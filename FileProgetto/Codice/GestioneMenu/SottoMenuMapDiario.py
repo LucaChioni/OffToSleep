@@ -482,7 +482,7 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, apriLabirinto=Fa
     return esci
 
 
-def menuDiario(dati):
+def menuDiario(avanzamentoStoria):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     xp = GlobalHWVar.gsx // 32 * 1
@@ -492,6 +492,7 @@ def menuDiario(dati):
     risposta = False
     voceMarcata = 1
     voceMarcataSottoMenu = 0
+    sottovoceSelezionata = False
     aggiornaSchermo = False
     esci = False
 
@@ -499,6 +500,76 @@ def menuDiario(dati):
     primoFrame = True
     bottoneDown = False
     tastotempfps = 8
+
+    dictOggettiSbloccati = {"BicchiereConAcqua":False, "ChiaveRipostiglio":False, "ChiaveStanzaCasaDavid":False, "CertificatoResidenza":False, "ImpoPietra":False}
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+        dictOggettiSbloccati["BicchiereConAcqua"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
+        dictOggettiSbloccati["ChiaveRipostiglio"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"]:
+        dictOggettiSbloccati["ChiaveStanzaCasaDavid"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"]:
+        dictOggettiSbloccati["CertificatoResidenza"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpoPietra"]:
+        dictOggettiSbloccati["ImpoPietra"] = True
+
+    dictPersonaggiSbloccati = {"Hans":0, "Norm":0, "Teresa":0, "Lino":0, "Sam":0, "David":0, "Sara":0, "Rod":0, "Rene":0, "Impo":0, "Neil":0, "Controllore1":0, "Controllore2":0, "Lucy":0}
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+        dictPersonaggiSbloccati["Hans"] = 1
+        dictPersonaggiSbloccati["Norm"] = 1
+        dictPersonaggiSbloccati["Teresa"] = 1
+        dictPersonaggiSbloccati["Lino"] = 1
+    if GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"]:
+        dictPersonaggiSbloccati["Sam"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"]:
+        dictPersonaggiSbloccati["Sam"] = 2
+    if GlobalGameVar.dictAvanzamentoStoria["primoDialogoDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
+        dictPersonaggiSbloccati["David"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
+        dictPersonaggiSbloccati["David"] = 2
+    if GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoConGuardiaCasaDavid"]:
+        dictPersonaggiSbloccati["Sara"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoConGuardiaCasaDavid"]:
+        dictPersonaggiSbloccati["Sara"] = 2
+    if GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
+        dictPersonaggiSbloccati["Rod"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
+        dictPersonaggiSbloccati["Rod"] = 2
+    if GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"]:
+        dictPersonaggiSbloccati["Rene"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"]:
+        dictPersonaggiSbloccati["Rene"] = 2
+    if GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+        dictPersonaggiSbloccati["Impo"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+        dictPersonaggiSbloccati["Impo"] = 3
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoNeil"]:
+        dictPersonaggiSbloccati["Neil"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["incontratoNeil"]:
+        dictPersonaggiSbloccati["Neil"] = 2
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+        dictPersonaggiSbloccati["Controllore1"] = 1
+        dictPersonaggiSbloccati["Controllore2"] = 1
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnni"]:
+        dictPersonaggiSbloccati["Lucy"] = 1
+
+    dictNemiciSbloccati = {"nemiciSogno":False, "nemiciForesta":False, "nemiciCitta":False, "nemiciSelva":False, "nemiciMontagne":False, "nemiciCastello":False, "nemiciCaverna":False, "nemiciVulcano":False}
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+        dictNemiciSbloccati["nemiciSogno"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["uscitoDaForesta"]:
+        dictNemiciSbloccati["nemiciForesta"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"]:
+        dictNemiciSbloccati["nemiciCitta"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoUscitaSelva"]:
+        dictNemiciSbloccati["nemiciSelva"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["uscitoDaPassoMontano"]:
+        dictNemiciSbloccati["nemiciMontagne"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        dictNemiciSbloccati["nemiciCastello"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["arrivoIngressoVulcano"]:
+        dictNemiciSbloccati["nemiciCaverna"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+        dictNemiciSbloccati["nemiciVulcano"] = True
 
     while not risposta:
         # rallenta per i 30 fps
@@ -536,36 +607,48 @@ def menuDiario(dati):
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if voceMarcataSottoMenu != 0:
-                voceMarcataSottoMenu = 0
-                xp = xpv
-                yp = ypv
+                if sottovoceSelezionata:
+                    sottovoceSelezionata = False
+                    aggiornaSchermo = True
+                else:
+                    voceMarcataSottoMenu = 0
+                    xp = xpv
+                    yp = ypv
             else:
                 risposta = True
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if bottoneDown == "mouseSinistro" and suTornaIndietro:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+                bottoneDown = False
                 if voceMarcataSottoMenu != 0:
-                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
-                    voceMarcataSottoMenu = 0
-                    xp = xpv
-                    yp = ypv
+                    if sottovoceSelezionata:
+                        sottovoceSelezionata = False
+                        aggiornaSchermo = True
+                    else:
+                        voceMarcataSottoMenu = 0
+                        xp = xpv
+                        yp = ypv
                 else:
-                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     risposta = True
             elif voceMarcataSottoMenu == 0:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 voceMarcataSottoMenu = 1
                 xpv = xp
                 ypv = yp
-                if voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
-                    xp = GlobalHWVar.gsx // 32 * 10
-                    yp = GlobalHWVar.gsy // 18 * 8
-            bottoneDown = False
+                xp = GlobalHWVar.gsx // 32 * 10
+                yp = GlobalHWVar.gsy // 18 * 5
+                bottoneDown = False
+            elif voceMarcataSottoMenu != 0 and not sottovoceSelezionata:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                sottovoceSelezionata = True
+                aggiornaSchermo = True
+                bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu":
+        if not sottovoceSelezionata and (bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu"):
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -574,10 +657,10 @@ def menuDiario(dati):
         if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
-                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                 if voceMarcataSottoMenu == 0:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if voceMarcata == 1:
-                        voceMarcata += 5
+                        voceMarcata += 3
                         yp = GlobalHWVar.gsy // 18 * 14.6
                     elif voceMarcata == 4:
                         voceMarcata -= 1
@@ -585,34 +668,106 @@ def menuDiario(dati):
                     else:
                         voceMarcata -= 1
                         yp = yp - GlobalHWVar.gpy * 1.5
-                else:
-                    if voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
+                elif not sottovoceSelezionata:
+                    if voceMarcata == 1:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if voceMarcataSottoMenu == 1:
-                            voceMarcataSottoMenu += 2
-                            yp = GlobalHWVar.gsy // 18 * 12
+                            voceMarcataSottoMenu += 10
+                            yp = GlobalHWVar.gsy // 18 * 15
                         else:
                             voceMarcataSottoMenu -= 1
-                            yp = yp - GlobalHWVar.gpy * 2
+                            yp -= GlobalHWVar.gpy * 1
+                    elif voceMarcata == 2:
+                        if voceMarcataSottoMenu != 1:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            if voceMarcataSottoMenu == 12:
+                                voceMarcataSottoMenu -= 1
+                                yp = GlobalHWVar.gsy // 18 * 15
+                            else:
+                                voceMarcataSottoMenu -= 1
+                                yp -= GlobalHWVar.gpy * 1
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.selimp)
+                            bottoneDown = False
+                    elif voceMarcata == 3:
+                        if voceMarcataSottoMenu != 1:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            if voceMarcataSottoMenu == 12 or voceMarcataSottoMenu == 23:
+                                voceMarcataSottoMenu -= 1
+                                yp = GlobalHWVar.gsy // 18 * 15
+                            else:
+                                voceMarcataSottoMenu -= 1
+                                yp -= GlobalHWVar.gpy * 1
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.selimp)
+                            bottoneDown = False
+                    elif voceMarcata == 4:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        if voceMarcataSottoMenu == 1:
+                            voceMarcataSottoMenu += 8
+                            yp = GlobalHWVar.gsy // 18 * 15
+                        elif voceMarcataSottoMenu == 4 or voceMarcataSottoMenu == 7:
+                            voceMarcataSottoMenu -= 1
+                            yp -= GlobalHWVar.gsy // 18 * 2
+                        else:
+                            voceMarcataSottoMenu -= 1
+                            yp -= GlobalHWVar.gpy * 1
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
-                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                 if voceMarcataSottoMenu == 0:
-                    if voceMarcata == 6:
-                        voceMarcata -= 5
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    if voceMarcata == 4:
+                        voceMarcata -= 3
                         yp = GlobalHWVar.gsy // 18 * 5.6
                     elif voceMarcata == 3:
                         voceMarcata += 1
-                        yp = GlobalHWVar.gsy // 18 * 11.6
+                        yp = GlobalHWVar.gsy // 18 * 14.6
                     else:
                         voceMarcata += 1
                         yp = yp + GlobalHWVar.gpy * 1.5
-                else:
-                    if voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
-                        if voceMarcataSottoMenu == 3:
-                            voceMarcataSottoMenu -= 2
-                            yp = GlobalHWVar.gsy // 18 * 8
+                elif not sottovoceSelezionata:
+                    if voceMarcata == 1:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        if voceMarcataSottoMenu == 11:
+                            voceMarcataSottoMenu -= 10
+                            yp = GlobalHWVar.gsy // 18 * 5
                         else:
                             voceMarcataSottoMenu += 1
-                            yp = yp + GlobalHWVar.gpy * 2
+                            yp += GlobalHWVar.gpy * 1
+                    elif voceMarcata == 2:
+                        if voceMarcataSottoMenu != 14:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            if voceMarcataSottoMenu == 11:
+                                voceMarcataSottoMenu += 1
+                                yp = GlobalHWVar.gsy // 18 * 5
+                            else:
+                                voceMarcataSottoMenu += 1
+                                yp += GlobalHWVar.gpy * 1
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.selimp)
+                            bottoneDown = False
+                    elif voceMarcata == 3:
+                        if voceMarcataSottoMenu != 29:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            if voceMarcataSottoMenu == 11 or voceMarcataSottoMenu == 22:
+                                voceMarcataSottoMenu += 1
+                                yp = GlobalHWVar.gsy // 18 * 5
+                            else:
+                                voceMarcataSottoMenu += 1
+                                yp += GlobalHWVar.gpy * 1
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.selimp)
+                            bottoneDown = False
+                    elif voceMarcata == 4:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        if voceMarcataSottoMenu == 3 or voceMarcataSottoMenu == 6:
+                            voceMarcataSottoMenu += 1
+                            yp += GlobalHWVar.gsy // 18 * 2
+                        elif voceMarcataSottoMenu == 9:
+                            voceMarcataSottoMenu -= 8
+                            yp = GlobalHWVar.gsy // 18 * 5
+                        else:
+                            voceMarcataSottoMenu += 1
+                            yp += GlobalHWVar.gpy * 1
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -630,14 +785,16 @@ def menuDiario(dati):
                 FunzioniGraficheGeneriche.messaggio("Oggetti speciali", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.5, 55)
                 FunzioniGraficheGeneriche.messaggio("Persone incontrate", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 55)
                 FunzioniGraficheGeneriche.messaggio("Nemici incontrati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, 55)
-                FunzioniGraficheGeneriche.messaggio("Guida tastiera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, 55)
-                FunzioniGraficheGeneriche.messaggio("Guida mouse", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, 55)
-                FunzioniGraficheGeneriche.messaggio("Guida controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.5, 55)
+                FunzioniGraficheGeneriche.messaggio("Guida comandi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.5, 55)
+
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDiarioChiusoMenu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.6, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
-                if voceMarcataSottoMenu == 0:
-                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 12.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 15))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5, GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 15))
+                if voceMarcataSottoMenu == 0 or not sottovoceSelezionata:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDiarioChiusoMenu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDiarioApertoMenu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
@@ -653,138 +810,645 @@ def menuDiario(dati):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
-                if voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
-                    FunzioniGraficheGeneriche.messaggio("Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7.9, 55)
-                    FunzioniGraficheGeneriche.messaggio("Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9.9, 55)
-                    FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11.9, 55)
-                    if voceMarcata == 4:
+                if voceMarcata == 1:
+                    if dictOggettiSbloccati["BicchiereConAcqua"]:
+                        FunzioniGraficheGeneriche.messaggio("Bicchiere con acqua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
+                    if dictOggettiSbloccati["ChiaveRipostiglio"]:
+                        FunzioniGraficheGeneriche.messaggio("Chiave ripostiglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
+                    if dictOggettiSbloccati["ChiaveStanzaCasaDavid"]:
+                        FunzioniGraficheGeneriche.messaggio("Chiave stanza casa di David", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
+                    if dictOggettiSbloccati["CertificatoResidenza"]:
+                        FunzioniGraficheGeneriche.messaggio("Certificato di residenza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
+                    if dictOggettiSbloccati["ImpoPietra"]:
+                        FunzioniGraficheGeneriche.messaggio("ImpoPietra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                    if sottovoceSelezionata:
+                        xImgOggetto = GlobalHWVar.gsx // 32 * 20.1
+                        yImgOggetto = GlobalHWVar.gsy // 18 * 3
+                        xNomeOggetto = GlobalHWVar.gsx // 32 * 25.15
+                        yNomeOggetto = GlobalHWVar.gsy // 18 * 12.7
+                        xDescrizioneOggetto = GlobalHWVar.gsx // 32 * 20.3
+                        yDescrizioneOggetto = GlobalHWVar.gsy // 18 * 13.9
+                        largezzaFoglio = GlobalHWVar.gpx * 9.7
+                        spazioTraLeRighe = GlobalHWVar.gpy * 0.5
+                        if voceMarcataSottoMenu == 1 and dictOggettiSbloccati["BicchiereConAcqua"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgBicchiereConAcqua, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Bicchiere con acqua", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Il bicchiere d'acqua che ho chiesto a Hans. Perché me lo sto portando dietro?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 2 and dictOggettiSbloccati["ChiaveRipostiglio"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveRipostiglio, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Chiave ripostiglio", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave del ripostiglio dei miei genitori. Ci sono un sacco di cose interessanti la dentro.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 3 and dictOggettiSbloccati["ChiaveStanzaCasaDavid"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveStanzaCasaDavid, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Chiave stanza casa di David", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave della mia stanza a casa di David. Credo ci siano molte altre stanze disponibili... perché non le utilizzano al posto ammassare tutti agli alloggi profughi?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 4 and dictOggettiSbloccati["CertificatoResidenza"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgCertificazioneResidenza, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Certificato di residenza", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Documento che dimostra la mia permanenza in città. Non capisco perché ce ne sia bisogno... non basta la mia presenza per dimostrare la mia permanenza in città?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 5 and dictOggettiSbloccati["ImpoPietra"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgImpoPietra, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("ImpoPietra", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Una strana pietra che si illumina premendo il piccolo pulsante che si trova nella parte superiore. Non ho ben capito perché ma Impo è attratto quasi ipnoticamente dalla sua luce.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                elif voceMarcata == 2:
+                    if voceMarcataSottoMenu <= 11:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
+                        if dictPersonaggiSbloccati["Hans"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Hans", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                        if dictPersonaggiSbloccati["Norm"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Norm", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        if dictPersonaggiSbloccati["Teresa"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Teresa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                        if dictPersonaggiSbloccati["Lino"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Lino", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                        if dictPersonaggiSbloccati["Sam"] == 1:
+                            FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        elif dictPersonaggiSbloccati["Sam"] == 2:
+                            FunzioniGraficheGeneriche.messaggio("Sam", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        if dictPersonaggiSbloccati["David"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                        if dictPersonaggiSbloccati["Sara"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                        if dictPersonaggiSbloccati["Rod"] == 1:
+                            FunzioniGraficheGeneriche.messaggio("Ragazzo strano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        elif dictPersonaggiSbloccati["Rod"] == 2:
+                            FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        if dictPersonaggiSbloccati["Rene"] == 1:
+                            FunzioniGraficheGeneriche.messaggio("Bibliotecario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                        elif dictPersonaggiSbloccati["Rene"] == 2:
+                            FunzioniGraficheGeneriche.messaggio(u"René", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                        if dictPersonaggiSbloccati["Impo"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        if dictPersonaggiSbloccati["Neil"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                    elif voceMarcataSottoMenu > 11:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
+                        if dictPersonaggiSbloccati["Controllore1"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Controllore 1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                        if dictPersonaggiSbloccati["Controllore2"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Controllore 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        if dictPersonaggiSbloccati["Lucy"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Lucy", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                    if sottovoceSelezionata:
+                        xImgPersonaggio = GlobalHWVar.gsx // 32 * 20.7
+                        yImgPersonaggio = GlobalHWVar.gsy // 18 * 3.5
+                        xNomePersonaggio = GlobalHWVar.gsx // 32 * 25.15
+                        yNomePersonaggio = GlobalHWVar.gsy // 18 * 12.7
+                        xDescrizionePersonaggio = GlobalHWVar.gsx // 32 * 20.3
+                        yDescrizionePersonaggio = GlobalHWVar.gsy // 18 * 13.9
+                        largezzaFoglio = GlobalHWVar.gpx * 9.7
+                        spazioTraLeRighe = GlobalHWVar.gpy * 0.5
+                        if voceMarcataSottoMenu == 1 and dictPersonaggiSbloccati["Hans"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.fraMaggioreDiario, (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Hans", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Mio fratello. Mi piace stare con lui anche se in questo periodo è sempre più pensieroso e irritabile. Forse succede crescendo. Mio padre dice che si sta \"rincoglionendo\"... ", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 2 and dictPersonaggiSbloccati["Norm"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Padre"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Norm", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Il padrone, il governante, il capo supremo della famiglia: mio padre. Io e Hans \"dobbiamo ancora crescere\", quindi è lui l'unico illuminato da Dio per prendere le scelte giuste per tutti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 3 and dictPersonaggiSbloccati["Teresa"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Madre"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Teresa", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Mia madre. Ascolta e ripete quello che dice mio padre. Mi sento un po' stupida e arrogante ora che l'ho pure scritto... A parte questo si prende cura della casa e ama la sua famiglia.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 4 and dictPersonaggiSbloccati["Lino"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["CaneCasa"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Lino", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Linooo... Mio padre l'ha portato a casa circa 12 anni fa quando era ancora un cucciolo. Adesso è ben addestrato per la caccia e per tenere lontani i malintenzionati.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 5:
+                            if dictPersonaggiSbloccati["Sam"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Un soldato che ho trovato a terra martoriato nella Foresta Cadetta. L'armatura che gli ho preso lo teneva più o meno... insieme... me ne sono accorta troppo tardi...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            if dictPersonaggiSbloccati["Sam"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Soldato deceduto (Sam)", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Sam. Quel soldato era il figlio di David e Sara. Quello che ho sotterrato dopo avergli sparpagliato gli organi ovunque cercando di rubargli l'armatura...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 6:
+                            if dictPersonaggiSbloccati["David"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["PadreUfficialeServizio"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Il \"Capitano della guardia notturna\". Mi ha fatta entrare in città nonostante non ci fosse più spazio per altri profughi. Ha detto che mi ospiterà in casa sua.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            if dictPersonaggiSbloccati["David"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["PadreUfficialeCasa"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Il capitano della guardia notturna. Mi ha ospitata per parlare del soldato morto nella foresta. Doveva essere una persona importante per lui e la moglie. Forse il figlio.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 7:
+                            if dictPersonaggiSbloccati["Sara"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"So solo che è la moglie di David e la madre si Sam... Era sconvolta durante la cena e alla fine se n'è andata mentre il marito continuava a ubriacarsi...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            elif dictPersonaggiSbloccati["Sara"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Moglie di David e madre si Sam. Ha deciso di suicidarsi... Possibile che per lei non aveva senso vivere se non per suo figlio? Cosa avrebbe fatto se non ne avesse mai avuto uno?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 8:
+                            if dictPersonaggiSbloccati["Rod"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Ragazzo strano", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Un tipo strano che ho trovato in città. Si guardava intorno ossessivamente ma il suo sguardo ricadeva continuamente su una ragazza poco distante. Mi ha aiutata a trovare gli alloggi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            if dictPersonaggiSbloccati["Rod"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Un tipo losco a cui ho dato " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per entrare nella sua \"confraternita\"... complimenti Lucy. Non sembra molto affidabile ma potrebbe rivelarsi utile in caso di necessità. Spero...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 9:
+                            if dictPersonaggiSbloccati["Rene"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Bibliotecario"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Bibliotecario", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Gestisce la biblioteca in città. Ha deciso di aiutarmi nonostante fossi stata abbastanza molesta. Poi gli ho pure vomitato nello studio... Come fa ad avere così tanta pazienza?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            if dictPersonaggiSbloccati["Rene"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Bibliotecario"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio(u"René", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Gestisce la biblioteca in città. È una persona molto interessante, le sue teorie sulla realtà sono abbastanza sconvolgenti soprattutto perché sono incredibilmente sensate.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 10:
+                            if dictPersonaggiSbloccati["Impo"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboDiario, (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"La scritta \"Impo\" è incisa sulla nuca di tutti gli animali di questa specie, assurdo! È l'ultimo della sua specie, gli altri si sono estinti dopo l'improvvisa contaminazione del lago.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            elif dictPersonaggiSbloccati["Impo"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboDiario, (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 11:
+                            if dictPersonaggiSbloccati["Neil"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.neilSconosciutoDiario, (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Un potente che, a detta di René, controlla gli spostamenti in tutta la nostra regione. Che sia stato delegato dall'autorità cittadina? Non importa, spero che potrà aiutarmi con Hans.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            elif dictPersonaggiSbloccati["Neil"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Neil"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 12 and dictPersonaggiSbloccati["Controllore1"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Alieno1"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Controllore - 1", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 13 and dictPersonaggiSbloccati["Controllore2"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Alieno2"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Controllore - 2", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 14 and dictPersonaggiSbloccati["Lucy"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.ralloDiario, (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Lucy", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                elif voceMarcata == 3:
+                    if voceMarcataSottoMenu <= 11:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
+                        if dictNemiciSbloccati["nemiciSogno"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Orco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("Pipistrello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        if dictNemiciSbloccati["nemiciForesta"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Tartaruga verde", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("Tartaruga marrone", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio("Lupo grigio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio("Lupo bianco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("Lupo nero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio("Cinghiale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        if dictNemiciSbloccati["nemiciCitta"] == 1:
+                            FunzioniGraficheGeneriche.messaggio("Aggressore 1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio("Aggressore 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        if dictNemiciSbloccati["nemiciSelva"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Serpente verde", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                    elif 11 < voceMarcataSottoMenu <= 22:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
+                        if dictNemiciSbloccati["nemiciSelva"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Serpente arancione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("Ragno nero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio("Ragno rosso", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("Scorpione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                        if dictNemiciSbloccati["nemiciMontagne"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Gufo marrone", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio("Gufo bianco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("Struzzo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio("Casuario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio("Falco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio("Aquila", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                        if dictNemiciSbloccati["nemiciCastello"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Servo con spada", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                    elif voceMarcataSottoMenu > 22:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
+                        if dictNemiciSbloccati["nemiciCastello"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Servo con arco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("Servo con lancia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                        if dictNemiciSbloccati["nemiciCaverna"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        if dictNemiciSbloccati["nemiciCaverna"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                    if sottovoceSelezionata:
+                        xImgPersonaggio = GlobalHWVar.gsx // 32 * 20.7
+                        yImgPersonaggio = GlobalHWVar.gsy // 18 * 3.5
+                        xNomePersonaggio = GlobalHWVar.gsx // 32 * 25.15
+                        yNomePersonaggio = GlobalHWVar.gsy // 18 * 12.7
+                        xDescrizionePersonaggio = GlobalHWVar.gsx // 32 * 20.3
+                        yDescrizionePersonaggio = GlobalHWVar.gsy // 18 * 13.9
+                        largezzaFoglio = GlobalHWVar.gpx * 9.7
+                        spazioTraLeRighe = GlobalHWVar.gpy * 0.5
+                        if voceMarcataSottoMenu == 1 and dictNemiciSbloccati["nemiciSogno"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Orco"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Orco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Dei giganteschi orchi che impugnano enormi spadoni. Secondo mio padre ti possono tagliare in due con un solo colpo. Ma io non credo che esistano veramente. Giusto?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 2 and dictNemiciSbloccati["nemiciSogno"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Pipistrello"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Pipistrello", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Dei pipistrelli velenosi. Non li ho mai visti al di fuori dei miei incubi, quindi anche questi potrebbero essere un'altra invenzione di mio padre per non farmi andare nella foresta.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 3 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["TartarugaVerde"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Tartaruga verde", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Non è molto pericolosa in quanto si muove molto lentamente e i suoi morsi non sono per niente dolorosi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 4 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["TartarugaMarrone"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Tartaruga marrone", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Un po' più forte della Tartaruga verde ma niente di troppo proccupante. Si muove lentamente.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 5 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoGrigio"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Lupo grigio", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Linooo... un tuo simile. Un lupo abbastanza aggressivo ma poco resistente. È abbastanza veloce, non facile da seminare.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 6 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoBianco"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Lupo bianco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. È un po' più forte e resistente del Lupo grigio. Quei pochi secondi in cui ti fissa prima di attaccharti sono gelanti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 7 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoNero"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Lupo nero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. La di lupo razza più forte. Nel buio della foresta sarebbe difficile notarlo se non viaggiasse in branco.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 8 and dictNemiciSbloccati["nemiciForesta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cinghiale"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cinghiale", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. È un bestione grande il doppio di me. Ne ho dovuto affrontare uno e per poco non ci rimanevo secca come quel soldato...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 9 and dictNemiciSbloccati["nemiciCitta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cittadino1"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Aggressore 1", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Non volevo ucciderlo. Aveva un tono violento, mi avrebbe stuprata... forse sarebbe stato meglio non opporsi... ?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 10 and dictNemiciSbloccati["nemiciCitta"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cittadino3"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Aggressore 2", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"L'ho ucciso prima che potesse toccarmi. Non sono una pazza assassina, voleva chiaramente farmi del male... che cazzo ho fatto...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 11 and dictNemiciSbloccati["nemiciSelva"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["SerpeVerde"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Serpente verde", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Li odio, fanno troppa confusione con i loro sonagli! Si muovono lentamente finché non trovano una preda. A quel punto non si scappa.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 12 and dictNemiciSbloccati["nemiciSelva"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["SerpeArancio"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Serpente arancione", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Questi maledetti sono velenosi! Sembrano muoversi lentamente ma quando avvistano la preda sono fulminei nel raggiungerla.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 13 and dictNemiciSbloccati["nemiciSelva"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RagnoNero"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Ragno nero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Sono enormi, veloci e abbastanza resistenti. I loro morsi fanno abbastanza male ma per fortuna non sono velenosi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 14 and dictNemiciSbloccati["nemiciSelva"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RagnoRosso"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Ragno rosso", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Questi sono veramente i più fastidiosi. Attaccano a distanza lanciando la loro saliva velenosa. Per fortuna non sono molto veloci.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 15 and dictNemiciSbloccati["nemiciSelva"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Scorpione"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Scorpione", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Senza dubbio la belva più temibile del posto. È forte, veloce, resistente e pure velenoso... Impossibile affrontarli in branco.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 16 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoMarrone"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Gufo marrone", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 17 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoBianco"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Gufo bianco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 18 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Struzzo"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Struzzo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 19 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Casuario"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Casuario", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 20 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Falco"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Falco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 21 and dictNemiciSbloccati["nemiciMontagne"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Aquila"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Aquila", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 22 and dictNemiciSbloccati["nemiciCastello"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoSpada"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Servo con spada", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 23 and dictNemiciSbloccati["nemiciCastello"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoArco"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Servo con arco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 24 and dictNemiciSbloccati["nemiciCastello"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoLancia"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Servo con lancia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 25 and dictNemiciSbloccati["nemiciCaverna"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboLeggero"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 26 and dictNemiciSbloccati["nemiciCaverna"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboVolante"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 27 and dictNemiciSbloccati["nemiciCaverna"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesante"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 28 and dictNemiciSbloccati["nemiciCaverna"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesanteVolante"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 29 and dictNemiciSbloccati["nemiciCaverna"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboTorre"], (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                elif voceMarcata == 4:
+                    FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
+                    FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
+                    FunzioniGraficheGeneriche.messaggio("Tastiera: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
+                    FunzioniGraficheGeneriche.messaggio("Mouse: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                    FunzioniGraficheGeneriche.messaggio("Mouse: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
+                    FunzioniGraficheGeneriche.messaggio("Mouse: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
+                    FunzioniGraficheGeneriche.messaggio("Controller: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
+                    FunzioniGraficheGeneriche.messaggio("Controller: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
+                    FunzioniGraficheGeneriche.messaggio("Controller: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                    if sottovoceSelezionata:
+                        xInizioTutorialComandi = GlobalHWVar.gsx // 32 * 20.1
+                        yInizioTutorialComandi = GlobalHWVar.gsy // 18 * 5.2
                         if voceMarcataSottoMenu == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 5.4, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.53, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.23), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.23), 2)
-                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.76, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.46), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.46), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.99, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9.69), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9.69), 2)
-                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.7, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 12.53, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 13.23), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 13.23), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.76, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 14.46), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 14.46), 2)
-                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.99, 35)
-                        if voceMarcataSottoMenu == 2:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 5.4, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.53, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.23), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.23), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.76, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.46), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.46), 2)
-                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.99, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9.69), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9.69), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.7, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 12.53, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 13.23), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 13.23), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.76, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 14.46), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 14.46), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.99, 35)
-                        if voceMarcataSottoMenu == 3:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInMenu, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.9, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.5), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.5), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.1, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.9), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.9), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.1, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 11.4), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 11.4), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 12, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12.8), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12.8), 2)
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.4, 35)
-                    if voceMarcata == 5:
-                        if voceMarcataSottoMenu == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Su casella libera - Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 5.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7, 35)
-                            FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 8, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 9.9, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su stato nemico - Rimuovi selezione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 10.4, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.5, 35)
-                        if voceMarcataSottoMenu == 2:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Su casella nemica - Inquadra / Attacca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 5.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7, 35)
-                            FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 8, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 10.1, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.5, 35)
-                        if voceMarcataSottoMenu == 3:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.6, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 10.1, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.3, 35)
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.8, 35)
-                    if voceMarcata == 6:
-                        if voceMarcataSottoMenu == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 5.5, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 6.3), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 6.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.85, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.65), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.65), 2)
-                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.2, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 9.55, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 10.35), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 10.35), 2)
-                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.9, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 11.70), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 11.70), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 12.25, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 13.05), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 13.05), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.6, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 14.4), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 14.4), 2)
-                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.95, 35)
-                        if voceMarcataSottoMenu == 2:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 5.5, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 6.3), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 6.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.85, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.65), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.65), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.2, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9), 2)
-                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 9.55, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 10.35), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 10.35), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.9, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 11.70), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 11.70), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 12.25, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 13.05), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 13.05), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.6, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 14.4), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 14.4), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.95, 35)
-                        if voceMarcataSottoMenu == 3:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInMenu, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.1, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.65, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9.55), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9.55), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 10.2, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 11.1), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 11.1), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 11.75, 35)
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12.65), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12.65), 2)
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 13.3, 35)
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), 2)
+                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), 2)
+                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), 2)
+                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), 2)
+                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
+                        elif voceMarcataSottoMenu == 2:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), 2)
+                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), 2)
+                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), 2)
+                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
+                        elif voceMarcataSottoMenu == 3:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInMenu, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Tastiera: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.1, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7), 2)
+                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.3, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.1), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.1), 2)
+                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.6), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8), 2)
+                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.6, 35)
+                        elif voceMarcataSottoMenu == 4:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Mouse: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Su casella libera - Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.1, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su stato nemico - Rimuovi selezione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.6, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
+                        elif voceMarcataSottoMenu == 5:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Mouse: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Su casella nemica - Inquadra / Attacca", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
+                        elif voceMarcataSottoMenu == 6:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Mouse: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.8, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
+                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9, 35)
+                        elif voceMarcataSottoMenu == 7:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Controller: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), 2)
+                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), 2)
+                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), 2)
+                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), 2)
+                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
+                        elif voceMarcataSottoMenu == 8:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Controller: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), 2)
+                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), 2)
+                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), 2)
+                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), 2)
+                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), 2)
+                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
+                        elif voceMarcataSottoMenu == 9:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInMenu, (xInizioTutorialComandi, yInizioTutorialComandi))
+                            FunzioniGraficheGeneriche.messaggio("Controller: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.3, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2), 2)
+                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.85, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75), 2)
+                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.4, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.3), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.95, 35)
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.85), 2)
+                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
 
-            GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+            if sottovoceSelezionata:
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
+            else:
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             primoFrame = False
 
             GlobalHWVar.aggiornaSchermo()

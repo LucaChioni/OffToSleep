@@ -508,7 +508,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Non credo che tengano la chiave del ripostiglio nel letto!")
+            dialogo.append("Non credo che tengano la chiave del ripostiglio nel letto.")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False
@@ -542,7 +542,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "CaneCasa":
         partiDialogo = []
-        nome = "Agglomerato"
+        nome = "Lino"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             oggettoDato = False
             avanzaStoria = False
@@ -550,7 +550,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ciao Agglo, cosa stai cercando in questi cespugli?")
+            dialogo.append("Ciao Lino, cosa stai cercando in questi cespugli?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -563,7 +563,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ehi Agglo, hai visto Hans andare da quella parte?")
+            dialogo.append("Linooo... Hai visto Hans andare da quella parte?")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCanaleCasa":
         partiDialogo = []

@@ -80,7 +80,7 @@ maxGsy = gsy
 # dimensione personaggio
 gpx = gsx // 32
 gpy = gsy // 18
-schermoIntero = True
+modalitaSchermo = 0
 
 # nome-icona
 titolo = "Off to Sleep"
@@ -583,7 +583,7 @@ def aggiornaSchermo():
     aggiornaTuttoLoSchermo = False
     gc.collect()
 
-# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
 linguaImpostata = "inglese"
 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
@@ -607,18 +607,31 @@ if len(datiFileImpostazioniString) == 6:
             volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
         if 0 <= int(datiFileImpostazioni[2]) <= 10:
             volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
-        if schermoIntero == 0 or schermoIntero == 1:
-            schermoIntero = int(datiFileImpostazioni[3])
+        if modalitaSchermo == 0 or modalitaSchermo == 1 or modalitaSchermo == 2:
+            modalitaSchermo = int(datiFileImpostazioni[3])
         if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
             gsx = int(datiFileImpostazioni[4])
             gsy = int(datiFileImpostazioni[5])
             gpx = gsx // 32
             gpy = gsy // 18
-        if schermoIntero:
+        if modalitaSchermo == 0:
             opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        else:
+        elif modalitaSchermo == 1:
+            if not (gsx == maxGsx and gsy == maxGsy):
+                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+            else:
+                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + gpy)
             opzioni_schermo = pygame.DOUBLEBUF
+            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+            pygame.display.set_caption(titolo)
+            pygame.display.set_icon(icona)
+        else:
+            if gsx == maxGsx and gsy == maxGsy:
+                os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
+            else:
+                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+            opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         initVolumeSounds()
 else:

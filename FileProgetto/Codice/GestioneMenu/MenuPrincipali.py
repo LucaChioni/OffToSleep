@@ -944,7 +944,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                         risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom)
                     # diario
                     if voceMarcata == 5:
-                        risposta = SottoMenuMapDiario.menuDiario(dati)
+                        risposta = SottoMenuMapDiario.menuDiario(dati[0])
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio

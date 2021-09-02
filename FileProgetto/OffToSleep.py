@@ -1515,6 +1515,8 @@ def gameloop():
                     colcoInCasellaVista = True
                 i += 3
             if not nemicoInCasellaVista:
+                # aggiorna img mappa
+                imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
                 aggiornaImgEquip = True
                 dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
                 if caricaSalvataggio:
@@ -1772,6 +1774,44 @@ def gameloop():
                     dati[5] = pvtot
                     difesa = 0
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
+                    i = GlobalHWVar.volumeCanzoni
+                    j = GlobalHWVar.volumeEffetti
+                    while i > 0 or j > 0:
+                        GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
+                        pygame.time.wait(30)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i -= GlobalHWVar.volumeCanzoni / 10
+                        j -= GlobalHWVar.volumeEffetti / 10
+                    GlobalHWVar.canaleSoundCanzone.set_volume(0)
+                    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(0)
+                    GlobalHWVar.canaleSoundCanzone.stop()
+                    GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                    i = 0
+                    while i < 2:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreCuraInDifesa)
+                    i = 0
+                    while i < 15:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    if canzone:
+                        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+                    if len(listaSottofondoAmbientale) > 0:
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
+                    i = 0
+                    j = 0
+                    while i < GlobalHWVar.volumeCanzoni or j < GlobalHWVar.volumeEffetti:
+                        GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
+                        pygame.time.wait(30)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += GlobalHWVar.volumeCanzoni / 10
+                        j += GlobalHWVar.volumeEffetti / 10
+                    GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                     caricaTutto = True
                     uscitoDaMenu = 2
                 else:
@@ -2313,9 +2353,6 @@ def gameloop():
                     if imgAggiornata:
                         refreshSchermo = True
 
-            # aggiorna img mappa
-            imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
-
             # prendere il denaro da terra
             i = 0
             while i < len(vettoreDenaro):
@@ -2375,6 +2412,24 @@ def gameloop():
             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+        elif cambiatoRisoluzione:
+            # controlla se devi cambiare personaggio giocabile
+            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+                personaggioDaUsare = "Lucy1"
+                GenericFunc.cambiaProtagonista(personaggioDaUsare)
+                personaggioUsato = personaggioDaUsare
+            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                personaggioDaUsare = "FratelloMaggiore"
+                GenericFunc.cambiaProtagonista(personaggioDaUsare)
+                personaggioUsato = personaggioDaUsare
+            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+                personaggioDaUsare = "Lucy1"
+                GenericFunc.cambiaProtagonista(personaggioDaUsare)
+                personaggioUsato = personaggioDaUsare
+            else:
+                personaggioDaUsare = "Lucy2"
+                GenericFunc.cambiaProtagonista(personaggioDaUsare)
+                personaggioUsato = personaggioDaUsare
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)

@@ -1780,7 +1780,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto4"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto2"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1806,7 +1806,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto5"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto3"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1827,13 +1827,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"]:
                 npers = "s"
                 x = GlobalHWVar.gpx * 13
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto2"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto6"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto4"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1853,13 +1853,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto1"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto5"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto8"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto5"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1879,7 +1879,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto2"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto6"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -1888,7 +1888,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto9"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto6"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1908,7 +1908,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto3"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto7"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -1917,7 +1917,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto10"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto7"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1943,7 +1943,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto11"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto8"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1963,13 +1963,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto4"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto9"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto12"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto9"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1989,7 +1989,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto5"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto10"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -1998,7 +1998,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto13"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto10"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2018,7 +2018,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto6"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto11"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -2027,7 +2027,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto14"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto11"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2047,13 +2047,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto7"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto10"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto15"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto12"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2073,13 +2073,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto8"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto13"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto16"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto13"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2099,7 +2099,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto9"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto14"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -2108,7 +2108,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto17"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto14"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2128,7 +2128,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto10"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto15"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
@@ -2137,7 +2137,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto18"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto15"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2157,13 +2157,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto11"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto14"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto19"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto16"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2183,13 +2183,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto12"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto17"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto17"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2209,7 +2209,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto13"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto16"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
@@ -2218,7 +2218,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto21"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto18"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2238,7 +2238,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto14"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto17"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
@@ -2247,7 +2247,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gpx * 29
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto22"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto19"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2267,13 +2267,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto15"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto18"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto23"]:
                 npers = "w"
-                y = GlobalHWVar.gpx * 15
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto20"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2293,10 +2293,14 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto16"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto21"]:
                 npers = "a"
                 x = GlobalHWVar.gpx * 29
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"]:
+                npers = "w"
+                x = GlobalHWVar.gpx * 13
+                y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["labirinto21"]:
         nomeCanzoneLuogo = "09-Labirinto"
         if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -2316,7 +2320,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto17"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
@@ -2342,7 +2346,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto18"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto21"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
@@ -2368,10 +2372,75 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto19"]:
                 npers = "s"
-                y = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["labirinto22"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
+    if stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
+        nomeCanzoneLuogo = ""
+        if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+            GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+            canzone = False
+            canzoneCambiata = True
+        sottofondoLuogo = "EsternoCastello"
+        if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+            GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+            audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+            listaSottofondoAmbientale = [audioAmbiente_Vento1]
+            sottofondoAmbientaleCambiato = True
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"]:
+                npers = "s"
+                x = GlobalHWVar.gpx * 13
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+            if stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 9
+    if stanza == GlobalGameVar.dictStanze["esternoCastello2"]:
+        nomeCanzoneLuogo = ""
+        if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+            GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+            canzone = False
+            canzoneCambiata = True
+        sottofondoLuogo = "EsternoCastello"
+        if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+            GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+            audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+            listaSottofondoAmbientale = [audioAmbiente_Vento1]
+            sottofondoAmbientaleCambiato = True
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello4"]:
+                npers = "w"
+                x = GlobalHWVar.gpx * 18
+                y = GlobalHWVar.gpy * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello3"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"]:
+                npers = "s"
+                x = GlobalHWVar.gpx * 19
+                y = GlobalHWVar.gpy * 12
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAperturaCancelloCastello)
+                i = 0
+                while i < 20:
+                    pygame.time.wait(100)
+                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    i += 1
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -2408,6 +2477,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Avamposto di Rod"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["labirinto3"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["labirinto20"]):
         nomeDaScrivere = u"Labirinto"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]):
+        nomeDaScrivere = u"Castello - Esterno"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -2501,6 +2572,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["labirinto3"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod3"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoCancellettoCastelloPerScorciatoia"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
         nonProcedere = True
 
     return nonProcedere
@@ -2599,5 +2672,15 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["esternoCastello2"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoCancelloPrincipaleCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
 
     return nomeStanza

@@ -366,17 +366,40 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["tutorialStartNelLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["monologoUscitaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoSecondaStanzaEsternoCastello"] = i
+    dictAvanzamentoStoria["mappaCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["convintoServoCastelloAperturaCancello"] = i
+    i += 1
+    dictAvanzamentoStoria["apertoCancelloPrincipaleCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["diaolgoServoLanciaDopoAperturaCancello"] = i
+    i += 1
+    dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello4"] = i
 
     i += 100
     i += 1
+    dictAvanzamentoStoria["servoLanciaTornatoAlCancello"] = i
+    i += 1
+    dictAvanzamentoStoria["incontratoNeil"] = i
+    i += 1
     dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] = i
+    i += 1
+    dictAvanzamentoStoria["apertoCancellettoCastelloPerScorciatoia"] = i
+    i += 1
+    dictAvanzamentoStoria["uscitoDaPassoMontano"] = i
     i += 1
     dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] = i
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
-
     i += 1
-    dictAvanzamentoStoria["mappaCastello"] = i
+    dictAvanzamentoStoria["arrivoIngressoVulcano"] = i
+    i += 1
+    dictAvanzamentoStoria["liberatoDaiControllori"] = i
+    i += 1
+    dictAvanzamentoStoria["passatiMoltiAnni"] = i
+
     i += 1
     dictAvanzamentoStoria["mappaScorciatoiaLabirinto"] = i
     i += 1
@@ -594,20 +617,30 @@ def definisciStanze():
     dictStanze["labirinto23"] = i
     i += 1
     dictStanze["esternoCastello1"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["esternoCastello2"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["esternoCastello3"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["esternoCastello4"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["esternoCastello5"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello1"] = i
+    vetStanzePacifiche.append(i)
 
     i += 100
     i += 1
     dictStanze["scorciatoiaLabirinto1"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["scorciatoiaLabirinto2"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["stradaPerPassoMontano1"] = i
     vetStanzePacifiche.append(i)

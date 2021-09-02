@@ -11,7 +11,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import FunzioniGraficheGeneriche
 
 
-def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
+def animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
     if npers == 1:
         x = x - (GlobalHWVar.gpx * fineanimaz // 10)
     if npers == 2:
@@ -23,14 +23,14 @@ def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, f
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     else:
         fineanimaz = 0
 
     return fineanimaz
 
 
-def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
+def animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
     if npers == 1:
         x = x - (GlobalHWVar.gpx * fineanimaz // 10)
     if npers == 2:
@@ -42,13 +42,13 @@ def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     elif 0 < fineanimaz <= 5:
         frame = 2
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio):
+def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -59,23 +59,23 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
                 primopasso = False
             # camminata quando si entra in una stanza
             if cambiosta:
-                fineanimaz = animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
+                fineanimaz = animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
                 if fineanimaz == 0:
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
             else:
-                animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
+                animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
         # quando si apre una porta o un cofanetto oppure quando ci si sposta verso un muro
         elif difesa == 0 and fineanimaz > 0:
             animazioneRallo = True
             if not nonMostrarePersonaggio:
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     elif GlobalHWVar.canaleSoundPassiRallo.get_busy():
         GlobalHWVar.canaleSoundPassiRallo.stop()
     return animazioneRallo, primopasso, fineanimaz
 
 
-def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz):
+def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz):
     if sposta and fineanimaz != 0:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
@@ -84,19 +84,19 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreLancioFreccia)
                 elif fineanimaz == 5:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreAttaccoArco)
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
             else:
                 if fineanimaz == 10:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreAttaccoSpada)
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
         elif animaOggetto[0]:
             animazioneRallo = True
             if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
             if animaOggetto[0] == "pozione" or animaOggetto[0] == "superPozione":
                 if fineanimaz == 10:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoPozione)
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaPozione1, (x, y))
                 else:
@@ -104,7 +104,7 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
             elif animaOggetto[0] == "medicina":
                 if fineanimaz == 10:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoMedicina)
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaMedicina1, (x, y))
                 else:
@@ -122,7 +122,7 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
                 GlobalHWVar.disegnaImmagineSuSchermo(armrobS, (vrx, vry))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (vrx, vry))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaCaricabatterie, (vrx, vry))
-                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     return animazioneRallo
 
 
@@ -146,14 +146,14 @@ def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDif
     return animazioneRallo
 
 
-def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz):
+def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz):
     if aumentoliv != 0:
         liv -= aumentoliv
         animazioneRallo = True
         if fineanimaz == 10:
             GlobalHWVar.canaleSoundLvUp.play(GlobalSndVar.rumorelevelup)
         avvele = False
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if 5 <= fineanimaz <= 10:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.saliliv2, (x, y))
         if 1 < fineanimaz <= 5:
@@ -224,12 +224,12 @@ def animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, tecnicaUsata,
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDanneggiamentoCausaColco, (x, y))
 
 
-def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
+def animaRalloFermo(avanzamentoStoria, x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
     if (not "attaccoRallo" in azioniDaEseguire and not "movimentoRallo" in azioniDaEseguire and not (nemicoAttaccante and nemicoAttaccante.ralloParato) and difesa == 0) or (fineanimaz == 0 and difesa == 0):
         if animazioneRalloFatta:
-            FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         else:
-            FunzioniGraficheGeneriche.disegnaRallo(npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
 def animaCamminataColco(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambiosta, animazioneColco, nemicoInquadrato, fineanimaz):
@@ -1552,7 +1552,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, nemicoInquadrato, fineanimaz)
             animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz)
             if not cambiosta and not nonMostrarePersonaggio:
-                animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
+                animaRalloFermo(dati[0], x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
 
             # tolgo il rumore passi quando non c'è l'animazione
             if not "movimentoRallo" in azioniDaEseguire and GlobalHWVar.canaleSoundPassiRallo.get_busy():
@@ -1570,7 +1570,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio)
+                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(dati[0], sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
@@ -1589,7 +1589,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco Rallo
-                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
+                animazioneRallo = animaAttaccoRallo(dati[0], sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
                 # animazione danneggiamento Rallo
                 animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, tecnicaUsata, azioniDaEseguire, fineanimaz)
                 # animazione oggetto lanciato
@@ -1615,7 +1615,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
-                animazioneRallo, caricaTutto, bottoneDown, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz)
+                animazioneRallo, caricaTutto, bottoneDown, aumentoliv, movimentoPerMouse = animaLvUp(dati[0], x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz)
 
             # animazione apertura cofanetto
             animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRallo)

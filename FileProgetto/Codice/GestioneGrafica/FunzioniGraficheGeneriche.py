@@ -270,14 +270,19 @@ def controllaMorteRallo(vitaRallo, inizio, gameover, riavviaAudioMusica, riavvia
     return inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente
 
 
-def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
+def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
+    mostraArmatura = True
+    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        mostraArmatura = False
+
     # personaggio: 1=d, 2=a, 3=w, 4=s
     if attaccoDaLontano:
         if npers == 1:
             GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persdmbAttacco, (x, y))
@@ -287,7 +292,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persambAttacco, (x, y))
@@ -300,7 +306,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
         if npers == 4:
@@ -308,7 +315,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssmbAttacco, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(arco, (x, y))
@@ -322,7 +330,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
                 GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(arco, (x, y))
@@ -348,7 +357,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
                 GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(arco, (x, y))
@@ -385,7 +395,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
                 GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(arco, (x, y))
@@ -398,7 +409,8 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
                 GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            if mostraArmatura:
+                GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
             if attaccoRavvicinato:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssmbAttacco, (x, y))

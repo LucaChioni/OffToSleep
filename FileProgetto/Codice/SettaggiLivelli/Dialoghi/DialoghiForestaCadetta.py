@@ -247,7 +247,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Il mio nome è Sam e sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Non ti conviene provare a derubarmi ragazzo: di solito non mi batto al di fuori degli allenamenti, ma nel caso ti avverto che sono armato e ben addestrato!")
+            dialogo.append(u"Il mio nome è Sam e sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Non ti conviene provare a derubarmi, ragazzo. Di solito non mi batto al di fuori degli allenamenti, ma nel caso ti avverto che sono armato e ben addestrato!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -377,7 +377,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ah beh certo...")
+            dialogo.append("Ah beh, certo...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -393,7 +393,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Mmh...<*> e tu invece perché stai andando tutto solo verso la città?")
+            dialogo.append(u"<*>#italic#Mmh...<*> e tu invece perché stai andando da solo verso la città?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

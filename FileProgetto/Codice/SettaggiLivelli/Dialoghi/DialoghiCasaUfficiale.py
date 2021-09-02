@@ -50,7 +50,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ok, grazie. Vado... a darmi una ripulita...")
+            dialogo.append(u"O-Ok, grazie. Vado... a darmi una ripulita...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -203,11 +203,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ciao, sono venuta per richiedere la certificazione di permanenza in città. Mi servirebbe per andare in biblioteca.")
+            dialogo.append(u"Ciao, sono venuta per richiedere il certificato di permanenza in città. Mi servirebbe per andare in biblioteca.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Ah, la certificazione! David l'aveva preparata, dev'essersi dimenticato di dargliela. Vado subito a prenderla.")
+            dialogo.append(u"Ah, il certificato! David l'aveva preparato, dev'essersi dimenticato di darglielo. Vado subito a prenderlo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -227,7 +227,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Ora rimani un attimo qui, torno subito con la certificazione.")
+            dialogo.append(u"Ora rimani un attimo qui, torno subito con il certificato.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["servoArrivaConCertificazione"]:
             oggettoDato = False
@@ -237,17 +237,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Rimani un attimo qui, torno subito con la certificazione.")
+            dialogo.append(u"Rimani un attimo qui, torno subito con il certificato.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoArrivaConCertificazione"]:
-            oggettoDato = "Certificazione di residenza"
+            oggettoDato = "Certificato di residenza"
             avanzaStoria = True
             menuMercante = False
             scelta = False
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Signorina, ecco la tua certificazione. Era già pronta, come pensavo.")
+            dialogo.append(u"Signorina, ecco il certificato. Era già pronto, come pensavo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -318,7 +318,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Salve mi chiamo Lucy.")
+            dialogo.append("Salve, mi chiamo Lucy.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

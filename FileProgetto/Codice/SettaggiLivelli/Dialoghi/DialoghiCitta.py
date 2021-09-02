@@ -778,7 +778,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Continua a lamentersi di questi pomodori... Perché non va in un'altra bancarella...?)")
+                dialogo.append(u"(Continua a lamentersi di questi pomodori... Perché non va in un'altra bancarella... ?)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False

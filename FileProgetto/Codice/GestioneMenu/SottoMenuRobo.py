@@ -212,14 +212,16 @@ def sceglicondiz(dati, condizione):
                     if voceMarcata == c:
                         if dati[i] != 0:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                            return c
+                            condizione = c
+                            risposta = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     i += 1
                     c += 1
                 if voceMarcata == 0:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    return 0
+                    condizione = 0
+                    risposta = True
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)

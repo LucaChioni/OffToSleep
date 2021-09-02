@@ -2,6 +2,7 @@
 
 import os
 import GlobalHWVar
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
@@ -50,7 +51,7 @@ class PersonaggioObj(object):
                     self.oggettoEnigma = True
             else:
                 self.mantieniSempreASchermo = False
-                self.caricaImgPersonaggio(nonCaricareImg=nonCaricareImg)
+                self.caricaImgPersonaggio()
                 self.girati(direzione)
         else:
             self.imgAttuale = False
@@ -112,65 +113,22 @@ class PersonaggioObj(object):
         if not primoCaricamento:
             return refreshSchermo
 
-    def caricaImgPersonaggio(self, nonCaricareImg=False):
-        if nonCaricareImg:
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png"):
-                raise Exception("Immagine \"" + self.tipo + "W.png\" non trovata...")
-            self.imgW = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png"):
-                raise Exception("Immagine \"" + self.tipo + "A.png\" non trovata...")
-            self.imgA = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png"):
-                raise Exception("Immagine \"" + self.tipo + "S.png\" non trovata...")
-            self.imgS = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png"):
-                raise Exception("Immagine \"" + self.tipo + "D.png\" non trovata...")
-            self.imgD = False
+    def caricaImgPersonaggio(self):
+        self.imgW = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgW"]
+        self.imgA = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgA"]
+        self.imgS = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgS"]
+        self.imgD = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgD"]
 
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png"):
-                raise Exception("Immagine \"" + self.tipo + "WMov1.png\" non trovata...")
-            self.imgWMov1 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png"):
-                raise Exception("Immagine \"" + self.tipo + "WMov2.png\" non trovata...")
-            self.imgWMov2 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png"):
-                raise Exception("Immagine \"" + self.tipo + "AMov1.png\" non trovata...")
-            self.imgAMov1 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png"):
-                raise Exception("Immagine \"" + self.tipo + "AMov2.png\" non trovata...")
-            self.imgAMov2 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png"):
-                raise Exception("Immagine \"" + self.tipo + "SMov1.png\" non trovata...")
-            self.imgSMov1 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png"):
-                raise Exception("Immagine \"" + self.tipo + "SMov2.png\" non trovata...")
-            self.imgSMov2 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png"):
-                raise Exception("Immagine \"" + self.tipo + "DMov1.png\" non trovata...")
-            self.imgDMov1 = False
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png"):
-                raise Exception("Immagine \"" + self.tipo + "DMov2.png\" non trovata...")
-            self.imgDMov2 = False
+        self.imgWMov1 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgWMov1"]
+        self.imgWMov2 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgWMov2"]
+        self.imgAMov1 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgAMov1"]
+        self.imgAMov2 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgAMov2"]
+        self.imgSMov1 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgSMov1"]
+        self.imgSMov2 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgSMov2"]
+        self.imgDMov1 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgDMov1"]
+        self.imgDMov2 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgDMov2"]
 
-            if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png"):
-                raise Exception("Immagine \"" + self.tipo + "Dialogo.png\" non trovata...")
-            self.imgDialogo = False
-        else:
-            self.imgW = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgA = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgS = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgD = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-
-            self.imgWMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgWMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgAMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgAMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgSMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgSMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgDMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgDMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-
-            self.imgDialogo = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
+        self.imgDialogo = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgDialogo"]
 
     def copiaImgsPersonaggio(self, personaggioDaCopiare):
         self.imgW = personaggioDaCopiare.imgW

@@ -251,7 +251,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry))
 
     if not nonMostrarePersonaggio:
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
     # disegnare i nemici
     for nemico in listaNemici:
@@ -644,6 +644,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     puntatogg5 = GlobalImgVar.puntatCof
     puntatogg6 = GlobalImgVar.puntatArc
     puntatogg7 = GlobalImgVar.puntatDialoghi
+    puntatogg8 = GlobalImgVar.puntatDifPv
 
     # modifica puntatore a seconda dell'attacco
     if attacco == 1:
@@ -654,6 +655,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         puntatogg5 = GlobalImgVar.puntatCof
         puntatogg6 = GlobalImgVar.puntatArc
         puntatogg7 = GlobalImgVar.puntatDialoghi
+        puntatogg8 = GlobalImgVar.puntatDifPv
     if attacco == 2:
         puntatogg = GlobalImgVar.puntatBom
     if attacco == 3:
@@ -834,7 +836,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry))
     # personaggio
     if not nonMostrarePersonaggio:
-        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     # disegnare i mostri
     for nemico in listaNemici:
         if nemico.inCasellaVista:
@@ -1952,7 +1954,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if (xp == x) and (yp == y):
                 suPorta = False
                 suCofanetto = False
-                puntatogg = puntatogg1
+                if dati[1] in GlobalGameVar.vetStanzePacifiche and dati[5] < pvtot:
+                    puntatogg = puntatogg8
+                else:
+                    puntatogg = puntatogg1
             elif (xp == rx) and (yp == ry):
                 suPorta = False
                 suCofanetto = False

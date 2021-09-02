@@ -12,6 +12,7 @@ global puntatIn
 global puntatOut
 global puntatSfo
 global puntatDif
+global puntatDifPv
 global puntatAtt
 global puntatArc
 global puntatPor
@@ -215,6 +216,13 @@ global sconosciutoOggettoIcoMenu
 global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
 global dictImgCampiVisiviNemici
+global dictImgNemiciDiario
+global dictionaryImgPersonaggi
+global dictImgPersonaggiDiario
+global fraMaggioreDiario
+global roboDiario
+global ralloDiario
+global neilSconosciutoDiario
 global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
 global persoLucy1
@@ -235,8 +243,15 @@ global vetImgGuantiInGame
 global vetImgCollaneInGame
 global vetImgFaretreInGame
 global vetImgArmRobInGame
+global imgDiarioChiusoMenu
+global imgDiarioApertoMenu
+global imgBicchiereConAcqua
+global imgChiaveRipostiglio
+global imgChiaveStanzaCasaDavid
+global imgCertificazioneResidenza
+global imgImpoPietra
 
-numImgTotali = 1360
+numImgTotali = 1413
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -266,6 +281,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global puntatOut
     global puntatSfo
     global puntatDif
+    global puntatDifPv
     global puntatAtt
     global puntatArc
     global puntatPor
@@ -469,6 +485,13 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgOmbreggiaturaContorniMappaMenu
     global dictionaryImgNemici
     global dictImgCampiVisiviNemici
+    global dictImgNemiciDiario
+    global dictionaryImgPersonaggi
+    global dictImgPersonaggiDiario
+    global fraMaggioreDiario
+    global roboDiario
+    global ralloDiario
+    global neilSconosciutoDiario
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
     global persoLucy1
@@ -489,6 +512,13 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global vetImgCollaneInGame
     global vetImgFaretreInGame
     global vetImgArmRobInGame
+    global imgDiarioChiusoMenu
+    global imgDiarioApertoMenu
+    global imgBicchiereConAcqua
+    global imgChiaveRipostiglio
+    global imgChiaveStanzaCasaDavid
+    global imgCertificazioneResidenza
+    global imgImpoPietra
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -502,6 +532,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     puntatOut = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraCVout.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatSfo = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/sfondoOggettoLanciato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatDif = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Difesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    puntatDifPv = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/DifesaPv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatAtt = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Attacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatArc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/AttaccoDistanza.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatPor = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ApriChiudiPorta.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -949,9 +980,6 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgFrecciaEletttricaLanciataP = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata+.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgFrecciaEletttricaLanciataPP = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata++.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
-    # img sfondi dialoghi
-    sfondoDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False)
-
     # img tutorial
     tutorialTastieraInGioco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInGioco.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
     tutorialTastieraInMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInMenu.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
@@ -970,6 +998,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
 
     # img grafiche / dialoghi
+    sfondoDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False)
     persGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     lucy1GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy1GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     lucy2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
@@ -999,6 +1028,49 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sconosciutoOggettoMenu2 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
     sconosciutoOggettoMenu3 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False)
+
+    # img personaggi
+    vettoreNomiPersonaggi = ["Alieno1", "Alieno2", "AssistBiblioteca", "Bibliotecario", "CaneCasa", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada"]
+    dictionaryImgPersonaggi = {}
+    for nomePersonaggi in vettoreNomiPersonaggi:
+        dictionaryImgPosizioni = {}
+        imgW = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgW"] = imgW
+        imgA = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgA"] = imgA
+        imgS = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgS"] = imgS
+        imgD = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgD"] = imgD
+        imgWMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgWMov1"] = imgWMov1
+        imgWMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgWMov2"] = imgWMov2
+        imgAMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgAMov1"] = imgAMov1
+        imgAMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgAMov2"] = imgAMov2
+        imgSMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgSMov1"] = imgSMov1
+        imgSMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgSMov2"] = imgSMov2
+        imgDMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgDMov1"] = imgDMov1
+        imgDMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictionaryImgPosizioni["imgDMov2"] = imgDMov2
+        imgDialogo = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
+        dictionaryImgPosizioni["imgDialogo"] = imgDialogo
+
+        dictionaryImgPersonaggi[nomePersonaggi] = dictionaryImgPosizioni
+    dictImgPersonaggiDiario = {}
+    for nomePersonaggi in vettoreNomiPersonaggi:
+        if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada":
+            imgPersonaggi = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/" + nomePersonaggi + "GrafMenu.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+            dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
+    fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    roboDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    ralloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    neilSconosciutoDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
 
     # img nemici
     vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "LupoGrigio", "LupoBianco", "LupoNero", "Cinghiale", "Cittadino1", "Cittadino3", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]
@@ -1057,8 +1129,21 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while raggio <= 8:
         dictImgCampiVisiviNemici[str(raggio)] = funzionePerCaricareImmagini("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True)
         raggio += 1
+    dictImgNemiciDiario = {}
+    for nomeNemico in vettoreNomiNemici:
+        imgNemico = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniNemici/" + nomeNemico + "Graf.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+        dictImgNemiciDiario[nomeNemico] = imgNemico
 
     # img menu
     schemataDiCaricamento = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     imgOmbreggiaturaContorniMappaMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgDiarioChiusoMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/DiarioChiusoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
+    imgDiarioApertoMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/DiarioApertoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
+
+    # img oggetti speciali
+    imgBicchiereConAcqua = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/BicchiereConAcqua.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveRipostiglio = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveRipostiglio.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveStanzaCasaDavid = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCasaDavid.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgCertificazioneResidenza = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/CertificazioneResidenza.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgImpoPietra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ImpoPietra.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
