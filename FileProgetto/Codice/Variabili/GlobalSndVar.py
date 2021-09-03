@@ -19,7 +19,6 @@ global rumoreParata
 global rumorecamminata
 global rumorelevelup
 global rumoreMorte
-global rumoreCuraInDifesa
 global suonoaperturacofanetti
 global suonoaperturaporteForesta
 global suonochiusuraporteForesta
@@ -101,7 +100,6 @@ def loadSounds(numSndCaricato):
     global rumorecamminata
     global rumorelevelup
     global rumoreMorte
-    global rumoreCuraInDifesa
     global suonoaperturacofanetti
     global suonoaperturaporteForesta
     global suonochiusuraporteForesta
@@ -170,7 +168,6 @@ def loadSounds(numSndCaricato):
     rumorecamminata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Camminata.wav")
     rumorelevelup = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Levelup.wav")
     rumoreMorte = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Morte.wav")
-    rumoreCuraInDifesa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/CuraInDifesa.wav")
 
     # souno raccolta esca - monete
     suonoRaccoltaOggetto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaOggetto.wav")

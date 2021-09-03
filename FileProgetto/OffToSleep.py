@@ -1787,17 +1787,6 @@ def gameloop():
                     GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(0)
                     GlobalHWVar.canaleSoundCanzone.stop()
                     GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
-                    i = 0
-                    while i < 2:
-                        pygame.time.wait(100)
-                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                        i += 1
-                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreCuraInDifesa)
-                    i = 0
-                    while i < 15:
-                        pygame.time.wait(100)
-                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                        i += 1
                     if canzone:
                         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
                     if len(listaSottofondoAmbientale) > 0:

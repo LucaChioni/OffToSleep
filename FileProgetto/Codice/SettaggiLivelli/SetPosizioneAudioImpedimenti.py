@@ -2441,6 +2441,26 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     pygame.time.wait(100)
                     inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                     i += 1
+    if stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
+        nomeCanzoneLuogo = ""
+        if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+            GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+            canzone = False
+            canzoneCambiata = True
+        sottofondoLuogo = "EsternoCastello"
+        if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+            GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+            audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+            listaSottofondoAmbientale = [audioAmbiente_Vento1]
+            sottofondoAmbientaleCambiato = True
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":

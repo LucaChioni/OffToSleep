@@ -579,17 +579,225 @@ def menuDiario(avanzamentoStoria):
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
+        voceMarcataSottoMenuVecchia = voceMarcataSottoMenu
         xMouse, yMouse = pygame.mouse.get_pos()
         suTornaIndietro = False
+        suFrecciaSu = False
+        suFrecciaGiu = False
         if GlobalHWVar.mouseVisibile:
             if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
+            elif voceMarcataSottoMenu == 0 and GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 10:
+                if GlobalHWVar.gsy // 18 * 5.1 <= yMouse <= GlobalHWVar.gsy // 18 * 6.6:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 1
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 5.6
+                elif GlobalHWVar.gsy // 18 * 6.6 <= yMouse <= GlobalHWVar.gsy // 18 * 8.1:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 7.1
+                elif GlobalHWVar.gsy // 18 * 8.1 <= yMouse <= GlobalHWVar.gsy // 18 * 9.6:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 3
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 8.6
+                elif GlobalHWVar.gsy // 18 * 14.1 <= yMouse <= GlobalHWVar.gsy // 18 * 15.6:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 4
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 14.6
+                else:
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
+            elif voceMarcataSottoMenu != 0 and not sottovoceSelezionata:
+                if GlobalHWVar.gsx // 32 * 10 <= xMouse <= GlobalHWVar.gsx // 32 * 18:
+                    if GlobalHWVar.gsx // 32 * 13.5 <= xMouse <= GlobalHWVar.gsx // 32 * 14.5 and GlobalHWVar.gsy // 18 * 4 <= yMouse <= GlobalHWVar.gsy // 18 * 4.75 and ((voceMarcata == 2 and voceMarcataSottoMenu > 11) or (voceMarcata == 3 and voceMarcataSottoMenu > 11)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        suFrecciaSu = True
+                    elif GlobalHWVar.gsx // 32 * 13.5 <= xMouse <= GlobalHWVar.gsx // 32 * 14.5 and GlobalHWVar.gsy // 18 * 15.75 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5 and ((voceMarcata == 2 and voceMarcataSottoMenu <= 11) or (voceMarcata == 3 and voceMarcataSottoMenu <= 22)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        suFrecciaGiu = True
+                    elif GlobalHWVar.gsy // 18 * 4.75 <= yMouse <= GlobalHWVar.gsy // 18 * 5.75:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1:
+                            voceMarcataSottoMenu = 1
+                        elif voceMarcata == 2:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 1
+                            else:
+                                voceMarcataSottoMenu = 12
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 1
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 12
+                            else:
+                                voceMarcataSottoMenu = 23
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 5
+                    elif GlobalHWVar.gsy // 18 * 5.75 <= yMouse <= GlobalHWVar.gsy // 18 * 6.75:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1:
+                            voceMarcataSottoMenu = 2
+                        elif voceMarcata == 2:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 2
+                            else:
+                                voceMarcataSottoMenu = 13
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 2
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 13
+                            else:
+                                voceMarcataSottoMenu = 24
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 6
+                    elif GlobalHWVar.gsy // 18 * 6.75 <= yMouse <= GlobalHWVar.gsy // 18 * 7.75:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1:
+                            voceMarcataSottoMenu = 3
+                        elif voceMarcata == 2:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 3
+                            else:
+                                voceMarcataSottoMenu = 14
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 3
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 14
+                            else:
+                                voceMarcataSottoMenu = 25
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 7
+                    elif GlobalHWVar.gsy // 18 * 7.75 <= yMouse <= GlobalHWVar.gsy // 18 * 8.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 4
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 4
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 15
+                            else:
+                                voceMarcataSottoMenu = 26
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 8
+                    elif GlobalHWVar.gsy // 18 * 8.75 <= yMouse <= GlobalHWVar.gsy // 18 * 9.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 5
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 5
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 16
+                            else:
+                                voceMarcataSottoMenu = 27
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 9
+                    elif GlobalHWVar.gsy // 18 * 9.75 <= yMouse <= GlobalHWVar.gsy // 18 * 10.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 6
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 6
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 17
+                            else:
+                                voceMarcataSottoMenu = 28
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 10
+                    elif GlobalHWVar.gsy // 18 * 10.75 <= yMouse <= GlobalHWVar.gsy // 18 * 11.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 7
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 7
+                            elif voceMarcataSottoMenu <= 22:
+                                voceMarcataSottoMenu = 18
+                            else:
+                                voceMarcataSottoMenu = 29
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 11
+                    elif GlobalHWVar.gsy // 18 * 11.75 <= yMouse <= GlobalHWVar.gsy // 18 * 12.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3 and voceMarcataSottoMenu <= 22)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 8
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 8
+                            else:
+                                voceMarcataSottoMenu = 19
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 12
+                    elif GlobalHWVar.gsy // 18 * 12.75 <= yMouse <= GlobalHWVar.gsy // 18 * 13.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3 and voceMarcataSottoMenu <= 22)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 9
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 9
+                            else:
+                                voceMarcataSottoMenu = 20
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 13
+                    elif GlobalHWVar.gsy // 18 * 13.75 <= yMouse <= GlobalHWVar.gsy // 18 * 14.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3 and voceMarcataSottoMenu <= 22)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 10
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 10
+                            else:
+                                voceMarcataSottoMenu = 21
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 14
+                    elif GlobalHWVar.gsy // 18 * 14.75 <= yMouse <= GlobalHWVar.gsy // 18 * 15.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3 and voceMarcataSottoMenu <= 22)):
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        if voceMarcata == 1 or voceMarcata == 2:
+                            voceMarcataSottoMenu = 11
+                        elif voceMarcata == 3:
+                            if voceMarcataSottoMenu <= 11:
+                                voceMarcataSottoMenu = 11
+                            else:
+                                voceMarcataSottoMenu = 22
+                        xp = GlobalHWVar.gsx // 32 * 10
+                        yp = GlobalHWVar.gsy // 18 * 15
+                    else:
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
+                else:
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             else:
                 if not GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(True)
-            if voceMarcataVecchia != voceMarcata and not primoFrame:
+            if (voceMarcataVecchia != voceMarcata or voceMarcataSottoMenuVecchia != voceMarcataSottoMenu) and not primoFrame:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
         # gestione degli input
@@ -631,6 +839,24 @@ def menuDiario(avanzamentoStoria):
                         yp = ypv
                 else:
                     risposta = True
+            elif bottoneDown == "mouseSinistro" and suFrecciaSu:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
+                if voceMarcataSottoMenu > 22:
+                    voceMarcataSottoMenu = 21
+                elif voceMarcataSottoMenu > 11:
+                    voceMarcataSottoMenu = 11
+                xp = GlobalHWVar.gsx // 32 * 10
+                yp = GlobalHWVar.gsy // 18 * 15
+                bottoneDown = False
+            elif bottoneDown == "mouseSinistro" and suFrecciaGiu:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
+                if voceMarcataSottoMenu <= 11:
+                    voceMarcataSottoMenu = 12
+                elif voceMarcataSottoMenu <= 22:
+                    voceMarcataSottoMenu = 23
+                xp = GlobalHWVar.gsx // 32 * 10
+                yp = GlobalHWVar.gsy // 18 * 5
+                bottoneDown = False
             elif voceMarcataSottoMenu == 0:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 voceMarcataSottoMenu = 1
@@ -654,7 +880,7 @@ def menuDiario(avanzamentoStoria):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or voceMarcataSottoMenuVecchia != voceMarcataSottoMenu or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcataSottoMenu == 0:
