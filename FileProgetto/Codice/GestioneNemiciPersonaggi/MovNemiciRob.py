@@ -1850,11 +1850,20 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         obiettivoGiaConosciuto = False
                         pathToNemico = []
                         if obbiettivoCasualeColco and obbiettivoCasualeColco in nemiciVistiDaColco:
-                            obiettivoGiaConosciuto = True
-                            nemicoBersaglio = obbiettivoCasualeColco
-                            vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemicoBersaglio.x, nemicoBersaglio.y)
-                            pathToNemico = GenericFunc.pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, vetNemiciSoloConXeY, caseviste)
-                        elif not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
+                            if tecnicaRavvicinata:
+                                vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, obbiettivoCasualeColco.x, obbiettivoCasualeColco.y)
+                                pathToNemico = GenericFunc.pathFinding(rx, ry, obbiettivoCasualeColco.x, obbiettivoCasualeColco.y, vetNemiciSoloConXeY, caseviste)
+                                if pathToNemico and len(pathToNemico) > 0:
+                                    obiettivoGiaConosciuto = True
+                                    nemicoBersaglio = obbiettivoCasualeColco
+                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemicoBersaglio.x, nemicoBersaglio.y)
+                                    pathToNemico = GenericFunc.pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, vetNemiciSoloConXeY, caseviste)
+                            else:
+                                obiettivoGiaConosciuto = True
+                                nemicoBersaglio = obbiettivoCasualeColco
+                                vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemicoBersaglio.x, nemicoBersaglio.y)
+                                pathToNemico = GenericFunc.pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, vetNemiciSoloConXeY, caseviste)
+                        if not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
                             # non uso il deepcopy perché mi serve che gli oggetti siano gli stessi
                             listaNemiciProvvisoria = nemiciVistiDaColco[:]
                             trovatoNemicoCasuale = False

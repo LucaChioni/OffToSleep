@@ -9,7 +9,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
     return listaNemiciTotali, listaNemici
 
 
-def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria):
+def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi):
     if stanza == GlobalGameVar.dictStanze["casaDavid1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoArrivoCasaConDavid"]:
             percorsoPersonaggio = ["w", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "w", "w"]

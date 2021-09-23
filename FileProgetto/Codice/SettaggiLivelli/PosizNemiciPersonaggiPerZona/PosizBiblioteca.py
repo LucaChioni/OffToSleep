@@ -9,7 +9,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
     return listaNemiciTotali, listaNemici
 
 
-def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria):
+def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi):
     if stanza == GlobalGameVar.dictStanze["biblioteca1"]:
         percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 11, "d", "AssistBiblioteca-0", stanza, avanzamentoStoria, percorsoPersonaggio)

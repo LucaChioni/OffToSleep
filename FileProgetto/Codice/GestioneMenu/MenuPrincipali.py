@@ -175,8 +175,8 @@ def menu(caricaSalvataggio, gameover):
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
     # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob
-    # porte(143-?) - cofanetti(?-?) // dimensione: 0-142 (=> 143 variabili) + porte e cofanetti
-    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 55, 0, 0, 0, 0, 0,  # <- statistiche
+    # porte(144-?) - cofanetti(?-?) // dimensione: 0-143 (=> 144 variabili) + porte e cofanetti
+    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 48, 0, 0, 0, 0, 0,  # <- statistiche
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
         2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,  # <- equpaggiamento
@@ -184,7 +184,7 @@ def menu(caricaSalvataggio, gameover):
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- condizioni
         0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
-        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False  # <- info aggiunte per poter salvare ovunque
+        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False, False  # <- info aggiunte per poter salvare ovunque
         ]
 
     # posizione porte e cofanetti nel vettore dati
@@ -208,6 +208,7 @@ def menu(caricaSalvataggio, gameover):
         oggettiRimastiAHans = GlobalGameVar.vetDatiSalvataggioGameOver[9]
         ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10]
         obbiettivoCasualeColco = GlobalGameVar.vetDatiSalvataggioGameOver[11]
+        GlobalGameVar.inizializzaVariabiliGlobali()
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
@@ -828,7 +829,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
 
     if GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]:
-        risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom, apriLabirinto=True)
+        risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom, tutticofanetti, apriLabirinto=True)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -941,10 +942,10 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom)
+                        risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom, tutticofanetti)
                     # diario
                     if voceMarcata == 5:
-                        risposta = SottoMenuMapDiario.menuDiario(dati[0])
+                        risposta = SottoMenuMapDiario.menuDiario(dati[0], listaAvanzamentoDialoghi)
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
@@ -957,7 +958,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     if voceMarcata == 7:
                         gpxPreCambioRisoluzione = GlobalHWVar.gpx
                         gpyPreCambioRisoluzione = GlobalHWVar.gpy
-                        cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom)
+                        cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
                         if cambiatoRisoluzione:
                             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
                             GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
@@ -1366,7 +1367,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
 
                     gpxPreCambioRisoluzione = GlobalHWVar.gpx
                     gpyPreCambioRisoluzione = GlobalHWVar.gpy
-                    cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom)
+                    cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
                     if cambiatoRisoluzione:
                         dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
                         GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
@@ -1642,7 +1643,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
                     if dati[32] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 100gr", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
@@ -1657,7 +1658,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
                     if dati[35] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 250gr", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 14.8))

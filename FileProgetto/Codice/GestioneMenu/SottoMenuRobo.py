@@ -205,23 +205,27 @@ def sceglicondiz(dati, condizione):
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             else:
-                # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
-                i = 81
-                c = 1
-                while i <= 100:
-                    if voceMarcata == c:
-                        if dati[i] != 0:
-                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                            condizione = c
-                            risposta = True
-                        else:
-                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                    i += 1
-                    c += 1
                 if voceMarcata == 0:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     condizione = 0
                     risposta = True
+                else:
+                    # reimposto la condizione giusta perché ho messo un ordine diverso nel menu rispetto a tutto il resto (scambiati "Impo surriscaldato" con "Sempre a Lucy")
+                    c = 1
+                    while c <= 20:
+                        if voceMarcata == c:
+                            condizioneTemp = c
+                            if c == 5:
+                                condizioneTemp = 9
+                            elif c == 9:
+                                condizioneTemp = 5
+                            if dati[condizioneTemp + 80] != 0:
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                                condizione = condizioneTemp
+                                risposta = True
+                            else:
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        c += 1
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -331,8 +335,8 @@ def sceglicondiz(dati, condizione):
                     FunzioniGraficheGeneriche.messaggio("Lucy con veleno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 40)
-                if dati[85] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
+                if dati[89] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
                 if dati[86] > 0:
@@ -347,8 +351,8 @@ def sceglicondiz(dati, condizione):
                     FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 30%", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 40)
-                if dati[89] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
+                if dati[85] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
                 if dati[90] > 0:
@@ -451,10 +455,10 @@ def sceglicondiz(dati, condizione):
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 5:
-                if dati[85] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scecond[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Impo surriscaldato:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Impo quando è surriscaldato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                if dati[89] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scecond[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sempre a Lucy:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Lucy in continuazione quando la vede (se l'Azio-ImpoFoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -483,10 +487,10 @@ def sceglicondiz(dati, condizione):
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 9:
-                if dati[89] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scecond[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sempre a Lucy:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Lucy in continuazione quando la vede (se l'Azio-ImpoFoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                if dati[85] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scecond[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Impo surriscaldato:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Impo quando è surriscaldato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -580,24 +584,23 @@ def sceglicondiz(dati, condizione):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
 
             # puntatore vecchio
-            i = 1
-            k = 6.1
-            while i <= 10:
-                if condizione == i:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * k))
-                    break
-                i += 1
-                k += 1
-            i = 11
-            k = 6.1
-            while i <= 20:
-                if condizione == i:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * k))
-                    break
-                i += 1
-                k += 1
-            if condizione == 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7))
+            xPuntatoreVecchio = GlobalHWVar.gpx * 1
+            yPuntatoreVecchio = GlobalHWVar.gpy * 4.7
+            if condizione == 5:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 14.1
+            elif condizione == 9:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 10.1
+            elif condizione != 0:
+                if condizione <= 10:
+                    xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                    yPuntatoreVecchio = (GlobalHWVar.gpy * condizione) + (GlobalHWVar.gpy * 5.1)
+                else:
+                    xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                    yPuntatoreVecchio = (GlobalHWVar.gpy * (condizione - 10)) + (GlobalHWVar.gpy * 5.1)
+            GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xPuntatoreVecchio, yPuntatoreVecchio))
+
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             primoFrame = False
 
@@ -803,23 +806,66 @@ def sceglitecn(dati, tecnica):
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             else:
-                i = 11
-                c = 1
-                while i <= 30:
-                    if voceMarcata == c:
-                        if dati[i] != 0:
-                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                            tecnica = c
-                            risposta = True
-                        else:
-                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                        break
-                    i += 1
-                    c += 1
                 if voceMarcata == 0:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     tecnica = 0
                     risposta = True
+                else:
+                    # reimposto la tecnica giusta perché ho messo un ordine diverso nel menu rispetto a tutto il resto (non avevo voglia di andare a modificare tutto il resto)
+                    # ordine menu => [1 cura, 2 cura+, 3 cura++, 4 antidoto, 5 attP, 6 difP, 7 ricarica, 8 ricarica+, 9 raffred, 10 efficienza, 11 scossa, 12 scossa+, 13 scossa++, 14 freccia, 15 freccia+, 16 freccia++, 17 tempesta, 18 tempesta+, 19 tempesta++, 20 velocizza]
+                    # ordine vero => [1 scossa, 2 cura, 3 antidoto, 4 freccia, 5 tempesta, 6 raffred, 7 ricarica, 8 cura+, 9 scossa+, 10 freccia+, 11 velocizza, 12 attP, 13 difP, 14 efficienza, 15 tempesta+, 16 cura++, 17 ricarica+, 18 scossa++, 19 freccia++, 20 tempesta++]
+                    c = 1
+                    while c <= 20:
+                        if voceMarcata == c:
+                            tecnicaTemp = c
+                            if c == 1:
+                                tecnicaTemp = 2
+                            elif c == 2:
+                                tecnicaTemp = 8
+                            elif c == 3:
+                                tecnicaTemp = 16
+                            elif c == 4:
+                                tecnicaTemp = 3
+                            elif c == 5:
+                                tecnicaTemp = 12
+                            elif c == 6:
+                                tecnicaTemp = 13
+                            elif c == 7:
+                                tecnicaTemp = 7
+                            elif c == 8:
+                                tecnicaTemp = 17
+                            elif c == 9:
+                                tecnicaTemp = 6
+                            elif c == 10:
+                                tecnicaTemp = 14
+                            elif c == 11:
+                                tecnicaTemp = 1
+                            elif c == 12:
+                                tecnicaTemp = 9
+                            elif c == 13:
+                                tecnicaTemp = 18
+                            elif c == 14:
+                                tecnicaTemp = 4
+                            elif c == 15:
+                                tecnicaTemp = 10
+                            elif c == 16:
+                                tecnicaTemp = 19
+                            elif c == 17:
+                                tecnicaTemp = 5
+                            elif c == 18:
+                                tecnicaTemp = 15
+                            elif c == 19:
+                                tecnicaTemp = 20
+                            elif c == 20:
+                                tecnicaTemp = 11
+                            if dati[tecnicaTemp + 10] != 0:
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                                tecnica = tecnicaTemp
+                                risposta = True
+                            else:
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                            break
+                        c += 1
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -913,84 +959,84 @@ def sceglitecn(dati, tecnica):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
                 FunzioniGraficheGeneriche.messaggio("Azio-ImpoFogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
-                if dati[11] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Scossa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
+                if dati[12] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Cura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
-                if dati[12] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Cura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 40)
+                if dati[18] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Cura +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 40)
-                if dati[13] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Antidoto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 40)
+                if dati[26] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Cura ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 40)
-                if dati[14] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 40)
+                if dati[13] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Antidoto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 40)
-                if dati[15] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
+                if dati[22] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Carica attacco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 40)
-                if dati[16] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Raffreddamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 40)
+                if dati[23] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Carica difesa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 40)
                 if dati[17] > 0:
                     FunzioniGraficheGeneriche.messaggio("Auto-ricarica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 40)
-                if dati[18] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Cura +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 40)
+                if dati[27] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Auto-ricarica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 40)
-                if dati[19] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Scossa +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
+                if dati[16] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Raffreddamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 40)
-                if dati[20] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 40)
+                if dati[24] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Efficienza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 40)
-                if dati[21] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Velocizza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 6.2, 40)
+                if dati[11] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Scossa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 6.2, 40)
-                if dati[22] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Carica attacco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 7.2, 40)
+                if dati[19] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Scossa +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 7.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 7.2, 40)
-                if dati[23] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Carica difesa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 8.2, 40)
+                if dati[28] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Scossa ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 8.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 8.2, 40)
-                if dati[24] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Efficienza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9.2, 40)
+                if dati[14] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9.2, 40)
-                if dati[25] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 10.2, 40)
+                if dati[20] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 10.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 10.2, 40)
-                if dati[26] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Cura ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 11.2, 40)
+                if dati[29] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Freccia Elettrica ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 11.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 11.2, 40)
-                if dati[27] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Auto-ricarica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 12.2, 40)
+                if dati[15] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 12.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 12.2, 40)
-                if dati[28] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Scossa ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 13.2, 40)
+                if dati[25] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 13.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 13.2, 40)
-                if dati[29] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Freccia Elettrica ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
+                if dati[30] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
-                if dati[30] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
+                if dati[21] > 0:
+                    FunzioniGraficheGeneriche.messaggio("Velocizza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
             else:
@@ -1017,15 +1063,6 @@ def sceglitecn(dati, tecnica):
                 FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Togli l'Azio-ImpoFoglio dalla cella di memoria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if voceMarcata == 1:
-                if dati[11] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[1], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Scossa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[0]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 2:
                 if dati[12] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[2], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Cura:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1034,7 +1071,25 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 2:
+                if dati[18] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[8], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Cura +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[7]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Recupera molti <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 3:
+                if dati[26] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[16], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Cura ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[15]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio(u"Recupera un'enorme quantità dei <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 4:
                 if dati[13] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[3], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Antidoto:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1043,30 +1098,21 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 4:
-                if dati[14] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[4], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[3]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 5:
-                if dati[15] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[4]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                if dati[22] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[12], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Carica attacco:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[11]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Incrementa l'attacco di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 6:
-                if dati[16] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[6], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Raffreddamento:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[5]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                if dati[23] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[13], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Carica difesa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[12]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Incrementa la difesa di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1080,87 +1126,6 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 8:
-                if dati[18] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[8], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Cura +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[7]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Recupera molti <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 9:
-                if dati[19] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Scossa +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[8]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 10:
-                if dati[20] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[10], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[9]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 11:
-                if dati[21] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[11], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Velocizza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[10]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Permette a Impo, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 12:
-                if dati[22] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[12], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Carica attacco:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[11]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Incrementa l'attacco di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 13:
-                if dati[23] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[13], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Carica difesa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[12]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Incrementa la difesa di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 14:
-                if dati[24] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[14], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Efficienza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[13]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"Tutte le tecniche costano la metà dei <*>#italic#Pe<*> per 15 turni. Si annulla con surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 15:
-                if dati[25] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[15], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[14]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 16:
-                if dati[26] > 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[16], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Cura ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[15]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"Recupera un enorme quantità dei <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 17:
                 if dati[27] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[17], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Auto-ricarica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1169,7 +1134,43 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 18:
+            if voceMarcata == 9:
+                if dati[16] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[6], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Raffreddamento:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[5]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 10:
+                if dati[24] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[14], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Efficienza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[13]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio(u"Tutte le tecniche costano la metà dei <*>#italic#Pe<*> per 15 turni. Si annulla con surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 11:
+                if dati[11] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[1], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Scossa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[0]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 12:
+                if dati[19] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Scossa +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[8]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 13:
                 if dati[28] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[18], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Scossa ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1178,7 +1179,25 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 19:
+            if voceMarcata == 14:
+                if dati[14] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[4], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[3]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 15:
+                if dati[20] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[10], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Freccia elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[9]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 16:
                 if dati[29] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[19], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Freccia Elettrica ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1187,7 +1206,25 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-            if voceMarcata == 20:
+            if voceMarcata == 17:
+                if dati[15] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[4]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 18:
+                if dati[25] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[15], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[14]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 19:
                 if dati[30] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[20], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1196,26 +1233,81 @@ def sceglitecn(dati, tecnica):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+            if voceMarcata == 20:
+                if dati[21] > 0:
+                    GlobalHWVar.disegnaImmagineSuSchermo(scetecn[11], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Velocizza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("Consumo: " + str(GlobalGameVar.costoTecniche[10]) + " <*>#italic#Pe<*>", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 13.8, 45)
+                    FunzioniGraficheGeneriche.messaggio("Permette a Impo, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
+                    FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
 
             # puntatore vecchio
-            i = 1
-            k = 6.1
-            while i <= 10:
-                if tecnica == i:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * k))
-                    break
-                i += 1
-                k += 1
-            i = 11
-            k = 6.1
-            while i <= 20:
-                if tecnica == i:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * k))
-                    break
-                i += 1
-                k += 1
-            if tecnica == 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7))
+            xPuntatoreVecchio = GlobalHWVar.gpx * 1
+            yPuntatoreVecchio = GlobalHWVar.gpy * 4.7
+            if tecnica == 2:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 6.1
+            elif tecnica == 8:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 7.1
+            elif tecnica == 16:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 8.1
+            elif tecnica == 3:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 9.1
+            elif tecnica == 12:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 10.1
+            elif tecnica == 13:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 11.1
+            elif tecnica == 7:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 12.1
+            elif tecnica == 17:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 13.1
+            elif tecnica == 6:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 14.1
+            elif tecnica == 14:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 1
+                yPuntatoreVecchio = GlobalHWVar.gpy * 15.1
+            elif tecnica == 1:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 6.1
+            elif tecnica == 9:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 7.1
+            elif tecnica == 18:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 8.1
+            elif tecnica == 4:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 9.1
+            elif tecnica == 10:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 10.1
+            elif tecnica == 19:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 11.1
+            elif tecnica == 5:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 12.1
+            elif tecnica == 15:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 13.1
+            elif tecnica == 20:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 14.1
+            elif tecnica == 11:
+                xPuntatoreVecchio = GlobalHWVar.gpx * 8
+                yPuntatoreVecchio = GlobalHWVar.gpy * 15.1
+            GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xPuntatoreVecchio, yPuntatoreVecchio))
+
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             primoFrame = False
 

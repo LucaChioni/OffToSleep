@@ -34,7 +34,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"...")
+        dialogo.append(u"Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("tu")
@@ -53,7 +53,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Non credo che Hans sia andato di qua...")
+        dialogo.append(u"Non credo che Hans sia andato di qua.")
         partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
@@ -71,19 +71,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Stai lontano! Per ordine del Re l'accesso verso oriente è vietato a tutti i civili.")
+                dialogo.append(u"Stai lontano! L'accesso verso oriente è vietato a tutti i civili per ordine del Re.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Perché?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Per ordine del Re.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Sì ok, ma perché il Re lo ha ordinato?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -99,7 +91,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Oh ok...")
+                dialogo.append("Oh, ok...")
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 1:
                 oggettoDato = False
@@ -113,7 +105,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"La strada è già bloccata da questi cartelli e l'unico punto libero è quello in cui sono io adesso, quindi è praticamente impossibile passare.")
+                dialogo.append(u"La strada è già bloccata da questi cartelli e l'unico punto libero è quello in cui sono io adesso. È praticamente impossibile passare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -125,7 +117,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Ehm... ok... ma uno potrebbe farsi strada nel bosco senza troppi problemi, no?")
+                dialogo.append("Ok... ma uno potrebbe farsi strada nel bosco senza troppi problemi, no?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -165,11 +157,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del tuo giudizio. Adesso vattene che ho molto da fare qui!")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("Ok...")
+                dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del giudizio altrui. Adesso vattene, ho molto da fare qui!")
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 4:
                 oggettoDato = False
@@ -205,11 +193,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Salve... si prega di non ingombrare il ponte troppo a lungo! È necessario che sia sempre il più fruibile possibile.")
+                    dialogo.append(u"Salve. Si prega di non ingombrare il ponte troppo a lungo! È necessario che sia sempre il più fruibile possibile.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Va bene, mi stavo proprio chiedendo perché non ci fosse nessuno qui...")
+                    dialogo.append(u"Oh, mi stavo giusto chiedendo perché non ci fosse nessuno qui...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -217,7 +205,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ok, ma tu invece? Non lo stai \"ostruendo\"?")
+                    dialogo.append(u"Ok, ma tu invece? Non lo stai ostruendo?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -225,7 +213,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"A me sembre che l'unico traffico qui sia composto da due guardie che stanno sul ponte senza neanche attraversarlo...")
+                    dialogo.append(u"A me sembra che l'unico traffico qui sia composto da due guardie che stanno sul ponte senza neanche attraversarlo...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -275,7 +263,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ehm, scusate sono di passaggio, sto cercando un ragazzo che dovrebbe essere passato di qua poco fa...")
+            dialogo.append("Scusate sono di passaggio... sto cercando un ragazzo che dovrebbe essere passato di qua poco fa...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

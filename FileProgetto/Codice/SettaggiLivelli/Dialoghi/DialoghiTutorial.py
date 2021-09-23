@@ -93,7 +93,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Inquadrando un nemico inoltre verranno oscurate in rosso le caselle che il nemico non riesce a vedere. Quando un nemico ti vede, l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
+        dialogo.append(u"Inquadrando un nemico inoltre verranno oscurate in rosso le caselle che riesce a vedere. Quando un nemico ti vede, l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
@@ -107,6 +107,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo = []
         dialogo.append("personaggio")
         dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni. Facendolo in un luogo sicuro invece ti permetterà di riposare e recuperare tutti i <*>#italic#Pv.<*>")
+        partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Assumendo la posizione difensiva in luoghi sicuri, recupererai tutti i <*>#italic#Pv.<*>")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         oggettoDato = False

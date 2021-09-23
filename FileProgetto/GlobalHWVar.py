@@ -536,42 +536,45 @@ def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
     x, y = coordinate
     x = int(x)
     y = int(y)
-    if superficie:
-        superficie.blit(img, (x, y))
-    else:
-        schermo.blit(img, (x, y))
-    dimX, dimY = img.get_rect().size
+    if img:
+        if superficie:
+            superficie.blit(img, (x, y))
+        else:
+            schermo.blit(img, (x, y))
+        dimX, dimY = img.get_rect().size
 
-    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
-        listaRettangoliDaAggiornare = []
-        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
-        aggiornaTuttoLoSchermo = True
-    if not aggiornaTuttoLoSchermo:
-        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
-        aggiungiRettangolo = True
-        rectOrig = pygame.Rect(x, y, dimX, dimY)
-        xInizioRectOrig = rectOrig.left
-        yInizioRectOrig = rectOrig.top
-        xFineRectOrig = rectOrig.right
-        yFineRectOrig = rectOrig.bottom
-        i = 0
-        while i < len(listaRettangoliDaAggiornare):
-            rectConfronto = listaRettangoliDaAggiornare[i]
-            xInizioRectConfronto = rectConfronto.left
-            yInizioRectConfronto = rectConfronto.top
-            xFineRectConfronto = rectConfronto.right
-            yFineRectConfronto = rectConfronto.bottom
-            rettangoloEliminato = False
-            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
-                aggiungiRettangolo = False
-                break
-            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
-                del listaRettangoliDaAggiornare[i]
-                rettangoloEliminato = True
-            if not rettangoloEliminato:
-                i += 1
-        if aggiungiRettangolo:
-            listaRettangoliDaAggiornare.append(rectOrig)
+        if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+            listaRettangoliDaAggiornare = []
+            listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+            aggiornaTuttoLoSchermo = True
+        if not aggiornaTuttoLoSchermo:
+            # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+            aggiungiRettangolo = True
+            rectOrig = pygame.Rect(x, y, dimX, dimY)
+            xInizioRectOrig = rectOrig.left
+            yInizioRectOrig = rectOrig.top
+            xFineRectOrig = rectOrig.right
+            yFineRectOrig = rectOrig.bottom
+            i = 0
+            while i < len(listaRettangoliDaAggiornare):
+                rectConfronto = listaRettangoliDaAggiornare[i]
+                xInizioRectConfronto = rectConfronto.left
+                yInizioRectConfronto = rectConfronto.top
+                xFineRectConfronto = rectConfronto.right
+                yFineRectConfronto = rectConfronto.bottom
+                rettangoloEliminato = False
+                if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                    aggiungiRettangolo = False
+                    break
+                elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                    del listaRettangoliDaAggiornare[i]
+                    rettangoloEliminato = True
+                if not rettangoloEliminato:
+                    i += 1
+            if aggiungiRettangolo:
+                listaRettangoliDaAggiornare.append(rectOrig)
+    else:
+        print "Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")"
 def aggiornaSchermo():
     global listaRettangoliDaAggiornare
     global aggiornaTuttoLoSchermo

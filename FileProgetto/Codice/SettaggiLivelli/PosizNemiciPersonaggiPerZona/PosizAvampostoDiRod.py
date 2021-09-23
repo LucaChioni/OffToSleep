@@ -9,7 +9,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
     return listaNemiciTotali, listaNemici
 
 
-def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria):
+def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi):
     if stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"]:
             percorsoPersonaggio = ["sGira", "mantieniPosizione"]

@@ -83,29 +83,29 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     listaPersonaggi = []
     if not stanza in stanzeGiaVisitate:
         if GlobalGameVar.dictStanze["sognoLucy1"] <= stanza <= GlobalGameVar.dictStanze["sognoLucy4"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizSogno.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizSogno.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["casaHansLucy1"] <= stanza <= GlobalGameVar.dictStanze["casaHansLucy4"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizCasaHansLucy.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizCasaHansLucy.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizForestaCadetta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizForestaCadetta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["stradaPerCittà1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerCittà3"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizStradaPerCitta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizStradaPerCitta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["città1"] <= stanza <= GlobalGameVar.dictStanze["città10"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizCitta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizCitta.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["casaDavid1"] <= stanza <= GlobalGameVar.dictStanze["casaDavid3"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizCasaUfficiale.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizCasaUfficiale.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["biblioteca1"] <= stanza <= GlobalGameVar.dictStanze["biblioteca3"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizBiblioteca.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizBiblioteca.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["stradaPerSelvaArida1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizStradaPerSelvaArida.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizStradaPerSelvaArida.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["selvaArida1"] <= stanza <= GlobalGameVar.dictStanze["selvaArida16"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizSelvaArida.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizSelvaArida.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizAvampostoDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizAvampostoDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["labirinto1"] <= stanza <= GlobalGameVar.dictStanze["labirinto23"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizLabirinto.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizLabirinto.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["esternoCastello1"] <= stanza <= GlobalGameVar.dictStanze["esternoCastello5"]:
-            listaPersonaggiTotali, listaPersonaggi = PosizEsternoCastello.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria)
+            listaPersonaggiTotali, listaPersonaggi = PosizEsternoCastello.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
     else:
         for personaggio in listaPersonaggiTotali:
             if personaggio.stanzaDiAppartenenza == stanza:
@@ -135,7 +135,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, rx, ry, nrob, c
     avanzamentoStoriaPreEventi = avanzamentoStoria
     if impossibileAprirePorta:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
 
     if GlobalGameVar.dictStanze["sognoLucy1"] <= stanza <= GlobalGameVar.dictStanze["sognoLucy4"]:

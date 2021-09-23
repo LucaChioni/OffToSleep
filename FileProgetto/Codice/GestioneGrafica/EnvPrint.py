@@ -21,8 +21,8 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         i = 0
         while i < len(cofanetti):
             j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caseviste[j + 2]:
+            while j < len(caselleNonVisibili):
+                if ((caselleNonVisibili[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caselleNonVisibili[j + 2]:
                     vetCofanettiVisti.append(cofanetti[i + 1])
                     vetCofanettiVisti.append(cofanetti[i + 2])
                 j += 3
@@ -35,6 +35,38 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             if ((casellePercorribili[i] / GlobalHWVar.gpx) + (casellePercorribili[i + 1] / GlobalHWVar.gpy)) % 2 == 1:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
             i += 2
+        # disegna cofanetti
+        i = 0
+        while i < len(cofanetti):
+            j = 0
+            while j < len(caselleNonVisibili):
+                if ((caselleNonVisibili[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caselleNonVisibili[j + 2]:
+                    if cofanetti[i + 3]:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
+                    else:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                j += 3
+            i += 4
+        # disegna porte
+        i = 0
+        while i < len(porte):
+            if not porte[i + 3]:
+                j = 0
+                while j < len(caseviste):
+                    if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
+                        if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]):
+                            if caseviste[j + 2]:
+                                GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
+                            else:
+                                GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
+                        else:
+                            if caseviste[j + 2]:
+                                GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
+                            else:
+                                GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
+                        break
+                    j += 3
+            i += 4
         # disegno l'ombreggiatura delle caselle non viste
         caselleNonVisibiliSenzaPorteChiuse = []
         i = 0
@@ -81,33 +113,6 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 if not casellaVicinaACasellaVista:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaOscurata, (caselleNonVisibili[i], caselleNonVisibili[i + 1]))
             i += 3
-
-        # disegna porte
-        i = 0
-        while i < len(porte):
-            if not porte[i + 3]:
-                j = 0
-                while j < len(caseviste):
-                    if ((caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy)) and caseviste[j + 2]:
-                        if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]):
-                            GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
-                        else:
-                            GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
-                        break
-                    j += 3
-            i += 4
-        # disegna cofanetti
-        i = 0
-        while i < len(cofanetti):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caseviste[j + 2]:
-                    if cofanetti[i + 3]:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                    else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                j += 3
-            i += 4
     else:
         # disegnare casella sopra la vecchia posizione e la posizioe attuale di rallo, colco, nemici, personaggi, esche e denaro
         i = 0
@@ -608,7 +613,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -755,11 +760,17 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if not porte[i + 3]:
             j = 0
             while j < len(caseviste):
-                if ((caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy)) and caseviste[j + 2]:
+                if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
                     if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]):
-                        GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
+                        if caseviste[j + 2]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
+                        else:
+                            GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
+                        if caseviste[j + 2]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
+                        else:
+                            GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
                     break
                 j += 3
         i += 4
@@ -767,8 +778,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     i = 0
     while i < len(cofanetti):
         j = 0
-        while j < len(caseviste):
-            if ((caseviste[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caseviste[j + 2]:
+        while j < len(caselleNonVisibili):
+            if ((caselleNonVisibili[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caselleNonVisibili[j + 2]:
                 if cofanetti[i + 3]:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                 else:
@@ -1770,9 +1781,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     attaccoDiRallo.append(-dannoEffettivo)
                     enrobVecchia = enrob
                     enrob -= dannoEffettivo
-                    if enrob <= 0 and enrobVecchia > 0:
+                    if enrob <= 0:
                         enrob = 0
-                        attaccoDiRallo.append("morte")
+                        if enrobVecchia > 0:
+                            attaccoDiRallo.append("morte")
                     else:
                         attaccoDiRallo.append("")
 
@@ -2168,9 +2180,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         # vita-status-campo visivo robo
         if xp == rx and yp == ry:
             puntandoSuUnNemicoOColcoOEsca = True
-            if enrob > 0:
-                # disegno le caselle non attaccabili
-                if not disegnateCaselleAttaccabili:
+            if not disegnateCaselleAttaccabili:
+                if enrob > 0:
+                    # disegno le caselle non attaccabili
                     vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
                     i = 0
                     while i < len(caselleAttaccabiliColco):
@@ -2178,9 +2190,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caselleAttaccabiliColco[i], caselleAttaccabiliColco[i + 1]))
                         i += 3
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRobo, (rx - vistaRobo, ry - vistaRobo))
-                    disegnateCaselleAttaccabili = True
-                    ricaricaschermo = True
-                    evitaAggiornamentoImgs = True
+                disegnateCaselleAttaccabili = True
+                ricaricaschermo = True
+                evitaAggiornamentoImgs = True
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         # vita colco selezionato
         if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:

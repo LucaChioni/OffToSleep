@@ -63,7 +63,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Conosci René? ... Il bibliotecario...")
+                dialogo.append(u"... Conosci René? Il bibliotecario...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -99,7 +99,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Ok, ok. Forse hai ragione... Va beh, quindi non ne sai nulla di queste creature...")
+                dialogo.append(u"... Ok, ok. Forse hai ragione... Va beh, quindi non ne sai nulla di queste creature?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -107,7 +107,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Va bene, grazie comunque.")
+                dialogo.append(u"Va bene...")
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 1:
                 partiDialogo = []
@@ -123,7 +123,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Beh... è difficile da dire. Ma una cosa è certa: questa non è un'evoluzione naturale della flora. Sono state gettate delle sostanze inquinanti in tutta l'area. Sostanze che tuttora non sono ancora state assorbite e smaltite dal terreno. E adesso si stanno riversando nel lago qua accanto creando gravi danni a tutta la fauna acquatica...")
+                dialogo.append(u"Beh, è difficile da dire. Ma una cosa è certa: questa non è un'evoluzione naturale della flora. Sono state gettate delle sostanze inquinanti in tutta l'area. Sostanze che tuttora non sono ancora state assorbite e smaltite dal terreno. E purtroppo una grande quantità si è poi riversata nel lago qua accanto creando gravi danni anche a tutta la fauna acquatica.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -131,7 +131,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Da molto tempo. È così da prima che nascessi. Dicono che sia mutata repentinamente nel giro di una settimana. Nessuno sa per certo come è successo...")
+                dialogo.append(u"Da molto tempo. È così da prima che nascessi. Dicono che sia mutata repentinamente nel giro di una settimana. Nessuno sa per certo com'è successo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -167,7 +167,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Se inizi a credere a tutte le dicerie cittadine, penserai che tra qualche giorno finirà il mondo e moriremo tutti...")
+                dialogo.append(u"Se inizi a credere a tutte le dicerie cittadine, penserai che tra qualche giorno finirà il mondo e moriremo tutti.")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

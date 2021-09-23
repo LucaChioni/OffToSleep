@@ -80,8 +80,8 @@ class NemicoObj(object):
 
         if self.tipo == "Orco":
             vitaTotale = 20
-            attacco = 20
-            difesa = 2
+            attacco = 10
+            difesa = 1
             velocita = -1
             raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
@@ -92,8 +92,8 @@ class NemicoObj(object):
             esp = 0
         if self.tipo == "Pipistrello":
             vitaTotale = 10
-            attacco = 15
-            difesa = 1
+            attacco = 5
+            difesa = 0
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = True
@@ -104,9 +104,9 @@ class NemicoObj(object):
             esp = 0
 
         if self.tipo == "TartarugaVerde":
-            vitaTotale = 30
-            attacco = 40
-            difesa = 4
+            vitaTotale = 20
+            attacco = 20
+            difesa = 3
             velocita = -2
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
@@ -116,9 +116,9 @@ class NemicoObj(object):
             denaro = random.randint(0, 1)
             esp = 1
         if self.tipo == "TartarugaMarrone":
-            vitaTotale = 50
-            attacco = 45
-            difesa = 7
+            vitaTotale = 30
+            attacco = 22
+            difesa = 4
             velocita = -1
             raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
@@ -126,11 +126,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(0, 2)
-            esp = 2
+            esp = 3
         if self.tipo == "LupoGrigio":
             vitaTotale = 40
-            attacco = 55
-            difesa = 3
+            attacco = 23
+            difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
@@ -138,11 +138,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(1, 4)
-            esp = 3
+            esp = 8
         if self.tipo == "LupoBianco":
-            vitaTotale = 60
-            attacco = 65
-            difesa = 3
+            vitaTotale = 50
+            attacco = 28
+            difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
@@ -150,11 +150,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(3, 6)
-            esp = 5
+            esp = 12
         if self.tipo == "LupoNero":
-            vitaTotale = 80
-            attacco = 80
-            difesa = 4
+            vitaTotale = 60
+            attacco = 30
+            difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
@@ -162,10 +162,10 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(5, 8)
-            esp = 7
+            esp = 15
         if self.tipo == "Cinghiale":
             vitaTotale = 100
-            attacco = 100
+            attacco = 60
             difesa = 8
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 4
@@ -174,11 +174,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(15, 20)
-            esp = 20
+            esp = 50
 
         if self.tipo == "Cittadino1":
-            vitaTotale = 44
-            attacco = 10000
+            vitaTotale = 40
+            attacco = GlobalGameVar.dannoMortale
             difesa = 0
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -190,8 +190,8 @@ class NemicoObj(object):
             esp = 0
             ignoraEsche = True
         if self.tipo == "Cittadino3":
-            vitaTotale = 44
-            attacco = 10000
+            vitaTotale = 40
+            attacco = GlobalGameVar.dannoMortale
             difesa = 0
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -204,9 +204,9 @@ class NemicoObj(object):
             ignoraEsche = True
 
         if self.tipo == "SerpeVerde":
-            vitaTotale = 80
-            attacco = 90
-            difesa = 10
+            vitaTotale = 110
+            attacco = 85
+            difesa = 8
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
@@ -214,11 +214,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(8, 12)
-            esp = 8
+            esp = 19
         if self.tipo == "SerpeArancio":
-            vitaTotale = 120
-            attacco = 120
-            difesa = 12
+            vitaTotale = 260
+            attacco = 100
+            difesa = 8
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
@@ -226,23 +226,23 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(13, 15)
-            esp = 10
+            esp = 36
         if self.tipo == "RagnoNero":
-            vitaTotale = 100
-            attacco = 100
-            difesa = 16
-            velocita = 1
+            vitaTotale = 250
+            attacco = 95
+            difesa = 15
+            velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 6
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(8, 12)
-            esp = 8
+            esp = 22
         if self.tipo == "RagnoRosso":
-            vitaTotale = 90
-            attacco = 100
-            difesa = 18
+            vitaTotale = 270
+            attacco = 85
+            difesa = 15
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 6
             attaccaDaLontano = True
@@ -250,11 +250,11 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(13, 15)
-            esp = 10
+            esp = 34
         if self.tipo == "Scorpione":
-            vitaTotale = 200
-            attacco = 150
-            difesa = 30
+            vitaTotale = 800
+            attacco = 110
+            difesa = 12
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
@@ -262,47 +262,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(25, 30)
-            esp = 30
-
-        if self.tipo == "ServoSpada":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
-            surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
-            ignoraEsche = True
-        if self.tipo == "ServoArco":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
-            surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
-            ignoraEsche = True
-        if self.tipo == "ServoLancia":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
-            surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
-            ignoraEsche = True
+            esp = 120
 
         if self.tipo == "GufoMarrone":
             vitaTotale = 25
@@ -376,6 +336,46 @@ class NemicoObj(object):
             avvelenabile = True
             denaro = random.randint(0, 3)
             esp = 5
+
+        if self.tipo == "ServoSpada":
+            vitaTotale = 25
+            attacco = 20
+            difesa = 5
+            velocita = -2
+            raggioVisivo = GlobalHWVar.gpx * 2
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            avvelenabile = True
+            denaro = random.randint(0, 3)
+            esp = 5
+            ignoraEsche = True
+        if self.tipo == "ServoArco":
+            vitaTotale = 25
+            attacco = 20
+            difesa = 5
+            velocita = -2
+            raggioVisivo = GlobalHWVar.gpx * 2
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            avvelenabile = True
+            denaro = random.randint(0, 3)
+            esp = 5
+            ignoraEsche = True
+        if self.tipo == "ServoLancia":
+            vitaTotale = 25
+            attacco = 20
+            difesa = 5
+            velocita = -2
+            raggioVisivo = GlobalHWVar.gpx * 2
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            avvelenabile = True
+            denaro = random.randint(0, 3)
+            esp = 5
+            ignoraEsche = True
 
         if self.tipo == "RoboLeggero":
             vitaTotale = 25

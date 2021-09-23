@@ -2498,7 +2498,7 @@ def scriviNomeZona(stanza, stanzaVecchia):
     elif (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["labirinto3"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["labirinto20"]):
         nomeDaScrivere = u"Labirinto"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]):
-        nomeDaScrivere = u"Castello - Esterno"
+        nomeDaScrivere = u"Castello di Neil - Esterno"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -2704,3 +2704,10 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaB"
 
     return nomeStanza
+
+
+def modificaStanzePacifiche(avanzamentoStoria):
+    if GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riavviatoMusicaPostDialogoBibliotecario"]:
+        GlobalGameVar.vetStanzePacifiche = []
+    else:
+        GlobalGameVar.vetStanzePacifiche = GlobalGameVar.vetStanzePacificheBackUp[:]

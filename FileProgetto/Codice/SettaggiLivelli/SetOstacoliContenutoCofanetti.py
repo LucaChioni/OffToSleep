@@ -1242,9 +1242,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 9:
             tesoro = 62
     if stanza == GlobalGameVar.dictStanze["forestaCadetta4"]:
-        # ottieni monete
+        # ottieni pozione
         if cx == GlobalHWVar.gpx * 29 and cy == GlobalHWVar.gpy * 9:
-            tesoro = 131
+            tesoro = 31
         # ottieni bomba
         if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 2:
             tesoro = 36
@@ -1382,6 +1382,38 @@ def aperturacofanetto(stanza, cx, cy, dati):
         # ottieni medicina
         if cx == GlobalHWVar.gpx * 20 and cy == GlobalHWVar.gpy * 7:
             tesoro = 33
+    if stanza == GlobalGameVar.dictStanze["labirinto2"]:
+        # ottieni condizione (pe<80)
+        if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 6:
+            tesoro = 86
+    if stanza == GlobalGameVar.dictStanze["labirinto4"]:
+        # ottieni condizione (nemici>1)
+        if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 11:
+            tesoro = 98
+    if stanza == GlobalGameVar.dictStanze["labirinto5"]:
+        # ottieni tecnica (auto-ricarica)
+        if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 10:
+            tesoro = 17
+    if stanza == GlobalGameVar.dictStanze["labirinto9"]:
+        # ottieni tecnica (attP)
+        if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 8:
+            tesoro = 22
+    if stanza == GlobalGameVar.dictStanze["labirinto11"]:
+        # ottieni condizione (pvNemico<80)
+        if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 9:
+            tesoro = 94
+    if stanza == GlobalGameVar.dictStanze["labirinto14"]:
+        # ottieni guanti difensivi
+        if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 8:
+            tesoro = 63
+    if stanza == GlobalGameVar.dictStanze["labirinto17"]:
+        # ottieni condizione (sempreLucy)
+        if cx == GlobalHWVar.gpx * 16 and cy == GlobalHWVar.gpy * 10:
+            tesoro = 89
+    if stanza == GlobalGameVar.dictStanze["labirinto23"]:
+        # ottieni tecnica (difP)
+        if cx == GlobalHWVar.gpx * 16 and cy == GlobalHWVar.gpy * 10:
+            tesoro = 23
 
     # assegna oggetto ottenuto
     if tesoro != -1 and tesoro != -2:

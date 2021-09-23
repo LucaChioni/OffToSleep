@@ -6,7 +6,7 @@ import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 def settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom):
-    imgDaUsare = "mappaCasa"
+    imgDaUsare = GlobalGameVar.imgMappaAttuale
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCasa"]:
         imgDaUsare = "mappaCasa"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaForestaCadetta"]:

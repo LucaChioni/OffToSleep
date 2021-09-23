@@ -701,7 +701,7 @@ def settaController(arrivatoDaMenuPrincipale):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria=False, imgMappa=False, imgMappaZoom=False):
+def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria=False, imgMappa=False, imgMappaZoom=False, cambiatoRisoluzione=False):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 5.1
@@ -715,7 +715,6 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     modalitaSchermoTemp = GlobalHWVar.modalitaSchermo
-    cambiatoRisoluzione = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1263,7 +1262,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 FunzioniGraficheGeneriche.messaggio("Volume musica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 60)
                 FunzioniGraficheGeneriche.messaggio("Controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Risoluzione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
-                FunzioniGraficheGeneriche.messaggio(u"Modalità schermo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
+                FunzioniGraficheGeneriche.messaggio(u"Modalità finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 14.6, 70)
                 FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 14.6, 70)
             else:

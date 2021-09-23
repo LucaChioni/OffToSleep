@@ -21,7 +21,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         if not avanzaIlTurnoSenzaMuoverti:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
             while avanzamentoStoria != GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"]:
-                avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+                avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             percorsoDaEseguire = ["s"]
         caricaTutto = True
@@ -32,7 +32,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
         if not avanzaIlTurnoSenzaMuoverti:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             percorsoDaEseguire = ["s"]
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] and stanza == GlobalGameVar.dictStanze["biblioteca1"] and y == GlobalHWVar.gpy * 11:
@@ -42,7 +42,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
         if not avanzaIlTurnoSenzaMuoverti:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             percorsoDaEseguire = ["w"]
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca2"]:
@@ -53,7 +53,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioArrivoNelloStudio"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggioArrivato = False
@@ -64,7 +64,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if personaggioArrivato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
             caricaTutto = True
         else:
@@ -84,7 +84,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoRegistroBibliotecaSullaScrivania"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioPreVomito1"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggioArrivato = False
@@ -95,7 +95,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if personaggioArrivato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             for personaggio in listaPersonaggi:
                 if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "Bibliotecario":
                     personaggio.percorso = ["s", "d", "s", "d"]
@@ -113,34 +113,37 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if personaggioArrivato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioPostVomito"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         nonMostrarePersonaggio = True
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["biblioteca3"]
+        listaNemiciTotali = []
+        listaPersonaggiTotali = []
+        stanzeGiaVisitate = []
         cambiosta = True
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ripulitoVomito"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         bibliotecarioGiratoVersoDiTe = False
@@ -154,7 +157,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if bibliotecarioGiratoVersoDiTe:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
@@ -167,7 +170,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if bibliotecarioArrivatoDaTe:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
@@ -178,6 +181,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         x = GlobalHWVar.gpx * 19
         y = GlobalHWVar.gpy * 7
         npers = 2
+        listaNemiciTotali = []
+        listaPersonaggiTotali = []
+        stanzeGiaVisitate = []
         cambiosta = True
         carim = True
         caricaTutto = True
@@ -225,7 +231,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if bibliotecarioGirato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
@@ -262,7 +268,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if bibliotecarioGirato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
@@ -298,7 +304,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["scrittiDatiEnigmaBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
         GlobalGameVar.datiEnigmaBibliotecario["velocità"] = 3
         GlobalGameVar.datiEnigmaBibliotecario["soluzione"] = 2.25
@@ -445,7 +451,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 personaggio.numeroMovimento = 0
                 break
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
         GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
@@ -481,7 +487,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricercaImpoDiBibliotecario1"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggioArrivato = False
@@ -492,7 +498,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if personaggioArrivato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
             avanzaIlTurnoSenzaMuoverti = True
         else:
@@ -514,7 +520,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
         avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpoPietra"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
@@ -532,12 +538,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         dati[32] = 1
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire

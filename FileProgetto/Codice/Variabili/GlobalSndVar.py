@@ -71,7 +71,7 @@ global suonochiusuraporteSelva
 global rumoreAperturaCancelloCastello
 
 
-numSndTotali = 65
+numSndTotali = 64
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)

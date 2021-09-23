@@ -14,55 +14,39 @@ import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliConten
 
 def getStatistiche(dati, difesa=0, inMenu=False):
     esptot = 1 + pow(dati[4], 2) + (dati[4] * 2)
-    pvtot = 50
+
+    # inizializzo le statistiche con il valore base derivato dal livello
+    pvtot = GlobalGameVar.statistichePerLivello[dati[4]-1][0]
+    attVicino = GlobalGameVar.statistichePerLivello[dati[4]-1][1]
+    attLontano = GlobalGameVar.statistichePerLivello[dati[4]-1][2]
+    dif = GlobalGameVar.statistichePerLivello[dati[4]-1][3]
+    par = 2
+
+    # effetti armi
+    attVicino += (dati[6] * dati[6]) * 10
+    attLontano += (dati[128] * dati[128]) * 10
+    dif += ((dati[8] * dati[8]) * 10) + ((dati[7] * dati[7]) * 5)
+    par += (dati[7] * dati[7]) * 3
+    # effetti accessori
     if dati[129] == 1:
         pvtot += 50
-    attVicino = 6 + ((dati[6] * dati[6]) * 10)
-    attLontano = 4 + ((dati[128] * dati[128]) * 10)
     if dati[129] == 3:
         attVicino += 20
         attLontano += 20
-    dif = 7 + ((dati[8] * dati[8]) * 10) + 5 + ((dati[7] * dati[7]) * 2)
     if dati[129] == 2:
         dif += 30
-    par = 2 + ((dati[7] * dati[7]) * 3)
     if dati[129] == 4:
         par += 10
+    # effetto difesa
     if difesa != 0:
         par += par // 4
         dif += dif // 8
-
-    if dati[4] >= 1:
-        i = 1
-        while i <= 100:
-            if dati[4] <= i + 2:
-                pvtot += (i * 5)
-                break
-            i += 3
-
-    if dati[4] >= 2:
-        i = 2
-        while i <= 100:
-            if dati[4] <= i + 2:
-                attVicino += (i * 3)
-                attLontano += (i * 2)
-                break
-            i += 3
-
-    if dati[4] >= 3:
-        i = 3
-        while i <= 100:
-            if dati[4] <= i + 2:
-                dif += (i * 2)
-                break
-            i += 3
-
-    if not inMenu:
-        if dati[123] > 0:
-            attVicino += attVicino // 4
-            attLontano += attLontano // 4
-        if dati[124] > 0:
-            dif += dif // 4
+    # effetti tecniche
+    if dati[123] > 0:
+        attVicino += attVicino // 4
+        attLontano += attLontano // 4
+    if dati[124] > 0:
+        dif += dif // 4
 
     entot = 220 + (dati[9] * dati[9] * 80)
     difro = 80 + (dati[9] * dati[9] * 20)
@@ -71,16 +55,9 @@ def getStatistiche(dati, difesa=0, inMenu=False):
 
 
 def getVitaTotRallo(livello, guanti):
-    pvtot = 50
+    pvtot = GlobalGameVar.statistichePerLivello[livello-1][0]
     if guanti == 1:
         pvtot += 50
-    if livello >= 1:
-        i = 1
-        while i <= 100:
-            if livello <= i + 2:
-                pvtot += (i * 5)
-                break
-            i += 3
     return pvtot
 
 

@@ -149,6 +149,7 @@ def gameloop():
                 morterob = False
             else:
                 morterob = True
+            GlobalGameVar.pazzoStrabico = dati[143]
 
             listaPersonaggi = []
             listaNemici = []
@@ -314,13 +315,30 @@ def gameloop():
                         dati[136] = raffredda
                         dati[137] = autoRic1
                         dati[138] = autoRic2
+                        dati[143] = GlobalGameVar.pazzoStrabico
                         GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
 
                 if cambiatoRisoluzione:
+                    if obbiettivoCasualeColco:
+                        obbiettivoCasualeColco.caricaImg()
+                        obbiettivoCasualeColco.girati(obbiettivoCasualeColco.direzione)
                     for nemico in listaNemiciTotali:
                         nemico.caricaImg()
                         nemico.girati(nemico.direzione)
                     for personaggio in listaPersonaggiTotali:
+                        if personaggio.tipo.startswith("Oggetto"):
+                            personaggio.caricaImgOggetto()
+                            personaggio.aggiornaImgOggetto(dati[0])
+                        else:
+                            personaggio.caricaImgPersonaggio()
+                            personaggio.girati(personaggio.direzione)
+                    if GlobalGameVar.vetDatiSalvataggioGameOver[11]:
+                        GlobalGameVar.vetDatiSalvataggioGameOver[11].caricaImg()
+                        GlobalGameVar.vetDatiSalvataggioGameOver[11].girati(GlobalGameVar.vetDatiSalvataggioGameOver[11].direzione)
+                    for nemico in GlobalGameVar.vetDatiSalvataggioGameOver[3]:
+                        nemico.caricaImg()
+                        nemico.girati(nemico.direzione)
+                    for personaggio in GlobalGameVar.vetDatiSalvataggioGameOver[7]:
                         if personaggio.tipo.startswith("Oggetto"):
                             personaggio.caricaImgOggetto()
                             personaggio.aggiornaImgOggetto(dati[0])
@@ -895,6 +913,7 @@ def gameloop():
             # interagisco
             if bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
                 GlobalHWVar.canaleSoundPassiRallo.stop()
+                interazioneEseguita = False
                 nx = 0
                 ny = 0
                 # apertura porte
@@ -928,6 +947,7 @@ def gameloop():
                         else:
                             caricaTutto = True
                             impossibileAprirePorta = True
+                        interazioneEseguita = True
                         break
                     k = k + 4
                 # apertura cofanetti
@@ -949,7 +969,6 @@ def gameloop():
                             j = j + 4
                     i = i + 4
                 # interazioni con altri personaggi
-                interazioneEseguita = False
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalHWVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalHWVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalHWVar.gpy and npers == 3):
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -965,7 +984,7 @@ def gameloop():
                         if personaggio.oggettoEnigma:
                             dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                         else:
-                            dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi, canzone)
                         sposta = False
                         interazioneEseguita = True
                         caricaTutto = True
@@ -1318,7 +1337,7 @@ def gameloop():
                     if personaggio.oggettoEnigma:
                         dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                     else:
-                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi, canzone)
                     sposta = False
                     caricaTutto = True
                     bottoneDown = False
@@ -1350,6 +1369,7 @@ def gameloop():
             dati[121] = False
             aumentoliv = 0
 
+        # movimento col mouse
         if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and dati[5] > 0:
             nx = 0
             ny = 0
@@ -1502,6 +1522,7 @@ def gameloop():
             dati[136] = raffredda
             dati[137] = autoRic1
             dati[138] = autoRic2
+            dati[143] = GlobalGameVar.pazzoStrabico
             # se c'è un nemico in caselleViste di Rallo => apri il menu di battaglia
             nemicoInCasellaVista = False
             colcoInCasellaVista = False
@@ -1611,6 +1632,9 @@ def gameloop():
         inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente)
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
+        # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
+        SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
+
         if not inizio and not cambiatoRisoluzione:
             # setto stato personaggi all'inizio del turno
             for nemico in listaNemici:
@@ -1672,7 +1696,7 @@ def gameloop():
             # attaccoDiRallo [obiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
             attaccoDiRallo = []
             if attacco != 0:
-                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac)
+                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili)
                 refreshSchermo = True
                 caricaTutto = True
                 # cancello apertura porta se non si può aprire
@@ -1893,7 +1917,7 @@ def gameloop():
                         if personaggio.oggettoEnigma:
                             dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                         else:
-                            dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi, canzone)
                         sposta = False
                         caricaTutto = True
                 interagisciConPersonaggio = False
@@ -1984,7 +2008,7 @@ def gameloop():
                 if personaggio.oggettoEnigma:
                     dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                 else:
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi, canzone)
 
             # lancio esche
             if creaesca:

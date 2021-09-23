@@ -87,7 +87,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Non aspetta ospiti, sarà sicuramente impegnato. L'entrata è da quella parte ma senza un invito non ti faranno entrare.")
+                    dialogo.append(u"... Non aspetta ospiti. L'entrata è da quella parte ma senza un invito non ti è concesso entrare.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -101,7 +101,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Neil è impegnato, senza un invito non ti riceverà.")
+                    dialogo.append(u"Neil è impegnato. Senza un invito non ti riceverà.")
                     partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello2"]:
         if tipo == "ServoLancia":
@@ -145,11 +145,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"<*>#italic#Hahaha...<*> I giovani d'oggi! Avete proprio la faccia come il culo! Levati di torno.")
+                        dialogo.append(u"<*>#italic#Hahaha...<*> Levati di torno.")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Senti... scusa, non volevo. Sono venuta per...")
+                        dialogo.append(u"Senti... scusa, non volevo. Sono venuta per-")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
@@ -186,7 +186,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"<*>#italic#Mh...<*>")
+                        dialogo.append(u"<*>#italic#Mmh...<*>")
                         partiDialogo.append(dialogo)
                     else:
                         oggettoDato = False

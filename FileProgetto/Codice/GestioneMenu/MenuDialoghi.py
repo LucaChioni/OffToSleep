@@ -9,9 +9,12 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
+import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
 
 
-def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
+def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
+    avanzamentoStoria = SetEventiDialoghi.gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone)
+
     GlobalHWVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
     menuMercante = False
@@ -52,6 +55,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
     fineDialogo = False
     bottoneDown = False
 
+    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni / 2)
     GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
@@ -125,12 +129,14 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-            if sceltaEffettuata != 0 and sceltaEffettuata != personaggio.scelta:
+            if sceltaEffettuata != 0 and sceltaEffettuata != personaggio.scelta and personaggio.scelta != -1:
                 fineDialogo = True
             elif numeromessaggioAttuale == numeroMessaggiTotali:
-                if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata):
+                if personaggio.tipo == "Pazzo1" and personaggio.avanzamentoDialogo == 2 and sceltaEffettuata == 3:
+                    GlobalGameVar.pazzoStrabico = True
+                if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata) or personaggio.scelta == -1:
                     if personaggio.avanzaStoria:
-                        avanzamentoStoria = avanzamentoStoria + 1
+                        avanzamentoStoria += 1
                     if personaggio.oggettoDato:
                         oggettoRicevuto = personaggio.oggettoDato
                     if personaggio.menuMercante:
@@ -148,7 +154,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
             else:
                 if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     sceltaEffettuata = voceMarcata
-                    if sceltaEffettuata != personaggio.scelta:
+                    if sceltaEffettuata != personaggio.scelta and personaggio.scelta != -1:
                         SetDialoghiPersonaggi.gestisciRisposteSbagliate(avanzamentoStoria)
                 prosegui = True
             bottoneDown = False
@@ -204,8 +210,10 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
         primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
     GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
 
+    avanzamentoStoria = SetEventiDialoghi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
 
 
@@ -1067,7 +1075,7 @@ def menuMercante(dati):
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[9] != sconosciutoOggetto and oggetton == 10:
                         FunzioniGraficheGeneriche.messaggio("Bomba potenziata:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
-                        FunzioniGraficheGeneriche.messaggio("Infligge molti danni ai nemici su cui viene lanciata in un vasto raggio.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio("Infligge molti danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 10:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if oggetton == 11:

@@ -251,7 +251,7 @@ global imgChiaveStanzaCasaDavid
 global imgCertificazioneResidenza
 global imgImpoPietra
 
-numImgTotali = 1413
+numImgTotali = 1415
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -1030,7 +1030,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False)
 
     # img personaggi
-    vettoreNomiPersonaggi = ["Alieno1", "Alieno2", "AssistBiblioteca", "Bibliotecario", "CaneCasa", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada"]
+    vettoreNomiPersonaggi = ["Alieno1", "Alieno2", "AssistBiblioteca", "Bibliotecario", "CaneCasa", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada"]
     dictionaryImgPersonaggi = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
         dictionaryImgPosizioni = {}

@@ -645,8 +645,8 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
 
 
 def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
-    lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-    lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
+    lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 14)
+    lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 14)
     if lungen < 0:
         lungen = 0
 
@@ -673,8 +673,8 @@ def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
 
 
 def disegnaVitaEsche(pvEsca):
-    lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15)
-    lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 15)
+    lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 14)
+    lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 14)
     if lungvita < 0:
         lungvita = 0
 
@@ -703,7 +703,7 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
     GlobalHWVar.disegnaImmagineSuSchermo(immagineS, (0, 0))
 
     if pvmtot > 1500:
-        lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
+        lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 14)
         if pvm > 7500:
             pvm = 1500
             coloreVita = (120, 50, 120)
@@ -728,11 +728,11 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
             coloreVita = (80, 180, 80)
             coloreVitaSuccessiva = (80, 80, 80)
     else:
-        lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
+        lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 14)
         coloreVita = (80, 180, 80)
         coloreVitaSuccessiva = (80, 80, 80)
 
-    lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
+    lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 14)
     if lungvita < 0:
         lungvita = 0
 
