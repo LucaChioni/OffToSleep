@@ -2245,9 +2245,6 @@ def gameloop():
                             nemico.mosseRimaste += 1
                     elif nemico.vita <= 0:
                         dati[127] += nemico.esp
-                        # effetto apprendimaschera
-                        if dati[130] == 3:
-                            dati[127] += nemico.esp
                         # metto il suo denaro nella casella in cui è morto (vettore => qta, x, y)
                         denaroDroppato = nemico.denaro
                         # effetto portafortuna

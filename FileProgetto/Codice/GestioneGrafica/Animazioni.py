@@ -906,7 +906,7 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
         elif tesoro == 68:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Collana medicinale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 69:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Apprendimaschera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Assorbilampo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 70:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Portafortuna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 71:

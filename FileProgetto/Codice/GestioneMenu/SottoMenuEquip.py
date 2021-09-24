@@ -1006,8 +1006,8 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 29:
                 if dati[69] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Apprendimaschera:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Collana che consente di ricevere più punti esperienza.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Assorbilampo:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Collana che ti rende immune agli attacchi di Impo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 30:
