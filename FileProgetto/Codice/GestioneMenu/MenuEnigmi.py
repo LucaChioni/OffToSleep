@@ -23,7 +23,7 @@ def mostraEnigma(tipoPersonaggio, avanzamentoStoria):
 
 def enigmaBiblioteca():
     GlobalHWVar.canaleSoundPassiRallo.stop()
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti / 2.0], True)
 
     esci = False
     bottoneDown = False
@@ -288,13 +288,13 @@ def enigmaBiblioteca():
         primoFrame = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsDisegno)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
     GlobalHWVar.configuraCursore(False)
 
 
 def enigmaLabirinto(avanzamentoStoria):
     GlobalHWVar.canaleSoundPassiRallo.stop()
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti / 2.0], True)
 
     tastotempfps = 8
     esci = False
@@ -658,8 +658,7 @@ def enigmaLabirinto(avanzamentoStoria):
         if utilizzandoStrumentoInizioCiclo and not utilizzandoStrumento:
             percorsoNonCorretto = False
             for quadretto in quadrettiColorati:
-                if (quadretto[2] and [quadretto[0], quadretto[1]] not in quadrettiDaColorare) or (
-                        not quadretto[2] and [quadretto[0], quadretto[1]] in quadrettiDaColorare):
+                if (quadretto[2] and [quadretto[0], quadretto[1]] not in quadrettiDaColorare) or (not quadretto[2] and [quadretto[0], quadretto[1]] in quadrettiDaColorare):
                     percorsoNonCorretto = True
                     break
             if not percorsoNonCorretto:
@@ -670,7 +669,7 @@ def enigmaLabirinto(avanzamentoStoria):
         primoFrame = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsDisegno)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
     GlobalHWVar.configuraCursore(False)
 
     return avanzamentoStoria

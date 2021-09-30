@@ -189,15 +189,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         avanzamentoStoria += 1
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         bibliotecarioGirato = False
         for personaggio in listaPersonaggi:
@@ -437,13 +430,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eseguitaVerificaRisultatoEnigma"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
-        i = GlobalHWVar.volumeCanzoni
-        while i > 0:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i -= GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
         for personaggio in listaPersonaggi:
             if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "Bibliotecario":
@@ -453,15 +440,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoConclusivoEnigmaBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggioArrivato = False
         for personaggio in listaPersonaggi:
@@ -482,7 +462,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoACercareImpo"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -515,7 +495,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -533,7 +513,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1

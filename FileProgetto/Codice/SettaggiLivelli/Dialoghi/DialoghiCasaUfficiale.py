@@ -279,7 +279,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Uh!? Ohh...<*> buongiorno...")
+            dialogo.append(u"<*>#italic#Uh?! Ohh...<*> buongiorno...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -566,7 +566,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Cosa!?")
+            dialogo.append(u"... Cosa?!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -598,7 +598,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"David, c'è una guerra!?")
+            dialogo.append(u"David, c'è una guerra?!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -622,7 +622,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... C'è una guerra che stiamo perdendo, David!? E nessuno lo sa!?")
+            dialogo.append(u"... C'è una guerra che stiamo perdendo, David?! E nessuno lo sa?!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -976,7 +976,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Cavolo! Perché non vanno via!?")
+            dialogo.append(u"Cavolo! Perché non vanno via?!")
             partiDialogo.append(dialogo)
         elif avanzamentoDialogo == 3 and GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             oggettoDato = False

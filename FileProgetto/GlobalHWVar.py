@@ -133,6 +133,9 @@ gialloCarta = (200, 200, 160)
 verdeVita = (80, 180, 80)
 azzurroVitaColco = (0, 160, 230)
 
+# la metto per gestire il cambio input nella funz. main mentre si è in altre funzioni
+aggiornaInterfacciaPerCambioInputMainFunc = False
+
 # nascondo subito il cursore
 pygame.mouse.set_visible(False)
 mouseVisibile = False

@@ -212,6 +212,7 @@ global idNemico
 global listaIdNemiciUsati
 global datiEnigmaBibliotecario
 global pazzoStrabico
+global volumeMusicaDimezzato
 def inizializzaVariabiliGlobali():
     global imgMappaAttuale
     global canzoneAttuale
@@ -220,6 +221,7 @@ def inizializzaVariabiliGlobali():
     global listaIdNemiciUsati
     global datiEnigmaBibliotecario
     global pazzoStrabico
+    global volumeMusicaDimezzato
     imgMappaAttuale = False
     canzoneAttuale = False
     audioSottofondoAttuale = False
@@ -235,6 +237,7 @@ def inizializzaVariabiliGlobali():
     datiEnigmaBibliotecario["rispostaFalsa2"] = 0.25
     datiEnigmaBibliotecario["rispostaFalsa3"] = 1.5
     pazzoStrabico = False
+    volumeMusicaDimezzato = False
 inizializzaVariabiliGlobali()
 
 def mostraLogo():

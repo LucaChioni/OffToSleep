@@ -22,7 +22,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Oh cavolo! Dove sono adesso!?")
+            dialogo.append("Oh cavolo! Dove sono adesso?!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -85,11 +85,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Dovevo immaginarlo che partiva stanotte! Mio padre si arrabbierà un casino quando lo saprà.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Provo a vedere se è ancora qua fuori da qualche parte.")
+            dialogo.append(u"Dovevo immaginarlo che partiva stanotte... provo a vedere se è ancora qua fuori da qualche parte.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRisveglioLucy"] and x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 10 and stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
             oggettoDato = False

@@ -10,6 +10,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
+import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
 def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
@@ -55,8 +56,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     fineDialogo = False
     bottoneDown = False
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni / 2)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni / 2.0], True, posizioneCanaleMusica=0)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
@@ -210,8 +210,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
         primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+    SetPosizioneAudioImpedimenti.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
 
     avanzamentoStoria = SetEventiDialoghi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
@@ -250,8 +250,7 @@ def menuMercante(dati):
             imgOggetti.append(sconosciutoOggetto)
         i += 1
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni / 2)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni / 2.0, GlobalHWVar.volumeEffetti / 3.0], True, posizioneCanaleMusica=0)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1098,6 +1097,5 @@ def menuMercante(dati):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni, GlobalHWVar.volumeEffetti], True, posizioneCanaleMusica=0)
     return dati

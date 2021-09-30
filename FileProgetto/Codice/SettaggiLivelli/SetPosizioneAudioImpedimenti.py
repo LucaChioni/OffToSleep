@@ -2530,6 +2530,37 @@ def decidiSeStoppareMusica(stanza, avanzamentoStoria):
     return stoppaMusica
 
 
+def decidiSeDimezzareVolumeMusica(avanzamentoStoria):
+    GlobalGameVar.volumeMusicaDimezzato = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tutorialMovimento"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["tutorialOggettiBattaglia"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy2"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy3"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["ingressoForestaCadetta"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tutorialCampoVisivo"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tutorialRecuperoPvDifesa"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioBagnoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoBagnoDavid"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoPreCambioPerCenaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostCambioPerCenaDavid"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoAlzatoDalLetto"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoConclusivoEnigmaBibliotecario"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tutorialImpoPietraMenuSettaImpo"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+    elif GlobalGameVar.dictAvanzamentoStoria["arrivoSelvaArida"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tutorialUsoImpoFrutti"]:
+        GlobalGameVar.volumeMusicaDimezzato = True
+
+    if GlobalGameVar.volumeMusicaDimezzato and GlobalHWVar.canaleSoundCanzone.get_busy() and GlobalHWVar.canaleSoundCanzone.get_volume() > 0:
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2.0)
+
+
 def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato):
     nonProcedere = False
 

@@ -232,7 +232,7 @@ class NemicoObj(object):
             attacco = 95
             difesa = 15
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 6
+            raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -256,7 +256,7 @@ class NemicoObj(object):
             attacco = 110
             difesa = 12
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
             velenoso = True
             surriscaldante = False

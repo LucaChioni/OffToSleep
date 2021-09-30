@@ -13,7 +13,7 @@ import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"] and stanza == GlobalGameVar.dictStanze["città1"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -154,15 +154,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         monetePossedute -= GlobalGameVar.monetePerEntrareNellaConfraternita
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanza == GlobalGameVar.dictStanze["città4"]:
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -189,13 +182,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                         avanzaIlTurnoSenzaMuoverti = True
                     break
             if not avanzaIlTurnoSenzaMuoverti:
-                i = GlobalHWVar.volumeCanzoni
-                while i > 0:
-                    GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                    i -= GlobalHWVar.volumeCanzoni / 10
-                    pygame.time.wait(30)
-                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                GlobalHWVar.canaleSoundCanzone.set_volume(0)
+                GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
                 GlobalHWVar.canaleSoundCanzone.stop()
 
                 personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)

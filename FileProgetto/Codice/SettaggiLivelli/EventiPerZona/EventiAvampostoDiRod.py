@@ -72,13 +72,15 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 else:
                     print ("Percorso Mercante verso altro tavolo non trovato")
                 break
-        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
         avanzamentoStoria += 1
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
+        avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riprodottoSuonoMappaLabirintoSulTavolo"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
         personaggioArrivato = False
         for personaggio in listaPersonaggi:
             if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"] and personaggio.tipo == "Mercante":

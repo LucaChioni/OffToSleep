@@ -10,6 +10,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
     global aggiornaInterfacciaDuranteLePause
     if aggiornaInterfacciaDuranteLePause:
         aggiornaInterfaccia = True
+        GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = True
         aggiornaInterfacciaDuranteLePause = False
 
     if controllerDaConfigurare:
@@ -34,6 +35,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
             GlobalHWVar.padUtilizzato = False
             tastoTrovato = True
             aggiornaInterfaccia = True
+            GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = True
             bottoneDown = False
             GlobalHWVar.setCursoreVisibile(False)
             GlobalHWVar.usandoIlController = False
@@ -46,6 +48,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
             GlobalHWVar.padUtilizzato = False
             tastoTrovato = True
             aggiornaInterfaccia = True
+            GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = True
             bottoneDown = False
             GlobalHWVar.setCursoreVisibile(True)
             GlobalHWVar.usandoIlController = False
@@ -83,6 +86,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                 GlobalHWVar.listaInputInSospeso = []
                 tastoTrovato = True
                 aggiornaInterfaccia = True
+                GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = True
                 bottoneDown = False
                 GlobalHWVar.setCursoreVisibile(False)
                 GlobalHWVar.usandoIlController = True

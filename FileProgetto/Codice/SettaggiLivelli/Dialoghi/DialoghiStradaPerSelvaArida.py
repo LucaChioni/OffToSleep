@@ -51,7 +51,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ehi, tu! Dove hai trovato quell'impo!?")
+                dialogo.append(u"Ehi, tu! Dove hai trovato quell'impo?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

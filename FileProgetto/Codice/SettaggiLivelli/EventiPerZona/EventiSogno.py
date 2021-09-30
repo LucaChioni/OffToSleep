@@ -34,7 +34,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy2"] and stanza == GlobalGameVar.dictStanze["sognoLucy4"] and x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 8:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        avanzamentoStoria = GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy3"]
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy3"] and stanza == GlobalGameVar.dictStanze["sognoLucy4"]:
+        avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["casaHansLucy1"]
         cambiosta = True
         carim = True

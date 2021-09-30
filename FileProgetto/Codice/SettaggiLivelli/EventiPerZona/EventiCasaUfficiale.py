@@ -14,7 +14,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         screen = GlobalHWVar.schermo.copy().convert()
 
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -23,15 +23,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
 
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoArrivoCasaConDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
         padreArrivato = False
@@ -76,13 +69,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 personaggio.numeroMovimento = 0
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioBagnoCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        i = GlobalHWVar.volumeCanzoni
-        while i > 0:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i -= GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
         dati[6] = 0
         dati[7] = 0
@@ -101,13 +88,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -143,7 +124,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -157,13 +138,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid2"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "PadreUfficialeCasa-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        i = GlobalHWVar.volumeCanzoni
-        while i > 0:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i -= GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid3"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
@@ -279,7 +254,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -294,15 +269,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        i = 0
-        while i < GlobalHWVar.volumeCanzoni:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            i += GlobalHWVar.volumeCanzoni / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -323,13 +291,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     servoArrivato = True
                 break
         if servoArrivato:
-            i = GlobalHWVar.volumeCanzoni
-            while i > 0:
-                GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                i -= GlobalHWVar.volumeCanzoni / 10
-                pygame.time.wait(30)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            GlobalHWVar.canaleSoundCanzone.set_volume(0)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
             GlobalHWVar.canaleSoundCanzone.stop()
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "ServoDavid-1", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

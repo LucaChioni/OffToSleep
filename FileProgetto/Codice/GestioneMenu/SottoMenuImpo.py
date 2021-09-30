@@ -853,12 +853,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     GlobalHWVar.linguaImpostata = linguaTemp
-                    GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10 * 1.0
-                    GlobalHWVar.volumeCanzoni = volumeCanzoniTemp / 10 * 1.0
+                    GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
+                    GlobalHWVar.volumeCanzoni = volumeCanzoniTemp / 10.0
                     GlobalHWVar.initVolumeSounds()
                     if dimezzaVolumeCanzone:
-                        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
+                        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2.0)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 3.0)
                     if GlobalHWVar.gsx != gsxTemp or GlobalHWVar.gsy != gsyTemp or GlobalHWVar.modalitaSchermo != modalitaSchermoTemp:
                         ricaricaImgs = False
                         if GlobalHWVar.gsx != gsxTemp or GlobalHWVar.gsy != gsyTemp:

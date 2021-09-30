@@ -23,6 +23,7 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["dialogoSognoLucy2"] = i
     i += 1
     dictAvanzamentoStoria["dialogoSognoLucy3"] = i
+    i += 1
     dictAvanzamentoStoria["primoCambioPersonaggio"] = i
     i += 1
     dictAvanzamentoStoria["dialogoCasaHansLucy1"] = i
@@ -352,6 +353,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["rimosseMonetePerMappaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"] = i
+    i += 1
+    dictAvanzamentoStoria["riprodottoSuonoMappaLabirintoSulTavolo"] = i
     i += 1
     dictAvanzamentoStoria["arrivatoRodAllAltroTavolo"] = i
     i += 1

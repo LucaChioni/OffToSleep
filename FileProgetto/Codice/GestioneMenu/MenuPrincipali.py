@@ -196,18 +196,18 @@ def menu(caricaSalvataggio, gameover):
     lunghezzadatiCofanetti = len(tuttiCofanetti)
 
     if gameover:
-        dati = GlobalGameVar.vetDatiSalvataggioGameOver[0]
-        tuttePorte = GlobalGameVar.vetDatiSalvataggioGameOver[1]
-        tuttiCofanetti = GlobalGameVar.vetDatiSalvataggioGameOver[2]
-        listaNemiciTotali = GlobalGameVar.vetDatiSalvataggioGameOver[3]
-        listaEsche = GlobalGameVar.vetDatiSalvataggioGameOver[4]
-        listaMonete = GlobalGameVar.vetDatiSalvataggioGameOver[5]
-        stanzeGiaVisitate = GlobalGameVar.vetDatiSalvataggioGameOver[6]
-        listaPersonaggiTotali = GlobalGameVar.vetDatiSalvataggioGameOver[7]
-        listaAvanzamentoDialoghi = GlobalGameVar.vetDatiSalvataggioGameOver[8]
-        oggettiRimastiAHans = GlobalGameVar.vetDatiSalvataggioGameOver[9]
-        ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10]
-        obbiettivoCasualeColco = GlobalGameVar.vetDatiSalvataggioGameOver[11]
+        dati = GlobalGameVar.vetDatiSalvataggioGameOver[0][:]
+        tuttePorte = GlobalGameVar.vetDatiSalvataggioGameOver[1][:]
+        tuttiCofanetti = GlobalGameVar.vetDatiSalvataggioGameOver[2][:]
+        listaNemiciTotali = GenericFunc.copiaListaDiOggettiConImmagini(GlobalGameVar.vetDatiSalvataggioGameOver[3], True)
+        listaEsche = GlobalGameVar.vetDatiSalvataggioGameOver[4][:]
+        listaMonete = GlobalGameVar.vetDatiSalvataggioGameOver[5][:]
+        stanzeGiaVisitate = GlobalGameVar.vetDatiSalvataggioGameOver[6][:]
+        listaPersonaggiTotali = GenericFunc.copiaListaDiOggettiConImmagini(GlobalGameVar.vetDatiSalvataggioGameOver[7], False)
+        listaAvanzamentoDialoghi = GlobalGameVar.vetDatiSalvataggioGameOver[8][:]
+        oggettiRimastiAHans = GlobalGameVar.vetDatiSalvataggioGameOver[9][:]
+        ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10][:]
+        obbiettivoCasualeColco = GenericFunc.copiaNemico(GlobalGameVar.vetDatiSalvataggioGameOver[11])
         GlobalGameVar.inizializzaVariabiliGlobali()
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
@@ -375,18 +375,10 @@ def menu(caricaSalvataggio, gameover):
                         if n != -1:
                             GlobalGameVar.inizializzaVariabiliGlobali()
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
-                            i = GlobalHWVar.volumeCanzoni
-                            j = GlobalHWVar.volumeEffetti
-                            while i > 0 or j > 0:
-                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
-                                i -= GlobalHWVar.volumeCanzoni / 10
-                                j -= GlobalHWVar.volumeEffetti / 10
-                                pygame.time.wait(30)
-                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
                             GlobalHWVar.canaleSoundCanzone.stop()
-                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
                             datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
                             dati = datiTotaliAttuali[0]
@@ -529,18 +521,10 @@ def menu(caricaSalvataggio, gameover):
                         inutile, conferma = chiediconferma(3)
                         if conferma:
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
-                            i = GlobalHWVar.volumeCanzoni
-                            j = GlobalHWVar.volumeEffetti
-                            while i > 0 or j > 0:
-                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
-                                i -= GlobalHWVar.volumeCanzoni / 10
-                                j -= GlobalHWVar.volumeEffetti / 10
-                                pygame.time.wait(30)
-                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
                             GlobalHWVar.canaleSoundCanzone.stop()
-                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
                             dati = datiIniziali
                             xInizialie = GlobalHWVar.gsx // 32 * 15
@@ -825,8 +809,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     bottoneDown = False
     tastotempfps = 8
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni / 2)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni / 2.0, GlobalHWVar.volumeEffetti / 3.0], True, posizioneCanaleMusica=0)
 
     if GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]:
         risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom, tutticofanetti, apriLabirinto=True)
@@ -1164,8 +1147,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
-        GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
-        GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni, GlobalHWVar.volumeEffetti], True, posizioneCanaleMusica=0)
     return dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione
 
 
@@ -1214,8 +1196,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
             vettoreOggettiIco.append(sconosciutoOggettoIco)
         oggetton += 1
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni / 2)
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni / 2.0, GlobalHWVar.volumeEffetti / 3.0], True, posizioneCanaleMusica=0)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1710,6 +1691,5 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio:
-        GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
-        GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni, GlobalHWVar.volumeEffetti], True, posizioneCanaleMusica=0)
     return dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione

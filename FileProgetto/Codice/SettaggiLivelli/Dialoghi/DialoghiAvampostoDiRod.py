@@ -49,11 +49,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Un avamposto... certo! Come ho fatto a non capirlo!? Ha proprio l'aspetto di un classico avamposto.")
+                dialogo.append(u"Un avamposto... certo! Come ho fatto a non capirlo?! Ha proprio l'aspetto di un classico avamposto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non è un \"classico\" avamposto. È molto di più! Come credi che possa sostenersi l'intero ecosistema di questa regione!?")
+                dialogo.append(u"Non è un \"classico\" avamposto. È molto di più! Come credi che possa sostenersi l'intero ecosistema di questa regione?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -145,7 +145,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"No, non ci voglio credere... e poi cosa vuol dire che me la presti!?")
+                dialogo.append(u"No, non ci voglio credere... e poi cosa vuol dire che me la presti?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

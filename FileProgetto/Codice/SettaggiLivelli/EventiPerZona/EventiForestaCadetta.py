@@ -42,7 +42,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] and stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
@@ -73,9 +73,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 nemicoArrivato = True
                 break
         if nemicoArrivato:
-            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.canaleSoundCanzone.stop()
             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
             i = 0
             while i < len(tutteporte):
@@ -110,7 +110,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             # tolgo gli eventuali guanti equipaggiati
             dati[129] = 0
             i = 0
-            while i < 10:
+            while i < 20:
                 pygame.time.wait(100)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 i += 1
@@ -212,7 +212,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sotterratoSam"] and stanza == GlobalGameVar.dictStanze["forestaCadetta7"]:
         i = 0
-        while i < 10:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1

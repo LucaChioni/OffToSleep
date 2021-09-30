@@ -1979,7 +1979,10 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, a
         caselleNonVisibili.append(False)
         i += 1
 
-    return caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili
+    # il vettore delle casellePercorribiliPorteEscluse serve per sapere se le porte non visibili (in caselle che non sono accanto a caselle viste) devono essere disegnate verticalmente o orizzontalmente
+    casellePercorribiliPorteEscluse, colcoInCasellaVista = scopriCaselleViste(x, y, rx, ry, stanza, [], cofanetti, avanzamentoStoria, vetPartenze=vetEntrate)
+
+    return caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili, casellePercorribiliPorteEscluse
 
 
 def copiaNemico(oggettoNemico, checkErrori=False):
@@ -2016,44 +2019,52 @@ def copiaListaDiOggettiConImmagini(listaOggetti, nemici, avanzamentoStoria=0, ch
     return copiaLista
 
 
-def cambiaVolumeCanale(canale, volumeFinale):
-    tempoTraCambiVolume = 3
-
-    if type(canale) is GestioneCanaliAudioAmbiente.CanaliAudioAmbiente:
-        volumeIniziale = canale.volume
-        unitaVolumeIncremento = abs(volumeFinale - volumeIniziale) / 5.0
-        if volumeFinale > volumeIniziale:
-            i = volumeIniziale
-            while i < volumeFinale:
-                canale.settaVolume(i)
-                i += unitaVolumeIncremento
-                pygame.time.wait(tempoTraCambiVolume)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        elif volumeFinale < volumeIniziale:
-            i = volumeIniziale
-            while i > volumeFinale:
-                canale.settaVolume(i)
-                i -= unitaVolumeIncremento
-                pygame.time.wait(tempoTraCambiVolume)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+def cambiaVolumeCanaliAudio(listaCanali, listaVolumiFinali, daMenu, posizioneCanaleMusica=-1):
+    if daMenu:
+        tempoPerCiclo = 5
+        numeroCicli = 5.0
     else:
-        volumeIniziale = canale.get_volume()
-        unitaVolumeIncremento = abs(volumeFinale - volumeIniziale) / 5.0
-        if volumeFinale > volumeIniziale:
-            i = volumeIniziale
-            while i < volumeFinale:
-                canale.set_volume(i)
-                i += unitaVolumeIncremento
-                pygame.time.wait(tempoTraCambiVolume)
+        tempoPerCiclo = 30
+        numeroCicli = 10.0
+
+    if len(listaCanali) == len(listaVolumiFinali) and len(listaCanali) > 0:
+        listaVolumiIniziali = []
+        for canale in listaCanali:
+            if type(canale) is GestioneCanaliAudioAmbiente.CanaliAudioAmbiente:
+                listaVolumiIniziali.append(canale.volume)
+            else:
+                listaVolumiIniziali.append(canale.get_volume())
+        if GlobalGameVar.volumeMusicaDimezzato and posizioneCanaleMusica != -1 and listaVolumiFinali[posizioneCanaleMusica] == GlobalHWVar.volumeCanzoni:
+            listaVolumiFinali[posizioneCanaleMusica] /= 2.0
+        volumiInvariati = True
+        i = 0
+        while i < len(listaCanali):
+            if listaVolumiFinali[i] != listaVolumiIniziali[i]:
+                volumiInvariati = False
+                break
+            i += 1
+        if not volumiInvariati:
+            listaVolumiEffettivi = listaVolumiIniziali[:]
+            numeroCicloAttuale = 1
+            while numeroCicloAttuale <= numeroCicli:
+                c = 0
+                while c < len(listaCanali):
+                    incrementoVolume = (listaVolumiFinali[c] - listaVolumiIniziali[c]) / numeroCicli
+                    listaVolumiEffettivi[c] += incrementoVolume
+                    if numeroCicloAttuale == numeroCicli:
+                        listaVolumiEffettivi[c] = listaVolumiFinali[c]
+
+                    if type(listaCanali[c]) is GestioneCanaliAudioAmbiente.CanaliAudioAmbiente:
+                        listaCanali[c].settaVolume(listaVolumiEffettivi[c])
+                    else:
+                        listaCanali[c].set_volume(listaVolumiEffettivi[c])
+
+                    c += 1
+                pygame.time.wait(tempoPerCiclo)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        elif volumeFinale < volumeIniziale:
-            i = volumeIniziale
-            while i > volumeFinale:
-                canale.set_volume(i)
-                i -= unitaVolumeIncremento
-                pygame.time.wait(tempoTraCambiVolume)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        canale.set_volume(volumeFinale)
+                numeroCicloAttuale += 1
+    elif len(listaCanali) != len(listaVolumiFinali):
+        print ("Errore: il numero dei canali audio non corrisponde ai numero dei volumi. NumCanali=" + str(len(listaCanali)) + ", NumVolumi=" + str(len(listaVolumiFinali)))
 
 
 def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione):

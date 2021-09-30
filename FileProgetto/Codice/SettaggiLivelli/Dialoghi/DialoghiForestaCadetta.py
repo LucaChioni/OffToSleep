@@ -142,7 +142,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ma Hans non sa cacciare... che ci sia qualcun altro nel bosco!? Ok ok, calma! Starà sicuramente bene.")
+            dialogo.append(u"Ma Hans non sa cacciare... che ci sia qualcun altro nel bosco?! Ok ok, calma! Starà sicuramente bene.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] and avanzamentoDialogo == 1:
             oggettoDato = False
@@ -227,7 +227,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("<*>#italic#Uh!?<*> Stai lontano ragazzo!")
+            dialogo.append("<*>#italic#Uh?!<*> Stai lontano ragazzo!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -313,7 +313,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Cinghiale!? Voglio dire il sapore è quello ma... queste ossa mi sembrano troppo piccole per un cinghiale!")
+            dialogo.append(u"Cinghiale?! Voglio dire il sapore è quello ma... queste ossa mi sembrano troppo piccole per un cinghiale!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

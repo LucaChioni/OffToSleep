@@ -17,7 +17,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreBussareCitta)
         i = 0
-        while i < 15:
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1

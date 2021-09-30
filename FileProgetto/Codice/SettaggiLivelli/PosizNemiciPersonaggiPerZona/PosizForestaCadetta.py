@@ -291,10 +291,11 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
             nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 14, "s", "LupoNero", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "s", "a", "a", "a", "", "w", "d"]
-            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6, "d", "Cinghiale", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"]:
+                percorsoNemico = ["d", "d", "s", "a", "a", "a", "", "w", "d"]
+                nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6, "d", "Cinghiale", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 percorsoNemico = ["w", "d", "d", "s", "s", "a", "a", "a", "a", "a", "w", "d", "d", "d"]
                 nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 7, "d", "LupoNero", stanza, percorsoNemico)

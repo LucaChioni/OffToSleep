@@ -8,6 +8,7 @@ import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
 def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False, superficie=False):
@@ -214,7 +215,7 @@ def guardaVideo(listaImg, audio, loop):
     # oscuraIlluminaSchermo(illumina=False)
 
 
-def controllaMorteRallo(vitaRallo, inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente):
+def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente):
     if vitaRallo <= 0:
         gameover = True
         if GlobalHWVar.mouseBloccato:
@@ -233,20 +234,13 @@ def controllaMorteRallo(vitaRallo, inizio, gameover, riavviaAudioMusica, riavvia
         GlobalHWVar.canaleSoundLvUp.stop()
         GlobalHWVar.canaleSoundInterazioni.stop()
         GlobalHWVar.canaleSoundAttacco.stop()
-        i = GlobalHWVar.volumeCanzoni
-        j = GlobalHWVar.volumeEffetti
-        while i > 0 or j > 0:
-            GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
-            i -= GlobalHWVar.volumeCanzoni / 10
-            j -= GlobalHWVar.volumeEffetti / 10
-            pygame.time.wait(30)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
-        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
+        disegnaVitaRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp)
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
@@ -434,7 +428,7 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
     GlobalHWVar.aggiornaSchermo()
     i = 0
-    while i < 10:
+    while i < 5:
         pygame.time.wait(100)
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         i += 1

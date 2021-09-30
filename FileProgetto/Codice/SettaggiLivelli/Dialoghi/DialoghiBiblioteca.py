@@ -78,7 +78,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Cosa!? Cos'hai?")
+            dialogo.append(u"... Cosa?! Cos'hai?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -186,7 +186,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Perché non viene via!?")
+            dialogo.append(u"... Perché non viene via?")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ripulitoVomito"]:
             nome = "Bibliotecario"
@@ -467,11 +467,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non hai meriti o colpe di qualunque cosa tu abbia fatto, detto o pensato nella tua vita. Semplicemente succedono degli eventi che ti impongono delle reazioni. Prima, ad esempio, eri scossa per qualcosa. Ma punirti per quello che hai fatto, sarebbe come punire questa palla perché qualcuno pensa che si ferma troppo presto o troppo tardi prima di tornare indietro. Se le condizioni di partenza sono le stesse, i risultati non cambieranno.")
+            dialogo.append(u"Non hai meriti o colpe di qualunque cosa tu abbia fatto, detto o pensato nella tua vita. Semplicemente succedono degli eventi che ti impongono delle reazioni. Prima, ad esempio, eri scossa per qualcosa. Ma punirti per quello che hai fatto, sarebbe come punire questa palla perché qualcuno pensa che si fermi troppo presto o troppo tardi prima di tornare indietro. Se le condizioni di partenza sono le stesse, i risultati non cambieranno.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Vuol dire che nessuno è responsabile di quello che fa... perché una persona dovrebbe impegnarsi a fare qualcosa? Cioè, se non esiste la possibilità di prendere decisioni, il futuro è invariabile, è statico... come il passato... non ci sarebbe motivo di... cioè...")
+            dialogo.append(u"... Quindi nessuno è responsabile di quello che fa? Perché una persona dovrebbe impegnarsi a fare qualcosa? Cioè, se non esiste la possibilità di prendere decisioni, il futuro è invariabile, è statico... come il passato... non ci sarebbe motivo di... cioè...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -495,11 +495,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Ok...")
+            dialogo.append(u"... Ok. Ma non mi sembri molto \"impulsivo\" o \"bestiale\".")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Comunque... dicevi di essere venuta per sapere di tuo fratello, giusto?")
+            dialogo.append(u"Lucy... lo sono io e lo sei tu tanto quanto lo sono le api, le formiche e i castori quando costruiscono alveari, formicai e dighe... Io posso costruire edifici, disegnare immagini e scrivere libri... Questo dovrebbe rendermi non impulsivo? La differenza tra naturale e artificiale serve solo per non abbassare il nostro lavoro a quello delle altre specie animali.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Mh...<*>")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Comunque... a proposito di lavoro, dovrei tornare al mio adesso. Dicevi di essere venuta per sapere di tuo fratello...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -550,10 +558,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Come vuoi... In effetti qualcuno c'è. E mi faresti anche un bel favore se ci andassi...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Chi?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -737,7 +741,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani ma con un impo non avrai problemi.")
+            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani ma con un impo non avrai problemi. L'unica cosa...  portati delle medicine e cerca di evitare gli scorpioni. Non dovresti incontrarli ma, nel caso, stagli alla larga.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -888,7 +892,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Mi stai ascoltando!?")
+                dialogo.append(u"Mi stai ascoltando?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

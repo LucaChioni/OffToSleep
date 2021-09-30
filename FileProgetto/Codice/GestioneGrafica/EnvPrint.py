@@ -13,7 +13,7 @@ import FunzioniGraficheGeneriche
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse):
     if caricaTutto:
         GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a caselle viste per non mettergli la casella oscurata
@@ -52,15 +52,15 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         while i < len(porte):
             if not porte[i + 3]:
                 j = 0
-                while j < len(caseviste):
-                    if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
-                        if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]):
-                            if caseviste[j + 2]:
+                while j < len(casellePercorribiliPorteEscluse):
+                    if (casellePercorribiliPorteEscluse[j] == porte[i + 1] - GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] + GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
+                        if (casellePercorribiliPorteEscluse[j] == porte[i + 1] - GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] + GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]):
+                            if casellePercorribiliPorteEscluse[j + 2]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
                             else:
                                 GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
                         else:
-                            if caseviste[j + 2]:
+                            if casellePercorribiliPorteEscluse[j + 2]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
                             else:
                                 GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
@@ -613,7 +613,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -759,15 +759,15 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     while i < len(porte):
         if not porte[i + 3]:
             j = 0
-            while j < len(caseviste):
-                if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
-                    if (caseviste[j] == porte[i + 1] - GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalHWVar.gpx and caseviste[j + 1] == porte[i + 2]):
-                        if caseviste[j + 2]:
+            while j < len(casellePercorribiliPorteEscluse):
+                if (casellePercorribiliPorteEscluse[j] == porte[i + 1] - GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] + GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2] - GlobalHWVar.gpy) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2] + GlobalHWVar.gpy):
+                    if (casellePercorribiliPorteEscluse[j] == porte[i + 1] - GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]) or (casellePercorribiliPorteEscluse[j] == porte[i + 1] + GlobalHWVar.gpx and casellePercorribiliPorteEscluse[j + 1] == porte[i + 2]):
+                        if casellePercorribiliPorteEscluse[j + 2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
                         else:
                             GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
                     else:
-                        if caseviste[j + 2]:
+                        if casellePercorribiliPorteEscluse[j + 2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
                         else:
                             GlobalHWVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
