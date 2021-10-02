@@ -1,8 +1,29 @@
 # -*- coding: utf-8 -*-
 
 import GlobalHWVar
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+
+
+def setImgDialogoProtagonista(avanzamentoStoria):
+    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        nomePersonaggio = "Hans"
+        imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
+    else:
+        nomePersonaggio = "Lucy"
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucy1
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucyAssonnata
+        elif GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucySconvolta
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucyOcchiChiusi
+        else:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucy2
+
+    return nomePersonaggio, imgPersDialogo
 
 
 def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):

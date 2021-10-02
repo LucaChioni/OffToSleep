@@ -861,7 +861,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if personaggio.imgAttuale and (personaggio.mantieniSempreASchermo or personaggio.inCasellaVista):
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
-    # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellaAttaccabile per non oscurarli)
+    # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellavista per non oscurarli)
     vetCaselleDaNonOscurare = []
     i = 0
     while i < len(caseattactotRallo):
@@ -881,9 +881,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 j += 4
             for personaggio in listaPersonaggi:
                 if personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista:
-                    if (caseattactotRallo[i] == personaggio.x - GlobalHWVar.gpx and caseattactotRallo[i + 1] == personaggio.y) or (caseattactotRallo[i] == personaggio.x + GlobalHWVar.gpx and caseattactotRallo[i + 1] == personaggio.y) or (caseattactotRallo[i] == personaggio.x and caseattactotRallo[i + 1] == personaggio.y - GlobalHWVar.gpy) or (caseattactotRallo[i] == personaggio.x and caseattactotRallo[i + 1] == personaggio.y + GlobalHWVar.gpy):
-                        vetCaselleDaNonOscurare.append(personaggio.x)
-                        vetCaselleDaNonOscurare.append(personaggio.y)
+                    vetCaselleDaNonOscurare.append(personaggio.x)
+                    vetCaselleDaNonOscurare.append(personaggio.y)
         i += 3
     i = 0
     while i < len(caseattactotRallo):

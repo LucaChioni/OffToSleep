@@ -23,19 +23,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = GlobalImgVar.puntatore
-    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        nomePersonaggio = "Hans"
-        imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
-    else:
-        nomePersonaggio = "Lucy"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucy1
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucyAssonnata
-        elif GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tranquillizzataDopoDialogoBibliotecario"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucySconvolta
-        else:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucy2
+    nomePersonaggio, imgPersDialogo = SetEventiDialoghi.setImgDialogoProtagonista(avanzamentoStoria)
 
     if personaggio.nome != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))

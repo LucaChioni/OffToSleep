@@ -281,7 +281,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["bibliotecarioVenutoVersoDiTe"] = i
     i += 1
-    dictAvanzamentoStoria["tranquillizzataDopoDialogoBibliotecario"] = i
+    dictAvanzamentoStoria["dialogoBibliotecarioDuranteSeduta"] = i
     i += 1
     dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"] = i
     i += 1
@@ -305,7 +305,13 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["eseguitaVerificaRisultatoEnigma"] = i
     i += 1
+    dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["pensatoASceltaPassataNelDialogoBibliotecario"] = i
+    i += 1
     dictAvanzamentoStoria["dialogoConclusivoEnigmaBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["ripartitaMusicaDopoPensatoASceltaPassataNelDialogoBibliotecario"] = i
     i += 1
     dictAvanzamentoStoria["bibliotecarioArrivatoAlRegistro"] = i
     i += 1
