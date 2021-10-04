@@ -222,6 +222,13 @@ def menuMercante(dati):
     moneteInsufficienti = False
     inventarioPieno = False
 
+    interlocutore = SetEventiDialoghi.setImgMercanteMenu(dati[0], dati[1])
+    imgMercante = GlobalImgVar.mercanteMenu
+    if interlocutore == "Pappagallo":
+        imgMercante = GlobalImgVar.pappagalloMenuMercante
+    elif interlocutore == "Lucy":
+        imgMercante = GlobalImgVar.lucyMenuMercante
+
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
@@ -780,7 +787,7 @@ def menuMercante(dati):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 16.5))
 
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaroMercante, (GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 14))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.mercanteMenu, (GlobalHWVar.gsx // 32 * (-1), GlobalHWVar.gsy // 18 * 8))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgMercante, (GlobalHWVar.gsx // 32 * (-1), GlobalHWVar.gsy // 18 * 8))
 
                 FunzioniGraficheGeneriche.messaggio("Acquista oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 FunzioniGraficheGeneriche.messaggio("Oggetti acquistabili", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.5, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
@@ -955,13 +962,28 @@ def menuMercante(dati):
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 7))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 7))
             if moneteInsufficienti:
-                FunzioniGraficheGeneriche.messaggio("Non hai abbastanza monete!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
+                if interlocutore == "Rod":
+                    FunzioniGraficheGeneriche.messaggio("Non hai abbastanza monete!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
+                elif interlocutore == "Pappagallo":
+                    FunzioniGraficheGeneriche.messaggio("Monete insufficienti!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
+                elif interlocutore == "Lucy":
+                    FunzioniGraficheGeneriche.messaggio("Non ho abbastanza monete... dovrei?", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
             if inventarioPieno:
-                FunzioniGraficheGeneriche.messaggio("Non puoi prenderne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
+                if interlocutore == "Rod":
+                    FunzioniGraficheGeneriche.messaggio("Non puoi prenderne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
+                elif interlocutore == "Pappagallo":
+                    FunzioniGraficheGeneriche.messaggio("Spazio insufficiente!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
+                elif interlocutore == "Lucy":
+                    FunzioniGraficheGeneriche.messaggio("Non posso trasportarne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
 
             # menu conferma
             if confermaOggettoDaAcquistare != 0:
-                FunzioniGraficheGeneriche.messaggio("Quante te ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
+                if interlocutore == "Rod":
+                    FunzioniGraficheGeneriche.messaggio("Quante te ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
+                elif interlocutore == "Pappagallo":
+                    FunzioniGraficheGeneriche.messaggio("Quanti?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.5, 50)
+                elif interlocutore == "Lucy":
+                    FunzioniGraficheGeneriche.messaggio("Quante me ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 # posizionare il cursore sul menu compra
                 if usauno:
                     xpv = xp
@@ -992,7 +1014,12 @@ def menuMercante(dati):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.8)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.5)), 2)
                 FunzioniGraficheGeneriche.messaggio("Annulla", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6.9, 50)
             else:
-                FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
+                if interlocutore == "Rod":
+                    FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
+                elif interlocutore == "Pappagallo":
+                    FunzioniGraficheGeneriche.messaggio("Compra!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
+                elif interlocutore == "Lucy":
+                    FunzioniGraficheGeneriche.messaggio("Cosa mi serve?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
                 if primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
                     if 1 <= oggetton <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))

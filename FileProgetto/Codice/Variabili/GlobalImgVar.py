@@ -63,6 +63,8 @@ global roboap
 global armrobmo
 global roboSurrisc
 global mercanteMenu
+global pappagalloMenuMercante
+global lucyMenuMercante
 global scorriSuGiu
 global scorriSuGiuBloccato
 global scorriSuGiuBloccatoGiu
@@ -224,6 +226,7 @@ global fraMaggioreDiario
 global roboDiario
 global ralloDiario
 global neilSconosciutoDiario
+global pappagalloDiario
 global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
 global persoLucy1
@@ -333,6 +336,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global armrobmo
     global roboSurrisc
     global mercanteMenu
+    global pappagalloMenuMercante
+    global lucyMenuMercante
     global scorriSuGiu
     global scorriSuGiuBloccato
     global scorriSuGiuBloccatoGiu
@@ -494,6 +499,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global roboDiario
     global ralloDiario
     global neilSconosciutoDiario
+    global pappagalloDiario
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
     global persoLucy1
@@ -780,6 +786,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
 
     # img menu mercante
     mercanteMenu = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Mercante/MercanteDialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    pappagalloMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/PappagalloGrafMenuMercante.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    lucyMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Lucy2Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     scorriSuGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccato = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccatoGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -1074,6 +1082,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     roboDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     ralloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     neilSconosciutoDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    pappagalloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/PappagalloGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
 
     # img nemici
     vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "LupoGrigio", "LupoBianco", "LupoNero", "Cinghiale", "Cittadino1", "Cittadino3", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]

@@ -517,7 +517,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Lucy... lo sono io e lo sei tu tanto quanto lo sono le api, le formiche e i castori quando costruiscono alveari, formicai e dighe... Io posso costruire edifici, disegnare immagini e scrivere libri... Questo dovrebbe rendermi \"non istintivo\"? Siamo una specie animale tra tante altre. La differenza tra naturale e artificiale serve solo a noi per non abbassare il nostro lavoro a quello delle \"bestie\"...")
+            dialogo.append(u"Lucy... lo sono io e lo sei tu tanto quanto lo sono le api, le formiche e i castori quando costruiscono alveari, formicai e dighe... Io posso costruire edifici, disegnare immagini e scrivere libri... Questo dovrebbe rendermi \"non istintivo\"? Siamo una specie animale tra tante altre. La differenza tra naturale e artificiale serve solo a noi per innalzare il nostro lavoro, per renderlo più nobile, più importante...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

@@ -26,6 +26,16 @@ def setImgDialogoProtagonista(avanzamentoStoria):
     return nomePersonaggio, imgPersDialogo
 
 
+def setImgMercanteMenu(avanzamentoStoria, stanza):
+    interlocutore = "Rod"
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        interlocutore = "Lucy"
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] and stanza == GlobalGameVar.dictStanze["città5"]:
+        interlocutore = "Pappagallo"
+
+    return interlocutore
+
+
 def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialRecuperoPvDifesa"] and personaggio.tipo == "FiglioUfficiale":
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)

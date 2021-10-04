@@ -2216,8 +2216,6 @@ def gameloop():
                         # effetto portafortuna
                         if dati[130] == 4:
                             denaroDroppato += int(nemico.denaro * 1.5)
-                            if denaroDroppato == 0:
-                                denaroDroppato = 1
                         if denaroDroppato > 0:
                             vettoreDenaro.append(denaroDroppato)
                             vettoreDenaro.append(nemico.x)
