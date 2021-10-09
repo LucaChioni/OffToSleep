@@ -2461,6 +2461,54 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
+    if stanza == GlobalGameVar.dictStanze["esternoCastello4"]:
+        nomeCanzoneLuogo = ""
+        if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+            GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+            canzone = False
+            canzoneCambiata = True
+        sottofondoLuogo = "EsternoCastello"
+        if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+            GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+            audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+            listaSottofondoAmbientale = [audioAmbiente_Vento1]
+            sottofondoAmbientaleCambiato = True
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"]:
+                npers = "s"
+                x = GlobalHWVar.gpx * 16
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+    if stanza == GlobalGameVar.dictStanze["esternoCastello5"]:
+        nomeCanzoneLuogo = ""
+        if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+            GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+            canzone = False
+            canzoneCambiata = True
+        sottofondoLuogo = "EsternoCastello"
+        if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+            GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+            audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+            listaSottofondoAmbientale = [audioAmbiente_Vento1]
+            sottofondoAmbientaleCambiato = True
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello4"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"]:
+                npers = "w"
+                x = GlobalHWVar.gpx * 9
+                y = GlobalHWVar.gpy * 14
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -2499,6 +2547,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Labirinto"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]):
         nomeDaScrivere = u"Castello di Neil - Esterno"
+    elif stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+        nomeDaScrivere = u"Castello di Neil - Interno"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
