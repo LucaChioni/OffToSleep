@@ -567,15 +567,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Tuo fratello è scappato di casa senza dire niente, non credo che volesse essere seguito. Perché non lo lasci andare per la sua strada? Magari un giorno vi rincontrerete...")
+            dialogo.append(u"Se n'è andato senza dire niente, non credo che volesse essere seguito... Non mi ostinerei troppo fossi in te. Magari un giorno vi rincontrerete.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Sì, ma è da solo... se si trovasse in difficoltà o in pericolo... Sai a chi altro potrei chiedere?")
+            dialogo.append(u"Sì... sai a chi altro potrei chiedere?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Come vuoi... In effetti qualcuno c'è. E mi faresti anche un bel favore se ci andassi.")
+            dialogo.append(u"Come vuoi... In effetti qualcuno c'è. E mi faresti anche un bel favore se ci andassi...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -583,15 +583,23 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"E lui vorrà aiutarmi?")
+            dialogo.append(u"<*>#italic#Mmh...<*> non penso se ne sia andato dalla città... rischio di perdere solo tempo...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sarà molto felice di ricevere ciò che gli consegnerai. Se sarà di buon umore e ti dimostrerai una persona valida, non ci saranno problemi.")
+            dialogo.append(u"Non sai neanche se è mai venuto in città, magari è adesso che stai perdendo tempo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mh...<*> Cosa dovrei consegnare?")
+            dialogo.append(u"<*>#italic#Uff...<*> non lo so... e questo Neil vorrà aiutarmi?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Certo, sarà molto felice di ricevere ciò che gli consegnerai.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Mh...<*> e cosa dovrei consegnare?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -707,7 +715,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Gli impo sono molto \"razionali\" e metodici. Eseguono sempre l'azione che ritengono prioritaria per le circostanze. Lo fanno finché non esauriscono le energie, a quel punto si fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
+            dialogo.append(u"Gli impo sono molto razionali e metodici. Eseguono sempre l'azione che ritengono prioritaria per le circostanze. Lo fanno finché non esauriscono le energie, a quel punto si fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

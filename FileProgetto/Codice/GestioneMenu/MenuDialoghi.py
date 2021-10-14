@@ -34,7 +34,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
 
-    schermo_prima_del_dialogo = GlobalHWVar.schermo.copy().convert()
+    schermo_prima_del_dialogo = GlobalHWVar.schermo.copy()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalHWVar.gsy // 18 * 3.5, GlobalHWVar.gsx, GlobalHWVar.gsy // 18 * 14.5)).convert()
 
     primoframe = True

@@ -72,7 +72,7 @@ def enigmaBiblioteca():
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.disegnaImmagineSuSchermo(sfondoUsandoMatita, (0, 0))
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.gialloCarta, (0, yInizioFoglio - GlobalHWVar.gpy, GlobalHWVar.gsx, GlobalHWVar.gsy - GlobalHWVar.gpy * 4))
-    sfondoEnigma = GlobalHWVar.schermo.copy().convert()
+    sfondoEnigma = GlobalHWVar.schermo.copy()
     superficieDisegni = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
 
     while not esci:
@@ -247,7 +247,7 @@ def enigmaBiblioteca():
                     FunzioniGraficheGeneriche.messaggio("3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.8, GlobalHWVar.gsy // 18 * 1, 50)
                     FunzioniGraficheGeneriche.messaggio("SHIFT: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.3, GlobalHWVar.gsy // 18 * 2.5, 50)
-                sfondoEnigma = GlobalHWVar.schermo.copy().convert()
+                sfondoEnigma = GlobalHWVar.schermo.copy()
 
             dimXBackground = GlobalHWVar.gpx * 2
             dimYBackground = GlobalHWVar.gpy * 2
@@ -255,7 +255,7 @@ def enigmaBiblioteca():
                 dimXBackground = GlobalHWVar.gsx - xStrumentoVecchia
             if yStrumentoVecchia < 0:
                 yStrumentoVecchia = 0
-            backgroundStrumento = sfondoEnigma.subsurface(pygame.Rect(xStrumentoVecchia, yStrumentoVecchia - GlobalHWVar.gpy * 2, dimXBackground, dimYBackground))
+            backgroundStrumento = sfondoEnigma.subsurface(pygame.Rect(xStrumentoVecchia, yStrumentoVecchia - GlobalHWVar.gpy * 2, dimXBackground, dimYBackground)).convert()
             GlobalHWVar.disegnaImmagineSuSchermo(backgroundStrumento, (xStrumentoVecchia, yStrumentoVecchia - GlobalHWVar.gpy * 2))
 
             if utilizzandoStrumento:
@@ -381,7 +381,7 @@ def enigmaLabirinto(avanzamentoStoria):
     GlobalHWVar.disegnaImmagineSuSchermo(sfondoUsandoMatita, (0, 0))
     for quadretto in quadrettiColorabili:
         GlobalHWVar.disegnaRettangoloSuSchermo(superficieDisegni, coloreGomma, (quadretto[0], quadretto[1], dimensioneTrattoGomma, dimensioneTrattoGomma))
-    sfondoEnigma = GlobalHWVar.schermo.copy().convert()
+    sfondoEnigma = GlobalHWVar.schermo.copy()
 
     while not esci:
         spostandoCursore = False
@@ -607,7 +607,7 @@ def enigmaLabirinto(avanzamentoStoria):
                     FunzioniGraficheGeneriche.messaggio("3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.8, GlobalHWVar.gsy // 18 * 1, 50)
                     FunzioniGraficheGeneriche.messaggio("SHIFT: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.3, GlobalHWVar.gsy // 18 * 2.5, 50)
-                sfondoEnigma = GlobalHWVar.schermo.copy().convert()
+                sfondoEnigma = GlobalHWVar.schermo.copy()
 
             xStrumentoInSuperficeNormale = (xStrumento * GlobalHWVar.gsx // numQuadrettiX) + (GlobalHWVar.gsx // numQuadrettiX // 2)
             yStrumentoInSuperficeNormale = (yStrumento * GlobalHWVar.gsy // numQuadrettiY) + (GlobalHWVar.gsy // numQuadrettiY // 2)
@@ -618,7 +618,7 @@ def enigmaLabirinto(avanzamentoStoria):
                 dimXBackground = GlobalHWVar.gsx - xStrumentoInSuperficeNormaleVecchia
             if yStrumentoInSuperficeNormaleVecchia < 0:
                 yStrumentoInSuperficeNormaleVecchia = 0
-            backgroundStrumento = sfondoEnigma.subsurface(pygame.Rect(xStrumentoInSuperficeNormaleVecchia, yStrumentoInSuperficeNormaleVecchia - GlobalHWVar.gpy * 2, dimXBackground, dimYBackground))
+            backgroundStrumento = sfondoEnigma.subsurface(pygame.Rect(xStrumentoInSuperficeNormaleVecchia, yStrumentoInSuperficeNormaleVecchia - GlobalHWVar.gpy * 2, dimXBackground, dimYBackground)).convert()
             GlobalHWVar.disegnaImmagineSuSchermo(backgroundStrumento, (xStrumentoInSuperficeNormaleVecchia, yStrumentoInSuperficeNormaleVecchia - GlobalHWVar.gpy * 2))
 
             if utilizzandoStrumento:

@@ -2792,3 +2792,20 @@ def modificaStanzePacifiche(avanzamentoStoria):
         GlobalGameVar.vetStanzePacifiche = []
     else:
         GlobalGameVar.vetStanzePacifiche = GlobalGameVar.vetStanzePacificheBackUp[:]
+
+
+def riproduciSuoniCambioStanza(stanzaVecchia, stanzaDestinazione):
+    riproduciSuono = False
+    if (stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy1"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansLucy2"]) or (stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy2"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansLucy1"]):
+        riproduciSuono = True
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["città4"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] and stanzaDestinazione == GlobalGameVar.dictStanze["città4"]):
+        riproduciSuono = True
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"] and stanzaDestinazione == GlobalGameVar.dictStanze["città7"]):
+        riproduciSuono = True
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca3"]) or (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca2"]):
+        riproduciSuono = True
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello5"]):
+        riproduciSuono = True
+
+    if riproduciSuono:
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)

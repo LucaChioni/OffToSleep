@@ -1502,7 +1502,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             if obbiettivoCasualeColco.x == nemicoCopiato.x and obbiettivoCasualeColco.y == nemicoCopiato.y:
                                 obbiettivoCasualeColcoCopiato = nemicoCopiato
                                 break
-                    analizzaColco(copy.copy(schermoOriginale), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], listaNemiciCopiata, difesa, ultimoObbiettivoColco[:], obbiettivoCasualeColcoCopiato, GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, pv, pvtot, numFrecce, avvele, attp, difp, saltaTurno)
+                    analizzaColco(schermoOriginale, x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], listaNemiciCopiata, difesa, ultimoObbiettivoColco[:], obbiettivoCasualeColcoCopiato, GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, pv, pvtot, numFrecce, avvele, attp, difp, saltaTurno)
                     analisiDiColcoEffettuata = True
                     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
                     disegnateCaselleAttaccabili = False

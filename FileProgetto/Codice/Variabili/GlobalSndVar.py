@@ -69,9 +69,10 @@ global rumoreCancellaTuttoEnigmi
 global suonoaperturaporteSelva
 global suonochiusuraporteSelva
 global rumoreAperturaCancelloCastello
+global rumorePortoniCambioStanza
 
 
-numSndTotali = 64
+numSndTotali = 65
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -150,6 +151,7 @@ def loadSounds(numSndCaricato):
     global suonoaperturaporteSelva
     global suonochiusuraporteSelva
     global rumoreAperturaCancelloCastello
+    global rumorePortoniCambioStanza
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -224,6 +226,7 @@ def loadSounds(numSndCaricato):
     rumoreAperturaCancelloCastello = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCancelloCastello.wav")
 
     # suoni apertura-chiusura porte
+    rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")
     suonoaperturaporteForesta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/AperturaPortaForesta.wav")
     suonochiusuraporteForesta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/ChiusuraPortaForesta.wav")
     suonoaperturaporteCasa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/AperturaPortaCasa.wav")

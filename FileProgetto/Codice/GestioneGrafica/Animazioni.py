@@ -9,6 +9,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import FunzioniGraficheGeneriche
+import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
 def animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
@@ -48,7 +49,7 @@ def animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura,
         FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio):
+def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, numStanza, stanzaVecchia):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -61,6 +62,7 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
             if cambiosta:
                 fineanimaz = animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
                 if fineanimaz == 0:
+                    SetPosizioneAudioImpedimenti.riproduciSuoniCambioStanza(numStanza, stanzaVecchia)
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
             else:
@@ -1403,8 +1405,8 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno):
-    schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy()
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia):
+    schermo_prima_delle_animazioni = False
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
     azioniDaEseguire = []
@@ -1539,7 +1541,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animaDenaro(vettoreDenaro, caseviste, vettoreImgCaselle)
 
             if fineanimaz == 10:
-                schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy().convert()
+                schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy()
             eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
@@ -1570,7 +1572,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(dati[0], sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio)
+                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(dati[0], sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, dati[1], stanzaVecchia)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco

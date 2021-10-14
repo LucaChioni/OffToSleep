@@ -21,14 +21,14 @@ def chiediconferma(conferma):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 17.5
     yp = GlobalHWVar.gsy // 18 * 10.3
-    schermo_temp = GlobalHWVar.schermo.copy().convert()
+    schermo_temp = GlobalHWVar.schermo.copy()
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
     dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 180))
     background.blit(dark, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
 
-    schermo_temp = GlobalHWVar.schermo.copy().convert()
+    schermo_temp = GlobalHWVar.schermo.copy()
     backgroundUpdate1 = schermo_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9, GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 3)).convert()
     backgroundUpdate2 = schermo_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5)).convert()
 
@@ -498,7 +498,7 @@ def menu(caricaSalvataggio, gameover):
                     FunzioniGraficheGeneriche.messaggio("Continua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 4.5, 90)
                     FunzioniGraficheGeneriche.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 7, 90)
                     FunzioniGraficheGeneriche.messaggio("Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 12, 90)
-                    sreen_temp = GlobalHWVar.schermo.copy().convert()
+                    sreen_temp = GlobalHWVar.schermo.copy()
                     imgOscuraPuntatore = sreen_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 11.5)).convert()
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(imgOscuraPuntatore, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2))
@@ -515,7 +515,7 @@ def menu(caricaSalvataggio, gameover):
 
                 if menuConferma:
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                    schermo_temp = GlobalHWVar.schermo.copy().convert()
+                    schermo_temp = GlobalHWVar.schermo.copy()
                     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
                     if menuConferma == "inizia":
                         inutile, conferma = chiediconferma(3)
@@ -1159,7 +1159,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
     sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu1
     sconosciutoOggettoIco = GlobalImgVar.sconosciutoOggettoIcoMenu
 
-    schermo_temp = GlobalHWVar.schermo.copy().convert()
+    schermo_temp = GlobalHWVar.schermo.copy()
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
     dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 80))
@@ -1343,7 +1343,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 if voceMarcata == -1:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                    schermo_temp = GlobalHWVar.schermo.copy().convert()
+                    schermo_temp = GlobalHWVar.schermo.copy()
                     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
 
                     gpxPreCambioRisoluzione = GlobalHWVar.gpx
@@ -1678,7 +1678,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
             if menuConferma:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                schermo_temp = GlobalHWVar.schermo.copy().convert()
+                schermo_temp = GlobalHWVar.schermo.copy()
                 background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
                 inizio, risposta = chiediconferma(1)
                 if not inizio:
