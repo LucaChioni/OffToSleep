@@ -93,7 +93,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x, y))
 
 
-def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe, scriviTutto=False):
+def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe, parlante, scriviTutto=False):
     x = int(x)
     y = int(y)
 
@@ -105,6 +105,12 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
     bold = False
     coloreOrig = colore
     xOrig = x
+    if parlante == "m":
+        suonoDialogo = GlobalSndVar.rumoreDialoghiInterlocutoriM
+    elif parlante == "f":
+        suonoDialogo = GlobalSndVar.rumoreDialoghiInterlocutoriF
+    else:
+        suonoDialogo = GlobalSndVar.rumoreDialoghiInterlocutoriN
 
     intervalloSuonoDialogo = 3
     vetMsg = msg.split("<*>")
@@ -154,7 +160,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             fineDialogo = True
                             bottoneDown = False
                         elif bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
-                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreDialoghi)
+                            GlobalHWVar.canaleSoundInterazioni.play(suonoDialogo)
                             scriviTutto = True
                             bottoneDown = False
                         if bottoneDown:
@@ -168,7 +174,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
 
                         if not scriviTutto:
                             if intervalloSuonoDialogo % 3 == 0:
-                                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreDialoghi)
+                                GlobalHWVar.canaleSoundInterazioni.play(suonoDialogo)
                             intervalloSuonoDialogo += 1
                             GlobalHWVar.aggiornaSchermo()
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)

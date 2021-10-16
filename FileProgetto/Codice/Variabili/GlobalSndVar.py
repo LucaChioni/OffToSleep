@@ -51,7 +51,9 @@ global rumoreMovimentoPersonaggi
 global rumoreAttaccoNemico
 global rumoreLancioOggettoNemico
 global rumoreMorteNemico
-global rumoreDialoghi
+global rumoreDialoghiInterlocutoriN
+global rumoreDialoghiInterlocutoriM
+global rumoreDialoghiInterlocutoriF
 global suonoAperturaMappa
 global rumoreScavare
 global rumoreBussareCitta
@@ -72,7 +74,7 @@ global rumoreAperturaCancelloCastello
 global rumorePortoniCambioStanza
 
 
-numSndTotali = 65
+numSndTotali = 66
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -133,7 +135,9 @@ def loadSounds(numSndCaricato):
     global rumoreAttaccoNemico
     global rumoreLancioOggettoNemico
     global rumoreMorteNemico
-    global rumoreDialoghi
+    global rumoreDialoghiInterlocutoriN
+    global rumoreDialoghiInterlocutoriM
+    global rumoreDialoghiInterlocutoriF
     global suonoAperturaMappa
     global rumoreScavare
     global rumoreBussareCitta
@@ -207,7 +211,9 @@ def loadSounds(numSndCaricato):
     rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
     # suono dialoghi
-    rumoreDialoghi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Dialoghi.wav")
+    rumoreDialoghiInterlocutoriM = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriM.wav")
+    rumoreDialoghiInterlocutoriN = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriN.wav")
+    rumoreDialoghiInterlocutoriF = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriF.wav")
 
     # effetti speciali
     suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCofanetto.wav")

@@ -122,3 +122,13 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
 def gestisciRisposteSbagliate(avanzamentoStoria):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
         GlobalGameVar.datiEnigmaBibliotecario["reset"] = True
+
+
+def setGender(tipo):
+    gender = "m"
+    if tipo == "Tutorial" or tipo == "Nessuno" or tipo.startswith("Oggetto"):
+        gender = "n"
+    elif tipo == "Madre" or tipo == "MadreUfficiale" or tipo.startswith("Ragazza"):
+        gender = "f"
+
+    return gender

@@ -58,6 +58,7 @@ class PersonaggioObj(object):
             self.imgDialogo = False
 
         self.aggiornaDialogo(avanzamentoStoria)
+        self.gender = SetDialoghiPersonaggi.setGender(self.tipo)
 
     def caricaImgOggetto(self, nonCaricareImg=False):
         self.imgOggetto = []
