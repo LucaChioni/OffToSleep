@@ -70,10 +70,6 @@ elif gsx // 16 > gsy // 9:
     gsx = gsy * 16 // 9
 print ("Modificato", gsx, gsy)
 
-# metto il fullhd come risoluzione massima
-if gsy > 1080:
-    gsx = 1920
-    gsy = 1080
 maxGsx = gsx
 maxGsy = gsy
 
