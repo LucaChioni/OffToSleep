@@ -73,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Sto cercando di andare da un certo Neil. Mi hanno detto che sarei arrivata al suo castello attraversando la Selva Arida e poi costeggiando il lago ma sono accidentalmente capitata in questo incredibile avamposto.")
+                dialogo.append(u"... Sto cercando di andare da un certo Neil. Mi hanno detto che sarei arrivata al suo castello attraversando la Selva Arida e poi costeggiando il lago, ma sono accidentalmente capitata in questo incredibile avamposto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -89,7 +89,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, può darsi. Ma è l'unica pista che mi rimane. E poi potrei attirare la sua attenzione con questo.")
+                dialogo.append(u"Sì, può darsi, ma è l'unica pista che mi rimane. E poi potrei attirare la sua attenzione con questo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -157,7 +157,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non devi memorizzarle tutte. E poi non sei obbligata ad accettare, è solo un'opzione che ti offro. Puoi anche rifiutare se credi che non ti serva. Ma sappi che una volta entrata sarà molto difficile uscire... potresti persino morirci la dentro.")
+                dialogo.append(u"Non devi memorizzarle tutte. E poi non sei obbligata ad accettare, è solo un'opzione che ti offro. Puoi anche rifiutare se credi che non ti serva, ma sappi che una volta entrata sarà molto difficile uscire... potresti persino morirci la dentro.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

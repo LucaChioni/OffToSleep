@@ -296,6 +296,158 @@ def mostraLogo():
         i += 1
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.aggiornaSchermo()
+def disegnaSchermataSelezioneLingua():
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
+    sndSpostapun = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriPuntatore/SpostaPun.wav")
+    sndSelezione = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriPuntatore/Selezione.wav")
+    sndSelimp = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriPuntatore/SelImp.wav")
+    puntatore = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatore.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True, True)
+
+    stringaTitolo = "Choose language"
+    carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 200 // 60)
+    testo = carattere.render(stringaTitolo, True, GlobalHWVar.grigiochi)
+    GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gpx * 1.6, GlobalHWVar.gpy * 2))
+    carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 100 // 60)
+    testo1 = carattere.render("English", True, GlobalHWVar.grigiochi)
+    GlobalHWVar.disegnaImmagineSuSchermo(testo1, (GlobalHWVar.gpx * 2.6, GlobalHWVar.gpy * 8))
+    testo2 = carattere.render("Italiano", True, GlobalHWVar.grigiochi)
+    GlobalHWVar.disegnaImmagineSuSchermo(testo2, (GlobalHWVar.gpx * 2.6, GlobalHWVar.gpy * 11))
+    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
+    screen = GlobalHWVar.schermo.copy().convert()
+
+    rect = pygame.display.get_surface().get_rect()
+    vetImg = []
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 250))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 200))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 150))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 100))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 60))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 20))
+    vetImg.append(imgOscuramento.convert_alpha(GlobalHWVar.schermo))
+    i = 0
+    while i <= 5:
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        pygame.event.pump()
+        GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+        i += 1
+    GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+    GlobalHWVar.aggiornaSchermo()
+
+    xp = GlobalHWVar.gpx * 1.5
+    yp = GlobalHWVar.gpy * 8.8
+    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+    GlobalHWVar.aggiornaSchermo()
+
+    risposta = False
+    bottoneDown = False
+    voceMarcata = 1
+    while not risposta:
+        aggiornaSchermo = False
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        if GlobalHWVar.mouseVisibile:
+            if GlobalHWVar.gsx // 32 * 1.5 <= xMouse <= GlobalHWVar.gsx // 32 * 9:
+                if GlobalHWVar.gsy // 18 * 7.8 <= yMouse <= GlobalHWVar.gsy // 18 * 10.5:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 1
+                    yp = GlobalHWVar.gpy * 8.8
+                elif GlobalHWVar.gsy // 18 * 10.5 <= yMouse <= GlobalHWVar.gsy // 18 * 13.2:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 2
+                    yp = GlobalHWVar.gpy * 11.8
+                else:
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
+            else:
+                if not GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata:
+                GlobalHWVar.canaleSoundPuntatoreSposta.play(sndSpostapun)
+                aggiornaSchermo = True
+
+        # gestione degli input
+        bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
+        if bottoneDown == pygame.K_w or bottoneDown == "padSu" or bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+            GlobalHWVar.canaleSoundPuntatoreSposta.play(sndSpostapun)
+            aggiornaSchermo = True
+            bottoneDown = False
+            if voceMarcata == 1:
+                voceMarcata = 2
+                yp = GlobalHWVar.gpy * 11.8
+            elif voceMarcata == 2:
+                voceMarcata = 1
+                yp = GlobalHWVar.gpy * 8.8
+        elif bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(sndSelezione)
+            risposta = True
+            bottoneDown = False
+        elif bottoneDown:
+            GlobalHWVar.canaleSoundInterazioni.play(sndSelimp)
+            bottoneDown = False
+
+        if aggiornaSchermo:
+            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 1.3, GlobalHWVar.gpx * 25, GlobalHWVar.gpy * 5.4))
+            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 6, GlobalHWVar.gpx * 1.5, GlobalHWVar.gpy * 8.2))
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
+            if voceMarcata == 1:
+                stringaTitolo = "Choose language"
+            else:
+                stringaTitolo = "Seleziona lingua"
+            carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 200 // 60)
+            testo = carattere.render(stringaTitolo, True, GlobalHWVar.grigiochi)
+            GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gpx * 1.6, GlobalHWVar.gpy * 2))
+            GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+            GlobalHWVar.aggiornaSchermo()
+
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+
+    rect = pygame.display.get_surface().get_rect()
+    imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    imgOscuramento.fill((0, 0, 0, 100))
+    imgOscuramento = imgOscuramento.convert_alpha(GlobalHWVar.schermo)
+    i = 0
+    while i <= 5:
+        GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramento, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+        i += 1
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+    GlobalHWVar.aggiornaSchermo()
+
+    if voceMarcata == 2:
+        GlobalHWVar.linguaImpostata = "italiano"
+    elif voceMarcata == 1:
+        GlobalHWVar.linguaImpostata = "inglese"
+    # inizializzo il file di impostazioni
+    scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
+    if GlobalHWVar.linguaImpostata == "italiano":
+        scrivi.write("0_")
+    elif GlobalHWVar.linguaImpostata == "inglese":
+        scrivi.write("1_")
+    scrivi.write(str(int(GlobalHWVar.volumeEffetti * 10)) + "_")
+    scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 10)) + "_")
+    scrivi.write(str(GlobalHWVar.modalitaSchermo) + "_")
+    scrivi.write(str(GlobalHWVar.gsx) + "_")
+    scrivi.write(str(GlobalHWVar.gsy) + "_")
+    scrivi.close()
 def disegnaSchermataDiCaricamento():
     global canzoneAttuale
     canzoneAttuale = "00-Menu"
@@ -352,6 +504,8 @@ def disegnaSchermataDiCaricamento():
     GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
     GlobalHWVar.aggiornaSchermo()
 mostraLogo()
+if GlobalHWVar.erroreFileImpostazioni:
+    disegnaSchermataSelezioneLingua()
 disegnaSchermataDiCaricamento()
 numImgCaricata = 0
 GlobalImgVar.loadImgs(numImgCaricata, cambioRisoluzione=False)

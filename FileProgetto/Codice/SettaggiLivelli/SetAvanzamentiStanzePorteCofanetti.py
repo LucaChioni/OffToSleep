@@ -392,10 +392,22 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello4"] = i
     i += 1
     dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello5"] = i
+    i += 1
+    dictAvanzamentoStoria["servoLanciaSiAccorgeCheNonLoSegui"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoServoLanciaEntrataNelCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["servoLanciaAndatoInInternoCastello2"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoServoLanciaSuAttenderePerNeil"] = i
 
     i += 100
     i += 1
     dictAvanzamentoStoria["servoLanciaTornatoAlCancello"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioCenaAlCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso20"] = i
     i += 1
     dictAvanzamentoStoria["incontratoNeil"] = i
     i += 1
@@ -407,11 +419,21 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] = i
     i += 1
+    dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso21"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioFugaDalCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["fineFugaDalCastello"] = i
+    i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
     i += 1
     dictAvanzamentoStoria["arrivoIngressoVulcano"] = i
     i += 1
     dictAvanzamentoStoria["liberatoDaiControllori"] = i
+    i += 1
+    dictAvanzamentoStoria["presoChiaveCastelloPerTunnelSubacqueo"] = i
+    i += 1
+    dictAvanzamentoStoria["apertoPortaStanza8Castello"] = i
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnni"] = i
 
@@ -671,6 +693,69 @@ def definisciStanze():
     i += 1
     dictStanze["internoCastello1"] = i
     vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello3"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello4"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello5"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello6"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello7"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello8"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello9"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello10"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello11"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello12"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello13"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello14"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello15"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello16"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello17"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello18"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello19"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello20"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello21"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["internoCastello22"] = i
+    vetStanzePacifiche.append(i)
 
     i += 100
     i += 1
@@ -701,30 +786,25 @@ def definisciPorte(dictStanze):
     stanza = dictStanze["forestaCadetta1"]
     vetPorte += [stanza, 6, 7, False]
     vetPorte += [stanza, 19, 12, False]
-
     stanza = dictStanze["forestaCadetta2"]
     vetPorte += [stanza, 22, 9, False]
     vetPorte += [stanza, 22, 2, False]
     vetPorte += [stanza, 13, 10, False]
-
     stanza = dictStanze["forestaCadetta3"]
     vetPorte += [stanza, 12, 7, False]
     vetPorte += [stanza, 16, 9, False]
     vetPorte += [stanza, 16, 15, False]
-
     stanza = dictStanze["forestaCadetta4"]
     vetPorte += [stanza, 18, 2, False]
     vetPorte += [stanza, 15, 10, False]
     vetPorte += [stanza, 18, 14, False]
     vetPorte += [stanza, 21, 14, False]
-
     stanza = dictStanze["forestaCadetta6"]
     vetPorte += [stanza, 7, 12, False]
     vetPorte += [stanza, 9, 6, False]
     vetPorte += [stanza, 13, 7, False]
     vetPorte += [stanza, 22, 10, False]
     vetPorte += [stanza, 26, 9, False]
-
     stanza = dictStanze["forestaCadetta7"]
     vetPorte += [stanza, 27, 3, False]
     vetPorte += [stanza, 28, 4, False]
@@ -733,7 +813,6 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 13, 6, False]
     vetPorte += [stanza, 13, 10, False]
     vetPorte += [stanza, 3, 9, False]
-
     stanza = dictStanze["forestaCadetta8"]
     vetPorte += [stanza, 25, 9, False]
     vetPorte += [stanza, 29, 10, False]
@@ -748,42 +827,76 @@ def definisciPorte(dictStanze):
 
     stanza = dictStanze["selvaArida1"]
     vetPorte += [stanza, 11, 11, False]
-
     stanza = dictStanze["selvaArida4"]
     vetPorte += [stanza, 9, 9, False]
-
     stanza = dictStanze["selvaArida5"]
     vetPorte += [stanza, 14, 12, False]
-
     stanza = dictStanze["selvaArida7"]
     vetPorte += [stanza, 6, 3, False]
     vetPorte += [stanza, 20, 5, False]
-
     stanza = dictStanze["selvaArida9"]
     vetPorte += [stanza, 10, 5, False]
-
     stanza = dictStanze["selvaArida12"]
     vetPorte += [stanza, 16, 4, False]
     vetPorte += [stanza, 28, 5, False]
-
     stanza = dictStanze["selvaArida13"]
     vetPorte += [stanza, 4, 11, False]
     vetPorte += [stanza, 15, 12, False]
-
     stanza = dictStanze["selvaArida14"]
     vetPorte += [stanza, 14, 4, False]
     vetPorte += [stanza, 15, 4, False]
     vetPorte += [stanza, 16, 4, False]
-
     stanza = dictStanze["selvaArida15"]
     vetPorte += [stanza, 18, 10, False]
     vetPorte += [stanza, 21, 11, False]
     vetPorte += [stanza, 24, 3, False]
     vetPorte += [stanza, 28, 4, False]
-
     stanza = dictStanze["selvaArida16"]
     vetPorte += [stanza, 20, 4, False]
     vetPorte += [stanza, 21, 3, False]
+
+    stanza = dictStanze["internoCastello3"]
+    vetPorte += [stanza, 14, 6, False]
+    vetPorte += [stanza, 22, 10, False]
+    vetPorte += [stanza, 25, 6, False]
+    stanza = dictStanze["internoCastello4"]
+    vetPorte += [stanza, 11, 6, False]
+    vetPorte += [stanza, 22, 6, False]
+    stanza = dictStanze["internoCastello5"]
+    vetPorte += [stanza, 10, 7, False]
+    vetPorte += [stanza, 18, 8, False]
+    vetPorte += [stanza, 20, 4, False]
+    vetPorte += [stanza, 23, 7, False]
+    vetPorte += [stanza, 25, 4, False]
+    vetPorte += [stanza, 28, 8, False]
+    stanza = dictStanze["internoCastello8"]
+    vetPorte += [stanza, 7, 7, False]
+    stanza = dictStanze["internoCastello10"]
+    vetPorte += [stanza, 8, 5, False]
+    vetPorte += [stanza, 12, 9, False]
+    stanza = dictStanze["internoCastello11"]
+    vetPorte += [stanza, 12, 5, False]
+    vetPorte += [stanza, 19, 5, False]
+    stanza = dictStanze["internoCastello15"]
+    vetPorte += [stanza, 5, 8, False]
+    vetPorte += [stanza, 14, 4, False]
+    stanza = dictStanze["internoCastello16"]
+    vetPorte += [stanza, 3, 6, False]
+    vetPorte += [stanza, 8, 6, False]
+    vetPorte += [stanza, 12, 3, False]
+    vetPorte += [stanza, 12, 9, False]
+    vetPorte += [stanza, 15, 11, False]
+    vetPorte += [stanza, 16, 5, False]
+    stanza = dictStanze["internoCastello17"]
+    vetPorte += [stanza, 6, 6, False]
+    vetPorte += [stanza, 8, 3, False]
+    vetPorte += [stanza, 8, 13, False]
+    vetPorte += [stanza, 11, 7, False]
+    stanza = dictStanze["internoCastello18"]
+    vetPorte += [stanza, 17, 12, False]
+    stanza = dictStanze["internoCastello20"]
+    vetPorte += [stanza, 10, 6, False]
+    vetPorte += [stanza, 17, 9, False]
 
     return vetPorte
 
@@ -898,5 +1011,48 @@ def definisciCofanetti(dictStanze):
     vetCofanetti += [stanza, 16, 10, False]
     stanza = dictStanze["labirinto23"]
     vetCofanetti += [stanza, 16, 10, False]
+
+    stanza = dictStanze["internoCastello1"]
+    vetCofanetti += [stanza, 2, 12, False]
+    stanza = dictStanze["internoCastello2"]
+    vetCofanetti += [stanza, 29, 5, False]
+    stanza = dictStanze["internoCastello3"]
+    vetCofanetti += [stanza, 27, 8, False]
+    stanza = dictStanze["internoCastello4"]
+    vetCofanetti += [stanza, 13, 12, False]
+    stanza = dictStanze["internoCastello5"]
+    vetCofanetti += [stanza, 8, 6, False]
+    vetCofanetti += [stanza, 18, 3, False]
+    vetCofanetti += [stanza, 25, 9, False]
+    stanza = dictStanze["internoCastello6"]
+    vetCofanetti += [stanza, 25, 7, False]
+    stanza = dictStanze["internoCastello7"]
+    vetCofanetti += [stanza, 23, 2, False]
+    stanza = dictStanze["internoCastello9"]
+    vetCofanetti += [stanza, 23, 2, False]
+    stanza = dictStanze["internoCastello10"]
+    vetCofanetti += [stanza, 16, 7, False]
+    vetCofanetti += [stanza, 26, 13, False]
+    stanza = dictStanze["internoCastello11"]
+    vetCofanetti += [stanza, 10, 12, False]
+    vetCofanetti += [stanza, 15, 7, False]
+    vetCofanetti += [stanza, 16, 7, False]
+    vetCofanetti += [stanza, 21, 12, False]
+    stanza = dictStanze["internoCastello12"]
+    vetCofanetti += [stanza, 3, 2, False]
+    stanza = dictStanze["internoCastello13"]
+    vetCofanetti += [stanza, 15, 3, False]
+    stanza = dictStanze["internoCastello15"]
+    vetCofanetti += [stanza, 3, 3, False]
+    stanza = dictStanze["internoCastello16"]
+    vetCofanetti += [stanza, 4, 15, False]
+    vetCofanetti += [stanza, 14, 7, False]
+    stanza = dictStanze["internoCastello17"]
+    vetCofanetti += [stanza, 14, 8, False]
+    stanza = dictStanze["internoCastello18"]
+    vetCofanetti += [stanza, 29, 14, False]
+    stanza = dictStanze["internoCastello20"]
+    vetCofanetti += [stanza, 19, 8, False]
+    vetCofanetti += [stanza, 25, 8, False]
 
     return vetCofanetti

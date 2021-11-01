@@ -123,7 +123,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Beh, è difficile da dire. Ma una cosa è certa: questa non è un'evoluzione naturale della flora. Sono state gettate delle sostanze inquinanti in tutta l'area. Sostanze che tuttora non sono ancora state assorbite e smaltite dal terreno. E purtroppo una grande quantità si è poi riversata nel lago qua accanto creando gravi danni anche a tutta la fauna acquatica.")
+                dialogo.append(u"Beh, è difficile da dire, ma una cosa è certa: questa non è un'evoluzione naturale della flora. Sono state gettate delle sostanze inquinanti in tutta l'area. Sostanze che tuttora non sono ancora state assorbite e smaltite dal terreno. E purtroppo una grande quantità si è poi riversata nel lago qua accanto creando gravi danni anche a tutta la fauna acquatica.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

@@ -277,7 +277,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Forse non avrei dovuto prendere le sue cose ma... non credo che gli sarebbero servite ancora...")
+            dialogo.append(u"Forse non avrei dovuto prendere le sue cose, ma... non credo che gli sarebbero servite ancora...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimessaMusicaDopoTombaSam"] and stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta9"]:
             oggettoDato = False

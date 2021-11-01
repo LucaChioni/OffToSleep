@@ -26,11 +26,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Salve. Che fai?")
+                    dialogo.append(u"Ehi, salve. Che fai?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Che fai tu! Chi sei e cosa vuoi?")
+                    dialogo.append(u"Che fai tu! Chi sei? E cosa vuoi?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -87,7 +87,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Non aspetta ospiti. L'entrata è da quella parte ma senza un invito non ti è concesso entrare.")
+                    dialogo.append(u"... Non aspetta ospiti. L'entrata è da quella parte, ma senza un invito non ti è concesso entrare.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")

@@ -138,11 +138,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Qua sopra c'è della carne fresca. Delle gocce di sangue stanno ancora colando per terra.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Ma Hans non sa cacciare... che ci sia qualcun altro nel bosco?! Ok ok, calma! Starà sicuramente bene.")
+            dialogo.append(u"Qua sopra c'è della carne fresca. Delle gocce di sangue stanno ancora colando per terra. Ma Hans non sa cacciare... che ci sia qualcun altro nel bosco?! Ok ok, calma! Starà sicuramente bene.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] and avanzamentoDialogo == 1:
             oggettoDato = False
@@ -259,7 +255,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non è una questione di età <*>#italic#ragazzo<*> ma di esperienza! Se vuoi sopravvivere stanotte vai a raccogliere la legna che ho tagliato ad est di qui. Altrimenti puoi procedere da solo. A sud troverai la città.")
+            dialogo.append(u"Non è una questione di età <*>#italic#ragazzo,<*> ma di esperienza! Se vuoi sopravvivere stanotte vai a raccogliere la legna che ho tagliato ad est di qui. Altrimenti puoi procedere da solo. A sud troverai la città.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -313,7 +309,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Cinghiale?! Voglio dire il sapore è quello ma... queste ossa mi sembrano troppo piccole per un cinghiale!")
+            dialogo.append(u"Cinghiale?! Voglio dire il sapore è quello, ma... queste ossa mi sembrano troppo piccole per un cinghiale!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -353,7 +349,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ah beh, certo... Ma, scusa se te lo chiedo: tecnicamente non dovrebbe essere vietato l'aiuto di altre persone?")
+            dialogo.append("Ah beh, certo... Ma, scusa se te lo chiedo: non dovrebbe essere vietato l'aiuto di altre persone?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

@@ -753,8 +753,8 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
 
 def mostraSchermataCitazione():
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-    messaggio(u"\"A noi uomini, nascendo, è toccato un tristo privilegio: quello di sentirci vivere, con la bella illusione di prendere come una realtà fuori di noi questo nostro interno sentimento...\"", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 7.5, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
-    messaggio("- Luigi Pirandello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
+    messaggio(u"A noi uomini, nascendo, è toccato un triste privilegio: quello di sentirci vivere, con la bella illusione di prendere come una realtà fuori di noi questo nostro interno sentimento...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 7.5, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
+    # messaggio("- Luigi Pirandello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
     oscuraIlluminaSchermo(illumina=2)
 
     if GlobalHWVar.mouseBloccato:
