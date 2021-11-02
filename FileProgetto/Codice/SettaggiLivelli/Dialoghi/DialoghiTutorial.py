@@ -63,7 +63,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Fai attenzione a quel pipistrello: è velenoso ed attacca a distanza!")
+        dialogo.append(u"Fai attenzione a quel pipistrello: è velenoso e attacca a distanza!")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")

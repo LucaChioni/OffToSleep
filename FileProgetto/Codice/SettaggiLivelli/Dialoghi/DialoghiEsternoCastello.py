@@ -26,19 +26,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ehi, salve. Che fai?")
+                    dialogo.append(u"Ehi, salve. Devo parlare con Neil, puoi aprirmi il cancello?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Che fai tu! Chi sei? E cosa vuoi?")
+                    dialogo.append(u"Ferma dove sei! Chi sei? E cosa vuoi?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Devo parlare con Neil, è da questa parte?")
+                    dialogo.append(u"... Sono Lucy e... vorrei parlare con Neil.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Neil non ha tempo da perdere. Se non hai un invito puoi anche andartene.")
+                    dialogo.append(u"Neil non ha tempo da perdere, se non hai un invito puoi anche andartene.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -54,7 +54,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Questa è un'uscita.")
+                    dialogo.append(u"... Questa è un'uscita. L'entrata è da quella parte.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -83,15 +83,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Salve... sto cercando un certo Neil, sai dove posso trovarlo?")
+                    dialogo.append(u"Salve... sto cercando un certo Neil, abita qui?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Non aspetta ospiti. L'entrata è da quella parte, ma senza un invito non ti è concesso entrare.")
-                    partiDialogo.append(dialogo)
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"D'accordo, grazie.")
+                    dialogo.append(u"... Non aspetta ospiti. Questo è il suo castello, ma senza un invito non ti è concesso entrare.")
                     partiDialogo.append(dialogo)
                 else:
                     oggettoDato = False
@@ -141,7 +137,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Sì... Me l'hanno dato così...")
+                        dialogo.append(u"Sì... me l'hanno dato così...")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
@@ -149,15 +145,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Senti... scusa, non volevo. Sono venuta per-")
+                        dialogo.append(u"Senti... scusa, non volevo... Sono venuta per-")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
                         dialogo.append(u"Levati di torno!")
-                        partiDialogo.append(dialogo)
-                        dialogo = []
-                        dialogo.append("tu")
-                        dialogo.append(u"Ok, ok...")
                         partiDialogo.append(dialogo)
                     else:
                         oggettoDato = False

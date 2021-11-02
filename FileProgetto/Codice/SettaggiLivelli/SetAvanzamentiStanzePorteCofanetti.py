@@ -397,9 +397,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["dialogoServoLanciaEntrataNelCastello"] = i
     i += 1
-    dictAvanzamentoStoria["servoLanciaAndatoInInternoCastello2"] = i
-    i += 1
-    dictAvanzamentoStoria["dialogoServoLanciaSuAttenderePerNeil"] = i
+    dictAvanzamentoStoria["servoLanciaAndatoDaNeil"] = i
 
     i += 100
     i += 1

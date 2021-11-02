@@ -158,7 +158,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Credo che sia stato quel soldato ad essersi procurato questa carne.")
+            dialogo.append(u"Credo che sia stato quel soldato a essersi procurato questa carne.")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False
@@ -255,7 +255,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non è una questione di età <*>#italic#ragazzo,<*> ma di esperienza! Se vuoi sopravvivere stanotte vai a raccogliere la legna che ho tagliato ad est di qui. Altrimenti puoi procedere da solo. A sud troverai la città.")
+            dialogo.append(u"Non è una questione di età <*>#italic#ragazzo,<*> ma di esperienza! Se vuoi sopravvivere stanotte vai a raccogliere la legna che ho tagliato a est di qui. Altrimenti puoi procedere da solo. A sud troverai la città.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -277,7 +277,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Ho già tagliato la legna ad est di qui, devi solo prenderla e metterla accanto al falò.")
+            dialogo.append(u"Ho già tagliato la legna a est di qui, devi solo prenderla e metterla accanto al falò.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
             nome = "Sam"

@@ -514,7 +514,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"È uno dei piatti che più preferiscono gli abitanti di questa zona. E da quello che si dice, presto sarà anche il più raro.")
+            dialogo.append(u"È uno dei piatti che più preferiscono gli abitanti di questa zona. E, da quello che si dice, presto sarà anche il più raro.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

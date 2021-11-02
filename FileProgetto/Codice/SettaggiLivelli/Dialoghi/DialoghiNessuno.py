@@ -468,7 +468,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Qua ci sono tante persone che potrebbero aver visto Hans. Devo parlare con tutti prima di continuare ad esplorare la città.")
+                dialogo.append(u"Qua ci sono tante persone che potrebbero aver visto Hans. Devo parlare con tutti prima di continuare a esplorare la città.")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città6"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] and y == GlobalHWVar.gpy * 4 and (x == GlobalHWVar.gpx * 17 or x == GlobalHWVar.gpx * 18):

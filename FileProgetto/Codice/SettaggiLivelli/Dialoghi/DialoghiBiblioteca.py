@@ -351,7 +351,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             i = 1
             while i <= 4:
                 if i == scelta:
-                    dialogo.append("Seguendo i calcoli, esattamente " + str(soluzione) + " m. E questo risultato corrisponde ad un evento non ancora avvenuto...")
+                    dialogo.append("Seguendo i calcoli, esattamente " + str(soluzione) + " m. E questo risultato corrisponde a un evento non ancora avvenuto...")
                 else:
                     dialogo.append(u"<*>#italic#Mmh...<*> no, devi aver sbagliato dei calcoli. Riprova con una velocità di " + str(velProssimaPalla) + " m/s. La risposta giusta era " + str(soluzione) + " m, ti faccio vedere.")
                 i += 1
@@ -391,7 +391,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Facciamo finta che sia possibile tornare indietro nel tempo. Torni ad una sitazione in cui hai preso una scelta. Una scelta qualsiasi. Però facendolo, perdi anche i ricordi che hai accumulato nel tempo che stai riavvolgendo. D'accordo?")
+            dialogo.append(u"Facciamo finta che sia possibile tornare indietro nel tempo. Torni a una sitazione in cui hai preso una scelta. Una scelta qualsiasi. Però facendolo, perdi anche i ricordi che hai accumulato nel tempo che stai riavvolgendo. D'accordo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -399,7 +399,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non importa... Anzi, sì. Facciamo che torni ad una situazione che vorresti cambiare. Un episodio dove hai compiuto una scelta \"sbagliata\". Adesso hai l'occasione di tornare indietro e sistemare le cose. Però facendolo scorderai tutto quello che è successo dopo aver preso quella scelta.")
+            dialogo.append(u"No, non importa... Anzi, sì. Facciamo che torni a una situazione che vorresti cambiare. Un episodio dove hai compiuto una scelta \"sbagliata\". Adesso hai l'occasione di tornare indietro e sistemare le cose. Però facendolo scorderai tutto quello che è successo dopo aver preso quella scelta.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -493,7 +493,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sì, infatti. Per questo è comodo che le persone pensino di avere libero arbitrio. Le porta ad impegnarsi per degli obiettivi, a dare importanza alle loro azioni, a responsabilizzarsi, a seguire le regole. Le rende punibili quando \"sbagliano\", cosicché si pentano e si evolvano secondo la visione che gli si vuole imporre. Le porta ad obbedire. Se così non fosse, sarebbe un problema organizzare delle società.")
+            dialogo.append(u"Sì, infatti. Per questo è comodo che le persone pensino di avere libero arbitrio. Le porta a impegnarsi per degli obiettivi, a dare importanza alle loro azioni, a responsabilizzarsi, a seguire le regole. Le rende punibili quando \"sbagliano\", cosicché si pentano e si evolvano secondo la visione che gli si vuole imporre. Le porta a obbedire. Se così non fosse, sarebbe un problema organizzare delle società.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -579,7 +579,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Devo fare una consegna ad un mio vecchio amico. Vive a sud oltre la Selva Arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
+            dialogo.append(u"Devo fare una consegna a un mio vecchio amico. Vive a sud oltre la Selva Arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -642,7 +642,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Questa è un'antica creatura delle montagne occidentali. Appartiene ad una specie che si è estinta da molto tempo, ma sono riuscito a conservarne un esemplare.")
+            dialogo.append(u"Questa è un'antica creatura delle montagne occidentali. Appartiene a una specie che si è estinta da molto tempo, ma sono riuscito a conservarne un esemplare.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -654,7 +654,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah... e come hanno fatto ad estinguersi allora?")
+            dialogo.append(u"Ah... e come hanno fatto a estinguersi allora?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -662,7 +662,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per questo diversi studiosi non accettarono quelle motivazioni ed iniziarono delle ricerche autonome per saperne di più. Io ero tra loro. Sono partito alla ricerca di spiegazioni verso ovest e sono riuscito a trovare questo piccolo impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
+            dialogo.append(u"Per questo diversi studiosi non accettarono quelle motivazioni e iniziarono delle ricerche autonome per saperne di più. Io ero tra loro. Sono partito alla ricerca di spiegazioni verso ovest e sono riuscito a trovare questo piccolo impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -735,7 +735,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per dare un'istruzione ad un impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. L'impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione, altrimenti sta fermo.")
+            dialogo.append(u"Per dare un'istruzione a un impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. L'impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione, altrimenti sta fermo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -1305,7 +1305,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la ImpoPietra è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
+                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la ImpoPietra è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi a essa...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
