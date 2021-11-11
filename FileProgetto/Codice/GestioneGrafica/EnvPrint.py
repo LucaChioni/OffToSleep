@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import random
-import copy
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
@@ -9,7 +8,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
-import FunzioniGraficheGeneriche
+import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 

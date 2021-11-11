@@ -3,7 +3,7 @@
 import os
 import pygame
 import GlobalHWVar
-import GestioneInput
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 
 
 def loadFile(path, mode):
@@ -18,7 +18,7 @@ def loadFile(path, mode):
     return file
 
 
-def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
+def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     img = pygame.image.load(GlobalHWVar.gamePath + path)
 
     # aumento la risoluzione per evitare imprecisioni delle img piccole e bug dello smoothscale per le img grandi (lo smoothscle ha problemi nel ridurre la risoluzione)
@@ -40,6 +40,10 @@ def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
         img = img.convert_alpha()
     else:
         img = img.convert()
+
+    if imgImpenetrabile:
+        for i in range(0, 3):
+            img.blit(img, (0, 0))
 
     # per poter chiudere il gioco durante il caricamento
     inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)

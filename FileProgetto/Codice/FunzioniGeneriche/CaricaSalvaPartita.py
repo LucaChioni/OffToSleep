@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import GlobalHWVar
-import GenericFunc
-import CaricaFileProgetto
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 

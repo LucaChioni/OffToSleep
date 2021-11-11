@@ -985,6 +985,557 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"C'è un silenzio tombale...")
                 partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello22"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello1"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["lucyCamminatoNelCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Wow...")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo soldato si è messo prorio davanti alla porta e non mi fa passare...")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
+            if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 14:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello3"]:
+            if x == GlobalHWVar.gpx * 29 and y == GlobalHWVar.gpy * 12:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello4"]:
+            if x == GlobalHWVar.gpx * 19 and y == GlobalHWVar.gpy * 2:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello5"]:
+            if x == GlobalHWVar.gpx * 5 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 23 and y == GlobalHWVar.gpy * 2:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 23 and y == GlobalHWVar.gpy * 14:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 28 and y == GlobalHWVar.gpy * 14:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello7"]:
+            if x == GlobalHWVar.gpx * 27 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello8"]:
+            if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 15:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 7 and y == GlobalHWVar.gpy * 8:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello9"]:
+            if x == GlobalHWVar.gpx * 7 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 23 and y == GlobalHWVar.gpy * 13:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello10"]:
+            if x == GlobalHWVar.gpx * 12 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 14 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 26 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 9 and y == GlobalHWVar.gpy * 5:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello11"]:
+            if x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 9 and y == GlobalHWVar.gpy * 10:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 22 and y == GlobalHWVar.gpy * 10:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello12"]:
+            if x == GlobalHWVar.gpx * 4 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 22 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 11:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello13"]:
+            if x == GlobalHWVar.gpx * 5 and y == GlobalHWVar.gpy * 8:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 15:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 5:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello14"]:
+            if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 14:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 6:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 22 and y == GlobalHWVar.gpy * 13:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello15"]:
+            if x == GlobalHWVar.gpx * 2 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 7 and y == GlobalHWVar.gpy * 12:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 9 and y == GlobalHWVar.gpy * 2:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 27 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 12:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello16"]:
+            if x == GlobalHWVar.gpx * 5 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 7 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 9:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello17"]:
+            if x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 10:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 4 and y == GlobalHWVar.gpy * 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 12 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 14:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello18"]:
+            if x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 11:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
+            if x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 5:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 25 and y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 13:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Devo aspettare che mi chiamino. Potrei leggere qualcosa nel frattempo...")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"]:
+            if x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 26 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso a chiave.")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

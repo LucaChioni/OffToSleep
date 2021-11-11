@@ -54,8 +54,8 @@ def enigmaBiblioteca():
     pathImgEnigma = "Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/"
     cursoreMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreMatita.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
     cursoreGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
-    sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
-    sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+    sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
+    sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
     if GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 1:
         imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 2:
@@ -324,8 +324,8 @@ def enigmaLabirinto(avanzamentoStoria):
     cursoreGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
     imgComandiUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     imgComandiUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
-    sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "SchermataMappa.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
-    sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "SchermataMappa.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+    sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "SchermataMappa.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
+    sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "SchermataMappa.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
     GlobalHWVar.disegnaImmagineSuSchermo(imgComandiUsandoMatita, (0, 0), superficie=sfondoUsandoMatita)
     GlobalHWVar.disegnaImmagineSuSchermo(imgComandiUsandoGomma, (0, 0), superficie=sfondoUsandoGomma)
 

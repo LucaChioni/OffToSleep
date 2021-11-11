@@ -393,17 +393,21 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello5"] = i
     i += 1
-    dictAvanzamentoStoria["servoLanciaSiAccorgeCheNonLoSegui"] = i
+    dictAvanzamentoStoria["lucyCamminatoNelCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoEntrataNelCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["servoLanciaEntratoNelCastello"] = i
     i += 1
     dictAvanzamentoStoria["dialogoServoLanciaEntrataNelCastello"] = i
-    i += 1
-    dictAvanzamentoStoria["servoLanciaAndatoDaNeil"] = i
 
     i += 100
     i += 1
     dictAvanzamentoStoria["servoLanciaTornatoAlCancello"] = i
     i += 1
     dictAvanzamentoStoria["inizioCenaAlCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["presoChiaveCameraDaLettoCastello"] = i
     i += 1
     dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso20"] = i
     i += 1

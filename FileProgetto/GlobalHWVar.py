@@ -573,7 +573,7 @@ def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
             if aggiungiRettangolo:
                 listaRettangoliDaAggiornare.append(rectOrig)
     else:
-        print "Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")"
+        print ("Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")")
 def aggiornaSchermo():
     global listaRettangoliDaAggiornare
     global aggiornaTuttoLoSchermo
@@ -611,7 +611,7 @@ if len(datiFileImpostazioniString) == 6:
             volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
         if modalitaSchermo == 0 or modalitaSchermo == 1 or modalitaSchermo == 2:
             modalitaSchermo = int(datiFileImpostazioni[3])
-        if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
+        if (maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5]) and (datiFileImpostazioni[4] % 32 == 0 and datiFileImpostazioni[5] % 18 == 0):
             gsx = int(datiFileImpostazioni[4])
             gsy = int(datiFileImpostazioni[5])
             gpx = gsx // 32
@@ -643,3 +643,22 @@ if erroreFileImpostazioni:
     opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
     initVolumeSounds()
+
+# RAM in MB necessaria per le varie risoluzioni
+RAMUUHD = 5000
+RAMUHD = 2800
+RAMQHD = 1500
+RAMFHD = 850
+RAMHD = 550
+RAMqHD = 400
+RAMnHD = 300
+
+# definisco la lista di risoluzioni utilizzabili (in ordine crescente)
+listaRisoluzioniDisponibili = [[640, 360], [960, 540], [1280, 720], [1600, 900], [1920, 1080], [2560, 1440], [3200, 1800], [3840, 2160]]
+i = len(listaRisoluzioniDisponibili) - 1
+while i > 0:
+    if listaRisoluzioniDisponibili[i][0] >= maxGsx:
+        del listaRisoluzioniDisponibili[i]
+    i -= 1
+listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
+print listaRisoluzioniDisponibili

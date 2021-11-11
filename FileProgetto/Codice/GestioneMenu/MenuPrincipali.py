@@ -10,11 +10,11 @@ import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
-import SottoMenuEquip
-import SottoMenuImpo
-import SottoMenuRobo
-import SottoMenuSalva
-import SottoMenuMapDiario
+import Codice.GestioneMenu.SottoMenuEquip as SottoMenuEquip
+import Codice.GestioneMenu.SottoMenuImpo as SottoMenuImpo
+import Codice.GestioneMenu.SottoMenuRobo as SottoMenuRobo
+import Codice.GestioneMenu.SottoMenuSalva as SottoMenuSalva
+import Codice.GestioneMenu.SottoMenuMapDiario as SottoMenuMapDiario
 
 
 def chiediconferma(conferma):

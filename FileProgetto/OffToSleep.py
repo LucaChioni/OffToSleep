@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# import psutil
+import psutil
 import os
 import pygame
 import GlobalHWVar
@@ -27,16 +27,17 @@ import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
 
 def gameloop():
-    # p = psutil.Process()
-    # maxMemoryUsage = 0
+    p = psutil.Process()
+    maxMemoryUsage = 0
     caricaSalvataggio = False
     inizio = True
     gameover = False
     while True:
 
-        # if p.memory_info().rss / 1000000.0 > maxMemoryUsage:
-        #     maxMemoryUsage = p.memory_info().rss / 1000000.0
-        #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
+        memoriaUsata = p.memory_info().rss / 1000000.0
+        if memoriaUsata > maxMemoryUsage:
+            maxMemoryUsage = memoriaUsata
+            print (u"Max RAM necessitata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
             cambiatoRisoluzione = False
@@ -2278,7 +2279,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato)
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True

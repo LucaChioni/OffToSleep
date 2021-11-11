@@ -8,7 +8,7 @@ import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
-import FunzioniGraficheGeneriche
+import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 

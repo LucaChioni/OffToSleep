@@ -1291,13 +1291,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo = []
             nome = "Libro"
             if x == GlobalHWVar.gpx * 12:
+                nome = "Libro (Scopo degli impo)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro si intitola: \"Scopo degli impo\".")
+                dialogo.append(u"Questo libro s'intitola: \"Scopo degli impo\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1312,13 +1313,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, l'impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18:
+                nome = "Libro (Sacche Energetiche)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro si intitola: \"Sacche Energetiche\".")
+                dialogo.append(u"Questo libro s'intitola: \"Sacche Energetiche\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1333,13 +1335,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... In uno degli ultimi studi, si è scoperto che le Sacche Energetiche sono responsabili anche dell'efficienza del sistema difensivo: alcune sacche permettono di resistere alle aggressioni spendendo meno energia...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 22:
+                nome = "Libro (Gestione dell'ImpoForza)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro si intitola: \"Gestione dell'ImpoForza\".")
+                dialogo.append(u"Questo libro s'intitola: \"Gestione dell'ImpoForza\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1354,13 +1357,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Anche se relativamente poco influente, questo loro comportamento non può essere alterato da agenti esterni...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 25:
+                nome = "Libro (ImpoMalus)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro si intitola: \"ImpoMalus\".")
+                dialogo.append(u"Questo libro s'intitola: \"ImpoMalus\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1388,6 +1392,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Ci sono un sacco di libri...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
+                nome = "Libro (Moto rettilineo uniformemente accelerato)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

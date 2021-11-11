@@ -783,7 +783,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 20.9 <= xMouse <= GlobalHWVar.gsx // 32 * 21.8 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
+            elif GlobalHWVar.gsx // 32 * 21 <= xMouse <= GlobalHWVar.gsx // 32 * 21.9 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
@@ -791,7 +791,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 23.6 <= xMouse <= GlobalHWVar.gsx // 32 * 24.5 and GlobalHWVar.gsy // 18 * 12.3 <= yMouse <= GlobalHWVar.gsy // 18 * 13.5:
+            elif GlobalHWVar.gsx // 32 * 23.7 <= xMouse <= GlobalHWVar.gsx // 32 * 24.6 and GlobalHWVar.gsy // 18 * 12.3 <= yMouse <= GlobalHWVar.gsy // 18 * 13.5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
@@ -974,33 +974,19 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if len(GlobalHWVar.listaRisoluzioniDisponibili) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        if gsxTemp == 800 and gsyTemp == 450:
-                            gsxTemp = GlobalHWVar.maxGsx
-                            gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1024 and gsyTemp == 576:
-                            gsxTemp = 800
-                            gsyTemp = 450
-                        elif gsxTemp == 1280 and gsyTemp == 720:
-                            gsxTemp = 1024
-                            gsyTemp = 576
-                        elif gsxTemp == 1920 and gsyTemp == 1080:
-                            gsxTemp = 1280
-                            gsyTemp = 720
-                        elif gsxTemp == GlobalHWVar.maxGsx and gsyTemp == GlobalHWVar.maxGsy:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = 1920
-                                gsyTemp = 1080
-                            elif GlobalHWVar.maxGsx > 1280 and GlobalHWVar.maxGsy > 720:
-                                gsxTemp = 1280
-                                gsyTemp = 720
-                            elif GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
-                                gsxTemp = 1024
-                                gsyTemp = 576
-                            elif GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
-                                gsxTemp = 800
-                                gsyTemp = 450
+                        if gsxTemp == GlobalHWVar.listaRisoluzioniDisponibili[0][0]:
+                            gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][0]
+                            gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][1]
+                        else:
+                            i = len(GlobalHWVar.listaRisoluzioniDisponibili) - 1
+                            while i >= 0:
+                                if GlobalHWVar.listaRisoluzioniDisponibili[i][0] < gsxTemp:
+                                    gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][0]
+                                    gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][1]
+                                    break
+                                i -= 1
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 6:
@@ -1059,46 +1045,19 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if len(GlobalHWVar.listaRisoluzioniDisponibili) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        if gsxTemp == 800 and gsyTemp == 450:
-                            if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
-                                gsxTemp = 1024
-                                gsyTemp = 576
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1024 and gsyTemp == 576:
-                            if GlobalHWVar.maxGsx > 1280 and GlobalHWVar.maxGsy > 720:
-                                gsxTemp = 1280
-                                gsyTemp = 720
-                            elif GlobalHWVar.maxGsx == 1024 and GlobalHWVar.maxGsy == 576:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1280 and gsyTemp == 720:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = 1920
-                                gsyTemp = 1080
-                            elif GlobalHWVar.maxGsx == 1280 and GlobalHWVar.maxGsy == 720:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1920 and gsyTemp == 1080:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                            else:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                        elif gsxTemp == GlobalHWVar.maxGsx and gsyTemp == GlobalHWVar.maxGsy:
-                            if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
-                                gsxTemp = 800
-                                gsyTemp = 450
+                        if gsxTemp == GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][0]:
+                            gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[0][0]
+                            gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[0][1]
+                        else:
+                            i = 0
+                            while i < len(GlobalHWVar.listaRisoluzioniDisponibili):
+                                if GlobalHWVar.listaRisoluzioniDisponibili[i][0] > gsxTemp:
+                                    gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][0]
+                                    gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][1]
+                                    break
+                                i += 1
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 6:
@@ -1137,33 +1096,19 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if len(GlobalHWVar.listaRisoluzioniDisponibili) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        if gsxTemp == 800 and gsyTemp == 450:
-                            gsxTemp = GlobalHWVar.maxGsx
-                            gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1024 and gsyTemp == 576:
-                            gsxTemp = 800
-                            gsyTemp = 450
-                        elif gsxTemp == 1280 and gsyTemp == 720:
-                            gsxTemp = 1024
-                            gsyTemp = 576
-                        elif gsxTemp == 1920 and gsyTemp == 1080:
-                            gsxTemp = 1280
-                            gsyTemp = 720
-                        elif gsxTemp == GlobalHWVar.maxGsx and gsyTemp == GlobalHWVar.maxGsy:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = 1920
-                                gsyTemp = 1080
-                            elif GlobalHWVar.maxGsx > 1280 and GlobalHWVar.maxGsy > 720:
-                                gsxTemp = 1280
-                                gsyTemp = 720
-                            elif GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
-                                gsxTemp = 1024
-                                gsyTemp = 576
-                            elif GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
-                                gsxTemp = 800
-                                gsyTemp = 450
+                        if gsxTemp == GlobalHWVar.listaRisoluzioniDisponibili[0][0]:
+                            gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][0]
+                            gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][1]
+                        else:
+                            i = len(GlobalHWVar.listaRisoluzioniDisponibili) - 1
+                            while i >= 0:
+                                if GlobalHWVar.listaRisoluzioniDisponibili[i][0] < gsxTemp:
+                                    gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][0]
+                                    gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][1]
+                                    break
+                                i -= 1
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 6:
@@ -1194,46 +1139,19 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if len(GlobalHWVar.listaRisoluzioniDisponibili) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        if gsxTemp == 800 and gsyTemp == 450:
-                            if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
-                                gsxTemp = 1024
-                                gsyTemp = 576
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1024 and gsyTemp == 576:
-                            if GlobalHWVar.maxGsx > 1280 and GlobalHWVar.maxGsy > 720:
-                                gsxTemp = 1280
-                                gsyTemp = 720
-                            elif GlobalHWVar.maxGsx == 1024 and GlobalHWVar.maxGsy == 576:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1280 and gsyTemp == 720:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = 1920
-                                gsyTemp = 1080
-                            elif GlobalHWVar.maxGsx == 1280 and GlobalHWVar.maxGsy == 720:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                            else:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                        elif gsxTemp == 1920 and gsyTemp == 1080:
-                            if GlobalHWVar.maxGsx > 1920 and GlobalHWVar.maxGsy > 1080:
-                                gsxTemp = GlobalHWVar.maxGsx
-                                gsyTemp = GlobalHWVar.maxGsy
-                            else:
-                                gsxTemp = 800
-                                gsyTemp = 450
-                        elif gsxTemp == GlobalHWVar.maxGsx and gsyTemp == GlobalHWVar.maxGsy:
-                            if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
-                                gsxTemp = 800
-                                gsyTemp = 450
+                        if gsxTemp == GlobalHWVar.listaRisoluzioniDisponibili[len(GlobalHWVar.listaRisoluzioniDisponibili) - 1][0]:
+                            gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[0][0]
+                            gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[0][1]
+                        else:
+                            i = 0
+                            while i < len(GlobalHWVar.listaRisoluzioniDisponibili):
+                                if GlobalHWVar.listaRisoluzioniDisponibili[i][0] > gsxTemp:
+                                    gsxTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][0]
+                                    gsyTemp = GlobalHWVar.listaRisoluzioniDisponibili[i][1]
+                                    break
+                                i += 1
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 6:
@@ -1343,9 +1261,9 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
                 if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.9))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.9))
             if modalitaSchermoTemp == 0:
                 FunzioniGraficheGeneriche.messaggio(u"Schermo intero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
             elif modalitaSchermoTemp == 1:
@@ -1358,9 +1276,9 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 12.4))
                 if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.8, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 12.4))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.8, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 12.4))
 
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             if voceMarcata != 7 and voceMarcata != 8:
