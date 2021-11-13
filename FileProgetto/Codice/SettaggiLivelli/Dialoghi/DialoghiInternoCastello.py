@@ -23,7 +23,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Sembra una parete piena di crepe...")
+        dialogo.append(u"(Sembra una parete piena di crepe...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-2":
         partiDialogo = []
@@ -35,7 +35,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una città che si affaccia su un mare in tempesta... credo...")
+        dialogo.append(u"(Una città che si affaccia su un mare in tempesta... credo...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-3":
         partiDialogo = []
@@ -47,7 +47,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un castello con una torre imponente nel mezzo.")
+        dialogo.append(u"(Un castello con una torre imponente nel mezzo...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-4":
         partiDialogo = []
@@ -59,7 +59,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una donna triste con un vestito enorme.")
+        dialogo.append(u"(Una donna con un vestito enorme accasciata su un letto...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-5":
         partiDialogo = []
@@ -71,7 +71,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un paesino a valle di una montagna.")
+        dialogo.append(u"(Un paesino a valle di una montagna...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-6":
         partiDialogo = []
@@ -83,7 +83,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una semplice foresta, direi...")
+        dialogo.append(u"(Una semplice foresta, direi...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-7":
         partiDialogo = []
@@ -95,7 +95,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un uomo nudo su una conchiglia. Quei lunghi capelli non si addicono molto al suo volto...")
+        dialogo.append(u"(Un uomo nudo su una conchiglia. Quei lunghi capelli non si addicono molto al suo volto...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-8":
         partiDialogo = []
@@ -107,7 +107,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un albero dal tronco bianco in mezzo a un paesaggio macabro...")
+        dialogo.append(u"(Un albero dal tronco bianco in mezzo a un paesaggio macabro...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-9":
         partiDialogo = []
@@ -119,7 +119,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un vaso con dei fiori.")
+        dialogo.append(u"(Un vaso con dei fiori...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-10":
         partiDialogo = []
@@ -131,7 +131,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un porto con diverse barche.")
+        dialogo.append(u"(Un porto con diverse barche...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-11":
         partiDialogo = []
@@ -143,7 +143,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una nave da guerra. Voglio dire, non so perché, ma dall'aspetto sembra... aggressiva.")
+        dialogo.append(u"(Una nave da guerra. Voglio dire, non so perché, ma dall'aspetto sembra... aggressiva...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-12":
         partiDialogo = []
@@ -155,7 +155,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un uomo fatto di frutta e verdura. Questo quadro... boh...")
+        dialogo.append(u"(Un uomo fatto di frutta e verdura. Ok...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-13":
         partiDialogo = []
@@ -167,7 +167,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una bambina che raccoglie dei fiori.")
+        dialogo.append(u"(Una bambina che raccoglie dei fiori...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-14":
         partiDialogo = []
@@ -179,7 +179,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Pesche...")
+        dialogo.append(u"(Pesche...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-15":
         partiDialogo = []
@@ -191,7 +191,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Sembra il riflesso di un castello nell'acqua.")
+        dialogo.append(u"(Il riflesso di un castello nell'acqua...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-16":
         partiDialogo = []
@@ -203,7 +203,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un albero in un... prato, credo... non so, l'unica cosa a fuoco è l'albero, il resto e sfocato.")
+        dialogo.append(u"(Un albero in un... prato, credo... non so, l'unica cosa a fuoco è l'albero, il resto e sfocato...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-17":
         partiDialogo = []
@@ -215,7 +215,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Una montagna innevata.")
+        dialogo.append(u"(Una montagna innevata...)")
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-18":
         partiDialogo = []
@@ -227,7 +227,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Un lago all'alba. C'è una sfera luminosa sopra una montagna.")
+        dialogo.append(u"(Un lago all'alba. C'è una sfera luminosa sopra una montagna...)")
         partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello1"]:
         if tipoId == "ServoLancia-3":
@@ -328,7 +328,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 avanzaColDialogo = False
                 dialogo = []
-                dialogo.append("personaggio")
+                dialogo.append("tu")
                 dialogo.append(u"(Mi sta ignorando completamente...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
@@ -413,7 +413,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Un sacco di libri sull'ambiente, la natura e gli animali...")
+            dialogo.append(u"(Un sacco di libri sull'ambiente, la natura e gli animali...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello4"]:
         if tipoId == "ServoLancia-5":
@@ -457,7 +457,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questi sistemi per portare l'acqua in casa, sono più comuni di quel che pensavo...")
+            dialogo.append(u"(Questi sistemi per portare l'acqua in casa, sono più comuni di quel che pensavo...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoGabinettoCastello-0":
             partiDialogo = []
@@ -469,7 +469,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È da un po' che non vado in bagno, ma ora non ho tempo per pensare ai miei problemi digestivi.")
+            dialogo.append(u"(È da un po' che non vado in bagno, ma ora non ho tempo per pensare ai miei problemi digestivi...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoVascaCastello-0":
             partiDialogo = []
@@ -481,7 +481,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Una vasca enorme. Chissà se anche qui c'è l'acqua riscaldata...")
+            dialogo.append(u"(Una vasca enorme. Chissà se anche qui c'è l'acqua riscaldata...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello5"]:
         if tipoId == "ServoArco-2":
@@ -553,7 +553,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Chissà a cosa stanno pensando... tipo: \"Se mi muovo non ho fatto bene il mio lavoro\"?)")
+                dialogo.append(u"(Chissà a cosa stanno pensando... tipo: \"Se mi muovo, non ho fatto bene il mio lavoro\"?)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello7"]:
         if tipoId == "ServoLancia-6":
@@ -632,7 +632,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Un camino praticamente nuovo...")
+            dialogo.append(u"(Un camino... sembra non essere mai stato utilizzato...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello8"]:
         if tipoId == "ServoArco-4":
@@ -676,7 +676,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"E un altro vaso... ma che hanno di così bello da dover essere presenti ovunque?")
+            dialogo.append(u"(E un altro vaso... ma che hanno di così bello da dover essere presenti ovunque?)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello9"]:
         if tipoId == "ServoLancia-7":
@@ -740,7 +740,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Queste guardie sono ovunque, ma nel castello non c'è nessuno... Si sorvegliano tra loro?)")
+                dialogo.append(u"(Queste guardie sono ovunque, ma nel castello non c'è nessuno... si sorvegliano tra loro?)")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-5":
             partiDialogo = []
@@ -783,7 +783,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo letto è morbidissimo.")
+            dialogo.append(u"(Questo letto è morbidissimo...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoArmadioCastello-0":
             partiDialogo = []
@@ -795,7 +795,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo armadio è vuoto")
+            dialogo.append(u"(Questo armadio è vuoto...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoComodinoCastello-0":
             partiDialogo = []
@@ -807,7 +807,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Su questo comodino c'è solo una lanterna. I cassetti sono vuoti.")
+            dialogo.append(u"(Su questo comodino c'è solo una lanterna. I cassetti sono vuoti...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoLavandinoCastello-1":
             partiDialogo = []
@@ -819,7 +819,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Anche da qui esce acqua riscaldata.")
+            dialogo.append(u"(Anche da qui uscirà acqua riscaldata?)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoVascaCastello-1":
             partiDialogo = []
@@ -831,7 +831,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Non ho tempo per farmi un bagno adesso.")
+            dialogo.append(u"(Non ho tempo per farmi un bagno adesso...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoGabinettoCastello-1":
             partiDialogo = []
@@ -843,7 +843,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Non sento il bisogno di andare in bagno... forse dovrei sedermi e aspettare un po', ma non ho tempo da perdere adesso.")
+            dialogo.append(u"(Non sento il bisogno di andare in bagno... forse dovrei sedermi e aspettare un po', ma non ho tempo da perdere adesso...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello11"]:
         if tipoId == "ServoSpada-2":
@@ -1022,7 +1022,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"E un altro modellino di una barca... Neil deve esserne proprio appassionato.")
+            dialogo.append(u"(E un altro modellino di una barca... Neil deve esserne proprio appassionato...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello14"]:
         if tipoId == "ServoSpada-4":
@@ -1112,6 +1112,37 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
+                dialogo.append(u"Sei a guardia di una porta che tutti possono attraversare?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(La porte sono aperte, ma ci sono comunque dei soldati di guardia...)")
+                partiDialogo.append(dialogo)
+        elif tipoId == "ServoSpada-6":
+            partiDialogo = []
+            nome = "Soldato con spada"
+            if avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
                 dialogo.append(u"Ehi, ciao. Mi chiamo Lucy. Possiamo conoscerci se ti va...")
                 partiDialogo.append(dialogo)
                 dialogo = []
@@ -1160,7 +1191,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Questi soldati sono tutti uguali...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello17"]:
-        if tipoId == "ServoSpada-6":
+        if tipoId == "ServoSpada-7":
             partiDialogo = []
             nome = "Soldato con spada"
             if avanzamentoDialogo == 0:
@@ -1201,25 +1232,81 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Forse non hanno bisogno di mangiare...)")
+                dialogo.append(u"(Forse non hanno bisogno neanche di mangiare...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello18"]:
-        if tipoId == "ServoSpada-7":
+        if tipoId == "ServoLancia-12":
             partiDialogo = []
-            nome = "Soldato con spada"
-            if avanzamentoDialogo == 0:
+            nome = "Soldato con lancia"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInternoCastello18"]:
                 oggettoDato = False
-                avanzaStoria = False
+                avanzaStoria = True
                 menuMercante = False
                 scelta = False
-                avanzaColDialogo = True
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Lucy. Verrai ricevuta domani. Lascia qua l'impo, la cena è servita al primo piano.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... La cena? Perché domani?!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Potrai alloggiare qui per la notte.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ma che ore sono?")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sei a guardia di una porta che tutti possono attraversare?")
+                dialogo.append(u"... Non voglio lasciarvi il mio Impo!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... E non ho fame.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"La cena è servita al primo piano. Non puoi circolare con l'impo nel castello.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Perché non posso parlare con Neil adesso?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Neil è occupato. Puoi tornare domani, se vuoi tenere l'impo.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... <*>#italic#Uff...<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... E va bene, starò qui per la notte.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1232,8 +1319,8 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 avanzaColDialogo = False
                 dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(La porta è aperta ma ci sono due soldati di guardia...)")
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-8":
             partiDialogo = []
@@ -1276,7 +1363,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sulla coscienza Vol.1 - Etica\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.1 - Etica\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1312,7 +1399,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sulla coscienza Vol.2 - Libero arbitrio\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.2 - Libero arbitrio\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1340,7 +1427,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sulla coscienza Vol.3 - Tempo\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.3 - Tempo\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1368,7 +1455,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sulla coscienza Vol.4 - Realtà\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.4 - Realtà\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1412,7 +1499,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sull'evoluzione\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sull'evoluzione\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1436,7 +1523,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Quindi è possibile alterare e \"potenziare\" le nostre capacità... è possibile che questi soldati... ?")
+            dialogo.append(u"(Quindi è possibile alterare e \"potenziare\" le nostre capacità... è possibile che questi soldati... ?)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-6":
             partiDialogo = []
@@ -1448,7 +1535,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sul conflitto\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sul conflitto\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1464,7 +1551,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Centosettant'anni di esperienza diretta?!")
+            dialogo.append(u"(Centosettant'anni di esperienza diretta?!)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1472,7 +1559,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ok, quindi... c'è una guerra che stiamo perdendo... e chi ha scritto questo libro (Neil?) ha centosettant'anni... <*>#italic#Mmh...<*> non so quanto siano affidabili questi libri...")
+            dialogo.append(u"(Ok, quindi... c'è una guerra che stiamo perdendo... e chi ha scritto questo libro (Neil?) ha centosettant'anni... non so quanto siano affidabili questi libri...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
         if tipoId == "ServoLancia-11":
@@ -1551,7 +1638,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Siamo parecchio in alto...")
+            dialogo.append(u"(Siamo parecchio in alto...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"]:
         if tipoId == "OggettoTavoloVuotoCastello-0":
@@ -1564,7 +1651,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Su questo tavolo non c'è niente...")
+            dialogo.append(u"(Su questo tavolo non c'è niente...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoTavoloAttrezziCastello-0":
             partiDialogo = []
@@ -1576,7 +1663,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È un tavolo da lavoro presumo...")
+            dialogo.append(u"(È un tavolo da lavoro presumo...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiNeilCastello-0":
             partiDialogo = []
@@ -1588,7 +1675,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ci sono un sacco di appunti e diagrammi disorganizzati...")
+            dialogo.append(u"(Ci sono un sacco di appunti e diagrammi disorganizzati...)")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-7":
             partiDialogo = []
@@ -1600,7 +1687,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questo libro s'intitola: \"Sugli Impo\"...")
+            dialogo.append(u"(Questo libro s'intitola: \"Sugli Impo\"...)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

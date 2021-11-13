@@ -281,22 +281,6 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, "s", "OggettoPortaChiusa-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 14, "s", "OggettoPortaChiusa-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 8, "s", "OggettoPortaChiusa-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 14, "s", "OggettoPortaChiusa-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 3, "s", "OggettoComodinoCasaDavid-0", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)

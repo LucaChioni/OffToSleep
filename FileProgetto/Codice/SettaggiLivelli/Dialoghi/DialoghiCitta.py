@@ -1348,7 +1348,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Da questa finestra si vede l'interno della casa. Sembra enorme.")
+                dialogo.append(u"(Da questa finestra si vede l'interno della casa. Sembra enorme...)")
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazzo1":
             partiDialogo = []
@@ -1907,7 +1907,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Questa cassa sembra molto invitante... ma ho la sensazione che quel pappagallo inizierebbe a urlare se provassi ad aprirla...")
+            dialogo.append(u"(Questa cassa sembra molto invitante... ma ho la sensazione che quel pappagallo inizierebbe a urlare se provassi ad aprirla...)")
             partiDialogo.append(dialogo)
         elif tipo == "OggettoPappaLibroSonoroMercante":
             partiDialogo = []

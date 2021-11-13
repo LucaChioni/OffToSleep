@@ -38,7 +38,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"C'è scritto: \" - <*>#bold#SELVA ARIDA<*> - Attenzione alla fauna velenosa\".")
+            dialogo.append(u"(C'è scritto: \" - <*>#bold#SELVA ARIDA<*> - Attenzione alla fauna velenosa\"...)")
             partiDialogo.append(dialogo)
         elif tipo == "AssistBiblioteca":
             if avanzamentoDialogo == 0:

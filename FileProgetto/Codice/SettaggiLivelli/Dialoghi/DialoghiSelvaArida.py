@@ -25,7 +25,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Che schifo! Il terreno è tutto appiccicoso...")
+                dialogo.append(u"(Che schifo, il terreno è tutto appiccicoso...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

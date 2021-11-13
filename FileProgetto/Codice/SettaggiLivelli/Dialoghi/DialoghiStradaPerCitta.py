@@ -23,7 +23,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"C'è scritto: \" - <*>#bold#FORESTA CADETTA<*> - Attenzione alla fauna notturna\".")
+        dialogo.append(u"(C'è scritto: \" - <*>#bold#FORESTA CADETTA<*> - Attenzione alla fauna notturna\"...)")
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloStaccionata":
         partiDialogo = []
@@ -34,11 +34,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"")
-        partiDialogo.append(dialogo)
-        dialogo = []
-        dialogo.append("tu")
-        dialogo.append(u"Da quello che so tutti i passaggi verso oriente sono bloccati da molti anni.")
+        dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"... Da quello che so, tutti i passaggi verso oriente sono bloccati da molti anni...)")
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloBloccoStrada":
         partiDialogo = []
@@ -49,11 +45,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Se oltrepassi questo cartello ti dichiari nemico del reggente cittadino\".")
-        partiDialogo.append(dialogo)
-        dialogo = []
-        dialogo.append("tu")
-        dialogo.append(u"Non credo che Hans sia andato di qua.")
+        dialogo.append(u"(C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Se oltrepassi questo cartello, ti dichiari nemico del reggente cittadino\"... Non credo che Hans sia andato di qua...)")
         partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
@@ -246,7 +238,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"È chiuso...")
+        dialogo.append(u"(È chiuso...)")
         partiDialogo.append(dialogo)
     elif tipo == "PadreUfficialeServizio":
         partiDialogo = []

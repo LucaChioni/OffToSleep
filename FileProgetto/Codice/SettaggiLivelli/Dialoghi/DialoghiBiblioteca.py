@@ -1298,7 +1298,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro s'intitola: \"Scopo degli impo\".")
+                dialogo.append(u"(Questo libro s'intitola: \"Scopo degli impo\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1320,7 +1320,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro s'intitola: \"Sacche Energetiche\".")
+                dialogo.append(u"(Questo libro s'intitola: \"Sacche Energetiche\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1342,7 +1342,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro s'intitola: \"Gestione dell'ImpoForza\".")
+                dialogo.append(u"(Questo libro s'intitola: \"Gestione dell'ImpoForza\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1364,7 +1364,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro s'intitola: \"ImpoMalus\".")
+                dialogo.append(u"(Questo libro s'intitola: \"ImpoMalus\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1389,7 +1389,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ci sono un sacco di libri...")
+                dialogo.append(u"(Ci sono un sacco di libri...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
                 nome = "Libro (Moto rettilineo uniformemente accelerato)"
@@ -1399,7 +1399,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Allora, ha detto di vedere il \"Moto rettilineo uniformemente accelerato\"... Oh, trovato! Vediamo se c'è una spiegazione comprensibile...")
+                dialogo.append(u"(Allora, ha detto di vedere il \"Moto rettilineo uniformemente accelerato\"... Oh, trovato! Vediamo se c'è una spiegazione comprensibile...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1427,7 +1427,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Vediamo se ce n'è uno simile alla mia situazione...")
+                dialogo.append(u"(Vediamo se ce n'è uno simile alla mia situazione...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1447,7 +1447,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Mmh...<*> non so se ho capito tutto... ma, sostituendo i dati nelle formule, dovrebbe andare... credo...")
+                dialogo.append(u"(<*>#italic#Mmh...<*> non so se ho capito tutto... ma, sostituendo i dati nelle formule, dovrebbe andare... credo...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
                 oggettoDato = False
@@ -1456,7 +1456,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non mi va di leggere altre spiegazioni di formule che non capisco...")
+                dialogo.append(u"(Non mi va di leggere altre spiegazioni di formule che non capisco...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoRegistroBiblioteca":
             partiDialogo = []
@@ -1468,7 +1468,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Mmmh...<*> non capisco niente di come è organizzato...")
+                dialogo.append(u"(<*>#italic#Mmmh...<*> non capisco niente di come è organizzato...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -1477,7 +1477,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Hans non è stato segnato su questo registro.")
+                dialogo.append(u"(Hans non è stato segnato su questo registro...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoLibreriaRegistri":
             partiDialogo = []
@@ -1488,7 +1488,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Sono i registri della biblioteca. Quello di oggi è sulla scrivania.")
+            dialogo.append(u"(Sono i registri della biblioteca. Quello di oggi è sulla scrivania...)")
             partiDialogo.append(dialogo)
         elif tipo == "OggettoTavoloEnigmaBiblioteca":
             partiDialogo = []
@@ -1500,7 +1500,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ci sono dei fogli e una penna... Spero che non servano per \"l'esperimento\".")
+                dialogo.append(u"(Ci sono dei fogli e una penna... Spero che non servano per \"l'esperimento\"...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -1509,7 +1509,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non mi metterò a fare altri calcoli adesso.")
+                dialogo.append(u"(Non mi metterò a fare altri calcoli adesso...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoMocio":
             partiDialogo = []
@@ -1520,7 +1520,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Non è bastato per pulire...")
+            dialogo.append(u"(Non è bastato per pulire...)")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -214,6 +214,7 @@ global listaIdNemiciUsati
 global datiEnigmaBibliotecario
 global pazzoStrabico
 global volumeMusicaDimezzato
+global impoPresente
 def inizializzaVariabiliGlobali():
     global imgMappaAttuale
     global canzoneAttuale
@@ -223,6 +224,7 @@ def inizializzaVariabiliGlobali():
     global datiEnigmaBibliotecario
     global pazzoStrabico
     global volumeMusicaDimezzato
+    global impoPresente
     imgMappaAttuale = False
     canzoneAttuale = False
     audioSottofondoAttuale = False
@@ -239,6 +241,7 @@ def inizializzaVariabiliGlobali():
     datiEnigmaBibliotecario["rispostaFalsa3"] = 1.5
     pazzoStrabico = False
     volumeMusicaDimezzato = False
+    impoPresente = False
 inizializzaVariabiliGlobali()
 
 def settaRisoluzioneOttimale():

@@ -1101,7 +1101,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 2.5))
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 12), int(GlobalHWVar.gpy * 12.5)), (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 12.5)), 2)
 
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+                    if GlobalGameVar.impoPresente:
                         # vita-status robo
                         if dati[10] < 0:
                             dati[10] = 0
@@ -1386,7 +1386,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         sposta = True
                         risposta = True
                     # carica batt
-                    if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    if voceMarcata == 2 and dati[32] > 0 and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterie"
                         dati[10] = dati[10] + 250
                         if dati[10] > entot:
@@ -1420,7 +1420,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         sposta = True
                         risposta = True
                     # carica migliorato
-                    if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    if voceMarcata == 5 and dati[35] > 0 and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterieMigliorato"
                         dati[10] = dati[10] + 600
                         if dati[10] > entot:

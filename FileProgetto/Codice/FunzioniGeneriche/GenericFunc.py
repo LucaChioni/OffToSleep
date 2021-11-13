@@ -1808,9 +1808,9 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
     trovatoNemicoDaInquadrare = False
 
     if scorriAvanti:
-        if not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        if not nemicoInquadrato and GlobalGameVar.impoPresente:
             obbiettivoRichiesto = "Colco"
-        elif not nemicoInquadrato and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        elif not nemicoInquadrato and not GlobalGameVar.impoPresente:
             obbiettivoRichiesto = "NemicoIniziale"
         elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
             obbiettivoRichiesto = "NemicoIniziale"
@@ -1848,16 +1848,16 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
                 else:
                     obbiettivoRichiesto = "ColcoFinale"
             if obbiettivoRichiesto == "ColcoFinale":
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+                if GlobalGameVar.impoPresente:
                     nemicoInquadrato = "Colco"
                     trovatoNemicoDaInquadrare = True
                 else:
                     obbiettivoRichiesto = "NemicoIniziale"
             cicliDisponibili -= 1
     else:
-        if not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        if not nemicoInquadrato and GlobalGameVar.impoPresente:
             obbiettivoRichiesto = "Colco"
-        elif not nemicoInquadrato and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        elif not nemicoInquadrato and not GlobalGameVar.impoPresente:
             obbiettivoRichiesto = "EscaFinale"
         elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
             obbiettivoRichiesto = "EscaFinale"
@@ -1896,7 +1896,7 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
                 else:
                     obbiettivoRichiesto = "ColcoFinale"
             if obbiettivoRichiesto == "ColcoFinale":
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+                if GlobalGameVar.impoPresente:
                     nemicoInquadrato = "Colco"
                     trovatoNemicoDaInquadrare = True
                 else:

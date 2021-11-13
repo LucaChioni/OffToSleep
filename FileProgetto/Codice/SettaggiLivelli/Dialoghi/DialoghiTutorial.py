@@ -50,7 +50,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Una volta inquadrato puoi selezionarlo e attaccarlo premendo <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> sul controller o il tasto <*>#bold#Sinistro<*> del mouse (dato che al momento non hai frecce, puoi attaccarlo solo da vicino).")
+        dialogo.append("Una volta inquadrato puoi selezionarlo e attaccarlo premendo <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> sul controller o il tasto <*>#bold#Sinistro<*> del mouse (dato che al momento non hai frecce, puoi attaccarlo solo da vicino). <br> Per deselezionare l'obiettivo, premi <*>#bold#Q<*> della tastiera, <*>#bold#Cerchio<*> del controller o il tasto <*>#bold#Destro<*> del mouse sul suo stato (in alto a sinistra sullo schermo).")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")

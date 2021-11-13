@@ -1606,7 +1606,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         vettorePrevisione[0][1] = "ImpoPietra spenta"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
-        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
+        if GlobalGameVar.impoPresente and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
             caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
             posizioneColcoAggiornamentoCaseAttac = [rx, ry]
         # trovo il path verso Rallo

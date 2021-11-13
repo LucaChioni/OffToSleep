@@ -296,7 +296,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+    if GlobalGameVar.impoPresente:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -306,7 +306,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
 
     # disegno la vita del mostro / Colco / esca selezionato
-    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]):
+    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and GlobalGameVar.impoPresente):
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
     elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
         idEscaInquadrata = int(nemicoInquadrato[4:])
@@ -414,7 +414,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
                 break
             i += 4
     # altrimenti mostro solo la vita di colco
-    elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+    elif GlobalGameVar.impoPresente:
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
     # vita-status rallo
@@ -432,7 +432,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+    if GlobalGameVar.impoPresente:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -735,7 +735,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 caseattactotRallo.append(GlobalHWVar.gpy * i)
                 caseattactotRallo.append(False)
             i += 1
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
+    if GlobalGameVar.impoPresente and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
         caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
         posizioneColcoAggiornamentoCaseAttac = [rx, ry]
 
@@ -914,7 +914,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+    if GlobalGameVar.impoPresente:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -949,7 +949,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 break
             i += 4
     # altrimenti mostro solo la vita di colco
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+    elif GlobalGameVar.impoPresente:
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
     GlobalHWVar.aggiornaSchermo()
@@ -1052,7 +1052,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"])) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1064,7 +1064,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 < xMouse <= GlobalHWVar.gsx // 32 * 29.8:
+            elif GlobalGameVar.impoPresente and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 < xMouse <= GlobalHWVar.gsx // 32 * 29.8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -1216,7 +1216,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             bottoneDown = False
         # attiva / disattiva il gambit
         if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+            if GlobalGameVar.impoPresente:
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
                 if chiamarob:
                     chiamarob = False
@@ -2193,7 +2193,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 evitaAggiornamentoImgs = True
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         # vita colco selezionato
-        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and GlobalGameVar.impoPresente:
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         # vita nemico selezionato
         elif not puntandoSuUnNemicoOColcoOEsca and not type(nemicoInquadrato) is str and nemicoInquadrato:
@@ -2210,7 +2210,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     break
                 i += 4
         # altrimenti mostro solo la vita di colco
-        elif not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        elif not puntandoSuUnNemicoOColcoOEsca and GlobalGameVar.impoPresente:
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
         # vita-status rallo
@@ -2228,7 +2228,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         else:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
         # chiave robo
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        if GlobalGameVar.impoPresente:
             if chiamarob:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
             else:

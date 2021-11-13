@@ -243,7 +243,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È chiuso.")
+            dialogo.append(u"(È chiuso...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello5"]:
         if tipo == "ServoLancia":
