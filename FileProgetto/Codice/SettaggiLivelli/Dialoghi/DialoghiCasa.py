@@ -13,9 +13,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipo == "OggettoLettoLucy":
+    if tipo == "OggettoLettoSara":
         partiDialogo = []
-        nome = "Lucy"
+        nome = "Sara"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
             oggettoDato = False
             avanzaStoria = True
@@ -49,7 +49,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append("Ok...")
             partiDialogo.append(dialogo)
-        elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
+        elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara1"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -82,7 +82,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Lucy... ?")
+            dialogo.append("Sara... ?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -179,9 +179,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append("(Non ho bisogno di queste cose...)")
             partiDialogo.append(dialogo)
-    elif tipo == "OggettoComodinoLucy":
+    elif tipo == "OggettoComodinoSara":
         partiDialogo = []
-        nome = "OggettoComodinoLucy"
+        nome = "OggettoComodinoSara"
         if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
             oggettoDato = False
             avanzaStoria = False
@@ -189,13 +189,13 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Questa è la roba di Lucy. C'è il suo diario e... un foglio arrotolato?)")
+            dialogo.append(u"(Questa è la roba di Sara. C'è il suo diario e... un foglio arrotolato?)")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Non importa, non prenderò queste cose...)")
             partiDialogo.append(dialogo)
-        elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara2"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False

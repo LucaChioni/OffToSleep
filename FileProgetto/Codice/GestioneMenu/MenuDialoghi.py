@@ -228,8 +228,8 @@ def menuMercante(dati):
     imgMercante = GlobalImgVar.mercanteMenu
     if interlocutore == "Pappagallo":
         imgMercante = GlobalImgVar.pappagalloMenuMercante
-    elif interlocutore == "Lucy":
-        imgMercante = GlobalImgVar.lucyMenuMercante
+    elif interlocutore == "Sara":
+        imgMercante = GlobalImgVar.saraMenuMercante
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -968,14 +968,14 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("Non hai abbastanza monete!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
                 elif interlocutore == "Pappagallo":
                     FunzioniGraficheGeneriche.messaggio("Monete insufficienti!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
-                elif interlocutore == "Lucy":
+                elif interlocutore == "Sara":
                     FunzioniGraficheGeneriche.messaggio("Non ho abbastanza monete... dovrei?", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
             if inventarioPieno:
                 if interlocutore == "Rod":
                     FunzioniGraficheGeneriche.messaggio("Non puoi prenderne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
                 elif interlocutore == "Pappagallo":
                     FunzioniGraficheGeneriche.messaggio("Spazio insufficiente!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
-                elif interlocutore == "Lucy":
+                elif interlocutore == "Sara":
                     FunzioniGraficheGeneriche.messaggio("Non posso trasportarne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
 
             # menu conferma
@@ -984,7 +984,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("Quante te ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 elif interlocutore == "Pappagallo":
                     FunzioniGraficheGeneriche.messaggio("Quanti?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.5, 50)
-                elif interlocutore == "Lucy":
+                elif interlocutore == "Sara":
                     FunzioniGraficheGeneriche.messaggio("Quante me ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 # posizionare il cursore sul menu compra
                 if usauno:
@@ -1020,7 +1020,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
                 elif interlocutore == "Pappagallo":
                     FunzioniGraficheGeneriche.messaggio("Compra!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
-                elif interlocutore == "Lucy":
+                elif interlocutore == "Sara":
                     FunzioniGraficheGeneriche.messaggio("Cosa mi serve?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)
                 if primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
                     if 1 <= oggetton <= 10:
@@ -1046,7 +1046,7 @@ def menuMercante(dati):
                         FunzioniGraficheGeneriche.messaggio("Usate per attaccare i nemici a distanza.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if imgOggetti[0] != sconosciutoOggetto and oggetton == 1:
                         FunzioniGraficheGeneriche.messaggio("Pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
-                        FunzioniGraficheGeneriche.messaggio("Recupera 100 <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio("Recupera 100 <*>#italic#Pv<*> di Sara.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 1:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[1] != sconosciutoOggetto and oggetton == 2:
@@ -1056,12 +1056,12 @@ def menuMercante(dati):
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[2] != sconosciutoOggetto and oggetton == 3:
                         FunzioniGraficheGeneriche.messaggio("Medicina:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
-                        FunzioniGraficheGeneriche.messaggio("Cura avvelenamento a Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio("Cura avvelenamento a Sara.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 3:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[3] != sconosciutoOggetto and oggetton == 4:
                         FunzioniGraficheGeneriche.messaggio("Super pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
-                        FunzioniGraficheGeneriche.messaggio("Recupera 300 <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio("Recupera 300 <*>#italic#Pv<*> di Sara.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, grandezzaCarettereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 4:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[4] != sconosciutoOggetto and oggetton == 5:

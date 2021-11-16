@@ -11,17 +11,17 @@ def setImgDialogoProtagonista(avanzamentoStoria):
         nomePersonaggio = "Hans"
         imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
     else:
-        nomePersonaggio = "Lucy"
+        nomePersonaggio = "Sara"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucy1
+            imgPersDialogo = GlobalImgVar.imgDialogoSara1
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucyAssonnata
+            imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnata
         elif GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucySconvolta
+            imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucyOcchiChiusi
+            imgPersDialogo = GlobalImgVar.imgDialogoSaraOcchiChiusi
         else:
-            imgPersDialogo = GlobalImgVar.imgDialogoLucy2
+            imgPersDialogo = GlobalImgVar.imgDialogoSara2
 
     return nomePersonaggio, imgPersDialogo
 
@@ -29,7 +29,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
 def setImgMercanteMenu(avanzamentoStoria, stanza):
     interlocutore = "Rod"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-        interlocutore = "Lucy"
+        interlocutore = "Sara"
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] and stanza == GlobalGameVar.dictStanze["città5"]:
         interlocutore = "Pappagallo"
 

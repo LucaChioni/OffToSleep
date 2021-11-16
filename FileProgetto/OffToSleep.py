@@ -102,7 +102,7 @@ def gameloop():
             gameover = False
             # controlla se devi cambiare personaggio giocabile
             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -110,11 +110,11 @@ def gameloop():
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             else:
-                personaggioDaUsare = "Lucy2"
+                personaggioDaUsare = "Sara2"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             caricaSalvataggio = False
@@ -164,13 +164,13 @@ def gameloop():
         if carim:
             # aggiorno le img del personaggio giocabile
             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
             elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 personaggioDaUsare = "FratelloMaggiore"
             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
             else:
-                personaggioDaUsare = "Lucy2"
+                personaggioDaUsare = "Sara2"
             if personaggioDaUsare != personaggioUsato:
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
@@ -2397,7 +2397,7 @@ def gameloop():
         elif cambiatoRisoluzione:
             # controlla se devi cambiare personaggio giocabile
             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -2405,11 +2405,11 @@ def gameloop():
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Lucy1"
+                personaggioDaUsare = "Sara1"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             else:
-                personaggioDaUsare = "Lucy2"
+                personaggioDaUsare = "Sara2"
                 GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
 

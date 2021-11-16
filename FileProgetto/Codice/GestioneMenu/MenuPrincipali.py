@@ -763,15 +763,15 @@ def menu(caricaSalvataggio, gameover):
 
 def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom):
     if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.lucy1GrafMenu
+        perssta = GlobalImgVar.sara1GrafMenu
     elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalImgVar.fraMaggioreGrafMenu
     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.lucy1GrafMenu
+        perssta = GlobalImgVar.sara1GrafMenu
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-        perssta = GlobalImgVar.lucy3GrafMenu
+        perssta = GlobalImgVar.sara3GrafMenu
     else:
-        perssta = GlobalImgVar.lucy2GrafMenu
+        perssta = GlobalImgVar.sara2GrafMenu
     robosta = GlobalImgVar.robograf1b
     puntatore = GlobalImgVar.puntatore
     puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -949,15 +949,15 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                             xp = GlobalHWVar.gsx // 32 * 1
                             yp = GlobalHWVar.gsy // 18 * 14
                             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                                perssta = GlobalImgVar.lucy1GrafMenu
+                                perssta = GlobalImgVar.sara1GrafMenu
                             elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 perssta = GlobalImgVar.fraMaggioreGrafMenu
                             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                                perssta = GlobalImgVar.lucy1GrafMenu
+                                perssta = GlobalImgVar.sara1GrafMenu
                             elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-                                perssta = GlobalImgVar.lucy3GrafMenu
+                                perssta = GlobalImgVar.sara3GrafMenu
                             else:
-                                perssta = GlobalImgVar.lucy2GrafMenu
+                                perssta = GlobalImgVar.sara2GrafMenu
                             robosta = GlobalImgVar.robograf1b
                             puntatore = GlobalImgVar.puntatore
                             puntatoreVecchio = GlobalImgVar.puntatorevecchio

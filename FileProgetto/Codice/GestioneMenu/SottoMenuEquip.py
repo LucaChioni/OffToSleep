@@ -1094,13 +1094,13 @@ def oggetti(dati, colcoInCasellaVista):
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu3
     if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.imgLucy1MenuOggetti
+        perssta = GlobalImgVar.imgSara1MenuOggetti
     elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalImgVar.imgFraMaggioreMenuOggetti
     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.imgLucy1MenuOggetti
+        perssta = GlobalImgVar.imgSara1MenuOggetti
     else:
-        perssta = GlobalImgVar.imgLucy2MenuOggetti
+        perssta = GlobalImgVar.imgSara2MenuOggetti
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 6.2
     xpv = xp

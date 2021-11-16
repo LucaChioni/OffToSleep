@@ -199,7 +199,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Signorina Lucy, cosa ci fa di nuovo qui?")
+            dialogo.append(u"Signorina Sara, cosa ci fa di nuovo qui?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -215,7 +215,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sara si è fatta male poco fa, non so bene cosa sia successo... dev'essere stato un incidente.")
+            dialogo.append(u"Olivia si è fatta male poco fa, non so bene cosa sia successo... dev'essere stato un incidente.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -261,7 +261,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non mi hanno ancora detto niente della situazione di Sara.")
+            dialogo.append(u"Non mi hanno ancora detto niente della situazione di Olivia.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -309,7 +309,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "MadreUfficiale":
         partiDialogo = []
-        nome = "Sara"
+        nome = "Olivia"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"] and avanzamentoDialogo == 0:
             oggettoDato = False
             avanzaStoria = False
@@ -318,7 +318,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Salve, mi chiamo Lucy.")
+            dialogo.append("Salve, mi chiamo Sara.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -330,7 +330,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("... Sara... sono la moglie di David e... la madre di Sam.")
+            dialogo.append("... Olivia... sono la moglie di David e... la madre di Sam.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -558,7 +558,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"David, che cos'ha Sara? Non... non credo stia molto bene...")
+            dialogo.append(u"David, che cos'ha Olivia? Non... non credo stia molto bene...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -586,7 +586,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non ti preoccupare Lucy... Lucy...")
+            dialogo.append(u"Non ti preoccupare Sara... Sara...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -594,7 +594,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Lucy... è un bel nome <*>#italic#Lucy...<*> mi ricorda quella ragazza al primo anno di addestramento...")
+            dialogo.append(u"... Sara... è un bel nome <*>#italic#Sara...<*> mi ricorda quella ragazza al primo anno di addestramento...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -618,7 +618,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Umpf!<*> ... Lucy... torna nella tua stanza. E dormi, domani dovrai svegliarti presto.")
+            dialogo.append(u"<*>#italic#Umpf!<*> ... Sara... torna nella tua stanza. E dormi, domani dovrai svegliarti presto.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -906,11 +906,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Oh, ma salve! Il mio nome è Lucy, piacere di conoscerti.")
+            dialogo.append(u"Oh, ma salve! Il mio nome è Sara, piacere di conoscerti.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Piacere Lucy. Hai prorpio un bel viso, sai? Sarebbe perfetto se non fosse per quelle occhiaie...<*>")
+            dialogo.append(u"<*>#italic#Piacere Sara. Hai prorpio un bel viso, sai? Sarebbe perfetto se non fosse per quelle occhiaie...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

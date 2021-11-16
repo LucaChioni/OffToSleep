@@ -230,11 +230,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Lucy...")
+            dialogo.append(u"... Sara...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Lucy, sei in pericolo per qualcosa? Hai problemi famigliari, economici...")
+            dialogo.append(u"Sara, sei in pericolo per qualcosa? Hai problemi famigliari, economici...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -517,7 +517,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Lucy... lo sono io e lo sei tu tanto quanto lo sono le api, le formiche e i castori quando costruiscono alveari, formicai e dighe... Io posso costruire edifici, disegnare immagini e scrivere libri... Questo dovrebbe rendermi \"non istintivo\"? Siamo una specie animale tra tante altre. La differenza tra naturale e artificiale serve solo a noi per innalzare il nostro lavoro, per renderlo più nobile, più importante...")
+            dialogo.append(u"Sara... lo sono io e lo sei tu tanto quanto lo sono le api, le formiche e i castori quando costruiscono alveari, formicai e dighe... Io posso costruire edifici, disegnare immagini e scrivere libri... Questo dovrebbe rendermi \"non istintivo\"? Siamo una specie animale tra tante altre. La differenza tra naturale e artificiale serve solo a noi per innalzare il nostro lavoro, per renderlo più nobile, più importante...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -767,7 +767,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non c'è di che, Lucy. Ah, dimenticavo! Prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutrono gli impo. Daglielo quando vedi che sta esaurendo le energie.")
+            dialogo.append(u"Non c'è di che, Sara. Ah, dimenticavo! Prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutrono gli impo. Daglielo quando vedi che sta esaurendo le energie.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

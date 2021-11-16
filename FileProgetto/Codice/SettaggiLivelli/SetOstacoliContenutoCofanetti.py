@@ -21,52 +21,52 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliInternoCastello as Ostacol
 def getEntrateStanze(stanza, avanzamentoStoria):
     entrateStanza = []
 
-    if GlobalGameVar.dictStanze["sognoLucy1"] <= stanza <= GlobalGameVar.dictStanze["sognoLucy4"]:
-        if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoLucy2"]])
-        elif stanza == GlobalGameVar.dictStanze["sognoLucy2"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoLucy1"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 3, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["sognoLucy3"]])
-        elif stanza == GlobalGameVar.dictStanze["sognoLucy3"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["sognoLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoLucy4"]])
-        elif stanza == GlobalGameVar.dictStanze["sognoLucy4"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoLucy3"]])
-    elif GlobalGameVar.dictStanze["casaHansLucy1"] <= stanza <= GlobalGameVar.dictStanze["casaHansLucy4"]:
-        if stanza == GlobalGameVar.dictStanze["casaHansLucy1"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-        elif stanza == GlobalGameVar.dictStanze["casaHansLucy2"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy1"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy1"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy3"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy3"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy3"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy3"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-        elif stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-        elif stanza == GlobalGameVar.dictStanze["casaHansLucy4"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy2"]])
+    if GlobalGameVar.dictStanze["sognoSara1"] <= stanza <= GlobalGameVar.dictStanze["sognoSara4"]:
+        if stanza == GlobalGameVar.dictStanze["sognoSara1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoSara2"]])
+        elif stanza == GlobalGameVar.dictStanze["sognoSara2"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoSara1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 3, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["sognoSara3"]])
+        elif stanza == GlobalGameVar.dictStanze["sognoSara3"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["sognoSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoSara4"]])
+        elif stanza == GlobalGameVar.dictStanze["sognoSara4"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["sognoSara3"]])
+    elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanza <= GlobalGameVar.dictStanze["casaHansSara4"]:
+        if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+        elif stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+        elif stanza == GlobalGameVar.dictStanze["casaHansSara3"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+        elif stanza == GlobalGameVar.dictStanze["casaHansSara4"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara2"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["forestaCadetta1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["forestaCadetta1"]])
     elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
         if stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
-            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansLucy4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["casaHansSara4"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["forestaCadetta2"]])
         elif stanza == GlobalGameVar.dictStanze["forestaCadetta2"]:
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 14, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["forestaCadetta1"]])
@@ -1409,9 +1409,9 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
         i += 5
 
     if not andandoVersoUscitaStanza and not (nx == 0 and ny == 0) and not cambiosta:
-        if GlobalGameVar.dictStanze["sognoLucy1"] <= stanza <= GlobalGameVar.dictStanze["sognoLucy4"]:
+        if GlobalGameVar.dictStanze["sognoSara1"] <= stanza <= GlobalGameVar.dictStanze["sognoSara4"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliSogno.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
-        elif GlobalGameVar.dictStanze["casaHansLucy1"] <= stanza <= GlobalGameVar.dictStanze["casaHansLucy4"]:
+        elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanza <= GlobalGameVar.dictStanze["casaHansSara4"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliCasa.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
         elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliForestaCadetta.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
@@ -1471,26 +1471,26 @@ def aperturacofanetto(stanza, cx, cy, dati):
     tesoro = -1
     # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 1000 -> celle di memoria(1) / 131 -> monete / 132 -> frecce
     # ordine tecniche => [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
-    # ordine condizioni => [pv<80, pv<50, pv<30, avvelenato, surriscaldato, pe<80, pe<50, pe<30, sempreLucy, sempreImpo, nemico casuale, nemico vicino, nemico lontano, pvNemico<80, pvNemico<50, pvNemico<30, pvNemicoMinori, nemici>1, nemici>4, nemici>7]
-    if GlobalGameVar.dictStanze["sognoLucy1"] <= stanza <= GlobalGameVar.dictStanze["sognoLucy4"]:
-        if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
+    # ordine condizioni => [pv<80, pv<50, pv<30, avvelenato, surriscaldato, pe<80, pe<50, pe<30, sempreSara, sempreImpo, nemico casuale, nemico vicino, nemico lontano, pvNemico<80, pvNemico<50, pvNemico<30, pvNemicoMinori, nemici>1, nemici>4, nemici>7]
+    if GlobalGameVar.dictStanze["sognoSara1"] <= stanza <= GlobalGameVar.dictStanze["sognoSara4"]:
+        if stanza == GlobalGameVar.dictStanze["sognoSara1"]:
             # ottieni pozione
             if cx == GlobalHWVar.gpx * 13 and cy == GlobalHWVar.gpy * 10:
                 tesoro = 31
                 avanzamentoStoria += 1
-        if stanza == GlobalGameVar.dictStanze["sognoLucy2"]:
+        if stanza == GlobalGameVar.dictStanze["sognoSara2"]:
             # ottieni pozione
             if cx == GlobalHWVar.gpx * 13 and cy == GlobalHWVar.gpy * 5:
                 tesoro = 31
             # ottieni medicina
             if cx == GlobalHWVar.gpx * 28 and cy == GlobalHWVar.gpy * 7:
                 tesoro = 33
-        if stanza == GlobalGameVar.dictStanze["sognoLucy3"]:
+        if stanza == GlobalGameVar.dictStanze["sognoSara3"]:
             # ottieni bomba
             if cx == GlobalHWVar.gpx * 3 and cy == GlobalHWVar.gpy * 13:
                 tesoro = 36
-    elif GlobalGameVar.dictStanze["casaHansLucy1"] <= stanza <= GlobalGameVar.dictStanze["casaHansLucy4"]:
-        if stanza == GlobalGameVar.dictStanze["casaHansLucy1"]:
+    elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanza <= GlobalGameVar.dictStanze["casaHansSara4"]:
+        if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
             # ottieni armatura (pelle)
             if cx == GlobalHWVar.gpx * 23 and cy == GlobalHWVar.gpy * 13:
                 tesoro = 52
@@ -1507,7 +1507,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 29 and cy == GlobalHWVar.gpy * 14:
                 tesoro = 47
                 avanzamentoStoria += 1
-        if stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
+        if stanza == GlobalGameVar.dictStanze["casaHansSara3"]:
             # ottieni monete
             if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 10:
                 tesoro = 131
@@ -1710,7 +1710,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 63
         if stanza == GlobalGameVar.dictStanze["labirinto17"]:
-            # ottieni condizione (sempreLucy)
+            # ottieni condizione (sempreSara)
             if cx == GlobalHWVar.gpx * 16 and cy == GlobalHWVar.gpy * 10:
                 tesoro = 89
         if stanza == GlobalGameVar.dictStanze["labirinto23"]:

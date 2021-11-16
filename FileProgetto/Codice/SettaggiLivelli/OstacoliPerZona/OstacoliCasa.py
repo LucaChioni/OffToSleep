@@ -6,7 +6,7 @@ import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOsta
 
 
 def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
-    if stanza == GlobalGameVar.dictStanze["casaHansLucy1"]:
+    if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
@@ -178,7 +178,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
             elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 3, x, y, nx, ny):
                 nx = 0
                 ny = 0
-    elif stanza == GlobalGameVar.dictStanze["casaHansLucy2"]:
+    elif stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
@@ -266,7 +266,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
             elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 13, x, y, nx, ny):
                 nx = 0
                 ny = 0
-    elif stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
+    elif stanza == GlobalGameVar.dictStanze["casaHansSara3"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
@@ -327,7 +327,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 10, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 2, x, y, nx, ny):
                 nx = 0
                 ny = 0
-    elif stanza == GlobalGameVar.dictStanze["casaHansLucy4"]:
+    elif stanza == GlobalGameVar.dictStanze["casaHansSara4"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:

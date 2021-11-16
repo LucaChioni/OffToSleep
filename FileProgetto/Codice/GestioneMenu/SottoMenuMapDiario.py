@@ -361,8 +361,8 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, 
                     stanzaInizioCofanetti = 0
                     stanzaFineCofanetti = 0
                     if voceMarcata == 1:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["casaHansLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["casaHansLucy4"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["casaHansSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["casaHansSara4"]
                         FunzioniGraficheGeneriche.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo mio padre, Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durante diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita come lui. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte e della spietata concorrenza.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 2:
@@ -381,18 +381,18 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, 
                         FunzioniGraficheGeneriche.messaggio("Castello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"La più grande struttura che abbia mai visto fino ad ora. È un castello composto da almeno un centinaio di stanze, abitato da Neil e dai suoi numerosi servitori. Il vasto terreno su cui è stato costruito comprende anche l'intero labirinto che dev'essere stato appositamente elaborato per tenere lontani i visitatori indesiderati. Il silenzio e il comportamento dei servi creano un'atmosfera cupa e surreale...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 5:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Palazzo di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"La villa in cui dimora Rod. Risulta essere quasi sempre vuota e silenziosa dato che lui è costantemente fuori per lavoro o ricerche (mi domando ancora che cosa stia ricercando...). Il posto ricorda vagamente il castello di Norm ma in miniatura e con il passaggio montano al posto del labirinto per scoraggiare l'avvicinamento di viaggiatori sconosciuti.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 6:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un vulcano sommerso nelle montagne a ovest della città. È simile a una montagna ma più grande e con un cratere sulla cima dal quale, a detta di Rod, fuoriesce del vapore incandescente. Chissà cosa c'è lì dentro...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 7:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Laboratorio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Il laboratorio in cui Norm svolge le sue ricerche. È molto piccolo ma al suo interno è presente tutto ciò che serve, ossia un calcolatore di eventi, che si estende anche sotto il terreno, e diversi altri calcolatori che credo servano per gestire i sistemi di alimentazione e raffreddamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
@@ -411,23 +411,23 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, 
                         FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un enorme terreno estremamente complicato da superare a causa delle innumerevoli strade percorribili al suo interno prive di punti di riferimento. Rod mi ha fornito una mappa che mostra nel dettaglio la sua struttura sconsigliandomi di procedere: è molto probabile non riuscire a uscirne se non si ha un buon senso dell'orientamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 11:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un passaggio tra le alture a ovest della città. In città nessuno sembrava sapere di questo varco apparte Rod che lo utilizza per raggiungere il proprio palazzo da più di vent'anni.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 12:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Caverna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne che conduce a un vulcano. All'interno vivono degli animali simili a Impo ma aggressivi. Rod è solito avventurarsi in quel posto per recuperare ImpoFrutti. Non mi spiego perché abbia deciso di viverci così vicino... forse ne è geloso e ne vuole controllare gli accessi?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 13:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"È un passaggio sicuro e veloce tra il palazzo di Rod e il suo avamposto. Rod lo utilizzava per trasportare direttamente gli ImpoFrutti dalla caverna al castello di Norm. Adesso capisco l'importanza \"strategica\" di questi luoghi.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoLucy1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un passaggio segreto nei sotterranei del castello di Norm che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce a osservare chiaramente il fondale del bacino a causa delle sostanze con cui questo è stato contaminato circa 50 anni fa.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     cofanettiTotali = 0
@@ -569,7 +569,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     pazzoNumDialogo = pazzo1NumDialogo
     if pazzo2NumDialogo != 0:
         pazzoNumDialogo = pazzo2NumDialogo
-    dictPersonaggiSbloccati = {"Hans":0, "Norm":0, "Teresa":0, "Lino":0, "Sam":0, "David":0, "Sara":0, "Rod":0, "Pazzo":0, "Rene":0, "Impo":0, "Neil":0, "Pappagallo":0, "Controllore1":0, "Controllore2":0, "Lucy":0}
+    dictPersonaggiSbloccati = {"Hans":0, "Norm":0, "Teresa":0, "Lino":0, "Sam":0, "David":0, "Olivia":0, "Rod":0, "Pazzo":0, "Rene":0, "Impo":0, "Neil":0, "Pappagallo":0, "Controllore1":0, "Controllore2":0, "Sara":0}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         dictPersonaggiSbloccati["Hans"] = 1
         dictPersonaggiSbloccati["Norm"] = 1
@@ -584,9 +584,9 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
         dictPersonaggiSbloccati["David"] = 2
     if GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoConGuardiaCasaDavid"]:
-        dictPersonaggiSbloccati["Sara"] = 1
+        dictPersonaggiSbloccati["Olivia"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoConGuardiaCasaDavid"]:
-        dictPersonaggiSbloccati["Sara"] = 2
+        dictPersonaggiSbloccati["Olivia"] = 2
     if GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
         dictPersonaggiSbloccati["Rod"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
@@ -617,7 +617,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Controllore1"] = 1
         dictPersonaggiSbloccati["Controllore2"] = 1
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnni"]:
-        dictPersonaggiSbloccati["Lucy"] = 1
+        dictPersonaggiSbloccati["Sara"] = 1
 
     dictNemiciSbloccati = {"nemiciSogno":False, "nemiciForesta":False, "nemiciCitta":False, "nemiciSelva":False, "nemiciMontagne":False, "nemiciCastello":False, "nemiciCaverna":False, "nemiciVulcano":False}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
@@ -1033,7 +1033,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                     elif voceMarcataSottoMenu == 6:
                         nomeVoceMarcataPerControllo = "David"
                     elif voceMarcataSottoMenu == 7:
-                        nomeVoceMarcataPerControllo = "Sara"
+                        nomeVoceMarcataPerControllo = "Olivia"
                     elif voceMarcataSottoMenu == 8:
                         nomeVoceMarcataPerControllo = "Rod"
                     elif voceMarcataSottoMenu == 9:
@@ -1051,7 +1051,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                     elif voceMarcataSottoMenu == 15:
                         nomeVoceMarcataPerControllo = "Controllore2"
                     elif voceMarcataSottoMenu == 16:
-                        nomeVoceMarcataPerControllo = "Lucy"
+                        nomeVoceMarcataPerControllo = "Sara"
                     if dictPersonaggiSbloccati[nomeVoceMarcataPerControllo] > 0:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         sottovoceSelezionata = True
@@ -1345,8 +1345,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
-                        if dictPersonaggiSbloccati["Sara"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                        if dictPersonaggiSbloccati["Olivia"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         if dictPersonaggiSbloccati["Rod"] == 1:
@@ -1387,8 +1387,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("Controllore 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
-                        if dictPersonaggiSbloccati["Lucy"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Lucy", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                        if dictPersonaggiSbloccati["Sara"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                     if sottovoceSelezionata:
@@ -1425,12 +1425,12 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un soldato che ho trovato a terra martoriato nella Foresta Cadetta. L'armatura che gli ho preso lo teneva più o meno... insieme... me ne sono accorta troppo tardi...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(u"Un soldato che ho trovato a terra martoriato nella Foresta Cadetta. L'armatura che gli ho preso lo teneva più o meno insieme... me ne sono accorta troppo tardi...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Sam"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Quel soldato nella foresta era il figlio di David e Sara. Non avrei dovuto sfilargli l'armatura...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(u"Quel soldato nella foresta era il figlio di David e Olivia. Non avrei dovuto rubargli l'armatura...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 6:
                             if dictPersonaggiSbloccati["David"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["PadreUfficialeServizio"], (xImgPersonaggio, yImgPersonaggio))
@@ -1443,15 +1443,15 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Il capitano della guardia notturna. Mi ha ospitata solo perché voleva che gli parlassi del soldato morto nella foresta, suo figlio... Ha anche parlato di una guerra in corso...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 7:
-                            if dictPersonaggiSbloccati["Sara"] == 1:
+                            if dictPersonaggiSbloccati["Olivia"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Moglie di David e madre del soldato a cui ho rubato l'armatura. Era visibilmente sconvolta durante la cena. Alla fine se n'è andata senza dire una parola.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                            elif dictPersonaggiSbloccati["Sara"] == 2:
+                            elif dictPersonaggiSbloccati["Olivia"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Ha deciso di suicidarsi... Possibile che per lei non aveva senso vivere se non per suo figlio? Cosa avrebbe fatto se non ne avesse mai avuto uno?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 8:
                             if dictPersonaggiSbloccati["Rod"] == 1:
@@ -1463,7 +1463,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un tipo losco a cui ho dato " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per entrare nella sua \"confraternita\"... complimenti Lucy. Non sembra molto affidabile ma potrebbe rivelarsi utile in caso di necessità. Spero...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(u"Un tipo losco a cui ho dato " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per entrare nella sua \"confraternita\"... complimenti Sara. Non sembra molto affidabile ma potrebbe rivelarsi utile in caso di necessità. Spero...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 9:
                             if dictPersonaggiSbloccati["Pazzo"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo1"], (xImgPersonaggio, yImgPersonaggio))
@@ -1533,10 +1533,10 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Controllore - 2", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 16 and dictPersonaggiSbloccati["Lucy"] == 1:
+                        elif voceMarcataSottoMenu == 16 and dictPersonaggiSbloccati["Sara"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.ralloDiario, (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lucy", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 3:
                     if voceMarcataSottoMenu <= 11:

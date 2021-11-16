@@ -147,9 +147,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     aggiornaSchermo = False
     n = -1
 
-    persoLucy1 = GlobalImgVar.persoLucy1
-    persoLucy2 = GlobalImgVar.persoLucy2
-    persobLucy = GlobalImgVar.persobLucy
+    persoSara1 = GlobalImgVar.persoSara1
+    persoSara2 = GlobalImgVar.persoSara2
+    persobSara = GlobalImgVar.persobSara
     persoFraMaggiore = GlobalImgVar.persoFraMaggiore
     persobFraMaggiore = GlobalImgVar.persobFraMaggiore
 
@@ -458,17 +458,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     else:
                         if not errore:
                             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                                persalva = persoLucy1
-                                persSalvaBraccia = persobLucy
+                                persalva = persoSara1
+                                persSalvaBraccia = persobSara
                             elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 persalva = persoFraMaggiore
                                 persSalvaBraccia = persobFraMaggiore
                             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                                persalva = persoLucy1
-                                persSalvaBraccia = persobLucy
+                                persalva = persoSara1
+                                persSalvaBraccia = persobSara
                             else:
-                                persalva = persoLucy2
-                                persSalvaBraccia = persobLucy
+                                persalva = persoSara2
+                                persSalvaBraccia = persobSara
 
                             spasalva = GlobalImgVar.vetImgSpadePixellate[dati[6]]
                             arcsalva = GlobalImgVar.vetImgArchiPixellate[dati[128]]

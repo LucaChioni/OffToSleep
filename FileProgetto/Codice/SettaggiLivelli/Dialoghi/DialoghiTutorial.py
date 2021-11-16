@@ -13,7 +13,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy1"]:
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoSara1"]:
         oggettoDato = False
         avanzaStoria = True
         menuMercante = False
@@ -73,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append("Oppure puoi semplicemente evitarlo aspettando il momento giusto per passare. Per saltare un turno premi il tasto <*>#bold#0<*> sulla tastiera, <*>#bold#Select<*> sul controller oppure clicca con il tasto <*>#bold#Sinistro<*> del mouse sulla relativa icona in alto a destra nello schermo.")
         partiDialogo.append(dialogo)
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara1"]:
         oggettoDato = False
         avanzaStoria = True
         menuMercante = False
@@ -82,7 +82,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"È possibile richiudere le porte utilizzando la modalità interazione.")
         partiDialogo.append(dialogo)
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara2"]:
         oggettoDato = False
         avanzaStoria = True
         menuMercante = False
@@ -137,7 +137,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Nel menu è apparsa la voce \"Setta Impo\". Selezionala per gestire gli equipaggiamenti di Impo. <br> Attenzione: è possibile accedervi solo se Impo si trova in una casella raggiungibile da Lucy.")
+        dialogo.append(u"Nel menu è apparsa la voce \"Setta Impo\". Selezionala per gestire gli equipaggiamenti di Impo. <br> Attenzione: è possibile accedervi solo se Impo si trova in una casella raggiungibile da Sara.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"]:
         oggettoDato = False
@@ -146,7 +146,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Cliccando su Impo in modalità interazione, potrai vedere la sua prossima mossa. <br> Ma fai attenzione: il movimento di Lucy può interferire e annullare le condizioni prese in considerazione nella previsione.")
+        dialogo.append(u"Cliccando su Impo in modalità interazione, potrai vedere la sua prossima mossa. <br> Ma fai attenzione: il movimento di Sara può interferire e annullare le condizioni prese in considerazione nella previsione.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoSelvaArida"]:
         oggettoDato = False
@@ -155,7 +155,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Lucy. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
+        dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Sara. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostRisoluzioneEnigma"]:
         oggettoDato = False

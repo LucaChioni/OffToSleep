@@ -64,7 +64,7 @@ global armrobmo
 global roboSurrisc
 global mercanteMenu
 global pappagalloMenuMercante
-global lucyMenuMercante
+global saraMenuMercante
 global scorriSuGiu
 global scorriSuGiuBloccato
 global scorriSuGiuBloccatoGiu
@@ -189,9 +189,9 @@ global impostaControllerStart
 global impostaControllerSelect
 global impostaControllerCroceDirezionale
 global persGrafMenu
-global lucy1GrafMenu
-global lucy2GrafMenu
-global lucy3GrafMenu
+global sara1GrafMenu
+global sara2GrafMenu
+global sara3GrafMenu
 global fraMaggioreGrafMenu
 global robograf0
 global robograf1
@@ -201,15 +201,15 @@ global robograf2b
 global robograf3
 global robograf4
 global imgDialogoFraMaggiore
-global imgDialogoLucy1
-global imgDialogoLucy2
-global imgDialogoLucyAssonnata
-global imgDialogoLucySconvolta
-global imgDialogoLucyOcchiChiusi
+global imgDialogoSara1
+global imgDialogoSara2
+global imgDialogoSaraAssonnata
+global imgDialogoSaraSconvolta
+global imgDialogoSaraOcchiChiusi
 global imgDialogoColco
 global imgFraMaggioreMenuOggetti
-global imgLucy1MenuOggetti
-global imgLucy2MenuOggetti
+global imgSara1MenuOggetti
+global imgSara2MenuOggetti
 global sfondoOggettoMenu
 global sconosciutoEquipMenu
 global sconosciutoOggettoMenu1
@@ -229,9 +229,9 @@ global neilSconosciutoDiario
 global pappagalloDiario
 global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
-global persoLucy1
-global persoLucy2
-global persobLucy
+global persoSara1
+global persoSara2
+global persobSara
 global persoFraMaggiore
 global persobFraMaggiore
 global schemataDiCaricamento
@@ -337,7 +337,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global roboSurrisc
     global mercanteMenu
     global pappagalloMenuMercante
-    global lucyMenuMercante
+    global saraMenuMercante
     global scorriSuGiu
     global scorriSuGiuBloccato
     global scorriSuGiuBloccatoGiu
@@ -462,9 +462,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global impostaControllerSelect
     global impostaControllerCroceDirezionale
     global persGrafMenu
-    global lucy1GrafMenu
-    global lucy2GrafMenu
-    global lucy3GrafMenu
+    global sara1GrafMenu
+    global sara2GrafMenu
+    global sara3GrafMenu
     global fraMaggioreGrafMenu
     global robograf0
     global robograf1
@@ -474,15 +474,15 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global robograf3
     global robograf4
     global imgDialogoFraMaggiore
-    global imgDialogoLucy1
-    global imgDialogoLucy2
-    global imgDialogoLucyAssonnata
-    global imgDialogoLucySconvolta
-    global imgDialogoLucyOcchiChiusi
+    global imgDialogoSara1
+    global imgDialogoSara2
+    global imgDialogoSaraAssonnata
+    global imgDialogoSaraSconvolta
+    global imgDialogoSaraOcchiChiusi
     global imgDialogoColco
     global imgFraMaggioreMenuOggetti
-    global imgLucy1MenuOggetti
-    global imgLucy2MenuOggetti
+    global imgSara1MenuOggetti
+    global imgSara2MenuOggetti
     global sfondoOggettoMenu
     global sconosciutoEquipMenu
     global sconosciutoOggettoMenu1
@@ -502,9 +502,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global pappagalloDiario
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
-    global persoLucy1
-    global persoLucy2
-    global persobLucy
+    global persoSara1
+    global persoSara2
+    global persobSara
     global persoFraMaggiore
     global persobFraMaggiore
     global schemataDiCaricamento
@@ -562,37 +562,37 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgCasellaObbiettivoAnalizzaColco = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ObiettivoAnalizzaColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # immagini personaggio
-    persw = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persab = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perso = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persob = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    perss = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persd = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persam = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persamb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persamb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persambAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persmbDifesa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persAvvele = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persoLucy1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoLucy2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persobLucy = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persw = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perswb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persab = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perso = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persob = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    perss = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perssb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persd = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persdb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perssm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perssmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perssmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persdm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persdmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persdmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persam = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persamb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persamb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perswm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perswmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perswmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perswmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persambAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    perssmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persdmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persmbDifesa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persAvvele = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    persoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
 
@@ -638,22 +638,22 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgSpadeInGame.append(vetAnimaTemp)
         # arco
         vetAnimaTemp = []
@@ -667,21 +667,21 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgArchiInGame.append(vetAnimaTemp)
         # armatura
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmatureInGame.append(vetAnimaTemp)
         # scudo
         vetAnimaTemp = []
@@ -692,11 +692,11 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgScudiInGame.append(vetAnimaTemp)
         # guanti
         vetAnimaTemp = []
@@ -719,23 +719,23 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgGuantiInGame.append(vetAnimaTemp)
         # collana
         vetAnimaTemp = []
@@ -745,10 +745,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgCollaneInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgFaretreInGame = []
@@ -762,10 +762,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
             vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgFaretreInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgArmRobInGame = []
@@ -787,7 +787,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     # img menu mercante
     mercanteMenu = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Mercante/MercanteDialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     pappagalloMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/PappagalloGrafMenuMercante.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
-    lucyMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Lucy2Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    saraMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara2Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     scorriSuGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccato = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccatoGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -844,10 +844,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     esche = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sacchettoDenaroStart = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroSinistra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
     sacchettoDenaroMercante = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroDestra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart0 = funzionePerCaricareImmagini('Risorse/Immagini/EquipLucy/Faretre/Faretra0Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart1 = funzionePerCaricareImmagini('Risorse/Immagini/EquipLucy/Faretre/Faretra1Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart2 = funzionePerCaricareImmagini('Risorse/Immagini/EquipLucy/Faretre/Faretra2Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart3 = funzionePerCaricareImmagini('Risorse/Immagini/EquipLucy/Faretre/Faretra3Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart0 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra0Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart1 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra1Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart2 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra2Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart3 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra3Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
     sacchettoDenaro = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgFrecciaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
@@ -884,12 +884,12 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     vetImgCollaneMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadeMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgArchiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgArmatureMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgScudiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgGuantiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgCollaneMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgSpadeMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgArchiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgArmatureMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgScudiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgGuantiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgCollaneMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
         contatoreGlobale += 1
     imgGambitSconosciuta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/GrafGambit/Sconosciuto.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     vetImgCondizioniMenu = []
@@ -930,12 +930,12 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     vetImgCollanePixellate = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgArchiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgArmaturePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgScudiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgGuantiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgCollanePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgSpadePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgArchiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgArmaturePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgScudiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgGuantiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgCollanePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
         contatoreGlobale += 1
 
     # img animazioni oggetti
@@ -1010,9 +1010,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     # img grafiche / dialoghi
     sfondoDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False, imgImpenetrabile=True)
     persGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
-    lucy1GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy1GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    lucy2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    lucy3GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy3GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    sara1GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara1GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    sara2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    sara3GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara3GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     fraMaggioreGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     robograf0 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     robograf1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
@@ -1022,18 +1022,18 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     robograf3 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     robograf4 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     imgDialogoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/FratelloMaggioreDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-    imgDialogoLucy1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Lucy1Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-    imgDialogoLucy2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Lucy2Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-    imgDialogoLucyAssonnata = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/LucyAssonnataDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-    imgDialogoLucySconvolta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/LucyScossaDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-    imgDialogoLucyOcchiChiusi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/LucyOcchiChiusiDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara1Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara2Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraAssonnata = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraSconvolta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraScossaDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraOcchiChiusi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraOcchiChiusiDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoColco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
-    imgLucy1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
-    imgLucy2MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy2Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
+    imgSara1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
+    imgSara2MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara2Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
-    sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
+    sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
     sconosciutoEquipMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoEquip.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
     sconosciutoOggettoMenu1 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
     sconosciutoOggettoMenu2 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
@@ -1080,7 +1080,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
     fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     roboDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    ralloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    ralloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     neilSconosciutoDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     pappagalloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/PappagalloGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
 

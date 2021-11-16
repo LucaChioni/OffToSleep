@@ -100,12 +100,12 @@ def definisciImgOggetti(tipo):
     numImgDialogo = 1
     nomeImgDialogo = ["Vuota"]
 
-    if tipo == "OggettoLettoLucy":
+    if tipo == "OggettoLettoSara":
         disegnaImg = False
         numImg = 1
         numImgDialogo = 3
-        nomeImgDialogo = ["LucyDormienteDialogo1", "LucyDormienteDialogo2", "Vuota"]
-    if tipo == "OggettoComodinoLucy":
+        nomeImgDialogo = ["SaraDormienteDialogo1", "SaraDormienteDialogo2", "Vuota"]
+    if tipo == "OggettoComodinoSara":
         disegnaImg = True
         numImg = 4
         numImgDialogo = 1
@@ -195,7 +195,7 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
-    if tipo == "OggettoLucySeduta":
+    if tipo == "OggettoSaraSedutaBiblioteca":
         disegnaImg = True
         numImg = 1
         numImgDialogo = 1
@@ -220,6 +220,11 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoSaraSedutaCastello":
+        disegnaImg = True
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
 
     return disegnaImg, numImg, numImgDialogo, nomeImgDialogo
 
@@ -227,8 +232,8 @@ def definisciImgOggetti(tipo):
 def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
     numImgAttuale = 0
 
-    if tipo == "OggettoComodinoLucy":
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
+    if tipo == "OggettoComodinoSara":
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara2"]:
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             numImgAttuale = 2
@@ -277,7 +282,7 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
 def impostaImgOggettoDialogoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
     numImgAttualeDialogo = 0
 
-    if tipo == "OggettoLettoLucy":
+    if tipo == "OggettoLettoSara":
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
             numImgAttualeDialogo = 0
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:

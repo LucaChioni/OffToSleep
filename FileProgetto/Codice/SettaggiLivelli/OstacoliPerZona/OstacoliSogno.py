@@ -6,7 +6,7 @@ import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOsta
 
 
 def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
-    if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
+    if stanza == GlobalGameVar.dictStanze["sognoSara1"]:
         # bordi stanza
         if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
             nx = 0
@@ -37,7 +37,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 4, x, y, nx, ny):
             nx = 0
             ny = 0
-    elif stanza == GlobalGameVar.dictStanze["sognoLucy2"]:
+    elif stanza == GlobalGameVar.dictStanze["sognoSara2"]:
         # bordi stanza
         if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
             nx = 0
@@ -110,7 +110,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 5, x, y, nx, ny):
             nx = 0
             ny = 0
-    elif stanza == GlobalGameVar.dictStanze["sognoLucy3"]:
+    elif stanza == GlobalGameVar.dictStanze["sognoSara3"]:
         # bordi stanza
         if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
             nx = 0
@@ -192,7 +192,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 6, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-    elif stanza == GlobalGameVar.dictStanze["sognoLucy4"]:
+    elif stanza == GlobalGameVar.dictStanze["sognoSara4"]:
         # bordi stanza
         if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
             nx = 0

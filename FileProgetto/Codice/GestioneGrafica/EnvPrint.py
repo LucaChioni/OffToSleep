@@ -465,7 +465,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     FunzioniGraficheGeneriche.messaggio("Movimento verso ImpoPietra", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 2.5))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
         azionePrevistaTrovata = True
     else:
         FunzioniGraficheGeneriche.messaggio(vettorePrevisione[0][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
@@ -474,7 +474,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     for i in range(1, 11):
         if not azionePrevistaTrovata and vettorePrevisione[i][1] == "":
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * c))
-            FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
+            FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
             azionePrevistaTrovata = True
         elif not azionePrevistaTrovata and vettorePrevisione[i][1] != "":
             FunzioniGraficheGeneriche.messaggio(vettorePrevisione[i][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
@@ -491,13 +491,13 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 0:
             FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            FunzioniGraficheGeneriche.messaggio("Lucy con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sara con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
             FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
@@ -507,7 +507,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 8:
             FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            FunzioniGraficheGeneriche.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sempre a Sara", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
             FunzioniGraficheGeneriche.messaggio("Sempre a Impo", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 11:
@@ -582,14 +582,14 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     FunzioniGraficheGeneriche.messaggio("Movimento verso obiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
     if not azionePrevistaTrovata and vettorePrevisione[11][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 14.8))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
         azionePrevistaTrovata = True
     elif not azionePrevistaTrovata and vettorePrevisione[11][1] != "":
         FunzioniGraficheGeneriche.messaggio(vettorePrevisione[11][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
     FunzioniGraficheGeneriche.messaggio("Nessuna azione da eseguire", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 16, 40)
     if not azionePrevistaTrovata:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 15.9))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
 
     GlobalHWVar.aggiornaSchermo()
 

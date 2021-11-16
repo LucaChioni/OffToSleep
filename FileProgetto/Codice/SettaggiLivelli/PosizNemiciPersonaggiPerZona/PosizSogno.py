@@ -6,7 +6,7 @@ import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 
 
 def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
-    if stanza == GlobalGameVar.dictStanze["sognoLucy2"]:
+    if stanza == GlobalGameVar.dictStanze["sognoSara2"]:
         percorsoNemico = ["s", "d", "d", "w", "w", "w", "a", "a", "s", "s"]
         nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 7, "s", "Orco", stanza, percorsoNemico)
         listaNemiciTotali.append(nemico)
@@ -19,7 +19,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
         nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 4, "d", "Orco", stanza, percorsoNemico)
         listaNemiciTotali.append(nemico)
         listaNemici.append(nemico)
-    elif stanza == GlobalGameVar.dictStanze["sognoLucy3"]:
+    elif stanza == GlobalGameVar.dictStanze["sognoSara3"]:
         percorsoNemico = ["a", "a", "a", "w", "w", "w", "d", "d", "d", "s", "s", "s"]
         nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 8, "s", "Pipistrello", stanza, percorsoNemico)
         listaNemiciTotali.append(nemico)

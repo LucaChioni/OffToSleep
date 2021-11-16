@@ -201,7 +201,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Mi chiamo Lucy. Devo incontrare Neil.")
+                    dialogo.append(u"Mi chiamo Sara. Devo incontrare Neil.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")

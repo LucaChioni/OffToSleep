@@ -479,7 +479,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Hanno messo una lapide. C'è scritto \"Sam\"... Il figlio di David e Sara...)")
+            dialogo.append(u"(Hanno messo una lapide. C'è scritto \"Sam\"... Il figlio di David e Olivia...)")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -28,7 +28,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Sono... ehm... mi chiamo Lucy e sto cercando mio fratello. Si chiama Hans e ha più o meno la mia età. Dovrebbe essere passato di qui non molto tempo fa...")
+            dialogo.append(u"Sono... ehm... mi chiamo Sara e sto cercando mio fratello. Si chiama Hans e ha più o meno la mia età. Dovrebbe essere passato di qui non molto tempo fa...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -313,7 +313,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Rod... piacere, io sono Lucy. Quindi? Dove hai visto mio fratello?")
+                dialogo.append(u"Rod... piacere, io sono Sara. Quindi? Dove hai visto mio fratello?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -365,7 +365,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ah, aspetta... ehm... Lucy. Ora che sei nella confraternita hai diritto ad accedere al catalogo di risorse disponibili. Quando ti serve qualcosa, ti farò dare un'occhiata.")
+                dialogo.append(u"Ah, aspetta... ehm... Sara. Ora che sei nella confraternita hai diritto ad accedere al catalogo di risorse disponibili. Quando ti serve qualcosa, ti farò dare un'occhiata.")
                 partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"]:
             oggettoDato = False
@@ -1928,7 +1928,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Lucy! Accesso consentito!")
+                dialogo.append(u"Sara! Accesso consentito!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1958,7 +1958,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Nome utente: Lucy! Compra!")
+                dialogo.append(u"Nome utente: Sara! Compra!")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -2223,7 +2223,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"PRIMA DOMANDA: sei Pazzo o sei Rallo?")
                 dialogo.append(u"Sono Pazzo.")
                 dialogo.append(u"Sono Rallo.")
-                dialogo.append(u"Sono Lucy.")
+                dialogo.append(u"Sono Sara.")
                 dialogo.append(u"Non lo so.")
                 partiDialogo.append(dialogo)
                 dialogo = []
@@ -2691,7 +2691,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Sono... Lucy.")
+                    dialogo.append(u"Sono... Sara.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
