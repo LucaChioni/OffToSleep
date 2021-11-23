@@ -191,6 +191,7 @@ global impostaControllerCroceDirezionale
 global persGrafMenu
 global sara1GrafMenu
 global sara2GrafMenu
+global saraSconvoltaGrafMenu
 global sara3GrafMenu
 global fraMaggioreGrafMenu
 global robograf0
@@ -203,13 +204,16 @@ global robograf4
 global imgDialogoFraMaggiore
 global imgDialogoSara1
 global imgDialogoSara2
+global imgDialogoSara3
 global imgDialogoSaraAssonnata
 global imgDialogoSaraSconvolta
 global imgDialogoSaraOcchiChiusi
+global imgDialogoSaraAssonnataCastello
 global imgDialogoColco
 global imgFraMaggioreMenuOggetti
 global imgSara1MenuOggetti
 global imgSara2MenuOggetti
+global imgSara3MenuOggetti
 global sfondoOggettoMenu
 global sconosciutoEquipMenu
 global sconosciutoOggettoMenu1
@@ -231,6 +235,7 @@ global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
 global persoSara1
 global persoSara2
+global persoSara3
 global persobSara
 global persoFraMaggiore
 global persobFraMaggiore
@@ -254,8 +259,10 @@ global imgChiaveRipostiglio
 global imgChiaveStanzaCasaDavid
 global imgCertificazioneResidenza
 global imgImpoPietra
+global imgChiaveStanzaCastello
+global imgListaStrumentiStudioImpo
 
-numImgTotali = 1757
+numImgTotali = 1763
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -464,6 +471,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persGrafMenu
     global sara1GrafMenu
     global sara2GrafMenu
+    global saraSconvoltaGrafMenu
     global sara3GrafMenu
     global fraMaggioreGrafMenu
     global robograf0
@@ -476,13 +484,16 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgDialogoFraMaggiore
     global imgDialogoSara1
     global imgDialogoSara2
+    global imgDialogoSara3
     global imgDialogoSaraAssonnata
     global imgDialogoSaraSconvolta
     global imgDialogoSaraOcchiChiusi
+    global imgDialogoSaraAssonnataCastello
     global imgDialogoColco
     global imgFraMaggioreMenuOggetti
     global imgSara1MenuOggetti
     global imgSara2MenuOggetti
+    global imgSara3MenuOggetti
     global sfondoOggettoMenu
     global sconosciutoEquipMenu
     global sconosciutoOggettoMenu1
@@ -504,6 +515,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgDanneggiamentoCausaColco
     global persoSara1
     global persoSara2
+    global persoSara3
     global persobSara
     global persoFraMaggiore
     global persobFraMaggiore
@@ -527,6 +539,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgChiaveStanzaCasaDavid
     global imgCertificazioneResidenza
     global imgImpoPietra
+    global imgChiaveStanzaCastello
+    global imgListaStrumentiStudioImpo
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -592,6 +606,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persAvvele = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     persoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
@@ -1012,6 +1027,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     sara1GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara1GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     sara2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    saraSconvoltaGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraSconvoltaGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     sara3GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara3GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     fraMaggioreGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     robograf0 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
@@ -1024,13 +1040,16 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgDialogoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/FratelloMaggioreDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara1Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara2Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara3Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSaraAssonnata = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSaraSconvolta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraScossaDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSaraOcchiChiusi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraOcchiChiusiDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraAssonnataCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataCastelloDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoColco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgSara1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgSara2MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara2Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
+    imgSara3MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara3Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
@@ -1159,3 +1178,5 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgChiaveStanzaCasaDavid = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCasaDavid.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgCertificazioneResidenza = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/CertificazioneResidenza.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgImpoPietra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ImpoPietra.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveStanzaCastello = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCastello.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgListaStrumentiStudioImpo = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ListaStrumentiStudioImpo.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)

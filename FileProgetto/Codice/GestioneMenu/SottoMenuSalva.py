@@ -149,6 +149,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
 
     persoSara1 = GlobalImgVar.persoSara1
     persoSara2 = GlobalImgVar.persoSara2
+    persoSara3 = GlobalImgVar.persoSara3
     persobSara = GlobalImgVar.persobSara
     persoFraMaggiore = GlobalImgVar.persoFraMaggiore
     persobFraMaggiore = GlobalImgVar.persobFraMaggiore
@@ -466,8 +467,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
                                 persalva = persoSara1
                                 persSalvaBraccia = persobSara
-                            else:
+                            elif not dati[144]:
                                 persalva = persoSara2
+                                persSalvaBraccia = persobSara
+                            else:
+                                persalva = persoSara3
                                 persSalvaBraccia = persobSara
 
                             spasalva = GlobalImgVar.vetImgSpadePixellate[dati[6]]

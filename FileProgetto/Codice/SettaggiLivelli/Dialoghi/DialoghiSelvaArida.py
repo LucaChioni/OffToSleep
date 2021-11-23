@@ -25,11 +25,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Che schifo, il terreno è tutto appiccicoso...)")
+                dialogo.append(u"Oh, che schifo, il terreno è tutto appiccicoso...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Tutto a posto tu?")
+                dialogo.append(u"... Tutto a posto tu?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -37,7 +37,71 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Direi di sì...")
+                dialogo.append(u"... Direi di sì...")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida2"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialUsoImpoFrutti"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo posto è un casino... però ci sono queste tracce per terra... dovrei seguirle?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... <*>#italic#Mmh...<*>")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida4"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSelva2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Pant pant...<*> cavolo... <*>#italic#Pant pant...<*> devo dire che probabilmente non me la sarei cavata da sola...")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida6"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSelva4"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ottimo, scorpioni... mi sa che ci sarà bisogno di un bel lavoro di squadra qui...")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida16"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSelva6"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Ohh!<*> L'uscita, ce l'abbiamo fatta!")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

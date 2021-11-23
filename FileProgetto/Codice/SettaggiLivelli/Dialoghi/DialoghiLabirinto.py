@@ -92,7 +92,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Ehm... attraverso gli occhi. Non so esattamente come funziona il... processo...")
+                dialogo.append(u"... Uhm... attraverso gli occhi. Non so esattamente come funziona il... processo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -107,6 +107,42 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append(u"<*>#italic#Mmh...<*>")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["labirinto14"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialStartNelLabirinto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Merda, di qua ci siamo già passati...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... No, aspetta... è giusto, era solo... tu non preoccuparti, so esattamente dove stiamo andando...")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["labirinto20"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoMetaLabirinto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ce l'abbiamo fatta! Alla fine non è stato così complicato, bastava seguire la mappa...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Te l'avevo detto che potevamo fidarci di Rod, devi solo cercare di essere più ottimista...")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

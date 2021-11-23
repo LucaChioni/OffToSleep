@@ -11,8 +11,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialStartNelLabirinto"] and stanza == GlobalGameVar.dictStanze["labirinto20"] and x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 13:
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialStartNelLabirinto"] and stanza == GlobalGameVar.dictStanze["labirinto14"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoMetaLabirinto"] and stanza == GlobalGameVar.dictStanze["labirinto20"] and x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 13:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
 

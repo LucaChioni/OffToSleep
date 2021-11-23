@@ -1109,6 +1109,12 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             i += 1
                     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                        i = 0
+                        while i < 15:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
                         npers = "d"
                         x = GlobalHWVar.gsx // 32 * 8
                         y = GlobalHWVar.gsy // 18 * 5
@@ -2712,8 +2718,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalHWVar.gpx * 29
                     y -= GlobalHWVar.gpy * 6
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioCenaAlCastello"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
                     mantieniPosizioneImpo = True
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
                     npers = "d"
                     x = GlobalHWVar.gpx * 23
                     y = GlobalHWVar.gpy * 7
@@ -2802,6 +2820,24 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "w"
                     x += GlobalHWVar.gpx * 26
                     y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello10"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
+                    mantieniPosizioneImpo = True
+                    i = 0
+                    while i < 20:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                elif stanzaVecchia == GlobalGameVar.dictStanze["internoCastello10"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoNelCastello"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 5
+                    y = GlobalHWVar.gpy * 4
+                elif stanzaVecchia == GlobalGameVar.dictStanze["internoCastello10"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 15:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
         if stanza == GlobalGameVar.dictStanze["internoCastello11"]:
             nomeCanzoneLuogo = ""
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -3062,6 +3098,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "d"
                     x = GlobalHWVar.gpx * 2
                     y = GlobalHWVar.gpy * 4
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 12
+                    y = GlobalHWVar.gpy * 10
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -3227,13 +3267,21 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod3"]:
         nonProcedere = True
-    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoCancellettoCastelloPerScorciatoia"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello5"]:
         nonProcedere = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSalaDaPranzoCastello"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"]:
         nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello9"] and (stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello8"] or stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello12"]):
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello9"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello8"]:
+        nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso20"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello20"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ripresoImpoDaNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello19"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uscitoDaAvampostoDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["labirinto20"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso21"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello21"]:
         nonProcedere = True
@@ -3255,7 +3303,9 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
         procedi = False
     if GlobalGameVar.dictAvanzamentoStoria["guardiaCastelloChiusoPortaLibreriaInternoCastello18"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello18"] and xPorta == GlobalHWVar.gpx * 17 and yPorta == GlobalHWVar.gpy * 12:
         procedi = False
-    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoChiaveCastelloPerTunnelSubacqueo"] and stanza == GlobalGameVar.dictStanze["internoCastello8"] and xPorta == GlobalHWVar.gpx * 7 and yPorta == GlobalHWVar.gpy * 7:
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoMazzoDi3ChiaviCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello20"] and xPorta == GlobalHWVar.gpx * 17 and yPorta == GlobalHWVar.gpy * 9:
+        procedi = False
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoMazzoDi3ChiaviCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello8"] and xPorta == GlobalHWVar.gpx * 7 and yPorta == GlobalHWVar.gpy * 7:
         procedi = False
 
     return procedi
@@ -3361,7 +3411,7 @@ def settaNomeStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello7"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaCastelloServita"] or GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaCastelloServita"] or GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"
         elif GlobalGameVar.dictAvanzamentoStoria["cenaCastelloServita"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
             nomeStanza = "StanzaB"
@@ -3377,6 +3427,11 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello10"]:
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
     if stanza == GlobalGameVar.dictStanze["internoCastello11"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"

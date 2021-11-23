@@ -215,6 +215,7 @@ global datiEnigmaBibliotecario
 global pazzoStrabico
 global volumeMusicaDimezzato
 global impoPresente
+global cambiataAlCastello
 def inizializzaVariabiliGlobali():
     global imgMappaAttuale
     global canzoneAttuale
@@ -225,6 +226,7 @@ def inizializzaVariabiliGlobali():
     global pazzoStrabico
     global volumeMusicaDimezzato
     global impoPresente
+    global cambiataAlCastello
     imgMappaAttuale = False
     canzoneAttuale = False
     audioSottofondoAttuale = False
@@ -242,6 +244,8 @@ def inizializzaVariabiliGlobali():
     pazzoStrabico = False
     volumeMusicaDimezzato = False
     impoPresente = False
+    # cambiataAlCastello[0] => vestiti attuali cambiataAlCastello[1] => vestiti vecchi (serve per far ricaricare le img dopo il cambio)
+    cambiataAlCastello = [False, False]
 inizializzaVariabiliGlobali()
 
 def settaRisoluzioneOttimale():

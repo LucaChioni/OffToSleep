@@ -122,6 +122,12 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             elif numeromessaggioAttuale == numeroMessaggiTotali:
                 if personaggio.tipo == "Pazzo1" and personaggio.avanzamentoDialogo == 2 and sceltaEffettuata == 3:
                     GlobalGameVar.pazzoStrabico = True
+                elif personaggio.tipo == "OggettoArmadioCastello":
+                    if sceltaEffettuata == 1 or sceltaEffettuata == 2:
+                        if GlobalGameVar.cambiataAlCastello[0]:
+                            GlobalGameVar.cambiataAlCastello[0] = False
+                        else:
+                            GlobalGameVar.cambiataAlCastello[0] = True
                 if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata) or personaggio.scelta == -1:
                     if personaggio.avanzaStoria:
                         avanzamentoStoria += 1

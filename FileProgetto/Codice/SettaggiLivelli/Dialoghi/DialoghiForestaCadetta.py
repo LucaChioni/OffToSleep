@@ -211,7 +211,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ehm... salve...")
+            dialogo.append("<*>#italic#Ehm ehm...<*> salve...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -317,7 +317,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("... Ehm ehm, da quanto sei in questa foresta?")
+            dialogo.append("... <*>#italic#Ehm ehm...<*> da quanto sei in questa foresta?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

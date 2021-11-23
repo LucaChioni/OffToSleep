@@ -415,15 +415,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Devo andarmene da qui...")
                 partiDialogo.append(dialogo)
-            else:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Non credo ci sia niente di interessante da quella parte...)")
-                partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città5"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and x == GlobalHWVar.gpx * 1 and (y == GlobalHWVar.gpy * 12 or y == GlobalHWVar.gpy * 13):
                 oggettoDato = False
@@ -547,15 +538,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Il sangue sulle mie armi... non dovrei tenerle addosso...)")
-                partiDialogo.append(dialogo)
-            elif y == GlobalHWVar.gpy * 6 and (x == GlobalHWVar.gpx * 18 or x == GlobalHWVar.gpx * 19):
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Ok, per andare da Neil devo procedere verso sud...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città8"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 1:
@@ -790,7 +772,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Yaaawn... che sonno...")
+                dialogo.append(u"<*>#italic#Yaaawn...<*> che sonno...")
                 partiDialogo.append(dialogo)
             elif (stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and (x == GlobalHWVar.gpx * 1 or y == GlobalHWVar.gpy * 1)) or (stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and (y == GlobalHWVar.gpy * 1 or y == GlobalHWVar.gpy * 16)):
                 oggettoDato = False
@@ -860,50 +842,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"(René mi sta aspettando. Devo prendere la marce da consegnare a Neil prima di andare...)")
                     partiDialogo.append(dialogo)
-    elif GlobalGameVar.dictStanze["selvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["selvaArida16"]:
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida2"]:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Questo posto è un casino... però ci sono queste tracce per terra... dovrei seguirle?)")
-            partiDialogo.append(dialogo)
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida16"]:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(<*>#italic#Ohh!<*> l'uscita...)")
-            partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaSelva"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Ok, dopo la Selva devo costeggiare il lago... che non è qui... Perfetto, ho sbagliato strada...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Ehi, ma quello è... Rod?)")
-                partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eliminatoPersonaggioOggettoPerEnigmaMappaLabirinto"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Fatto! Adesso dovrei potermi orientare bene là dentro...)")
-                partiDialogo.append(dialogo)
-            elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 6:
+            if x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 6:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -949,20 +890,18 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"(Se mi segnassi il percorso da seguire, sarebbe molto più facile attraversare il labirinto...)")
                     partiDialogo.append(dialogo)
-    elif GlobalGameVar.dictStanze["labirinto1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["labirinto23"]:
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["labirinto20"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialStartNelLabirinto"]:
+    elif GlobalGameVar.dictStanze["esternoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["esternoCastello5"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello1"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaCastello"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono fuori! Alla fine non è stato così complicato...)")
+                dialogo.append(u"(Ecco il passaggio per la scorciatoia. Adesso il cancello è aperto...)")
                 partiDialogo.append(dialogo)
-    elif GlobalGameVar.dictStanze["esternoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["esternoCastello5"]:
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello1"]:
-            if x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 9:
+            elif x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 9:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -980,28 +919,18 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello2"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaLabirinto"]:
+            elif x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
-                avanzaStoria = True
+                avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(C'è un silenzio tombale...)")
+                dialogo.append(u"(Posso passare per la scorciatoia adesso...)")
                 partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello22"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello1"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["saraCamminatoNelCastello"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Wow...")
-                partiDialogo.append(dialogo)
-            elif y == GlobalHWVar.gpy * 1:
+            if y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1124,7 +1053,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Quello là sembra sempre che mi stia fissando quando non lo guardo... a cosa starà pensando?)")
+                dialogo.append(u"(... Quello là sembra sempre fissarmi quando non lo guardo... a cosa starà pensando?)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1136,15 +1065,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... No, aspetta! Non tutti i movimenti che faccio, li penso prima. Alcuni li faccio senza pensare...)")
+                dialogo.append(u"(... No, aspetta! Non tutti i movimenti che faccio, li penso prima. Alcuni li faccio senza pensare... quindi anch'io non...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(... Ok, non importa, devo mangiare questo... brodo, adesso...)")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello1"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Questa brodaglia non sa di niente... non odora di niente... sembra aria. È fredda, sa di aria fredda... fredda, come questo castello, come queste persone...)")
+                dialogo.append(u"(... Questa brodaglia non sa di niente... non odora di niente... sembra aria. È fredda, sa di aria fredda... fredda come questo castello, come queste persone...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1158,14 +1092,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"<*>#italic#WAAA!<*>")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Oddio, cos'ho fatto?! Non si sono mossi... come se non fosse successo nulla... rimangono immobili, non reagiscono agli stimoli esterni...)")
+                dialogo.append(u"(Oddio, l'ho fatto davvero? Non si sono mossi... come se non fosse successo nulla... rimangono immobili, non reagiscono agli stimoli esterni...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1173,7 +1107,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Va beh, continuo a mangiare... cavolo... mi sento già sazia... ne ho mangiati solo due cucchiai... cosa penseranno se non finisco di mangiare...)")
+                dialogo.append(u"(... Cavolo... mi sento già sazia... ne ho mangiati solo due cucchiai... cosa penseranno se non finisco di mangiare...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1181,7 +1115,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Oddio mi sta appesantendo un sacco... meglio smetterla qui... oh cavolo, mi sta venendo sonno... mi si chiudono gli occhi... hanno messo qualcosa in questa brodaglia, lo sapevo che non dovevo fidarmi...)")
+                dialogo.append(u"(... Oddio mi sta appesantendo un sacco... meglio smetterla qui... oh cazzo, mi sta venendo sonno... mi si chiudono gli occhi... hanno messo qualcosa in questa brodaglia, lo sapevo che non dovevo fidarmi...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1189,7 +1123,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Non riesco a tenere gli occhi aperti! Devo... devo fare due passi...)")
+                dialogo.append(u"(... Cazzo, non riesco a tenere gli occhi aperti!)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Devo... devo fare due passi...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello8"]:
             if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 15:
@@ -1218,7 +1156,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
@@ -1227,7 +1168,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 23 and y == GlobalHWVar.gpy * 13:
                 oggettoDato = False
@@ -1236,7 +1180,31 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+            elif (x == GlobalHWVar.gpx * 30) or (x == GlobalHWVar.gpx * 7 and (y == GlobalHWVar.gpy * 12 or y == GlobalHWVar.gpy * 13 or y == GlobalHWVar.gpy * 14)):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
+                    dialogo.append(u"(Non mi reggo in piedi... la mia stanza dovrebbe essere su questo piano...)")
+                else:
+                    dialogo.append(u"(Penso che Neil sia di sopra, dove mi hanno fermata ieri...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoLanciaUscitoDaSalaPranzoCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questo è il secondo piano, ma non so quale sia la stanza... devo trovarla prima di crollare dal sonno...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello10"]:
             if x == GlobalHWVar.gpx * 12 and y == GlobalHWVar.gpy * 16:
@@ -1246,7 +1214,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 14 and y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
@@ -1255,7 +1226,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 16:
                 oggettoDato = False
@@ -1264,7 +1238,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 26 and y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
@@ -1273,7 +1250,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Trovata!)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 9 and y == GlobalHWVar.gpy * 5:
                 oggettoDato = False
@@ -1284,6 +1273,32 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... <*>#italic#Uh?!<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Ma... quanto ho dormito? Che ore sono?)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoNelCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... <*>#italic#Yaaawn...<*> non capisco se è giorno o è ancora notte... in questo posto ci sono pochissime finestre...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Ora che ci penso, come arriva la luce in queste stanze? I candelabri sono sempre spenti... e non ci sono ombre...)")
+                partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello11"]:
             if x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 3:
                 oggettoDato = False
@@ -1292,7 +1307,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 9 and y == GlobalHWVar.gpy * 10:
                 oggettoDato = False
@@ -1301,7 +1319,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 22 and y == GlobalHWVar.gpy * 10:
                 oggettoDato = False
@@ -1310,7 +1331,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 30 and y == GlobalHWVar.gpy * 3:
                 oggettoDato = False
@@ -1319,7 +1343,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoSecondoPianoCastello"]:
+                    dialogo.append(u"(La chiave non gira... devo provare un'altra porta...)")
+                else:
+                    dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello12"]:
             if x == GlobalHWVar.gpx * 4 and y == GlobalHWVar.gpy * 1:
@@ -1405,15 +1432,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello14"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoServoLanciaEntrataNelCastello"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(... Dove sto andando?)")
-                partiDialogo.append(dialogo)
             if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 14:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1442,16 +1460,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello15"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInternoCastello14"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoAlzatoDalLettoNelCastello"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Quanti piani ci sono?)")
+                dialogo.append(u"(... Non ce la faccio più con tutte queste scale... che senso ha abitare in un posto così grosso?)")
                 partiDialogo.append(dialogo)
-            if x == GlobalHWVar.gpx * 2 and y == GlobalHWVar.gpy * 4:
+            elif x == GlobalHWVar.gpx * 2 and y == GlobalHWVar.gpy * 4:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1598,14 +1616,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello18"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInternoCastello15"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoStanza15CastelloSecondaVolta"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Le guardie non mi stanno bloccando... posso andare dove voglio?)")
+                dialogo.append(u"(È aperta adesso...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 12:
                 oggettoDato = False
@@ -1626,7 +1644,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
-            if x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 5:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRipresoImpoDaNeil"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ok... Neil è... credo che abbia fatto tutte le operazioni descritte in quel libro direttamente su se stesso...)")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 5:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1663,7 +1690,34 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Devo aspettare che mi chiamino. Potrei leggere qualcosa nel frattempo...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"]:
-            if x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
+            if x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Devo parlare con Neil adesso...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso20"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Un corridoio... non so perché, ma credo sia chiaro quale sia la porta da aprire...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInternoCastello20"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Oh... forse avrei dovuto bussare?)")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1673,6 +1727,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(È chiuso a chiave...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 26 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 9:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

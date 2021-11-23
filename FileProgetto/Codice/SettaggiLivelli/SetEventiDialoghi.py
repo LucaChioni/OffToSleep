@@ -20,8 +20,15 @@ def setImgDialogoProtagonista(avanzamentoStoria):
             imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
             imgPersDialogo = GlobalImgVar.imgDialogoSaraOcchiChiusi
-        else:
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
+            if not GlobalGameVar.cambiataAlCastello[0]:
+                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnata
+            else:
+                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataCastello
+        elif not GlobalGameVar.cambiataAlCastello[0]:
             imgPersDialogo = GlobalImgVar.imgDialogoSara2
+        else:
+            imgPersDialogo = GlobalImgVar.imgDialogoSara3
 
     return nomePersonaggio, imgPersDialogo
 

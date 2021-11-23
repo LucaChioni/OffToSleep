@@ -56,7 +56,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Yaaawn... sto ancora aspettando la mia acqua...")
+            dialogo.append("<*>#italic#Yaaawn...<*> sto ancora aspettando la mia acqua...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
             oggettoDato = False

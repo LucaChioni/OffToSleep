@@ -661,4 +661,4 @@ while i > 0:
         del listaRisoluzioniDisponibili[i]
     i -= 1
 listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
-print listaRisoluzioniDisponibili
+print (listaRisoluzioniDisponibili)

@@ -45,6 +45,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"La tua stanza è già stata preparata, è l'ultima porta a destra di quel corridoio. Vai pure a cambiarti, questa è la chiave.")
             partiDialogo.append(dialogo)
             dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ok... a destra...")
+            partiDialogo.append(dialogo)
+            dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"E... nella porta in fondo al corridoio c'è il bagno se hai bisogno di darti una ripulita.")
             partiDialogo.append(dialogo)
@@ -77,7 +81,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ehm... salve...")
+            dialogo.append("Uhm... salve...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -326,7 +330,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ehm...")
+            dialogo.append("Uhm...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -638,7 +642,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Oh!!!")
+            dialogo.append(u"Ohhh!!!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -650,7 +654,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... <*>#italic#Mmh...<*> <*>#italic#Umpf...<*> Il soldato da cui hai preso quell'armatura d'acciao... dove l'hai seploto?")
+            dialogo.append(u"... <*>#italic#Umpf...<*> Il soldato da cui hai preso quell'armatura d'acciao... dove l'hai seploto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

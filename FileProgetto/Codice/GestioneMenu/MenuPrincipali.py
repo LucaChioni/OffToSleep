@@ -172,10 +172,10 @@ def menu(caricaSalvataggio, gameover):
     yInizialie = 0
     rxInizialie = 0
     ryInizialie = 0
+    # dimensione: 0-144 (=> 145 variabili)
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob
-    # porte(144-?) - cofanetti(?-?) // dimensione: 0-143 (=> 144 variabili) + porte e cofanetti
+    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello
     datiIniziali = [0, 1, xInizialie, yInizialie, 1, 48, 0, 0, 0, 0, 0,  # <- statistiche
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
@@ -184,7 +184,8 @@ def menu(caricaSalvataggio, gameover):
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- condizioni
         0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
-        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False, False  # <- info aggiunte per poter salvare ovunque
+        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False,  # <- info aggiunte per poter salvare ovunque
+        False, False  # <- pazzoStrabico e cambiataCastello
         ]
 
     # posizione porte e cofanetti nel vettore dati
@@ -769,9 +770,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         perssta = GlobalImgVar.sara1GrafMenu
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-        perssta = GlobalImgVar.sara3GrafMenu
-    else:
+        perssta = GlobalImgVar.saraSconvoltaGrafMenu
+    elif not GlobalGameVar.cambiataAlCastello[0]:
         perssta = GlobalImgVar.sara2GrafMenu
+    else:
+        perssta = GlobalImgVar.sara3GrafMenu
     robosta = GlobalImgVar.robograf1b
     puntatore = GlobalImgVar.puntatore
     puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -955,9 +958,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                             elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
                                 perssta = GlobalImgVar.sara1GrafMenu
                             elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-                                perssta = GlobalImgVar.sara3GrafMenu
-                            else:
+                                perssta = GlobalImgVar.saraSconvoltaGrafMenu
+                            elif not GlobalGameVar.cambiataAlCastello[0]:
                                 perssta = GlobalImgVar.sara2GrafMenu
+                            else:
+                                perssta = GlobalImgVar.sara3GrafMenu
                             robosta = GlobalImgVar.robograf1b
                             puntatore = GlobalImgVar.puntatore
                             puntatoreVecchio = GlobalImgVar.puntatorevecchio

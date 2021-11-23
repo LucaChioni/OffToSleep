@@ -101,22 +101,8 @@ def gameloop():
 
             gameover = False
             # controlla se devi cambiare personaggio giocabile
-            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Sara1"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                personaggioDaUsare = "FratelloMaggiore"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Sara1"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            else:
-                personaggioDaUsare = "Sara2"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
+            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0])
+            personaggioUsato = personaggioDaUsare
             caricaSalvataggio = False
             pers = GlobalImgVar.perss
             robot = GlobalImgVar.robos
@@ -150,6 +136,8 @@ def gameloop():
             else:
                 morterob = True
             GlobalGameVar.pazzoStrabico = dati[143]
+            GlobalGameVar.cambiataAlCastello[0] = dati[144]
+            GlobalGameVar.cambiataAlCastello[1] = dati[144]
 
             listaPersonaggi = []
             listaNemici = []
@@ -163,16 +151,8 @@ def gameloop():
         # caricare gli oggetti
         if carim:
             # aggiorno le img del personaggio giocabile
-            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Sara1"
-            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                personaggioDaUsare = "FratelloMaggiore"
-            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Sara1"
-            else:
-                personaggioDaUsare = "Sara2"
+            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0], personaggioUsato)
             if personaggioDaUsare != personaggioUsato:
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
                 npers = 4
 
@@ -306,6 +286,7 @@ def gameloop():
                         dati[137] = autoRic1
                         dati[138] = autoRic2
                         dati[143] = GlobalGameVar.pazzoStrabico
+                        dati[144] = GlobalGameVar.cambiataAlCastello[0]
                         GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
 
                 if cambiatoRisoluzione:
@@ -1521,6 +1502,7 @@ def gameloop():
             dati[137] = autoRic1
             dati[138] = autoRic2
             dati[143] = GlobalGameVar.pazzoStrabico
+            dati[144] = GlobalGameVar.cambiataAlCastello[0]
             # se c'è un nemico in caselleViste di Rallo => apri il menu di battaglia
             nemicoInCasellaVista = False
             colcoInCasellaVista = False
@@ -2396,22 +2378,8 @@ def gameloop():
             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
         elif cambiatoRisoluzione:
             # controlla se devi cambiare personaggio giocabile
-            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                personaggioDaUsare = "Sara1"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                personaggioDaUsare = "FratelloMaggiore"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                personaggioDaUsare = "Sara1"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
-            else:
-                personaggioDaUsare = "Sara2"
-                GenericFunc.cambiaProtagonista(personaggioDaUsare)
-                personaggioUsato = personaggioDaUsare
+            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0])
+            personaggioUsato = personaggioDaUsare
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)

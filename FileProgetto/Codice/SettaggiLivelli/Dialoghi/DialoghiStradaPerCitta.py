@@ -34,7 +34,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"... Da quello che so, tutti i passaggi verso oriente sono bloccati da molti anni...)")
+        dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"... Da quello che so, tutti i passaggi verso oriente sono bloccati da anni...)")
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloBloccoStrada":
         partiDialogo = []
@@ -127,7 +127,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Ehm ehm, dovrei passare...")
+                dialogo.append("<*>#italic#Ehm ehm,<*> dovrei passare...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

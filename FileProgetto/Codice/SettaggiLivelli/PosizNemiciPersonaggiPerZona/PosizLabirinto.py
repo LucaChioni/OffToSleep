@@ -20,7 +20,7 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             elif listaAvanzamentoDialoghi[i] == "Pazzo1-0":
                 avanzamentoDialogoPazzo = listaAvanzamentoDialoghi[i + 1]
             i += 2
-        if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["monologoUscitaLabirinto"] and 2 <= avanzamentoDialogoPazzo < 4:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoArrivoEsternoCastello"] and 2 <= avanzamentoDialogoPazzo < 4:
             percorsoPersonaggio = ["dGira", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 10, "d", "Pazzo1-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)

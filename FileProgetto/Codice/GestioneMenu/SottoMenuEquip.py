@@ -694,7 +694,7 @@ def equip(dati):
             if voceMarcata == 3:
                 if dati[43] != 0:
                     FunzioniGraficheGeneriche.messaggio("Spadone d'acciaio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Grande spadone in acciaio con ornamenti in oro. Rappresenta il modello di spada migliore mai prodotto dall'uomo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Grande spadone d'acciaio con ornamenti in oro. Studiato per permettere attacchi rapidi e potenti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 40 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 2:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
@@ -705,7 +705,7 @@ def equip(dati):
             if voceMarcata == 4:
                 if dati[44] != 0:
                     FunzioniGraficheGeneriche.messaggio("Lykother:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Spada molto leggera e affilata. Si dice essere stata ricavata da un dente di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Spada molto leggera e affilata. Sembra essere stata ricavata da un dente di una bestia enorme.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 90 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 3:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
@@ -759,7 +759,7 @@ def equip(dati):
             if voceMarcata == 9:
                 if dati[49] != 0:
                     FunzioniGraficheGeneriche.messaggio("Arco di precisione:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Sofisticato arco in legno e acciaio. Molto leggero e potente. Massima espressione dell'ingegno umano.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Sofisticato arco in legno e acciaio. Molto leggero e potente.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 90 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 3:
                         FunzioniGraficheGeneriche.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
@@ -802,7 +802,7 @@ def equip(dati):
             if voceMarcata == 13:
                 if dati[53] != 0:
                     FunzioniGraficheGeneriche.messaggio("Armatura d'acciaio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Grande armatura d'acciaio con ornamenti in oro. Usata solo dagli ufficiali dell'esercito.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Armatura d'acciaio con ornamenti in oro. Usata solo dagli ufficiali dell'esercito.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 40 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 2:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
@@ -813,7 +813,7 @@ def equip(dati):
             if voceMarcata == 14:
                 if dati[54] != 0:
                     FunzioniGraficheGeneriche.messaggio("Lykodes:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Armatura formata da materiali leggieri e resistenti. Si dice essere stata ricavata dalle ossa di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Armatura formata da materiali leggeri e resistenti. Sembra essere stata ricavata dalle ossa di una bestia.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 90 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 3:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
@@ -880,7 +880,7 @@ def equip(dati):
             if voceMarcata == 19:
                 if dati[59] != 0:
                     FunzioniGraficheGeneriche.messaggio("Lykethmos:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Scudo molto leggero e resistente. Si dice essere stato ricavato dalle ossa più resistenti di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Scudo molto leggero e resistente. Sembra essere stato ricavato dalle ossa più resistenti di una qualche bestia.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 45 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 3:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
@@ -1099,8 +1099,10 @@ def oggetti(dati, colcoInCasellaVista):
         perssta = GlobalImgVar.imgFraMaggioreMenuOggetti
     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         perssta = GlobalImgVar.imgSara1MenuOggetti
-    else:
+    elif not GlobalGameVar.cambiataAlCastello[0]:
         perssta = GlobalImgVar.imgSara2MenuOggetti
+    else:
+        perssta = GlobalImgVar.imgSara3MenuOggetti
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 6.2
     xpv = xp

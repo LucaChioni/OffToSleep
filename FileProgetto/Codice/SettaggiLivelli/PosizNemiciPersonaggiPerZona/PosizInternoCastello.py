@@ -416,6 +416,39 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggiTotali.append(personaggio)
     elif stanza == GlobalGameVar.dictStanze["internoCastello11"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+            if GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"]:
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = ["sGira", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2, "s", "ServoSpada-2", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
@@ -502,6 +535,23 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggiTotali.append(personaggio)
     elif stanza == GlobalGameVar.dictStanze["internoCastello16"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+            if GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"]:
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 10, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 11, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 12, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13, "s", "OggettoFinestraCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = ["dGira", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 8, "d", "ServoSpada-5", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
@@ -605,8 +655,8 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4, "d", "ServoLancia-11", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-            percorsoPersonaggio = ["sGira", "mantieniPosizione"]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 11, "s", "ServoSpada-8", stanza, avanzamentoStoria, percorsoPersonaggio)
+            percorsoPersonaggio = ["wGira", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 14, "w", "ServoSpada-8", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
@@ -626,10 +676,16 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
     elif stanza == GlobalGameVar.dictStanze["internoCastello20"]:
-        percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 13, "s", "OggettoLibreriaCastello-10", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ripresoImpoDaNeil"]:
+            percorsoPersonaggio = ["sGira", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 9, "s", "Neil-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+            percorsoPersonaggio = ["dGira", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12, "d", "Neil-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16, "s", "OggettoQuadro-11", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
@@ -647,11 +703,11 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 10, "s", "OggettoTavoloVuotoCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 10, "s", "OggettoTavoloVuotoCastelloA-0", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 10, "s", "OggettoTavoloVuotoCastello-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 10, "s", "OggettoTavoloVuotoCastelloB-0", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []

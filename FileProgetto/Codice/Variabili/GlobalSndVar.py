@@ -74,9 +74,12 @@ global rumoreAperturaCancelloCastello
 global rumorePortoniCambioStanza
 global suonoaperturaporteCastello
 global suonochiusuraporteCastello
+global rumoreMovimentoVestiti
+global rumoreCucchiaioSuPiatto
+global rumoreBussarePortaUfficioNeil
 
 
-numSndTotali = 66
+numSndTotali = 71
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -160,6 +163,9 @@ def loadSounds(numSndCaricato):
     global rumorePortoniCambioStanza
     global suonoaperturaporteCastello
     global suonochiusuraporteCastello
+    global rumoreMovimentoVestiti
+    global rumoreCucchiaioSuPiatto
+    global rumoreBussarePortaUfficioNeil
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -227,6 +233,8 @@ def loadSounds(numSndCaricato):
     rumoreSollevamentoPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SollevamentoPortaCittà.wav")
     rumoreChiusuraPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AbbassamentoPortaCittà.wav")
     rumoreDoccia = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DocciaCasaUfficiale.wav")
+    rumoreMovimentoVestiti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/MovimentoVestiti.wav")
+    rumoreCucchiaioSuPiatto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/CucchiaioSuPiatto.wav")
     rumoreLancioPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/LancioPallaBibliotecario.wav")
     rumoreRitornoPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RitornoPallaBibliotecario.wav")
     rumoreAppoggioStrumentoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AppaggioMatitaEnigmi.wav")
@@ -234,6 +242,7 @@ def loadSounds(numSndCaricato):
     rumoreScorrimentoGommaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScorrimentoGommaEnigmi.wav")
     rumoreCancellaTuttoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/CancellaTuttoEnigmi.wav")
     rumoreAperturaCancelloCastello = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCancelloCastello.wav")
+    rumoreBussarePortaUfficioNeil = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/BussarePortaUfficioNeil.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

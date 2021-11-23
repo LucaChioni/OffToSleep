@@ -255,7 +255,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Eccomi, ehm... bibliotecario.")
+            dialogo.append(u"Eccomi, uhm... bibliotecario.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -305,7 +305,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mh...<*>")
+            dialogo.append(u"Mh...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -387,7 +387,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mh...<*>")
+            dialogo.append(u"<*>#italic#Mmh...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -521,7 +521,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mh...<*>")
+            dialogo.append(u"Mh...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -599,7 +599,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mh...<*> e cosa dovrei consegnare?")
+            dialogo.append(u"... E cosa dovrei consegnare?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -658,7 +658,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa cinquant'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche anno prima. In realtà questa fu una delle poche specie a non soffrire per niente di quei disastri...")
+            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa vent'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche mese prima. In realtà questa fu una delle poche specie a non soffrire per niente di quei disastri...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
