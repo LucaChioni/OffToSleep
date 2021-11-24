@@ -138,7 +138,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ce l'abbiamo fatta! Alla fine non è stato così complicato, bastava seguire la mappa...")
+                dialogo.append(u"Ce l'abbiamo fatta!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Alla fine non è stato così complicato, bastava seguire la mappa...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

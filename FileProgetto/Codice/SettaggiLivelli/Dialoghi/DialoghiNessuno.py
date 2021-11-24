@@ -1467,7 +1467,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Non ce la faccio più con tutte queste scale... che senso ha abitare in un posto così grosso?)")
+                dialogo.append(u"(... Non ce la faccio più con tutte queste scale... che senso ha abitare in un posto così grande?)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 2 and y == GlobalHWVar.gpy * 4:
                 oggettoDato = False

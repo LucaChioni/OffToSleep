@@ -132,17 +132,25 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         if abs(x - rx) + abs(y - ry) <= GlobalHWVar.gpx:
             impoAccanto = True
         if impoAccanto:
-            i = 0
-            while i < 5:
-                pygame.time.wait(100)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                i += 1
-            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            avanzamentoStoria += 1
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["giratoVersoImpoPerDarloAlCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello18"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoConImpoPrimaDiLasciarloAlleGuardieCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello18"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         avanzamentoStoria += 1
         i = 0
         while i < len(tutteporte):

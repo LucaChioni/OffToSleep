@@ -101,7 +101,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Ohh!<*> L'uscita, ce l'abbiamo fatta!")
+                dialogo.append(u"Ohhh, l'uscita! Ce l'abbiamo fatta.")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

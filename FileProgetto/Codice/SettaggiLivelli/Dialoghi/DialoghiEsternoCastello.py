@@ -195,7 +195,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"... \"Certificato di residenza\"... Non è valido.")
+                        dialogo.append(u"... \"Certificato di residenza\"... non è valido.")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")

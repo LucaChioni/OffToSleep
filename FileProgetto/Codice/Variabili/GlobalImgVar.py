@@ -262,7 +262,7 @@ global imgImpoPietra
 global imgChiaveStanzaCastello
 global imgListaStrumentiStudioImpo
 
-numImgTotali = 1763
+numImgTotali = 1764
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)

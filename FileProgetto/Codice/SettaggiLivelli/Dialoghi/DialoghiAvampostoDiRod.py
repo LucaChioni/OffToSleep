@@ -88,11 +88,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Un avamposto... certo! Come ho fatto a non capirlo? Ha proprio l'aspetto di un classico avamposto.")
+                dialogo.append(u"Un avamposto... certo! Come ho fatto a non capirlo? Ha proprio l'aspetto di un classico avamposto...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non è un \"classico\" avamposto. È molto di più! Come credi che possa sostenersi l'intero ecosistema di questa regione?!")
+                dialogo.append(u"Non è un \"classico\" avamposto. È molto di più! Come credi che possa sostenersi l'intero ecosistema di questa regione?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -172,11 +172,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"No, no. Certo... ma sappi che potresti spillargli un bel po' di monete a quel vecchio trombone.")
+                dialogo.append(u"No, no. Certo... ma sappi che, se ti presentassi a nome della confraternita, avresti un potere contrattuale enorme... potresti spillargli un bel po' di monete a quel vecchio trombone.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Vecchio trombone?")
+                dialogo.append(u"... Vecchio trombone?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -184,11 +184,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, avevo... non importa. Sai da che parte è il lago?")
+                dialogo.append(u"Sì, avevo... non importa, non m'interessa Rod. Sai da che parte è il lago?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non devi andare verso il lago. Quella è una vecchia stradina non più percorribile al giorno d'oggi. Per andare da Neil devi per forza attraversare il labirinto.")
+                dialogo.append(u"... Non devi andare verso il lago. Quella è una vecchia stradina non più percorribile al giorno d'oggi. Per andare da Neil devi per forza attraversare il labirinto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -212,11 +212,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non devi memorizzarle tutte. E poi non sei obbligata ad accettare, è solo un'opzione che ti offro. Puoi anche rifiutare se credi che non ti serva, ma sappi che, una volta entrata, sarà molto difficile uscire... potresti persino morirci là dentro.")
+                dialogo.append(u"Non devi memorizzarle tutte. E poi non sei obbligata ad accettare, è solo un'opzione che ti offro. Puoi anche rifiutare se credi che non ti serva... ma sappi che ci sono morte molte persone là dentro...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"E tu mi lasceresti morire?")
+                dialogo.append(u"... E tu mi lasceresti morire?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -259,7 +259,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Oh, non è stato così difficile, eh?")
+                    dialogo.append(u"Ohh, non è stato così difficile, eh?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")

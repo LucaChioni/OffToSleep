@@ -419,6 +419,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["bloccatoDaGuardiaCastelloInInternoCastello18"] = i
     i += 1
+    dictAvanzamentoStoria["giratoVersoImpoPerDarloAlCastello"] = i
+    i += 1
     dictAvanzamentoStoria["monologoConImpoPrimaDiLasciarloAlleGuardieCastello"] = i
     i += 1
     dictAvanzamentoStoria["guardiaCastelloChiusoPortaLibreriaInternoCastello18"] = i
