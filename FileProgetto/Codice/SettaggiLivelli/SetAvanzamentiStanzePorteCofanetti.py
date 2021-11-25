@@ -495,6 +495,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoUscitaStudioDiNeil"] = i
     i += 1
+    dictAvanzamentoStoria["monologoNotatoAscensore"] = i
+    i += 1
     dictAvanzamentoStoria["monologoUscitaCastello"] = i
     i += 1
     dictAvanzamentoStoria["monologoNotatoScorciatoiaLabirinto"] = i
@@ -844,14 +846,14 @@ def definisciStanze():
     i += 1
     dictStanze["internoCastello22"] = i
     vetStanzePacifiche.append(i)
-
-    i += 100
     i += 1
     dictStanze["scorciatoiaLabirinto1"] = i
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["scorciatoiaLabirinto2"] = i
     vetStanzePacifiche.append(i)
+
+    i += 100
     i += 1
     dictStanze["stradaPerPassoMontano1"] = i
     vetStanzePacifiche.append(i)

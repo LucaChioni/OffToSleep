@@ -317,7 +317,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         if tipo == "OggettoImpo":
             partiDialogo = []
             nome = "Impo"
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaStudioDiNeil"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAscensore"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False

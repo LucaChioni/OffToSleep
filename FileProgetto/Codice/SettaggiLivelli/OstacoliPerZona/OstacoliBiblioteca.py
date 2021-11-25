@@ -5,7 +5,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
 
 
-def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
+def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria):
     if stanza == GlobalGameVar.dictStanze["biblioteca1"]:
         # bordi stanza
         if not escludiOggettiBassi:

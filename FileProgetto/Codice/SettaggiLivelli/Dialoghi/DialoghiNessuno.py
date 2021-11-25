@@ -940,14 +940,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Questo soldato si è messo prorio davanti alla porta e non mi fa passare...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
-            if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 14:
+            if (x == GlobalHWVar.gpx * 13 or x == GlobalHWVar.gpx * 14) and y == GlobalHWVar.gpy * 15:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                dialogo.append(u"(Non si apre...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello3"]:
             if x == GlobalHWVar.gpx * 29 and y == GlobalHWVar.gpy * 12:
@@ -1293,7 +1293,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... <*>#italic#Yaaawn...<*> non capisco se è giorno o è ancora notte... in questo posto ci sono pochissime finestre...)")
+                dialogo.append(u"(... Non capisco se è giorno o è ancora notte. Perché in questo posto non ci sono finestre?)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1653,14 +1653,23 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Ok... Neil è... credo che abbia fatto tutte le operazioni descritte in quel libro direttamente su se stesso...)")
                 partiDialogo.append(dialogo)
-            elif x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 5:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaStudioDiNeil"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Oh, è quello il piano ascansore?)")
+                partiDialogo.append(dialogo)
+            elif (x == GlobalHWVar.gpx * 10 or x == GlobalHWVar.gpx * 11) and y == GlobalHWVar.gpy * 3:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È chiuso a chiave...)")
+                dialogo.append(u"(Non si apre...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 16:
                 oggettoDato = False

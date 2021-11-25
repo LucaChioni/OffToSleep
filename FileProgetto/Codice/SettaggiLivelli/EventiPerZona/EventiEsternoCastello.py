@@ -91,7 +91,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzaIlTurnoSenzaMuoverti = True
             carim = True
             caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaStudioDiNeil"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAscensore"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
