@@ -167,6 +167,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         for personaggio in listaPersonaggi:
             if personaggio.tipoId == "ServoLancia-6" or personaggio.tipoId == "ServoArco-3":
                 personaggio.avanzamentoDialogo = 2
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "ServoLancia-6" or listaAvanzamentoDialoghi[i] == "ServoArco-3":
+                listaAvanzamentoDialoghi[i + 1] = 2
+                break
+            i += 2
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -175,6 +181,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         for personaggio in listaPersonaggi:
             if personaggio.tipoId == "ServoLancia-6" or personaggio.tipoId == "ServoArco-3":
                 personaggio.avanzamentoDialogo = 1
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "ServoLancia-6" or listaAvanzamentoDialoghi[i] == "ServoArco-3":
+                listaAvanzamentoDialoghi[i + 1] = 1
+                break
+            i += 2
         nonMostrarePersonaggio = True
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["internoCastello7"]

@@ -185,6 +185,17 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["andatoADormireCasaDavid"] = i
     i += 1
+    dictAvanzamentoStoria["inizioSognoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["hansUscitoCamerettaSognoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoHansUscitoCamerettaSognoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["hansUscitoCasaSognoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["fineSognoCasaDavid"] = i
     dictAvanzamentoStoria["inizioSecondoGiorno"] = i
     dictAvanzamentoStoria["mercantePozione"] = i
     dictAvanzamentoStoria["mercanteMedicina"] = i
@@ -451,6 +462,10 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoAndatoALettoCastello"] = i
     i += 1
+    dictAvanzamentoStoria["inizioSognoCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["fineSognoCastello"] = i
+    i += 1
     dictAvanzamentoStoria["dormitoNelCastello"] = i
     dictAvanzamentoStoria["servoLanciaTornatoAlCancello"] = i
     i += 1
@@ -500,6 +515,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoUscitaCastello"] = i
     i += 1
     dictAvanzamentoStoria["monologoNotatoScorciatoiaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoMetaScorciatoiaLabirinto"] = i
 
     i += 100
     i += 1

@@ -16,6 +16,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliAvampostoDiRod as Ostacoli
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliLabirinto as OstacoliLabirinto
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliEsternoCastello as OstacoliEsternoCastello
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliInternoCastello as OstacoliInternoCastello
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliScorciatoiaLabirinto as OstacoliScorciatoiaLabirinto
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -1385,6 +1386,19 @@ def getEntrateStanze(stanza, avanzamentoStoria):
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["internoCastello19"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 3, 0, -GlobalHWVar.gpy, -1])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 4, +GlobalHWVar.gpx, 0, -1])
+    elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+        if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 12, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["esternoCastello1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]])
+        elif stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
 
     return entrateStanza
 
@@ -1437,6 +1451,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliEsternoCastello.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello22"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliInternoCastello.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliScorciatoiaLabirinto.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):

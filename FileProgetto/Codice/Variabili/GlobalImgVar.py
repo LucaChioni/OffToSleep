@@ -262,7 +262,7 @@ global imgImpoPietra
 global imgChiaveStanzaCastello
 global imgListaStrumentiStudioImpo
 
-numImgTotali = 1764
+numImgTotali = 1777
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -1060,7 +1060,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False)
 
     # img personaggi
-    vettoreNomiPersonaggi = ["Alieno1", "Alieno2", "AssistBiblioteca", "Bibliotecario", "CaneCasa", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada"]
+    vettoreNomiPersonaggi = ["Alieno1", "Alieno2", "AssistBiblioteca", "Bibliotecario", "CaneCasa", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada", "FratelloMaggiore"]
     dictionaryImgPersonaggi = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
         dictionaryImgPosizioni = {}
@@ -1094,7 +1094,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         dictionaryImgPersonaggi[nomePersonaggi] = dictionaryImgPosizioni
     dictImgPersonaggiDiario = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
-        if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada":
+        if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada" and nomePersonaggi != "FratelloMaggiore":
             imgPersonaggi = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/" + nomePersonaggi + "GrafMenu.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
             dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
     fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)

@@ -202,7 +202,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "OggettoPadreUfficialeSeduto":
                     listaPersonaggi.remove(personaggio)
                     break
-            percorsoPersonaggio = ["d", "w", "d", "w", "d", "w", "d", "d", "d", "d", "s"]
+            percorsoPersonaggio = ["d", "w", "d", "w", "d", "w", "d", "d", "d", "d", "sGira"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 20, GlobalHWVar.gpy * 7, "w", "PadreUfficialeCasa-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
             listaPersonaggi.append(personaggio)
@@ -246,9 +246,14 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
 
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        nonMostrarePersonaggio = True
         avanzamentoStoria += 1
-        stanza = GlobalGameVar.dictStanze["casaDavid3"]
+        # chiudo tutte le porte di casaHansSara tranne la cameretta
+        i = 0
+        while i < len(tutteporte):
+            if tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and not (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
+                tutteporte[i + 3] = False
+            i += 4
+        stanza = GlobalGameVar.dictStanze["casaHansSara1"]
         cambiosta = True
         carim = True
         caricaTutto = True

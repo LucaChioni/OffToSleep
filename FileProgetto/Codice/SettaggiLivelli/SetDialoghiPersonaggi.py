@@ -15,6 +15,7 @@ import Codice.SettaggiLivelli.Dialoghi.DialoghiAvampostoDiRod as DialoghiAvampos
 import Codice.SettaggiLivelli.Dialoghi.DialoghiLabirinto as DialoghiLabirinto
 import Codice.SettaggiLivelli.Dialoghi.DialoghiEsternoCastello as DialoghiEsternoCastello
 import Codice.SettaggiLivelli.Dialoghi.DialoghiInternoCastello as DialoghiInternoCastello
+import Codice.SettaggiLivelli.Dialoghi.DialoghiScorciatoiaLabirinto as DialoghiScorciatoiaLabirinto
 
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -118,6 +119,8 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiEsternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello22"]:
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiInternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+    elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiScorciatoiaLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
 

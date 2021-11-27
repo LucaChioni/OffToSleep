@@ -989,6 +989,9 @@ def gameloop():
                 bottoneDown = False
             if bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato:
                 if inquadratoQualcosa == "saltaTurno":
+                    GlobalHWVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
                     sposta = True
                     saltaTurno = True
@@ -1477,135 +1480,139 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1 and dati[5] > 0:
-            if not (GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]):
-                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
-            refreshSchermo = True
-            dati[2] = x
-            dati[3] = y
-            dati[140] = npers
-            dati[134] = rx
-            dati[135] = ry
-            # 1->d , 2->a , 3->s , 4->w
-            if robot == GlobalImgVar.robod:
-                dati[141] = 1
-            elif robot == GlobalImgVar.roboa:
-                dati[141] = 2
-            elif robot == GlobalImgVar.robos:
-                dati[141] = 3
-            elif robot == GlobalImgVar.robow:
-                dati[141] = 4
-            elif robot == GlobalImgVar.robomo:
-                dati[141] = 0
-            dati[142] = chiamarob
-            dati[139] = mosseRimasteRob
-            dati[136] = raffredda
-            dati[137] = autoRic1
-            dati[138] = autoRic2
-            dati[143] = GlobalGameVar.pazzoStrabico
-            dati[144] = GlobalGameVar.cambiataAlCastello[0]
-            # se c'è un nemico in caselleViste di Rallo => apri il menu di battaglia
-            nemicoInCasellaVista = False
-            colcoInCasellaVista = False
-            i = 0
-            while i < len(casevisteDaRallo):
-                for nemico in listaNemici:
-                    if nemico.x == casevisteDaRallo[i] and nemico.y == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
-                        nemicoInCasellaVista = True
-                        break
-                if rx == casevisteDaRallo[i] and ry == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
-                    colcoInCasellaVista = True
-                i += 3
-            if not nemicoInCasellaVista:
-                # aggiorna img mappa
-                imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
-                aggiornaImgEquip = True
-                dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
-                if caricaSalvataggio:
-                    inizio = True
-                if attacco == 0:
-                    uscitoDaMenu = 2
-                if not inizio:
-                    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
+            possibileAprireMenu = SetPosizioneAudioImpedimenti.decidiSePoterAprireMenu(dati[0])
+            if possibileAprireMenu:
+                if not (GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]):
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
+                refreshSchermo = True
+                dati[2] = x
+                dati[3] = y
+                dati[140] = npers
+                dati[134] = rx
+                dati[135] = ry
+                # 1->d , 2->a , 3->s , 4->w
+                if robot == GlobalImgVar.robod:
+                    dati[141] = 1
+                elif robot == GlobalImgVar.roboa:
+                    dati[141] = 2
+                elif robot == GlobalImgVar.robos:
+                    dati[141] = 3
+                elif robot == GlobalImgVar.robow:
+                    dati[141] = 4
+                elif robot == GlobalImgVar.robomo:
+                    dati[141] = 0
+                dati[142] = chiamarob
+                dati[139] = mosseRimasteRob
+                dati[136] = raffredda
+                dati[137] = autoRic1
+                dati[138] = autoRic2
+                dati[143] = GlobalGameVar.pazzoStrabico
+                dati[144] = GlobalGameVar.cambiataAlCastello[0]
+                # se c'è un nemico in caselleViste di Rallo => apri il menu di battaglia
+                nemicoInCasellaVista = False
+                colcoInCasellaVista = False
+                i = 0
+                while i < len(casevisteDaRallo):
+                    for nemico in listaNemici:
+                        if nemico.x == casevisteDaRallo[i] and nemico.y == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
+                            nemicoInCasellaVista = True
+                            break
+                    if rx == casevisteDaRallo[i] and ry == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
+                        colcoInCasellaVista = True
+                    i += 3
+                if not nemicoInCasellaVista:
+                    # aggiorna img mappa
+                    imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
+                    aggiornaImgEquip = True
+                    dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
+                    if caricaSalvataggio:
+                        inizio = True
+                    if attacco == 0:
+                        uscitoDaMenu = 2
+                    if not inizio:
+                        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
+                else:
+                    dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, imgMappa, imgMappaZoom)
+                    # cambiare posizione dopo l'uso di caricabatterie
+                    if npers == 3:
+                        pers = GlobalImgVar.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalImgVar.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalImgVar.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalImgVar.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
+                    caricaTutto = True
+                x = dati[2]
+                y = dati[3]
+                rx = dati[134]
+                ry = dati[135]
+                nrob = dati[141]
+
+                # se robo è morto e non lo è più quando esci dal menu rimetti le img giuste del robo
+                if morterob and dati[10] > 0:
+                    robot = GlobalImgVar.robos
+                    armrob = armrobs
+
+                carim = True
             else:
-                dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, imgMappa, imgMappaZoom)
-                # cambiare posizione dopo l'uso di caricabatterie
-                if npers == 3:
-                    pers = GlobalImgVar.persw
-                    arma = armaw
-                    armaMov1 = armawMov1
-                    armaMov2 = armawMov2
-                    armaAttacco = armawAttacco
-                    armatura = armaturaw
-                    scudo = scudow
-                    arco = arcow
-                    faretra = faretraw
-                    arcoAttacco = arcowAttacco
-                    guanti = guantiw
-                    guantiMov1 = guantiwMov1
-                    guantiMov2 = guantiwMov2
-                    guantiAttacco = guantiwAttacco
-                    collana = collanaw
-                if npers == 2:
-                    pers = GlobalImgVar.persa
-                    arma = armaa
-                    armaMov1 = armaaMov1
-                    armaMov2 = armaaMov2
-                    armaAttacco = armaaAttacco
-                    armatura = armaturaa
-                    scudo = scudoa
-                    arco = arcoa
-                    faretra = faretraa
-                    arcoAttacco = arcoaAttacco
-                    guanti = guantia
-                    guantiMov1 = guantiaMov1
-                    guantiMov2 = guantiaMov2
-                    guantiAttacco = guantiaAttacco
-                    collana = collanaa
-                if npers == 4:
-                    pers = GlobalImgVar.perss
-                    arma = armas
-                    armaMov1 = armasMov1
-                    armaMov2 = armasMov2
-                    armaAttacco = armasAttacco
-                    armatura = armaturas
-                    scudo = scudos
-                    arco = arcos
-                    faretra = faretras
-                    arcoAttacco = arcosAttacco
-                    guanti = guantis
-                    guantiMov1 = guantisMov1
-                    guantiMov2 = guantisMov2
-                    guantiAttacco = guantisAttacco
-                    collana = collanas
-                if npers == 1:
-                    pers = GlobalImgVar.persd
-                    arma = armad
-                    armaMov1 = armadMov1
-                    armaMov2 = armadMov2
-                    armaAttacco = armadAttacco
-                    armatura = armaturad
-                    scudo = scudod
-                    arco = arcod
-                    faretra = faretrad
-                    arcoAttacco = arcodAttacco
-                    guanti = guantid
-                    guantiMov1 = guantidMov1
-                    guantiMov2 = guantidMov2
-                    guantiAttacco = guantidAttacco
-                    collana = collanad
-                caricaTutto = True
-            x = dati[2]
-            y = dati[3]
-            rx = dati[134]
-            ry = dati[135]
-            nrob = dati[141]
-
-            # se robo è morto e non lo è più quando esci dal menu rimetti le img giuste del robo
-            if morterob and dati[10] > 0:
-                robot = GlobalImgVar.robos
-                armrob = armrobs
-
-            carim = True
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             startf = False
 
         # morte tua e di robo

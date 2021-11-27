@@ -151,6 +151,16 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "s"
                     x = GlobalHWVar.gsx // 32 * 4
                     y = GlobalHWVar.gsy // 18 * 14
+                if stanzaVecchia == GlobalGameVar.dictStanze["casaDavid3"]:
+                    npers = "w"
+                    x = GlobalHWVar.gsx // 32 * 6
+                    y = GlobalHWVar.gsy // 18 * 13
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 30:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
         if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
             nomeCanzoneLuogo = "03-EsterniPacifici"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -1119,9 +1129,24 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         x = GlobalHWVar.gsx // 32 * 8
                         y = GlobalHWVar.gsy // 18 * 5
                     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                        i = 0
+                        while i < 15:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
                         npers = "a"
                         x = GlobalHWVar.gsx // 32 * 10
                         y = GlobalHWVar.gsy // 18 * 4
+                if stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpy * 10
+                    y = GlobalHWVar.gpy * 4
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
     elif GlobalGameVar.dictStanze["biblioteca1"] <= stanza <= GlobalGameVar.dictStanze["biblioteca3"]:
         if stanza == GlobalGameVar.dictStanze["biblioteca1"]:
             nomeCanzoneLuogo = "07-Biblioteca"
@@ -3129,6 +3154,59 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "d"
                     x = GlobalHWVar.gpx * 12
                     y = GlobalHWVar.gpy * 10
+    elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+        if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+            nomeCanzoneLuogo = "03-EsterniPacifici"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "ScorciatoiaLabirinto/Stanza1"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y = GlobalHWVar.gpy * 12
+                if stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+            nomeCanzoneLuogo = "03-EsterniPacifici"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "ScorciatoiaLabirinto/Stanza2"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 2
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -3165,10 +3243,12 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Avamposto di Rod"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["labirinto3"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["labirinto20"]):
         nomeDaScrivere = u"Labirinto"
-    elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]):
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]):
         nomeDaScrivere = u"Castello di Neil - Esterno"
     elif stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
         nomeDaScrivere = u"Castello di Neil - Interno"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]):
+        nomeDaScrivere = u"Scorciatoia sulle montagne"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -3195,6 +3275,8 @@ def decidiSeStoppareMusica(stanza, avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
         stoppaMusica = True
     elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riavviatoMusicaPostDialogoBibliotecario"]:
+        stoppaMusica = True
+    elif stanza == GlobalGameVar.dictStanze["casaHansSara1"] and GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCasaDavid"]:
         stoppaMusica = True
 
     return stoppaMusica
@@ -3338,6 +3420,8 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
         procedi = False
     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoMazzoDi3ChiaviCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello8"] and xPorta == GlobalHWVar.gpx * 7 and yPorta == GlobalHWVar.gpy * 7:
         procedi = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"] and ((xPorta == GlobalHWVar.gpx * 25 and yPorta == GlobalHWVar.gpy * 3) or (xPorta == GlobalHWVar.gpx * 7 and yPorta == GlobalHWVar.gpy * 6)):
+        procedi = False
 
     return procedi
 
@@ -3347,8 +3431,10 @@ def settaNomeStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             nomeStanza = "StanzaA"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"]:
             nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             nomeStanza = "StanzaA"
@@ -3524,3 +3610,13 @@ def settaPresenzaDiColco(avanzamentoStoria):
         GlobalGameVar.impoPresente = True
     else:
         GlobalGameVar.impoPresente = False
+
+
+def decidiSePoterAprireMenu(avanzamentoStoria):
+    possibileAprireMenu = True
+    if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCasaDavid"]:
+        possibileAprireMenu = False
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
+        possibileAprireMenu = False
+
+    return possibileAprireMenu

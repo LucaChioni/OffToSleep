@@ -2,6 +2,7 @@
 
 import pygame
 import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -95,7 +96,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     listaPersonaggiTotali.remove(personaggio)
                     break
             avanzamentoStoria += 1
+            carim = True
             caricaTutto = True
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoAlzatoDalLetto"] and stanza == GlobalGameVar.dictStanze["città4"]:
         # resetto avanzamento dialoghi dei 2 soldati all'ingresso città1
         i = 0
