@@ -282,6 +282,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoAndatoALettoCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
+        # chiudo la porta della tua stanza nel castello
         i = 0
         while i < len(tutteporte):
             if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello10"] and tutteporte[i + 1] == GlobalHWVar.gpx * 8 and tutteporte[i + 2] == GlobalHWVar.gpy * 5:
@@ -289,9 +290,14 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     tutteporte[i + 3] = False
                 break
             i += 4
-        nonMostrarePersonaggio = True
+        # chiudo tutte le porte di casaHansSara tranne la cameretta e la porta della tua stanza del castello
+        i = 0
+        while i < len(tutteporte):
+            if tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and not (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
+                tutteporte[i + 3] = False
+            i += 4
         avanzamentoStoria += 1
-        stanza = GlobalGameVar.dictStanze["internoCastello10"]
+        stanza = GlobalGameVar.dictStanze["casaHansSara1"]
         cambiosta = True
         carim = True
         caricaTutto = True

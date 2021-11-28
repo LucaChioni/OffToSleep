@@ -71,7 +71,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoHansUscitoCamerettaSognoCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
         personaggioArrivato = False
         for personaggio in listaPersonaggi:
-            if personaggio.tipo == "FratelloMaggiore" and personaggio.x == GlobalHWVar.gpx * 8 and personaggio.y == GlobalHWVar.gpy * 8:
+            if personaggio.tipo == "FratelloMaggiore" and personaggio.x == GlobalHWVar.gpx * 9 and personaggio.y == GlobalHWVar.gpy * 8:
                 personaggioArrivato = True
                 break
         if personaggioArrivato:
@@ -105,5 +105,71 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         cambiosta = True
         carim = True
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "FratelloMaggiore" and personaggio.x == GlobalHWVar.gpx * 6 and personaggio.y == GlobalHWVar.gpy * 9:
+                personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            avanzamentoStoria += 1
+        else:
+            i = 0
+            while i < 15:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            avanzaIlTurnoSenzaMuoverti = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["hansUscitoCamerettaSognoCastello"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "FratelloMaggiore-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoHansUscitoCamerettaSognoCastello"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "FratelloMaggiore" and personaggio.x == GlobalHWVar.gpx * 9 and personaggio.y == GlobalHWVar.gpy * 8:
+                personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            avanzamentoStoria += 1
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCastello"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "FratelloMaggiore" and personaggio.x == GlobalHWVar.gpx * 16 and personaggio.y == GlobalHWVar.gpy * 15 and personaggio.direzione == "s":
+                personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansSara1"] and personaggio.tipo == "FratelloMaggiore":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansSara1"] and personaggio.tipo == "FratelloMaggiore":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["hansUscitoCasaSognoCastello"] and stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "FratelloMaggiore" and personaggio.y == GlobalHWVar.gpy * 15:
+                personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansSara2"] and personaggio.tipo == "FratelloMaggiore":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansSara2"] and personaggio.tipo == "FratelloMaggiore":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco

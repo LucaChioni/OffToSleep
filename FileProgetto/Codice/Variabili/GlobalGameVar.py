@@ -199,7 +199,7 @@ initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(
 vitaTotEsche = 300
 
 # danno mortale (viene usato per la storia)
-dannoMortale = 10000
+dannoMortale = 100000
 
 # costi servizi di Rod
 monetePerEntrareNellaConfraternita = 200

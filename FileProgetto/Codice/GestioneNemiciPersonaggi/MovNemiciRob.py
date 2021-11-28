@@ -6,7 +6,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
-def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste, avanzamentoStoria):
+def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste, impossibileParare):
     sposta = False
     attacca = False
     nmos = 0
@@ -14,10 +14,6 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
     nmy = 0
     avvelena = nemico.velenoso
     surriscalda = nemico.surriscaldante
-
-    impossibileParare = False
-    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"]:
-        impossibileParare = True
 
     if nemico.obbiettivo[0] == "Esca" or nemico.obbiettivo[0] == "Colco" or nemico.obbiettivo[0] == "Rallo":
         nemico.triggerato = True

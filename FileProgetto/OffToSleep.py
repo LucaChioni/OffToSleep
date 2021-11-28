@@ -2129,6 +2129,7 @@ def gameloop():
                 else:
                     nemico.visto = False
             # movimento-azioni mostri
+            impossibileParare = SetPosizioneAudioImpedimenti.decidiSePoterParare(dati[0])
             if len(listaNemici) > 0 and not cambiosta:
                 for nemico in listaNemici:
                     if nemico.avvelenato and sposta and nemico.vita > 0:
@@ -2150,7 +2151,7 @@ def gameloop():
                             nemico.settaObbiettivo(x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste)
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y
-                            nemico, direzioneMostro, dati, vettoreEsche = MovNemiciRob.movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste, dati[0])
+                            nemico, direzioneMostro, dati, vettoreEsche = MovNemiciRob.movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste, impossibileParare)
                             if direzioneMostro == 1:
                                 nemico.girati("d")
                             elif direzioneMostro == 2:
