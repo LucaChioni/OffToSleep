@@ -119,7 +119,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Quindi... sei riuscito a capire cosa è successo a questo posto?")
+                dialogo.append(u"Quindi... sei riuscito a capire cos'è successo a questo posto?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -147,7 +147,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non iniziare con queste cose! Anch'io li ho sentiti. Sono solo complottisti che si inventano delle teorie per farsi ascoltare da qualcuno. Non fidarti di quelli.")
+                dialogo.append(u"Non iniziare con queste cose! Anch'io li ho sentiti. Sono solo complottisti che s'inventano delle teorie per farsi ascoltare da qualcuno. Non fidarti di quelli.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

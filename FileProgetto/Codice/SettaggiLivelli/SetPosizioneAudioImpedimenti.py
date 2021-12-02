@@ -1054,6 +1054,12 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     elif x == GlobalHWVar.gsx // 32 * 29:
                         x = GlobalHWVar.gsx // 32 * 28
                 if stanzaVecchia == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 15:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
                     npers = "s"
                     x = GlobalHWVar.gsx // 32 * 14
                     y = GlobalHWVar.gsy // 18 * 5
@@ -1220,11 +1226,35 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             # posizione personaggio e robot al cambio stanza
             if not inizio:
                 if stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"]:
+                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"]:
+                        i = 0
+                        while i < 10:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
+                        i = 0
+                        while i < 10:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
                     npers = "a"
                     x = GlobalHWVar.gsx // 32 * 20
                     y = GlobalHWVar.gsy // 18 * 9
                 elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
                     mantieniPosizioneImpo = True
+                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+                        i = 0
+                        while i < 2:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
+                        i = 0
+                        while i < 3:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
     elif GlobalGameVar.dictStanze["stradaPerSelvaArida1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
         if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
             nomeCanzoneLuogo = "03-EsterniPacifici"
@@ -3152,9 +3182,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalHWVar.gpx * 2
                     y = GlobalHWVar.gpy * 4
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"]:
-                    npers = "d"
+                    mantieniPosizioneImpo = True
+                    npers = "w"
                     x = GlobalHWVar.gpx * 12
                     y = GlobalHWVar.gpy * 10
+                    i = 0
+                    while i < 2:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
+                    i = 0
+                    while i < 3:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
             nomeCanzoneLuogo = "03-EsterniPacifici"
@@ -3492,7 +3534,7 @@ def settaNomeStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["casaDavid2"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostCambioPerCenaDavid"]:
             nomeStanza = "StanzaA"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaB"

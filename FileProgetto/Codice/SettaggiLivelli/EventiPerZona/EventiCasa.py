@@ -19,11 +19,10 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoLettoSara-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-
+        caricaTutto = True
         if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
             GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
             GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
-        caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara1"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"] and x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 8:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

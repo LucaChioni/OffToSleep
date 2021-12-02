@@ -171,7 +171,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         while i < len(listaAvanzamentoDialoghi):
             if listaAvanzamentoDialoghi[i] == "ServoLancia-6" or listaAvanzamentoDialoghi[i] == "ServoArco-3":
                 listaAvanzamentoDialoghi[i + 1] = 2
-                break
             i += 2
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
@@ -185,7 +184,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         while i < len(listaAvanzamentoDialoghi):
             if listaAvanzamentoDialoghi[i] == "ServoLancia-6" or listaAvanzamentoDialoghi[i] == "ServoArco-3":
                 listaAvanzamentoDialoghi[i + 1] = 1
-                break
             i += 2
         nonMostrarePersonaggio = True
         avanzamentoStoria += 1
@@ -414,18 +412,31 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ripresoImpoDaNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["internoCastello20"]
+        rx = GlobalHWVar.gpx * 12
+        ry = GlobalHWVar.gpy * 9
+        nrob = 2
         cambiosta = True
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
-        i = 0
-        while i < 5:
-            pygame.time.wait(100)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            i += 1
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        caricaTutto = True
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipoId == "Neil-0":
+                if personaggio.x == GlobalHWVar.gpx * 15 and personaggio.y == GlobalHWVar.gpy * 12 and personaggio.direzione == "d":
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRipresoImpoDaNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello19"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

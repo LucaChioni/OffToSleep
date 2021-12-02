@@ -2,6 +2,7 @@
 
 import pygame
 import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -11,8 +12,6 @@ import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
-        screen = GlobalHWVar.schermo.copy().convert()
-
         i = 0
         while i < 20:
             pygame.time.wait(100)
@@ -20,12 +19,10 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "PadreUfficialeServizio-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-
-        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
-        GlobalHWVar.aggiornaSchermo()
-        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
         caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"]:
+            GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoArrivoCasaConDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
         padreArrivato = False
         for personaggio in listaPersonaggi:
@@ -57,6 +54,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             for personaggio in listaPersonaggi:
                 if personaggio.tipo == "PadreUfficialeServizio":
                     personaggio.percorso = ["sGira", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 0
                     personaggio.girati("s")
                     break
             avanzamentoStoria += 1
@@ -64,6 +62,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         for personaggio in listaPersonaggi:
             if personaggio.tipo == "PadreUfficialeServizio":
                 personaggio.percorso = ["aGira", "mantieniPosizione"]
+                personaggio.numeroMovimento = 0
             if personaggio.tipo == "ServoDavid" and personaggio.x == GlobalHWVar.gpx * 19 and personaggio.y == GlobalHWVar.gpx * 2:
                 personaggio.percorso = ["s", "s", "d", "mantieniPosizione"]
                 personaggio.numeroMovimento = 0
@@ -99,10 +98,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and personaggio.tipo == "PadreUfficialeServizio":
-                listaPersonaggiTotali.remove(personaggio)
-                break
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -232,19 +227,19 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        # avanzo col dialogo il servo nella prima stanza (sennò si bugga il dialogo)
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.tipo == "ServoDavid" and personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"]:
-                personaggio.avanzamentoDialogo = 1
-                break
-        i = 0
-        while i < len(listaAvanzamentoDialoghi):
-            if listaAvanzamentoDialoghi[i] == "ServoDavid_0":
-                listaAvanzamentoDialoghi[i + 1] = 1
-                break
-            i += 2
-
         caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"]:
+            # avanzo col dialogo il servo nella prima stanza (sennò si bugga il dialogo)
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.tipo == "ServoDavid" and personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"]:
+                    personaggio.avanzamentoDialogo = 1
+                    break
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if listaAvanzamentoDialoghi[i] == "ServoDavid_0":
+                    listaAvanzamentoDialoghi[i + 1] = 1
+                    break
+                i += 2
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         avanzamentoStoria += 1
         # chiudo tutte le porte di casaHansSara tranne la cameretta

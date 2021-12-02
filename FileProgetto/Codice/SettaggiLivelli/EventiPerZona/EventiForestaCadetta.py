@@ -52,7 +52,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineUltimoDialogoHans"] and stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
         percorsoNemico = ["w", "w"]
         nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 12, "w", "Cinghiale", stanza, percorsoNemico)
-        nemico.mosseRimaste = 3
         nemico.attacco = GlobalGameVar.dannoMortale
         listaNemiciTotali.append(nemico)
         listaNemici.append(nemico)
@@ -62,19 +61,25 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         listaNemiciTotali.append(nemico)
         listaNemici.append(nemico)
         avanzamentoStoria += 1
-        avanzaIlTurnoSenzaMuoverti = True
+        npers = 4
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["creatoCinghialiForesta5"] and stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
-        npers = 4
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCinghiale-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        carim = True
-        caricaTutto = True
+        nemicoArrivato = False
+        for nemico in listaNemici:
+            if nemico.tipo == "Cinghiale" and nemico.y == GlobalHWVar.gpy * 11:
+                nemicoArrivato = True
+                break
+        if nemicoArrivato:
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCinghiale-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["attaccoCinghiale"] and stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
         nemicoArrivato = False
         for nemico in listaNemici:
-            if nemico.tipo == "Cinghiale" and nemico.mosseRimaste == 0:
+            if nemico.tipo == "Cinghiale" and nemico.y == GlobalHWVar.gpy * 10 and dati[5] <= 0:
                 nemicoArrivato = True
                 break
         if nemicoArrivato:
@@ -125,6 +130,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
             aggiornaImgEquip = True
             caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

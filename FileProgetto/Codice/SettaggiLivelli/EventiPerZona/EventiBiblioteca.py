@@ -20,7 +20,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
         if not avanzaIlTurnoSenzaMuoverti:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
-            while avanzamentoStoria != GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"]:
+            while not avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["rimosseMonetePerEntrareInConfraternita"]:
                 avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             percorsoDaEseguire = ["s"]
@@ -36,13 +36,16 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             percorsoDaEseguire = ["s"]
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] and stanza == GlobalGameVar.dictStanze["biblioteca1"] and y == GlobalHWVar.gpy * 11:
+        screen = GlobalHWVar.schermo.copy().convert()
         if npers != 2:
             npers = 2
             avanzaIlTurnoSenzaMuoverti = True
             carim = True
         if not avanzaIlTurnoSenzaMuoverti:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            while not avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"]:
+                avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+                GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             percorsoDaEseguire = ["w"]
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca2"]:
@@ -65,8 +68,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         if personaggioArrivato:
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
             caricaTutto = True
+            if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioArrivoNelloStudio"]:
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["toltoRegistroBibliotecaDallaLibreria"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
@@ -299,24 +303,25 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-        GlobalGameVar.datiEnigmaBibliotecario["velocità"] = 3
-        GlobalGameVar.datiEnigmaBibliotecario["soluzione"] = 2.25
-        GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa1"] = 1.25
-        GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa2"] = 1
-        GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa3"] = 2.5
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "OggettoTavoloEnigmaBiblioteca":
-                listaPersonaggiTotali.remove(personaggio)
-                break
-        for personaggio in listaPersonaggi:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "OggettoTavoloEnigmaBiblioteca":
-                listaPersonaggi.remove(personaggio)
-                break
-        percorsoPersonaggio = []
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "s", "OggettoEnigmaBiblioteca-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        carim = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["scrittiDatiEnigmaBibliotecario"]:
+            GlobalGameVar.datiEnigmaBibliotecario["velocità"] = 3
+            GlobalGameVar.datiEnigmaBibliotecario["soluzione"] = 2.25
+            GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa1"] = 1.25
+            GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa2"] = 1
+            GlobalGameVar.datiEnigmaBibliotecario["rispostaFalsa3"] = 2.5
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "OggettoTavoloEnigmaBiblioteca":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"] and personaggio.tipo == "OggettoTavoloEnigmaBiblioteca":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "s", "OggettoEnigmaBiblioteca-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            carim = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"] and stanza == GlobalGameVar.dictStanze["biblioteca3"] and GlobalGameVar.datiEnigmaBibliotecario["reset"]:
         bibliotecarioGirato = False
         for personaggio in listaPersonaggi:
@@ -491,7 +496,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
-            avanzaIlTurnoSenzaMuoverti = True
+            if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["ricercaImpoDiBibliotecario1"]:
+                avanzaIlTurnoSenzaMuoverti = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricercaImpoDiBibliotecario2"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
@@ -513,7 +519,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-        avanzaIlTurnoSenzaMuoverti = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+            avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpoPietra"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
         dati[10] = entot
@@ -530,8 +537,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Bibliotecario-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        dati[32] = 1
         caricaTutto = True
+        dati[32] = 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

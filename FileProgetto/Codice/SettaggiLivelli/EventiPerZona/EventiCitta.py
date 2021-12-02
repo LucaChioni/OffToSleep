@@ -175,7 +175,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     personaggio.percorso = ["s", "aGira", "mantieniPosizione"]
                     personaggio.numeroMovimento = 0
                 break
-
         if arrivatoDaAggressore:
             for personaggio in listaPersonaggi:
                 if personaggio.tipoId == "Ragazzo1-2":
@@ -187,11 +186,10 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             if not avanzaIlTurnoSenzaMuoverti:
                 GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
                 GlobalHWVar.canaleSoundCanzone.stop()
-
                 personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)
                 avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-
-                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"]:
+                caricaTutto = True
+                if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
                     for personaggio in listaPersonaggi:
                         if personaggio.tipoId == "Ragazzo3-2":
                             listaPersonaggi.remove(personaggio)
@@ -208,7 +206,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
 
                     percorsoDaEseguire = ["a"]
                     carim = True
-                caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
         aggressoreAncoraVivo = False
         spawnCadavereX = 0
@@ -225,6 +222,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 if personaggio.tipoId == "Ragazzo1-2":
                     if x == GlobalHWVar.gpx * 20 and personaggio.y == y:
                         personaggio.percorso = ["aGira", "mantieniPosizione"]
+                        personaggio.numeroMovimento = 0
                     elif x >= GlobalHWVar.gpx * 16 and personaggio.y > y:
                         personaggio.percorso = ["w", "aGira", "mantieniPosizione"]
                         personaggio.numeroMovimento = 0
@@ -243,22 +241,21 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"] and stanza == GlobalGameVar.dictStanze["città4"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-
-        ySpawnSecondoAggressore = GlobalHWVar.gsy // 18 * 13
-        for personaggio in listaPersonaggi:
-            if personaggio.tipoId == "Ragazzo1-2":
-                listaPersonaggi.remove(personaggio)
-                break
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.tipoId == "Ragazzo1-2":
-                ySpawnSecondoAggressore = personaggio.y
-                listaPersonaggiTotali.remove(personaggio)
-                break
-        percorsoNemico = []
-        nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 21, ySpawnSecondoAggressore, "a", "Cittadino1", stanza, percorsoNemico)
-        listaNemiciTotali.append(nemico)
-        listaNemici.append(nemico)
-
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"]:
+            ySpawnSecondoAggressore = GlobalHWVar.gsy // 18 * 13
+            for personaggio in listaPersonaggi:
+                if personaggio.tipoId == "Ragazzo1-2":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.tipoId == "Ragazzo1-2":
+                    ySpawnSecondoAggressore = personaggio.y
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 21, ySpawnSecondoAggressore, "a", "Cittadino1", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoDopoPrimoOmicidio"] and stanza == GlobalGameVar.dictStanze["città4"]:
@@ -284,42 +281,42 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-
-        vetNemiciSoloConXeY = []
-        for personaggio in listaPersonaggi:
-            vetNemiciSoloConXeY.append(personaggio.x)
-            vetNemiciSoloConXeY.append(personaggio.y)
-        xDestinazione = GlobalHWVar.gpx * 29
-        yDestinazione = GlobalHWVar.gpy * 12
-        percorsoTrovato = GenericFunc.pathFinding(x, y, xDestinazione, yDestinazione, vetNemiciSoloConXeY, casevisteEntrateIncluse)
-        if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y):
-            xVirtuale = x
-            yVirtuale = y
-            i = len(percorsoTrovato) - 2
-            while i >= 0:
-                if percorsoTrovato[i] > xVirtuale:
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["uccisoSecondoAggressore"]:
+            vetNemiciSoloConXeY = []
+            for personaggio in listaPersonaggi:
+                vetNemiciSoloConXeY.append(personaggio.x)
+                vetNemiciSoloConXeY.append(personaggio.y)
+            xDestinazione = GlobalHWVar.gpx * 29
+            yDestinazione = GlobalHWVar.gpy * 12
+            percorsoTrovato = GenericFunc.pathFinding(x, y, xDestinazione, yDestinazione, vetNemiciSoloConXeY, casevisteEntrateIncluse)
+            if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y):
+                xVirtuale = x
+                yVirtuale = y
+                i = len(percorsoTrovato) - 2
+                while i >= 0:
+                    if percorsoTrovato[i] > xVirtuale:
+                        percorsoDaEseguire.append("d")
+                    elif percorsoTrovato[i] < xVirtuale:
+                        percorsoDaEseguire.append("a")
+                    elif percorsoTrovato[i + 1] > yVirtuale:
+                        percorsoDaEseguire.append("s")
+                    elif percorsoTrovato[i + 1] < yVirtuale:
+                        percorsoDaEseguire.append("w")
+                    xVirtuale = percorsoTrovato[i]
+                    yVirtuale = percorsoTrovato[i + 1]
+                    i -= 2
+                if xVirtuale == GlobalHWVar.gpx * 28:
                     percorsoDaEseguire.append("d")
-                elif percorsoTrovato[i] < xVirtuale:
-                    percorsoDaEseguire.append("a")
-                elif percorsoTrovato[i + 1] > yVirtuale:
+                    percorsoDaEseguire.append("d")
+                elif yVirtuale == GlobalHWVar.gpy * 11:
                     percorsoDaEseguire.append("s")
-                elif percorsoTrovato[i + 1] < yVirtuale:
+                    percorsoDaEseguire.append("d")
+                elif yVirtuale == GlobalHWVar.gpy * 13:
                     percorsoDaEseguire.append("w")
-                xVirtuale = percorsoTrovato[i]
-                yVirtuale = percorsoTrovato[i + 1]
-                i -= 2
-            if xVirtuale == GlobalHWVar.gpx * 28:
-                percorsoDaEseguire.append("d")
-                percorsoDaEseguire.append("d")
-            elif yVirtuale == GlobalHWVar.gpy * 11:
-                percorsoDaEseguire.append("s")
-                percorsoDaEseguire.append("d")
-            elif yVirtuale == GlobalHWVar.gpy * 13:
-                percorsoDaEseguire.append("w")
-                percorsoDaEseguire.append("d")
-        else:
-            print ("Percorso Rallo verso uscita città4 non trovato")
-            percorsoDaEseguire = []
+                    percorsoDaEseguire.append("d")
+            else:
+                print ("Percorso Rallo verso uscita città4 non trovato")
+                percorsoDaEseguire = []
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 27:
             percorsoPersonaggio = ["s"]

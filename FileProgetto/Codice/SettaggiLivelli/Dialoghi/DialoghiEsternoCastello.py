@@ -70,7 +70,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Ehi...")
+                        dialogo.append(u"Ehi...?")
                         partiDialogo.append(dialogo)
                     else:
                         oggettoDato = False
@@ -80,7 +80,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         avanzaColDialogo = False
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Ehi...")
+                        dialogo.append(u"Ehi...?")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
@@ -94,7 +94,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ehi...")
+                    dialogo.append(u"Ehi...?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -142,7 +142,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ehi...")
+                    dialogo.append(u"Ehi...?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")

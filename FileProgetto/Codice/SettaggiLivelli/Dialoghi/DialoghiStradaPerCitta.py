@@ -34,7 +34,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"... Da quello che so, tutti i passaggi verso oriente sono bloccati da anni...)")
+        dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"...)")
+        partiDialogo.append(dialogo)
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"(Da quello che so, tutti i passaggi verso oriente sono bloccati da anni...)")
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloBloccoStrada":
         partiDialogo = []
@@ -45,7 +49,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Se oltrepassi questo cartello, ti dichiari nemico del reggente cittadino\"... Non credo che Hans sia andato di qua...)")
+        dialogo.append(u"(C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Se oltrepassi questo cartello, ti dichiari nemico del reggente cittadino\"...)")
+        partiDialogo.append(dialogo)
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"(Non credo che Hans sia andato di qua...)")
         partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
@@ -79,7 +87,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"È mio compito arrestare chi commette questo illecito.")
+                dialogo.append(u"È mio compito arrestare chi commette quest'illecito.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -101,7 +109,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Cosa?!")
+                dialogo.append("... Cosa...?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -201,7 +209,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"No. Deve esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per stanci sopra!")
+                    dialogo.append(u"No. Dev'esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per stanci sopra!")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
