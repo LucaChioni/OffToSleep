@@ -1843,7 +1843,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Non si sa quando sia iniziato il conflitto. Il più vecchio reperto che ce ne testimonia l'esistenza, risale a qualche migliaio di anni fa. Negli ultimi centosettant'anni (unico periodo di cui ho esperienza diretta) abbiamo perso diversi territori, nonostante gli enormi sviluppi tecnologici che siamo riusciti a compiere...")
+            dialogo.append(u"... Non si sa quando sia iniziato il conflitto. Il più vecchio reperto che ce ne testimonia l'esistenza risale a qualche migliaio di anni fa. Negli ultimi centosettant'anni (unico periodo di cui ho esperienza diretta) abbiamo perso diversi territori, nonostante gli enormi sviluppi tecnologici che siamo riusciti a compiere...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -1855,7 +1855,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Ok, quindi... c'è una guerra che stiamo perdendo... e chi ha scritto questo libro ha centosettant'anni...)")
+            dialogo.append(u"(Ok, quindi c'è una guerra che stiamo perdendo... e chi ha scritto questo libro ha centosettant'anni...)")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
         if tipoId == "ServoLancia-11":

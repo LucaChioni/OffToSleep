@@ -403,7 +403,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene, torno indietro anche con i ricordi, quindi...")
+            dialogo.append(u"Va bene, torno indietro anche con i ricordi quindi...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
             oggettoDato = False

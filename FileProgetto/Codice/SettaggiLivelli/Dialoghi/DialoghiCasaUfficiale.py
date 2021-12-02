@@ -68,7 +68,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Vai pure a cambiarti. Al tuo ritorno, la cena sarà servita.")
+            dialogo.append(u"Vai pure a cambiarti, al tuo ritorno la cena sarà servita.")
             partiDialogo.append(dialogo)
     elif tipo == "ServoDavid":
         partiDialogo = []
