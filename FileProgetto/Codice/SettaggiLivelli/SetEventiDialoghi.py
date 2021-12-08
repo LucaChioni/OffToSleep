@@ -39,6 +39,8 @@ def setImgMercanteMenu(avanzamentoStoria, stanza):
         interlocutore = "Sara"
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] and stanza == GlobalGameVar.dictStanze["città5"]:
         interlocutore = "Pappagallo"
+    elif stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
+        interlocutore = "Pappagallo"
 
     return interlocutore
 

@@ -542,7 +542,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     bottoneDown = False
     tastotempfps = 8
 
-    dictOggettiSbloccati = {"NonEsistente":False, "BicchiereConAcqua":False, "ChiaveRipostiglio":False, "ChiaveStanzaCasaDavid":False, "CertificatoResidenza":False, "ImpoPietra":False, "ChiaveStanzaCastello":False, "ListaStrumenti":False}
+    dictOggettiSbloccati = {"NonEsistente":False, "BicchiereConAcqua":False, "ChiaveRipostiglio":False, "ChiaveStanzaCasaDavid":False, "CertificatoResidenza":False, "ImpoPietra":False, "ChiaveStanzaCastello":False, "ListaStrumenti":False, "ChiaveAvamposto":False}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         dictOggettiSbloccati["BicchiereConAcqua"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
@@ -557,6 +557,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictOggettiSbloccati["ChiaveStanzaCastello"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoListaStrumentiDaNeil"]:
         dictOggettiSbloccati["ListaStrumenti"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoChiaveAvampostoDiRod"]:
+        dictOggettiSbloccati["ChiaveAvamposto"] = True
 
     pazzo1NumDialogo = 0
     pazzo2NumDialogo = 0
@@ -1020,6 +1022,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         nomeVoceMarcataPerControllo = "ChiaveStanzaCastello"
                     elif voceMarcataSottoMenu == 7:
                         nomeVoceMarcataPerControllo = "ListaStrumenti"
+                    elif voceMarcataSottoMenu == 8:
+                        nomeVoceMarcataPerControllo = "ChiaveAvamposto"
                     if dictOggettiSbloccati[nomeVoceMarcataPerControllo]:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         sottovoceSelezionata = True
@@ -1292,7 +1296,10 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         FunzioniGraficheGeneriche.messaggio("Lista strumenti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
-                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
+                    if dictOggettiSbloccati["ChiaveAvamposto"]:
+                        FunzioniGraficheGeneriche.messaggio("Chiave avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
@@ -1314,7 +1321,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveRipostiglio, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Chiave del ripostiglio", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave del ripostiglio dei miei genitori. Ci sono un sacco di cose interessanti la dentro.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave del ripostiglio dei miei genitori. Ci sono un sacco di cose interessanti là dentro.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 3 and dictOggettiSbloccati["ChiaveStanzaCasaDavid"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveStanzaCasaDavid, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
@@ -1340,6 +1347,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Lista strumenti", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"Questa busta contiene la lista degli strumenti necessari per studiare Impo. Neil mi ha incaricata di richiederli a Rod.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 8 and dictOggettiSbloccati["ChiaveAvamposto"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveAvamposto, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Chiave avamposto di Rod", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave dell'avamposto di Rod. L'ho trovata in mezzo alle sue cianfrusaglie.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 2:
                     if voceMarcataSottoMenu <= 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))

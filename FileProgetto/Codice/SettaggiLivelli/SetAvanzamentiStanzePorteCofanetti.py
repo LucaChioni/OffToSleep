@@ -538,14 +538,25 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoNotatoScorciatoiaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["monologoMetaScorciatoiaLabirinto"] = i
+    dictAvanzamentoStoria["mappaScorciatoiaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoRetroAvampostoRod"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoEntratoAvampostoRod"] = i
+    i += 1
+    dictAvanzamentoStoria["lettoAppuntiInquinamentoAvampostoRod"] = i
+    i += 1
+    dictAvanzamentoStoria["trovatoChiaveAvampostoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"] = i
 
     i += 100
-    i += 1
-    dictAvanzamentoStoria["uscitoDaAvampostoDiRod"] = i
     i += 1
     dictAvanzamentoStoria["uscitoDaPassoMontano"] = i
     i += 1
     dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["sbloccatoTunnelDiRod"] = i
     i += 1
     dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso21"] = i
     i += 1
@@ -565,8 +576,6 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnni"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaScorciatoiaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["mappaPassoMontano"] = i
     i += 1
@@ -895,6 +904,12 @@ def definisciStanze():
     i += 1
     dictStanze["stradaPerPassoMontano1"] = i
     vetStanzePacifiche.append(i)
+    dictStanze["tunnelDiRod1"] = i
+    vetStanzePacifiche.append(i)
+    dictStanze["tunnelDiRod2"] = i
+    vetStanzePacifiche.append(i)
+    dictStanze["tunnelDiRod3"] = i
+    vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
 
@@ -1182,5 +1197,8 @@ def definisciCofanetti(dictStanze):
     stanza = dictStanze["internoCastello20"]
     vetCofanetti += [stanza, 19, 8, False]
     vetCofanetti += [stanza, 25, 8, False]
+
+    stanza = dictStanze["avampostoDiRod3"]
+    vetCofanetti += [stanza, 24, 12, False]
 
     return vetCofanetti
