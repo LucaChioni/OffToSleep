@@ -629,11 +629,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Oh, questo parla di \"Agenti degradanti e sostanze inquinanti\"... è pieno di appunti indecifrabili. Ci sono scarabocchi e grafici ovunque... si è interessato molto alla questione...)")
+                dialogo.append(u"(... Oh, questo parla di \"Agenti degradanti e sostanze inquinanti\"... è pieno di appunti indecifrabili di Rod. Ci sono scarabocchi e grafici ovunque... si è interessato molto alla questione...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Mi domando se sia riuscito a trovare le cause di ciò che è successo... a meno che non... no, non avrebbe senso... credo...)")
+                dialogo.append(u"(... Mi domando se sia riuscito a capire cos'è successo... a meno che non... no, non avrebbe senso... credo...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["lettoAppuntiInquinamentoAvampostoRod"]:
                 oggettoDato = "Chiave avamposto di Rod"
