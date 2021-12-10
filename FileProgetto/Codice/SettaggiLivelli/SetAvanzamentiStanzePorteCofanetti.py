@@ -549,6 +549,10 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["trovatoChiaveAvampostoDiRod"] = i
     i += 1
     dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoInCitta9CercandoRod"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoInCitta5CercandoRod"] = i
 
     i += 100
     i += 1

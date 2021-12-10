@@ -650,13 +650,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     audioAmbiente_Fuoco = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Fuoco.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Fuoco]
                     sottofondoAmbientaleCambiato = True
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                 sottofondoLuogo = "Citta/Giorno"
                 if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
                     GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
                     audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
                     audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
                     sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
@@ -693,13 +700,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     audioAmbiente_Fuoco = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Fuoco.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Fuoco]
                     sottofondoAmbientaleCambiato = True
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                 sottofondoLuogo = "Citta/Giorno"
                 if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
                     GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
                     audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
                     audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
                     sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
@@ -732,13 +746,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     audioAmbiente_Fuoco = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Fuoco.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Fuoco]
                     sottofondoAmbientaleCambiato = True
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                 sottofondoLuogo = "Citta/Giorno"
                 if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
                     GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
                     audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
                     audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
                     sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
@@ -776,13 +797,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     audioAmbiente_Fuoco = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Fuoco.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Fuoco]
                     sottofondoAmbientaleCambiato = True
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                 sottofondoLuogo = "Citta/Giorno"
                 if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
                     GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
                     audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
                     audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
                     listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
                     sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
@@ -807,13 +835,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
@@ -846,13 +882,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
@@ -873,13 +917,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
@@ -900,13 +952,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
@@ -923,13 +983,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
@@ -953,13 +1021,21 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "Citta/Giorno"
-            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
-                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
-                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
-                audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
-                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
-                sottofondoAmbientaleCambiato = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Persone = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Persone.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Persone]
+                    sottofondoAmbientaleCambiato = True
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                sottofondoLuogo = "Citta/Giorno"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
             # rumore porte
             rumoreAperturaPorte = False
             rumoreChiusuraPorte = False
