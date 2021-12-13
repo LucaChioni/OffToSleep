@@ -903,11 +903,16 @@ def definisciStanze():
     i += 1
     dictStanze["scorciatoiaLabirinto2"] = i
     vetStanzePacifiche.append(i)
-
-    i += 100
     i += 1
     dictStanze["stradaPerPassoMontano1"] = i
     vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["stradaPerPassoMontano2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["passoMontano1"] = i
+
+    i += 100
     dictStanze["tunnelDiRod1"] = i
     vetStanzePacifiche.append(i)
     dictStanze["tunnelDiRod2"] = i
