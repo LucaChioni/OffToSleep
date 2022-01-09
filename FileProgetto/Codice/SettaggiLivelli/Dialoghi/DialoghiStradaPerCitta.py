@@ -83,7 +83,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Esiste qualcuno a cui è \"concesso\"?")
+                dialogo.append(u"... Esiste qualcuno a cui è concesso?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

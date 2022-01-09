@@ -392,11 +392,11 @@ def sceglicondiz(dati, condizione):
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 13.2, 40)
                 if dati[99] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 4", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
+                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 14.2, 40)
                 if dati[100] > 0:
-                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
+                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
             else:
@@ -514,7 +514,7 @@ def sceglicondiz(dati, condizione):
                 if dati[92] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[12], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Nemico vicino:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione sul nemico più vicino nel raggio di 2 caselle.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su un nemico in una casella accanto alla propria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -522,7 +522,7 @@ def sceglicondiz(dati, condizione):
                 if dati[93] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[13], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Nemico lontano:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su un nemico distante di almeno una casella (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -569,16 +569,16 @@ def sceglicondiz(dati, condizione):
             if voceMarcata == 19:
                 if dati[99] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[19], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 4:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 2 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 20:
                 if dati[100] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[20], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 7:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 3 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2176,9 +2176,9 @@ def equiprobo(dati):
                     if dati[i] == 18:
                         FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * posXCondizioni, GlobalHWVar.gsy // 18 * c, 40)
                     if dati[i] == 19:
-                        FunzioniGraficheGeneriche.messaggio("Numero di nemici > 4", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * posXCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+                        FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * posXCondizioni, GlobalHWVar.gsy // 18 * c, 40)
                     if dati[i] == 20:
-                        FunzioniGraficheGeneriche.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * posXCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+                        FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * posXCondizioni, GlobalHWVar.gsy // 18 * c, 40)
                     c += 1
                 posXTecniche = 18
                 c = 6.3

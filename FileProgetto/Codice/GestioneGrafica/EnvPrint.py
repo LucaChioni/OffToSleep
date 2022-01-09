@@ -12,7 +12,7 @@ import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGener
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcoS, faretraS, armaturaS, collanaS, armaS, guantiDifesa, scudoDifesa):
     if caricaTutto:
         GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a caselle viste per non mettergli la casella oscurata
@@ -217,7 +217,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         i += 3
 
     # robo (anche in caso di raffreddamento e autoricarica)
-    if (raffreddamento and not primaDiAnima) or (raffredda > 0 and not raffreddamento):
+    if (raffreddamento and not primaDiAnima) or (raffredda >= 0 and not raffreddamento):
         GlobalHWVar.disegnaImmagineSuSchermo(armrobS, (rx, ry))
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (rx, ry))
         imgAnimazione = 0
@@ -228,7 +228,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 break
             i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione, (rx, ry))
-    elif (ricarica1 and not primaDiAnima) or (autoRic1 > 0 and not ricarica1):
+    elif (ricarica1 and not primaDiAnima) or (autoRic1 >= 0 and not ricarica1):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robomo, (rx, ry))
         imgAnimazione = 0
         i = 0
@@ -238,7 +238,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 break
             i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione, (rx, ry))
-    elif (ricarica2 and not primaDiAnima) or (autoRic2 > 0 and not ricarica2):
+    elif (ricarica2 and not primaDiAnima) or (autoRic2 >= 0 and not ricarica2):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robomo, (rx, ry))
         imgAnimazione = 0
         i = 0
@@ -255,7 +255,20 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry))
 
     if not nonMostrarePersonaggio:
-        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        if difesa == 0:
+            FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        else:
+            GlobalHWVar.disegnaImmagineSuSchermo(arcoS, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(faretraS, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (x, y))
+            if avvele:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(armaturaS, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(collanaS, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persmbDifesa, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(armaS, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(guantiDifesa, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(scudoDifesa, (x, y))
 
     # disegnare i nemici
     for nemico in listaNemici:
@@ -527,9 +540,9 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 18:
             FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:
-            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 4", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 20:
-            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
     xListaTecniche = xPartenzaPannello + (GlobalHWVar.gsx // 32 * 7.2)
     c = 3.8
@@ -808,7 +821,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             j += 3
         i += 3
     # robo (anche in caso di raffreddamento e autoricarica)
-    if raffredda > 0:
+    if raffredda >= 0:
         GlobalHWVar.disegnaImmagineSuSchermo(armrobS, (rx, ry))
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (rx, ry))
         imgAnimazione = 0
@@ -819,7 +832,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 break
             i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione, (rx, ry))
-    elif autoRic1 > 0:
+    elif autoRic1 >= 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robomo, (rx, ry))
         imgAnimazione = 0
         i = 0
@@ -829,7 +842,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 break
             i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione, (rx, ry))
-    elif autoRic2 > 0:
+    elif autoRic2 >= 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robomo, (rx, ry))
         imgAnimazione = 0
         i = 0
@@ -1749,9 +1762,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 nemicoColpito = False
                 if infliggidanno and attacco != 1 and (abs(x - xp) <= raggio and abs(y - yp) <= raggio):
                     attaccoDiRallo.append("Rallo")
-                    dannoEffettivo = danno - difRallo
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, difRallo)
                     attaccoDiRallo.append(-dannoEffettivo)
                     pv -= dannoEffettivo
                     if pv <= 0:
@@ -1773,9 +1784,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     if attacco == 1:
                         nemicoInquadrato = "Colco"
                     attaccoDiRallo.append("Colco")
-                    dannoEffettivo = danno - difro
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, difro)
                     attaccoDiRallo.append(-dannoEffettivo)
                     enrobVecchia = enrob
                     enrob -= dannoEffettivo
@@ -1801,9 +1810,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             nemicoInquadrato = nemico
 
                         attaccoDiRallo.append(nemico)
-                        dannoApprossimato = danno - nemico.difesa
-                        if dannoApprossimato < 0:
-                            dannoApprossimato = 0
+                        dannoApprossimato = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiRallo.append(-dannoApprossimato)
                         if attacco == 3:
                             attaccoDiRallo.append("avvelena")

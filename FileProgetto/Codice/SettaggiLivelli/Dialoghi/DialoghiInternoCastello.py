@@ -705,7 +705,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"OH CAZZO!")
+            dialogo.append(u"OH...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -940,9 +940,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append("!!!RISPOSTA!!!")
-            dialogo.append(u"Ok, vediamo...")
+            dialogo.append(u"Ok...")
             dialogo.append(u"<*>#italic#Mmh...<*>")
-            dialogo.append(u"I miei vestiti vanno più che bene.")
+            dialogo.append(u"Questi vestiti vanno più che bene.")
             dialogo.append(u"Direi di no... quindi?")
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoComodinoCastello-0":
@@ -1765,7 +1765,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Seguendo la seconda ipotesi, in cui si sostiene che la realtà è contenuta nell'immaginazione, deduciamo che è la coscienza a produrre la realtà. Ciò che sta \"fuori di noi\", sarebbe una sorta di lista di ricordi che costruiremmo attraverso l'immaginazione. E, dato che la realtà si evolve in modo deterministico, dovremmo pensare che le leggi fisiche che la governano, siano in verità i meccanismi con cui la coscienza sviluppa i sui pensieri.")
+            dialogo.append(u"... Seguendo la seconda ipotesi, in cui si sostiene che la realtà è contenuta nell'immaginazione, deduciamo che è la coscienza a produrre la realtà. Ciò che sta \"fuori di noi\", sarebbe una sorta di lista di ricordi che costruiremmo attraverso l'immaginazione. E, data l'evoluzione deterministica della realtà, dovremmo pensare che le leggi fisiche che la governano, siano in verità i meccanismi con cui la coscienza sviluppa i sui pensieri.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -2080,11 +2080,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Tutto quello che so io...")
+                dialogo.append(u"Tutto quello che so io...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì...")
+                dialogo.append(u"Sì.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2096,7 +2096,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Possiamo raggiungere un accordo. Potremmo collaborare... quali sono i tuoi titoli di studio?")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Possiamo collaborare. Quali sono i tuoi titoli di studio?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2132,7 +2140,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, conosco Rod...  E faccio anche parte della sua confraternita!")
+                dialogo.append(u"Sì, conosco Rod...  e faccio anche parte della sua confraternita!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

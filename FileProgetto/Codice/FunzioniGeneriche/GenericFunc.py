@@ -37,16 +37,16 @@ def getStatistiche(dati, difesa=0, inMenu=False):
         dif += 30
     if dati[129] == 4:
         par += 10
+    # effetti tecniche
+    if dati[123] > 0:
+        attVicino += attVicino // 2
+        attLontano += attLontano // 2
+    if dati[124] > 0:
+        dif += dif // 2
     # effetto difesa
     if difesa != 0:
         par += par // 4
-        dif += dif // 8
-    # effetti tecniche
-    if dati[123] > 0:
-        attVicino += attVicino // 4
-        attLontano += attLontano // 4
-    if dati[124] > 0:
-        dif += dif // 4
+        dif += dif
 
     entot = 220 + (dati[9] * dati[9] * 80)
     difro = 80 + (dati[9] * dati[9] * 20)
@@ -1722,6 +1722,8 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
     if impossibileRaggiungere:
         return False
     else:
+        if len(percorsoTrovato) == 0:
+            percorsoTrovato = [xArrivo, yArrivo]
         return percorsoTrovato
 
 
@@ -2132,3 +2134,13 @@ def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemici
         obbiettivoCasualeColco.y = obbiettivoCasualeColco.y // gpyPreCambioRisoluzione * GlobalHWVar.gpy
 
     return dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco
+
+
+def calcoloDanni(danno, difesa):
+    difesa /= 10.0
+    difesa += 1
+    dannoEffettivo = int(danno / difesa)
+    if dannoEffettivo < 0:
+        dannoEffettivo = 0
+
+    return dannoEffettivo

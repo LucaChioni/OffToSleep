@@ -367,7 +367,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Beh... un essere vivente ha qualcosa in più rispetto alla materia normale. Può fare qualcosa. Può pensare, prendere decisioni... Ha qualcosa che lo rende \"vivente\"...")
+            dialogo.append(u"Beh... un essere vivente ha qualcosa in più rispetto alla materia normale. Può fare qualcosa. Può pensare, prendere decisioni... ha qualcosa che lo rende \"vivente\"...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -509,11 +509,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Beh... nel momento in cui ci penso, sì, ma finché non penso o pensano gli altri, sono un individuo responsabile.")
+            dialogo.append(u"... Beh... quando ci penso... ma finché non penso, o pensano gli altri, sono un individuo responsabile.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Ok... non mi sembri molto \"istintivo\" o \"bestiale\"...")
+            dialogo.append(u"... Ok... non mi sembri molto \"istintivo\" o \"bestiale\" ora che ci stai pensando...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -904,7 +904,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ha ha... ok...")
+                dialogo.append(u"<*>#italic#Ha ha...<*> ok...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

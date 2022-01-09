@@ -17,6 +17,7 @@ import Codice.SettaggiLivelli.Dialoghi.DialoghiEsternoCastello as DialoghiEstern
 import Codice.SettaggiLivelli.Dialoghi.DialoghiInternoCastello as DialoghiInternoCastello
 import Codice.SettaggiLivelli.Dialoghi.DialoghiScorciatoiaLabirinto as DialoghiScorciatoiaLabirinto
 import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerPassoMontano as DialoghiStradaPerPassoMontano
+import Codice.SettaggiLivelli.Dialoghi.DialoghiPassoMontano as DialoghiPassoMontano
 
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -124,6 +125,8 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiScorciatoiaLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["stradaPerPassoMontano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerPassoMontano2"]:
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+    elif GlobalGameVar.dictStanze["passoMontano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["passoMontano10"]:
+        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
 

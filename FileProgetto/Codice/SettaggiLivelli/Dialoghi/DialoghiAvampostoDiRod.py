@@ -633,7 +633,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Mi domando se sia riuscito a capire cos'è successo... a meno che non... no, non avrebbe senso... credo...)")
+                dialogo.append(u"(... Mi domando se sia riuscito a capire cos'è successo...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["lettoAppuntiInquinamentoAvampostoRod"]:
                 oggettoDato = "Chiave avamposto di Rod"
@@ -643,11 +643,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ci sono un sacco di libri sulla creazione di... \"sostanze\" e...)")
+                dialogo.append(u"(Ci sono un sacco di libri sulla creazione di... \"sostanze\" e... lettere verso un certo Rodolfo... oh Rodolfo, Rod-olfo... <*>#italic#ha ha,<*> che nome...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Oh, c'è una chiave qua in mezzo...)")
+                dialogo.append(u"(... Oh, c'è anche una chiave qua in mezzo...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False

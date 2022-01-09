@@ -673,8 +673,8 @@ def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
 
 
 def disegnaVitaEsche(pvEsca):
-    lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 14)
-    lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 14)
+    lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 5)
+    lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 5)
     if lungvita < 0:
         lungvita = 0
 
@@ -702,37 +702,37 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
     GlobalHWVar.disegnaImmagineSuSchermo(immagineS, (0, 0))
 
-    if pvmtot > 1500:
-        lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 14)
-        if pvm > 7500:
-            pvm = 1500
+    if pvmtot > 500:
+        lungvitatot = int(((GlobalHWVar.gpx * 500) / float(4)) // 5)
+        if pvm > 2500:
+            pvm = 500
             coloreVita = (120, 50, 120)
             coloreVitaSuccessiva = (180, 50, 70)
-        elif pvm > 6000:
-            pvm -= 6000
+        elif pvm > 2000:
+            pvm -= 2000
             coloreVita = (120, 50, 120)
             coloreVitaSuccessiva = (180, 50, 70)
-        elif pvm > 4500:
-            pvm -= 4500
-            coloreVita = (180, 50, 70)
-            coloreVitaSuccessiva = (170, 110, 50)
-        elif pvm > 3000:
-            pvm -= 3000
-            coloreVita = (170, 110, 50)
-            coloreVitaSuccessiva = (170, 160, 40)
         elif pvm > 1500:
             pvm -= 1500
+            coloreVita = (180, 50, 70)
+            coloreVitaSuccessiva = (170, 110, 50)
+        elif pvm > 1000:
+            pvm -= 1000
+            coloreVita = (170, 110, 50)
+            coloreVitaSuccessiva = (170, 160, 40)
+        elif pvm > 500:
+            pvm -= 500
             coloreVita = (170, 160, 40)
             coloreVitaSuccessiva = (80, 180, 80)
         else:
             coloreVita = (80, 180, 80)
             coloreVitaSuccessiva = (80, 80, 80)
     else:
-        lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 14)
+        lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 5)
         coloreVita = (80, 180, 80)
         coloreVitaSuccessiva = (80, 80, 80)
 
-    lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 14)
+    lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 5)
     if lungvita < 0:
         lungvita = 0
 

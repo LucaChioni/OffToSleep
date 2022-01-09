@@ -369,7 +369,7 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, 
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["stradaPerCittà1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["stradaPerSelvaArida2"]
                         FunzioniGraficheGeneriche.messaggio(u"Città", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Da quando ne ho sentito parlare per la prima volta, ho sempre avuto il desiderio di viverci. Da quello che so, lì a tutti è concesso scegliere quale mansione svolgere nella vita. Questo è diventato possibile grazie ai nuovi strumenti di produzione, che hanno permesso la realizzazione di un sistema in cui, poche persone, riescono a produrre abbastanza anche per tutte le altre. La parte di popolazione \"impoduttiva\" può quindi dedicarsi ad altre attività come musica, teatro, studio, sport e chissà cos'altro...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Da quando ne ho sentito parlare per la prima volta, ho sempre avuto il desiderio di viverci. Da quello che so, lì a tutti è concesso scegliere quale mansione svolgere nella vita. Questo è diventato possibile grazie ai nuovi strumenti di produzione, che hanno permesso la realizzazione di un sistema in cui poche persone riescono a produrre abbastanza anche per tutte le altre. La parte di popolazione \"impoduttiva\" può quindi dedicarsi ad altre attività come musica, teatro, studio, sport e chissà cos'altro...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 3:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["avampostoDiRod1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["avampostoDiRod3"]
@@ -411,10 +411,10 @@ def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, 
                         FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un enorme terreno estremamente complicato da superare a causa delle innumerevoli strade percorribili prive di punti di riferimento. Rod mi ha fornito una mappa che mostra nel dettaglio la sua struttura sconsigliandomi di procedere: è molto probabile non riuscire a uscirne, se non si ha un buon senso dell'orientamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 11:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["passoMontano1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["passoMontano10"]
                         FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio tra le alture a ovest della città. In pochi mettono piede in quei territori, e quelli che lo fanno ne parlano come se fosse il posto più pericoloso al mondo. In città nessuno sa molto di quei passaggi, apparte un tizio che mi ha raccontato alcune sue avventure. Mi ha detto anche di aver visto Rod diverse volte durante le sue escursioni...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio tra le alture a ovest della città. In pochi mettono piede in quei territori, e quelli che lo fanno ne parlano come se fosse il posto più pericoloso al mondo. In città nessuno sa molto di quei passaggi. Alcuni mi hanno detto di aver visto diverse volte Rod arrivare da quelle parti...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 12:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
@@ -595,8 +595,10 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Olivia"] = 2
     if GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
         dictPersonaggiSbloccati["Rod"] = 1
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoChiaveAvampostoDiRod"]:
         dictPersonaggiSbloccati["Rod"] = 2
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoChiaveAvampostoDiRod"]:
+        dictPersonaggiSbloccati["Rod"] = 3
     if pazzoNumDialogo == 1:
         dictPersonaggiSbloccati["Pazzo"] = 1
     elif pazzoNumDialogo == 2:
@@ -636,7 +638,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictNemiciSbloccati["nemiciSelva"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["uscitoDaPassoMontano"]:
         dictNemiciSbloccati["nemiciMontagne"] = True
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         dictNemiciSbloccati["nemiciCastello"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["arrivoIngressoVulcano"]:
         dictNemiciSbloccati["nemiciCaverna"] = True
@@ -1387,6 +1389,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("Ragazzo strano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         elif dictPersonaggiSbloccati["Rod"] == 2:
                             FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                        elif dictPersonaggiSbloccati["Rod"] == 3:
+                            FunzioniGraficheGeneriche.messaggio("Rodolfo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         if dictPersonaggiSbloccati["Pazzo"] >= 1:
@@ -1498,6 +1502,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Un tipo losco a cui ho dato " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per entrare nella sua \"confraternita\"... complimenti Sara. Non sembra molto affidabile, ma potrebbe rivelarsi utile in caso di necessità. Spero...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            if dictPersonaggiSbloccati["Rod"] == 3:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Rodolfo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"Si fa chiamare Rod, penso non gli piaccia il suo nome completo. Potrei chiamarlo solo \"Olfo\"... Non sembra molto affidabile, ma devo dire che si è rivelato utile in diverse occasioni.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 9:
                             if dictPersonaggiSbloccati["Pazzo"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo1"], (xImgPersonaggio, yImgPersonaggio))
@@ -1746,32 +1755,32 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoMarrone"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Gufo marrone", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Questi gufetti sembrano tanto innoqui e amichevoli, ma, appena ti vedono, ti piombano addosso e iniziano ad artigliarti senza sosta.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 17 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoBianco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Gufo bianco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. A primo impatto, anche loro innoqui e amichevoli, ma, come i loro simili gufi marroni, sono ostili e persino più aggressivi e resistenti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 18 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Struzzo"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Struzzo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Degli strani volatili che però non ho mai visto volare... immagino non possano per la loro stazza. Sono un po' goffi, ma molto forti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 19 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Casuario"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Casuario", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Degli struzzi un po' più bassi, tozzi e velenosi. Le loro piume nere sono unte e appiccicose, non è bello vederseli arrivare addosso.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 20 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Falco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Falco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Uno dei volatili più temibili. La loro apertura alare misura quasi il doppio della mia altezza. Sono veloci, aggressivi e molto resistenti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 21 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Aquila"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Aquila", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. La più pericolosa della zona. È grande circa quanto un falco, ma è più feroce e resistente. Fortunatamente non si incontra spesso.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 22 and dictNemiciSbloccati["nemiciCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoSpada"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)

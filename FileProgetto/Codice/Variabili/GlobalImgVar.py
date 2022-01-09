@@ -193,6 +193,8 @@ global sara1GrafMenu
 global sara2GrafMenu
 global saraSconvoltaGrafMenu
 global sara3GrafMenu
+global saraAssonnataPostCenaCastello
+global saraAssonnataCastelloPostCenaCastello
 global fraMaggioreGrafMenu
 global robograf0
 global robograf1
@@ -209,6 +211,8 @@ global imgDialogoSaraAssonnata
 global imgDialogoSaraSconvolta
 global imgDialogoSaraOcchiChiusi
 global imgDialogoSaraAssonnataCastello
+global imgDialogoSaraAssonnataPostCenaCastello
+global imgDialogoSaraAssonnataCastelloPostCenaCastello
 global imgDialogoColco
 global imgFraMaggioreMenuOggetti
 global imgSara1MenuOggetti
@@ -263,7 +267,7 @@ global imgChiaveStanzaCastello
 global imgListaStrumentiStudioImpo
 global imgChiaveAvamposto
 
-numImgTotali = 1777
+numImgTotali = 1782
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -474,6 +478,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global sara2GrafMenu
     global saraSconvoltaGrafMenu
     global sara3GrafMenu
+    global saraAssonnataPostCenaCastello
+    global saraAssonnataCastelloPostCenaCastello
     global fraMaggioreGrafMenu
     global robograf0
     global robograf1
@@ -490,6 +496,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgDialogoSaraSconvolta
     global imgDialogoSaraOcchiChiusi
     global imgDialogoSaraAssonnataCastello
+    global imgDialogoSaraAssonnataPostCenaCastello
+    global imgDialogoSaraAssonnataCastelloPostCenaCastello
     global imgDialogoColco
     global imgFraMaggioreMenuOggetti
     global imgSara1MenuOggetti
@@ -874,14 +882,14 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sfocontcof = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SfondoContenutoCofanetto.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 3, False)
 
     # caselle attaccabili
-    campoattaccabileRallo1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
-    campoattaccabileRallo2 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
-    campoattaccabileRallo3 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
-    campoattaccabileRallo4 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
-    campoattaccabileRallo5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    campoattaccabileRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile3.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
+    campoattaccabileRallo1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
+    campoattaccabileRallo2 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
+    campoattaccabileRallo3 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
+    campoattaccabileRallo4 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
+    campoattaccabileRallo5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    campoattaccabileRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRobo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
     caselleattaccabiliRobo = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
-    caselleattaccabiliRobo.fill((130, 130, 130, 100))
+    caselleattaccabiliRobo.fill((0, 0, 130, 100))
     caselleattaccabilimostro = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     caselleattaccabilimostro.fill((130, 0, 0, 100))
     caselleattaccabili = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
@@ -1031,6 +1039,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sara2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     saraSconvoltaGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraSconvoltaGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     sara3GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Sara3GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    saraAssonnataPostCenaCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraAssonnataPostCenaCastelloGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    saraAssonnataCastelloPostCenaCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraAssonnataCastelloPostCenaCastelloGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     fraMaggioreGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     robograf0 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     robograf1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
@@ -1047,6 +1057,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgDialogoSaraSconvolta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraScossaDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSaraOcchiChiusi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraOcchiChiusiDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoSaraAssonnataCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataCastelloDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraAssonnataPostCenaCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataDialogoPostCenaCastello.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoSaraAssonnataCastelloPostCenaCastello = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SaraAssonnataCastelloDialogoPostCenaCastello.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoColco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgSara1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
@@ -1160,7 +1172,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     dictImgCampiVisiviNemici = {}
     raggio = 2
     while raggio <= 8:
-        dictImgCampiVisiviNemici[str(raggio)] = funzionePerCaricareImmagini("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True)
+        dictImgCampiVisiviNemici[str(raggio)] = funzionePerCaricareImmagini("Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileMostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True)
         raggio += 1
     dictImgNemiciDiario = {}
     for nomeNemico in vettoreNomiNemici:

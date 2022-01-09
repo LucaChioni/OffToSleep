@@ -38,7 +38,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
-        if tipo == "OggettoCartelloSelva":
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... È stato più facile della prima volta...")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoCartelloSelva":
             partiDialogo = []
             nome = "OggettoCartelloSelva"
             oggettoDato = False

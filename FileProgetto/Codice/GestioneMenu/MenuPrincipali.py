@@ -167,7 +167,6 @@ def chiediconferma(conferma):
 
 
 def menu(caricaSalvataggio, gameover):
-    # per aggiungere porte e cofanetti => aggiungi "numStanza, x, y, False"
     xInizialie = 0
     yInizialie = 0
     rxInizialie = 0
@@ -771,6 +770,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
         perssta = GlobalImgVar.sara1GrafMenu
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
         perssta = GlobalImgVar.saraSconvoltaGrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
+        if not GlobalGameVar.cambiataAlCastello[0]:
+            perssta = GlobalImgVar.saraAssonnataPostCenaCastello
+        else:
+            perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
     elif not GlobalGameVar.cambiataAlCastello[0]:
         perssta = GlobalImgVar.sara2GrafMenu
     else:
@@ -959,6 +963,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                                 perssta = GlobalImgVar.sara1GrafMenu
                             elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
                                 perssta = GlobalImgVar.saraSconvoltaGrafMenu
+                            elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
+                                if not GlobalGameVar.cambiataAlCastello[0]:
+                                    perssta = GlobalImgVar.saraAssonnataPostCenaCastello
+                                else:
+                                    perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
                             elif not GlobalGameVar.cambiataAlCastello[0]:
                                 perssta = GlobalImgVar.sara2GrafMenu
                             else:

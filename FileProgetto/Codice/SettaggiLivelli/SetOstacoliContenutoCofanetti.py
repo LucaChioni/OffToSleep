@@ -18,6 +18,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliEsternoCastello as Ostacol
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliInternoCastello as OstacoliInternoCastello
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliScorciatoiaLabirinto as OstacoliScorciatoiaLabirinto
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliStradaPerPassoMontano as OstacoliStradaPerPassoMontano
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliPassoMontano as OstacoliPassoMontano
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -1433,6 +1434,123 @@ def getEntrateStanze(stanza, avanzamentoStoria):
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano1"]])
+    elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
+        if stanza == GlobalGameVar.dictStanze["passoMontano1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 12, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["stradaPerPassoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 13, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["stradaPerPassoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 14, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["stradaPerPassoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano6"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano2"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano3"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano3"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano4"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano4"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 3, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 4, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 5, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano5"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano4"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 2, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano9"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano6"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 6, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 7, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano1"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano7"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 7, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 8, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 9, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano6"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano8"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano7"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano9"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano8"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano10"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano10"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano10"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 15, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["passoMontano5"]])
+        elif stanza == GlobalGameVar.dictStanze["passoMontano10"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["passoMontano9"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 3, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod1"]])
 
     return entrateStanza
 
@@ -1489,6 +1607,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliScorciatoiaLabirinto.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["stradaPerPassoMontano1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerPassoMontano2"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliStradaPerPassoMontano.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliPassoMontano.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):
@@ -1625,6 +1745,19 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni bomba veleno
             if cx == GlobalHWVar.gpx * 5 and cy == GlobalHWVar.gpy * 11:
                 tesoro = 37
+    elif GlobalGameVar.dictStanze["città1"] <= stanza <= GlobalGameVar.dictStanze["città10"]:
+        if stanza == GlobalGameVar.dictStanze["città4"]:
+            # ottieni monete
+            if cx == GlobalHWVar.gpx * 17 and cy == GlobalHWVar.gpy * 5:
+                tesoro = 131
+        if stanza == GlobalGameVar.dictStanze["città8"]:
+            # ottieni monete
+            if cx == GlobalHWVar.gpx * 27 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 131
+        if stanza == GlobalGameVar.dictStanze["città10"]:
+            # ottieni monete
+            if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 3:
+                tesoro = 131
     elif GlobalGameVar.dictStanze["selvaArida1"] <= stanza <= GlobalGameVar.dictStanze["selvaArida16"]:
         if stanza == GlobalGameVar.dictStanze["selvaArida1"]:
             # ottieni batteria (Sacca Energetica discreta)
@@ -1869,6 +2002,77 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni batteria (Sacca Energetica enorme)
             if cx == GlobalHWVar.gpx * 25 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 74
+    elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
+        if stanza == GlobalGameVar.dictStanze["passoMontano1"]:
+            # ottieni condizione (pv<50)
+            if cx == GlobalHWVar.gpx * 11 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 82
+            # ottieni superpozione
+            if cx == GlobalHWVar.gpx * 16 and cy == GlobalHWVar.gpy * 9:
+                tesoro = 34
+            # ottieni bomba veleno
+            if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 37
+        if stanza == GlobalGameVar.dictStanze["passoMontano2"]:
+            # ottieni batteria (Sacca Energetica capiente)
+            if cx == GlobalHWVar.gpx * 3 and cy == GlobalHWVar.gpy * 3:
+                tesoro = 73
+            # ottieni tecnica (cura+)
+            if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 12:
+                tesoro = 18
+            # ottieni cella di memoria
+            if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 4:
+                tesoro = 1000
+            # ottieni caricabatterie
+            if cx == GlobalHWVar.gpx * 29 and cy == GlobalHWVar.gpy * 5:
+                tesoro = 32
+        if stanza == GlobalGameVar.dictStanze["passoMontano3"]:
+            # ottieni superpozione
+            if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 15:
+                tesoro = 34
+            # ottieni condizione (pe<50)
+            if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 2:
+                tesoro = 87
+        if stanza == GlobalGameVar.dictStanze["passoMontano4"]:
+            # ottieni esca
+            if cx == GlobalHWVar.gpx * 11 and cy == GlobalHWVar.gpy * 2:
+                tesoro = 38
+        if stanza == GlobalGameVar.dictStanze["passoMontano5"]:
+            # ottieni guanti offensivi
+            if cx == GlobalHWVar.gpx * 3 and cy == GlobalHWVar.gpy * 2:
+                tesoro = 64
+            # ottieni tecnica (freccia+)
+            if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 15:
+                tesoro = 20
+            # ottieni caricabatterie
+            if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 11:
+                tesoro = 32
+            # ottieni bomba appiccicosa
+            if cx == GlobalHWVar.gpx * 28 and cy == GlobalHWVar.gpy * 13:
+                tesoro = 39
+        if stanza == GlobalGameVar.dictStanze["passoMontano6"]:
+            # ottieni bomba potenziata
+            if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 2:
+                tesoro = 40
+        if stanza == GlobalGameVar.dictStanze["passoMontano7"]:
+            # ottieni condizione (pvNemico<50)
+            if cx == GlobalHWVar.gpx * 12 and cy == GlobalHWVar.gpy * 15:
+                tesoro = 95
+        if stanza == GlobalGameVar.dictStanze["passoMontano8"]:
+            # ottieni tecnica (tempesta elettrica+)
+            if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 7:
+                tesoro = 25
+        if stanza == GlobalGameVar.dictStanze["passoMontano9"]:
+            # ottieni bomba appiccicosa
+            if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 39
+            # ottieni condizione (nemici>4)
+            if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 99
+        if stanza == GlobalGameVar.dictStanze["passoMontano10"]:
+            # ottieni cella di memoria
+            if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 2:
+                tesoro = 1000
 
     # assegna oggetto ottenuto
     if tesoro != -1 and tesoro != -2:

@@ -3474,7 +3474,304 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano1"]:
                     npers = "d"
                     x = GlobalHWVar.gpx * 2
-                    y += GlobalHWVar.gpy * 5
+                    y += GlobalHWVar.gpy * 1
+    elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
+        if stanza == GlobalGameVar.dictStanze["passoMontano1"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano2"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 1
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano2"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 3
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano6"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 8
+        if stanza == GlobalGameVar.dictStanze["passoMontano2"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano1"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 3
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano3"]:
+                    if x == GlobalHWVar.gpx * 12:
+                        npers = "s"
+                        x -= GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 2
+                    else:
+                        npers = "s"
+                        x -= GlobalHWVar.gpx * 6
+                        y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["passoMontano3"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano2"]:
+                    if x == GlobalHWVar.gpx * 4:
+                        npers = "w"
+                        x += GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 15
+                    else:
+                        npers = "w"
+                        x += GlobalHWVar.gpx * 6
+                        y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano4"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 8
+        if stanza == GlobalGameVar.dictStanze["passoMontano4"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano3"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 8
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano5"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["passoMontano5"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano4"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano6"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 16
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano9"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["passoMontano6"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano5"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 16
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano7"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 6
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano1"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 8
+        if stanza == GlobalGameVar.dictStanze["passoMontano7"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano6"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 6
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano8"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["passoMontano8"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano7"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano9"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["passoMontano9"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano8"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano10"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano5"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["passoMontano10"]:
+            nomeCanzoneLuogo = "10-PassoMontano"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PassoMontano"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["passoMontano9"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 3
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -3519,6 +3816,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Scorciatoia sulle montagne"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["città10"] and stanza == GlobalGameVar.dictStanze["stradaPerPassoMontano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano1"] and stanza == GlobalGameVar.dictStanze["stradaPerPassoMontano2"]):
         nomeDaScrivere = u"Strada per Passo Montano"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano2"] and stanza == GlobalGameVar.dictStanze["passoMontano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["passoMontano10"]):
+        nomeDaScrivere = u"Passo Montano"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)

@@ -73,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Pant pant...<*> cavolo... <*>#italic#Pant pant...<*> devo dire che probabilmente non me la sarei cavata da sola...")
+                dialogo.append(u"<*>#italic#Pant pant...<*> cavolo... <*>#italic#Pant pant...<*> devo dire che non me la sarei cavata da sola...")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida6"]:
         if tipo == "OggettoImpo":

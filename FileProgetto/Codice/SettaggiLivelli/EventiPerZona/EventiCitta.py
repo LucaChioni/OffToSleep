@@ -368,7 +368,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"] and stanza == GlobalGameVar.dictStanze["città9"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaSelvaAridaCercandoRod"] and stanza == GlobalGameVar.dictStanze["città9"]:
         i = 0
         while i < 5:
             pygame.time.wait(100)
@@ -377,7 +377,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"]:
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoUscitaSelvaAridaCercandoRod"]:
             # resetto avanzamento dialoghi di tutti i cittadini che rimangono in città
             i = 0
             while i < len(listaAvanzamentoDialoghi):

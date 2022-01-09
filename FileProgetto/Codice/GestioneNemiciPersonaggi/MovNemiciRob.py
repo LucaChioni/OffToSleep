@@ -42,9 +42,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         print ("attacco vicino", nemico.tipo, "a esca", danno)
                         vettoreEsche[escabersaglio + 1] = vettoreEsche[escabersaglio + 1] - danno
                 elif nemico.obbiettivo[0] == "Colco":
-                    danno = nemico.attacco - difro
-                    if danno < 0:
-                        danno = 0
+                    danno = GenericFunc.calcoloDanni(nemico.attacco, difro)
                     nemico.bersaglioColpito.append("Colco")
                     nemico.bersaglioColpito.append(-danno)
                     if surriscalda:
@@ -59,9 +57,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                     print ("attacco vicino", nemico.tipo, "a robo", danno)
                     dati[10] = dati[10] - danno
                 elif nemico.obbiettivo[0] == "Rallo":
-                    danno = nemico.attacco - dif
-                    if danno < 0:
-                        danno = 0
+                    danno = GenericFunc.calcoloDanni(nemico.attacco, dif)
                     if random.randint(1, 100) <= par and not impossibileParare:
                         danno = 0
                         avvelena = False
@@ -363,9 +359,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
 
                 if not sposta:
                     if nemico.obbiettivo[0] == "Colco":
-                        danno = nemico.attacco - difro
-                        if danno < 0:
-                            danno = 0
+                        danno = GenericFunc.calcoloDanni(nemico.attacco, difro)
                         nemico.bersaglioColpito.append("Colco")
                         nemico.bersaglioColpito.append(-danno)
                         if surriscalda:
@@ -380,9 +374,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         print ("attacco lontano", nemico.tipo, "a robo", danno)
                         dati[10] = dati[10] - danno
                     elif nemico.obbiettivo[0] == "Rallo":
-                        danno = nemico.attacco - dif
-                        if danno < 0:
-                            danno = 0
+                        danno = GenericFunc.calcoloDanni(nemico.attacco, dif)
                         if random.randint(1, 100) <= par and not impossibileParare:
                             danno = 0
                             avvelena = False
@@ -669,9 +661,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if nemicoBersaglio:
                     nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
-                dannoEffettivo = danno - nemicoBersaglio.difesa
-                if dannoEffettivo < 0:
-                    dannoEffettivo = 0
+                dannoEffettivo = GenericFunc.calcoloDanni(danno, nemicoBersaglio.difesa)
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # cura
@@ -706,9 +696,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if nemicoBersaglio:
                     nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
-                dannoEffettivo = danno - nemicoBersaglio.difesa
-                if dannoEffettivo < 0:
-                    dannoEffettivo = 0
+                dannoEffettivo = GenericFunc.calcoloDanni(danno, nemicoBersaglio.difesa)
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # attP
@@ -738,9 +726,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if nemicoBersaglio:
                     nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
-                dannoEffettivo = danno - nemicoBersaglio.difesa
-                if dannoEffettivo < 0:
-                    dannoEffettivo = 0
+                dannoEffettivo = GenericFunc.calcoloDanni(danno, nemicoBersaglio.difesa)
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # giro Colco verso l'obiettivo
@@ -782,9 +768,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta
@@ -793,9 +777,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 i = 0
@@ -829,9 +811,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
             # freccia+
@@ -844,9 +824,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta+
@@ -855,9 +833,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 i = 0
@@ -891,9 +867,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
             # freccia++
@@ -906,9 +880,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta++
@@ -917,9 +889,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 i = 0
@@ -953,9 +923,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
             # giro Colco verso l'obiettivo
@@ -1037,9 +1005,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecnicaUsata
                     # scossa
                     if azione == 1 and azioneEseguita:
-                        dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
@@ -1067,9 +1033,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
                     # scossa+
                     if azione == 9 and azioneEseguita:
-                        dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
@@ -1095,9 +1059,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
                     # scossa++
                     if azione == 18 and azioneEseguita:
-                        dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
@@ -1133,9 +1095,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # freccia
                 if azione == 4 and azioneEseguita:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1143,9 +1103,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if azione == 5 and azioneEseguita:
                     danno = GlobalGameVar.dannoTecniche[azione - 1]
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1177,17 +1135,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
                         if type(nemico) is not str:
                             attaccoDiColco.append(nemico)
-                            dannoEffettivo = danno - nemico.difesa
-                            if dannoEffettivo < 0:
-                                dannoEffettivo = 0
+                            dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                             attaccoDiColco.append(-dannoEffettivo)
                             attaccoDiColco.append("")
                 # freccia+
                 if azione == 10 and azioneEseguita:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1195,9 +1149,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if azione == 15 and azioneEseguita:
                     danno = GlobalGameVar.dannoTecniche[azione - 1]
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1229,17 +1181,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
                         if type(nemico) is not str:
                             attaccoDiColco.append(nemico)
-                            dannoEffettivo = danno - nemico.difesa
-                            if dannoEffettivo < 0:
-                                dannoEffettivo = 0
+                            dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                             attaccoDiColco.append(-dannoEffettivo)
                             attaccoDiColco.append("")
                 # freccia++
                 if azione == 19 and azioneEseguita:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = GlobalGameVar.dannoTecniche[azione - 1] - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(GlobalGameVar.dannoTecniche[azione - 1], dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1247,9 +1195,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if azione == 20 and azioneEseguita:
                     danno = GlobalGameVar.dannoTecniche[azione - 1]
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1281,9 +1227,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
                         if type(nemico) is not str:
                             attaccoDiColco.append(nemico)
-                            dannoEffettivo = danno - nemico.difesa
-                            if dannoEffettivo < 0:
-                                dannoEffettivo = 0
+                            dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                             attaccoDiColco.append(-dannoEffettivo)
                             attaccoDiColco.append("")
                 # giro Colco verso l'obiettivo
@@ -1351,9 +1295,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 danno = GlobalGameVar.dannoTecniche[azione - 1]
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1385,9 +1327,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
             # tempesta+
@@ -1395,9 +1335,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 danno = GlobalGameVar.dannoTecniche[azione - 1]
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1429,9 +1367,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
             # tempesa++
@@ -1439,9 +1375,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 danno = GlobalGameVar.dannoTecniche[azione - 1]
                 if abs(rx - x) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpx and abs(ry - y) <= GlobalGameVar.vistaRobo * GlobalHWVar.gpy:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    dannoEffettivo = danno - dif
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
+                    dannoEffettivo = GenericFunc.calcoloDanni(danno, dif)
                     attaccoDiColco.append("Rallo")
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
@@ -1473,9 +1407,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str:
                         attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
+                        dannoEffettivo = GenericFunc.calcoloDanni(danno, nemico.difesa)
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
 
@@ -1837,34 +1769,10 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico vicino
                     if dati[i] == 12:
-                        distMin = False
-                        distanzaDaNemico = -1
-                        pathToNemico = []
-                        primoMostro = True
                         for nemico in nemiciVistiDaColco:
-                            if abs(nemico.x - rx) <= (GlobalHWVar.gpx * 2) and abs(nemico.y - ry) <= (GlobalHWVar.gpy * 2):
-                                if primoMostro:
-                                    if tecnicaRavvicinata:
-                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemico.x, nemico.y)
-                                        pathToNemico = GenericFunc.pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                        if pathToNemico and len(pathToNemico) > 0:
-                                            distanzaDaNemico = len(pathToNemico) / 2
-                                    distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
-                                    nemicoBersaglio = nemico
-                                    primoMostro = False
-                                else:
-                                    pathToNemicoTemp = False
-                                    if tecnicaRavvicinata:
-                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemico.x, nemico.y)
-                                        pathToNemicoTemp = GenericFunc.pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
-                                        if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
-                                            pathToNemico = pathToNemicoTemp
-                                            distanzaDaNemico = len(pathToNemico) / 2
-                                        distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
-                                        nemicoBersaglio = nemico
-                        if tecnicaRavvicinata and not pathToNemico:
-                            nemicoBersaglio = False
+                            if (abs(nemico.x - rx) == GlobalHWVar.gpx and abs(nemico.y - ry) == 0) or (abs(nemico.x - rx) == 0 and abs(nemico.y - ry) == GlobalHWVar.gpy):
+                                nemicoBersaglio = nemico
+                                break
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, nemiciNonVistiDaColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, nemiciNonVistiDaColco, caseviste, pathToRallo, pathToNemico)
@@ -1875,10 +1783,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             else:
                                 ultimoObbiettivoColco = []
                         else:
-                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
-                            else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico lontano
                     if dati[i] == 13:
                         distMin = False
@@ -1886,7 +1791,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         pathToNemico = []
                         primoMostro = True
                         for nemico in nemiciVistiDaColco:
-                            if abs(nemico.x - rx) >= (GlobalHWVar.gpx * 3) or abs(nemico.y - ry) >= (GlobalHWVar.gpy * 3):
+                            if not ((abs(nemico.x - rx) == GlobalHWVar.gpx and abs(nemico.y - ry) == 0) or (abs(nemico.x - rx) == 0 and abs(nemico.y - ry) == GlobalHWVar.gpy)):
                                 if primoMostro:
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreEsche, nemico.x, nemico.y)
@@ -2150,9 +2055,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
-                    # numero nemici > 4
+                    # numero nemici > 2
                     if dati[i] == 19:
-                        if len(nemiciVistiDaColco) > 4:
+                        if len(nemiciVistiDaColco) > 2:
                             distMin = False
                             distanzaDaNemico = -1
                             pathToNemico = []
@@ -2196,9 +2101,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
-                    # numero nemici > 7
+                    # numero nemici > 3
                     if dati[i] == 20:
-                        if len(nemiciVistiDaColco) > 7:
+                        if len(nemiciVistiDaColco) > 3:
                             distMin = False
                             distanzaDaNemico = -1
                             pathToNemico = []

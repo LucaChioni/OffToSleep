@@ -196,7 +196,7 @@ initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStan
 initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
 
 # vita esche
-vitaTotEsche = 300
+vitaTotEsche = 200
 
 # danno mortale (viene usato per la storia)
 dannoMortale = 100000

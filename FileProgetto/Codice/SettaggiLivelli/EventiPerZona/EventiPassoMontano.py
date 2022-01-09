@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
+import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
 def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco):
-    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial-0", stanza, avanzamentoStoria, False)
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInCitta5CercandoRod"] and stanza == GlobalGameVar.dictStanze["passoMontano1"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoAssenzaRodFuoriDallAvamposto"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoPassoMontano"] and stanza == GlobalGameVar.dictStanze["passoMontano7"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True

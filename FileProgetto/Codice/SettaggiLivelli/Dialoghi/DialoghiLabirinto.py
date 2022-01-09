@@ -60,39 +60,44 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
+            elif avanzamentoDialogo == 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = -1
+                avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"... Adesso è finit-")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
+                dialogo.append("???DOMANDA???")
                 dialogo.append(u"TERZA DOMANDA: Come fai a vedermi?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... In che senso? ... Sei qui davanti a me, ti vedo...")
+                dialogo.append(u"Sei qui davanti a me, ti vedo...")
+                dialogo.append(u"Con gli occhi.")
+                dialogo.append(u"Posso vedere le cose che riflettono la luce.")
+                dialogo.append(u"Non lo so.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
+                dialogo.append("!!!RISPOSTA!!!")
+                dialogo.append(u"Dove sono.")
+                dialogo.append(u"...")
+                dialogo.append(u"La luce...")
                 dialogo.append(u"<*>#italic#Mmh...<*>")
                 partiDialogo.append(dialogo)
-            elif avanzamentoDialogo == 3:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ehi Ral-")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"QUARTA DOMANDA: Come fa la tua vista a vedermi?")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Uhm... attraverso gli occhi. Non so esattamente come funziona il... processo...")
+                dialogo.append(u"... Credo che ci sia una specie di meccanismo negli occhi che ci permette di vedere. Non ho idea di come funzioni...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
