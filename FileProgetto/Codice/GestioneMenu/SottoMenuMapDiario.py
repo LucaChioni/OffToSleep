@@ -615,9 +615,9 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Impo"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
         dictPersonaggiSbloccati["Impo"] = 3
-    if GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"]:
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
         dictPersonaggiSbloccati["Neil"] = 1
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"]:
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
         dictPersonaggiSbloccati["Neil"] = 2
     if pappagalloNumDialogo >= 1:
         dictPersonaggiSbloccati["Pappagallo"] = 1

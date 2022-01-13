@@ -1362,6 +1362,19 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                             pygame.time.wait(100)
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             i += 1
+                    elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                        i = 0
+                        while i < 5:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
+                    elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
+                        i = 0
+                        while i < 2:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
     elif GlobalGameVar.dictStanze["stradaPerSelvaArida1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
         if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
             nomeCanzoneLuogo = "03-EsterniPacifici"
@@ -3882,6 +3895,18 @@ def decidiSeDimezzareVolumeMusica(avanzamentoStoria):
 
     if GlobalGameVar.volumeMusicaDimezzato and GlobalHWVar.canaleSoundCanzone.get_busy() and GlobalHWVar.canaleSoundCanzone.get_volume() > 0:
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2.0)
+
+
+def riproduciAudioSpeciali(avanzamentoStoria):
+    if GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
+        if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+            GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
+    elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoAndatoALettoCastello"]:
+        if not GlobalHWVar.canaleSoundMelodieEventi.get_busy():
+            GlobalHWVar.canaleSoundMelodieEventi.play(GlobalSndVar.rumoreMelodiaFantasticare, -1)
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ripresoImpoDaNeil"]:
+        if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+            GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
 
 
 def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato):

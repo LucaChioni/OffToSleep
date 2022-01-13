@@ -207,6 +207,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     percorsoDaEseguire = ["a"]
                     carim = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
+        if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+            GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
         aggressoreAncoraVivo = False
         spawnCadavereX = 0
         spawnCadavereY = 0

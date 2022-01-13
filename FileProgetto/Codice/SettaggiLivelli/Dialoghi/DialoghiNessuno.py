@@ -1181,11 +1181,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(... Continuano a fissarmi quando non li guardo... dovrei provare a prenderli di sorpresa... dovrei provare a...)")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"<*>#italic#WAAA!<*>")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["urloDuranteCenaAlCastello"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -1818,6 +1823,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Oh... forse avrei dovuto bussare?)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoDialogoNeil"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Oddio! La sua faccia...)")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
                 oggettoDato = False

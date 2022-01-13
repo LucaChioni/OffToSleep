@@ -142,7 +142,7 @@ def quit():
 # canali audio / volume (0-1)
 volumeCanzoni = 0.5
 volumeEffetti = 0.5
-maxCanaliAudio = 15
+maxCanaliAudio = 17
 pygame.mixer.set_num_channels(maxCanaliAudio)
 numCanaleAudioAttuale = 0
 canaleSoundCanzone = pygame.mixer.Channel(numCanaleAudioAttuale)
@@ -164,6 +164,10 @@ numCanaleAudioAttuale += 1
 canaleSoundInterazioni = pygame.mixer.Channel(numCanaleAudioAttuale)
 numCanaleAudioAttuale += 1
 canaleSoundAttacco = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundMelodieEventi = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundBattitoCardiaco = pygame.mixer.Channel(numCanaleAudioAttuale)
 canaliSoundSottofondoAmbientale = GestioneCanaliAudioAmbiente.CanaliAudioAmbiente(maxCanaliAudio, numCanaleAudioAttuale)
 
 def initVolumeSounds():
@@ -177,6 +181,8 @@ def initVolumeSounds():
     canaleSoundLvUp.set_volume(volumeEffetti)
     canaleSoundInterazioni.set_volume(volumeEffetti)
     canaleSoundAttacco.set_volume(volumeEffetti)
+    canaleSoundMelodieEventi.set_volume(volumeCanzoni)
+    canaleSoundBattitoCardiaco.set_volume(volumeEffetti)
     canaliSoundSottofondoAmbientale.settaVolume(volumeEffetti)
 
 # freccetta (sized 24x24)

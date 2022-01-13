@@ -450,6 +450,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoCenaAlCastello2"] = i
     i += 1
+    dictAvanzamentoStoria["urloDuranteCenaAlCastello"] = i
+    i += 1
     dictAvanzamentoStoria["monologoCenaAlCastello3"] = i
     i += 1
     dictAvanzamentoStoria["fineCenaAlCastello"] = i
@@ -520,6 +522,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["bussatoPortaStudioDiNeil"] = i
     i += 1
     dictAvanzamentoStoria["primoDialogoNeil"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPrimaVistaDiNeil"] = i
     i += 1
     dictAvanzamentoStoria["ricevutoListaStrumentiDaNeil"] = i
     i += 1

@@ -167,6 +167,7 @@ def gameloop():
                 if cambiosta:
                     SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
                     stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
+                    SetPosizioneAudioImpedimenti.riproduciAudioSpeciali(dati[0])
 
                     canzoneCambiata = False
                     sottofondoAmbientaleCambiato = False
@@ -2390,6 +2391,8 @@ def gameloop():
             GlobalHWVar.canaleSoundLvUp.stop()
             GlobalHWVar.canaleSoundInterazioni.stop()
             GlobalHWVar.canaleSoundAttacco.stop()
+            GlobalHWVar.canaleSoundMelodieEventi.stop()
+            GlobalHWVar.canaleSoundBattitoCardiaco.stop()
             GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
             GlobalHWVar.canaleSoundCanzone.stop()
             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()

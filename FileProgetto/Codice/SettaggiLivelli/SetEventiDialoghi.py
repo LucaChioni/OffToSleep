@@ -2,6 +2,7 @@
 
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
@@ -20,7 +21,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
             imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
             imgPersDialogo = GlobalImgVar.imgDialogoSaraOcchiChiusi
-        elif GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
+        elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
             if not GlobalGameVar.cambiataAlCastello[0]:
                 imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataPostCenaCastello
             else:
@@ -57,6 +58,8 @@ def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"] and personaggio.tipo == "OggettoPersonaCadavereSam":
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
+        GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
 
     return avanzamentoStoria
 
@@ -70,7 +73,12 @@ def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
     elif (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"] and personaggio.tipo == "OggettoPersonaCadavereSam") or (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and personaggio.tipo == "Nessuno"):
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"]:
             avanzamentoStoria += 1
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] and personaggio.tipo == "Nessuno":
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreVomito)
 
     return avanzamentoStoria

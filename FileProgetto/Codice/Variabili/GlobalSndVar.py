@@ -78,9 +78,13 @@ global rumoreMovimentoVestiti
 global rumoreCucchiaioSuPiatto
 global rumoreBussarePortaUfficioNeil
 global rumorePianoAscensoreCastello
+global rumoreBattitoCardiaco
+global rumoreAttimoPericoloso
+global rumoreVomito
+global rumoreMelodiaFantasticare
 
 
-numSndTotali = 73
+numSndTotali = 77
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -168,6 +172,10 @@ def loadSounds(numSndCaricato):
     global rumoreCucchiaioSuPiatto
     global rumoreBussarePortaUfficioNeil
     global rumorePianoAscensoreCastello
+    global rumoreBattitoCardiaco
+    global rumoreAttimoPericoloso
+    global rumoreVomito
+    global rumoreMelodiaFantasticare
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -186,11 +194,6 @@ def loadSounds(numSndCaricato):
     rumorecamminata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Camminata.wav")
     rumorelevelup = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Levelup.wav")
     rumoreMorte = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Morte.wav")
-
-    # souno raccolta esca - monete
-    suonoRaccoltaOggetto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaOggetto.wav")
-    suonoRaccoltaMonete = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaMonete.wav")
-    rumoreAcquisto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Acquisto.wav")
 
     # suoni robo
     rumoreCamminataColco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriColco/Camminata.wav")
@@ -223,29 +226,40 @@ def loadSounds(numSndCaricato):
     rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
     # suono dialoghi
-    rumoreDialoghiInterlocutoriM = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriM.wav")
-    rumoreDialoghiInterlocutoriN = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriN.wav")
-    rumoreDialoghiInterlocutoriF = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DialoghiInterlocutoriF.wav")
+    rumoreDialoghiInterlocutoriM = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriDialoghi/DialoghiInterlocutoriM.wav")
+    rumoreDialoghiInterlocutoriN = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriDialoghi/DialoghiInterlocutoriN.wav")
+    rumoreDialoghiInterlocutoriF = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriDialoghi/DialoghiInterlocutoriF.wav")
 
-    # effetti speciali
+    # effetti speciali generici
+    suonoRaccoltaOggetto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaOggetto.wav")
+    suonoRaccoltaMonete = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaMonete.wav")
+    rumoreAcquisto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Acquisto.wav")
     suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCofanetto.wav")
     suonoAperturaMappa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaMappa.wav")
-    rumoreScavare = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Scavare.wav")
-    rumoreBussareCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/BussareCittà.wav")
-    rumoreSollevamentoPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SollevamentoPortaCittà.wav")
-    rumoreChiusuraPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AbbassamentoPortaCittà.wav")
-    rumoreDoccia = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DocciaCasaUfficiale.wav")
-    rumoreMovimentoVestiti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/MovimentoVestiti.wav")
-    rumoreCucchiaioSuPiatto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/CucchiaioSuPiatto.wav")
-    rumoreLancioPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/LancioPallaBibliotecario.wav")
-    rumoreRitornoPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RitornoPallaBibliotecario.wav")
-    rumoreAppoggioStrumentoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AppaggioMatitaEnigmi.wav")
-    rumoreScorrimentoMatitaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScorrimentoMatitaEnigmi.wav")
-    rumoreScorrimentoGommaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScorrimentoGommaEnigmi.wav")
-    rumoreCancellaTuttoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/CancellaTuttoEnigmi.wav")
-    rumoreAperturaCancelloCastello = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCancelloCastello.wav")
-    rumoreBussarePortaUfficioNeil = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/BussarePortaUfficioNeil.wav")
     rumorePianoAscensoreCastello = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/PianoAscensoreCastello.wav")
+
+    # effetti speciali enigmi
+    rumoreLancioPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/LancioPallaBibliotecario.wav")
+    rumoreRitornoPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/RitornoPallaBibliotecario.wav")
+    rumoreAppoggioStrumentoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/AppaggioMatitaEnigmi.wav")
+    rumoreScorrimentoMatitaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/ScorrimentoMatitaEnigmi.wav")
+    rumoreScorrimentoGommaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/ScorrimentoGommaEnigmi.wav")
+    rumoreCancellaTuttoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Enigmi/CancellaTuttoEnigmi.wav")
+
+    # effetti speciali eventi
+    rumoreScavare = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/Scavare.wav")
+    rumoreBussareCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/BussareCittà.wav")
+    rumoreSollevamentoPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/SollevamentoPortaCittà.wav")
+    rumoreChiusuraPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AbbassamentoPortaCittà.wav")
+    rumoreDoccia = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/DocciaCasaUfficiale.wav")
+    rumoreMovimentoVestiti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/MovimentoVestiti.wav")
+    rumoreCucchiaioSuPiatto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/CucchiaioSuPiatto.wav")
+    rumoreAperturaCancelloCastello = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AperturaCancelloCastello.wav")
+    rumoreBussarePortaUfficioNeil = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/BussarePortaUfficioNeil.wav")
+    rumoreBattitoCardiaco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/BattitoCardiaco.wav")
+    rumoreAttimoPericoloso = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttimoPericoloso.wav")
+    rumoreVomito = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/Vomito.wav")
+    rumoreMelodiaFantasticare = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/MelodiaFantasticare.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

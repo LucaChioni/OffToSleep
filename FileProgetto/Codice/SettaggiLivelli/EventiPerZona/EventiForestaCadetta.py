@@ -4,6 +4,7 @@ import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
@@ -167,6 +168,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria -= 1
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] and stanza == GlobalGameVar.dictStanze["forestaCadetta7"]:
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
         # oggettiRimastiAHans: 0-9 => oggetti / 10 => frecce / 11 => guanti / 12 => monete
         if oggettiRimastiAHans[0] > 0:
             dati[31] += oggettiRimastiAHans[0]

@@ -240,6 +240,8 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
         GlobalHWVar.canaleSoundLvUp.stop()
         GlobalHWVar.canaleSoundInterazioni.stop()
         GlobalHWVar.canaleSoundAttacco.stop()
+        GlobalHWVar.canaleSoundMelodieEventi.stop()
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()

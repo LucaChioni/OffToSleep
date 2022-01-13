@@ -399,7 +399,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non importa... Anzi, sì. Facciamo che torni a una situazione che vorresti cambiare. Un episodio dove hai compiuto una scelta \"sbagliata\". Adesso hai l'occasione di tornare indietro e sistemare le cose. Però facendolo scorderai tutto quello che è successo dopo aver preso quella scelta.")
+            dialogo.append(u"No, non importa... va beh, facciamo che torni a una situazione che vorresti cambiare. Un episodio dove hai compiuto una scelta \"sbagliata\". Adesso hai l'occasione di tornare indietro e sistemare le cose. Però facendolo scorderai tutto quello che è successo dopo aver preso quella scelta.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -432,7 +432,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Non succederà veramente!")
+            dialogo.append(u"... Non succederà veramente...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -448,7 +448,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Ok. Mi raccomando, hai perso i ricordi che hai accumulato da quel momento fino ad adesso...")
+            dialogo.append(u"Ok. Mi raccomando, hai perso i ricordi che hai accumulato da quel momento fino ad adesso.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
