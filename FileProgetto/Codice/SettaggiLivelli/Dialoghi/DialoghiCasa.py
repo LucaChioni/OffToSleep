@@ -546,7 +546,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ciao Lino, cosa stai cercando in questi cespugli?")
+            dialogo.append("Ehi Lino, cosa stai cercando in questi cespugli?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

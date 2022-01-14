@@ -162,7 +162,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
         if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "02-Casa"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -195,7 +195,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "w"
                     y = GlobalHWVar.gsy // 18 * 15
         if stanza == GlobalGameVar.dictStanze["casaHansSara3"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "02-Casa"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -217,7 +217,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "w"
                     y = GlobalHWVar.gsy // 18 * 15
         if stanza == GlobalGameVar.dictStanze["casaHansSara4"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "02-Casa"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -1928,7 +1928,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x -= GlobalHWVar.gpx * 12
     elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -1958,7 +1958,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalHWVar.gpx * 4
                     y = GlobalHWVar.gpy * 6
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -1988,7 +1988,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x -= GlobalHWVar.gpx * 6
                     y = GlobalHWVar.gpy * 4
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -3382,7 +3382,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         i += 1
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "09-Labirinto"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -3408,7 +3408,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x -= GlobalHWVar.gpx * 19
                     y = GlobalHWVar.gpy * 2
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
-            nomeCanzoneLuogo = "03-EsterniPacifici"
+            nomeCanzoneLuogo = "09-Labirinto"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
