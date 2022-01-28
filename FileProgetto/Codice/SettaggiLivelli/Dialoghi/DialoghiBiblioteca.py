@@ -747,7 +747,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Wow!<*> Possiamo farglielo fare ora?")
+            dialogo.append(u"Wow! Possiamo farglielo fare ora?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

@@ -266,8 +266,9 @@ global imgImpoPietra
 global imgChiaveStanzaCastello
 global imgListaStrumentiStudioImpo
 global imgChiaveAvamposto
+global imgStrumentiDiRod
 
-numImgTotali = 1782
+numImgTotali = 1783
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -551,6 +552,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgChiaveStanzaCastello
     global imgListaStrumentiStudioImpo
     global imgChiaveAvamposto
+    global imgStrumentiDiRod
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -1195,3 +1197,4 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgChiaveStanzaCastello = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCastello.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgListaStrumentiStudioImpo = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ListaStrumentiStudioImpo.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgChiaveAvamposto = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveAvampostoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgStrumentiDiRod = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/StrumentiDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)

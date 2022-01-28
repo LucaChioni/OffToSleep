@@ -24,7 +24,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Brrr...<*> questo vento... hai freddo?")
+                dialogo.append(u"<*>#italic#Brrr...<*> questo vento... tu stai bene?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

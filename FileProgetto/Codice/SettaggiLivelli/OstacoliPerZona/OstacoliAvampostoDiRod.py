@@ -176,7 +176,10 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria):
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 2, x, y, nx, ny):
+        elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 1, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16, GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 1, x, y, nx, ny):
@@ -189,6 +192,9 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria):
             nx = 0
             ny = 0
         elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 9, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif not escludiOggettiBassi and UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 1, x, y, nx, ny):

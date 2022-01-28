@@ -205,6 +205,7 @@ dannoMortale = 100000
 monetePerEntrareNellaConfraternita = 200
 monetePerLasciareLaConfraternita = 1000
 monetePerLaMappaDelLabirinto = 500
+monetePerGliStumentiPerNeil = 2000
 
 global imgMappaAttuale
 global canzoneAttuale

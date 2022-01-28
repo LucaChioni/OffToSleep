@@ -321,6 +321,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 percorsoDaEseguire = []
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 27:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
             percorsoPersonaggio = ["s"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-18", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
@@ -330,6 +331,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoPrimaGuardia"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 28:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
             percorsoPersonaggio = ["s"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-18", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)

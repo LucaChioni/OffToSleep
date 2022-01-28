@@ -19,6 +19,7 @@ import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizInternoCastello 
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizScorciatoiaLabirinto as PosizScorciatoiaLabirinto
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizStradaPerPassoMontano as PosizStradaPerPassoMontano
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizPassoMontano as PosizPassoMontano
+import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizPalazzoDiRod as PosizPalazzoDiRod
 import Codice.SettaggiLivelli.EventiPerZona.EventiSogno as EventiSogno
 import Codice.SettaggiLivelli.EventiPerZona.EventiCasa as EventiCasa
 import Codice.SettaggiLivelli.EventiPerZona.EventiForestaCadetta as EventiForestaCadetta
@@ -35,6 +36,7 @@ import Codice.SettaggiLivelli.EventiPerZona.EventiInternoCastello as EventiInter
 import Codice.SettaggiLivelli.EventiPerZona.EventiScorciatoiaLabirinto as EventiScorciatoiaLabirinto
 import Codice.SettaggiLivelli.EventiPerZona.EventiStradaPerPassoMontano as EventiStradaPerPassoMontano
 import Codice.SettaggiLivelli.EventiPerZona.EventiPassoMontano as EventiPassoMontano
+import Codice.SettaggiLivelli.EventiPerZona.EventiPalazzoDiRod as EventiPalazzoDiRod
 
 
 def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi):
@@ -77,6 +79,8 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaNemiciTotali, listaNemici = PosizStradaPerPassoMontano.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
             listaNemiciTotali, listaNemici = PosizPassoMontano.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
+            listaNemiciTotali, listaNemici = PosizPalazzoDiRod.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
     else:
         for nemico in listaNemiciTotali:
             if nemico.stanzaDiAppartenenza == stanza:
@@ -130,6 +134,8 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaPersonaggiTotali, listaPersonaggi = PosizStradaPerPassoMontano.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
             listaPersonaggiTotali, listaPersonaggi = PosizPassoMontano.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
+        elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
+            listaPersonaggiTotali, listaPersonaggi = PosizPalazzoDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
     else:
         for personaggio in listaPersonaggiTotali:
             if personaggio.stanzaDiAppartenenza == stanza:
@@ -194,6 +200,8 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, rx, ry, nrob, c
         x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco = EventiStradaPerPassoMontano.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
     elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
         x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco = EventiPassoMontano.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
+    elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
+        x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco = EventiPalazzoDiRod.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
 
     evitaAvanzamentoTurno = False
     if caricaTutto or avanzamentoStoriaPreEventi != avanzamentoStoria:

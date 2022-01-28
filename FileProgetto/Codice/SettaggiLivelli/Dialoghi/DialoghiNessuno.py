@@ -971,7 +971,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È una grotta... bloccata da delle sbarre... cosa ci sarà là dentro?)")
+                dialogo.append(u"(È una grotta... bloccata da delle sbarre. Cosa ci sarà là dentro?)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
             if x == GlobalHWVar.gpx * 26 and y == GlobalHWVar.gpy * 6:
@@ -1859,6 +1859,36 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+            if y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Un'altra grotta bloccata da delle sbarre...)")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+            if x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 8:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Devo prendere gli strumenti prima di andarmene...)")
                 partiDialogo.append(dialogo)
     else:
         oggettoDato = False

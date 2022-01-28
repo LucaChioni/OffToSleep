@@ -2,7 +2,6 @@
 
 import pygame
 import GlobalHWVar
-import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -236,7 +235,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     break
             i = 0
             while i < len(listaAvanzamentoDialoghi):
-                if listaAvanzamentoDialoghi[i] == "ServoDavid_0":
+                if listaAvanzamentoDialoghi[i] == "ServoDavid-0":
                     listaAvanzamentoDialoghi[i + 1] = 1
                     break
                 i += 2

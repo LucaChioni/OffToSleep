@@ -153,6 +153,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     persobSara = GlobalImgVar.persobSara
     persoFraMaggiore = GlobalImgVar.persoFraMaggiore
     persobFraMaggiore = GlobalImgVar.persobFraMaggiore
+    confermaSalvataggioCancellazione = False
 
     while not risposta:
         # rallenta per i 30 fps
@@ -329,29 +330,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             CaricaSalvaPartita.salvataggio(n, datiAttualiTotali, datiGameoverTotali)
                             # ricarico il salvataggio
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
-
-                            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 9.3, GlobalHWVar.gsy // 18 * 3.5))
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), ((GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), 2)
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
-                            FunzioniGraficheGeneriche.messaggio("Salvato!", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
-                            GlobalHWVar.aggiornaSchermo()
-                            if GlobalHWVar.mouseBloccato:
-                                GlobalHWVar.configuraCursore(False)
-                            rispostaSottoMenu = False
-                            bottoneDownSottoMenu = False
-                            while not rispostaSottoMenu:
-                                # gestione degli input
-                                bottoneDownSottoMenu, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDownSottoMenu, False)
-                                if bottoneDownSottoMenu == pygame.K_SPACE or bottoneDownSottoMenu == "mouseSinistro" or bottoneDownSottoMenu == "padCroce":
-                                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                                    rispostaSottoMenu = True
-                                    bottoneDownSottoMenu = False
-                                if bottoneDownSottoMenu:
-                                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                                    bottoneDownSottoMenu = False
-                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                                GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+                            confermaSalvataggioCancellazione = 1
 
                             xp = vxp
                             yp = vyp
@@ -370,29 +349,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             leggi.close()
                             # ricarico il salvataggio
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
-
-                            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.rossoScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 9.3, GlobalHWVar.gsy // 18 * 3.5))
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.rossoScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), ((GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), 2)
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
-                            FunzioniGraficheGeneriche.messaggio("Cancellato!", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
-                            GlobalHWVar.aggiornaSchermo()
-                            if GlobalHWVar.mouseBloccato:
-                                GlobalHWVar.configuraCursore(False)
-                            rispostaSottoMenu = False
-                            bottoneDownSottoMenu = False
-                            while not rispostaSottoMenu:
-                                # gestione degli input
-                                bottoneDownSottoMenu, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDownSottoMenu, False)
-                                if bottoneDownSottoMenu == pygame.K_SPACE or bottoneDownSottoMenu == "mouseSinistro" or bottoneDownSottoMenu == "padCroce":
-                                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                                    rispostaSottoMenu = True
-                                    bottoneDownSottoMenu = False
-                                if bottoneDownSottoMenu:
-                                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                                    bottoneDownSottoMenu = False
-                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                                GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+                            confermaSalvataggioCancellazione = 2
 
                             xp = vxp
                             yp = vyp
@@ -618,6 +575,38 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 14.3), ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 15.7), 2)
                 FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 7.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.5, 70)
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (vxp, vyp))
+            elif confermaSalvataggioCancellazione:
+                if confermaSalvataggioCancellazione == 1:
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 9.3, GlobalHWVar.gsy // 18 * 3.5))
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), ((GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), 2)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
+                    FunzioniGraficheGeneriche.messaggio("Salvato!", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
+                elif confermaSalvataggioCancellazione == 2:
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.rossoScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 9.3, GlobalHWVar.gsy // 18 * 3.5))
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.rossoScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), ((GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), 2)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
+                    FunzioniGraficheGeneriche.messaggio("Cancellato!", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
+                GlobalHWVar.aggiornaSchermo()
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                rispostaSottoMenu = False
+                bottoneDownSottoMenu = False
+                while not rispostaSottoMenu:
+                    # gestione degli input
+                    bottoneDownSottoMenu, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDownSottoMenu, False)
+                    if bottoneDownSottoMenu == pygame.K_SPACE or bottoneDownSottoMenu == "mouseSinistro" or bottoneDownSottoMenu == "padCroce":
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                        rispostaSottoMenu = True
+                        bottoneDownSottoMenu = False
+                    if bottoneDownSottoMenu:
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        bottoneDownSottoMenu = False
+                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+                confermaSalvataggioCancellazione = False
+                aggiornaSchermo = True
 
             primoFrame = False
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
