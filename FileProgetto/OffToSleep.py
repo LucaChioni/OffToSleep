@@ -1622,6 +1622,8 @@ def gameloop():
 
         # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
         SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
+        # decido se far avanzare dei dialoghi specifici (in base all'avanzamentoDialoghi di altri personaggi)
+        listaAvanzamentoDialoghi, listaPersonaggiTotali = SetPosizioneAudioImpedimenti.avanzaDialoghiSpecifici(dati[0], dati[1], listaAvanzamentoDialoghi, listaPersonaggiTotali)
 
         if not inizio and not cambiatoRisoluzione:
             # setto stato personaggi all'inizio del turno

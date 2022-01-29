@@ -2036,7 +2036,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Servono... servono informazioni su... sulla guerra in corso...")
+                dialogo.append(u"... Servono... servono informazioni sulla guerra in corso...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2194,11 +2194,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Abbiamo un accordo. Usa il piano ascensore per tornare all'ingresso, se non vuoi fare le scale.")
+                dialogo.append(u"Abbiamo un accordo. Al secondo piano puoi trovare delle armi, se ne hai bisogno. Usa il piano ascensore per tornare all'ingresso.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ok... il piano ascensore...")
+                dialogo.append(u"Ok...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

@@ -1890,6 +1890,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Devo prendere gli strumenti prima di andarmene...)")
                 partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Posso usare il Tunnel di Rod per tornare...)")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

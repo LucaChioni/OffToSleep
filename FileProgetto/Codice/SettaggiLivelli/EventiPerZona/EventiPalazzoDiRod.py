@@ -85,6 +85,24 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+        # azzero avanzamentoDialogo di Rod
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.tipo == "Mercante" and personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+                personaggio.avanzamentoDialogo = 0
+                break
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "Mercante-0":
+                listaAvanzamentoDialoghi[i + 1] = 0
+                break
+            i += 2
+        # giro Rod verso i fogli
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "Mercante":
+                personaggio.percorso = ["dGira", "mantieniPosizione"]
+                personaggio.numeroMovimento = 0
+                personaggio.girati("d")
+                break
         monetePossedute -= GlobalGameVar.monetePerGliStumentiPerNeil
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]:

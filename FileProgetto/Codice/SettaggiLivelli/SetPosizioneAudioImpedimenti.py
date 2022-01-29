@@ -4097,6 +4097,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod5"]:
         nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -4351,3 +4353,25 @@ def decidiSePoterParare(avanzamentoStoria):
         impossibileParare = True
 
     return impossibileParare
+
+
+def avanzaDialoghiSpecifici(avanzamentoStoria, stanza, listaAvanzamentoDialoghi, listaPersonaggiTotali):
+    if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"] and GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        avanzaDialogo = False
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.tipo == "Mercante" and personaggio.avanzamentoDialogo == 1:
+                avanzaDialogo = True
+                break
+        if avanzaDialogo:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.tipo == "OggettoAppuntiInElaborazioneRod":
+                    personaggio.avanzamentoDialogo = 1
+                    break
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if listaAvanzamentoDialoghi[i] == "OggettoAppuntiInElaborazioneRod-0":
+                    listaAvanzamentoDialoghi[i + 1] = 1
+                    break
+                i += 2
+
+    return listaAvanzamentoDialoghi, listaPersonaggiTotali
