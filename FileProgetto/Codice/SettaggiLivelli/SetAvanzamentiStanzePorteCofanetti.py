@@ -588,9 +588,12 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] = i
     i += 1
     dictAvanzamentoStoria["monologoUscitoDalPalazzoDiRod"] = i
+
     i += 1
-    dictAvanzamentoStoria["monologoVistaLevaPerAprireIlTunnelDiRod"] = i
+    dictAvanzamentoStoria["monologoArrivoTunnelDiRod"] = i
     dictAvanzamentoStoria["mappaTunnelDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoUtilizzoLevaTunnelDiRod"] = i
     i += 1
     dictAvanzamentoStoria["sbloccatoTunnelDiRod"] = i
 
@@ -616,6 +619,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnni"] = i
 
+    i += 1
+    dictAvanzamentoStoria["mappaVistoVulcano"] = i
     i += 1
     dictAvanzamentoStoria["mappaCaverna"] = i
     i += 1
@@ -1323,5 +1328,8 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["palazzoDiRod2"]
     vetCofanetti += [stanza, 26, 10, False]
+
+    stanza = dictStanze["tunnelDiRod2"]
+    vetCofanetti += [stanza, 17, 8, False]
 
     return vetCofanetti

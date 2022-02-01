@@ -84,9 +84,10 @@ global rumoreVomito
 global rumoreMelodiaFantasticare
 global suonoaperturaportePalazzoDiRod
 global suonochiusuraportePalazzoDiRod
+global rumoreLevaTunnelDiRod
 
 
-numSndTotali = 79
+numSndTotali = 80
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -180,6 +181,7 @@ def loadSounds(numSndCaricato):
     global rumoreMelodiaFantasticare
     global suonoaperturaportePalazzoDiRod
     global suonochiusuraportePalazzoDiRod
+    global rumoreLevaTunnelDiRod
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -264,6 +266,7 @@ def loadSounds(numSndCaricato):
     rumoreAttimoPericoloso = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttimoPericoloso.wav")
     rumoreVomito = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/Vomito.wav")
     rumoreMelodiaFantasticare = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/MelodiaFantasticare.wav")
+    rumoreLevaTunnelDiRod = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LevaSbarreGrotta.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

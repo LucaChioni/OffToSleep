@@ -29,12 +29,14 @@ def settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom):
         imgDaUsare = "mappaPassoMontano"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
         imgDaUsare = "mappaPalazzoDiRod"
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod"]:
+        imgDaUsare = "mappaTunnelDiRod"
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaVistoVulcano"]:
+        imgDaUsare = "mappaVistoVulcano"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCaverna"]:
         imgDaUsare = "mappaCaverna"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaVulcano"]:
         imgDaUsare = "mappaVulcano"
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod"]:
-        imgDaUsare = "mappaTunnelDiRod"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
         imgDaUsare = "mappaTunnelSubacqueo"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
@@ -75,21 +77,24 @@ def settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom):
         elif imgDaUsare == "mappaPalazzoDiRod":
             imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
             imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
-        elif imgDaUsare == "mappaCaverna":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
-        elif imgDaUsare == "mappaVulcano":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaTunnelDiRod":
+            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+        elif imgDaUsare == "mappaVistoVulcano":
             imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
             imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
-        elif imgDaUsare == "mappaTunnelSubacqueo":
+        elif imgDaUsare == "mappaCaverna":
             imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
             imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
-        elif imgDaUsare == "mappaLaboratorio":
+        elif imgDaUsare == "mappaVulcano":
+            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+        elif imgDaUsare == "mappaTunnelSubacqueo":
             imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
             imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+        elif imgDaUsare == "mappaLaboratorio":
+            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
 
     return imgMappa, imgMappaZoom
 

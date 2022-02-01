@@ -177,7 +177,7 @@ numSalvataggioCaricato = 0
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
 costoTecniche = [2, 5, 3, 2, 3, 10, 1, 10, 5, 5, 15, 10, 10, 15, 10, 20, 1, 20, 20, 40]
-dannoTecniche = [120, 50, 0, 100, 90, 0, 200, 150, 300, 250, 15, 10, 10, 15, 230, 500, 800, 700, 600, 550]
+dannoTecniche = [120, 50, 0, 100, 90, 0, 200, 150, 300, 250, 30, 50, 50, 30, 230, 500, 800, 700, 600, 550]
 vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]

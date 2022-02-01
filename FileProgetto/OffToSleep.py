@@ -23,6 +23,7 @@ import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOsta
 import Codice.SettaggiLivelli.SetNemiciPersonaggiEventi as SetNemiciPersonaggiEventi
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
+import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
 
@@ -1623,7 +1624,7 @@ def gameloop():
         # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
         SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
         # decido se far avanzare dei dialoghi specifici (in base all'avanzamentoDialoghi di altri personaggi)
-        listaAvanzamentoDialoghi, listaPersonaggiTotali = SetPosizioneAudioImpedimenti.avanzaDialoghiSpecifici(dati[0], dati[1], listaAvanzamentoDialoghi, listaPersonaggiTotali)
+        listaAvanzamentoDialoghi, listaPersonaggiTotali = SetDialoghiPersonaggi.avanzaDialoghiSpecifici(dati[0], dati[1], listaAvanzamentoDialoghi, listaPersonaggiTotali)
 
         if not inizio and not cambiatoRisoluzione:
             # setto stato personaggi all'inizio del turno

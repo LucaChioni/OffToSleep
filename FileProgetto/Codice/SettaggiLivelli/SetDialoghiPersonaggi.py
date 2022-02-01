@@ -19,6 +19,7 @@ import Codice.SettaggiLivelli.Dialoghi.DialoghiScorciatoiaLabirinto as DialoghiS
 import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerPassoMontano as DialoghiStradaPerPassoMontano
 import Codice.SettaggiLivelli.Dialoghi.DialoghiPassoMontano as DialoghiPassoMontano
 import Codice.SettaggiLivelli.Dialoghi.DialoghiPalazzoDiRod as DialoghiPalazzoDiRod
+import Codice.SettaggiLivelli.Dialoghi.DialoghiTunnelDiRod as DialoghiTunnelDiRod
 
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -130,6 +131,8 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPalazzoDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+    elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTunnelDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
 
@@ -147,3 +150,25 @@ def setGender(tipo):
         gender = "f"
 
     return gender
+
+
+def avanzaDialoghiSpecifici(avanzamentoStoria, stanza, listaAvanzamentoDialoghi, listaPersonaggiTotali):
+    if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"] and GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        avanzaDialogo = False
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.tipo == "Mercante" and personaggio.avanzamentoDialogo == 1:
+                avanzaDialogo = True
+                break
+        if avanzaDialogo:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.tipo == "OggettoAppuntiInElaborazioneRod":
+                    personaggio.avanzamentoDialogo = 1
+                    break
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if listaAvanzamentoDialoghi[i] == "OggettoAppuntiInElaborazioneRod-0":
+                    listaAvanzamentoDialoghi[i + 1] = 1
+                    break
+                i += 2
+
+    return listaAvanzamentoDialoghi, listaPersonaggiTotali

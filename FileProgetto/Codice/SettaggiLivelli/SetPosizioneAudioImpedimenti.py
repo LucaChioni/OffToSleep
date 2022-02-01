@@ -1985,7 +1985,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gpy * 10
                 if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"]:
                     npers = "s"
-                    x -= GlobalHWVar.gpx * 6
+                    x -= GlobalHWVar.gpx * 12
                     y = GlobalHWVar.gpy * 4
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
             nomeCanzoneLuogo = "11-ProprietaDiRod"
@@ -3872,8 +3872,91 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gpy * 5
                 if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"]:
                     npers = "w"
-                    x += GlobalHWVar.gpx * 19
+                    x += GlobalHWVar.gpx * 13
                     y = GlobalHWVar.gpy * 12
+    elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        if stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]:
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "TunnelDiRod"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 13
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 12
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "TunnelDiRod"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 12
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 8
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "TunnelDiRod"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 8
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 12
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLevaTunnelDiRod)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -3922,6 +4005,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Passo Montano"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano10"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]):
         nomeDaScrivere = u"Palazzo di Rod"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]):
+        nomeDaScrivere = u"Tunnel di Rod"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -4098,6 +4183,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod5"]:
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"]:
         nonProcedere = True
 
     return nonProcedere
@@ -4286,6 +4373,11 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
 
     return nomeStanza
 
@@ -4353,25 +4445,3 @@ def decidiSePoterParare(avanzamentoStoria):
         impossibileParare = True
 
     return impossibileParare
-
-
-def avanzaDialoghiSpecifici(avanzamentoStoria, stanza, listaAvanzamentoDialoghi, listaPersonaggiTotali):
-    if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"] and GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-        avanzaDialogo = False
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.tipo == "Mercante" and personaggio.avanzamentoDialogo == 1:
-                avanzaDialogo = True
-                break
-        if avanzaDialogo:
-            for personaggio in listaPersonaggiTotali:
-                if personaggio.tipo == "OggettoAppuntiInElaborazioneRod":
-                    personaggio.avanzamentoDialogo = 1
-                    break
-            i = 0
-            while i < len(listaAvanzamentoDialoghi):
-                if listaAvanzamentoDialoghi[i] == "OggettoAppuntiInElaborazioneRod-0":
-                    listaAvanzamentoDialoghi[i + 1] = 1
-                    break
-                i += 2
-
-    return listaAvanzamentoDialoghi, listaPersonaggiTotali

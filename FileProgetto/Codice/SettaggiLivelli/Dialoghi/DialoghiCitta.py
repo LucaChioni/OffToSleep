@@ -459,6 +459,22 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and tipo.startswith("Ragazz"):
+        if tipo.startswith("Ragazzo"):
+            partiDialogo = []
+            nome = "Sconosciuto"
+        elif tipo.startswith("Ragazza"):
+            partiDialogo = []
+            nome = "Sconosciuta"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"(Non ho niente da chiedergli...)")
+        partiDialogo.append(dialogo)
 
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città1"]:
         if tipo == "GuardiaCitta":

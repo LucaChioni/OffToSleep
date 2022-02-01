@@ -20,6 +20,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliScorciatoiaLabirinto as Os
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliStradaPerPassoMontano as OstacoliStradaPerPassoMontano
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliPassoMontano as OstacoliPassoMontano
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliPalazzoDiRod as OstacoliPalazzoDiRod
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliTunnelDiRod as OstacoliTunnelDiRod
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -1584,6 +1585,32 @@ def getEntrateStanze(stanza, avanzamentoStoria):
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 12, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 12, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 12, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
+    elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        if stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod5"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+        elif stanza == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod3"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod3"]])
+        elif stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod2"]])
 
     return entrateStanza
 
@@ -1644,6 +1671,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliPassoMontano.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliPalazzoDiRod.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliTunnelDiRod.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):
@@ -2112,6 +2141,11 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
             # ottieni cella di memoria
             if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 10:
+                tesoro = 1000
+    elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        if stanza == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+            # ottieni cella di memoria
+            if cx == GlobalHWVar.gpx * 17 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 1000
 
     # assegna oggetto ottenuto
