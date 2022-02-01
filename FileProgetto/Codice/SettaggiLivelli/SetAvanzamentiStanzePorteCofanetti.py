@@ -588,7 +588,6 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] = i
     i += 1
     dictAvanzamentoStoria["monologoUscitoDalPalazzoDiRod"] = i
-
     i += 1
     dictAvanzamentoStoria["monologoArrivoTunnelDiRod"] = i
     dictAvanzamentoStoria["mappaTunnelDiRod"] = i
