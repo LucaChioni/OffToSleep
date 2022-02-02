@@ -1021,7 +1021,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Posso passare per la scorciatoia adesso...)")
                 partiDialogo.append(dialogo)
-    elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello22"]:
+    elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello1"]:
             if y == GlobalHWVar.gpy * 1:
                 oggettoDato = False

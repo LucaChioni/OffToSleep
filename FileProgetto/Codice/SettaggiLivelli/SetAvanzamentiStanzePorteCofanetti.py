@@ -929,9 +929,6 @@ def definisciStanze():
     dictStanze["internoCastello21"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["internoCastello22"] = i
-    vetStanzePacifiche.append(i)
-    i += 1
     dictStanze["scorciatoiaLabirinto1"] = i
     vetStanzePacifiche.append(i)
     i += 1
@@ -991,6 +988,9 @@ def definisciStanze():
     i += 100
     i += 1
     dictStanze["caverna1"] = i
+    i += 1
+    dictStanze["tunnelSubacqueo1"] = i
+    vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
 
