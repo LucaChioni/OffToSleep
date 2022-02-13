@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import random
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
@@ -8,12 +9,15 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
+import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
-def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco):
+def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
         if dati[10] <= 0:
             dati[10] = 1
+        dati[122] = 0
         if x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 2:
             if not chiamarob:
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
@@ -114,6 +118,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["bloccatoDaGuardiaCastelloInInternoCastello18"] and stanza == GlobalGameVar.dictStanze["internoCastello18"]:
         if dati[10] <= 0:
             dati[10] = 1
+        dati[122] = 0
         if not chiamarob:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
             chiamarob = True
@@ -160,6 +165,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     tutteporte[i + 3] = False
                 break
             i += 4
+        if chiamarob:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
+            chiamarob = False
         stanza = GlobalGameVar.dictStanze["internoCastello18"]
         cambiosta = True
         carim = True
@@ -305,7 +313,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     tutteporte[i + 3] = False
                 break
             i += 4
-        # chiudo tutte le porte di casaHansSara tranne la cameretta e la porta della tua stanza del castello
+        # chiudo tutte le porte di casaHansSara tranne la cameretta
         i = 0
         while i < len(tutteporte):
             if tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and not (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
@@ -472,5 +480,332 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] and stanza == GlobalGameVar.dictStanze["internoCastello20"] and y == GlobalHWVar.gpy * 7:
+        if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+            GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
+        avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["avviatoBattitoCardiacoPreConsegnaStrumenti"] and stanza == GlobalGameVar.dictStanze["internoCastello20"] and y == GlobalHWVar.gpy * 8:
+        personaggioGirato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "Neil":
+                if personaggio.direzione == "a":
+                    personaggioGirato = True
+                elif personaggio.percorso != ["aGira", "mantieniPosizione"]:
+                    personaggio.percorso = ["aGira", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 0
+                break
+        if personaggioGirato:
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+            if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["avviatoBattitoCardiacoPreConsegnaStrumenti"]:
+                for personaggio in listaPersonaggi:
+                    if personaggio.tipo == "Neil":
+                        personaggio.percorso = ["a", "sGira", "mantieniPosizione"]
+                        personaggio.numeroMovimento = 0
+                        break
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoStrumentiSulTavoloDiNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        avanzamentoStoria += 1
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
+        avanzaIlTurnoSenzaMuoverti = True
+        evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riprodottoSuonoStrumentiSulTavoloDiNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoImpoSulTavoloDopoConsegnaStrumenti"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        avanzamentoStoria += 1
+        if dati[10] <= 0:
+            dati[10] = 1
+        if chiamarob:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
+            chiamarob = False
+            i = 0
+            while i < 2:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        stanza = GlobalGameVar.dictStanze["internoCastello20"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        avanzaIlTurnoSenzaMuoverti = True
+        evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimossoImpoMessoSulTavoloDopoConsegnaStrumenti"] and stanza == GlobalGameVar.dictStanze["internoCastello20"] and x == GlobalHWVar.gpx * 11 and y == GlobalHWVar.gpy * 12:
+        npers = 3
+        avanzamentoStoria += 1
+        avanzaIlTurnoSenzaMuoverti = True
+        evitaTurnoDiColco = True
+        carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tentatoDiAndarteneDaNeilConImpoPietra"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoNeilSuImpoPietraNonConsegnata"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "Neil":
+                if personaggio.x == GlobalHWVar.gpx * 12 and personaggio.y == GlobalHWVar.gpy * 9:
+                    personaggioArrivato = True
+                elif personaggio.percorso != ["a", "sGira", "sGira", "mantieniPosizione"]:
+                    personaggio.percorso = ["a", "sGira", "sGira", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 0
+                break
+        if personaggioArrivato:
+            avanzamentoStoria += 1
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
+            if dati[10] <= 0:
+                dati[10] = 1
+            dati[122] = 0
+            chiamarob = True
+            ultimoObbiettivoColco = []
+            ultimoObbiettivoColco.append("Telecomando")
+            ultimoObbiettivoColco.append(x)
+            ultimoObbiettivoColco.append(y)
+            ultimoObbiettivoColco.append("spostamento")
+            GlobalHWVar.canaleSoundPassiColco.play(GlobalSndVar.rumoreCamminataColco)
+            rx = GlobalHWVar.gpx * 14
+            ry = GlobalHWVar.gpy * 11
+            nrob = 3
+            carim = True
+            caricaTutto = True
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        if not (rx == GlobalHWVar.gpx * 12 and ry == GlobalHWVar.gpy * 12):
+            avanzaIlTurnoSenzaMuoverti = True
+        else:
+            percorsoDaEseguire = ["a", "w", "w", "w", "w", "w", "w", "w", "w", "s"]
+            avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioPercorsoPerUscireDalloStudioDiNeilConImpo"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        if x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 11:
+            for personaggio in listaPersonaggi:
+                if personaggio.tipo == "Neil":
+                    personaggio.percorso = ["aGira", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 0
+                    break
+        elif x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 7:
+            i = 0
+            while i < len(porte):
+                if porte[i] == GlobalGameVar.dictStanze["internoCastello20"] and porte[i + 1] == GlobalHWVar.gpx * 10 and porte[i + 2] == GlobalHWVar.gpy * 6:
+                    if not porte[i + 3]:
+                        porte[i + 3] = True
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoaperturaporteCastello)
+                        carim = True
+                        caricaTutto = True
+                    break
+                i += 4
+            i = 0
+            while i < len(tutteporte):
+                if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"] and tutteporte[i + 1] == GlobalHWVar.gpx * 10 and tutteporte[i + 2] == GlobalHWVar.gpy * 6:
+                    if not tutteporte[i + 3]:
+                        tutteporte[i + 3] = True
+                    break
+                i += 4
+        elif x == GlobalHWVar.gpx * 10 and y == GlobalHWVar.gpy * 5 and npers == 4:
+            avanzamentoStoria += 1
+            i = 0
+            while i < len(porte):
+                if porte[i] == GlobalGameVar.dictStanze["internoCastello20"] and porte[i + 1] == GlobalHWVar.gpx * 10 and porte[i + 2] == GlobalHWVar.gpy * 6:
+                    if porte[i + 3]:
+                        porte[i + 3] = False
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonochiusuraporteCastello)
+                    break
+                i += 4
+            i = 0
+            while i < len(tutteporte):
+                if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"] and tutteporte[i + 1] == GlobalHWVar.gpx * 10 and tutteporte[i + 2] == GlobalHWVar.gpy * 6:
+                    if tutteporte[i + 3]:
+                        tutteporte[i + 3] = False
+                    break
+                i += 4
+            percorsoDaEseguire = []
+            carim = True
+            caricaTutto = True
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoDalloStudioDiNeilConImpo"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitoDalloStudioDiNeilConImpo"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipoId == "ServoSpada-9":
+                if personaggio.x == GlobalHWVar.gpx * 2 and personaggio.y == GlobalHWVar.gpy * 4 and personaggio.direzione == "a":
+                    personaggioArrivato = True
+                elif personaggio.percorso != ["w", "aGira", "mantieniPosizione"] and x == GlobalHWVar.gpx * 8:
+                    personaggio.percorso = ["w", "aGira", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 0
+                break
+        if personaggioArrivato:
+            listaNemiciTotali = []
+            listaPersonaggiTotali = []
+            stanzeGiaVisitate = []
+            avanzamentoStoria += 1
+            stanza = GlobalGameVar.dictStanze["internoCastello20"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoPortaInternoCastello20DaSoldato"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "ServoSpada-9", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSoldatoInternoCastello20CheChiudePorta"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        nemicoAncoraVivo = False
+        spawnCadavereX = 0
+        spawnCadavereY = 0
+        for nemico in listaNemici:
+            if nemico.tipo == "ServoSpada":
+                if nemico.vita > 0:
+                    nemicoAncoraVivo = True
+                spawnCadavereX = nemico.x
+                spawnCadavereY = nemico.y
+                break
+        if not nemicoAncoraVivo:
+            if spawnCadavereX == GlobalHWVar.gpx * 2 and spawnCadavereY == GlobalHWVar.gpy * 4:
+                spawnCadavereX = GlobalHWVar.gpx * 2
+                spawnCadavereY = GlobalHWVar.gpy * 3
+            if (spawnCadavereX == x and spawnCadavereY == y) or (spawnCadavereX == rx and spawnCadavereY == ry):
+                spawnCadavereX = GlobalHWVar.gpx * 2
+                spawnCadavereY = GlobalHWVar.gpy * 5
+            if (spawnCadavereX == x and spawnCadavereY == y) or (spawnCadavereX == rx and spawnCadavereY == ry):
+                spawnCadavereX = GlobalHWVar.gpx * 3
+                spawnCadavereY = GlobalHWVar.gpy * 4
+            while (spawnCadavereX == x and spawnCadavereY == y) or (spawnCadavereX == rx and spawnCadavereY == ry):
+                spawnCadavereX += GlobalHWVar.gpx * 1
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj.PersonaggioObj(spawnCadavereX, spawnCadavereY, "s", "OggettoDictCadavereSoldato" + str(random.randint(1, 3)) + "-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggiTotali.append(personaggio)
+            listaPersonaggi.append(personaggio)
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoAperturaPortaInternoCastello20"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"] and personaggio.tipo == "OggettoPortaCastelloChiusa":
+                listaPersonaggiTotali.remove(personaggio)
+                break
+        for personaggio in listaPersonaggi:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"] and personaggio.tipo == "OggettoPortaCastelloChiusa":
+                listaPersonaggi.remove(personaggio)
+                break
+        avanzamentoStoria += 1
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoaperturaporteCastello)
+        stanza = GlobalGameVar.dictStanze["internoCastello19"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        avanzaIlTurnoSenzaMuoverti = True
+        evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoPortaInternoCastello20AndandoInInternoCastello19"] and stanza == GlobalGameVar.dictStanze["internoCastello19"]:
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["apertoPortaInternoCastello20AndandoInInternoCastello19"]:
+            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+            GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+            # chiudo tutte le porte nel castello (per la fuga)
+            i = 0
+            while i < len(tutteporte):
+                if GlobalGameVar.dictStanze["internoCastello1"] <= tutteporte[i] <= GlobalGameVar.dictStanze["internoCastello21"]:
+                    tutteporte[i + 3] = False
+                i += 4
 
-    return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco
+    # creazione personaggi-oggetto cadaveri soldati (solo se non ti bloccano per andare avanti)
+    if GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        listaCaselleUscita = []
+        if stanza == GlobalGameVar.dictStanze["internoCastello2"]:
+            listaCaselleUscita.append([GlobalHWVar.gpx * 6, GlobalHWVar.gpy * 2])
+            listaCaselleUscita.append([GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 2])
+            listaCaselleUscita.append([GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 2])
+            listaCaselleUscita.append([GlobalHWVar.gpx * 23, GlobalHWVar.gpy * 2])
+            listaCaselleUscita.append([GlobalHWVar.gpx * 24, GlobalHWVar.gpy * 2])
+            listaCaselleUscita.append([GlobalHWVar.gpx * 25, GlobalHWVar.gpy * 2])
+        else:
+            if stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+                stanzaDestinazione = GlobalGameVar.dictStanze["esternoCastello5"]
+            elif stanza == GlobalGameVar.dictStanze["internoCastello9"] and ((x <= GlobalHWVar.gpx * 16 and y >= GlobalHWVar.gpy * 7) or y >= GlobalHWVar.gpy * 12):
+                stanzaDestinazione = GlobalGameVar.dictStanze["internoCastello11"]
+            elif stanza == GlobalGameVar.dictStanze["internoCastello12"]:
+                stanzaDestinazione = GlobalGameVar.dictStanze["internoCastello9"]
+            else:
+                stanzaDestinazione = stanza - 1
+            vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(stanza, avanzamentoStoria)
+            i = 0
+            while i < len(vetEntrate):
+                if vetEntrate[i + 4] == stanzaDestinazione:
+                    listaCaselleUscita.append([vetEntrate[i], vetEntrate[i + 1]])
+                i += 5
+        for nemico in listaNemici:
+            if nemico.morto:
+                nemicoSovrapposto = False
+                for nemicoTemp in listaNemici:
+                    if nemico != nemicoTemp and nemico.x == nemicoTemp.x and nemico.y == nemicoTemp.y:
+                        nemicoSovrapposto = True
+                if not nemicoSovrapposto:
+                    vetNemiciSoloConXeY = []
+                    for personaggio in listaPersonaggi:
+                        vetNemiciSoloConXeY.append(personaggio.x)
+                        vetNemiciSoloConXeY.append(personaggio.y)
+                    vetNemiciSoloConXeY.append(nemico.x)
+                    vetNemiciSoloConXeY.append(nemico.y)
+                    # aggiungo anche le porte che non si possono aprire
+                    k = 0
+                    while k < len(porte):
+                        if stanza == porte[k] and not SetPosizioneAudioImpedimenti.possibileAprirePorta(stanza, porte[k + 1], porte[k + 2], avanzamentoStoria):
+                            vetNemiciSoloConXeY.append(porte[k + 1])
+                            vetNemiciSoloConXeY.append(porte[k + 2])
+                        k += 4
+                    for casellaUscita in listaCaselleUscita:
+                        percorsoTrovato = GenericFunc.pathFinding(x, y, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                        if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                            percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                            if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                                percorsoPersonaggio = []
+                                personaggio = PersonaggioObj.PersonaggioObj(nemico.x, nemico.y, "s", "OggettoDictCadavereSoldato" + str(random.randint(1, 3)) + "-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                                listaPersonaggiTotali.append(personaggio)
+                                listaPersonaggi.append(personaggio)
+                                carim = True
+                                caricaTutto = True
+                                break
+    # se un nemico ti vede, tutti sanno dove sei
+    if GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        listaObiettiviVisti = []
+        for nemico in listaNemici:
+            if nemico.inCasellaVista and nemico.obbiettivo[0] != "":
+                listaObiettiviVisti.append([nemico.obbiettivo[1], nemico.obbiettivo[2]])
+        if len(listaObiettiviVisti) > 0:
+            for nemico in listaNemici:
+                if nemico.inCasellaVista and nemico.obbiettivo[0] == "":
+                    primoObiettivo = True
+                    for obiettivoVisto in listaObiettiviVisti:
+                        if primoObiettivo:
+                            nemico.xPosizioneUltimoBersaglio = obiettivoVisto[0]
+                            nemico.yPosizioneUltimoBersaglio = obiettivoVisto[1]
+                            primoObiettivo = False
+                        elif abs(nemico.x - obiettivoVisto[0]) + abs(nemico.y - obiettivoVisto[1]) < abs(nemico.x - nemico.xPosizioneUltimoBersaglio) + abs(nemico.y - nemico.yPosizioneUltimoBersaglio):
+                            nemico.xPosizioneUltimoBersaglio = obiettivoVisto[0]
+                            nemico.yPosizioneUltimoBersaglio = obiettivoVisto[1]
+
+    return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco

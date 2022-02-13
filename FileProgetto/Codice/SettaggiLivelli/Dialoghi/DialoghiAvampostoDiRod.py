@@ -61,7 +61,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Non c'è... forse è tornato in città...")
+                dialogo.append(u"... Non c'è... forse è tornato in città.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

@@ -15,6 +15,7 @@ import Codice.GestioneMenu.SottoMenuImpo as SottoMenuImpo
 import Codice.GestioneMenu.SottoMenuRobo as SottoMenuRobo
 import Codice.GestioneMenu.SottoMenuSalva as SottoMenuSalva
 import Codice.GestioneMenu.SottoMenuMapDiario as SottoMenuMapDiario
+import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
 
 
 def chiediconferma(conferma):
@@ -762,23 +763,7 @@ def menu(caricaSalvataggio, gameover):
 
 
 def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom):
-    if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.sara1GrafMenu
-    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        perssta = GlobalImgVar.fraMaggioreGrafMenu
-    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.sara1GrafMenu
-    elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-        perssta = GlobalImgVar.saraSconvoltaGrafMenu
-    elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
-        if not GlobalGameVar.cambiataAlCastello[0]:
-            perssta = GlobalImgVar.saraAssonnataPostCenaCastello
-        else:
-            perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
-    elif not GlobalGameVar.cambiataAlCastello[0]:
-        perssta = GlobalImgVar.sara2GrafMenu
-    else:
-        perssta = GlobalImgVar.sara3GrafMenu
+    perssta = SetEventiDialoghi.setImgMenuStartProtagonista(dati[0])
     robosta = GlobalImgVar.robograf1b
     puntatore = GlobalImgVar.puntatore
     puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -955,23 +940,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
 
                             xp = GlobalHWVar.gsx // 32 * 1
                             yp = GlobalHWVar.gsy // 18 * 14
-                            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                                perssta = GlobalImgVar.sara1GrafMenu
-                            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                                perssta = GlobalImgVar.fraMaggioreGrafMenu
-                            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                                perssta = GlobalImgVar.sara1GrafMenu
-                            elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-                                perssta = GlobalImgVar.saraSconvoltaGrafMenu
-                            elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
-                                if not GlobalGameVar.cambiataAlCastello[0]:
-                                    perssta = GlobalImgVar.saraAssonnataPostCenaCastello
-                                else:
-                                    perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
-                            elif not GlobalGameVar.cambiataAlCastello[0]:
-                                perssta = GlobalImgVar.sara2GrafMenu
-                            else:
-                                perssta = GlobalImgVar.sara3GrafMenu
+                            perssta = SetEventiDialoghi.setImgMenuStartProtagonista(dati[0])
                             robosta = GlobalImgVar.robograf1b
                             puntatore = GlobalImgVar.puntatore
                             puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -1133,10 +1102,10 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
 
                     if faretraFrecceStart != 0:
                         GlobalHWVar.disegnaImmagineSuSchermo(faretraFrecceStart, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 2.7))
-                        FunzioniGraficheGeneriche.messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 3)), (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 6.7)), 2)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaroStart, (GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 2.7))
-                    FunzioniGraficheGeneriche.messaggio("Monete: " + str(dati[131]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 28.4, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio("Monete: " + str(dati[131]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 28.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
                 else:
                     if aperturaSettaColcoNonRiuscita:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 7, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 0.6))

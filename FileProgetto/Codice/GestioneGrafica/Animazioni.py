@@ -1354,7 +1354,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if GlobalGameVar.impoPresente:
+    if GlobalGameVar.impoPietraPosseduta:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:

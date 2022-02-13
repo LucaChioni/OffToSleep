@@ -69,13 +69,17 @@ class PersonaggioObj(object):
         i = 1
         while i <= numImg:
             if nonCaricareImg:
-                if disegnaImg and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
+                if disegnaImg and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png") and not self.tipo.startswith("OggettoDict"):
                     raise Exception("Immagine \"" + self.tipo + str(i) + ".png\" non trovata...")
                 img = False
                 self.imgOggetto.append(img)
             else:
                 if disegnaImg:
-                    img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                    if self.tipo.startswith("OggettoDict"):
+                        img = GlobalImgVar.dictImgPersonaggiOggettoSpecifici[self.tipo]
+                    else:
+                        img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+
                 else:
                     img = False
                 self.imgOggetto.append(img)
@@ -83,13 +87,16 @@ class PersonaggioObj(object):
         i = 0
         while i < numImgDialogo:
             if nonCaricareImg:
-                if nomeImgDialogo[i] != "Vuota" and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
+                if nomeImgDialogo[i] != "Vuota" and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png") and not nomeImgDialogo[i].startswith("OggettoDict"):
                     raise Exception("Immagine \"" + nomeImgDialogo[i] + ".png\" non trovata...")
                 img = False
                 self.imgOggettoDialogo.append(img)
             else:
                 if nomeImgDialogo[i] != "Vuota":
-                    img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+                    if nomeImgDialogo[i].startswith("OggettoDict"):
+                        img = GlobalImgVar.dictImgDialoghiPersonaggiOggettoSpecifici[nomeImgDialogo[i]]
+                    else:
+                        img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
                 else:
                     img = False
                 self.imgOggettoDialogo.append(img)

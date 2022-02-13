@@ -440,14 +440,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo == "GuardiaCitta" and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
         partiDialogo = []
         nome = "Soldato"
-        oggettoDato = False
-        avanzaStoria = False
-        menuMercante = False
-        scelta = False
-        dialogo = []
-        dialogo.append("personaggio")
-        dialogo.append(u"(Non voglio parlare coi soldati... poi potrebbero insospettirsi per Impo...)")
-        partiDialogo.append(dialogo)
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["città4"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Non ci provare ragazzina! L'accesso è vietato!")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ehm... ok.")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Non voglio parlare coi soldati... poi potrebbero insospettirsi per Impo...)")
+            partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta" and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
         partiDialogo = []
         nome = "Soldato"
@@ -456,7 +470,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         menuMercante = False
         scelta = False
         dialogo = []
-        dialogo.append("personaggio")
+        dialogo.append("tu")
         dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and tipo.startswith("Ragazz"):

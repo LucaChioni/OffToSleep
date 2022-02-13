@@ -160,7 +160,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             fineDialogo = True
                             bottoneDown = False
                         elif bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
-                            GlobalHWVar.canaleSoundInterazioni.play(suonoDialogo)
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(suonoDialogo)
                             scriviTutto = True
                             bottoneDown = False
                         if bottoneDown:
@@ -174,7 +174,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
 
                         if not scriviTutto:
                             if intervalloSuonoDialogo % 3 == 0:
-                                GlobalHWVar.canaleSoundInterazioni.play(suonoDialogo)
+                                GlobalHWVar.canaleSoundPuntatoreSposta.play(suonoDialogo)
                             intervalloSuonoDialogo += 1
                             GlobalHWVar.aggiornaSchermo()
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
@@ -625,9 +625,9 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.25), 40)
     if avvele:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3.1, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
     if difp > 0:

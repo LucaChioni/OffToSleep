@@ -176,15 +176,15 @@ vetDatiSalvataggioGameOver = []
 numSalvataggioCaricato = 0
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
-costoTecniche = [2, 5, 3, 2, 3, 10, 1, 10, 5, 5, 15, 10, 10, 15, 10, 20, 1, 20, 20, 40]
-dannoTecniche = [120, 50, 0, 100, 90, 0, 200, 150, 300, 250, 30, 50, 50, 30, 230, 500, 800, 700, 600, 550]
+costoTecniche = [3, 5, 3, 3, 6, 10, 5, 10, 10, 10, 15, 10, 10, 15, 20, 20, 20, 30, 30, 60]
+dannoTecniche = [120, 50, 0, 100, 90, 0, 300, 150, 300, 250, 30, 50, 50, 30, 230, 500, 1000, 700, 600, 550]
 vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
 dannoOggetti = [200, 50, 0, 50, 1000]
 # frecce trasportabili per faretra
-frecceMaxPerFaretra = [1, 20, 50, 90]
+frecceMaxPerFaretra = [3, 20, 100, 800]
 
 # dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
 dictAvanzamentoStoria = SetAvanzamentiStanzePorteCofanetti.definisciAvanzamentiStoria()
@@ -194,6 +194,9 @@ vetStanzePacificheBackUp = vetStanzePacifiche[:]
 # dichiaro i vettori di porte e cofanetti
 initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStanze)
 initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
+
+# definisco il massimo delle monete che è possibile avere
+maxMonete = 999999
 
 # vita esche
 vitaTotEsche = 200
@@ -205,7 +208,7 @@ dannoMortale = 100000
 monetePerEntrareNellaConfraternita = 200
 monetePerLasciareLaConfraternita = 1000
 monetePerLaMappaDelLabirinto = 500
-monetePerGliStumentiPerNeil = 2000
+monetePerGliStumentiPerNeil = 1500
 
 global imgMappaAttuale
 global canzoneAttuale
@@ -216,7 +219,9 @@ global datiEnigmaBibliotecario
 global pazzoStrabico
 global volumeMusicaDimezzato
 global impoPresente
+global impoPietraPosseduta
 global cambiataAlCastello
+global armaturaIndossata
 def inizializzaVariabiliGlobali():
     global imgMappaAttuale
     global canzoneAttuale
@@ -227,7 +232,9 @@ def inizializzaVariabiliGlobali():
     global pazzoStrabico
     global volumeMusicaDimezzato
     global impoPresente
+    global impoPietraPosseduta
     global cambiataAlCastello
+    global armaturaIndossata
     imgMappaAttuale = False
     canzoneAttuale = False
     audioSottofondoAttuale = False
@@ -245,8 +252,10 @@ def inizializzaVariabiliGlobali():
     pazzoStrabico = False
     volumeMusicaDimezzato = False
     impoPresente = False
+    impoPietraPosseduta = False
     # cambiataAlCastello[0] => vestiti attuali cambiataAlCastello[1] => vestiti vecchi (serve per far ricaricare le img dopo il cambio)
     cambiataAlCastello = [False, False]
+    armaturaIndossata = 0
 inizializzaVariabiliGlobali()
 
 def settaRisoluzioneOttimale():

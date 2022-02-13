@@ -338,43 +338,43 @@ class NemicoObj(object):
             esp = 1000
 
         if self.tipo == "ServoSpada":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
+            vitaTotale = 1000
+            attacco = 500
+            difesa = 65
+            velocita = 0
+            raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(50, 53)
+            esp = 158
             ignoraEsche = True
         if self.tipo == "ServoArco":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
+            vitaTotale = 500
+            attacco = 350
+            difesa = 50
+            velocita = 0
+            raggioVisivo = GlobalHWVar.gpx * 6
+            attaccaDaLontano = True
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(54, 57)
+            esp = 181
             ignoraEsche = True
         if self.tipo == "ServoLancia":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
+            vitaTotale = 1500
+            attacco = 400
+            difesa = 65
+            velocita = 0
+            raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
-            velenoso = False
+            velenoso = True
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(58, 60)
+            esp = 203
             ignoraEsche = True
 
         if self.tipo == "RoboLeggero":

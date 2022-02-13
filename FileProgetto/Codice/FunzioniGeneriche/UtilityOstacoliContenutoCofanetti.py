@@ -17,8 +17,8 @@ def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
 
 def ottieniMonete(dati, moneteOttenute):
     moneteTot = dati[131] + moneteOttenute
-    if moneteTot > 9999:
-        moneteTot = 9999
+    if moneteTot > GlobalGameVar.maxMonete:
+        moneteTot = GlobalGameVar.maxMonete
     return moneteTot
 
 

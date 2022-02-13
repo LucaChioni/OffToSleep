@@ -166,6 +166,9 @@ def gameloop():
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
                 if cambiosta:
+                    # necessario ridefinire le stanze pacifiche in caso di carica partita nel castello (inizialmente quelle stanze sono pacifiche)
+                    SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
+
                     SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
                     stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
                     SetPosizioneAudioImpedimenti.riproduciAudioSpeciali(dati[0])
@@ -381,6 +384,7 @@ def gameloop():
 
                 impossibileCliccarePulsanti = True
 
+            GlobalGameVar.armaturaIndossata = dati[8]
             if aggiornaImgEquip or cambiatoRisoluzione:
                 # arma
                 armaw = GlobalImgVar.vetImgSpadeInGame[dati[6]][0]
@@ -2042,7 +2046,7 @@ def gameloop():
                     # surriscalda
                     if dati[122] > 0:
                         dati[122] = dati[122] - 1
-                        dati[10] = dati[10] - 3
+                        dati[10] = dati[10] - 1
                     # efficienza
                     if dati[126] > 0:
                         dati[126] -= 1
@@ -2225,9 +2229,24 @@ def gameloop():
                         if dati[130] == 4:
                             denaroDroppato += int(nemico.denaro * 1.5)
                         if denaroDroppato > 0:
-                            vettoreDenaro.append(denaroDroppato)
-                            vettoreDenaro.append(nemico.x)
-                            vettoreDenaro.append(nemico.y)
+                            # se sei nel castello metto le monete nella casella di rallo (non possono stare in quella del nemio perché c'é il loro cadavere)
+                            if GlobalGameVar.dictStanze["internoCastello1"] <= dati[1] <= GlobalGameVar.dictStanze["internoCastello21"]:
+                                denaroGiaPresente = False
+                                i = 0
+                                while i < len(vettoreDenaro):
+                                    if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
+                                        vettoreDenaro[i] += denaroDroppato
+                                        denaroGiaPresente = True
+                                        break
+                                    i += 3
+                                if not denaroGiaPresente:
+                                    vettoreDenaro.append(denaroDroppato)
+                                    vettoreDenaro.append(x)
+                                    vettoreDenaro.append(y)
+                            else:
+                                vettoreDenaro.append(denaroDroppato)
+                                vettoreDenaro.append(nemico.x)
+                                vettoreDenaro.append(nemico.y)
                         nemico.morto = True
                         nemico.animaMorte = True
 
@@ -2286,10 +2305,48 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
+                porteTemp = porte[:]
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True
+                if porteTemp != porte:
+                    posizioneRalloAggiornamentoCaseAttac = [0, 0]
+                    # aggiorno inCasellaVista di nemici e personaggi
+                    listaNemici, listaPersonaggi = GenericFunc.aggiornaInCasellaVistaDiNemiciEPersonaggi(caselleNonVisibili, listaNemici, listaPersonaggi)
+                    # aggiorno il campo attaccabile di colco
+                    if GlobalGameVar.impoPresente:
+                        caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
+                        posizioneColcoAggiornamentoCaseAttac = [rx, ry]
+                    # aggiorno la vista dei nemici
+                    for nemico in listaNemici:
+                        if nemico.vita > 0 and nemico.inCasellaVista:
+                            nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
+                    caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili, casellePercorribiliPorteEscluse = GenericFunc.creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
+
+            # tolgo le esche sovrapposte a eventuali personaggi o nemici creati negli eventi
+            i = 0
+            while i < len(vettoreEsche):
+                escaCancellata = False
+                for personaggio in listaPersonaggi:
+                    if vettoreEsche[i + 2] == personaggio.x and vettoreEsche[i + 3] == personaggio.y:
+                        del vettoreEsche[i + 3]
+                        del vettoreEsche[i + 2]
+                        del vettoreEsche[i + 1]
+                        del vettoreEsche[i]
+                        escaCancellata = True
+                        break
+                if not escaCancellata:
+                    for nemico in listaNemici:
+                        if vettoreEsche[i + 2] == nemico.x and vettoreEsche[i + 3] == nemico.y:
+                            del vettoreEsche[i + 3]
+                            del vettoreEsche[i + 2]
+                            del vettoreEsche[i + 1]
+                            del vettoreEsche[i]
+                            escaCancellata = True
+                            break
+                if not escaCancellata:
+                    i += 4
 
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
             i = len(listaNemici) - 1

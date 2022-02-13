@@ -554,7 +554,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Uh?!")
+            dialogo.append(u"<*>#italic#Uh?!<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

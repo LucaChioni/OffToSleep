@@ -31,12 +31,44 @@ def setImgDialogoProtagonista(avanzamentoStoria):
                 imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnata
             else:
                 imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataCastello
+        elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            if not GlobalGameVar.cambiataAlCastello[0]:
+                imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
+            else:
+                imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvoltaCastello
         elif not GlobalGameVar.cambiataAlCastello[0]:
             imgPersDialogo = GlobalImgVar.imgDialogoSara2
         else:
             imgPersDialogo = GlobalImgVar.imgDialogoSara3
 
     return nomePersonaggio, imgPersDialogo
+
+
+def setImgMenuStartProtagonista(avanzamentoStoria):
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+        perssta = GlobalImgVar.sara1GrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        perssta = GlobalImgVar.fraMaggioreGrafMenu
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+        perssta = GlobalImgVar.sara1GrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
+        perssta = GlobalImgVar.saraSconvoltaGrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
+        if not GlobalGameVar.cambiataAlCastello[0]:
+            perssta = GlobalImgVar.saraAssonnataPostCenaCastello
+        else:
+            perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
+    elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        if not GlobalGameVar.cambiataAlCastello[0]:
+            perssta = GlobalImgVar.saraSconvoltaGrafMenu
+        else:
+            perssta = GlobalImgVar.saraSconvoltaCastelloGrafMenu
+    elif not GlobalGameVar.cambiataAlCastello[0]:
+        perssta = GlobalImgVar.sara2GrafMenu
+    else:
+        perssta = GlobalImgVar.sara3GrafMenu
+
+    return perssta
 
 
 def setImgMercanteMenu(avanzamentoStoria, stanza):
@@ -60,6 +92,8 @@ def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
         GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] and personaggio.tipo.startswith("OggettoDictCadavereSoldato"):
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
 
     return avanzamentoStoria
 
@@ -80,5 +114,7 @@ def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] and personaggio.tipo == "Nessuno":
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreVomito)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodAperturaRetroPalazzo"] and personaggio.tipo == "Mercante":
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSbloccoPorta)
 
     return avanzamentoStoria

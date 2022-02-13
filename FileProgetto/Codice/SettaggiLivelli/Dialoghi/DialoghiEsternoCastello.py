@@ -148,6 +148,22 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("personaggio")
                     dialogo.append(u"...")
                     partiDialogo.append(dialogo)
+        elif tipo == "Neil":
+            partiDialogo = []
+            nome = "Neil"
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello2"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -312,6 +328,40 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(È chiuso...)")
+            partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello3"]:
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoNeilFuoriDalCastelloDuranteLaFuga"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+        elif tipo == "Neil":
+            partiDialogo = []
+            nome = "Neil"
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"N-non ti avvicinare!")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Perché hai ucciso i miei soldati, Sara?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello5"]:
         if tipo == "OggettoImpo":

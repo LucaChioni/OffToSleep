@@ -309,7 +309,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if GlobalGameVar.impoPresente:
+    if GlobalGameVar.impoPietraPosseduta:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -445,7 +445,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if GlobalGameVar.impoPresente:
+    if GlobalGameVar.impoPietraPosseduta:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -927,7 +927,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
-    if GlobalGameVar.impoPresente:
+    if GlobalGameVar.impoPietraPosseduta:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
@@ -2235,7 +2235,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         else:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
         # chiave robo
-        if GlobalGameVar.impoPresente:
+        if GlobalGameVar.impoPietraPosseduta:
             if chiamarob:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
             else:

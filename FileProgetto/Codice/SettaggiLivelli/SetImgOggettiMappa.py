@@ -232,7 +232,22 @@ def definisciImgOggetti(tipo):
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoTavoloVuotoCastelloA":
         disegnaImg = True
+        numImg = 3
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoTavoloVuotoCastelloB":
+        disegnaImg = True
         numImg = 2
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
+    if tipo.startswith("OggettoDictCadavereSoldato"):
+        disegnaImg = True
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["OggettoDictCadavereSoldatoDialogo"]
+    if tipo == "OggettoSaraNelLago":
+        disegnaImg = True
+        numImg = 5
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
 
@@ -290,6 +305,26 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
     if tipo == "OggettoTavoloVuotoCastelloA":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ripresoImpoDaNeil"]:
             numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["messoStrumentiSulTavoloDiNeil"]:
+            numImgAttuale = 2
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            numImgAttuale = 1
+    if tipo == "OggettoTavoloVuotoCastelloB":
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rimossoImpoMessoSulTavoloDopoConsegnaStrumenti"]:
+            numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
+            numImgAttuale = 0
+    if tipo == "OggettoSaraNelLago":
+        if GlobalGameVar.armaturaIndossata == 0 and not GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttuale = 0
+        if GlobalGameVar.armaturaIndossata == 0 and GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttuale = 1
+        if GlobalGameVar.armaturaIndossata == 1:
+            numImgAttuale = 2
+        if GlobalGameVar.armaturaIndossata == 2:
+            numImgAttuale = 3
+        if GlobalGameVar.armaturaIndossata == 3:
+            numImgAttuale = 4
 
     return numImgAttuale
 
