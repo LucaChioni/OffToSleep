@@ -601,7 +601,6 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoUtilizzoLevaTunnelDiRod"] = i
     i += 1
     dictAvanzamentoStoria["sbloccatoTunnelDiRod"] = i
-    print i
     i += 1
     dictAvanzamentoStoria["avviatoBattitoCardiacoPreConsegnaStrumenti"] = i
     i += 1

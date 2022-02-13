@@ -339,7 +339,7 @@ class NemicoObj(object):
 
         if self.tipo == "ServoSpada":
             vitaTotale = 1000
-            attacco = 500
+            attacco = 400
             difesa = 65
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
@@ -352,7 +352,7 @@ class NemicoObj(object):
             ignoraEsche = True
         if self.tipo == "ServoArco":
             vitaTotale = 500
-            attacco = 350
+            attacco = 250
             difesa = 50
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -365,7 +365,7 @@ class NemicoObj(object):
             ignoraEsche = True
         if self.tipo == "ServoLancia":
             vitaTotale = 1500
-            attacco = 400
+            attacco = 300
             difesa = 65
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5

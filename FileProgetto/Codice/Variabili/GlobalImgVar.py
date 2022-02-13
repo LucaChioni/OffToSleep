@@ -273,7 +273,7 @@ global imgChiaveAvamposto
 global imgStrumentiDiRod
 global imgChiaveUfficioNeil
 
-numImgTotali = 1786
+numImgTotali = 1790
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
