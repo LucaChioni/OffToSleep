@@ -10,6 +10,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
@@ -23,7 +24,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = GlobalImgVar.puntatore
-    nomePersonaggio, imgPersDialogo = SetEventiDialoghi.setImgDialogoProtagonista(avanzamentoStoria)
+    nomePersonaggio, imgPersDialogo = SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(avanzamentoStoria)
 
     if personaggio.nome != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
@@ -230,7 +231,7 @@ def menuMercante(dati):
     moneteInsufficienti = False
     inventarioPieno = False
 
-    interlocutore = SetEventiDialoghi.setImgMercanteMenu(dati[0], dati[1])
+    interlocutore = SetImgOggettiMappaPersonaggi.setImgMercanteMenu(dati[0], dati[1])
     imgMercante = GlobalImgVar.mercanteMenu
     if interlocutore == "Pappagallo":
         imgMercante = GlobalImgVar.pappagalloMenuMercante

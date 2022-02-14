@@ -10,7 +10,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
-import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 import Codice.GestioneMenu.MenuPrincipali as MenuPrincipali
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneMenu.MenuEnigmi as MenuEnigmi
@@ -102,7 +102,7 @@ def gameloop():
 
             gameover = False
             # controlla se devi cambiare personaggio giocabile
-            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0])
+            personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0])
             personaggioUsato = personaggioDaUsare
             caricaSalvataggio = False
             pers = GlobalImgVar.perss
@@ -155,7 +155,7 @@ def gameloop():
             SetPosizioneAudioImpedimenti.settaPresenzaDiColco(dati[0])
 
             # aggiorno le img del personaggio giocabile
-            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0], personaggioUsato)
+            personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0], personaggioUsato)
             if personaggioDaUsare != personaggioUsato:
                 personaggioUsato = personaggioDaUsare
                 npers = 4
@@ -562,7 +562,7 @@ def gameloop():
                         refreshSchermo = True
 
             # aggiorna img mappa
-            imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
+            imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
 
             caricaTutto = True
             cambiosta = False
@@ -1528,7 +1528,7 @@ def gameloop():
                     i += 3
                 if not nemicoInCasellaVista:
                     # aggiorna img mappa
-                    imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
+                    imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
                     aggiornaImgEquip = True
                     dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
                     if caricaSalvataggio:
@@ -2460,7 +2460,7 @@ def gameloop():
             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
         elif cambiatoRisoluzione:
             # controlla se devi cambiare personaggio giocabile
-            personaggioDaUsare = GenericFunc.cambiaProtagonista(dati[0])
+            personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0])
             personaggioUsato = personaggioDaUsare
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)

@@ -8,6 +8,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 
 
 def equip(dati):
@@ -1093,16 +1094,7 @@ def oggetti(dati, colcoInCasellaVista):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu3
-    if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.imgSara1MenuOggetti
-    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        perssta = GlobalImgVar.imgFraMaggioreMenuOggetti
-    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.imgSara1MenuOggetti
-    elif not GlobalGameVar.cambiataAlCastello[0]:
-        perssta = GlobalImgVar.imgSara2MenuOggetti
-    else:
-        perssta = GlobalImgVar.imgSara3MenuOggetti
+    perssta = SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(dati[0])
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 6.2
     xpv = xp

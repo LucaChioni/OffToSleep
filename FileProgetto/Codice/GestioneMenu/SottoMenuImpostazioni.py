@@ -9,7 +9,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
-import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 
 
 def settaController(arrivatoDaMenuPrincipale):
@@ -896,7 +896,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             if not arrivatoDaMenuPrincipale:
                                 # aggiorna img mappa
                                 GlobalGameVar.imgMappaAttuale = False
-                                imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom)
+                                imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom)
                                 cambiatoRisoluzione = True
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)

@@ -11,11 +11,11 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneMenu.SottoMenuEquip as SottoMenuEquip
-import Codice.GestioneMenu.SottoMenuImpo as SottoMenuImpo
+import Codice.GestioneMenu.SottoMenuImpostazioni as SottoMenuImpostazioni
 import Codice.GestioneMenu.SottoMenuRobo as SottoMenuRobo
 import Codice.GestioneMenu.SottoMenuSalva as SottoMenuSalva
 import Codice.GestioneMenu.SottoMenuMapDiario as SottoMenuMapDiario
-import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 
 
 def chiediconferma(conferma):
@@ -415,7 +415,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # Impostazioni
                     if voceMarcata == 3:
-                        inutile, inutile, inutile = SottoMenuImpo.menuImpostazioni(True, False)
+                        inutile, inutile, inutile = SottoMenuImpostazioni.menuImpostazioni(True, False)
                         primoFrame = True
 
                     # esci dal gioco
@@ -763,7 +763,7 @@ def menu(caricaSalvataggio, gameover):
 
 
 def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom):
-    perssta = SetEventiDialoghi.setImgMenuStartProtagonista(dati[0])
+    perssta = SetImgOggettiMappaPersonaggi.setImgMenuStartProtagonista(dati[0])
     robosta = GlobalImgVar.robograf1b
     puntatore = GlobalImgVar.puntatore
     puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -933,14 +933,14 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     if voceMarcata == 7:
                         gpxPreCambioRisoluzione = GlobalHWVar.gpx
                         gpyPreCambioRisoluzione = GlobalHWVar.gpy
-                        cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
+                        cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpostazioni.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
                         if cambiatoRisoluzione:
                             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
                             GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
 
                             xp = GlobalHWVar.gsx // 32 * 1
                             yp = GlobalHWVar.gsy // 18 * 14
-                            perssta = SetEventiDialoghi.setImgMenuStartProtagonista(dati[0])
+                            perssta = SetImgOggettiMappaPersonaggi.setImgMenuStartProtagonista(dati[0])
                             robosta = GlobalImgVar.robograf1b
                             puntatore = GlobalImgVar.puntatore
                             puntatoreVecchio = GlobalImgVar.puntatorevecchio
@@ -1331,7 +1331,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
 
                     gpxPreCambioRisoluzione = GlobalHWVar.gpx
                     gpyPreCambioRisoluzione = GlobalHWVar.gpy
-                    cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
+                    cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpostazioni.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom, cambiatoRisoluzione=cambiatoRisoluzione)
                     if cambiatoRisoluzione:
                         dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
                         GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)

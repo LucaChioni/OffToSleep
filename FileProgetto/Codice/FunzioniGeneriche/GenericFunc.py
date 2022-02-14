@@ -1740,48 +1740,6 @@ def controllaMorteColco(dati, mosseRimasteRob,ultimoObbiettivoColco):
     return morterob, dati, mosseRimasteRob, ultimoObbiettivoColco
 
 
-def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):
-    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        personaggioDaUsare = "Sara1"
-    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        personaggioDaUsare = "FratelloMaggiore"
-    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        personaggioDaUsare = "Sara1"
-    elif not GlobalGameVar.cambiataAlCastello[0]:
-        personaggioDaUsare = "Sara2"
-    else:
-        personaggioDaUsare = "Sara3"
-    if personaggioDaUsare != personaggioUsato:
-        GlobalImgVar.persw = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perswb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persa = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persab = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perso = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-        GlobalImgVar.perss = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persob = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-        GlobalImgVar.perssb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persd = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persdb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perssm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perssmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perssmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persdm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persdmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persdmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persam = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persamb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persamb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perswm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perswmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perswmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perswmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persambAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.perssmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persdmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persmbDifesa = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        GlobalImgVar.persAvvele = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-
-
 def aggiornaInCasellaVistaDiNemiciEPersonaggi(caselleNonVisibili, listaNemici, listaPersonaggi):
     for nemico in listaNemici:
         nemico.inCasellaVista = False
