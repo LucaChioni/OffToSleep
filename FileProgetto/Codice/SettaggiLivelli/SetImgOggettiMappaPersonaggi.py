@@ -6,8 +6,8 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
-def settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom):
-    imgDaUsare = GlobalGameVar.imgMappaAttuale
+def settaImgMappa(avanzamentoStoria):
+    imgDaUsare = GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgMappaAttuale"]
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCasa"]:
         imgDaUsare = "mappaCasa"
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaForestaCadetta"]:
@@ -43,61 +43,59 @@ def settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom):
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
         imgDaUsare = "mappaLaboratorio"
 
-    if imgDaUsare != GlobalGameVar.imgMappaAttuale:
-        GlobalGameVar.imgMappaAttuale = imgDaUsare
+    if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgMappaAttuale"]:
+        GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgMappaAttuale"] = imgDaUsare
         if imgDaUsare == "mappaCasa":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaForestaCadetta":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaCittà":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaSelvaArida":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaAvampostoDiRod":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaLabirinto":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaLabirintoRisolto":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaCastello":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaScorciatoiaLabirinto":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaPassoMontano":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaPalazzoDiRod":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaTunnelDiRod":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaVistoVulcano":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaCaverna":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaVulcano":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaTunnelSubacqueo":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
         elif imgDaUsare == "mappaLaboratorio":
-            imgMappa = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
-            imgMappaZoom = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
-
-    return imgMappa, imgMappaZoom
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False, True)
+            GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"] = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu16.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False, True)
 
 
 def definisciImgOggetti(tipo):
@@ -351,97 +349,103 @@ def impostaImgOggettoDialogoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo)
 
 def setImgDialogoProtagonista(avanzamentoStoria):
     if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        nomePersonaggio = "Hans"
-        imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
+        GlobalGameVar.nomePersonaggioDialoghi = "Hans"
+        imgDaUsare = "FratelloMaggioreDialogo"
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
-        nomePersonaggio = "Sara"
+        GlobalGameVar.nomePersonaggioDialoghi = "Sara"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoSara1
+            imgDaUsare = "Sara1Dialogo"
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnata
+            imgDaUsare = "SaraAssonnataDialogo"
         elif GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
+            imgDaUsare = "SaraScossaDialogo"
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDiPensareASceltaPassataNelDialogoBibliotecario"]:
-            imgPersDialogo = GlobalImgVar.imgDialogoSaraOcchiChiusi
+            imgDaUsare = "SaraOcchiChiusiDialogo"
         elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
             if not GlobalGameVar.cambiataAlCastello[0]:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataPostCenaCastello
+                imgDaUsare = "SaraAssonnataDialogoPostCenaCastello"
             else:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataCastelloPostCenaCastello
+                imgDaUsare = "SaraAssonnataCastelloDialogoPostCenaCastello"
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
             if not GlobalGameVar.cambiataAlCastello[0]:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnata
+                imgDaUsare = "SaraAssonnataDialogo"
             else:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraAssonnataCastello
+                imgDaUsare = "SaraAssonnataCastelloDialogo"
         elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             if not GlobalGameVar.cambiataAlCastello[0]:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvolta
+                imgDaUsare = "SaraScossaDialogo"
             else:
-                imgPersDialogo = GlobalImgVar.imgDialogoSaraSconvoltaCastello
+                imgDaUsare = "SaraScossaCastelloDialogo"
         elif not GlobalGameVar.cambiataAlCastello[0]:
-            imgPersDialogo = GlobalImgVar.imgDialogoSara2
+            imgDaUsare = "Sara2Dialogo"
         else:
-            imgPersDialogo = GlobalImgVar.imgDialogoSara3
+            imgDaUsare = "Sara3Dialogo"
     elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
-        nomePersonaggio = "Rod"
-        imgPersDialogo = GlobalImgVar.dictionaryImgPersonaggi["Mercante"]["imgDialogo"]
+        GlobalGameVar.nomePersonaggioDialoghi = "Rod"
+        imgDaUsare = "RodDialogo"
     else:
-        nomePersonaggio = "Sara"
-        imgPersDialogo = GlobalImgVar.imgDialogoSara3
+        GlobalGameVar.nomePersonaggioDialoghi = "Sara"
+        imgDaUsare = "Sara3Dialogo"
 
-    return nomePersonaggio, imgPersDialogo
+    if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaDialogoAttuale"]:
+        GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaDialogoAttuale"] = imgDaUsare
+        GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioDialoghi"] = CaricaFileProgetto.loadImage('Risorse/Immagini/DecorazioniMenu/Dialoghi/' + imgDaUsare + '.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
 
 
 def setImgMenuStartProtagonista(avanzamentoStoria):
     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.sara1GrafMenu
+        imgDaUsare = "Sara1GrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        perssta = GlobalImgVar.fraMaggioreGrafMenu
+        imgDaUsare = "FratelloMaggioreGrafMenu"
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.sara1GrafMenu
+        imgDaUsare = "Sara1GrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
-        perssta = GlobalImgVar.saraSconvoltaGrafMenu
+        imgDaUsare = "SaraSconvoltaGrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["fineCenaAlCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
-            perssta = GlobalImgVar.saraAssonnataPostCenaCastello
+            imgDaUsare = "SaraAssonnataPostCenaCastelloGrafMenu"
         else:
-            perssta = GlobalImgVar.saraAssonnataCastelloPostCenaCastello
+            imgDaUsare = "SaraAssonnataCastelloPostCenaCastelloGrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
-            perssta = GlobalImgVar.saraSconvoltaGrafMenu
+            imgDaUsare = "SaraSconvoltaGrafMenu"
         else:
-            perssta = GlobalImgVar.saraSconvoltaCastelloGrafMenu
+            imgDaUsare = "SaraSconvoltaCastelloGrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
-            perssta = GlobalImgVar.sara2GrafMenu
+            imgDaUsare = "Sara2GrafMenu"
         else:
-            perssta = GlobalImgVar.sara3GrafMenu
+            imgDaUsare = "Sara3GrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
-        perssta = GlobalImgVar.rodGrafMenu
+        imgDaUsare = "MercanteGrafMenu"
     else:
-        perssta = GlobalImgVar.sara3GrafMenu
+        imgDaUsare = "Sara3GrafMenu"
 
-    return perssta
+    if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaStartAttuale"]:
+        GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaStartAttuale"] = imgDaUsare
+        GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioStart"] = CaricaFileProgetto.loadImage('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/' + imgDaUsare + '.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
 
 
 def setImgMenuOggettiProtagonista(avanzamentoStoria):
     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        perssta = GlobalImgVar.imgSara1MenuOggetti
+        imgDaUsare = "Sara1Menu"
     elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        perssta = GlobalImgVar.imgFraMaggioreMenuOggetti
+        imgDaUsare = "FratelloMaggioreMenu"
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        perssta = GlobalImgVar.imgSara1MenuOggetti
+        imgDaUsare = "Sara1Menu"
     elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
-            perssta = GlobalImgVar.imgSara2MenuOggetti
+            imgDaUsare = "Sara2Menu"
         else:
-            perssta = GlobalImgVar.imgSara3MenuOggetti
+            imgDaUsare = "Sara3Menu"
     elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
-        perssta = GlobalImgVar.imgRodMenuOggetti
+        imgDaUsare = "RodMenu"
     else:
-        perssta = GlobalImgVar.imgSara3MenuOggetti
+        imgDaUsare = "Sara3Menu"
 
-    return perssta
+    if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaMenuOggettiAttuale"]:
+        GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaMenuOggettiAttuale"] = imgDaUsare
+        GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioMenuOggetti"] = CaricaFileProgetto.loadImage('Risorse/Immagini/DecorazioniMenu/' + imgDaUsare + '.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
 
 
 def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):

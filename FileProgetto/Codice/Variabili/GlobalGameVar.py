@@ -182,7 +182,7 @@ vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [200, 50, 0, 50, 1000]
+dannoOggetti = [2000, 100, 0, 100, 5000]
 # frecce trasportabili per faretra
 frecceMaxPerFaretra = [3, 20, 100, 800]
 
@@ -210,8 +210,11 @@ monetePerLasciareLaConfraternita = 1000
 monetePerLaMappaDelLabirinto = 500
 monetePerGliStumentiPerNeil = 1500
 
-global imgMappaAttuale
+global nomiImgDaAggiornareAvanzandoStoriaAttuali
+global imgDaAggiornareAvanzandoStoria
+global nomePersonaggioDialoghi
 global canzoneAttuale
+global schemataDiCaricamento
 global audioSottofondoAttuale
 global idNemico
 global listaIdNemiciUsati
@@ -223,8 +226,11 @@ global impoPietraPosseduta
 global cambiataAlCastello
 global armaturaIndossata
 def inizializzaVariabiliGlobali():
-    global imgMappaAttuale
+    global nomiImgDaAggiornareAvanzandoStoriaAttuali
+    global imgDaAggiornareAvanzandoStoria
+    global nomePersonaggioDialoghi
     global canzoneAttuale
+    global schemataDiCaricamento
     global audioSottofondoAttuale
     global idNemico
     global listaIdNemiciUsati
@@ -235,8 +241,11 @@ def inizializzaVariabiliGlobali():
     global impoPietraPosseduta
     global cambiataAlCastello
     global armaturaIndossata
-    imgMappaAttuale = False
+    nomiImgDaAggiornareAvanzandoStoriaAttuali = {"imgMappaAttuale":False, "imgProtagonistaStartAttuale": False, "imgProtagonistaMenuOggettiAttuale":False, "imgProtagonistaDialogoAttuale":False}
+    imgDaAggiornareAvanzandoStoria = {"imgMappa":False, "imgMappaZoom":False, "imgPersonaggioStart":False, "imgPersonaggioMenuOggetti":False, "imgPersonaggioDialoghi":False}
+    nomePersonaggioDialoghi = False
     canzoneAttuale = False
+    schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     audioSottofondoAttuale = False
     # id incrementale da assegare ai nemici
     idNemico = 0
@@ -518,11 +527,11 @@ def disegnaSchermataSelezioneLingua():
     scrivi.write(str(GlobalHWVar.gsy) + "_")
     scrivi.close()
 def disegnaSchermataDiCaricamento():
+    global schemataDiCaricamento
     global canzoneAttuale
     canzoneAttuale = "00-Menu"
     canzone = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/" + canzoneAttuale + ".wav")
 
-    schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))

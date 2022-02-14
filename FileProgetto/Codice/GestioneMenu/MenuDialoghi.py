@@ -24,7 +24,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = GlobalImgVar.puntatore
-    nomePersonaggio, imgPersDialogo = SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(avanzamentoStoria)
+    nomePersonaggio = GlobalGameVar.nomePersonaggioDialoghi
+    imgPersDialogo = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioDialoghi"]
 
     if personaggio.nome != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))

@@ -268,6 +268,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["buttataNelLagoDuranteLaFuga"] and stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
         GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemici)
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreTuffoLago)
+        if GlobalHWVar.volumeCanzoni <= 0:
+            i = 0
+            while i < 1:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)

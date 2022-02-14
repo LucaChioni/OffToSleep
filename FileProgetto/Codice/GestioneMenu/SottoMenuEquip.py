@@ -8,7 +8,6 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
-import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 
 
 def equip(dati):
@@ -1091,10 +1090,11 @@ def equip(dati):
 
 
 def oggetti(dati, colcoInCasellaVista):
+    imgProtagonista = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioMenuOggetti"]
+
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu3
-    perssta = SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(dati[0])
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 6.2
     xpv = xp
@@ -1756,7 +1756,7 @@ def oggetti(dati, colcoInCasellaVista):
                 dati[5] = 0
             FunzioniGraficheGeneriche.messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 4.8, 50)
             FunzioniGraficheGeneriche.messaggio("Status alterati: ", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 5.6, 50)
-            GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 4.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgProtagonista, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 4.5))
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 4)), (int(GlobalHWVar.gpx * 18.5), int(GlobalHWVar.gpy * 4)), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 7.5)), (int(GlobalHWVar.gpx * 18.5), int(GlobalHWVar.gpy * 7.5)), 2)
             if dati[121]:

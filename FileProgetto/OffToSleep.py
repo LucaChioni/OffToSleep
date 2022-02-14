@@ -47,8 +47,6 @@ def gameloop():
                 riavviaAudioAmbiente = False
                 canzone = False
                 listaSottofondoAmbientale = []
-            imgMappa = False
-            imgMappaZoom = False
             evitaAvanzamentoTurno = False
             caseattactotRallo = []
             posizioneRalloAggiornamentoCaseAttac = [0, 0]
@@ -561,8 +559,11 @@ def gameloop():
                     if imgAggiornata:
                         refreshSchermo = True
 
-            # aggiorna img mappa
-            imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
+            # aggiorna img mappa, protagonista
+            SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0])
+            SetImgOggettiMappaPersonaggi.setImgMenuStartProtagonista(dati[0])
+            SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(dati[0])
+            SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(dati[0])
 
             caricaTutto = True
             cambiosta = False
@@ -1527,10 +1528,8 @@ def gameloop():
                         colcoInCasellaVista = True
                     i += 3
                 if not nemicoInCasellaVista:
-                    # aggiorna img mappa
-                    imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
                     aggiornaImgEquip = True
-                    dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
+                    dati, inizio, attacco, caricaSalvataggio, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista)
                     if caricaSalvataggio:
                         inizio = True
                     if attacco == 0:
@@ -1538,7 +1537,7 @@ def gameloop():
                     if not inizio:
                         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
                 else:
-                    dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, imgMappa, imgMappaZoom)
+                    dati, attacco, sposta, animaOggetto, npers, inizio, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco)
                     # cambiare posizione dopo l'uso di caricabatterie
                     if npers == 3:
                         pers = GlobalImgVar.persw
@@ -1629,6 +1628,12 @@ def gameloop():
         SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
         # decido se far avanzare dei dialoghi specifici (in base all'avanzamentoDialoghi di altri personaggi)
         listaAvanzamentoDialoghi, listaPersonaggiTotali = SetDialoghiPersonaggi.avanzaDialoghiSpecifici(dati[0], dati[1], listaAvanzamentoDialoghi, listaPersonaggiTotali)
+
+        # aggiorna img mappa, protagonista
+        SetImgOggettiMappaPersonaggi.settaImgMappa(dati[0])
+        SetImgOggettiMappaPersonaggi.setImgMenuStartProtagonista(dati[0])
+        SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(dati[0])
+        SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(dati[0])
 
         if not inizio and not cambiatoRisoluzione:
             # setto stato personaggi all'inizio del turno

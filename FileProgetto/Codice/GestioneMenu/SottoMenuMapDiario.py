@@ -9,7 +9,10 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
-def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, tutticofanetti, apriLabirinto=False):
+def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
+    imgMappaNormale = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappa"]
+    imgMappaZoom = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgMappaZoom"]
+
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalImgVar.imgOmbreggiaturaContorniMappaMenu

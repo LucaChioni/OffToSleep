@@ -701,7 +701,7 @@ def settaController(arrivatoDaMenuPrincipale):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria=False, imgMappa=False, imgMappaZoom=False, cambiatoRisoluzione=False):
+def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria, cambiatoRisoluzione):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 5.1
@@ -894,9 +894,15 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
                             if not arrivatoDaMenuPrincipale:
-                                # aggiorna img mappa
-                                GlobalGameVar.imgMappaAttuale = False
-                                imgMappa, imgMappaZoom = SetImgOggettiMappaPersonaggi.settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom)
+                                # aggiorna img mappa, protagonista
+                                GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgMappaAttuale"] = False
+                                GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaStartAttuale"] = False
+                                GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaMenuOggettiAttuale"] = False
+                                GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaDialogoAttuale"] = False
+                                SetImgOggettiMappaPersonaggi.settaImgMappa(avanzamentoStoria)
+                                SetImgOggettiMappaPersonaggi.setImgMenuStartProtagonista(avanzamentoStoria)
+                                SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(avanzamentoStoria)
+                                SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(avanzamentoStoria)
                                 cambiatoRisoluzione = True
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
@@ -1293,4 +1299,4 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
-    return cambiatoRisoluzione, imgMappa, imgMappaZoom
+    return cambiatoRisoluzione
