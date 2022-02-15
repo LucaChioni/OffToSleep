@@ -220,6 +220,8 @@ global persoSara3
 global persobSara
 global persoFraMaggiore
 global persobFraMaggiore
+global persoRod
+global persobRod
 global casellaChiara
 global casellaScura
 global casellaOscurata
@@ -244,7 +246,7 @@ global imgChiaveAvamposto
 global imgStrumentiDiRod
 global imgChiaveUfficioNeil
 
-numImgTotali = 1761
+numImgTotali = 1763
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -482,6 +484,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persobSara
     global persoFraMaggiore
     global persobFraMaggiore
+    global persoRod
+    global persobRod
     global casellaChiara
     global casellaScura
     global casellaOscurata
@@ -574,6 +578,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoRod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persobRod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
 
     # immagini robot
     robow = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
-import Codice.SettaggiLivelli.Dialoghi.DialoghiNessuno as DialoghiNessuno
-import Codice.SettaggiLivelli.Dialoghi.DialoghiTutorial as DialoghiTutorial
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCasa as DialoghiCasa
-import Codice.SettaggiLivelli.Dialoghi.DialoghiForestaCadetta as DialoghiForestaCadetta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerCitta as DialoghiStradaPerCitta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCitta as DialoghiCitta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCasaUfficiale as DialoghiCasaUfficiale
-import Codice.SettaggiLivelli.Dialoghi.DialoghiBiblioteca as DialoghiBiblioteca
-import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerSelvaArida as DialoghiStradaPerSelvaArida
-import Codice.SettaggiLivelli.Dialoghi.DialoghiSelvaArida as DialoghiSelvaArida
-import Codice.SettaggiLivelli.Dialoghi.DialoghiAvampostoDiRod as DialoghiAvampostoDiRod
-import Codice.SettaggiLivelli.Dialoghi.DialoghiLabirinto as DialoghiLabirinto
-import Codice.SettaggiLivelli.Dialoghi.DialoghiEsternoCastello as DialoghiEsternoCastello
-import Codice.SettaggiLivelli.Dialoghi.DialoghiInternoCastello as DialoghiInternoCastello
-import Codice.SettaggiLivelli.Dialoghi.DialoghiScorciatoiaLabirinto as DialoghiScorciatoiaLabirinto
-import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerPassoMontano as DialoghiStradaPerPassoMontano
-import Codice.SettaggiLivelli.Dialoghi.DialoghiPassoMontano as DialoghiPassoMontano
-import Codice.SettaggiLivelli.Dialoghi.DialoghiPalazzoDiRod as DialoghiPalazzoDiRod
-import Codice.SettaggiLivelli.Dialoghi.DialoghiTunnelDiRod as DialoghiTunnelDiRod
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiNessuno as DialoghiNessuno
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTutorial as DialoghiTutorial
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCasa as DialoghiCasa
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiForestaCadetta as DialoghiForestaCadetta
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiStradaPerCitta as DialoghiStradaPerCitta
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCitta as DialoghiCitta
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCasaUfficiale as DialoghiCasaUfficiale
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiBiblioteca as DialoghiBiblioteca
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiStradaPerSelvaArida as DialoghiStradaPerSelvaArida
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiSelvaArida as DialoghiSelvaArida
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiAvampostoDiRod as DialoghiAvampostoDiRod
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiLabirinto as DialoghiLabirinto
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiEsternoCastello as DialoghiEsternoCastello
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiInternoCastello as DialoghiInternoCastello
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiScorciatoiaLabirinto as DialoghiScorciatoiaLabirinto
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiStradaPerPassoMontano as DialoghiStradaPerPassoMontano
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiPassoMontano as DialoghiPassoMontano
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiPalazzoDiRod as DialoghiPalazzoDiRod
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelDiRod as DialoghiTunnelDiRod
 
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):

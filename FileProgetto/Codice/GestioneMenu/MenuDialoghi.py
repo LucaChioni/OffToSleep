@@ -11,7 +11,7 @@ import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGener
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
 import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
-import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
+import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaAudio
 
 
 def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
@@ -208,7 +208,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
         primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    SetPosizioneAudioImpedimenti.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
+    SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
     GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
 
     avanzamentoStoria = SetEventiDialoghi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)

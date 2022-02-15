@@ -9,6 +9,7 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
+import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 
 
 def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=-1):
@@ -146,13 +147,6 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     voceMarcata = 2
     aggiornaSchermo = False
     n = -1
-
-    persoSara1 = GlobalImgVar.persoSara1
-    persoSara2 = GlobalImgVar.persoSara2
-    persoSara3 = GlobalImgVar.persoSara3
-    persobSara = GlobalImgVar.persobSara
-    persoFraMaggiore = GlobalImgVar.persoFraMaggiore
-    persobFraMaggiore = GlobalImgVar.persobFraMaggiore
     confermaSalvataggioCancellazione = False
 
     while not risposta:
@@ -461,21 +455,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                         FunzioniGraficheGeneriche.messaggio("Slot vuoto", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.6) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 8, 60, centrale=True)
                     else:
                         if not errore:
-                            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-                                persalva = persoSara1
-                                persSalvaBraccia = persobSara
-                            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                                persalva = persoFraMaggiore
-                                persSalvaBraccia = persobFraMaggiore
-                            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-                                persalva = persoSara1
-                                persSalvaBraccia = persobSara
-                            elif not dati[144]:
-                                persalva = persoSara2
-                                persSalvaBraccia = persobSara
-                            else:
-                                persalva = persoSara3
-                                persSalvaBraccia = persobSara
+                            persalva, persSalvaBraccia = SetImgOggettiMappaPersonaggi.setImgMenuSalvaProtagonista(dati[0], dati[144])
 
                             spasalva = GlobalImgVar.vetImgSpadePixellate[dati[6]]
                             arcsalva = GlobalImgVar.vetImgArchiPixellate[dati[128]]

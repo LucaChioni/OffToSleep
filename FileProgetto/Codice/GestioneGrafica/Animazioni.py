@@ -9,7 +9,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
-import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
+import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaAudio
 
 
 def animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
@@ -62,7 +62,7 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
             if cambiosta:
                 fineanimaz = animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
                 if fineanimaz == 0:
-                    SetPosizioneAudioImpedimenti.riproduciSuoniCambioStanza(numStanza, stanzaVecchia)
+                    SetPosizProtagonistaAudio.riproduciSuoniCambioStanza(numStanza, stanzaVecchia)
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
             else:

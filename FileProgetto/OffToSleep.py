@@ -22,7 +22,8 @@ import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetNemiciPersonaggiEventi as SetNemiciPersonaggiEventi
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
-import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
+import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaAudio
+import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
@@ -141,7 +142,7 @@ def gameloop():
             listaPersonaggi = []
             listaNemici = []
 
-            SetPosizioneAudioImpedimenti.decidiSeDimezzareVolumeMusica(dati[0])
+            SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(dati[0])
 
             carim = True
             cambiosta = True
@@ -150,7 +151,7 @@ def gameloop():
         # caricare gli oggetti
         if carim:
             # aggiorno presenza di Impo
-            SetPosizioneAudioImpedimenti.settaPresenzaDiColco(dati[0])
+            SetZoneStanzeImpedimenti.settaPresenzaDiColco(dati[0])
 
             # aggiorno le img del personaggio giocabile
             personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0], personaggioUsato)
@@ -165,16 +166,16 @@ def gameloop():
 
                 if cambiosta:
                     # necessario ridefinire le stanze pacifiche in caso di carica partita nel castello (inizialmente quelle stanze sono pacifiche)
-                    SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
+                    SetZoneStanzeImpedimenti.modificaStanzePacifiche(dati[0])
 
-                    SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
-                    stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
-                    SetPosizioneAudioImpedimenti.riproduciAudioSpeciali(dati[0])
+                    SetZoneStanzeImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
+                    stoppaMusica = SetPosizProtagonistaAudio.decidiSeStoppareMusica(dati[1], dati[0])
+                    SetPosizProtagonistaAudio.riproduciAudioSpeciali(dati[0])
 
                     canzoneCambiata = False
                     sottofondoAmbientaleCambiato = False
                     # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
-                    x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, dati[0], bottoneDown)
+                    x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizProtagonistaAudio.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, dati[0], bottoneDown)
                     if not inizio:
                         vx = x
                         vy = y
@@ -356,7 +357,7 @@ def gameloop():
                     i += 4
 
                 # stanza
-                nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
+                nomeStanza = SetZoneStanzeImpedimenti.settaNomeStanza(dati[0], dati[1])
                 imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
                 if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
                     portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -903,7 +904,7 @@ def gameloop():
                 k = 0
                 while k < len(porte):
                     if porte[k] == dati[1] and not porte[k + 3] and ((porte[k + 1] == x + GlobalHWVar.gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - GlobalHWVar.gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + GlobalHWVar.gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - GlobalHWVar.gpy and npers == 3)):
-                        if SetPosizioneAudioImpedimenti.possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
+                        if SetZoneStanzeImpedimenti.possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
                             posizioneRalloAggiornamentoCaseAttac = [0, 0]
                             sposta = True
                             GlobalHWVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
@@ -1037,7 +1038,7 @@ def gameloop():
                     ny = 0
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPortaInVettore = int(inquadratoQualcosaList[1])
-                    if SetPosizioneAudioImpedimenti.possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
+                    if SetZoneStanzeImpedimenti.possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
                         posizioneRalloAggiornamentoCaseAttac = [0, 0]
                         sposta = True
                         GlobalHWVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
@@ -1345,7 +1346,7 @@ def gameloop():
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
         # decido quando si deve dimezzare il volume della musica
-        SetPosizioneAudioImpedimenti.decidiSeDimezzareVolumeMusica(dati[0])
+        SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(dati[0])
 
         # resetta stati/pv al cambio personaggio
         if dati[0] == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -1487,7 +1488,7 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1 and dati[5] > 0:
-            possibileAprireMenu = SetPosizioneAudioImpedimenti.decidiSePoterAprireMenu(dati[0])
+            possibileAprireMenu = SetZoneStanzeImpedimenti.decidiSePoterAprireMenu(dati[0])
             if possibileAprireMenu:
                 if not (GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]):
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
@@ -1625,7 +1626,7 @@ def gameloop():
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
         # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
-        SetPosizioneAudioImpedimenti.modificaStanzePacifiche(dati[0])
+        SetZoneStanzeImpedimenti.modificaStanzePacifiche(dati[0])
         # decido se far avanzare dei dialoghi specifici (in base all'avanzamentoDialoghi di altri personaggi)
         listaAvanzamentoDialoghi, listaPersonaggiTotali = SetDialoghiPersonaggi.avanzaDialoghiSpecifici(dati[0], dati[1], listaAvanzamentoDialoghi, listaPersonaggiTotali)
 
@@ -1700,7 +1701,7 @@ def gameloop():
                 refreshSchermo = True
                 caricaTutto = True
                 # cancello apertura porta se non si può aprire
-                if apriChiudiPorta[0] and not SetPosizioneAudioImpedimenti.possibileAprirePorta(dati[1], apriChiudiPorta[1], apriChiudiPorta[2], dati[0]):
+                if apriChiudiPorta[0] and not SetZoneStanzeImpedimenti.possibileAprirePorta(dati[1], apriChiudiPorta[1], apriChiudiPorta[2], dati[0]):
                     apriChiudiPorta = [False, 0, 0]
                     sposta = False
                     impossibileAprirePorta = True
@@ -1964,7 +1965,7 @@ def gameloop():
                 equipaggiamentoIndossato = True
             else:
                 equipaggiamentoIndossato = False
-            if cambiosta and SetPosizioneAudioImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1], equipaggiamentoIndossato):
+            if cambiosta and SetZoneStanzeImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1], equipaggiamentoIndossato):
                 cambiosta = False
                 dati[1] = stanzaVecchia
                 xPrimaDiCambioStanza = x
@@ -2153,7 +2154,7 @@ def gameloop():
                 else:
                     nemico.visto = False
             # movimento-azioni mostri
-            impossibileParare = SetPosizioneAudioImpedimenti.decidiSePoterParare(dati[0])
+            impossibileParare = SetZoneStanzeImpedimenti.decidiSePoterParare(dati[0])
             if len(listaNemici) > 0 and not cambiosta:
                 for nemico in listaNemici:
                     if nemico.avvelenato and sposta and nemico.vita > 0:
@@ -2431,7 +2432,7 @@ def gameloop():
                     i += 3
 
             # aggiorno la presenza di Impo
-            SetPosizioneAudioImpedimenti.settaPresenzaDiColco(dati[0])
+            SetZoneStanzeImpedimenti.settaPresenzaDiColco(dati[0])
 
             movimentoDaCompiere = False
             vx = x

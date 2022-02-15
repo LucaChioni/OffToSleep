@@ -448,6 +448,33 @@ def setImgMenuOggettiProtagonista(avanzamentoStoria):
         GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioMenuOggetti"] = CaricaFileProgetto.loadImage('Risorse/Immagini/DecorazioniMenu/' + imgDaUsare + '.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
 
 
+def setImgMenuSalvaProtagonista(avanzamentoStoria, abitiCastello):
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+        persalva = GlobalImgVar.persoSara1
+        persSalvaBraccia = GlobalImgVar.persobSara
+    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        persalva = GlobalImgVar.persoFraMaggiore
+        persSalvaBraccia = GlobalImgVar.persobFraMaggiore
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+        persalva = GlobalImgVar.persoSara1
+        persSalvaBraccia = GlobalImgVar.persobSara
+    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        if not abitiCastello:
+            persalva = GlobalImgVar.persoSara2
+            persSalvaBraccia = GlobalImgVar.persobSara
+        else:
+            persalva = GlobalImgVar.persoSara3
+            persSalvaBraccia = GlobalImgVar.persobSara
+    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+        persalva = GlobalImgVar.persoRod
+        persSalvaBraccia = GlobalImgVar.persobRod
+    else:
+        persalva = GlobalImgVar.persoSara3
+        persSalvaBraccia = GlobalImgVar.persobSara
+
+    return persalva, persSalvaBraccia
+
+
 def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):
     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
         personaggioDaUsare = "Sara1"
