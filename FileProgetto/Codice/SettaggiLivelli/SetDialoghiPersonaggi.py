@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiNessuno as DialoghiNessuno
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTutorial as DialoghiTutorial
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCasa as DialoghiCasa
@@ -20,6 +23,80 @@ import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiStradaPerPassoMontano as D
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiPassoMontano as DialoghiPassoMontano
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiPalazzoDiRod as DialoghiPalazzoDiRod
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelDiRod as DialoghiTunnelDiRod
+
+
+def setGender(tipo):
+    gender = "m"
+    if tipo == "Tutorial" or tipo == "Nessuno" or tipo.startswith("Oggetto"):
+        gender = "n"
+    elif tipo == "Madre" or tipo == "MadreUfficiale" or tipo.startswith("Ragazza"):
+        gender = "f"
+
+    return gender
+
+
+def avanzaDialoghiSpecifici(avanzamentoStoria, stanza, listaAvanzamentoDialoghi, listaPersonaggiTotali):
+    # if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"] and GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+    #     avanzaDialogo = False
+    #     for personaggio in listaPersonaggiTotali:
+    #         if personaggio.tipo == "Mercante" and personaggio.avanzamentoDialogo == 1:
+    #             avanzaDialogo = True
+    #             break
+    #     if avanzaDialogo:
+    #         for personaggio in listaPersonaggiTotali:
+    #             if personaggio.tipo == "OggettoAppuntiInElaborazioneRod":
+    #                 personaggio.avanzamentoDialogo = 1
+    #                 break
+    #         i = 0
+    #         while i < len(listaAvanzamentoDialoghi):
+    #             if listaAvanzamentoDialoghi[i] == "OggettoAppuntiInElaborazioneRod-0":
+    #                 listaAvanzamentoDialoghi[i + 1] = 1
+    #                 break
+    #             i += 2
+
+    return listaAvanzamentoDialoghi, listaPersonaggiTotali
+
+
+def gestisciRisposteSbagliate(avanzamentoStoria):
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
+        GlobalGameVar.datiEnigmaBibliotecario["reset"] = True
+
+
+def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialRecuperoPvDifesa"] and personaggio.tipo == "FiglioUfficiale":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
+        GlobalHWVar.canaleSoundCanzone.stop()
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"] and personaggio.tipo == "OggettoPersonaCadavereSam":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
+        GlobalHWVar.canaleSoundCanzone.stop()
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
+        GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] and personaggio.tipo.startswith("OggettoDictCadavereSoldato"):
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
+
+    return avanzamentoStoria
+
+
+def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
+    if GlobalGameVar.dictAvanzamentoStoria["tutorialRecuperoPvDifesa"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"] and personaggio.tipo == "FiglioUfficiale":
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"]:
+            avanzamentoStoria += 1
+        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
+    elif (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"] and personaggio.tipo == "OggettoPersonaCadavereSam") or (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and personaggio.tipo == "Nessuno"):
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"]:
+            avanzamentoStoria += 1
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
+        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] and personaggio.tipo == "Nessuno":
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreVomito)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodAperturaRetroPalazzo"] and personaggio.tipo == "Mercante":
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSbloccoPorta)
+
+    return avanzamentoStoria
 
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -135,40 +212,3 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTunnelDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
-
-
-def gestisciRisposteSbagliate(avanzamentoStoria):
-    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
-        GlobalGameVar.datiEnigmaBibliotecario["reset"] = True
-
-
-def setGender(tipo):
-    gender = "m"
-    if tipo == "Tutorial" or tipo == "Nessuno" or tipo.startswith("Oggetto"):
-        gender = "n"
-    elif tipo == "Madre" or tipo == "MadreUfficiale" or tipo.startswith("Ragazza"):
-        gender = "f"
-
-    return gender
-
-
-def avanzaDialoghiSpecifici(avanzamentoStoria, stanza, listaAvanzamentoDialoghi, listaPersonaggiTotali):
-    # if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"] and GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-    #     avanzaDialogo = False
-    #     for personaggio in listaPersonaggiTotali:
-    #         if personaggio.tipo == "Mercante" and personaggio.avanzamentoDialogo == 1:
-    #             avanzaDialogo = True
-    #             break
-    #     if avanzaDialogo:
-    #         for personaggio in listaPersonaggiTotali:
-    #             if personaggio.tipo == "OggettoAppuntiInElaborazioneRod":
-    #                 personaggio.avanzamentoDialogo = 1
-    #                 break
-    #         i = 0
-    #         while i < len(listaAvanzamentoDialoghi):
-    #             if listaAvanzamentoDialoghi[i] == "OggettoAppuntiInElaborazioneRod-0":
-    #                 listaAvanzamentoDialoghi[i + 1] = 1
-    #                 break
-    #             i += 2
-
-    return listaAvanzamentoDialoghi, listaPersonaggiTotali

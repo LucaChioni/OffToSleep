@@ -9,13 +9,12 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
-import Codice.SettaggiLivelli.SetEventiDialoghi as SetEventiDialoghi
 import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaAudio
 
 
 def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
-    avanzamentoStoria = SetEventiDialoghi.gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone)
+    avanzamentoStoria = SetDialoghiPersonaggi.gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone)
 
     GlobalHWVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
@@ -211,7 +210,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
     GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
 
-    avanzamentoStoria = SetEventiDialoghi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
+    avanzamentoStoria = SetDialoghiPersonaggi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
 
 
