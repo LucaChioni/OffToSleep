@@ -351,7 +351,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
     if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         GlobalGameVar.nomePersonaggioDialoghi = "Hans"
         imgDaUsare = "FratelloMaggioreDialogo"
-    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         GlobalGameVar.nomePersonaggioDialoghi = "Sara"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
             imgDaUsare = "Sara1Dialogo"
@@ -371,7 +371,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
                 imgDaUsare = "SaraAssonnataDialogo"
             else:
                 imgDaUsare = "SaraAssonnataCastelloDialogo"
-        elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
             if not GlobalGameVar.cambiataAlCastello[0]:
                 imgDaUsare = "SaraScossaDialogo"
             else:
@@ -380,7 +380,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
             imgDaUsare = "Sara2Dialogo"
         else:
             imgDaUsare = "Sara3Dialogo"
-    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         GlobalGameVar.nomePersonaggioDialoghi = "Rod"
         imgDaUsare = "RodDialogo"
     else:
@@ -406,17 +406,17 @@ def setImgMenuStartProtagonista(avanzamentoStoria):
             imgDaUsare = "SaraAssonnataPostCenaCastelloGrafMenu"
         else:
             imgDaUsare = "SaraAssonnataCastelloPostCenaCastelloGrafMenu"
-    elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
             imgDaUsare = "SaraSconvoltaGrafMenu"
         else:
             imgDaUsare = "SaraSconvoltaCastelloGrafMenu"
-    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
             imgDaUsare = "Sara2GrafMenu"
         else:
             imgDaUsare = "Sara3GrafMenu"
-    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         imgDaUsare = "MercanteGrafMenu"
     else:
         imgDaUsare = "Sara3GrafMenu"
@@ -433,12 +433,12 @@ def setImgMenuOggettiProtagonista(avanzamentoStoria):
         imgDaUsare = "FratelloMaggioreMenu"
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         imgDaUsare = "Sara1Menu"
-    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
             imgDaUsare = "Sara2Menu"
         else:
             imgDaUsare = "Sara3Menu"
-    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         imgDaUsare = "RodMenu"
     else:
         imgDaUsare = "Sara3Menu"
@@ -458,14 +458,14 @@ def setImgMenuSalvaProtagonista(avanzamentoStoria, abitiCastello):
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         persalva = GlobalImgVar.persoSara1
         persSalvaBraccia = GlobalImgVar.persobSara
-    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         if not abitiCastello:
             persalva = GlobalImgVar.persoSara2
             persSalvaBraccia = GlobalImgVar.persobSara
         else:
             persalva = GlobalImgVar.persoSara3
             persSalvaBraccia = GlobalImgVar.persobSara
-    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         persalva = GlobalImgVar.persoRod
         persSalvaBraccia = GlobalImgVar.persobRod
     else:
@@ -482,12 +482,12 @@ def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):
         personaggioDaUsare = "FratelloMaggiore"
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         personaggioDaUsare = "Sara1"
-    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
         if not GlobalGameVar.cambiataAlCastello[0]:
             personaggioDaUsare = "Sara2"
         else:
             personaggioDaUsare = "Sara3"
-    elif GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["morteRod"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         personaggioDaUsare = "RodGiocabile"
     else:
         personaggioDaUsare = "Sara3"

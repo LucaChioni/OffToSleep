@@ -174,7 +174,7 @@ def menu(caricaSalvataggio, gameover):
     # dimensione: 0-144 (=> 145 variabili)
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello
+    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello - moneteSpeseDaRod
     datiIniziali = [0, 1, xInizialie, yInizialie, 1, 48, 0, 0, 0, 0, 0,  # <- statistiche
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
@@ -184,7 +184,7 @@ def menu(caricaSalvataggio, gameover):
         0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
         rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False,  # <- info aggiunte per poter salvare ovunque
-        False, False  # <- pazzoStrabico e cambiataCastello
+        False, False, 0  # <- pazzoStrabico, cambiataCastello e moneteSpeseDaRod
         ]
 
     # posizione porte e cofanetti nel vettore dati
@@ -414,7 +414,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # Impostazioni
                     if voceMarcata == 3:
-                        inutile, inutile, inutile = SottoMenuImpostazioni.menuImpostazioni(True, False, False, False, False)
+                        inutile = SottoMenuImpostazioni.menuImpostazioni(True, False, False, False)
                         primoFrame = True
 
                     # esci dal gioco
@@ -771,7 +771,10 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     difesapiusta = GlobalImgVar.difesapiuMenu
     velocitapiusta = GlobalImgVar.velocitapiuMenu
     efficienzapiusta = GlobalImgVar.efficienzapiuMenu
-    if dati[133] == 0:
+    usandoRod = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        usandoRod = True
+    if dati[133] == 0 or usandoRod:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
     elif dati[133] == 1:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart1
@@ -895,7 +898,10 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                 # non far cliccare su "Setta Colco" se Colco non è in una casella vista
                 if voceMarcata == 3 and not colcoInCasellaVista:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                    aperturaSettaColcoNonRiuscita = True
+                    if not usandoRod:
+                        aperturaSettaColcoNonRiuscita = True
+                elif (voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5) and usandoRod:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     primoFrame = True
@@ -947,7 +953,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                             difesapiusta = GlobalImgVar.difesapiuMenu
                             velocitapiusta = GlobalImgVar.velocitapiuMenu
                             efficienzapiusta = GlobalImgVar.efficienzapiuMenu
-                            if dati[133] == 0:
+                            if dati[133] == 0 or usandoRod:
                                 faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
                             elif dati[133] == 1:
                                 faretraFrecceStart = GlobalImgVar.faretraFrecceStart1
@@ -1043,15 +1049,22 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
                     FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                     FunzioniGraficheGeneriche.messaggio("Oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
-                    FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
+                    if not usandoRod:
+                        FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
                     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         if colcoInCasellaVista:
                             FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                         else:
                             FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                        FunzioniGraficheGeneriche.messaggio("Mappa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 50)
-                        FunzioniGraficheGeneriche.messaggio("Diario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, 50)
+                        if not usandoRod:
+                            FunzioniGraficheGeneriche.messaggio("Mappa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 50)
+                            FunzioniGraficheGeneriche.messaggio("Diario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, 50)
+                        else:
+                            FunzioniGraficheGeneriche.messaggio("Mappa", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 50)
+                            FunzioniGraficheGeneriche.messaggio("Diario", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, 50)
                     FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, 50)
                     FunzioniGraficheGeneriche.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14, 50)
                     FunzioniGraficheGeneriche.messaggio("Menu principale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, 50)
@@ -1099,10 +1112,17 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
 
                     if faretraFrecceStart != 0:
                         GlobalHWVar.disegnaImmagineSuSchermo(faretraFrecceStart, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 2.7))
-                        FunzioniGraficheGeneriche.messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
+                        numFrecce = dati[132]
+                        if usandoRod:
+                            numFrecce = 0
+                            maxFrecce = 0
+                        FunzioniGraficheGeneriche.messaggio("Frecce: " + str(numFrecce) + " / " + str(maxFrecce), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 3)), (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 6.7)), 2)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaroStart, (GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 2.7))
-                    FunzioniGraficheGeneriche.messaggio("Monete: " + str(dati[131]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 28.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
+                    numMonete = dati[131]
+                    if usandoRod:
+                        numMonete = dati[145] + GlobalGameVar.monetePerEntrareNellaConfraternita + GlobalGameVar.monetePerLaMappaDelLabirinto + GlobalGameVar.monetePerGliStumentiPerNeil
+                    FunzioniGraficheGeneriche.messaggio("Monete: " + str(numMonete), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 28.45, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
                 else:
                     if aperturaSettaColcoNonRiuscita:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 7, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 0.6))
@@ -1132,8 +1152,8 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
 
 
 def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco):
-    xp = GlobalHWVar.gpx * 1
-    yp = GlobalHWVar.gpy * 13.8
+    xp = GlobalHWVar.gpx * 0.9
+    yp = GlobalHWVar.gpy * 13.3
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu1
@@ -1145,11 +1165,14 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
     dark.fill((0, 0, 0, 80))
     background.blit(dark, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
+    usandoRod = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        usandoRod = True
+    qtaOggettiDiRod = 99
 
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
 
     attacco = 0
-    disegnoOggetto = 0
     risposta = False
     voceMarcata = 1
     voceMarcataOggetto = voceMarcata
@@ -1159,9 +1182,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
     primoFrame = True
     bottoneDown = False
     tastotempfps = 8
-
-    difensivi = True
-    offensivi = False
     sposta = False
 
     oggetton = 1
@@ -1186,7 +1206,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        mouseInquadraFreccia = False
         suTornaIndietro = False
         if GlobalHWVar.mouseVisibile:
             if GlobalHWVar.gsy // 18 * 15.6 <= yMouse <= GlobalHWVar.gsy // 18 * 17 and 0 <= xMouse < GlobalHWVar.gsx // 32 * 4.2:
@@ -1205,87 +1224,71 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif difensivi:
-                if GlobalHWVar.gsy // 18 * 14.8 <= yMouse <= GlobalHWVar.gsy // 18 * 15.3 and GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
-                    mouseInquadraFreccia = True
+            elif GlobalHWVar.gsy // 18 * 13.3 <= yMouse <= GlobalHWVar.gsy // 18 * 14.3:
+                if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
-                elif GlobalHWVar.gsy // 18 * 13.8 <= yMouse <= GlobalHWVar.gsy // 18 * 14.8:
-                    if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 1
-                        xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 13.8
-                    elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 2
-                        xp = GlobalHWVar.gsx // 32 * 2
-                        yp = GlobalHWVar.gsy // 18 * 13.8
-                    elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 3
-                        xp = GlobalHWVar.gsx // 32 * 3
-                        yp = GlobalHWVar.gsy // 18 * 13.8
-                    elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 4
-                        xp = GlobalHWVar.gsx // 32 * 4
-                        yp = GlobalHWVar.gsy // 18 * 13.8
-                    elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 5
-                        xp = GlobalHWVar.gsx // 32 * 5
-                        yp = GlobalHWVar.gsy // 18 * 13.8
-                    else:
-                        if not GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(True)
+                    voceMarcata = 1
+                    xp = GlobalHWVar.gsx // 32 * 0.9
+                    yp = GlobalHWVar.gsy // 18 * 13.3
+                elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalHWVar.gsx // 32 * 1.9
+                    yp = GlobalHWVar.gsy // 18 * 13.3
+                elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 3
+                    xp = GlobalHWVar.gsx // 32 * 2.9
+                    yp = GlobalHWVar.gsy // 18 * 13.3
+                elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 4
+                    xp = GlobalHWVar.gsx // 32 * 3.9
+                    yp = GlobalHWVar.gsy // 18 * 13.3
+                elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 5
+                    xp = GlobalHWVar.gsx // 32 * 4.9
+                    yp = GlobalHWVar.gsy // 18 * 13.3
                 else:
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
-            elif offensivi:
-                if GlobalHWVar.gsy // 18 * 13.8 <= yMouse <= GlobalHWVar.gsy // 18 * 14.3 and GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
-                    mouseInquadraFreccia = True
+            elif GlobalHWVar.gsy // 18 * 14.3 <= yMouse <= GlobalHWVar.gsy // 18 * 15.3:
+                if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
-                elif GlobalHWVar.gsy // 18 * 14.3 <= yMouse <= GlobalHWVar.gsy // 18 * 15.3:
-                    if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 1
-                        xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 14.3
-                    elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 2
-                        xp = GlobalHWVar.gsx // 32 * 2
-                        yp = GlobalHWVar.gsy // 18 * 14.3
-                    elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 3
-                        xp = GlobalHWVar.gsx // 32 * 3
-                        yp = GlobalHWVar.gsy // 18 * 14.3
-                    elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 4
-                        xp = GlobalHWVar.gsx // 32 * 4
-                        yp = GlobalHWVar.gsy // 18 * 14.3
-                    elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
-                        if GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(False)
-                        voceMarcata = 5
-                        xp = GlobalHWVar.gsx // 32 * 5
-                        yp = GlobalHWVar.gsy // 18 * 14.3
-                    else:
-                        if not GlobalHWVar.mouseBloccato:
-                            GlobalHWVar.configuraCursore(True)
+                    voceMarcata = 6
+                    xp = GlobalHWVar.gsx // 32 * 0.9
+                    yp = GlobalHWVar.gsy // 18 * 14.3
+                elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 7
+                    xp = GlobalHWVar.gsx // 32 * 1.9
+                    yp = GlobalHWVar.gsy // 18 * 14.3
+                elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 8
+                    xp = GlobalHWVar.gsx // 32 * 2.9
+                    yp = GlobalHWVar.gsy // 18 * 14.3
+                elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 9
+                    xp = GlobalHWVar.gsx // 32 * 3.9
+                    yp = GlobalHWVar.gsy // 18 * 14.3
+                elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                    voceMarcata = 10
+                    xp = GlobalHWVar.gsx // 32 * 4.9
+                    yp = GlobalHWVar.gsy // 18 * 14.3
                 else:
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
@@ -1308,17 +1311,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
             if bottoneDown == "mouseSinistro" and suTornaIndietro:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
-            elif bottoneDown == "mouseSinistro" and mouseInquadraFreccia:
-                if difensivi:
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gpy * 14.3
-                    difensivi = False
-                    offensivi = True
-                elif offensivi:
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gpy * 13.8
-                    offensivi = False
-                    difensivi = True
             elif voceMarcata < 0:
                 if voceMarcata == -1:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -1355,91 +1347,94 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 elif voceMarcata == -2:
                     menuConferma = True
             else:
-                if difensivi:
-                    # pozione
-                    if voceMarcata == 1 and dati[31] > 0:
-                        animaOggetto[0] = "pozione"
-                        dati[5] = dati[5] + 100
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[31] = dati[31] - 1
-                        sposta = True
-                        risposta = True
-                    # carica batt
-                    if voceMarcata == 2 and dati[32] > 0 and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
-                        animaOggetto[0] = "caricaBatterie"
-                        dati[10] = dati[10] + 250
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[32] = dati[32] - 1
-                        # npers: 1=d, 2=a, 3=w, 4=s
-                        if x < rx:
-                            npers = 1
-                        elif x > rx:
-                            npers = 2
-                        elif y < ry:
-                            npers = 4
-                        elif y > ry:
-                            npers = 3
-                        sposta = True
-                        risposta = True
-                    # antidoto
-                    if voceMarcata == 3 and dati[33] > 0:
-                        animaOggetto[0] = "medicina"
-                        dati[121] = 0
-                        dati[33] = dati[33] - 1
-                        sposta = True
-                        risposta = True
-                    # super pozione
-                    if voceMarcata == 4 and dati[34] > 0:
-                        animaOggetto[0] = "superPozione"
-                        dati[5] = dati[5] + 300
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[34] = dati[34] - 1
-                        sposta = True
-                        risposta = True
-                    # carica migliorato
-                    if voceMarcata == 5 and dati[35] > 0 and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
-                        animaOggetto[0] = "caricaBatterieMigliorato"
-                        dati[10] = dati[10] + 600
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[35] = dati[35] - 1
-                        # npers: 1=d, 2=a, 3=w, 4=s
-                        if x < rx:
-                            npers = 1
-                        elif x > rx:
-                            npers = 2
-                        elif y < ry:
-                            npers = 4
-                        elif y > ry:
-                            npers = 3
-                        sposta = True
-                        risposta = True
-                elif offensivi:
-                    # bomba
-                    if voceMarcata == 1 and dati[36] > 0:
-                        attacco = 2
-                        risposta = True
-                    # bomba veleno
-                    if voceMarcata == 2 and dati[37] > 0:
-                        attacco = 3
-                        risposta = True
-                    # esca
-                    if voceMarcata == 3 and dati[38] > 0:
-                        attacco = 4
-                        risposta = True
-                    # bomba appiccicosa
-                    if voceMarcata == 4 and dati[39] > 0:
-                        attacco = 5
-                        risposta = True
-                    # bomba potenziata
-                    if voceMarcata == 5 and dati[40] > 0:
-                        attacco = 6
-                        risposta = True
+                # pozione
+                if voceMarcata == 1 and (dati[31] > 0 or usandoRod):
+                    animaOggetto[0] = "pozione"
+                    dati[5] = dati[5] + 100
+                    if dati[5] > pvtot:
+                        dati[5] = pvtot
+                    if not usandoRod:
+                        dati[31] -= 1
+                    sposta = True
+                    risposta = True
+                # carica batt
+                if voceMarcata == 2 and (dati[32] > 0 or usandoRod) and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    animaOggetto[0] = "caricaBatterie"
+                    dati[10] = dati[10] + 250
+                    if dati[10] > entot:
+                        dati[10] = entot
+                    if not usandoRod:
+                        dati[32] -= 1
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    if x < rx:
+                        npers = 1
+                    elif x > rx:
+                        npers = 2
+                    elif y < ry:
+                        npers = 4
+                    elif y > ry:
+                        npers = 3
+                    sposta = True
+                    risposta = True
+                # antidoto
+                if voceMarcata == 3 and (dati[33] > 0 or usandoRod):
+                    animaOggetto[0] = "medicina"
+                    dati[121] = 0
+                    if not usandoRod:
+                        dati[33] -= 1
+                    sposta = True
+                    risposta = True
+                # super pozione
+                if voceMarcata == 4 and (dati[34] > 0 or usandoRod):
+                    animaOggetto[0] = "superPozione"
+                    dati[5] = dati[5] + 300
+                    if dati[5] > pvtot:
+                        dati[5] = pvtot
+                    if not usandoRod:
+                        dati[34] -= 1
+                    sposta = True
+                    risposta = True
+                # carica migliorato
+                if voceMarcata == 5 and (dati[35] > 0 or usandoRod) and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    animaOggetto[0] = "caricaBatterieMigliorato"
+                    dati[10] = dati[10] + 600
+                    if dati[10] > entot:
+                        dati[10] = entot
+                    if not usandoRod:
+                        dati[35] -= 1
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    if x < rx:
+                        npers = 1
+                    elif x > rx:
+                        npers = 2
+                    elif y < ry:
+                        npers = 4
+                    elif y > ry:
+                        npers = 3
+                    sposta = True
+                    risposta = True
+                # bomba
+                if voceMarcata == 6 and (dati[36] > 0 or usandoRod):
+                    attacco = 2
+                    risposta = True
+                # bomba veleno
+                if voceMarcata == 7 and (dati[37] > 0 or usandoRod):
+                    attacco = 3
+                    risposta = True
+                # esca
+                if voceMarcata == 8 and (dati[38] > 0 or usandoRod):
+                    attacco = 4
+                    risposta = True
+                # bomba appiccicosa
+                if voceMarcata == 9 and (dati[39] > 0 or usandoRod):
+                    attacco = 5
+                    risposta = True
+                # bomba potenziata
+                if voceMarcata == 10 and (dati[40] > 0 or usandoRod):
+                    attacco = 6
+                    risposta = True
                 if risposta:
-                    if offensivi:
+                    if 6 <= voceMarcata <= 10:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1460,21 +1455,18 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata < 0:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    offensivi = True
-                    difensivi = False
                     if voceMarcata == -1:
-                        xp = GlobalHWVar.gpx * 1
+                        xp = GlobalHWVar.gpx * 0.9
                         yp = GlobalHWVar.gpy * 14.3
-                        voceMarcata = 1
+                        voceMarcata = 6
                     elif voceMarcata == -2:
-                        xp = GlobalHWVar.gpx * 4
+                        xp = GlobalHWVar.gpx * 3.9
                         yp = GlobalHWVar.gpy * 14.3
-                        voceMarcata = 4
-                elif offensivi:
+                        voceMarcata = 9
+                elif 6 <= voceMarcata <= 10:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gpy * 13.8
-                    offensivi = False
-                    difensivi = True
+                    yp = GlobalHWVar.gpy * 13.3
+                    voceMarcata -= 5
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
@@ -1488,23 +1480,22 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         voceMarcata -= 1
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         xp = GlobalHWVar.gsx // 32 * 4.2
-                elif voceMarcata != 1:
+                elif voceMarcata == 1 or voceMarcata == 6:
+                    voceMarcata += 4
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = GlobalHWVar.gpx * 4.9
+                else:
                     voceMarcata -= 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = xp - GlobalHWVar.gpx
-                else:
-                    voceMarcata += 4
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    xp = GlobalHWVar.gpx * 5
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
-                if difensivi:
+                if 1 <= voceMarcata <= 5:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = GlobalHWVar.gpy * 14.3
-                    difensivi = False
-                    offensivi = True
-                elif voceMarcata >= 0:
+                    voceMarcata += 5
+                elif voceMarcata >= 6:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if voceMarcata <= 3:
+                    if voceMarcata <= 8:
                         xp = 0
                         yp = GlobalHWVar.gsy // 18 * 16.05
                         voceMarcata = -1
@@ -1525,14 +1516,14 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                         voceMarcata += 1
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         xp = 0
-                elif voceMarcata != 5:
+                elif voceMarcata == 5 or voceMarcata == 10:
+                    voceMarcata -= 4
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = GlobalHWVar.gpx * 0.9
+                else:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = xp + GlobalHWVar.gpx
-                else:
-                    voceMarcata -= 4
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    xp = GlobalHWVar.gpx * 1
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -1543,117 +1534,87 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
             FunzioniGraficheGeneriche.messaggio("Impostazioni", GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 0.7), int(GlobalHWVar.gpy * 16.05), 45)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 15.8)), (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 16.8)), 2)
             FunzioniGraficheGeneriche.messaggio("Esci", GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 4.9), int(GlobalHWVar.gpy * 16.05), 45)
-            if difensivi:
-                if voceMarcata == 1:
-                    disegnoOggetto = 0
-                if voceMarcata == 2:
-                    disegnoOggetto = 1
-                if voceMarcata == 3:
-                    disegnoOggetto = 2
-                if voceMarcata == 4:
-                    disegnoOggetto = 3
-                if voceMarcata == 5:
-                    disegnoOggetto = 4
-            elif offensivi:
-                if voceMarcata == 1:
-                    disegnoOggetto = 5
-                if voceMarcata == 2:
-                    disegnoOggetto = 6
-                if voceMarcata == 3:
-                    disegnoOggetto = 7
-                if voceMarcata == 4:
-                    disegnoOggetto = 8
-                if voceMarcata == 5:
-                    disegnoOggetto = 9
-            GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiGraf[disegnoOggetto], (GlobalHWVar.gpx // 2, GlobalHWVar.gpy * 9.7))
-            if dati[disegnoOggetto + 31] <= 0:
-                if voceMarcata < 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatOut, (xp, yp))
-                qta = 0
-            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalHWVar.gpx:
-                if voceMarcata < 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatOut, (xp, yp))
+
+            disegnoOggetto = voceMarcataOggetto - 1
+            GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiGraf[disegnoOggetto], (GlobalHWVar.gpx // 2, GlobalHWVar.gpy * 9.2))
+            if usandoRod:
+                qta = qtaOggettiDiRod
+            elif dati[disegnoOggetto + 31] >= 0:
                 qta = dati[disegnoOggetto + 31]
             else:
-                if voceMarcata < 0:
-                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                qta = 0
+            if voceMarcata < 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+            else:
+                if not usandoRod and (dati[disegnoOggetto + 31] <= 0 or ((disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalHWVar.gpx)):
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatOut, (xp, yp))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatIn, (xp, yp))
-                qta = dati[disegnoOggetto + 31]
-            FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 4) + (GlobalHWVar.gpx // 2), GlobalHWVar.gpy * 11.2, 80)
-            disegnati = 0
+            FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 4) + (GlobalHWVar.gpx // 2), GlobalHWVar.gpy * 10.7, 80)
             i = 0
-            while i < 10:
-                if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
-                    GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (disegnati + 1), GlobalHWVar.gpy * 13.8))
-                    disegnati += 1
-                if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
-                    GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (disegnati + 1), (GlobalHWVar.gpy * 13.8) + (GlobalHWVar.gpy // 2)))
-                    disegnati += 1
+            while i < 5:
+                GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (i + 0.9), GlobalHWVar.gpy * 13.3))
+                i += 1
+            i = 0
+            while i < 5:
+                GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i + 5], (GlobalHWVar.gpx * (i + 0.9), GlobalHWVar.gpy * 14.3))
                 i += 1
             posizioneXNomiOggetti = GlobalHWVar.gpx * 3.4
-            if difensivi:
-                if voceMarcata == 1 or voceMarcataOggetto == 1:
-                    if dati[31] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 2 or voceMarcataOggetto == 2:
-                    if dati[32] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 3 or voceMarcataOggetto == 3:
-                    if dati[33] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 4 or voceMarcataOggetto == 4:
-                    if dati[34] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 5 or voceMarcataOggetto == 5:
-                    if dati[35] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 14.8))
-            if offensivi:
-                if voceMarcata == 1 or voceMarcataOggetto == 1:
-                    if dati[36] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 2 or voceMarcataOggetto == 2:
-                    if dati[37] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 3 or voceMarcataOggetto == 3:
-                    if dati[38] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 4 or voceMarcataOggetto == 4:
-                    if dati[39] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                if voceMarcata == 5 or voceMarcataOggetto == 5:
-                    if dati[40] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                    else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 13.3))
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.3), int(GlobalHWVar.gpy * 9.7)), (int(GlobalHWVar.gpx * 6.5), int(GlobalHWVar.gpy * 9.7)), 1)
+            posizioneYNomiOggetti = GlobalHWVar.gpy * 8.4
+            if voceMarcata == 1 or voceMarcataOggetto == 1:
+                if dati[31] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 2 or voceMarcataOggetto == 2:
+                if dati[32] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 3 or voceMarcataOggetto == 3:
+                if dati[33] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 4 or voceMarcataOggetto == 4:
+                if dati[34] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 5 or voceMarcataOggetto == 5:
+                if dati[35] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 6 or voceMarcataOggetto == 6:
+                if dati[36] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 7 or voceMarcataOggetto == 7:
+                if dati[37] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 8 or voceMarcataOggetto == 8:
+                if dati[38] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 9 or voceMarcataOggetto == 9:
+                if dati[39] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            if voceMarcata == 10 or voceMarcataOggetto == 10:
+                if dati[40] >= 0:
+                    FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+                else:
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, posizioneYNomiOggetti, 55, centrale=True)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.3), int(GlobalHWVar.gpy * 9.2)), (int(GlobalHWVar.gpx * 6.5), int(GlobalHWVar.gpy * 9.2)), 1)
 
             # vita-status rallo
-            FunzioniGraficheGeneriche.disegnaVitaRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124])
+            FunzioniGraficheGeneriche.disegnaVitaRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], dati[0])
 
             if menuConferma:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)

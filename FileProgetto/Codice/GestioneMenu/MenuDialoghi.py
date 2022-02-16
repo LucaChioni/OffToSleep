@@ -438,6 +438,7 @@ def menuMercante(dati):
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                         primoFrame = True
                         dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                        dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                         voceMarcata = 0
                         xp = GlobalHWVar.gsx // 32 * 10.5
                         # freccia
@@ -491,6 +492,7 @@ def menuMercante(dati):
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
                             dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
@@ -503,6 +505,7 @@ def menuMercante(dati):
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
                             dati[131] -= GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
+                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
@@ -515,6 +518,7 @@ def menuMercante(dati):
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
                             dati[131] -= GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
+                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra

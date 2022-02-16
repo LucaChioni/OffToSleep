@@ -1622,7 +1622,7 @@ def gameloop():
             startf = False
 
         # morte tua e di robo
-        inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente)
+        inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente, dati[0])
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
         # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
@@ -1774,22 +1774,25 @@ def gameloop():
                     guantiAttacco = guantidAttacco
                     collana = collanad
                 # decrementa oggetto utilizzato
-                if sposta:
+                usandoRod = False
+                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                    usandoRod = True
+                if sposta and not usandoRod:
                     # bomba attacco = 2
                     if attacco == 2:
-                        dati[36] = dati[36] - 1
+                        dati[36] -= 1
                     # bomba veleno attacco = 3
                     if attacco == 3:
-                        dati[37] = dati[37] - 1
+                        dati[37] -= 1
                     # esca attacco = 4
                     if attacco == 4:
-                        dati[38] = dati[38] - 1
+                        dati[38] -= 1
                     # bomba appiccicosa attacco = 5
                     if attacco == 5:
-                        dati[39] = dati[39] - 1
+                        dati[39] -= 1
                     # bomba potenziata attacco = 6
                     if attacco == 6:
-                        dati[40] = dati[40] - 1
+                        dati[40] -= 1
             # gestione difesa
             if (not sposta and difesa == 1 and mosseRimasteRob <= 0 and not nemiciInMovimento) or (sposta and difesa == 1):
                 difesa = 0
@@ -2413,7 +2416,7 @@ def gameloop():
             while i < len(vettoreDenaro):
                 denaroPreso = False
                 if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
-                    dati[131] = UtilityOstacoliContenutoCofanetti.ottieniMonete(dati, vettoreDenaro[i])
+                    dati = UtilityOstacoliContenutoCofanetti.ottieniMonete(dati, vettoreDenaro[i])
                     del vettoreDenaro[i + 2]
                     del vettoreDenaro[i + 1]
                     del vettoreDenaro[i]

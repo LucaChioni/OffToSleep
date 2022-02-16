@@ -1108,6 +1108,10 @@ def oggetti(dati, colcoInCasellaVista):
     aggiornaSchermo = False
     impossibileUsareCaricaBatt = False
     esci = False
+    usandoRod = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        usandoRod = True
+    qtaOggettiDiRod = 99
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1318,33 +1322,38 @@ def oggetti(dati, colcoInCasellaVista):
                         dati[5] = dati[5] + 100
                         if dati[5] > pvtot:
                             dati[5] = pvtot
-                        dati[31] = dati[31] - 1
+                        if not usandoRod:
+                            dati[31] -= 1
                         yp = GlobalHWVar.gsy // 18 * 6.2
                     # carica batt
                     if usa == 2:
                         dati[10] = dati[10] + 250
                         if dati[10] > entot:
                             dati[10] = entot
-                        dati[32] = dati[32] - 1
+                        if not usandoRod:
+                            dati[32] -= 1
                         yp = GlobalHWVar.gsy // 18 * 7.2
                     # antidoto
                     if usa == 3:
                         dati[121] = 0
-                        dati[33] = dati[33] - 1
+                        if not usandoRod:
+                            dati[33] -= 1
                         yp = GlobalHWVar.gsy // 18 * 8.2
                     # super pozione
                     if usa == 4:
                         dati[5] = dati[5] + 300
                         if dati[5] > pvtot:
                             dati[5] = pvtot
-                        dati[34] = dati[34] - 1
+                        if not usandoRod:
+                            dati[34] -= 1
                         yp = GlobalHWVar.gsy // 18 * 9.2
                     # carica migliorato
                     if usa == 5:
                         dati[10] = dati[10] + 600
                         if dati[10] > entot:
                             dati[10] = entot
-                        dati[35] = dati[35] - 1
+                        if not usandoRod:
+                            dati[35] -= 1
                         yp = GlobalHWVar.gsy // 18 * 10.2
                     # bomba
                     if usa == 6:
@@ -1414,74 +1423,74 @@ def oggetti(dati, colcoInCasellaVista):
                 # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
                 if usadue:
                     if oggetton == 1:
-                        if dati[31] > 0:
+                        if dati[31] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 1
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 2:
-                        if dati[32] > 0 and GlobalGameVar.impoPresente and colcoInCasellaVista:
+                        if (dati[32] > 0 or usandoRod) and GlobalGameVar.impoPresente and colcoInCasellaVista:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 2
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if dati[32] > 0 and (not GlobalGameVar.impoPresente or not colcoInCasellaVista):
+                            if (not GlobalGameVar.impoPresente or not colcoInCasellaVista) and not usandoRod:
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 3:
-                        if dati[33] > 0:
+                        if dati[33] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 3
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 4:
-                        if dati[34] > 0:
+                        if dati[34] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 4
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 5:
-                        if dati[35] > 0 and GlobalGameVar.impoPresente and colcoInCasellaVista:
+                        if (dati[35] > 0 or usandoRod) and GlobalGameVar.impoPresente and colcoInCasellaVista:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 5
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if dati[35] > 0 and (not GlobalGameVar.impoPresente or not colcoInCasellaVista):
+                            if (not GlobalGameVar.impoPresente or not colcoInCasellaVista) and not usandoRod:
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 6:
-                        if dati[36] > 0:
+                        if dati[36] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 6
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 7:
-                        if dati[37] > 0:
+                        if dati[37] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 7
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 8:
-                        if dati[38] > 0:
+                        if dati[38] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 8
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 9:
-                        if dati[39] > 0:
+                        if dati[39] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 9
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 10:
-                        if dati[40] > 0:
+                        if dati[40] > 0 or usandoRod:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 10
                             usauno = True
@@ -1560,7 +1569,11 @@ def oggetti(dati, colcoInCasellaVista):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 1.5), int(GlobalHWVar.gpy * 5.6)), (int(GlobalHWVar.gpx * 10.5), int(GlobalHWVar.gpy * 5.6)), 1)
                 if dati[31] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[31], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 6.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[31]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 6.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
                 if dati[32] >= 0:
@@ -1568,17 +1581,29 @@ def oggetti(dati, colcoInCasellaVista):
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[32], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 7.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[32]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 7.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                 if dati[33] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[33], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 8.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[33]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 8.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 45)
                 if dati[34] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[34], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 9.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[34]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 9.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
                 if dati[35] >= 0:
@@ -1586,32 +1611,56 @@ def oggetti(dati, colcoInCasellaVista):
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[35], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 10.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[35]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 10.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                 if dati[36] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[36], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 11.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[36]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 11.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 45)
                 if dati[37] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[37], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 12.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[37]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 12.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 45)
                 if dati[38] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[38], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 13.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[38]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 13.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 45)
                 if dati[39] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[39], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 14.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[39]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 14.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 45)
                 if dati[40] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 45)
-                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[40], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 15.2, 45, centrale=True)
+                    if usandoRod:
+                        qta = qtaOggettiDiRod
+                    else:
+                        qta = dati[40]
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 15.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 45)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 7.6) - 1, int(GlobalHWVar.gpy * 4.5)), (int(GlobalHWVar.gpx * 7.6) - 1, int(GlobalHWVar.gpy * 5.4)), 2)

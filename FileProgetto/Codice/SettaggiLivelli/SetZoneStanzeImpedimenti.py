@@ -399,7 +399,7 @@ def settaPresenzaDiColco(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["messoImpoSulTavoloDopoConsegnaStrumenti"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
         GlobalGameVar.impoPresente = False
         GlobalGameVar.impoPietraPosseduta = True
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         GlobalGameVar.impoPresente = True
         GlobalGameVar.impoPietraPosseduta = True
     else:

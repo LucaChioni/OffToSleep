@@ -16,10 +16,15 @@ def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
 
 
 def ottieniMonete(dati, moneteOttenute):
-    moneteTot = dati[131] + moneteOttenute
-    if moneteTot > GlobalGameVar.maxMonete:
-        moneteTot = GlobalGameVar.maxMonete
-    return moneteTot
+    if dati[0] < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] or dati[0] >= GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        dati[131] += moneteOttenute
+        if dati[131] > GlobalGameVar.maxMonete:
+            dati[131] = GlobalGameVar.maxMonete
+    else:
+        dati[145] += moneteOttenute
+        if dati[145] > GlobalGameVar.maxMonete:
+            dati[145] = GlobalGameVar.maxMonete
+    return dati
 
 
 def ottieniFrecce(dati, frecceOttenute, tesoro):

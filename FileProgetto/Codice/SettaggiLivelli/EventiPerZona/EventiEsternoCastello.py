@@ -284,6 +284,34 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
+        # tolgo l'equipaggiamento (spada, arco, armatura, scudo, guanti e collana) perché passo a Rod
+        dati[6] = 0
+        dati[128] = 0
+        dati[8] = 0
+        dati[7] = 0
+        dati[129] = 0
+        dati[130] = 0
+        # rendo visibili tutti gli oggetti anche se non li ho mai presi
+        if dati[31] < 0:
+            dati[31] = 0
+        if dati[32] < 0:
+            dati[32] = 0
+        if dati[33] < 0:
+            dati[33] = 0
+        if dati[34] < 0:
+            dati[34] = 0
+        if dati[35] < 0:
+            dati[35] = 0
+        if dati[36] < 0:
+            dati[36] = 0
+        if dati[37] < 0:
+            dati[37] = 0
+        if dati[38] < 0:
+            dati[38] = 0
+        if dati[39] < 0:
+            dati[39] = 0
+        if dati[40] < 0:
+            dati[40] = 0
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["palazzoDiRod2"]
         nonMostrarePersonaggio = False

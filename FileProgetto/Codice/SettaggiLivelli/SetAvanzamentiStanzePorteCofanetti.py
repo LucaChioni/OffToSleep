@@ -656,11 +656,13 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["buttataNelLagoDuranteLaFuga"] = i
     i += 1
     dictAvanzamentoStoria["fineFugaDalCastello"] = i
+    dictAvanzamentoStoria["inizioParteDiRod"] = i
     dictAvanzamentoStoria["stoppatoMusicaFugaCastello"] = i
 
     i += 100
     i += 1
     dictAvanzamentoStoria["morteRod"] = i
+    dictAvanzamentoStoria["fineParteDiRod"] = i
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
     i += 1

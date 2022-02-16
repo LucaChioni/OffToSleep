@@ -316,7 +316,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
     # vita-status rallo
-    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria)
 
     # disegno la vita del mostro / Colco / esca selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and GlobalGameVar.impoPresente):
@@ -431,7 +431,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
     # vita-status rallo
-    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, dati[0])
 
     # background saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
@@ -651,6 +651,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     nyp = 0
     risposta = False
     difesa = 0
+
+    usandoRod = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        usandoRod = True
 
     puntat = GlobalImgVar.puntatOut
     puntatogg = 0
@@ -913,7 +917,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
 
     # vita-status rallo
-    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria)
 
     # background saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
@@ -1109,7 +1113,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                 j = 0
                                 while j < len(caseattactotRallo):
                                     if caseattactotRallo[j] == nemico.x and caseattactotRallo[j + 1] == nemico.y:
-                                        if caseattactotRallo[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0) and attacco != 4:
+                                        if caseattactotRallo[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or (numFrecce > 0 and not usandoRod)) and attacco != 4:
                                             if GlobalHWVar.mouseBloccato:
                                                 GlobalHWVar.configuraCursore(False)
                                             inquadratoQualcosa = "nemico"
@@ -1130,7 +1134,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                     j = 0
                                     while j < len(caseattactotRallo):
                                         if caseattactotRallo[j] == vettoreEsche[i + 2] and caseattactotRallo[j + 1] == vettoreEsche[i + 3]:
-                                            if caseattactotRallo[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or numFrecce > 0) and attacco != 4:
+                                            if caseattactotRallo[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or (numFrecce > 0 and not usandoRod)) and attacco != 4:
                                                 if GlobalHWVar.mouseBloccato:
                                                     GlobalHWVar.configuraCursore(False)
                                                 inquadratoQualcosa = "esca"
@@ -1550,7 +1554,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     danno = attVicino
                     raggio = GlobalHWVar.gpx * 0
                 # attacco lontano attacco = 1
-                elif attacco == 1 and not ((xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0:
+                elif attacco == 1 and not ((xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0 and not usandoRod:
                     j = 0
                     while j < len(caseattactotRallo):
                         if caseattactotRallo[j] == xp and caseattactotRallo[j + 1] == yp:
@@ -2037,7 +2041,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         suCofanetto = False
                         puntatogg = puntatogg7
                         break
-            if (((xp == x and yp == y) or (xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy)) and puntatogg != 0) or (puntatogg == puntatogg6 and nemicoInCampoVisivoArco and numFrecce > 0):
+            if (((xp == x and yp == y) or (xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy)) and puntatogg != 0) or (puntatogg == puntatogg6 and nemicoInCampoVisivoArco and numFrecce > 0 and not usandoRod):
                 puntat = GlobalImgVar.puntatIn
             else:
                 puntat = GlobalImgVar.puntatOut
@@ -2221,7 +2225,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
         # vita-status rallo
-        FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
+        FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria)
 
         # background saltaTurno/occhio/chiave
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))

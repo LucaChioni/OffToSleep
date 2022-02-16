@@ -1251,7 +1251,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
         pvtot = GenericFunc.getVitaTotRallo(dati[4] - aumentoliv, dati[129])
         pvRallo = pvtot
         velenoRallo = False
-    FunzioniGraficheGeneriche.disegnaVitaRallo(pvRallo, pvtot, dati[132], velenoRallo, attPRallo, difPRallo)
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pvRallo, pvtot, dati[132], velenoRallo, attPRallo, difPRallo, dati[0])
 
     # disegno la vita del Colco / esca / mostro selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and GlobalGameVar.impoPresente):

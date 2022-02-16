@@ -2166,7 +2166,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
         elif tesoro == 1000:
             dati = UtilityOstacoliContenutoCofanetti.ottieniCellaDiMemoria(dati)
         elif tesoro == 131:
-            dati[tesoro] = UtilityOstacoliContenutoCofanetti.ottieniMonete(dati, numMoneteOttenute)
+            dati = UtilityOstacoliContenutoCofanetti.ottieniMonete(dati, numMoneteOttenute)
         elif tesoro == 132:
             dati[tesoro], tesoro = UtilityOstacoliContenutoCofanetti.ottieniFrecce(dati, numFrecceOttenute, tesoro)
         else:
