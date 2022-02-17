@@ -3871,6 +3871,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "w"
                     x = GlobalHWVar.gpx * 11
                     y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello3"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 5
         if stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
             nomeCanzoneLuogo = "11-ProprietaDiRod"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:

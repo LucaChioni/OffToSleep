@@ -164,6 +164,37 @@ def gameloop():
                 if not inizio and not cambiatoRisoluzione:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
+                # carica i cofanetti nella stanza (svuoto e riempio il vettore)
+                i = 0
+                while i < len(cofanetti):
+                    del cofanetti[i + 3]
+                    del cofanetti[i + 2]
+                    del cofanetti[i + 1]
+                    del cofanetti[i]
+                i = 0
+                while i < len(tutticofanetti):
+                    if tutticofanetti[i] == dati[1]:
+                        cofanetti.append(tutticofanetti[i])
+                        cofanetti.append(tutticofanetti[i + 1])
+                        cofanetti.append(tutticofanetti[i + 2])
+                        cofanetti.append(tutticofanetti[i + 3])
+                    i = i + 4
+                # carica le porte nella stanza (svuoto e riempio il vettore)
+                i = 0
+                while i < len(porte):
+                    del porte[i + 3]
+                    del porte[i + 2]
+                    del porte[i + 1]
+                    del porte[i]
+                i = 0
+                while i < len(tutteporte):
+                    if tutteporte[i] == dati[1]:
+                        porte.append(tutteporte[i])
+                        porte.append(tutteporte[i + 1])
+                        porte.append(tutteporte[i + 2])
+                        porte.append(tutteporte[i + 3])
+                    i += 4
+
                 if cambiosta:
                     # necessario ridefinire le stanze pacifiche in caso di carica partita nel castello (inizialmente quelle stanze sono pacifiche)
                     SetZoneStanzeImpedimenti.modificaStanzePacifiche(dati[0])
@@ -241,7 +272,7 @@ def gameloop():
                         obbiettivoCasualeColco = False
 
                     # carico nemici e personaggi nella stanza
-                    listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi = SetNemiciPersonaggiEventi.caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi)
+                    listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi = SetNemiciPersonaggiEventi.caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi, cofanetti)
                     stanzaVecchia = dati[1]
                     # metto i nemici nella posizione originale se sono nella nostra stessa casella
                     for nemico in listaNemici:
@@ -323,38 +354,6 @@ def gameloop():
                         else:
                             personaggio.caricaImgPersonaggio()
                             personaggio.girati(personaggio.direzione)
-
-                # carica i cofanetti nella stanza (svuoto e riempio il vettore)
-                i = 0
-                while i < len(cofanetti):
-                    del cofanetti[i + 3]
-                    del cofanetti[i + 2]
-                    del cofanetti[i + 1]
-                    del cofanetti[i]
-                i = 0
-                while i < len(tutticofanetti):
-                    if tutticofanetti[i] == dati[1]:
-                        cofanetti.append(tutticofanetti[i])
-                        cofanetti.append(tutticofanetti[i + 1])
-                        cofanetti.append(tutticofanetti[i + 2])
-                        cofanetti.append(tutticofanetti[i + 3])
-                    i = i + 4
-
-                # carica le porte nella stanza (svuoto e riempio il vettore)
-                i = 0
-                while i < len(porte):
-                    del porte[i + 3]
-                    del porte[i + 2]
-                    del porte[i + 1]
-                    del porte[i]
-                i = 0
-                while i < len(tutteporte):
-                    if tutteporte[i] == dati[1]:
-                        porte.append(tutteporte[i])
-                        porte.append(tutteporte[i + 1])
-                        porte.append(tutteporte[i + 2])
-                        porte.append(tutteporte[i + 3])
-                    i += 4
 
                 # stanza
                 nomeStanza = SetZoneStanzeImpedimenti.settaNomeStanza(dati[0], dati[1])

@@ -41,7 +41,7 @@ import Codice.SettaggiLivelli.EventiPerZona.EventiPalazzoDiRod as EventiPalazzoD
 import Codice.SettaggiLivelli.EventiPerZona.EventiTunnelDiRod as EventiTunnelDiRod
 
 
-def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi):
+def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi, cofanetti):
     if stanzaVecchia != 0 and ((stanza in GlobalGameVar.vetStanzePacifiche) or (stanza not in GlobalGameVar.vetStanzePacifiche and stanzaVecchia in GlobalGameVar.vetStanzePacifiche)):
         listaNemiciTotali = []
         listaPersonaggiTotali = []
@@ -142,6 +142,19 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaPersonaggiTotali, listaPersonaggi = PosizPalazzoDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
             listaPersonaggiTotali, listaPersonaggi = PosizTunnelDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
+        # metto i personaggi-cofanetto per quando usi Rod
+        if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+            i = 0
+            while i < len(cofanetti):
+                if cofanetti[i + 3]:
+                    nomeOggetto = "OggettoDictCofanettoAperto-0"
+                else:
+                    nomeOggetto = "OggettoDictCofanettoChiuso-0"
+                percorsoPersonaggio = []
+                personaggio = PersonaggioObj.PersonaggioObj(cofanetti[i + 1], cofanetti[i + 2], "s", nomeOggetto, stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                i += 4
     else:
         for personaggio in listaPersonaggiTotali:
             if personaggio.stanzaDiAppartenenza == stanza:

@@ -1005,6 +1005,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     dictImgPersonaggiOggettoSpecifici["OggettoDictCadavereSoldato1"] = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Oggetti/CadavereSoldatoCastello1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     dictImgPersonaggiOggettoSpecifici["OggettoDictCadavereSoldato2"] = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Oggetti/CadavereSoldatoCastello2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     dictImgPersonaggiOggettoSpecifici["OggettoDictCadavereSoldato3"] = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Oggetti/CadavereSoldatoCastello3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoAperto"] = cofaniaper
+    dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoChiuso"] = cofanichiu
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
