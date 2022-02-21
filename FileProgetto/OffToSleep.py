@@ -224,6 +224,11 @@ def gameloop():
                                 nrob = 4
                             if npers == 4:
                                 nrob = 3
+                    if not GlobalGameVar.impoPresente:
+                        rx = GlobalHWVar.gsx
+                        ry = GlobalHWVar.gsy
+                        vrx = rx
+                        vry = ry
 
                     if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
                         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
@@ -356,7 +361,7 @@ def gameloop():
                             personaggio.girati(personaggio.direzione)
 
                 # stanza
-                nomeStanza = SetZoneStanzeImpedimenti.settaNomeStanza(dati[0], dati[1])
+                nomeStanza = SetZoneStanzeImpedimenti.settaNomeImgStanza(dati[0], dati[1])
                 imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
                 if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
                     portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)

@@ -311,7 +311,7 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["messoStrumentiSulTavoloDiNeil"]:
             numImgAttuale = 2
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
             numImgAttuale = 1
     if tipo == "OggettoTavoloVuotoCastelloB":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rimossoImpoMessoSulTavoloDopoConsegnaStrumenti"]:

@@ -661,7 +661,6 @@ def definisciAvanzamentiStoria():
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["morteRod"] = i
     dictAvanzamentoStoria["fineParteDiRod"] = i
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i

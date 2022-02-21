@@ -35,6 +35,10 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
 
+    usandoRod = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        usandoRod = True
+
     schermo_prima_del_dialogo = GlobalHWVar.schermo.copy()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalHWVar.gsy // 18 * 3.5, GlobalHWVar.gsx, GlobalHWVar.gsy // 18 * 14.5)).convert()
 
@@ -123,12 +127,11 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             elif numeromessaggioAttuale == numeroMessaggiTotali:
                 if personaggio.tipo == "Pazzo1" and personaggio.avanzamentoDialogo == 2 and sceltaEffettuata == 3:
                     GlobalGameVar.pazzoStrabico = True
-                elif personaggio.tipo == "OggettoArmadioCastello":
-                    if sceltaEffettuata == 1 or sceltaEffettuata == 2:
-                        if GlobalGameVar.cambiataAlCastello[0]:
-                            GlobalGameVar.cambiataAlCastello[0] = False
-                        else:
-                            GlobalGameVar.cambiataAlCastello[0] = True
+                elif personaggio.tipo == "OggettoArmadioCastello" and not usandoRod and (sceltaEffettuata == 1 or sceltaEffettuata == 2):
+                    if GlobalGameVar.cambiataAlCastello[0]:
+                        GlobalGameVar.cambiataAlCastello[0] = False
+                    else:
+                        GlobalGameVar.cambiataAlCastello[0] = True
                 if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata) or personaggio.scelta == -1:
                     if personaggio.avanzaStoria:
                         avanzamentoStoria += 1

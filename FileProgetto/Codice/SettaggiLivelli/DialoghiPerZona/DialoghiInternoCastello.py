@@ -13,7 +13,30 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipoId == "OggettoQuadro-1":
+    if tipoId.startswith("OggettoQuadro") and GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        partiDialogo = []
+        nome = "Quadro"
+        if tipoId == "OggettoQuadro-7":
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Ok, questo... è un bel quadro...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Un quadro di Neil... non so quale sia il suo significato e non ho voglia di pensarci...)")
+            partiDialogo.append(dialogo)
+    elif tipoId == "OggettoQuadro-1":
         partiDialogo = []
         nome = "Quadro"
         oggettoDato = False
@@ -227,7 +250,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(Un lago all'alba. C'è una sfera luminosa sopra una montagna...)")
+        dialogo.append(u"(Un lago all'alba...)")
         partiDialogo.append(dialogo)
     elif tipoId.startswith("OggettoDictCadavereSoldato"):
         partiDialogo = []
@@ -450,15 +473,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoLibreriaCastello-0":
             partiDialogo = []
             nome = "OggettoLibreriaCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Un sacco di libri sull'ambiente, la natura e gli animali...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Libri sull'ambiente...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Un sacco di libri sull'ambiente, la natura e gli animali...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello4"]:
         if tipoId == "ServoLancia-5":
             partiDialogo = []
@@ -491,42 +525,102 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(È immobile... sembra che non stia neanche respirando...)")
                 partiDialogo.append(dialogo)
+        elif tipoId == "OggettoSpecchioCastello-0":
+            partiDialogo = []
+            nome = "OggettoSpecchioCastello"
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Oh, uno specchio. È proprio quello che mi serviva. Non credo che qualcuno noterebbe la sua assenza...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Non si stacca... aspetta, continua dentro il muro... continua lungo tutta la parete... perché mettere uno specchio dentro il muro?)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ehi, uno specchio! Cavolo mi sono lavata ieri e guarda qua... mi servirebbe un altro bagno...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLavandinoCastello-0":
             partiDialogo = []
             nome = "OggettoLavandinoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Questi sistemi per portare l'acqua in casa sono più comuni di quel che pensavo...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ah, utilizza ancora il mio vecchio modello di schema idraulico... quanta inefficienza...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questi sistemi per portare l'acqua in casa sono più comuni di quel che pensavo...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoGabinettoCastello-0":
             partiDialogo = []
             nome = "OggettoGabinettoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(È da un po' che non vado in bagno, ma ora non ho tempo per pensare ai miei problemi digestivi...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non devo andare in bagno adesso...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È da un po' che non vado in bagno, ma ora non ho tempo per pensare ai miei problemi digestivi...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoVascaCastello-0":
             partiDialogo = []
             nome = "OggettoVascaCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Una vasca enorme. Chissà se anche qui c'è l'acqua riscaldata...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Vasca idromassaggio con acqua riscaldata... troppa comodità...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Una vasca enorme. Chissà se anche qui c'è l'acqua riscaldata...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello5"]:
         if tipoId == "ServoArco-2":
             partiDialogo = []
@@ -749,15 +843,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoCaminoCastello-0":
             partiDialogo = []
             nome = "OggettoCaminoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Un camino... sembra non essere mai stato utilizzato...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questo camino è completamente inutile con il pavimento radiante...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Un camino... sembra non essere mai stato utilizzato...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoSediaCastello-0":
             partiDialogo = []
             nome = "OggettoSediaCastello"
@@ -817,15 +922,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoVasoCastello-0":
             partiDialogo = []
             nome = "OggettoVasoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(E un altro vaso... ma che hanno di così bello da dover essere presenti ovunque?)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questi vasi emanano strani odori...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(E un altro vaso... ma che hanno di così bello da dover essere presenti ovunque?)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello9"]:
         if tipoId == "ServoLancia-7":
             partiDialogo = []
@@ -934,6 +1050,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Ce l'ho fatta... un altro passo e sarei crollata...)")
                 partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Dev'essere un letto per gli ospiti...)")
+                partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
                 avanzaStoria = False
@@ -947,79 +1073,170 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoArmadioCastello-0":
             partiDialogo = []
             nome = "OggettoArmadioCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = -1
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("???DOMANDA???")
-            if not GlobalGameVar.cambiataAlCastello[0]:
-                dialogo.append(u"Ci sono dei vestiti... dovrei cambiarmi?")
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = -1
+                avanzaColDialogo = False
+                if not GlobalGameVar.cambiataAlCastello[0]:
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append("???DOMANDA???")
+                    dialogo.append(u"Ci sono dei vestiti... dovrei cambiarmi?")
+                    dialogo.append(u"Sì.")
+                    dialogo.append(u"Forse...")
+                    dialogo.append(u"No.")
+                    dialogo.append(u"Non so se mi starebbe bene questo violetto...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append("!!!RISPOSTA!!!")
+                    dialogo.append(u"Aspetta... ma che sto facendo?!")
+                    dialogo.append(u"<*>#italic#Mmh...<*>")
+                    dialogo.append(u"Non ha neanche il cappuccio...")
+                    dialogo.append(u"Allora no...")
+                    partiDialogo.append(dialogo)
+                else:
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Oh, ci sono i vecchi vestiti di Sara... deve aver alloggiato qui. Profumano di sapone e un po' di sudore...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append("???DOMANDA???")
+                    dialogo.append(u"Potrei provarli...?")
+                    dialogo.append(u"Sì...?")
+                    dialogo.append(u"Forse...")
+                    dialogo.append(u"No.")
+                    dialogo.append(u"Non so se mi entrano...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append("!!!RISPOSTA!!!")
+                    dialogo.append(u"Aspetta... ma che sto facendo?!")
+                    dialogo.append(u"<*>#italic#Mmh...<*>")
+                    dialogo.append(u"Meglio di no.")
+                    dialogo.append(u"Lasciamo stare...")
+                    partiDialogo.append(dialogo)
             else:
-                dialogo.append(u"Ci sono i miei vecchi vestiti... dovrei cambiarmi?")
-            dialogo.append(u"Sì.")
-            dialogo.append(u"Forse...")
-            dialogo.append(u"No.")
-            dialogo.append(u"Dovrei pensare a opzioni diverse da \"sì\" e \"no\"?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("!!!RISPOSTA!!!")
-            dialogo.append(u"Ok...")
-            dialogo.append(u"<*>#italic#Mmh...<*>")
-            dialogo.append(u"Questi vestiti vanno più che bene.")
-            dialogo.append(u"Direi di no... quindi?")
-            partiDialogo.append(dialogo)
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = -1
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("???DOMANDA???")
+                if not GlobalGameVar.cambiataAlCastello[0]:
+                    dialogo.append(u"Ci sono dei vestiti... dovrei cambiarmi?")
+                else:
+                    dialogo.append(u"Ci sono i miei vecchi vestiti... dovrei cambiarmi?")
+                dialogo.append(u"Sì.")
+                dialogo.append(u"Forse...")
+                dialogo.append(u"No.")
+                dialogo.append(u"Dovrei pensare a opzioni diverse da \"sì\" e \"no\"?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("!!!RISPOSTA!!!")
+                dialogo.append(u"Ok...")
+                dialogo.append(u"<*>#italic#Mmh...<*>")
+                dialogo.append(u"Questi vestiti vanno più che bene.")
+                dialogo.append(u"Direi di no... quindi?")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoComodinoCastello-0":
             partiDialogo = []
             nome = "OggettoComodinoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Su questo comodino c'è solo una lanterna. I cassetti sono vuoti...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(I cassetti sono vuoti...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Su questo comodino c'è solo una lanterna. I cassetti sono vuoti...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLavandinoCastello-1":
             partiDialogo = []
             nome = "OggettoLavandinoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Anche da qui uscirà acqua riscaldata?)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ah, utilizza ancora il mio vecchio modello di schema idraulico... quanta inefficienza...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Anche da qui uscirà acqua riscaldata?)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoVascaCastello-1":
             partiDialogo = []
             nome = "OggettoVascaCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Non ho tempo per farmi un bagno adesso...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Vasca idromassaggio con acqua riscaldata... troppa comodità...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non ho tempo per farmi un bagno adesso...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoGabinettoCastello-1":
             partiDialogo = []
             nome = "OggettoGabinettoCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Non sento il bisogno di andare in bagno... forse dovrei sedermi e aspettare un po', ma non ho tempo da perdere adesso...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non devo andare in bagno adesso...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non sento il bisogno di andare in bagno... forse dovrei sedermi e aspettare un po', ma non ho tempo da perdere adesso...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello11"]:
         if tipoId == "ServoSpada-2":
             partiDialogo = []
@@ -1211,15 +1428,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoBarcaCastello-0":
             partiDialogo = []
             nome = "OggettoBarcaCastello"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(E un altro modellino di una barca... Neil deve esserne proprio appassionato...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Perché ha questi modellini sparsi ovunque?)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(E un altro modellino di una barca... Neil deve esserne proprio appassionato...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello14"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -1708,10 +1936,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"... Percorrendo la seconda ipotesi, invece, è vero che l'anima non sarebbe governata dalle stesse leggi della materia, ma da queste leggi comunque dipenderebbe, anche se in maniera indiretta. Il comportamento degli individui, così come il loro pensiero, viene plasmato dall'esperienza che gli stessi compiono sul mondo materiale. L'anima verrebbe in questo modo influenzata e \"corrotta\" dalla materia, risultando quindi non più libera.")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mmh...<*> In sostanza, le cose di cui mi ha parlato René...")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Più ci penso, più sembra assurdo...)")
+                partiDialogo.append(dialogo)
+            else:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Mmh...<*> In sostanza, le cose di cui mi ha parlato René...")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-3":
             partiDialogo = []
             nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
@@ -1743,10 +1977,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"... Seguendo la seconda ipotesi, in cui gli eventi sono inseparabili e indistinguibili, non si presenta un fenomeno di causa-effetto tra gli eventi. Gli eventi sono, in questo caso, un unico blocco che esiste \"sempre\". La percezione \"temporale\" del tempo risulta, quindi, propria degli esseri viventi: una percezione simile alla lettura di un libro che, pur esistendo per intero, viene compreso parzialmente in diversi momenti del tempo.")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"... Assurdo...")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questa è roba di anni fa. Mi domando quanto sia riuscito ad approfondire...)")
+                partiDialogo.append(dialogo)
+            else:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Assurdo...")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-4":
             partiDialogo = []
             nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
@@ -1794,10 +2034,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"... Seguendo la seconda ipotesi, in cui si sostiene che la realtà è contenuta nell'immaginazione, deduciamo che è la coscienza a produrre la realtà. Ciò che sta \"fuori di noi\", sarebbe una sorta di lista di ricordi che costruiremmo attraverso l'immaginazione. E, data l'evoluzione deterministica della realtà, dovremmo pensare che le leggi fisiche che la governano, siano in verità i meccanismi con cui la coscienza sviluppa i sui pensieri.")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"... Non so... sembrano assurde entrambe le ipotesi...")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ma come fa ad avere così tante monete se non fa altro che pensare a questa roba? Come fa a convertire in denaro?)")
+                partiDialogo.append(dialogo)
+            else:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non so... sembrano assurde entrambe le ipotesi...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-5":
             partiDialogo = []
             nome = "Libro (Sull'evoluzione)"
@@ -1833,14 +2079,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"... Occorre innanzitutto sostituire diverse componenti di alcuni organi sensoriali: completa sostituzione del nervo ottico e della retina, ...")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose... sostituzione del midollo spinale... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Quindi è possibile che questi soldati...?")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ah, ecco come fa... quanti complessi si sarà fatto prima di accettare questi interveti su di sé?)")
+                partiDialogo.append(dialogo)
+            else:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose... sostituzione del midollo spinale... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Quindi è possibile che questi soldati...?)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoLibreriaCastello-6":
             partiDialogo = []
             nome = "Libro (Sul conflitto)"
@@ -1872,18 +2124,25 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"... Non si sa quando sia iniziato il conflitto. Il più vecchio reperto che ce ne testimonia l'esistenza risale a qualche migliaio di anni fa. Negli ultimi centosettant'anni (unico periodo di cui ho esperienza diretta) abbiamo perso diversi territori, nonostante gli enormi sviluppi tecnologici che siamo riusciti a compiere...")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Centosettant'anni di esperienza diretta?!)")
-            partiDialogo.append(dialogo)
+            if not (GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]):
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Centosettant'anni di esperienza diretta?!)")
+                partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"... Negli ultimi cinquant'anni, in particolare, gli attacchi si sono intensificati. Dopo una serie di successi della nostra difensa, hanno iniziato ad attaccare su tutti i fronti orientali contemporaneamente e in maniera massiccia. Nel momento in cui pensavamo di avere un vantaggio, ci hanno sorpreso conquistando quasi tutti gli avamposti. I pochi sopravvissuti parlano di armi esplosive tecnologicamente avanzate...")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Ok, quindi c'è una guerra che stiamo perdendo... e chi ha scritto questo libro ha centosettant'anni...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Mmh...<*>")
+                partiDialogo.append(dialogo)
+            else:
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ok, quindi c'è una guerra che stiamo perdendo... e chi ha scritto questo libro ha centosettant'anni...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -2478,6 +2737,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Sono gli strumenti di Rod...)")
                 partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(I miei strumenti...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoTavoloVuotoCastelloB-0":
             partiDialogo = []
             nome = "OggettoTavoloVuotoCastello"
@@ -2514,6 +2783,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Non preoccuparti, non succederà niente...")
                 partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non c'è niente su questa parte del tavolo...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoTavoloAttrezziCastello-0":
             partiDialogo = []
             nome = "OggettoTavoloAttrezziCastello"
@@ -2529,15 +2808,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoAppuntiNeilCastello-0":
             partiDialogo = []
             nome = "Appunti di Neil"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Ci sono un sacco di appunti e grafici...)")
-            partiDialogo.append(dialogo)
+            if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Sono degli scarabocchi di Neil...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ci sono un sacco di appunti e grafici...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoPortaCastelloChiusa-0":
             partiDialogo = []
             nome = "OggettoPortaCastelloChiusa"

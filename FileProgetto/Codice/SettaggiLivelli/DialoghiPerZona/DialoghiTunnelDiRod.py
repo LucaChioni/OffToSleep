@@ -41,7 +41,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Forse se tiro questa leva...)")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -50,6 +50,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Non voglio chiudere di nuovo le sbarre...)")
+                partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Lo lascerò aperto finché non torno...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
