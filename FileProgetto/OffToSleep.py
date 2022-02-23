@@ -2014,7 +2014,8 @@ def gameloop():
                     del vettoreEsche[i + 1]
                     del vettoreEsche[i]
                     del vettoreEsche[i - 1]
-                    dati[38] += 1
+                    if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dati[38] += 1
                 i += 4
             i = 0
             while i < len(vettoreEsche):

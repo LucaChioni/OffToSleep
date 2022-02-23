@@ -1021,6 +1021,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Ecco il passaggio per la scorciatoia. Adesso il cancello è aperto...)")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodDecisoDiParlareConSara"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non ci sono soldati?)")
+                partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 1 and y == GlobalHWVar.gpy * 9:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1060,7 +1069,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello1"]:
-            if y == GlobalHWVar.gpy * 1:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodArrivoAlCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questo è... sangue? Che è successo qui...?)")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1070,7 +1088,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Questo soldato si è messo prorio davanti alla porta e non mi fa passare...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
-            if (x == GlobalHWVar.gpx * 13 or x == GlobalHWVar.gpx * 14) and y == GlobalHWVar.gpy * 15:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodNotatoSangueNelCastello"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Oh, il piano ascensore è aperto...)")
+                partiDialogo.append(dialogo)
+            elif (x == GlobalHWVar.gpx * 13 or x == GlobalHWVar.gpx * 14) and y == GlobalHWVar.gpy * 15:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1973,7 +2000,102 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Un'altra grotta bloccata da delle sbarre...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
-            if x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 8:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Non hanno un cervello, come possono pensare? Forse non ne hanno bisogno... usano gli impoFogli per quello...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Gli impoFogli sono dei pensieri già compiuti... ma compiuti da chi? Nessun'altra specie animale li usa o li produce...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Nessuna specie animale ha qualcosa in comune con gli impo. Nessuna specie conosciuta, quantomeno...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Magari non sono gli unici a vivere nella caverna, chi produce gli impoFogli magari vive con loro...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... \"Vive\"? Possiamo dire per certo che sono vivi? Chi gli materializza i pensieri sicuramente lo è...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Qualcuno abbastanza intelligente per farlo...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Un umano? Che sia opera del Nemico? Vorrebbe dire che stanno costruendo dei tunnel per attraversare la catena montuosa e attaccare da ovest...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Ma sono anni che esiste questa caverna, perché avrebbero dovuto aspettare così tanto?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Forse sto andando fuori strada. Ogni volta che ci penso finisco per perdere un sacco di tempo, devo finire l'armatura e andare là dentro...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Il tempo non è certo dalla mia parte...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... La nuova recluta è riuscita ad avere un impo ancora vivo, ma ha deciso bene di collaborare con Neil. E Neil giungerà presto alle mie stesse scoperte. Tutti i miei progetti e i miei studi diventerano immediatamente obsoleti...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... E cosa risolverebbe entrare in quella maledetta grotta? Perché sto facendo tutto questo?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Smettila! Non è il momento di deprimersi questo...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Devo reclutare qualcuno che possa aiutarmi...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Come se fosse facile trovare qualcuno tanto incosciente che voglia anche solo attraversare il Passo Montano...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... L'ultima volta che qualcuno è venuto qua su...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Aspetta...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodSuImpoNonVivi"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sara!")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodCercandoSaraAlPalazzo1"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sara?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Se n'è già andata?)")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 13 and y == GlobalHWVar.gpy * 8:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -2028,6 +2150,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Non voglio perdere tempo, devo parlare con Sara adesso...)")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodCercandoSaraAlPalazzo2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Forse riesco a intercettarla prima che arrivi da Neil...)")
                 partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod3"]:

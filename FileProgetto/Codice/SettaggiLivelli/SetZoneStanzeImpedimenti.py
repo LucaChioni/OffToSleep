@@ -306,50 +306,113 @@ def settaNomeImgStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello2"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] or GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["internoCastello3"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello4"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["internoCastello5"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello6"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["internoCastello7"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaCastelloServita"] or GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"
         elif GlobalGameVar.dictAvanzamentoStoria["cenaCastelloServita"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
             nomeStanza = "StanzaB"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaC"
+        else:
+            nomeStanza = "StanzaD"
+    if stanza == GlobalGameVar.dictStanze["internoCastello8"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"]:
+            nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaC"
-    if stanza == GlobalGameVar.dictStanze["internoCastello8"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"]:
-            nomeStanza = "StanzaA"
-        else:
-            nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello9"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
             nomeStanza = "StanzaA"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["internoCastello10"]:
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"]:
             nomeStanza = "StanzaB"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["internoCastello11"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["internoCastello12"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello13"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello14"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["internoCastello15"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["internoCastello16"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello17"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["internoCastello18"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
@@ -365,8 +428,10 @@ def settaNomeImgStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["internoCastello20"]:
         if GlobalGameVar.dictAvanzamentoStoria["chiusoPortaInternoCastello20DaSoldato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaInternoCastello20AndandoInInternoCastello19"]:
             nomeStanza = "StanzaB"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"]:
             nomeStanza = "StanzaA"
