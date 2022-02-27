@@ -1220,7 +1220,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 xp = GlobalHWVar.gsx // 32 * 4.2
                 yp = GlobalHWVar.gsy // 18 * 16.05
                 voceMarcata = -2
-            elif GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 7:
+            elif GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
@@ -1292,6 +1292,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 else:
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
+            else:
+                if not GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(True)
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 

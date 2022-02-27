@@ -1412,6 +1412,8 @@ def getEntrateStanze(stanza, avanzamentoStoria):
                 entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["internoCastello19"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 3, 0, -GlobalHWVar.gpy, -1])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 4, +GlobalHWVar.gpx, 0, -1])
+        elif stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["internoCastello19"]])
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 12, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["esternoCastello1"]])

@@ -673,14 +673,19 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoRodNotatoPianoAscensoreAperto"] = i
     dictAvanzamentoStoria["apertoPortaStanza19CastelloVerso21"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoRodNeil1"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoRodNeil2"] = i
+
+    i += 1
+    dictAvanzamentoStoria["fineParteDiRod"] = i
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["fineParteDiRod"] = i
+    dictAvanzamentoStoria["alzatoDalTavoloLaboratorioCastello"] = i
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
-    i += 1
-    dictAvanzamentoStoria["presoMazzoDi2ChiaviCastello"] = i
     i += 1
     dictAvanzamentoStoria["sbloccatoCaverna"] = i
     i += 1

@@ -1065,19 +1065,19 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         break
         if GlobalHWVar.mouseVisibile:
             # controlla se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
-            if GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+            if GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 1:
+            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 3:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 3:
+            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1773,7 +1773,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         pv = 0
                         attaccoDiRallo.append("morte")
                     else:
-                        if attacco == 3 and not numCollanaIndossata == 1:
+                        if attacco == 3 and not numCollanaIndossata == 2:
                             avvele = True
                             attaccoDiRallo.append("avvelena")
                         elif attacco == 5:
@@ -1796,6 +1796,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         enrob = 0
                         if enrobVecchia > 0:
                             attaccoDiRallo.append("morte")
+                        else:
+                            attaccoDiRallo.append("")
                     else:
                         attaccoDiRallo.append("")
 

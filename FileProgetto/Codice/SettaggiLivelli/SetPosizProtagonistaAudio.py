@@ -3403,6 +3403,38 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoPortaInternoCastello20DaSoldato"]:
                     mantieniPosizioneImpo = True
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonochiusuraporteCastello)
+        if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+            nomeCanzoneLuogo = ""
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = False
+                canzoneCambiata = True
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                sottofondoLuogo = "InternoCastello/Macchinario"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    audioAmbiente_Macchinario1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Macchinario1.wav")
+                    audioAmbiente_Macchinario2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Macchinario2.wav")
+                    audioAmbiente_Macchinario3 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Macchinario3.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Macchinario1, audioAmbiente_Macchinario2, audioAmbiente_Macchinario3]
+                    sottofondoAmbientaleCambiato = True
+            else:
+                sottofondoLuogo = "InternoCastello"
+                if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                    GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                    audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                    listaSottofondoAmbientale = [audioAmbiente_Vento1]
+                    sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCastello
+            rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCastello
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"]:
+                    npers = "s"
+                    x = GlobalHWVar.gpx * 19
+                    y = GlobalHWVar.gpy * 2
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
             nomeCanzoneLuogo = "09-Labirinto"

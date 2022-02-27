@@ -601,19 +601,19 @@ def gameloop():
         xMouse, yMouse = pygame.mouse.get_pos()
         if GlobalHWVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / salta turno / personaggio / porta / cofanetto / casella vista
-            if GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+            if GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 1:
+            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
+            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1490,6 +1490,29 @@ def gameloop():
             if nx == 0 and ny == 0:
                 GlobalHWVar.canaleSoundPassiRallo.stop()
 
+        # setto stato personaggi all'inizio del turno
+        for nemico in listaNemici:
+            nemico.statoInizioTurno = []
+            nemico.statoInizioTurno.append(nemico.vita)
+            nemico.statoInizioTurno.append(nemico.avvelenato)
+            nemico.statoInizioTurno.append(nemico.appiccicato)
+        statoRalloInizioTurno = []
+        statoRalloInizioTurno.append(dati[5])
+        statoRalloInizioTurno.append(dati[121])
+        statoRalloInizioTurno.append(dati[123])
+        statoRalloInizioTurno.append(dati[124])
+        statoColcoInizioTurno = []
+        statoColcoInizioTurno.append(dati[10])
+        statoColcoInizioTurno.append(dati[122])
+        statoColcoInizioTurno.append(dati[125])
+        statoColcoInizioTurno.append(dati[126])
+        statoEscheInizioTurno = []
+        i = 0
+        while i < len(vettoreEsche):
+            statoEscheInizioTurno.append("Esca" + str(vettoreEsche[i]))
+            statoEscheInizioTurno.append(vettoreEsche[i + 1])
+            i += 4
+
         # menu start
         if startf and attacco != 1 and dati[5] > 0:
             possibileAprireMenu = SetZoneStanzeImpedimenti.decidiSePoterAprireMenu(dati[0])
@@ -1625,6 +1648,18 @@ def gameloop():
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             startf = False
 
+        # per animazione valori cura
+        # attaccoDiRallo [obiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
+        attaccoDiRallo = []
+        if statoRalloInizioTurno[0] != dati[5]:
+            attaccoDiRallo.append("Rallo")
+            attaccoDiRallo.append(dati[5] - statoRalloInizioTurno[0])
+            attaccoDiRallo.append("")
+        if statoColcoInizioTurno[0] != dati[10]:
+            attaccoDiRallo.append("Colco")
+            attaccoDiRallo.append(dati[10] - statoColcoInizioTurno[0])
+            attaccoDiRallo.append("")
+
         # morte tua e di robo
         inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente, dati[0])
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
@@ -1641,29 +1676,6 @@ def gameloop():
         SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(dati[0])
 
         if not inizio and not cambiatoRisoluzione:
-            # setto stato personaggi all'inizio del turno
-            for nemico in listaNemici:
-                nemico.statoInizioTurno = []
-                nemico.statoInizioTurno.append(nemico.vita)
-                nemico.statoInizioTurno.append(nemico.avvelenato)
-                nemico.statoInizioTurno.append(nemico.appiccicato)
-            statoRalloInizioTurno = []
-            statoRalloInizioTurno.append(dati[5])
-            statoRalloInizioTurno.append(dati[121])
-            statoRalloInizioTurno.append(dati[123])
-            statoRalloInizioTurno.append(dati[124])
-            statoColcoInizioTurno = []
-            statoColcoInizioTurno.append(dati[10])
-            statoColcoInizioTurno.append(dati[122])
-            statoColcoInizioTurno.append(dati[125])
-            statoColcoInizioTurno.append(dati[126])
-            statoEscheInizioTurno = []
-            i = 0
-            while i < len(vettoreEsche):
-                statoEscheInizioTurno.append("Esca" + str(vettoreEsche[i]))
-                statoEscheInizioTurno.append(vettoreEsche[i + 1])
-                i += 4
-
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
@@ -1698,8 +1710,6 @@ def gameloop():
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # gestione attacchi
             attaccoADistanza = False
-            # attaccoDiRallo [obiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
-            attaccoDiRallo = []
             if attacco != 0:
                 sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse)
                 refreshSchermo = True
@@ -1825,6 +1835,17 @@ def gameloop():
                 dati[123] = dati[123] - 1
             if dati[124] > 0 and sposta:
                 dati[124] = dati[124] - 1
+            # effetto collana rigenerante
+            animaCuraCollana = -1
+            if dati[130] == 1 and sposta:
+                if dati[5] + 1 > pvtot:
+                    animaCuraCollana = 0
+                else:
+                    animaCuraCollana = 1
+                statoRalloInizioTurno[0] += animaCuraCollana
+                dati[5] += 1
+                if dati[5] > pvtot:
+                    dati[5] = pvtot
             # apertura/chiusura porte
             if apriChiudiPorta[0]:
                 k = 0
@@ -2042,7 +2063,11 @@ def gameloop():
                     mosseRimasteRob = 2
                 else:
                     mosseRimasteRob = 1
-            # effetto di surriscalda / raffreddamento / auto-ricarica / auto-ricarica+
+            # attaccoDiColco [obiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
+            attaccoDiColco = []
+            tecnicaUsata = False
+            listaNemiciAttaccatiADistanzaRobo = False
+            # decremento di surriscalda, raffreddamento, auto-ricarica, auto-ricarica+ / effetto di raffreddamento, auto-ricarica, auto-ricarica+
             if GlobalGameVar.impoPresente:
                 raffreddamento = False
                 ricarica1 = False
@@ -2059,8 +2084,7 @@ def gameloop():
                 if sposta:
                     # surriscalda
                     if dati[122] > 0:
-                        dati[122] = dati[122] - 1
-                        dati[10] = dati[10] - 1
+                        dati[122] -= 1
                     # efficienza
                     if dati[126] > 0:
                         dati[126] -= 1
@@ -2078,22 +2102,30 @@ def gameloop():
                     if autoRic1 >= 0:
                         autoRic1 -= 1
                     if autoRic1 == 0:
+                        qtaRicarica = GlobalGameVar.dannoTecniche[6]
                         dati[10] += GlobalGameVar.dannoTecniche[6]
                         if dati[10] > entot:
+                            qtaRicarica = GlobalGameVar.dannoTecniche[6] - (dati[10] - entot)
                             dati[10] = entot
+                        attaccoDiColco.append("Colco")
+                        attaccoDiColco.append(qtaRicarica)
+                        attaccoDiColco.append("")
+                        tecnicaUsata = "conclusioneRicarica"
                         dati[122] = 10
                     # autoric+
                     if autoRic2 >= 0:
                         autoRic2 -= 1
                     if autoRic2 == 0:
+                        qtaRicarica = GlobalGameVar.dannoTecniche[16]
                         dati[10] += GlobalGameVar.dannoTecniche[16]
                         if dati[10] > entot:
+                            qtaRicarica = GlobalGameVar.dannoTecniche[16] - (dati[10] - entot)
                             dati[10] = entot
+                        attaccoDiColco.append("Colco")
+                        attaccoDiColco.append(qtaRicarica)
+                        attaccoDiColco.append("")
+                        tecnicaUsata = "conclusioneRicarica+"
                         dati[122] = 10
-            listaNemiciAttaccatiADistanzaRobo = False
-            # attaccoDiColco [obiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
-            attaccoDiColco = []
-            tecnicaUsata = False
             if GlobalGameVar.impoPresente and mosseRimasteRob > 0 and not morterob and not cambiosta and not evitaTurnoDiColco:
                 vrx = rx
                 vry = ry
@@ -2165,10 +2197,6 @@ def gameloop():
             impossibileParare = SetZoneStanzeImpedimenti.decidiSePoterParare(dati[0])
             if len(listaNemici) > 0 and not cambiosta:
                 for nemico in listaNemici:
-                    if nemico.avvelenato and sposta and nemico.vita > 0:
-                        nemico.vita -= 3
-                        if nemico.vita <= 0:
-                            nemico.vita = 1
                     if nemico.vita > 0 and nemico.inCasellaVista:
                         if sposta and nemico.mosseRimaste == 0:
                             nemico.resettaMosseRimaste()
@@ -2264,15 +2292,36 @@ def gameloop():
                         nemico.morto = True
                         nemico.animaMorte = True
 
-            # effetto collana rigenerante e effetto veleno su Rallo -> vengono fatti alla fine del turno per farli combaciare con le animazioni
-            if dati[130] == 1 and sposta:
-                dati[5] += 1
-                if dati[5] > pvtot:
-                    dati[5] = pvtot
+            # effetto veleno su Rallo + veleno su nemici + surriscaldamento su impo -> vengono fatti alla fine del turno per farli combaciare con le animazioni
+            animaEffettoVeleno = -1
             if dati[121] and sposta and dati[5] > 0:
+                if dati[5] - 2 > 0:
+                    animaEffettoVeleno = 2
+                elif dati[5] - 1 > 0:
+                    animaEffettoVeleno = 1
+                else:
+                    animaEffettoVeleno = 0
                 dati[5] -= 2
                 if dati[5] <= 0:
                     dati[5] = 1
+            animaEffettoSurriscaldamento = -1
+            if GlobalGameVar.impoPresente and sposta and dati[122] > 0 and dati[10] > 0:
+                animaEffettoSurriscaldamento = 1
+                dati[10] -= 1
+            animaEffettoVelenoNemico = -1
+            for nemico in listaNemici:
+                if nemico.avvelenato and sposta and nemico.vita > 0 and not cambiosta:
+                    if nemico.vita - 3 > 0:
+                        animaEffettoVelenoNemico = 3
+                    elif nemico.vita - 2 > 0:
+                        animaEffettoVelenoNemico = 2
+                    elif nemico.vita - 1 > 0:
+                        animaEffettoVelenoNemico = 1
+                    else:
+                        animaEffettoVelenoNemico = 0
+                    nemico.vita -= 3
+                    if nemico.vita <= 0:
+                        nemico.vita = 1
 
             # movimento personaggi che sono in una casella vista
             if sposta:
@@ -2303,7 +2352,7 @@ def gameloop():
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
                 caricaTutto = False
             if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and not stanzaCambiata:
-                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia)
+                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia, animaCuraCollana, animaEffettoVeleno, animaEffettoVelenoNemico, animaEffettoSurriscaldamento)
             if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta):
                 refreshSchermo = False
                 apriocchio = False
@@ -2438,6 +2487,9 @@ def gameloop():
                             break
                 if not denaroPreso:
                     i += 3
+
+            # tolgo animazione valore danni dopo il tempo limite
+            FunzioniGraficheGeneriche.aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, entot, vettoreEsche, sposta)
 
             # aggiorno la presenza di Impo
             SetZoneStanzeImpedimenti.settaPresenzaDiColco(dati[0])

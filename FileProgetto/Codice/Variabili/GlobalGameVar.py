@@ -225,6 +225,7 @@ global impoPresente
 global impoPietraPosseduta
 global cambiataAlCastello
 global armaturaIndossata
+global datiAnimazioniDanniInflitti
 def inizializzaVariabiliGlobali():
     global nomiImgDaAggiornareAvanzandoStoriaAttuali
     global imgDaAggiornareAvanzandoStoria
@@ -241,6 +242,7 @@ def inizializzaVariabiliGlobali():
     global impoPietraPosseduta
     global cambiataAlCastello
     global armaturaIndossata
+    global datiAnimazioniDanniInflitti
     nomiImgDaAggiornareAvanzandoStoriaAttuali = {"imgMappaAttuale":False, "imgProtagonistaStartAttuale": False, "imgProtagonistaMenuOggettiAttuale":False, "imgProtagonistaDialogoAttuale":False}
     imgDaAggiornareAvanzandoStoria = {"imgMappa":False, "imgMappaZoom":False, "imgPersonaggioStart":False, "imgPersonaggioMenuOggetti":False, "imgPersonaggioDialoghi":False}
     nomePersonaggioDialoghi = False
@@ -265,6 +267,7 @@ def inizializzaVariabiliGlobali():
     # cambiataAlCastello[0] => vestiti attuali cambiataAlCastello[1] => vestiti vecchi (serve per far ricaricare le img dopo il cambio)
     cambiataAlCastello = [False, False]
     armaturaIndossata = 0
+    datiAnimazioniDanniInflitti = {"dannoRallo":[False, 0, -1], "dannoImpo":[False, 0, -1], "dannoEsche":[False, 0, -1], "dannoNemico":[False, 0, -1], "tempoAnimazione":60}
 inizializzaVariabiliGlobali()
 
 def settaRisoluzioneOttimale():

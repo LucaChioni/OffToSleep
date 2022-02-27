@@ -632,10 +632,10 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.1), GlobalHWVar.gsy // 18 * 17))
     if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         numFrecce = 0
-    messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.25), 40)
+    messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.7), int(GlobalHWVar.gsy // 18 * 17.23), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3.1, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
@@ -654,6 +654,29 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria
     if lungvita > 0:
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][1] != 0 and GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] > 0:
+        colore = GlobalHWVar.bianco
+        valore = 0
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][0] == "danno":
+            colore = GlobalHWVar.rosso
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][0] == "cura":
+            colore = GlobalHWVar.verde
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][0] == "veleno":
+            colore = GlobalHWVar.violaVeleno
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][1]
+        if valore > 9999:
+            valore = 9999
+        elif valore < -9999:
+            valore = -9999
+        if valore > 0:
+            valore = "+" + str(valore)
+        elif valore < 0:
+            valore = str(valore)
+
+        messaggio(valore, colore, GlobalHWVar.gpx * 6.97, GlobalHWVar.gpy * 17.13, 50, centrale=True)
 
 
 def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
@@ -683,6 +706,32 @@ def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.azzurroVitaColco, (GlobalHWVar.gpx, yInizioVita, lungen, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungen, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
 
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1] != 0 and GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] > 0:
+        colore = GlobalHWVar.bianco
+        valore = 0
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] == "danno":
+            colore = GlobalHWVar.rosso
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] == "surriscaldamento":
+            colore = GlobalHWVar.rossoSurriscaldamento
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] == "cura":
+            colore = GlobalHWVar.azzurro
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] == "consumo":
+            colore = GlobalHWVar.grigiochiarino
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1]
+        if valore > 9999:
+            valore = 9999
+        elif valore < -9999:
+            valore = -9999
+        if valore > 0:
+            valore = "+" + str(valore)
+        elif valore < 0:
+            valore = str(valore)
+
+        messaggio(valore, colore, GlobalHWVar.gpx * 4.98, GlobalHWVar.gpy * 0.36, 50, centrale=True)
+
 
 def disegnaVitaEsche(pvEsca):
     lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 5)
@@ -704,6 +753,18 @@ def disegnaVitaEsche(pvEsca):
     if lungvita > 0:
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][1] != 0 and GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] > 0:
+        colore = GlobalHWVar.bianco
+        valore = 0
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][0] == "danno":
+            colore = GlobalHWVar.rosso
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][1]
+        if valore < -9999:
+            valore = -9999
+        valore = str(valore)
+
+        messaggio(valore, colore, GlobalHWVar.gpx * 1.98, GlobalHWVar.gpy * 0.36, 50, centrale=True)
 
 
 def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagineS):
@@ -761,6 +822,84 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVitaSuccessiva, (GlobalHWVar.gpx, yInizioVita, lungvitatot, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] != 0 and GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] > 0:
+        colore = GlobalHWVar.bianco
+        valore = 0
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0] == "danno":
+            colore = GlobalHWVar.rosso
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0] == "cura":
+            colore = GlobalHWVar.verde
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1]
+        elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0] == "veleno":
+            colore = GlobalHWVar.violaVeleno
+            valore = GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1]
+        if valore > 9999:
+            valore = 9999
+        elif valore < -9999:
+            valore = -9999
+        if valore > 0:
+            valore = "+" + str(valore)
+        elif valore < 0:
+            valore = str(valore)
+
+        messaggio(valore, colore, GlobalHWVar.gpx * 3.98, GlobalHWVar.gpy * 0.36, 50, centrale=True)
+
+
+def aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, entot, vettoreEsche, turnoAvanzato):
+    aggiornaVitaRallo = False
+    aggiornaVitaImpo = False
+    aggiornaVitaEsca = False
+    aggiornaVitaNemico = False
+    # cancello i danni dei turni vecchi
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"] = [False, 0, -1]
+        aggiornaVitaRallo = True
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"] = [False, 0, -1]
+        aggiornaVitaImpo = True
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"] = [False, 0, -1]
+        aggiornaVitaEsca = True
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"] = [False, 0, -1]
+        aggiornaVitaNemico = True
+
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] >= 0:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] -= 1
+        aggiornaVitaRallo = True
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] >= 0:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] -= 1
+        aggiornaVitaImpo = True
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] >= 0:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] -= 1
+        aggiornaVitaEsca = True
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] >= 0:
+        GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] -= 1
+        aggiornaVitaNemico = True
+
+    if GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] < 0 and aggiornaVitaRallo:
+        disegnaVitaRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], dati[0])
+        GlobalHWVar.aggiornaSchermo()
+    if (type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente):
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] < 0 and aggiornaVitaImpo:
+            disegnaVitaColco(entot, dati[10], dati[122], dati[125], dati[126])
+            GlobalHWVar.aggiornaSchermo()
+    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] < 0 and aggiornaVitaEsca:
+            idEscaInquadrata = int(nemicoInquadrato[4:])
+            i = 0
+            while i < len(vettoreEsche):
+                if idEscaInquadrata == vettoreEsche[i]:
+                    disegnaVitaEsche(vettoreEsche[i + 1])
+                    GlobalHWVar.aggiornaSchermo()
+                    break
+                i += 4
+    elif nemicoInquadrato and not type(nemicoInquadrato) is str:
+        if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] < 0 and aggiornaVitaNemico:
+            disegnaVitaNemici(nemicoInquadrato.vita, nemicoInquadrato.vitaTotale, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
+            GlobalHWVar.aggiornaSchermo()
 
 
 def mostraSchermataCitazione():
