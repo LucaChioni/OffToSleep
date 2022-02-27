@@ -34,8 +34,222 @@ def gameloop():
     caricaSalvataggio = False
     inizio = True
     gameover = False
-    while True:
+    # inizializzo tutte le variabili
+    if True:
+        casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
 
+        cambiatoRisoluzione = False
+        riavviaAudioMusica = False
+        riavviaAudioAmbiente = False
+        canzone = False
+        listaSottofondoAmbientale = []
+        evitaAvanzamentoTurno = False
+        caseattactotRallo = []
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
+        saltaTurno = False
+        movimentoDaCompiere = False
+        percorsoDaEseguire = []
+        nonMostrarePersonaggio = False
+        avanzaIlTurnoSenzaMuoverti = False
+        evitaTurnoDiColco = False
+        aggiornaImgEquip = True
+        refreshSchermo = True
+        impossibileAprirePorta = False
+        stanzaCambiata = False
+        uscitoDaMenu = 0
+        # rumore porte (dipende dalla stanza)
+        rumoreAperturaPorte = 0
+        rumoreChiusuraPorte = 0
+        animaOggetto = [False, 0, 0]
+        raffreddamento = False
+        ricarica1 = False
+        ricarica2 = False
+        nemicoInquadrato = False
+        spingiColco = False
+        apriChiudiPorta = [False, 0, 0]
+        apriCofanetto = [False, 0, 0]
+        interagisciConPersonaggio = False
+        oggettoRicevuto = False
+        visualizzaMenuMercante = False
+        stanzaVecchia = 0
+        tesoro = -1
+        apriocchio = False
+        sposta = False
+        bottoneDown = False
+        startf = False
+        aumentoliv = 0
+        primopasso = True
+        xesca = 0
+        yesca = 0
+        creaesca = False
+        attacco = 0
+        difesa = 0
+        nx = 0
+        ny = 0
+
+        dati = []
+        tutteporte = []
+        tutticofanetti = []
+        listaNemiciTotali = []
+        vettoreEsche = []
+        vettoreDenaro = []
+        stanzeGiaVisitate = []
+        listaPersonaggiTotali = []
+        listaAvanzamentoDialoghi = []
+        oggettiRimastiAHans = []
+        ultimoObbiettivoColco = []
+        obbiettivoCasualeColco = False
+
+        # controlla se devi cambiare personaggio giocabile
+        personaggioDaUsare = "Sara1"
+        personaggioUsato = personaggioDaUsare
+        pers = casellaVuotaPreset
+        robot = casellaVuotaPreset
+
+        # vettore porte -> porte[stanza, x, y, True/False, ...]
+        porte = []
+        # vettore cofanetti -> cofanetti[stanza, x, y, True/False, ...]
+        cofanetti = []
+
+        x = 0
+        y = 0
+        vx = x
+        vy = y
+        # 1->d , 2->a , 3->w , 4->s
+        npers = 4
+        rx = 0
+        ry = 0
+        vrx = rx
+        vry = ry
+        chiamarob = False
+        caselleAttaccabiliColco = []
+        posizioneColcoAggiornamentoCaseAttac = [rx, ry]
+        raffredda = 0
+        autoRic1 = 0
+        autoRic2 = 0
+        # 1->d , 2->a , 3->s , 4->w
+        nrob = 3
+        mosseRimasteRob = 0
+        morterob = False
+
+        listaPersonaggi = []
+        listaNemici = []
+
+        carim = True
+        cambiosta = True
+        impossibileCliccarePulsanti = True
+
+        # stanza
+        imgSfondoStanza = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+        portaVert = False
+        portaOriz = False
+
+        caseviste = []
+        casevisteDaRallo = []
+        casevisteEntrateIncluse = []
+        caselleNonVisibili = []
+        casellePercorribili = []
+        casellePercorribiliPorteEscluse = []
+        entrateStanza = []
+
+        vettoreImgCaselle = []
+
+        # arma
+        armaw = casellaVuotaPreset
+        armawMov1 = casellaVuotaPreset
+        armawMov2 = casellaVuotaPreset
+        armaa = casellaVuotaPreset
+        armaaMov1 = casellaVuotaPreset
+        armaaMov2 = casellaVuotaPreset
+        armas = casellaVuotaPreset
+        armasMov1 = casellaVuotaPreset
+        armasMov2 = casellaVuotaPreset
+        armad = casellaVuotaPreset
+        armadMov1 = casellaVuotaPreset
+        armadMov2 = casellaVuotaPreset
+        armasAttacco = casellaVuotaPreset
+        armaaAttacco = casellaVuotaPreset
+        armadAttacco = casellaVuotaPreset
+        armawAttacco = casellaVuotaPreset
+        # arco
+        arcow = casellaVuotaPreset
+        arcoa = casellaVuotaPreset
+        arcos = casellaVuotaPreset
+        arcod = casellaVuotaPreset
+        arcosAttacco = casellaVuotaPreset
+        arcoaAttacco = casellaVuotaPreset
+        arcodAttacco = casellaVuotaPreset
+        arcowAttacco = casellaVuotaPreset
+        # faretra
+        faretraw = casellaVuotaPreset
+        faretraa = casellaVuotaPreset
+        faretras = casellaVuotaPreset
+        faretrad = casellaVuotaPreset
+        # armatura
+        armaturaw = casellaVuotaPreset
+        armaturaa = casellaVuotaPreset
+        armaturas = casellaVuotaPreset
+        armaturad = casellaVuotaPreset
+        # scudo
+        scudow = casellaVuotaPreset
+        scudoa = casellaVuotaPreset
+        scudos = casellaVuotaPreset
+        scudod = casellaVuotaPreset
+        scudoDifesa = casellaVuotaPreset
+        # guanti
+        guantiw = casellaVuotaPreset
+        guantiwMov1 = casellaVuotaPreset
+        guantiwMov2 = casellaVuotaPreset
+        guantia = casellaVuotaPreset
+        guantiaMov1 = casellaVuotaPreset
+        guantiaMov2 = casellaVuotaPreset
+        guantis = casellaVuotaPreset
+        guantisMov1 = casellaVuotaPreset
+        guantisMov2 = casellaVuotaPreset
+        guantid = casellaVuotaPreset
+        guantidMov1 = casellaVuotaPreset
+        guantidMov2 = casellaVuotaPreset
+        guantisAttacco = casellaVuotaPreset
+        guantiaAttacco = casellaVuotaPreset
+        guantidAttacco = casellaVuotaPreset
+        guantiwAttacco = casellaVuotaPreset
+        guantiDifesa = casellaVuotaPreset
+        # collana
+        collanaw = casellaVuotaPreset
+        collanaa = casellaVuotaPreset
+        collanas = casellaVuotaPreset
+        collanad = casellaVuotaPreset
+        # armatura robot
+        armrobw = casellaVuotaPreset
+        armroba = casellaVuotaPreset
+        armrobs = casellaVuotaPreset
+        armrobd = casellaVuotaPreset
+
+        arma = casellaVuotaPreset
+        armaMov1 = casellaVuotaPreset
+        armaMov2 = casellaVuotaPreset
+        armaAttacco = casellaVuotaPreset
+        armatura = casellaVuotaPreset
+        scudo = casellaVuotaPreset
+        arco = casellaVuotaPreset
+        faretra = casellaVuotaPreset
+        arcoAttacco = casellaVuotaPreset
+        guanti = casellaVuotaPreset
+        guantiMov1 = casellaVuotaPreset
+        guantiMov2 = casellaVuotaPreset
+        guantiAttacco = casellaVuotaPreset
+        collana = casellaVuotaPreset
+        armrob = casellaVuotaPreset
+
+        statoRalloInizioTurno = [0, 0, 0, 0]
+        pvtot = 0
+        statoColcoInizioTurno = [0, 0, 0, 0]
+        entot = 0
+        statoEscheInizioTurno = []
+
+        caricaTutto = True
+
+    while True:
         memoriaUsata = p.memory_info().rss / 1000000.0
         if memoriaUsata > maxMemoryUsage:
             maxMemoryUsage = memoriaUsata
