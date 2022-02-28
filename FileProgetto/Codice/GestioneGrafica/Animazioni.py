@@ -1374,8 +1374,8 @@ def animaValoreEffettoVeleno(animaEffettoVeleno, dati, difesa):
         FunzioniGraficheGeneriche.disegnaVitaRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], dati[0])
 
 
-def animaValoreEffettoSurriscaldamento(animaEffettoSurriscaldamento, dati):
-    if animaEffettoSurriscaldamento > 0:
+def animaValoreEffettoSurriscaldamento(nemicoInquadrato, animaEffettoSurriscaldamento, dati):
+    if ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and GlobalGameVar.impoPresente)) and animaEffettoSurriscaldamento > 0:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] = "surriscaldamento"
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1] = -animaEffettoSurriscaldamento
@@ -1662,7 +1662,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 azioniPossibili.remove("aumentaLv")
 
     animaValoreEffettoVeleno(animaEffettoVeleno, dati, difesa)
-    animaValoreEffettoSurriscaldamento(animaEffettoSurriscaldamento, dati)
+    animaValoreEffettoSurriscaldamento(nemicoInquadrato, animaEffettoSurriscaldamento, dati)
     animaValoreEffettoVelenoNemici(nemicoInquadrato, animaEffettoVelenoNemico)
 
     if tesoro != -1:

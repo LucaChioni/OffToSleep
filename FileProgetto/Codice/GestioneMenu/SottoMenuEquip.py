@@ -1152,13 +1152,13 @@ def oggetti(dati, colcoInCasellaVista):
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalHWVar.gsx // 32 * 11.9
-                        yp = GlobalHWVar.gsy // 18 * 15.1
+                        yp = GlobalHWVar.gsy // 18 * 15.25
                     elif GlobalHWVar.gsx // 32 * 14.8 <= xMouse <= GlobalHWVar.gsx // 32 * 18.5:
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalHWVar.gsx // 32 * 14.8
-                        yp = GlobalHWVar.gsy // 18 * 15.1
+                        yp = GlobalHWVar.gsy // 18 * 15.25
                     else:
                         if not GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(True)
@@ -1725,14 +1725,15 @@ def oggetti(dati, colcoInCasellaVista):
                     xpv = xp
                     ypv = yp
                     xp = GlobalHWVar.gsx // 32 * 14.8
-                    yp = GlobalHWVar.gsy // 18 * 15.1
+                    yp = GlobalHWVar.gsy // 18 * 15.25
                     voceMarcata = 2
                     usauno = False
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
                 FunzioniGraficheGeneriche.messaggio("Usare?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 13.1, 85, centrale=True)
-                FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 14.9, 70)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 14.8)), (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 15.9)), 2)
-                FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.8, GlobalHWVar.gsy // 18 * 14.9, 70)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 14.5), (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5), 2)
+                FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 15, 70)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 14.8)), (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 16.2)), 2)
+                FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.8, GlobalHWVar.gsy // 18 * 15, 70)
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 19.5), int(GlobalHWVar.gpy * 3.5)), (int(GlobalHWVar.gpx * 19.5), int(GlobalHWVar.gpy * 17)), 2)
 

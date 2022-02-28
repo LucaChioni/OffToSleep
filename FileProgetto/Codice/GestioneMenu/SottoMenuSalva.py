@@ -205,19 +205,19 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     suCambiaOperazione = True
-                elif GlobalHWVar.gsy // 18 * 14 <= yMouse <= GlobalHWVar.gsy // 18 * 16:
+                elif GlobalHWVar.gsy // 18 * 14.1 <= yMouse <= GlobalHWVar.gsy // 18 * 16:
                     if (GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) <= xMouse <= (GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3):
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
                         xp = (GlobalHWVar.gsx // 32 * 3.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3)
-                        yp = GlobalHWVar.gsy // 18 * 14.7
+                        yp = GlobalHWVar.gsy // 18 * 14.8
                     elif (GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) <= xMouse <= (GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3):
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
                         xp = (GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3)
-                        yp = GlobalHWVar.gsy // 18 * 14.7
+                        yp = GlobalHWVar.gsy // 18 * 14.8
                     else:
                         if not GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(True)
@@ -536,7 +536,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     vxp = xp
                     vyp = yp
                     xp = (GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3)
-                    yp = GlobalHWVar.gsy // 18 * 14.7
+                    yp = GlobalHWVar.gsy // 18 * 14.8
                     voceMarcata = 2
                     primaconf = False
                 if cosa == 2:
@@ -551,9 +551,10 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
                 FunzioniGraficheGeneriche.messaggio("Confermi?", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.5) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13, 70)
-                FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.5, 70)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 14.3), ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 15.7), 2)
-                FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 7.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.5, 70)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 14.1) - 1), ((GlobalHWVar.gsx // 32 * 10.25) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 14.1) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 14.4), ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 15.7), 2)
+                FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 7.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70)
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (vxp, vyp))
             elif confermaSalvataggioCancellazione:
                 if confermaSalvataggioCancellazione == 1:

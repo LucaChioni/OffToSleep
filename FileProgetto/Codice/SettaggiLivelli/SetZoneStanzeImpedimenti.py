@@ -124,6 +124,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["labirinto20"]:
         nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -155,8 +157,6 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
     if GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello3"] and xPorta == GlobalHWVar.gpx * 25 and yPorta == GlobalHWVar.gpy * 6:
         procedi = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello5"] and xPorta == GlobalHWVar.gpx * 25 and yPorta == GlobalHWVar.gpy * 4:
-        procedi = False
-    if GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello10"] and xPorta == GlobalHWVar.gpx * 8 and yPorta == GlobalHWVar.gpy * 5:
         procedi = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello16"] and xPorta == GlobalHWVar.gpx * 16 and yPorta == GlobalHWVar.gpy * 5:
         procedi = False

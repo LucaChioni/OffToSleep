@@ -740,6 +740,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoRodArrivoAlCastello"]:
+            # apro tutte le porte nel castello (per far andare Rod dove vuole (senza chiavi))
+            i = 0
+            while i < len(tutteporte):
+                if GlobalGameVar.dictStanze["internoCastello1"] <= tutteporte[i] <= GlobalGameVar.dictStanze["internoCastello7"] or GlobalGameVar.dictStanze["internoCastello9"] <= tutteporte[i] <= GlobalGameVar.dictStanze["internoCastello19"]:
+                    tutteporte[i + 3] = True
+                i += 4
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodNotatoSangueNelCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello2"]:
         i = 0
         while i < 5:
@@ -779,9 +786,60 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             caricaTutto = True
         else:
             avanzaIlTurnoSenzaMuoverti = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
-        percorsoDaEseguire = ["w", "w", "w"]
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil2"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
         avanzamentoStoria += 1
+        vetNemiciSoloConXeY = []
+        for personaggio in listaPersonaggi:
+            vetNemiciSoloConXeY.append(personaggio.x)
+            vetNemiciSoloConXeY.append(personaggio.y)
+        xDestinazione = GlobalHWVar.gpx * 29
+        yDestinazione = GlobalHWVar.gpy * 12
+        percorsoTrovato = GenericFunc.pathFinding(x, y, xDestinazione, yDestinazione, vetNemiciSoloConXeY, casevisteEntrateIncluse)
+        if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y):
+            xVirtuale = x
+            yVirtuale = y
+            i = len(percorsoTrovato) - 2
+            while i >= 0:
+                if percorsoTrovato[i] > xVirtuale:
+                    percorsoDaEseguire.append("d")
+                elif percorsoTrovato[i] < xVirtuale:
+                    percorsoDaEseguire.append("a")
+                elif percorsoTrovato[i + 1] > yVirtuale:
+                    percorsoDaEseguire.append("s")
+                elif percorsoTrovato[i + 1] < yVirtuale:
+                    percorsoDaEseguire.append("w")
+                xVirtuale = percorsoTrovato[i]
+                yVirtuale = percorsoTrovato[i + 1]
+                i -= 2
+            if xVirtuale == GlobalHWVar.gpx * 28:
+                percorsoDaEseguire.append("d")
+                percorsoDaEseguire.append("d")
+            elif yVirtuale == GlobalHWVar.gpy * 11:
+                percorsoDaEseguire.append("s")
+                percorsoDaEseguire.append("d")
+            elif yVirtuale == GlobalHWVar.gpy * 13:
+                percorsoDaEseguire.append("w")
+                percorsoDaEseguire.append("d")
+        else:
+            print ("Percorso Rallo verso uscita internoCastello21 non trovato")
+            percorsoDaEseguire = []
+
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
+            # apro le porte nell'ufficio di Neil e nella stanza8 per accedere al tunnel (evitare di dover prendere chiavi)
+            i = 0
+            while i < len(tutteporte):
+                if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"] or tutteporte[i] == GlobalGameVar.dictStanze["internoCastello8"]:
+                    tutteporte[i + 3] = True
+                i += 4
 
     # creazione personaggi-oggetto cadaveri soldati (solo se non ti bloccano per andare avanti)
     if GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:

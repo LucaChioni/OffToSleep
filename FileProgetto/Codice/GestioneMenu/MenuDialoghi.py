@@ -365,19 +365,19 @@ def menuMercante(dati):
                     mouseInquadraFrecciaGiu = True
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
-                elif GlobalHWVar.gsy // 18 * 6.5 <= yMouse <= GlobalHWVar.gsy // 18 * 7.9:
+                elif GlobalHWVar.gsy // 18 * 6.7 <= yMouse <= GlobalHWVar.gsy // 18 * 8:
                     if GlobalHWVar.gsx // 32 * 0.5 <= xMouse <= GlobalHWVar.gsx // 32 * 5.3:
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalHWVar.gsx // 32 * 1.3
-                        yp = GlobalHWVar.gsy // 18 * 6.9
+                        yp = GlobalHWVar.gsy // 18 * 7.05
                     elif GlobalHWVar.gsx // 32 * 5.3 <= xMouse <= GlobalHWVar.gsx // 32 * 10:
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalHWVar.gsx // 32 * 5.3
-                        yp = GlobalHWVar.gsy // 18 * 6.9
+                        yp = GlobalHWVar.gsy // 18 * 7.05
                     else:
                         if not GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(True)
@@ -1005,7 +1005,7 @@ def menuMercante(dati):
                     xpv = xp
                     ypv = yp
                     xp = GlobalHWVar.gsx // 32 * 5.3
-                    yp = GlobalHWVar.gsy // 18 * 6.9
+                    yp = GlobalHWVar.gsy // 18 * 7.05
                     voceMarcata = 2
                     usauno = False
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
@@ -1026,9 +1026,10 @@ def menuMercante(dati):
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
-                FunzioniGraficheGeneriche.messaggio("Conferma", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.9, 50)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.8)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.5)), 2)
-                FunzioniGraficheGeneriche.messaggio("Annulla", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6.9, 50)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1), int(GlobalHWVar.gpy * 6.7) - 1), (int(GlobalHWVar.gpx * 9.5), int(GlobalHWVar.gpy * 6.7) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio("Conferma", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.9)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.7)), 2)
+                FunzioniGraficheGeneriche.messaggio("Annulla", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 7, 50)
             else:
                 if interlocutore == "Rod":
                     FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)

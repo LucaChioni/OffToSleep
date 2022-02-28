@@ -38,6 +38,7 @@ def gameloop():
     if True:
         casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
 
+        evitaAggiornamentoStatoInizioTurno = True
         cambiatoRisoluzione = False
         riavviaAudioMusica = False
         riavviaAudioAmbiente = False
@@ -364,6 +365,7 @@ def gameloop():
 
         # caricare gli oggetti
         if carim:
+            evitaAggiornamentoStatoInizioTurno = True
             # aggiorno presenza di Impo
             SetZoneStanzeImpedimenti.settaPresenzaDiColco(dati[0])
 
@@ -1567,7 +1569,7 @@ def gameloop():
         SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(dati[0])
 
         # resetta stati/pv al cambio personaggio
-        if dati[0] == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        if dati[0] == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
             dati[5] = pvtot
             dati[121] = False
 
@@ -1705,27 +1707,29 @@ def gameloop():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
 
         # setto stato personaggi all'inizio del turno
-        for nemico in listaNemici:
-            nemico.statoInizioTurno = []
-            nemico.statoInizioTurno.append(nemico.vita)
-            nemico.statoInizioTurno.append(nemico.avvelenato)
-            nemico.statoInizioTurno.append(nemico.appiccicato)
-        statoRalloInizioTurno = []
-        statoRalloInizioTurno.append(dati[5])
-        statoRalloInizioTurno.append(dati[121])
-        statoRalloInizioTurno.append(dati[123])
-        statoRalloInizioTurno.append(dati[124])
-        statoColcoInizioTurno = []
-        statoColcoInizioTurno.append(dati[10])
-        statoColcoInizioTurno.append(dati[122])
-        statoColcoInizioTurno.append(dati[125])
-        statoColcoInizioTurno.append(dati[126])
-        statoEscheInizioTurno = []
-        i = 0
-        while i < len(vettoreEsche):
-            statoEscheInizioTurno.append("Esca" + str(vettoreEsche[i]))
-            statoEscheInizioTurno.append(vettoreEsche[i + 1])
-            i += 4
+        if not evitaAggiornamentoStatoInizioTurno:
+            for nemico in listaNemici:
+                nemico.statoInizioTurno = []
+                nemico.statoInizioTurno.append(nemico.vita)
+                nemico.statoInizioTurno.append(nemico.avvelenato)
+                nemico.statoInizioTurno.append(nemico.appiccicato)
+            statoRalloInizioTurno = []
+            statoRalloInizioTurno.append(dati[5])
+            statoRalloInizioTurno.append(dati[121])
+            statoRalloInizioTurno.append(dati[123])
+            statoRalloInizioTurno.append(dati[124])
+            statoColcoInizioTurno = []
+            statoColcoInizioTurno.append(dati[10])
+            statoColcoInizioTurno.append(dati[122])
+            statoColcoInizioTurno.append(dati[125])
+            statoColcoInizioTurno.append(dati[126])
+            statoEscheInizioTurno = []
+            i = 0
+            while i < len(vettoreEsche):
+                statoEscheInizioTurno.append("Esca" + str(vettoreEsche[i]))
+                statoEscheInizioTurno.append(vettoreEsche[i + 1])
+                i += 4
+        evitaAggiornamentoStatoInizioTurno = False
 
         # menu start
         if startf and attacco != 1 and dati[5] > 0:
