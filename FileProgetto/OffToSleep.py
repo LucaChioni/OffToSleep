@@ -1857,6 +1857,7 @@ def gameloop():
                     robot = GlobalImgVar.robos
                     armrob = armrobs
 
+                impossibileCliccarePulsanti = True
                 carim = True
             else:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1889,7 +1890,7 @@ def gameloop():
         SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(dati[0])
         SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(dati[0])
 
-        if not inizio and not cambiatoRisoluzione:
+        if not inizio and not cambiatoRisoluzione and not carim:
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)

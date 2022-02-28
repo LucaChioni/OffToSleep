@@ -819,8 +819,6 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz):
     i = 0
     while i < len(vettoreDenaro):
         if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
-            if fineanimaz == 1:
-                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaMonete)
             if GlobalHWVar.canaleSoundPassiRallo.get_busy():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
             denaroRaccolto = True
@@ -1831,6 +1829,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 denaroTrovato = vettoreDenaro[i]
                 break
             i += 3
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaMonete)
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfocontcof, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 0))
         FunzioniGraficheGeneriche.messaggio("Monete trovate: " + str(denaroTrovato), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         GlobalHWVar.aggiornaSchermo()
