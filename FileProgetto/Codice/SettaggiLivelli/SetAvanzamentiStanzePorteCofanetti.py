@@ -677,6 +677,10 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["dialogoRodNeil1"] = i
     i += 1
     dictAvanzamentoStoria["dialogoRodNeil2"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoRodNeil3"] = i
+    i += 1
+    dictAvanzamentoStoria["uscitoDaInternoCastello21ConRod"] = i
 
     i += 1
     dictAvanzamentoStoria["fineParteDiRod"] = i

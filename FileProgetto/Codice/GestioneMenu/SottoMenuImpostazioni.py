@@ -592,7 +592,7 @@ def settaController(arrivatoDaMenuPrincipale):
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.5), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 15.9), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.5), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 15.8), 2)
 
             if countdownAggiornamentoModulo <= 0 and arrivatoDaMenuPrincipale:
                 FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
@@ -1212,7 +1212,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 4.5), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 13.7), 2)
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.4), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 15.8), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.4), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 15.7), 2)
 
             if linguaTemp == "italiano":
                 FunzioniGraficheGeneriche.messaggio("Italiano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 5, 60)

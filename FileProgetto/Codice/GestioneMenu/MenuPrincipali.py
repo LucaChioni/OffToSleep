@@ -20,7 +20,7 @@ import Codice.GestioneMenu.SottoMenuMapDiario as SottoMenuMapDiario
 def chiediconferma(conferma):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 17.5
-    yp = GlobalHWVar.gsy // 18 * 10.3
+    yp = GlobalHWVar.gsy // 18 * 10.2
     schermo_temp = GlobalHWVar.schermo.copy()
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
     dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
@@ -60,14 +60,14 @@ def chiediconferma(conferma):
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     voceMarcata = 1
-                    xp = GlobalHWVar.gsx // 32 * 9.5
-                    yp = GlobalHWVar.gsy // 18 * 10.3
+                    xp = GlobalHWVar.gsx // 32 * 9.9
+                    yp = GlobalHWVar.gsy // 18 * 10.2
                 elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 22.5:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     voceMarcata = 2
                     xp = GlobalHWVar.gsx // 32 * 17.5
-                    yp = GlobalHWVar.gsy // 18 * 10.3
+                    yp = GlobalHWVar.gsy // 18 * 10.2
                 else:
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
@@ -121,7 +121,7 @@ def chiediconferma(conferma):
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    xp = GlobalHWVar.gsx // 32 * 9.5
+                    xp = GlobalHWVar.gsx // 32 * 9.9
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
@@ -141,7 +141,7 @@ def chiediconferma(conferma):
                 if conferma == 1:
                     FunzioniGraficheGeneriche.messaggio(u"Tornare al menu principale?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.5, 120, centrale=True)
                 elif conferma == 2:
-                    FunzioniGraficheGeneriche.messaggio("Uscire dal gioco?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.5, 120, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio("Uscire dal gioco?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.1, GlobalHWVar.gsy // 18 * 6.5, 120, centrale=True)
                 elif conferma == 3:
                     FunzioniGraficheGeneriche.messaggio("Iniziare una nuova partita?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.5, 120, centrale=True)
             else:
@@ -156,7 +156,7 @@ def chiediconferma(conferma):
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.5, GlobalHWVar.gsy // 18 * 8.8), (GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 8.8), 1)
-            FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9.5, 120)
+            FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.4, GlobalHWVar.gsy // 18 * 9.5, 120)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 16), int(GlobalHWVar.gpy * 9.3)), (int(GlobalHWVar.gpx * 16), int(GlobalHWVar.gpy * 11.6)), 1)
             FunzioniGraficheGeneriche.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 9.5, 120)
             primoFrame = False

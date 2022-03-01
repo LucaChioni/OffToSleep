@@ -2877,11 +2877,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Che vuoi?")
+                dialogo.append(u"Che vuoi?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Che stai facendo...?")
+                dialogo.append(u"... Che sta succedendo qui?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2907,8 +2907,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
                 dialogo = []
-                dialogo.append("tu")
+                dialogo.append("personaggio")
                 dialogo.append(u"Ha ucciso metà dai miei uomini. Poi si è gettata nel lago mentre cercava di scappare.")
                 partiDialogo.append(dialogo)
                 dialogo = []

@@ -422,7 +422,7 @@ def setImgMenuStartProtagonista(avanzamentoStoria):
         else:
             imgDaUsare = "Sara3GrafMenu"
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-        imgDaUsare = "MercanteGrafMenu"
+        imgDaUsare = "MercanteGrafMenuStart"
     else:
         imgDaUsare = "Sara3GrafMenu"
 

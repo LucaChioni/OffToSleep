@@ -787,13 +787,33 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil2"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello21"] and personaggio.tipo == "Neil":
+                if personaggio.direzione == "s":
+                    personaggioArrivato = True
+                else:
+                    personaggio.percorso = ["sGira", "mantieniPosizione"]
+                break
+        if personaggioArrivato:
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil3"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
         avanzamentoStoria += 1
         vetNemiciSoloConXeY = []
         for personaggio in listaPersonaggi:
             vetNemiciSoloConXeY.append(personaggio.x)
             vetNemiciSoloConXeY.append(personaggio.y)
-        xDestinazione = GlobalHWVar.gpx * 29
-        yDestinazione = GlobalHWVar.gpy * 12
+        xDestinazione = GlobalHWVar.gpx * 19
+        yDestinazione = GlobalHWVar.gpy * 2
         percorsoTrovato = GenericFunc.pathFinding(x, y, xDestinazione, yDestinazione, vetNemiciSoloConXeY, casevisteEntrateIncluse)
         if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y):
             xVirtuale = x
@@ -811,15 +831,15 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 xVirtuale = percorsoTrovato[i]
                 yVirtuale = percorsoTrovato[i + 1]
                 i -= 2
-            if xVirtuale == GlobalHWVar.gpx * 28:
+            if xVirtuale == GlobalHWVar.gpx * 18:
                 percorsoDaEseguire.append("d")
-                percorsoDaEseguire.append("d")
-            elif yVirtuale == GlobalHWVar.gpy * 11:
-                percorsoDaEseguire.append("s")
-                percorsoDaEseguire.append("d")
-            elif yVirtuale == GlobalHWVar.gpy * 13:
                 percorsoDaEseguire.append("w")
-                percorsoDaEseguire.append("d")
+            elif xVirtuale == GlobalHWVar.gpx * 20:
+                percorsoDaEseguire.append("a")
+                percorsoDaEseguire.append("w")
+            elif yVirtuale == GlobalHWVar.gpy * 3:
+                percorsoDaEseguire.append("w")
+                percorsoDaEseguire.append("w")
         else:
             print ("Percorso Rallo verso uscita internoCastello21 non trovato")
             percorsoDaEseguire = []
