@@ -491,9 +491,9 @@ def menu(caricaSalvataggio, gameover):
                     if voceMarcata == 4:
                         yp = GlobalHWVar.gsy // 18 * 12.5
                     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                    FunzioniGraficheGeneriche.messaggio("Off", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 1.5, 200)
-                    FunzioniGraficheGeneriche.messaggio("To", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 4.5, 200)
-                    FunzioniGraficheGeneriche.messaggio("Sleep", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 7.5, 200)
+                    FunzioniGraficheGeneriche.messaggio("Off", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 1.5, 200)
+                    FunzioniGraficheGeneriche.messaggio("To", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 4.5, 200)
+                    FunzioniGraficheGeneriche.messaggio("Sleep", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 7.5, 200)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalGameVar.schemataDiCaricamento, (0, 0))
                     FunzioniGraficheGeneriche.messaggio("Inizia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 2, 90)
                     FunzioniGraficheGeneriche.messaggio("Continua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 4.5, 90)

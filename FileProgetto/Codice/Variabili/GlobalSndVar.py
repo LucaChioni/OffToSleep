@@ -87,6 +87,7 @@ global suonochiusuraportePalazzoDiRod
 global rumoreLevaTunnelDiRod
 global rumoreTuffoLago
 global rumoreSbloccoPorta
+global rumoreRimozioneBende
 
 
 numSndTotali = 82
@@ -186,6 +187,7 @@ def loadSounds(numSndCaricato):
     global rumoreLevaTunnelDiRod
     global rumoreTuffoLago
     global rumoreSbloccoPorta
+    global rumoreRimozioneBende
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -273,6 +275,7 @@ def loadSounds(numSndCaricato):
     rumoreLevaTunnelDiRod = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LevaSbarreGrotta.wav")
     rumoreTuffoLago = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/TuffoLago.wav")
     rumoreSbloccoPorta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/SbloccoPorta.wav")
+    rumoreRimozioneBende = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/RimozioneBende.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

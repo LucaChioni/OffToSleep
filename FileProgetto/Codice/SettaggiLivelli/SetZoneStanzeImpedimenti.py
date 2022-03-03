@@ -435,7 +435,7 @@ def settaNomeImgStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
             nomeStanza = "StanzaA"
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoDalTavoloLaboratorioCastello"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzataDalTavoloLaboratorioCastello"]:
             nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaC"

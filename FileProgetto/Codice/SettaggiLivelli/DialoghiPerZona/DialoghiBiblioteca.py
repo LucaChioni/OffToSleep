@@ -658,11 +658,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa vent'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche mese prima. In realtà questa fu una delle poche specie a non soffrire per niente di quei disastri...")
+            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa vent'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che è stato ignorato da molti per via dei disastri avvenuti nella selva e nel lago qualche giorno dopo...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per questo diversi studiosi non accettarono quelle motivazioni e iniziarono delle ricerche autonome per saperne di più. Io ero tra loro. Sono partito alla ricerca di spiegazioni verso ovest e sono riuscito a trovare questo piccolo impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
+            dialogo.append(u"Per questo solo pochi studiosi si interessarono alla questione. Ma io ero tra quelli. Sono partito alla ricerca di una qualche spiegazione verso ovest e sono riuscito a trovare questo piccolo impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

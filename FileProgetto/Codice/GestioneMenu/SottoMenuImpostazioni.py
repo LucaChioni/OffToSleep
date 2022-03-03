@@ -904,6 +904,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                                 SetImgOggettiMappaPersonaggi.setImgMenuOggettiProtagonista(avanzamentoStoria)
                                 SetImgOggettiMappaPersonaggi.setImgDialogoProtagonista(avanzamentoStoria)
                                 cambiatoRisoluzione = True
+                            GlobalGameVar.schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
                     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")

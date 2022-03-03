@@ -3435,6 +3435,23 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "s"
                     x = GlobalHWVar.gpx * 19
                     y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 26
+                    y = GlobalHWVar.gpy * 10
+                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDalTavoloLaboratorioCastello"]:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                        i = 0
+                        while i < 10:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreRimozioneBende)
+                        i = 0
+                        while i < 20:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
         if stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
             nomeCanzoneLuogo = "09-Labirinto"

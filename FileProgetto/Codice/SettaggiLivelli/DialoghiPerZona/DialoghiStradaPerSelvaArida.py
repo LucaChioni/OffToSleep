@@ -86,7 +86,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Conosci René? Il bibliotecario...")
+                dialogo.append(u"Conosci René? Il bibliotecario...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -102,7 +102,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Devo consegnarlo a un certo Neil...")
+                dialogo.append(u"... Devo consegnarlo a un certo Neil.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -110,7 +110,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Senti... se l'avessi rubato, che senso avrebbe dirti da chi l'ho preso?")
+                dialogo.append(u"Senti, se l'avessi rubato, che senso avrebbe dirti da chi l'ho preso?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -122,7 +122,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Ok, ok. Forse hai ragione... Va beh, quindi non ne sai nulla di queste creature?")
+                dialogo.append(u"Ok, ok. Forse hai ragione... Va beh, quindi non ne sai nulla di queste creature?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -162,7 +162,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"E chi lo sa... nessuno sembra averne tratto beneficio. Forse si è trattato di un incidente...")
+                dialogo.append(u"E chi lo sa... nessuno sembra averne tratto beneficio. Forse si è trattato di un incidente.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -174,7 +174,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Dici? Sarebbe una spiegazione valida...")
+                dialogo.append(u"Dici? Sarebbe una spiegazione valida.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
