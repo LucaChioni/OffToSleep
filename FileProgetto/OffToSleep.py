@@ -637,10 +637,16 @@ def gameloop():
                 faretras = GlobalImgVar.vetImgFaretreInGame[dati[133]][2]
                 faretrad = GlobalImgVar.vetImgFaretreInGame[dati[133]][3]
                 # armatura
-                armaturaw = GlobalImgVar.vetImgArmatureInGame[dati[8]][0]
-                armaturaa = GlobalImgVar.vetImgArmatureInGame[dati[8]][1]
-                armaturas = GlobalImgVar.vetImgArmatureInGame[dati[8]][2]
-                armaturad = GlobalImgVar.vetImgArmatureInGame[dati[8]][3]
+                if dati[0] > GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"] and dati[8] == 0:
+                    armaturaw = casellaVuotaPreset
+                    armaturaa = casellaVuotaPreset
+                    armaturas = casellaVuotaPreset
+                    armaturad = casellaVuotaPreset
+                else:
+                    armaturaw = GlobalImgVar.vetImgArmatureInGame[dati[8]][0]
+                    armaturaa = GlobalImgVar.vetImgArmatureInGame[dati[8]][1]
+                    armaturas = GlobalImgVar.vetImgArmatureInGame[dati[8]][2]
+                    armaturad = GlobalImgVar.vetImgArmatureInGame[dati[8]][3]
                 # scudo
                 scudow = GlobalImgVar.vetImgScudiInGame[dati[7]][0]
                 scudoa = GlobalImgVar.vetImgScudiInGame[dati[7]][1]

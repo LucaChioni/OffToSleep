@@ -3438,7 +3438,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"]:
                     npers = "a"
                     x = GlobalHWVar.gpx * 26
-                    y = GlobalHWVar.gpy * 10
+                    y = GlobalHWVar.gpy * 9
+                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
+                        i = 0
+                        while i < 30:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
                     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDalTavoloLaboratorioCastello"]:
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
                         i = 0
@@ -3448,7 +3454,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                             i += 1
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreRimozioneBende)
                         i = 0
-                        while i < 20:
+                        while i < 60:
                             pygame.time.wait(100)
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             i += 1

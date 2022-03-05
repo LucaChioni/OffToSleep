@@ -912,6 +912,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         else:
             avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil6"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+        GlobalHWVar.canaleSoundPassiRallo.stop()
         i = 0
         while i < 5:
             pygame.time.wait(100)
@@ -950,7 +951,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         nonMostrarePersonaggio = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
         i = 0
-        while i < 20:
+        while i < 50:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1

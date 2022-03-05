@@ -2965,7 +2965,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ah, non c'entra? Li hai distrutti tutti per ricavarne del liquido energetico con cui hai distrutto mezza regione. E io dovrei affidarti l'ultimo esemplare?")
+                dialogo.append(u"Ah, non c'entra? Li hai distrutti tutti per ricavarne del liquido energetico con cui hai inquinato mezza regione. E io dovrei affidarti l'ultimo esemplare?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2991,7 +2991,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma stai zitto, vecchio trombone. Parli tu che ti sei rinchiuso in questo castello per decenni passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare!")
+                dialogo.append(u"Ma stai zitto, vecchio trombone. Parli tu che ti sei rinchiuso in questo castello per decenni, passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3013,15 +3013,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Sono stato nel vulcano, Neil. Ho studiato gli impo per un po'. Credo che ci sia qualcuno là dentro, qualcuno che li fabbrica. Potrebbe aiutarci nel conflitto.")
+                dialogo.append(u"... Sono stato nel vulcano, Neil. Ho studiato gli impo per un po'. Credo che ci sia qualcuno là dentro, qualcuno che li fabbrica. Potrebbe essere utile nel conflitto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non serve che ti metti a fare l'investigatore di questioni molto più grandi di te, Rod. Quel fabbro agisce in autonomia. È già intervenuto in passato e interverrà nuovamente a breve anche senza le mediazioni di un ragazzino isterico e impulsivo.")
+                dialogo.append(u"Non serve che ti metti a fare l'investigatore di questioni molto più grandi di te, Rod. Quel fabbro agisce in autonomia. È già intervenuto in passato e interverrà nuovamente a breve anche senza le mediazioni di un isterico ragazzino impulsivo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Bene! E sei sicuro che vorrà aiutarci...")
+                dialogo.append(u"Bene! E tu sai per certo che vorrà aiutarci?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3043,11 +3043,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E Sara... diventerà come loro?")
+                dialogo.append(u"... E Sara? Diventerà come voi?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Per lei non ci sono molte alternative viste le condizioni. Ma se può esserti di conforto, vivrà molto più a lungo degli altri. Dopotutto, ho degli accordi da rispettare...")
+                dialogo.append(u"Per lei non ci sono molte alternative viste le condizioni. Ma se può esserti di conforto, le saranno riservate condizioni privilegiate. Dopotutto, ho degli accordi da rispettare...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

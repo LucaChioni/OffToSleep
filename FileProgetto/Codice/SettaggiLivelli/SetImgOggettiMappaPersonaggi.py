@@ -390,7 +390,10 @@ def setImgDialogoProtagonista(avanzamentoStoria):
         imgDaUsare = "RodDialogo"
     else:
         GlobalGameVar.nomePersonaggioDialoghi = "Sara"
-        imgDaUsare = "Sara3Dialogo"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
+            imgDaUsare = "Sara4BendataDialogo"
+        else:
+            imgDaUsare = "Sara4Dialogo"
 
     if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaDialogoAttuale"]:
         GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaDialogoAttuale"] = imgDaUsare
@@ -424,7 +427,7 @@ def setImgMenuStartProtagonista(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         imgDaUsare = "MercanteGrafMenuStart"
     else:
-        imgDaUsare = "Sara3GrafMenu"
+        imgDaUsare = "Sara4GrafMenu"
 
     if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaStartAttuale"]:
         GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaStartAttuale"] = imgDaUsare
@@ -446,7 +449,7 @@ def setImgMenuOggettiProtagonista(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         imgDaUsare = "RodMenu"
     else:
-        imgDaUsare = "Sara3Menu"
+        imgDaUsare = "Sara4Menu"
 
     if imgDaUsare != GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaMenuOggettiAttuale"]:
         GlobalGameVar.nomiImgDaAggiornareAvanzandoStoriaAttuali["imgProtagonistaMenuOggettiAttuale"] = imgDaUsare
@@ -474,7 +477,7 @@ def setImgMenuSalvaProtagonista(avanzamentoStoria, abitiCastello):
         persalva = GlobalImgVar.persoRod
         persSalvaBraccia = GlobalImgVar.persobRod
     else:
-        persalva = GlobalImgVar.persoSara3
+        persalva = GlobalImgVar.persoSara4
         persSalvaBraccia = GlobalImgVar.persobSara
 
     return persalva, persSalvaBraccia
@@ -495,7 +498,7 @@ def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         personaggioDaUsare = "RodGiocabile"
     else:
-        personaggioDaUsare = "Sara3"
+        personaggioDaUsare = "Sara4"
     if personaggioDaUsare != personaggioUsato:
         GlobalImgVar.persw = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         GlobalImgVar.perswb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + personaggioDaUsare + '/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

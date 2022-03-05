@@ -217,6 +217,7 @@ global imgDanneggiamentoCausaColco
 global persoSara1
 global persoSara2
 global persoSara3
+global persoSara4
 global persobSara
 global persoFraMaggiore
 global persobFraMaggiore
@@ -481,6 +482,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persoSara1
     global persoSara2
     global persoSara3
+    global persoSara4
     global persobSara
     global persoFraMaggiore
     global persobFraMaggiore
@@ -575,6 +577,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara4 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
@@ -594,6 +597,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     armrobmo = funzionePerCaricareImmagini('Risorse/Immagini/EquipRobo/Batteria00.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     roboSurrisc = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/RobotSurriscaldato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
+    casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     # immagini equipaggiamenti
     vetImgSpadeInGame = []
     vetImgArchiInGame = []
@@ -606,22 +610,22 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # arma
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -643,14 +647,14 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # arco
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -671,11 +675,11 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # scudo
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -686,23 +690,23 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # guanti
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -725,10 +729,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # collana
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -742,10 +746,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         # faretra
         vetAnimaTemp = []
         if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
+            vetAnimaTemp.append(casellaVuotaPreset)
         else:
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
             vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
@@ -772,7 +776,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     # img menu mercante
     mercanteMenu = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Mercante/MercanteDialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     pappagalloMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/PappagalloGrafMenuMercante.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
-    saraMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara2Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    saraMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara4Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     scorriSuGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccato = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     scorriSuGiuBloccatoGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

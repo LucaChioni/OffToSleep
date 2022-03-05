@@ -497,6 +497,8 @@ def decidiSePoterAprireMenu(avanzamentoStoria):
         possibileAprireMenu = False
     elif GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
         possibileAprireMenu = False
+    elif GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        possibileAprireMenu = False
 
     return possibileAprireMenu
 

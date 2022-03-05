@@ -85,18 +85,18 @@ def settaController(arrivatoDaMenuPrincipale):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 14.2 <= yMouse <= GlobalHWVar.gsy // 18 * 16.2 and not (configurando or testando):
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 14.4 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5 and not (configurando or testando):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 voceMarcata = 6
                 xp = GlobalHWVar.gsx // 32 * 4.4
-                yp = GlobalHWVar.gsy // 18 * 14.9
-            elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 13 and GlobalHWVar.gsy // 18 * 14.2 <= yMouse <= GlobalHWVar.gsy // 18 * 16.2 and not (configurando or testando):
+                yp = GlobalHWVar.gsy // 18 * 15.2
+            elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 14.4 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5 and not (configurando or testando):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 voceMarcata = 7
                 xp = GlobalHWVar.gsx // 32 * 8.5
-                yp = GlobalHWVar.gsy // 18 * 14.9
+                yp = GlobalHWVar.gsy // 18 * 15.2
             elif GlobalHWVar.gsx // 32 * 1.8 <= xMouse <= GlobalHWVar.gsx // 32 * 2.7 and GlobalHWVar.gsy // 18 * 7.5 <= yMouse <= GlobalHWVar.gsy // 18 * 8.7 and not (configurando or testando):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
@@ -372,7 +372,7 @@ def settaController(arrivatoDaMenuPrincipale):
                     if voceMarcata == 1:
                         voceMarcata += 5
                         xp = GlobalHWVar.gsx // 32 * 4.4
-                        yp = GlobalHWVar.gsy // 18 * 14.9
+                        yp = GlobalHWVar.gsy // 18 * 15.2
                     elif voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5:
                         voceMarcata -= 1
                         yp = yp - GlobalHWVar.gsy // 18 * 1.5
@@ -440,7 +440,7 @@ def settaController(arrivatoDaMenuPrincipale):
                     elif voceMarcata == 5:
                         voceMarcata += 1
                         xp = GlobalHWVar.gsx // 32 * 4.4
-                        yp = GlobalHWVar.gsy // 18 * 14.9
+                        yp = GlobalHWVar.gsy // 18 * 15.2
                     elif voceMarcata == 6:
                         voceMarcata -= 5
                         xp = GlobalHWVar.gsx // 32 * 1
@@ -567,14 +567,14 @@ def settaController(arrivatoDaMenuPrincipale):
                 FunzioniGraficheGeneriche.messaggio("Cancella configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
                 FunzioniGraficheGeneriche.messaggio("Testa configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
 
-                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 14.7, 70)
-                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 14.7, 70)
+                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 1.3))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 7.5, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 1.3))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 14.9, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14.9, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 if mostraErrore == "nonInMenuPrincipale":
@@ -592,7 +592,8 @@ def settaController(arrivatoDaMenuPrincipale):
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.5), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 15.8), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 14.4) - 1), (GlobalHWVar.gpx * 15.5, (GlobalHWVar.gpy * 14.4) - 1), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if countdownAggiornamentoModulo <= 0 and arrivatoDaMenuPrincipale:
                 FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
@@ -704,7 +705,7 @@ def settaController(arrivatoDaMenuPrincipale):
 def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria, cambiatoRisoluzione):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 1
-    yp = GlobalHWVar.gsy // 18 * 5.1
+    yp = GlobalHWVar.gsy // 18 * 4.8
     risposta = False
     voceMarcata = 1
     aggiornaSchermo = False
@@ -715,6 +716,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     modalitaSchermoTemp = GlobalHWVar.modalitaSchermo
+    vSyncTemp = GlobalHWVar.vSyncEnabled
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -739,59 +741,67 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif GlobalHWVar.gsx // 32 * 10 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 14.1 <= yMouse <= GlobalHWVar.gsy // 18 * 16.1:
-                if GlobalHWVar.mouseBloccato:
-                    GlobalHWVar.configuraCursore(False)
-                voceMarcata = 7
-                xp = GlobalHWVar.gsx // 32 * 11.9
-                yp = GlobalHWVar.gsy // 18 * 14.8
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 22 and GlobalHWVar.gsy // 18 * 14.1 <= yMouse <= GlobalHWVar.gsy // 18 * 16.1:
+            elif GlobalHWVar.gsx // 32 * 10 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 14.45 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 voceMarcata = 8
+                xp = GlobalHWVar.gsx // 32 * 11.9
+                yp = GlobalHWVar.gsy // 18 * 15.2
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 22 and GlobalHWVar.gsy // 18 * 14.45 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                voceMarcata = 9
                 xp = GlobalHWVar.gsx // 32 * 16
-                yp = GlobalHWVar.gsy // 18 * 14.8
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 6:
+                yp = GlobalHWVar.gsy // 18 * 15.2
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 4.5 <= yMouse <= GlobalHWVar.gsy // 18 * 5.7:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 19.7 <= xMouse <= GlobalHWVar.gsx // 32 * 20.6 and GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 6:
+            elif GlobalHWVar.gsx // 32 * 19.7 <= xMouse <= GlobalHWVar.gsx // 32 * 20.6 and GlobalHWVar.gsy // 18 * 4.5 <= yMouse <= GlobalHWVar.gsy // 18 * 5.7:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 6.3 <= yMouse <= GlobalHWVar.gsy // 18 * 7.5:
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 5.9 <= yMouse <= GlobalHWVar.gsy // 18 * 7.1:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 18 <= xMouse <= GlobalHWVar.gsx // 32 * 18.9 and GlobalHWVar.gsy // 18 * 6.3 <= yMouse <= GlobalHWVar.gsy // 18 * 7.5:
+            elif GlobalHWVar.gsx // 32 * 18 <= xMouse <= GlobalHWVar.gsx // 32 * 18.9 and GlobalHWVar.gsy // 18 * 5.9 <= yMouse <= GlobalHWVar.gsy // 18 * 7.1:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 7.8 <= yMouse <= GlobalHWVar.gsy // 18 * 9:
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 7.3 <= yMouse <= GlobalHWVar.gsy // 18 * 8.5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 18 <= xMouse <= GlobalHWVar.gsx // 32 * 18.9 and GlobalHWVar.gsy // 18 * 7.8 <= yMouse <= GlobalHWVar.gsy // 18 * 9:
+            elif GlobalHWVar.gsx // 32 * 18 <= xMouse <= GlobalHWVar.gsx // 32 * 18.9 and GlobalHWVar.gsy // 18 * 7.3 <= yMouse <= GlobalHWVar.gsy // 18 * 8.5:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 21.2 and GlobalHWVar.gsy // 18 * 9.3 <= yMouse <= GlobalHWVar.gsy // 18 * 10.5:
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 21.2 and GlobalHWVar.gsy // 18 * 8.7 <= yMouse <= GlobalHWVar.gsy // 18 * 9.9:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuImpoController = True
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 10.1 <= yMouse <= GlobalHWVar.gsy // 18 * 11.3:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 21 <= xMouse <= GlobalHWVar.gsx // 32 * 21.9 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
+            elif GlobalHWVar.gsx // 32 * 21 <= xMouse <= GlobalHWVar.gsx // 32 * 21.9 and GlobalHWVar.gsy // 18 * 10.1 <= yMouse <= GlobalHWVar.gsy // 18 * 11.3:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
-            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 12.3 <= yMouse <= GlobalHWVar.gsy // 18 * 13.5:
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 11.5 <= yMouse <= GlobalHWVar.gsy // 18 * 12.7:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 23.7 <= xMouse <= GlobalHWVar.gsx // 32 * 24.6 and GlobalHWVar.gsy // 18 * 12.3 <= yMouse <= GlobalHWVar.gsy // 18 * 13.5:
+            elif GlobalHWVar.gsx // 32 * 23.7 <= xMouse <= GlobalHWVar.gsx // 32 * 24.6 and GlobalHWVar.gsy // 18 * 11.5 <= yMouse <= GlobalHWVar.gsy // 18 * 12.7:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 16.9 and GlobalHWVar.gsy // 18 * 12.9 <= yMouse <= GlobalHWVar.gsy // 18 * 14.1:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalHWVar.gsx // 32 * 20.7 <= xMouse <= GlobalHWVar.gsx // 32 * 21.6 and GlobalHWVar.gsy // 18 * 12.9 <= yMouse <= GlobalHWVar.gsy // 18 * 14.1:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
@@ -799,30 +809,34 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 if not GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(True)
             if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 31:
-                if GlobalHWVar.gsy // 18 * 4.6 <= yMouse <= GlobalHWVar.gsy // 18 * 6.1:
+                if GlobalHWVar.gsy // 18 * 4.3 <= yMouse <= GlobalHWVar.gsy // 18 * 5.7:
                     voceMarcata = 1
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 5.1
-                elif GlobalHWVar.gsy // 18 * 6.1 <= yMouse <= GlobalHWVar.gsy // 18 * 7.6:
+                    yp = GlobalHWVar.gsy // 18 * 4.8
+                elif GlobalHWVar.gsy // 18 * 5.7 <= yMouse <= GlobalHWVar.gsy // 18 * 7.1:
                     voceMarcata = 2
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 6.6
-                elif GlobalHWVar.gsy // 18 * 7.6 <= yMouse <= GlobalHWVar.gsy // 18 * 9.1:
+                    yp = GlobalHWVar.gsy // 18 * 6.2
+                elif GlobalHWVar.gsy // 18 * 7.1 <= yMouse <= GlobalHWVar.gsy // 18 * 8.5:
                     voceMarcata = 3
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 8.1
-                elif GlobalHWVar.gsy // 18 * 9.1 <= yMouse <= GlobalHWVar.gsy // 18 * 10.6:
+                    yp = GlobalHWVar.gsy // 18 * 7.6
+                elif GlobalHWVar.gsy // 18 * 8.5 <= yMouse <= GlobalHWVar.gsy // 18 * 9.9:
                     voceMarcata = 4
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 9.6
-                elif GlobalHWVar.gsy // 18 * 10.6 <= yMouse <= GlobalHWVar.gsy // 18 * 12.1:
+                    yp = GlobalHWVar.gsy // 18 * 9
+                elif GlobalHWVar.gsy // 18 * 9.9 <= yMouse <= GlobalHWVar.gsy // 18 * 11.3:
                     voceMarcata = 5
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 11.1
-                elif GlobalHWVar.gsy // 18 * 12.1 <= yMouse <= GlobalHWVar.gsy // 18 * 13.6:
+                    yp = GlobalHWVar.gsy // 18 * 10.4
+                elif GlobalHWVar.gsy // 18 * 11.3 <= yMouse <= GlobalHWVar.gsy // 18 * 12.7:
                     voceMarcata = 6
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 12.6
+                    yp = GlobalHWVar.gsy // 18 * 11.8
+                elif GlobalHWVar.gsy // 18 * 12.7 <= yMouse <= GlobalHWVar.gsy // 18 * 14.1:
+                    voceMarcata = 7
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 13.2
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
@@ -850,11 +864,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     settaController(arrivatoDaMenuPrincipale)
                     primoFrame = True
-                elif voceMarcata == 7:
+                elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     GlobalHWVar.linguaImpostata = linguaTemp
                     GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
                     GlobalHWVar.volumeCanzoni = volumeCanzoniTemp / 10.0
+                    GlobalHWVar.vSyncEnabled = vSyncTemp
                     GlobalHWVar.initVolumeSounds()
                     if dimezzaVolumeCanzone:
                         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2.0)
@@ -919,10 +934,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     scrivi.write(str(GlobalHWVar.gsy) + "_")
                     scrivi.close()
                     puntatore = GlobalImgVar.puntatore
-                    yp = GlobalHWVar.gsy // 18 * 14.8
+                    yp = GlobalHWVar.gsy // 18 * 15.2
                     xp = GlobalHWVar.gsx // 32 * 11.9
                     primoFrame = True
-                elif voceMarcata == 8:
+                elif voceMarcata == 9:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     risposta = True
                 else:
@@ -941,25 +956,25 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
-                if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
+                if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6 or voceMarcata == 7:
                     voceMarcata -= 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = yp - GlobalHWVar.gsy // 18 * 1.5
-                    xp = GlobalHWVar.gsx // 32 * 1
-                elif voceMarcata == 7:
-                    voceMarcata -= 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 12.6
+                    yp = yp - GlobalHWVar.gsy // 18 * 1.4
                     xp = GlobalHWVar.gsx // 32 * 1
                 elif voceMarcata == 8:
+                    voceMarcata -= 1
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gsy // 18 * 13.2
+                    xp = GlobalHWVar.gsx // 32 * 1
+                elif voceMarcata == 9:
                     voceMarcata -= 2
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 12.6
+                    yp = GlobalHWVar.gsy // 18 * 13.2
                     xp = GlobalHWVar.gsx // 32 * 1
                 elif voceMarcata == 1:
-                    voceMarcata += 6
+                    voceMarcata += 7
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 14.8
+                    yp = GlobalHWVar.gsy // 18 * 15.2
                     xp = GlobalHWVar.gsx // 32 * 11.9
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
@@ -1006,31 +1021,38 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 1
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    if vSyncTemp:
+                        vSyncTemp = False
+                    else:
+                        vSyncTemp = True
+                elif voceMarcata == 8:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
                     xp = GlobalHWVar.gsx // 32 * 16
-                elif voceMarcata == 8:
+                elif voceMarcata == 9:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
                     xp = GlobalHWVar.gsx // 32 * 11.9
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
-                if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
+                if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = yp + GlobalHWVar.gsy // 18 * 1.5
-                elif voceMarcata == 6:
-                    voceMarcata += 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 14.8
-                    xp = GlobalHWVar.gsx // 32 * 11.9
-                elif voceMarcata == 7:
-                    voceMarcata -= 6
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 5.1
                     xp = GlobalHWVar.gsx // 32 * 1
+                    yp = yp + GlobalHWVar.gsy // 18 * 1.4
+                elif voceMarcata == 7:
+                    voceMarcata += 1
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gsy // 18 * 15.2
+                    xp = GlobalHWVar.gsx // 32 * 11.9
                 elif voceMarcata == 8:
                     voceMarcata -= 7
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = GlobalHWVar.gsy // 18 * 5.1
+                    yp = GlobalHWVar.gsy // 18 * 4.8
+                    xp = GlobalHWVar.gsx // 32 * 1
+                elif voceMarcata == 9:
+                    voceMarcata -= 8
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gsy // 18 * 4.8
                     xp = GlobalHWVar.gsx // 32 * 1
             if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
@@ -1077,9 +1099,15 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 0
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    if vSyncTemp:
+                        vSyncTemp = False
+                    else:
+                        vSyncTemp = True
+                elif voceMarcata == 8:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
                     xp = GlobalHWVar.gsx // 32 * 16
-                elif voceMarcata == 8:
+                elif voceMarcata == 9:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
                     xp = GlobalHWVar.gsx // 32 * 11.9
@@ -1126,6 +1154,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 0
                     else:
                         modalitaSchermoTemp = 1
+                elif voceMarcata == 7:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    if vSyncTemp:
+                        vSyncTemp = False
+                    else:
+                        vSyncTemp = True
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1169,6 +1203,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 2
                     else:
                         modalitaSchermoTemp = 0
+                elif voceMarcata == 7:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    if vSyncTemp:
+                        vSyncTemp = False
+                    else:
+                        vSyncTemp = True
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -1182,26 +1222,28 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Lingua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
-                FunzioniGraficheGeneriche.messaggio("Volume effetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Volume musica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 60)
-                FunzioniGraficheGeneriche.messaggio("Controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Risoluzione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
-                FunzioniGraficheGeneriche.messaggio(u"Modalità finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 14.6, 70)
-                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 14.6, 70)
+                FunzioniGraficheGeneriche.messaggio("Lingua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.7, 60)
+                FunzioniGraficheGeneriche.messaggio("Volume effetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, 60)
+                FunzioniGraficheGeneriche.messaggio("Volume musica", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.5, 60)
+                FunzioniGraficheGeneriche.messaggio("Controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.9, 60)
+                FunzioniGraficheGeneriche.messaggio("Risoluzione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.3, 60)
+                FunzioniGraficheGeneriche.messaggio(u"Modalità finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.7, 60)
+                FunzioniGraficheGeneriche.messaggio("VSync", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, 60)
+                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 15, 70)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 9.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.9, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 7.4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 8.9, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 10.4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 11.9, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13.4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13.9, GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 0.4))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 9.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 11.9, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.55, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 6.95, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 8.35, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 9.75, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 11.15, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 12.55, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13.95, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 14.35, GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 10))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 11.9, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
@@ -1212,87 +1254,100 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 4.5), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 13.7), 2)
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.4), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 15.7), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 4.3), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.23), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if linguaTemp == "italiano":
-                FunzioniGraficheGeneriche.messaggio("Italiano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio("Italiano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if linguaTemp == "inglese":
-                FunzioniGraficheGeneriche.messaggio("English", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio("English", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if voceMarcata == 1:
                 if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.6))
                 if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.9))
-            FunzioniGraficheGeneriche.messaggio(str(int(volumeEffettiTemp)), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 6.5, 60)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.6))
+            FunzioniGraficheGeneriche.messaggio(str(int(volumeEffettiTemp)), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 6.1, 60)
             if voceMarcata == 2:
                 if volumeEffettiTemp != 0:
                     if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6.4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6.4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                 if volumeEffettiTemp != 10:
                     if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6.4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6.4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6.4))
-            FunzioniGraficheGeneriche.messaggio(str(int(volumeCanzoniTemp)), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8, 60)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
+            FunzioniGraficheGeneriche.messaggio(str(int(volumeCanzoniTemp)), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 7.5, 60)
             if voceMarcata == 3:
                 if volumeCanzoniTemp != 0:
                     if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.4))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.4))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 7.4))
                 if volumeCanzoniTemp != 10:
                     if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.4))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.4))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
-            FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
-            FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.4))
+            FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8.9, 60)
+            FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 10.3, 60)
             if voceMarcata == 5:
                 if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
                 if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.2))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.9))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.2))
             if modalitaSchermoTemp == 0:
-                FunzioniGraficheGeneriche.messaggio(u"Schermo intero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
+                FunzioniGraficheGeneriche.messaggio(u"Schermo intero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             elif modalitaSchermoTemp == 1:
-                FunzioniGraficheGeneriche.messaggio(u"Finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
+                FunzioniGraficheGeneriche.messaggio(u"Finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             else:
-                FunzioniGraficheGeneriche.messaggio("Finestra senza bordi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
+                FunzioniGraficheGeneriche.messaggio("Finestra senza bordi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             if voceMarcata == 6:
                 if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 11.6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 11.6))
                 if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
                 else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 12.4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
+            if vSyncTemp:
+                FunzioniGraficheGeneriche.messaggio(u"Attivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
+            else:
+                FunzioniGraficheGeneriche.messaggio(u"Disattivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
+            if voceMarcata == 7:
+                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
+                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 20.9, GlobalHWVar.gsy // 18 * 13))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 20.9, GlobalHWVar.gsy // 18 * 13))
 
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
-            if voceMarcata != 7 and voceMarcata != 8:
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 0.5))), yp + (int(GlobalHWVar.gpy * 1))), (xp + (int(GlobalHWVar.gpx * 14.5)), yp + (int(GlobalHWVar.gpy * 1))), 2)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 15.5))), yp + (int(GlobalHWVar.gpy * 1))), (xp + (int(GlobalHWVar.gpx * 29.4)), yp + (int(GlobalHWVar.gpy * 1))), 2)
+            if voceMarcata != 8 and voceMarcata != 9:
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 0.5))), yp + (int(GlobalHWVar.gpy * 0.9)) - 1), (xp + (int(GlobalHWVar.gpx * 14.65)), yp + (int(GlobalHWVar.gpy * 0.9)) - 1), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 15.3))), yp + (int(GlobalHWVar.gpy * 0.9)) - 1), (xp + (int(GlobalHWVar.gpx * 29.4)), yp + (int(GlobalHWVar.gpy * 0.9)) - 1), 2)
             else:
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1.5), int(GlobalHWVar.gpy * 14.05)), (int(GlobalHWVar.gpx * 30.45), int(GlobalHWVar.gpy * 14.05)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1.5), int(GlobalHWVar.gpy * 14.45) - 1), (int(GlobalHWVar.gpx * 30.45), int(GlobalHWVar.gpy * 14.45) - 1), 2)
             primoFrame = False
 
             GlobalHWVar.aggiornaSchermo()
