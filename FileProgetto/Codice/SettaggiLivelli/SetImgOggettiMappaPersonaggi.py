@@ -231,12 +231,12 @@ def definisciImgOggetti(tipo):
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoTavoloVuotoCastelloA":
         disegnaImg = True
-        numImg = 3
+        numImg = 4
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoTavoloVuotoCastelloB":
         disegnaImg = True
-        numImg = 2
+        numImg = 3
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
     if tipo.startswith("OggettoDictCadavereSoldato"):
@@ -313,10 +313,18 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 2
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
             numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiataSulTavoloPostRianimazione"]:
+            numImgAttuale = 3
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
+            numImgAttuale = 1
     if tipo == "OggettoTavoloVuotoCastelloB":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rimossoImpoMessoSulTavoloDopoConsegnaStrumenti"]:
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
+            numImgAttuale = 0
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiataSulTavoloPostRianimazione"]:
+            numImgAttuale = 2
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
             numImgAttuale = 0
     if tipo == "OggettoSaraNelLago":
         if GlobalGameVar.armaturaIndossata == 0 and not GlobalGameVar.cambiataAlCastello[0]:

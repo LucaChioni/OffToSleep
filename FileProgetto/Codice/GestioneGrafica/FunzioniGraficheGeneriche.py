@@ -538,7 +538,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
             image.fill((0, 0, 0, 30))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
-            while i <= 40:
+            while i <= 50:
                 if i % 2 == 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
                     if imgIlluminata:
@@ -547,6 +547,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     else:
         screen = GlobalHWVar.schermo.copy().convert()
         rect = pygame.display.get_surface().get_rect()

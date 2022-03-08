@@ -3403,6 +3403,16 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoPortaInternoCastello20DaSoldato"]:
                     mantieniPosizioneImpo = True
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonochiusuraporteCastello)
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sdraiataSulTavoloPostRianimazione"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    # sposto il personaggio in un punto a caso per fare spazio al percorso di Neil
+                    x = GlobalHWVar.gpx * 10
+                    y = GlobalHWVar.gpy * 9
         if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
             nomeCanzoneLuogo = ""
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -3439,12 +3449,6 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "a"
                     x = GlobalHWVar.gpx * 26
                     y = GlobalHWVar.gpy * 9
-                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
-                        i = 0
-                        while i < 30:
-                            pygame.time.wait(100)
-                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                            i += 1
                     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDalTavoloLaboratorioCastello"]:
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
                         i = 0

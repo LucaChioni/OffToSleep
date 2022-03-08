@@ -38,6 +38,7 @@ def gameloop():
     if True:
         casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
 
+        avanzaManualmentePercorsoDaEseguire = False
         evitaAggiornamentoStatoInizioTurno = True
         cambiatoRisoluzione = False
         riavviaAudioMusica = False
@@ -263,6 +264,7 @@ def gameloop():
                 riavviaAudioAmbiente = False
                 canzone = False
                 listaSottofondoAmbientale = []
+            avanzaManualmentePercorsoDaEseguire = False
             evitaAvanzamentoTurno = False
             caseattactotRallo = []
             posizioneRalloAggiornamentoCaseAttac = [0, 0]
@@ -927,9 +929,17 @@ def gameloop():
             bottoneDown = False
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         elif len(percorsoDaEseguire) > 0:
+            bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
+            if avanzaManualmentePercorsoDaEseguire:
+                if (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato and inquadratoQualcosa.startswith("movimento")) or bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_s or bottoneDown == pygame.K_d or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padGiu" or bottoneDown == "padDestra":
+                    movimentoDaCompiere = percorsoDaEseguire.pop(0)
+                elif bottoneDown:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
+            else:
+                movimentoDaCompiere = percorsoDaEseguire.pop(0)
             bottoneDown = False
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            movimentoDaCompiere = percorsoDaEseguire.pop(0)
+            if len(percorsoDaEseguire) <= 0:
+                avanzaManualmentePercorsoDaEseguire = False
         if (not bottoneDown and not movimentoDaCompiere) or GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc:
             bottoneDown = False
             GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = False
@@ -2594,7 +2604,9 @@ def gameloop():
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
                 porteTemp = porte[:]
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco)
+                if movimentoDaCompiere and len(percorsoDaEseguire) == 0:
+                    GlobalHWVar.canaleSoundPassiRallo.stop()
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno, avanzaManualmentePercorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True
