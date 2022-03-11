@@ -2651,7 +2651,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Neil...? Cosa vuoi farmi?!")
+                dialogo.append(u"... Neil... cosa vuoi farmi?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2669,7 +2669,83 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
+                dialogo.append(u"Niente, solo un piccolo test.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Perché sono... così?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Perché l'acqua del lago ti ha corrosa. È penetrata nell'armatura e ti ha logorato l'apparato digerente, il cuore, un polmone, quasi tutti i muscoli, i bulbi oculari, i canali olfattivi e uditivi.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
                 dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Il cervello e il sistema nervoso sono rimasti per lo più intatti. Le ossa hanno retto...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Perché non riesco muovermi?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Tornerai autonoma tra poco.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Dobbiamo fare degli esperimenti adesso. Ho sviluppato nuovi apparecchi cerebrali e li dovrai testare.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... No...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Avrai notato che quei libri che hai letto nella mia libreria propongono alcune teorie sulla consequenzialità degli eventi reali. Ebbene, una di quelle teorie si è rivelata corretta. Gli eventi si susseguono l'un l'altro con un principio di causalità, e vengono intervallati da dei momenti di pausa con una precisa frequenza. Adesso, ciò che dovrai fare tu, è capire cos'è che scandisce quella frequenza.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Cosa?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Il tuo cervello ora dovrebbe essere in grado di prendere coscienza della realtà a una frequenza molto superiore rispetto alla frequenza con cui gli eventi si susseguono.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Quindi riuscirai a percepire per molto tempo tra un evento e l'altro, così da poter notare ciò che avviene più nel dettaglio. Poi tornerai per fare rapporto.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E... perché non lo fai tu?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Perché non l'ho ancora testato su un essere umano.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... No, io... io voglio tornare come prima...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Bene, possiamo procedere.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Aspetta! Rod...")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoImpo":
             partiDialogo = []
@@ -2701,6 +2777,37 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Merda... andiamocene da qui.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Impo!")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostTempoBloccato"]:
+                oggettoDato = "ImpoPietra"
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Dove...?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oh, eccola!")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricaricatoImpoPostRianimazione"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oh, grazie a Dio, tu sei ancora a posto!")
                 partiDialogo.append(dialogo)
         elif tipo == "Mercante":
             partiDialogo = []
@@ -2735,7 +2842,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Rod aiutami...")
+                dialogo.append(u"Rod, aiutami...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2744,6 +2851,65 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoConImpoPostTempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Rod?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Rod?!")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoRodBloccato"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Rod?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È bloccato...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Quindi sono...?")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Stava scrivendo qualcosa...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non si capisce molto... sembrano progetti sulla modellazione di... alcuni materiali...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Ci sono anche dei disegni di volti umani...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Forse... per me...?)")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-9":
             partiDialogo = []
@@ -2826,6 +2992,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(I miei strumenti...)")
                 partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non c'è niente...)")
+                partiDialogo.append(dialogo)
         elif tipoId == "OggettoTavoloVuotoCastelloB-0":
             partiDialogo = []
             nome = "OggettoTavoloVuotoCastello"
@@ -2871,6 +3047,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Non c'è niente su questa parte del tavolo...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non c'è niente...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoTavoloAttrezziCastello-0":
             partiDialogo = []
@@ -2968,19 +3154,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Dov'è lei?")
+                dialogo.append(u"Dov'è lei?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Dov'è Sara?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Dentro.")
+                dialogo.append(u"... Dentro.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3028,23 +3206,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Che ne hai fatto di tutti gli altri impo?")
+                dialogo.append(u"Hai distrutto tutti gli impo che hai trovato per ricavarne del liquido energetico con cui hai inquinato mezza regione. Perché dovremmo affidare a te l'ultimo esemplare?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Questo adesso che c'entra?!")
+                dialogo.append(u"... Non spetta a te decidere a chi deve essere affidato. L'impo è della confraternita.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ah, non c'entra? Li hai distrutti tutti per ricavarne del liquido energetico con cui hai inquinato mezza regione. E io dovrei affidarti l'ultimo esemplare?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Non spetta a te decidere a chi affidarlo. L'impo è della confraternita.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"E infatti rimarrà a un suo membro. Io lo terrò soltanto finché non si sveglierà.")
+                dialogo.append(u"E infatti rimarrà a un suo membro. Io lo terrò dove l'ha lasciato soltanto finché non si sveglierà.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3058,23 +3228,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Povero Rod. Non sa nemmeno lui se disperarsi di più per le sue prospettive economiche o per quelle sentimentali...")
+                dialogo.append(u"Povero Rod. Non sai nemmeno tu se disperarti di più per le tue prospettive economiche o per quelle sentimentali.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma stai zitto, vecchio trombone. Parli tu che ti sei rinchiuso in questo castello per decenni, passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare!")
+                dialogo.append(u"Ma stai zitto, vecchio <*>#italic#trombone.<*> Non parlarmi di prospettive, ti sei rinchiuso in questo castello per decenni passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Non puoi riavere l'impo. Sara ha accettato di affidarlo a me.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Sì, vedo. Tutto questo è solo un piccolo imprevisto irrilevante, immagino.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Se hai finito, ho del lavoro da fare ora.")
+                dialogo.append(u"... Va bene. Vattene adesso.")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil5"]:
                 oggettoDato = False
@@ -3084,11 +3246,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Sono stato nel vulcano, Neil. Ho studiato gli impo per un po'. Credo che ci sia qualcuno là dentro, qualcuno che li fabbrica. Potrebbe essere utile nel conflitto.")
+                dialogo.append(u"... Sono stato nel vulcano, Neil. Ho studiato gli impo per un po'. Credo che ci sia qualcuno là dentro, qualcuno che li fabbrica...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non serve che tu ti metta a fare l'investigatore di queste questioni, Rod. Quel fabbro agisce in autonomia. È già intervenuto in passato e interverrà nuovamente a breve anche senza le mediazioni di un isterico ragazzino impulsivo.")
+                dialogo.append(u"Non serve che tu ti metta a investigare, Rod. Quel fabbro agisce in autonomia. È già intervenuto in passato e interverrà nuovamente a breve, anche senza le mediazioni di un isterico ragazzino impulsivo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3096,7 +3258,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Lui non vuole aiutare nessuno. Vuole solo mantenere il conflitto aperto e in equilibrio.")
+                dialogo.append(u"Lui non vuole \"aiutarci\", vuole solo mantenere il conflitto aperto e in equilibrio.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3122,7 +3284,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Per lei non ci sono molte alternative viste le condizioni. Ma se può esserti di conforto, le saranno riservate condizioni privilegiate. Dopotutto, ho degli accordi da rispettare...")
+                dialogo.append(u"Non ci sono molte alternative viste le condizioni. Ma se può esserti di conforto, le saranno riservate condizioni privilegiate. Ho degli accordi da rispettare dopotutto...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3169,5 +3331,129 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"... Dove mi state portando?!")
                 partiDialogo.append(dialogo)
+        elif tipoId == "OggettoSpecchio-0":
+            partiDialogo = []
+            nome = "Specchio"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+        elif tipoId == "OggettoValvolaMacchinario-0":
+            partiDialogo = []
+            nome = "Valvola"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Non ho idea di cosa sia...)")
+            partiDialogo.append(dialogo)
+        elif tipoId == "OggettoCapsulaMacchinario-0":
+            partiDialogo = []
+            nome = "Capsula"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Sembra una porta, ma non si apre...)")
+            partiDialogo.append(dialogo)
+        elif tipoId == "OggettoArmadioRatti-0":
+            partiDialogo = []
+            nome = "Ratto"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Ci sono degli strani ratti qua... alcuni si muovono...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Devono essere delle cavie...)")
+            partiDialogo.append(dialogo)
+        elif tipoId == "OggettoAppuntiRatti-0":
+            partiDialogo = []
+            nome = "Appunti di Neil"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Sono appunti di Neil su degli esperimenti su dei ratti...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(A quanto pare alcuni di questi ratti sono vivi da più di settecento miliardi di secoli...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Però accanto c'è scritto che sono nati solo qualche giorno fa...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Forse sta considerando anche il tempo di... adesso...?)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Vuol dire che rimarrò bloccata per... per...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(... Ok, dev'esserci un altro modo, non mi lascerebbero... non mi...)")
+            partiDialogo.append(dialogo)
+        elif tipoId == "OggettoAppuntiRianimazioneSara-0":
+            partiDialogo = []
+            nome = "Appunti di Neil"
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Sono appunti di Neil sul mio processo di guarigione...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Sono passate diciotto ore e il soggetto si sta comportando meglio del previsto. Di questo passo, il processo di rianimazione sarà completato in meno di due giorni...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Il processo di rianimazione si è concluso in trentasei ore e ventidue minuti. Il soggetto ha ripreso a respirare, il battito cardiaco è regolare e l'attività cerebrale è perfettamente nella norma. L'installazione del prototipo potrà iniziare tra tre giorni...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... La fase di riposo è terminata nei tempi previsti. Procedura d'installazione del prototipo avviata...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Il soggetto ha inaspettatamente ripreso coscienza per pochi secondi durante la fase conclusiva dell'installazione: rischio di collasso del sistema elevato. I trattamenti estetici di Rod verranno sospesi fino alla conclusione dei test...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... L'installazione si è conclusa con successo, nessun elemento dell'ospite è stato danneggiato. I test sul prototipo inizieranno non appena il soggetto tornerà operativo...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Quindi ero morta...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(E adesso ho un \"prototipo\" installato...)")
+            partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

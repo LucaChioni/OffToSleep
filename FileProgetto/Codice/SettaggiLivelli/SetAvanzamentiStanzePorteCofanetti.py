@@ -727,6 +727,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["soldatoUscitoDaInternoCastello19PostRianimazione"] = i
     i += 1
+    dictAvanzamentoStoria["riapparsoImpoInternoCastello20PostRianimazione"] = i
+    i += 1
     dictAvanzamentoStoria["uscitoDaInternoCastello19PostRianimazione"] = i
     i += 1
     dictAvanzamentoStoria["dialogoConRodPostRianimazione1"] = i
@@ -742,15 +744,26 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["dialogoConRodPostRianimazione2"] = i
     i += 1
     dictAvanzamentoStoria["dialogoConNeilPostRianimazione2"] = i
-
-    i += 1
-    dictAvanzamentoStoria["addormentataDaNeilPerOperazioneBloccoTempo"] = i
-
-    i += 100
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
     i += 1
     dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPostTempoBloccato"] = i
+    i += 1
+    dictAvanzamentoStoria["presoImpoPietraPostRianimazione"] = i
+    i += 1
+    dictAvanzamentoStoria["ricaricatoImpoPostRianimazione"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoConImpoPostTempoBloccato"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoVistoRodBloccato"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoAccantoARodBloccato"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoNotatoQtaSoldatiCastelloPostTempoBloccato"] = i
+
+    i += 100
     i += 1
     dictAvanzamentoStoria["sbloccatoCaverna"] = i
     i += 1

@@ -867,16 +867,16 @@ def aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, 
     aggiornaVitaEsca = False
     aggiornaVitaNemico = False
     # cancello i danni dei turni vecchi
-    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"] and GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][0]:
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"] = [False, 0, -1]
         aggiornaVitaRallo = True
-    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"] and GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0]:
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"] = [False, 0, -1]
         aggiornaVitaImpo = True
-    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"] and GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][0]:
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"] = [False, 0, -1]
         aggiornaVitaEsca = True
-    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]:
+    if turnoAvanzato and GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] < GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"] and GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0]:
         GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"] = [False, 0, -1]
         aggiornaVitaNemico = True
 

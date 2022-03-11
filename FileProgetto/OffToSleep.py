@@ -841,7 +841,7 @@ def gameloop():
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif GlobalGameVar.impoPresente and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 <= xMouse <= GlobalHWVar.gsx // 32 * 29.8:
+            elif GlobalGameVar.impoPresente and GlobalGameVar.impoPietraPosseduta and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 <= xMouse <= GlobalHWVar.gsx // 32 * 29.8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -1060,7 +1060,7 @@ def gameloop():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
-                if GlobalGameVar.impoPresente:
+                if GlobalGameVar.impoPresente and GlobalGameVar.impoPietraPosseduta:
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
                     refreshSchermo = True
                     if chiamarob:
@@ -1192,14 +1192,15 @@ def gameloop():
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalHWVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalHWVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalHWVar.gpy and npers == 3):
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                        if npers == 1:
-                            personaggio.girati("a")
-                        elif npers == 2:
-                            personaggio.girati("d")
-                        elif npers == 3:
-                            personaggio.girati("s")
-                        elif npers == 4:
-                            personaggio.girati("w")
+                        if dati[0] < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                            if npers == 1:
+                                personaggio.girati("a", perDialogo=True)
+                            elif npers == 2:
+                                personaggio.girati("d", perDialogo=True)
+                            elif npers == 3:
+                                personaggio.girati("s", perDialogo=True)
+                            elif npers == 4:
+                                personaggio.girati("w", perDialogo=True)
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
                         if personaggio.oggettoEnigma:
                             dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
@@ -1548,14 +1549,15 @@ def gameloop():
                         guantiMov2 = guantidMov2
                         guantiAttacco = guantidAttacco
                         collana = collanad
-                    if npers == 1:
-                        personaggio.girati("a")
-                    elif npers == 2:
-                        personaggio.girati("d")
-                    elif npers == 3:
-                        personaggio.girati("s")
-                    elif npers == 4:
-                        personaggio.girati("w")
+                    if dati[0] < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                        if npers == 1:
+                            personaggio.girati("a", perDialogo=True)
+                        elif npers == 2:
+                            personaggio.girati("d", perDialogo=True)
+                        elif npers == 3:
+                            personaggio.girati("s", perDialogo=True)
+                        elif npers == 4:
+                            personaggio.girati("w", perDialogo=True)
                     EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
                     if personaggio.oggettoEnigma:
                         dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
@@ -2140,14 +2142,15 @@ def gameloop():
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalHWVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalHWVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalHWVar.gpy and npers == 3):
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                        if npers == 1:
-                            personaggio.girati("a")
-                        elif npers == 2:
-                            personaggio.girati("d")
-                        elif npers == 3:
-                            personaggio.girati("s")
-                        elif npers == 4:
-                            personaggio.girati("w")
+                        if dati[0] < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                            if npers == 1:
+                                personaggio.girati("a", perDialogo=True)
+                            elif npers == 2:
+                                personaggio.girati("d", perDialogo=True)
+                            elif npers == 3:
+                                personaggio.girati("s", perDialogo=True)
+                            elif npers == 4:
+                                personaggio.girati("w", perDialogo=True)
                         # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
                         if personaggio.oggettoEnigma:

@@ -896,7 +896,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     vetCaselleDaNonOscurare.append(cofanetti[j + 2])
                 j += 4
             for personaggio in listaPersonaggi:
-                if personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista:
+                if personaggio.mantieniSempreASchermo and ((personaggio.x == x and (personaggio.y == y + GlobalHWVar.gpy or personaggio.y == y - GlobalHWVar.gpy)) or (personaggio.y == y and (personaggio.x == x + GlobalHWVar.gpx or personaggio.x == x - GlobalHWVar.gpx))):
                     vetCaselleDaNonOscurare.append(personaggio.x)
                     vetCaselleDaNonOscurare.append(personaggio.y)
         i += 3
@@ -913,6 +913,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if casellaDaOscurare:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabili, (caseattactotRallo[i], caseattactotRallo[i + 1]))
         i += 3
+
+    # disegno evidenziazione ai personaggi-oggetto interagibili
+    for personaggio in listaPersonaggi:
+        if personaggio.vicinoACasellaVista or personaggio.inCasellaVista:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
 
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
 
@@ -1081,7 +1086,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif GlobalGameVar.impoPresente and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 < xMouse <= GlobalHWVar.gsx // 32 * 29.8:
+            elif GlobalGameVar.impoPresente and GlobalGameVar.impoPietraPosseduta and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 < xMouse <= GlobalHWVar.gsx // 32 * 29.8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -1233,7 +1238,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             bottoneDown = False
         # attiva / disattiva il gambit
         if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
-            if GlobalGameVar.impoPresente:
+            if GlobalGameVar.impoPresente and GlobalGameVar.impoPietraPosseduta:
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
                 if chiamarob:
                     chiamarob = False

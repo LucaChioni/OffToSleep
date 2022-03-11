@@ -159,18 +159,19 @@ class PersonaggioObj(object):
         self.imgOggetto = oggettoDaCopiare.imgOggetto
         self.imgOggettoDialogo = oggettoDaCopiare.imgOggettoDialogo
 
-    def girati(self, direzione):
-        if direzione == "w":
-            self.imgAttuale = self.imgW
-        elif direzione == "a":
-            self.imgAttuale = self.imgA
-        elif direzione == "s":
-            self.imgAttuale = self.imgS
-        elif direzione == "d":
-            self.imgAttuale = self.imgD
+    def girati(self, direzione, perDialogo=False):
+        if not perDialogo or (perDialogo and not (self.tipo == "ServoLancia" or self.tipo == "ServoSpada" or self.tipo == "ServoArco")):
+            if direzione == "w":
+                self.imgAttuale = self.imgW
+            elif direzione == "a":
+                self.imgAttuale = self.imgA
+            elif direzione == "s":
+                self.imgAttuale = self.imgS
+            elif direzione == "d":
+                self.imgAttuale = self.imgD
 
-        if direzione != "" and direzione != "fermati" and direzione != "mantieniPosizione":
-            self.direzione = direzione
+            if direzione != "" and direzione != "fermati" and direzione != "mantieniPosizione":
+                self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria, monetePossedute=0):
         self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = SetDialoghiPersonaggi.caricaDialogo(self.tipoId, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo, monetePossedute)

@@ -246,8 +246,9 @@ global imgListaStrumentiStudioImpo
 global imgChiaveAvamposto
 global imgStrumentiDiRod
 global imgChiaveUfficioNeil
+global imgEvidenziaInterzaione
 
-numImgTotali = 1764
+numImgTotali = 1765
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -511,6 +512,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgChiaveAvamposto
     global imgStrumentiDiRod
     global imgChiaveUfficioNeil
+    global imgEvidenziaInterzaione
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -839,6 +841,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     faretraFrecceStart3 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra3Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
     sacchettoDenaro = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgFrecciaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaInterzaione = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneDisponibile.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # cofanetti
     cofaniaper = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

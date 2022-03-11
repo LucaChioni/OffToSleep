@@ -3371,6 +3371,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "d"
                     x = GlobalHWVar.gpx * 2
                     y = GlobalHWVar.gpy * 4
+                    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["soldatoUscitoDaInternoCastello19PostRianimazione"]:
+                        mantieniPosizioneImpo = True
+                        avanzamentoStoria += 1
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                     mantieniPosizioneImpo = True
                     npers = "w"
@@ -3413,6 +3416,18 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     # sposto il personaggio in un punto a caso per fare spazio al percorso di Neil
                     x = GlobalHWVar.gpx * 10
                     y = GlobalHWVar.gpy * 9
+                    mantieniPosizioneImpo = True
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
+                    x = GlobalHWVar.gpx * 14
+                    y = GlobalHWVar.gpy * 11
+                    npers = "s"
+                    mantieniPosizioneImpo = True
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
         if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
             nomeCanzoneLuogo = ""
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
