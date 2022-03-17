@@ -4341,6 +4341,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
 
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        listaSottofondoAmbientale = []
+        canzone = False
+
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
         npers = 1

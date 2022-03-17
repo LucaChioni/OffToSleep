@@ -1469,6 +1469,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"] and personaggio.tipo == "Neil":
                 listaPersonaggi.remove(personaggio)
                 break
+        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
         avanzamentoStoria += 1
         carim = True
         caricaTutto = True
