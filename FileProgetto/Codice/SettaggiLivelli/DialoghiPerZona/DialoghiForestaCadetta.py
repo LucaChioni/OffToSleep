@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
@@ -13,7 +14,30 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipo == "OggettoSiepe":
+    if tipo in GlobalImgVar.vettoreNomiNemici:
+        partiDialogo = []
+        if tipo == "TartarugaVerde":
+            nome = "Tartaruga verde"
+        elif tipo == "TartarugaMarrone":
+            nome = "Tartaruga marrone"
+        elif tipo == "LupoGrigio":
+            nome = "Lupo grigio"
+        elif tipo == "LupoBianco":
+            nome = "Lupo bianco"
+        elif tipo == "LupoNero":
+            nome = "Lupo nero"
+        elif tipo == "Cinghiale":
+            nome = "Cinghiale"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
+    elif tipo == "OggettoSiepe":
         partiDialogo = []
         nome = "OggettoSiepe"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and avanzamentoDialogo == 0:
@@ -60,7 +84,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"...")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -69,6 +93,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Questo cinghiale non è riuscito a liberarsi... almeno ha smesso di fare quegli strazianti lamenti...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Un cinghiale mezzo mangiato da altri animali...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoFuoco":
         partiDialogo = []
@@ -110,7 +144,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"...")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -118,6 +152,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Probabilmente questo accampamento è stato allestito da quel soldato...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Un falò spento...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCibo":
         partiDialogo = []
@@ -200,7 +243,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"...")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -209,6 +252,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Qualche animale dev'essersi divorato tutto...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Non c'è più niente qua sopra...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoMucchioLegna":
         partiDialogo = []
@@ -250,7 +302,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"...")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -258,6 +310,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(È un mucchio di legna da bruciare...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Un mucchio di legna...)")
             partiDialogo.append(dialogo)
     elif tipo == "FiglioUfficiale":
         partiDialogo = []
@@ -464,7 +525,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"(Non c'è più legna da prendere qui...)")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -473,6 +534,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append("(Ci sono dei bastoncini di legno per terra...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Dei rametti...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCinghiale":
         partiDialogo = []
@@ -530,7 +601,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append("(... Forse stava cacciando... che sia stato lui ad allestire quell'accampamento?)")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -542,6 +613,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(... Il figlio di David e Olivia...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(La tomba di \"Sam\"...)")
             partiDialogo.append(dialogo)
     elif tipo == "Ragazzo1":
         partiDialogo = []

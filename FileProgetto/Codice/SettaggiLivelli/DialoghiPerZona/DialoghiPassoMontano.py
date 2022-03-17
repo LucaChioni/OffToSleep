@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
@@ -13,7 +14,30 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano1"]:
+    if tipo in GlobalImgVar.vettoreNomiNemici:
+        partiDialogo = []
+        if tipo == "GufoMarrone":
+            nome = "Gufo marrone"
+        elif tipo == "GufoBianco":
+            nome = "Gufo bianco"
+        elif tipo == "Struzzo":
+            nome = "Struzzo"
+        elif tipo == "Casuario":
+            nome = "Casuario"
+        elif tipo == "Falco":
+            nome = "Falco"
+        elif tipo == "Aquila":
+            nome = "Aquila"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
             nome = "Impo"

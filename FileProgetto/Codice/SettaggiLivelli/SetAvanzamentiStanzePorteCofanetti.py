@@ -1447,6 +1447,10 @@ def definisciCofanetti(dictStanze):
     stanza = dictStanze["internoCastello20"]
     vetCofanetti += [stanza, 19, 8, False]
     vetCofanetti += [stanza, 25, 8, False]
+    stanza = dictStanze["internoCastello21"]
+    vetCofanetti += [stanza, 6, 12, False]
+    vetCofanetti += [stanza, 14, 9, False]
+    vetCofanetti += [stanza, 25, 8, False]
 
     stanza = dictStanze["avampostoDiRod3"]
     vetCofanetti += [stanza, 24, 12, False]

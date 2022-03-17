@@ -1953,9 +1953,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 6:
                 tesoro = 86
         if stanza == GlobalGameVar.dictStanze["labirinto4"]:
-            # ottieni condizione (nemici>1)
+            # ottieni condizione (nemici>3)
             if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 11:
-                tesoro = 98
+                tesoro = 100
         if stanza == GlobalGameVar.dictStanze["labirinto5"]:
             # ottieni tecnica (auto-ricarica)
             if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 10:
@@ -2073,6 +2073,16 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni batteria (Sacca Energetica enorme)
             if cx == GlobalHWVar.gpx * 25 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 74
+        if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+            # ottieni tecnica (ricarica+)
+            if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 12:
+                tesoro = 27
+            # ottieni condizione (pvNemicoMinori)
+            if cx == GlobalHWVar.gpx * 14 and cy == GlobalHWVar.gpy * 9:
+                tesoro = 97
+            # ottieni tecnica (efficienza)
+            if cx == GlobalHWVar.gpx * 25 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 24
     elif GlobalGameVar.dictStanze["passoMontano1"] <= stanza <= GlobalGameVar.dictStanze["passoMontano10"]:
         if stanza == GlobalGameVar.dictStanze["passoMontano1"]:
             # ottieni condizione (pv<50)
@@ -2137,7 +2147,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni bomba appiccicosa
             if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 14:
                 tesoro = 39
-            # ottieni condizione (nemici>4)
+            # ottieni condizione (nemici>2)
             if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 14:
                 tesoro = 99
         if stanza == GlobalGameVar.dictStanze["passoMontano10"]:

@@ -412,7 +412,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Oh, la mia mappa... davvero non l'ha presa?)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -421,6 +421,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(La mappa del labirinto disegnata da Rod...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(La mappa di Rod...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAttrezziRod":
             partiDialogo = []
@@ -435,7 +445,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Sono i miei attrezzi...)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -444,6 +454,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Ci sono degli attrezzi da lavoro...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Attrezzi di Rod...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoFogliProgettiRod":
             partiDialogo = []
@@ -458,7 +478,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Non ho voglia di scrivere adesso...)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -467,6 +487,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Credo siano degli appunti. Sono veramente incomprensibili...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Rod...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoScatoloniRod":
             partiDialogo = []
@@ -481,7 +511,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Cosa ho messo qua dentro? Ah, altri attrezzi...)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -490,6 +520,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Scatole con degli attrezzi all'interno...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Attrezzi di Rod...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
         if tipo == "OggettoImpo":
@@ -538,6 +578,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Il tubo è a posto...)")
                 partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È un tubo...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -569,7 +619,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Sono i miei attrezzi...)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -578,6 +628,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Ci sono degli attrezzi da lavoro...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Attrezzi di Rod...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoFinestraAvampostoDiRod":
             partiDialogo = []
@@ -592,7 +652,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Come illuminare un intero avamposto con una sola finestra? Sarebbe una sfida impossibile per chiunque altro...)")
                 partiDialogo.append(dialogo)
-            else:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -601,6 +661,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Da qui si vede solo la siepe del labirinto...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoPappaLibroSonoroMercante":
             partiDialogo = []
@@ -677,6 +747,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 menuMercante = True
                 scelta = False
                 avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Io... prendo un attimo delle cose...")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append(u"...")

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
@@ -13,7 +14,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida1"]:
+    if tipo in GlobalImgVar.vettoreNomiNemici:
+        partiDialogo = []
+        if tipo == "SerpeVerde":
+            nome = "Serpente verde"
+        elif tipo == "SerpeArancio":
+            nome = "Serpente arancione"
+        elif tipo == "RagnoNero":
+            nome = "Ragno nero"
+        elif tipo == "RagnoRosso":
+            nome = "Ragno rosso"
+        elif tipo == "Scorpione":
+            nome = "Scorpione"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
             nome = "Impo"

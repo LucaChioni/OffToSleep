@@ -1800,6 +1800,17 @@ def gameloop():
                         uscitoDaMenu = 2
                     if not inizio:
                         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
+                    # aggiorno lo stato di Rallo e Colco all'inizio del turno (altrimenti ci sono bug nell'aggiornare i PV e i PE)
+                    statoRalloInizioTurno = []
+                    statoRalloInizioTurno.append(dati[5])
+                    statoRalloInizioTurno.append(dati[121])
+                    statoRalloInizioTurno.append(dati[123])
+                    statoRalloInizioTurno.append(dati[124])
+                    statoColcoInizioTurno = []
+                    statoColcoInizioTurno.append(dati[10])
+                    statoColcoInizioTurno.append(dati[122])
+                    statoColcoInizioTurno.append(dati[125])
+                    statoColcoInizioTurno.append(dati[126])
                 else:
                     dati, attacco, sposta, animaOggetto, npers, inizio, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco)
                     # cambiare posizione dopo l'uso di caricabatterie

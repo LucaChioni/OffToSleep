@@ -9,6 +9,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
+import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
@@ -918,6 +919,31 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     for personaggio in listaPersonaggi:
         if personaggio.vicinoACasellaVista or personaggio.inCasellaVista:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
+    # disegno evidenziazione delle uscite della stanza
+    vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(dati[1], avanzamentoStoria)
+    i = 0
+    while i < len(vetEntrate):
+        xUscita = vetEntrate[i] + vetEntrate[i + 2]
+        yUscita = vetEntrate[i + 1] + vetEntrate[i + 3]
+        if vetEntrate[i + 4] != -1:
+            if vetEntrate[i + 3] > 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaGiu, (xUscita, yUscita))
+            elif vetEntrate[i + 3] < 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaSu, (xUscita, yUscita))
+            elif vetEntrate[i + 2] > 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaDestra, (xUscita, yUscita))
+            elif vetEntrate[i + 2] < 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaSinistra, (xUscita, yUscita))
+        else:
+            if vetEntrate[i + 3] > 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaGiuBloccate, (xUscita, yUscita))
+            elif vetEntrate[i + 3] < 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaSuBloccate, (xUscita, yUscita))
+            elif vetEntrate[i + 2] > 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaDestraBloccate, (xUscita, yUscita))
+            elif vetEntrate[i + 2] < 0:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaUsciteStanzaSinistraBloccate, (xUscita, yUscita))
+        i += 5
 
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
 

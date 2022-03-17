@@ -437,6 +437,22 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("personaggio")
                 dialogo.append(u"Dai un'occhiata e prendi quello che ti serve...")
                 partiDialogo.append(dialogo)
+    elif (tipo == "GuardiaCitta" or tipo.startswith("Ragazz")) and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        partiDialogo = []
+        if tipo.startswith("Ragazzo"):
+            nome = "Sconosciuto"
+        elif tipo.startswith("Ragazza"):
+            nome = "Sconosciuta"
+        else:
+            nome = "Soldato"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta" and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
         partiDialogo = []
         nome = "Soldato"
@@ -460,7 +476,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Non voglio parlare coi soldati... poi potrebbero insospettirsi per Impo...)")
+            dialogo.append(u"(Non voglio parlare coi soldati...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Poi potrebbero insospettirsi per Impo...)")
             partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta" and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
         partiDialogo = []
@@ -473,7 +493,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("tu")
         dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
         partiDialogo.append(dialogo)
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and tipo.startswith("Ragazz"):
+    elif tipo.startswith("Ragazz") and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"]:
         if tipo.startswith("Ragazzo"):
             partiDialogo = []
             nome = "Sconosciuto"
@@ -2093,15 +2113,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipo.startswith("OggettoCassaMercante"):
             partiDialogo = []
             nome = "OggettoCassaMercante"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Questa cassa sembra molto invitante, ma ho la sensazione che quel pappagallo inizierebbe a urlare se provassi ad aprirla...)")
-            partiDialogo.append(dialogo)
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Questa cassa sembra molto invitante, ma ho la sensazione che quel pappagallo inizierebbe a urlare se provassi ad aprirla...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(C'è un sacco di roba...)")
+                partiDialogo.append(dialogo)
         elif tipo == "OggettoPappaLibroSonoroMercante":
             partiDialogo = []
             nome = "Pappagallo"
@@ -2159,6 +2190,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 menuMercante = True
                 scelta = False
                 avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Io... prendo un attimo delle cose...")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append(u"...")

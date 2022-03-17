@@ -39,7 +39,11 @@ class PersonaggioObj(object):
         self.avanzamentoDialogo = avanzamentoDialogo
         self.avanzaColDialogo = False
 
-        if self.tipo != "Tutorial" and self.tipo != "Nessuno":
+        if self.tipo in GlobalImgVar.vettoreNomiNemici:
+            self.mantieniSempreASchermo = False
+            self.caricaImgNemico()
+            self.girati(direzione)
+        elif self.tipo != "Tutorial" and self.tipo != "Nessuno":
             if self.tipo.startswith("Oggetto"):
                 if self.tipo.startswith("OggettoPersona"):
                     self.mantieniSempreASchermo = False
@@ -137,6 +141,23 @@ class PersonaggioObj(object):
         self.imgDMov2 = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgDMov2"]
 
         self.imgDialogo = GlobalImgVar.dictionaryImgPersonaggi[self.tipo]["imgDialogo"]
+
+    def caricaImgNemico(self):
+        self.imgW = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgW"]
+        self.imgA = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgA"]
+        self.imgS = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgS"]
+        self.imgD = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgD"]
+
+        self.imgWMov1 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgWMov1"]
+        self.imgWMov2 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgWMov2"]
+        self.imgAMov1 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgAMov1"]
+        self.imgAMov2 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgAMov2"]
+        self.imgSMov1 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgSMov1"]
+        self.imgSMov2 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgSMov2"]
+        self.imgDMov1 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgDMov1"]
+        self.imgDMov2 = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgDMov2"]
+
+        self.imgDialogo = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgDialogo"]
 
     def copiaImgsPersonaggio(self, personaggioDaCopiare):
         self.imgW = personaggioDaCopiare.imgW

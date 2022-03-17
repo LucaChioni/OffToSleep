@@ -247,6 +247,12 @@ def menuMercante(dati):
     tastotempfps = 8
 
     maxFrecce = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
+    costoOggettiTemp = GlobalGameVar.costoOggetti[:]
+    if dati[0] > GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        i = 0
+        while i < len(costoOggettiTemp):
+            costoOggettiTemp[i] = 0
+            i += 1
 
     imgOggetti = []
     i = 1
@@ -437,11 +443,11 @@ def menuMercante(dati):
                 procediAllAcquisto = True
                 # confermaOggettoDaAcquistare?
                 if voceMarcata == 1 and not (bottoneDown == "mouseSinistro" and suTornaIndietro):
-                    if 0 <= oggetton <= 10 and GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                    if 0 <= oggetton <= 10 and costoOggettiTemp[oggetton] * numeroOggettiAcquistati <= dati[131]:
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                         primoFrame = True
-                        dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
-                        dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                        dati[131] -= costoOggettiTemp[oggetton] * numeroOggettiAcquistati
+                        dati[145] += costoOggettiTemp[oggetton] * numeroOggettiAcquistati
                         voceMarcata = 0
                         xp = GlobalHWVar.gsx // 32 * 10.5
                         # freccia
@@ -491,11 +497,11 @@ def menuMercante(dati):
                         confermaOggettoDaAcquistare = 0
                         procediAllAcquisto = False
                     elif oggetton == 11:
-                        if dati[133] == 0 and GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                        if dati[133] == 0 and costoOggettiTemp[oggetton] * numeroOggettiAcquistati <= dati[131]:
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
-                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                            dati[131] -= costoOggettiTemp[oggetton] * numeroOggettiAcquistati
+                            dati[145] += costoOggettiTemp[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
@@ -504,11 +510,11 @@ def menuMercante(dati):
                                 yp = GlobalHWVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
-                        elif dati[133] == 1 and GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
+                        elif dati[133] == 1 and costoOggettiTemp[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
-                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                            dati[131] -= costoOggettiTemp[oggetton + 1] * numeroOggettiAcquistati
+                            dati[145] += costoOggettiTemp[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
@@ -517,11 +523,11 @@ def menuMercante(dati):
                                 yp = GlobalHWVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
-                        elif dati[133] == 2 and GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
+                        elif dati[133] == 2 and costoOggettiTemp[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
                             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
-                            dati[145] += GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                            dati[131] -= costoOggettiTemp[oggetton + 2] * numeroOggettiAcquistati
+                            dati[145] += costoOggettiTemp[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
@@ -817,11 +823,11 @@ def menuMercante(dati):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 5.7)), (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 17)), 2)
 
                 FunzioniGraficheGeneriche.messaggio("Freccia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 6.2, 40)
-                FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[0]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 6.2, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[0]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 6.2, 40, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[132], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 6.2, 40, centrale=True)
                 if imgOggetti[0] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 7.1, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[1]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[1]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
                     if dati[31] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
                     else:
@@ -830,7 +836,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 7.1, 40)
                 if imgOggetti[1] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[2]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[2]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
                     if dati[32] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
                     else:
@@ -839,7 +845,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8, 40)
                 if imgOggetti[2] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8.9, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[3]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[3]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
                     if dati[33] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
                     else:
@@ -848,7 +854,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8.9, 40)
                 if imgOggetti[3] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 9.8, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[4]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[4]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
                     if dati[34] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
                     else:
@@ -857,7 +863,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 9.8, 40)
                 if imgOggetti[4] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 10.7, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[5]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[5]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
                     if dati[35] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
                     else:
@@ -866,7 +872,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 10.7, 40)
                 if imgOggetti[5] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 11.6, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[6]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[6]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
                     if dati[36] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
                     else:
@@ -875,7 +881,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 11.6, 40)
                 if imgOggetti[6] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 12.5, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[7]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[7]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
                     if dati[37] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
                     else:
@@ -884,7 +890,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 12.5, 40)
                 if imgOggetti[7] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 13.4, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[8]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[8]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
                     if dati[38] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
                     else:
@@ -893,7 +899,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 13.4, 40)
                 if imgOggetti[8] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 14.3, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[9]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[9]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
                     if dati[39] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
                     else:
@@ -902,7 +908,7 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 14.3, 40)
                 if imgOggetti[9] != sconosciutoOggetto:
                     FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 15.2, 40)
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[10]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[10]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
                     if dati[40] < 0:
                         FunzioniGraficheGeneriche.messaggio(u"×0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
                     else:
@@ -911,11 +917,11 @@ def menuMercante(dati):
                     FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 15.2, 40)
                 FunzioniGraficheGeneriche.messaggio("Faretra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 16.1, 40)
                 if dati[133] == 0:
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[11]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[11]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] == 1:
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[12]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[12]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] >= 2:
-                    FunzioniGraficheGeneriche.messaggio(str(GlobalGameVar.costoOggetti[13]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(costoOggettiTemp[13]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] == 3:
                     FunzioniGraficheGeneriche.messaggio(u"×1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 else:
@@ -1013,11 +1019,11 @@ def menuMercante(dati):
                 if oggetton == 11:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccato, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     if dati[133] == 1:
-                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (costoOggettiTemp[oggetton + 1] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                     elif dati[133] >= 2:
-                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (costoOggettiTemp[oggetton + 2] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                 else:
                     if voceMarcata != 0 and oggetton != 11 and (bottoneDown == pygame.K_w or (bottoneDown == "mouseSinistro" and mouseInquadraFrecciaSu) or bottoneDown == "padSu"):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoSu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
@@ -1025,7 +1031,7 @@ def menuMercante(dati):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
-                    FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                    FunzioniGraficheGeneriche.messaggio("(Monete necessarie: %i)" % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1), int(GlobalHWVar.gpy * 6.7) - 1), (int(GlobalHWVar.gpx * 9.5), int(GlobalHWVar.gpy * 6.7) - 1), 2)
                 FunzioniGraficheGeneriche.messaggio("Conferma", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.9)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.7)), 2)

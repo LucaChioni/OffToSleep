@@ -202,6 +202,7 @@ global sconosciutoOggettoMenu2
 global sconosciutoOggettoMenu3
 global sconosciutoOggettoIcoMenu
 global imgOmbreggiaturaContorniMappaMenu
+global vettoreNomiNemici
 global dictionaryImgNemici
 global dictImgCampiVisiviNemici
 global dictImgNemiciDiario
@@ -247,8 +248,16 @@ global imgChiaveAvamposto
 global imgStrumentiDiRod
 global imgChiaveUfficioNeil
 global imgEvidenziaInterzaione
+global imgEvidenziaUsciteStanzaSu
+global imgEvidenziaUsciteStanzaGiu
+global imgEvidenziaUsciteStanzaDestra
+global imgEvidenziaUsciteStanzaSinistra
+global imgEvidenziaUsciteStanzaSuBloccate
+global imgEvidenziaUsciteStanzaGiuBloccate
+global imgEvidenziaUsciteStanzaDestraBloccate
+global imgEvidenziaUsciteStanzaSinistraBloccate
 
-numImgTotali = 1765
+numImgTotali = 1787
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -468,6 +477,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global sconosciutoOggettoMenu3
     global sconosciutoOggettoIcoMenu
     global imgOmbreggiaturaContorniMappaMenu
+    global vettoreNomiNemici
     global dictionaryImgNemici
     global dictImgCampiVisiviNemici
     global dictImgNemiciDiario
@@ -513,6 +523,14 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgStrumentiDiRod
     global imgChiaveUfficioNeil
     global imgEvidenziaInterzaione
+    global imgEvidenziaUsciteStanzaSu
+    global imgEvidenziaUsciteStanzaGiu
+    global imgEvidenziaUsciteStanzaDestra
+    global imgEvidenziaUsciteStanzaSinistra
+    global imgEvidenziaUsciteStanzaSuBloccate
+    global imgEvidenziaUsciteStanzaGiuBloccate
+    global imgEvidenziaUsciteStanzaDestraBloccate
+    global imgEvidenziaUsciteStanzaSinistraBloccate
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -842,6 +860,14 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sacchettoDenaro = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgFrecciaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaInterzaione = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneDisponibile.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaSu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaGiu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaDestra = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaSinistra = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaSuBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaGiuBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaDestraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaUsciteStanzaSinistraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSinistraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # cofanetti
     cofaniaper = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -1117,6 +1143,11 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
         imgDanneggiamentoColcoNemico = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
+        if nomeNemico == "Orco" or nomeNemico == "Pipistrello" or nomeNemico == "Cinghiale" or nomeNemico == "Cittadino1" or nomeNemico == "Cittadino3" or nomeNemico == "Scorpione" or nomeNemico == "ServoSpada" or nomeNemico == "ServoArco" or nomeNemico == "ServoLancia" or nomeNemico == "Aquila" or nomeNemico == "RoboLeggero" or nomeNemico == "RoboVolante" or nomeNemico == "RoboPesante" or nomeNemico == "RoboPesanteVolante" or nomeNemico == "RoboTorre":
+            imgDialogo = casellaVuotaPreset
+        else:
+            imgDialogo = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+        dictionaryImgPosizioni["imgDialogo"] = imgDialogo
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
     dictImgCampiVisiviNemici = {}
