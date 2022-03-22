@@ -1384,7 +1384,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveUfficioNeil, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Chiave ufficio di Neil", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave dell'ufficio di Neil. Era di un soldato. Io mi sono solo difesa... sto diventando una pazza assassina...", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave dell'ufficio di Neil. Era di un soldato. Io mi sono solo difesa...", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 2:
                     if voceMarcataSottoMenu <= 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
@@ -1523,7 +1523,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Ha deciso di suicidarsi... Possibile che per lei non aveva senso vivere se non per suo figlio? Cosa avrebbe fatto se non ne avesse mai avuto uno?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(u"Moglie di David. Ha deciso di suicidarsi... Possibile che per lei non aveva senso vivere se non per suo figlio? Cosa avrebbe fatto se non ne avesse mai avuto uno?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 8:
                             if dictPersonaggiSbloccati["Rod"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))

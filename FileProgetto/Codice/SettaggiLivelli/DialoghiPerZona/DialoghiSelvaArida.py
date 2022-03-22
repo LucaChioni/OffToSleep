@@ -26,15 +26,34 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             nome = "Ragno rosso"
         elif tipo == "Scorpione":
             nome = "Scorpione"
-        oggettoDato = False
-        avanzaStoria = False
-        menuMercante = False
-        scelta = False
-        avanzaColDialogo = False
-        dialogo = []
-        dialogo.append("personaggio")
-        dialogo.append(u"...")
-        partiDialogo.append(dialogo)
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoAvampostoPostEsplosioneVulcano"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Sono immobili...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(È strano poterli osservare così da vicino...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -123,7 +142,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ohhh, l'uscita! Ce l'abbiamo fatta.")
+                dialogo.append(u"Ohh, l'uscita! Ce l'abbiamo fatta.")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -39,7 +39,7 @@ class PersonaggioObj(object):
         self.avanzamentoDialogo = avanzamentoDialogo
         self.avanzaColDialogo = False
 
-        if self.tipo in GlobalImgVar.vettoreNomiNemici:
+        if self.tipo in GlobalImgVar.vettoreNomiNemici and self.tipo != "ServoLancia" and self.tipo != "ServoSpada" and self.tipo != "ServoArco":
             self.mantieniSempreASchermo = False
             self.caricaImgNemico()
             self.girati(direzione)

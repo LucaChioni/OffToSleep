@@ -29,4 +29,27 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
 
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        tiratoLevaTunnelDiRod = False
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "OggettoLevaTunnelDiRod-0":
+                if listaAvanzamentoDialoghi[i + 1] == 1:
+                    listaAvanzamentoDialoghi[i + 1] = 2
+                    tiratoLevaTunnelDiRod = True
+                break
+            i += 2
+        if tiratoLevaTunnelDiRod:
+            # aggiorno avanzamento dialogo della leva
+            for personaggio in listaPersonaggi:
+                if personaggio.tipoId == "OggettoLevaTunnelDiRod-0":
+                    personaggio.avanzamentoDialogo = 2
+                    break
+            stanza = GlobalGameVar.dictStanze["tunnelDiRod3"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire

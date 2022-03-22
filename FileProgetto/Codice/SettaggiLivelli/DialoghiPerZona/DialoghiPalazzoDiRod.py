@@ -31,6 +31,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"... È casa sua?")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoFreddoNonPercepitoPassoMontanoPostTempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Siamo abbastanza vicini alla montagna adesso, ma non si sente nessun rumore...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Speriamo solo che non ci siano altre esplosioni...)")
+                partiDialogo.append(dialogo)
         elif tipo == "OggettoPortaPalazzoDiRod":
             partiDialogo = []
             nome = "OggettoPortaPalazzoDiRod"
@@ -137,7 +151,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Certo... e collaborerete finché la persecuzione di tuo fratello non sarà conclusa, immagino.")
+                dialogo.append(u"Sì, sì... e collaborerete finché la persecuzione di tuo fratello non sarà conclusa, immagino.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -165,15 +179,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"<*>#italic#Mmh...<*> avete parlato di impo, ovvio...")
+                dialogo.append(u"... Gli hai detto che fai parte della confraternita?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Cosa c'è?")
+                dialogo.append(u"Sì...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Niente. Non importa, ce li ho gli strumenti.")
+                dialogo.append(u"<*>#italic#Mmh...<*> ok, ce li ho...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rodArrivatoAlTavoloDegliStrumenti"]:
                 oggettoDato = False

@@ -1185,7 +1185,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città3"]:
-        if tipo == "Ragazzo1":
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNemiciBloccatiSelvaArida"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sembra tutto immobile anche qua...")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazzo1":
             partiDialogo = []
             nome = "Sconosciuto"
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and avanzamentoDialogo == 0:
@@ -1765,6 +1778,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Oh no, non è neanche qui... c'è solo quel pappagallo incredibilmente addestrato...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoCittàPostTempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Con questo silenzio sembra quasi un altro posto...")
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazzo1":
             partiDialogo = []

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import random
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
@@ -937,3 +938,25 @@ def mostraSchermataCitazione():
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
     oscuraIlluminaSchermo(illumina=False)
+
+
+def animaTremolioSchermo():
+    rect = pygame.display.get_surface().get_rect()
+    oscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    oscuramento.fill((0, 0, 0, 100))
+    oscuramento = oscuramento.convert_alpha(GlobalHWVar.schermo)
+
+    schermoOriginale = GlobalHWVar.schermo.copy().convert()
+    i = 50
+    while i > 0:
+        apprI = int(i // 5)
+        n = random.randint(-apprI, apprI) / 20.0
+        m = random.randint(-apprI, apprI) / 20.0
+        GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+        GlobalHWVar.aggiornaSchermo()
+        pygame.time.wait(20)
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        i -= 1
+    GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
+    GlobalHWVar.aggiornaSchermo()

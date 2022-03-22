@@ -400,7 +400,7 @@ def setImgDialogoProtagonista(avanzamentoStoria):
         GlobalGameVar.nomePersonaggioDialoghi = "Sara"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
             imgDaUsare = "Sara4BendataDialogo"
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["voltatoRodDopoIlDialogoPostRianimazione"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["voltatoBibliotecarioDopoIlDialogoPostRianimazione"]:
             imgDaUsare = "Sara4Dialogo"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoConImpoPostTempoBloccato"]:
             imgDaUsare = "Sara4ScossaDialogo"
@@ -439,7 +439,7 @@ def setImgMenuStartProtagonista(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         imgDaUsare = "MercanteGrafMenuStart"
     else:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["voltatoRodDopoIlDialogoPostRianimazione"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["voltatoBibliotecarioDopoIlDialogoPostRianimazione"]:
             imgDaUsare = "Sara4GrafMenu"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoConImpoPostTempoBloccato"]:
             imgDaUsare = "Sara4SconvoltaGrafMenu"

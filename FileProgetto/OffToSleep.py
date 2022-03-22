@@ -579,7 +579,7 @@ def gameloop():
                             personaggio.girati(personaggio.direzione)
 
                 # stanza
-                nomeStanza = SetZoneStanzeImpedimenti.settaNomeImgStanza(dati[0], dati[1])
+                nomeStanza = SetZoneStanzeImpedimenti.settaNomeImgStanza(dati[0], dati[1], listaAvanzamentoDialoghi)
                 imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
                 if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
                     portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -2242,7 +2242,7 @@ def gameloop():
                 equipaggiamentoIndossato = True
             else:
                 equipaggiamentoIndossato = False
-            if cambiosta and SetZoneStanzeImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1], equipaggiamentoIndossato):
+            if cambiosta and SetZoneStanzeImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1], equipaggiamentoIndossato, listaAvanzamentoDialoghi):
                 cambiosta = False
                 dati[1] = stanzaVecchia
                 xPrimaDiCambioStanza = x

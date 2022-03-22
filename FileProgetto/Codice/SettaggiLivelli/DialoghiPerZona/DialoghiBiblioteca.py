@@ -670,7 +670,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"\"Impo\" è il nome della specie. Gli è stato dato perché molti esemplari portavano un'incisione sulla nuca che formava quella scritta...")
+            dialogo.append(u"\"Impo\" è il nome della specie. Gli è stato dato perché portano un'incisione sulla nuca che forma quella scritta...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -678,11 +678,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Comunque, io l'ho osservato abbastanza e non saprei cos'altro ricavarne. Neil ne era molto affascinato, se glielo lasciassi studiare potrebbe dedurne qualcosa in più.")
+            dialogo.append(u"Comunque io l'ho osservato abbastanza e non saprei cos'altro ricavarne. Neil stava iniziando a interessarsene, ma, da quello che so, non ne ha mai potuto osservare uno da vicino. Se glielo lasciassi studiare potrebbe dedurne qualcosa in più.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene. Come lo trasporto?")
+            dialogo.append(u"... Va bene. Come lo trasporto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

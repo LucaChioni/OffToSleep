@@ -5,7 +5,15 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
-def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato):
+def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato, listaAvanzamentoDialoghi):
+    tiratoLevaTunnelDiRod = False
+    i = 0
+    while i < len(listaAvanzamentoDialoghi):
+        if listaAvanzamentoDialoghi[i] == "OggettoLevaTunnelDiRod-0":
+            if listaAvanzamentoDialoghi[i + 1] >= 1:
+                tiratoLevaTunnelDiRod = True
+            break
+        i += 2
     nonProcedere = False
 
     if stanzaDestinazione == -1:
@@ -126,6 +134,12 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
         nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPerImpoNonBloccatoPostTempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and (stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello18"] or stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello2"]):
+        nonProcedere = True
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod3"] and not tiratoLevaTunnelDiRod:
+        nonProcedere = True
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"] and not tiratoLevaTunnelDiRod:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -213,8 +227,17 @@ def scriviNomeZona(stanza, stanzaVecchia):
         GlobalHWVar.aggiornaSchermo()
 
 
-def settaNomeImgStanza(avanzamentoStoria, stanza):
+def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
+    tiratoLevaTunnelDiRod = False
+    i = 0
+    while i < len(listaAvanzamentoDialoghi):
+        if listaAvanzamentoDialoghi[i] == "OggettoLevaTunnelDiRod-0":
+            if listaAvanzamentoDialoghi[i + 1] >= 1:
+                tiratoLevaTunnelDiRod = True
+            break
+        i += 2
     nomeStanza = "Stanza"
+
     if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             nomeStanza = "StanzaA"
@@ -449,7 +472,7 @@ def settaNomeImgStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
@@ -459,7 +482,7 @@ def settaNomeImgStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
