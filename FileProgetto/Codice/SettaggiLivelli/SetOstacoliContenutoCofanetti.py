@@ -1585,6 +1585,14 @@ def getEntrateStanze(stanza, avanzamentoStoria):
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 10, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod3"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 3, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod4"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod4"]])
+        elif stanza == GlobalGameVar.dictStanze["palazzoDiRod3"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 13, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 14, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["palazzoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 5, -GlobalHWVar.gpx, 0, -1])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 12, +GlobalHWVar.gpx, 0, -1])
+        elif stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 10, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 10, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod2"]])
         elif stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 5, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["palazzoDiRod2"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 12, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["tunnelDiRod1"]])
@@ -1944,9 +1952,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 tesoro = 33
     elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
-            # ottieni collana Assorbilampo
+            # ottieni collana assorbilampo
             if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 12:
-                tesoro = 69
+                tesoro = 70
     elif GlobalGameVar.dictStanze["labirinto1"] <= stanza <= GlobalGameVar.dictStanze["labirinto23"]:
         if stanza == GlobalGameVar.dictStanze["labirinto2"]:
             # ottieni condizione (pe<80)
@@ -1968,6 +1976,10 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni condizione (pvNemico<80)
             if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 9:
                 tesoro = 94
+        if stanza == GlobalGameVar.dictStanze["labirinto13"]:
+            # ottieni collana portafortuna
+            if cx == GlobalHWVar.gpx * 9 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 69
         if stanza == GlobalGameVar.dictStanze["labirinto14"]:
             # ottieni guanti difensivi
             if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 8:
@@ -2159,6 +2171,32 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni cella di memoria
             if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 10:
                 tesoro = 1000
+        if stanza == GlobalGameVar.dictStanze["palazzoDiRod3"]:
+            # ottieni armatura (ultima)
+            if cx == GlobalHWVar.gpx * 17 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 55
+            # ottieni spada (ultima)
+            if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 45
+            # ottieni scudo (ultima)
+            if cx == GlobalHWVar.gpx * 19 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 60
+            # ottieni arco (ultima)
+            if cx == GlobalHWVar.gpx * 20 and cy == GlobalHWVar.gpy * 14:
+                tesoro = 50
+        if stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+            # ottieni condizione (pv<30%)
+            if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 83
+            # ottieni condizione (pe<30%)
+            if cx == GlobalHWVar.gpx * 22 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 88
+            # ottieni tecnica (cura++)
+            if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 7:
+                tesoro = 26
+            # ottieni tecnica (scossa++)
+            if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 8:
+                tesoro = 28
     elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
         if stanza == GlobalGameVar.dictStanze["tunnelDiRod2"]:
             # ottieni cella di memoria

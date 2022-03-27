@@ -256,8 +256,9 @@ global imgEvidenziaUsciteStanzaSuBloccate
 global imgEvidenziaUsciteStanzaGiuBloccate
 global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
+global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1787
+numImgTotali = 1788
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -531,6 +532,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgEvidenziaUsciteStanzaGiuBloccate
     global imgEvidenziaUsciteStanzaDestraBloccate
     global imgEvidenziaUsciteStanzaSinistraBloccate
+    global imgChiaveSeminterratoPalazzoRod
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -1176,3 +1178,4 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgChiaveAvamposto = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveAvampostoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgStrumentiDiRod = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/StrumentiDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     imgChiaveUfficioNeil = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveUfficioNeil.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveSeminterratoPalazzoRod = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveSeminterratoPalazzoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)

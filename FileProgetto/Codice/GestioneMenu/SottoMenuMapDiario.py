@@ -545,7 +545,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     bottoneDown = False
     tastotempfps = 8
 
-    dictOggettiSbloccati = {"NonEsistente":False, "BicchiereConAcqua":False, "ChiaveRipostiglio":False, "ChiaveStanzaCasaDavid":False, "CertificatoResidenza":False, "ImpoPietra":False, "ChiaveStanzaCastello":False, "ListaStrumenti":False, "ChiaveAvamposto":False, "StrumentiDiRod":False, "ChiaveUfficioDiNeil":False}
+    dictOggettiSbloccati = {"NonEsistente":False, "BicchiereConAcqua":False, "ChiaveRipostiglio":False, "ChiaveStanzaCasaDavid":False, "CertificatoResidenza":False, "ImpoPietra":False, "ChiaveStanzaCastello":False, "ListaStrumenti":False, "ChiaveAvamposto":False, "StrumentiDiRod":False, "ChiaveUfficioDiNeil":False, "ChiaveSeminterratoPalazzoRod":False}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         dictOggettiSbloccati["BicchiereConAcqua"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
@@ -566,6 +566,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictOggettiSbloccati["StrumentiDiRod"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presaChiaveSoldatoInternoCastello20"]:
         dictOggettiSbloccati["ChiaveUfficioDiNeil"] = True
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presoChiavePianoInterratoPalazzoRod"]:
+        dictOggettiSbloccati["ChiaveSeminterratoPalazzoRod"] = True
 
     pazzo1NumDialogo = 0
     pazzo2NumDialogo = 0
@@ -1041,6 +1043,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         nomeVoceMarcataPerControllo = "StrumentiDiRod"
                     elif voceMarcataSottoMenu == 10:
                         nomeVoceMarcataPerControllo = "ChiaveUfficioDiNeil"
+                    elif voceMarcataSottoMenu == 11:
+                        nomeVoceMarcataPerControllo = "ChiaveSeminterratoPalazzoRod"
                     if dictOggettiSbloccati[nomeVoceMarcataPerControllo]:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         sottovoceSelezionata = True
@@ -1325,7 +1329,10 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         FunzioniGraficheGeneriche.messaggio("Chiave ufficio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
-                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                    if dictOggettiSbloccati["ChiaveSeminterratoPalazzoRod"]:
+                        FunzioniGraficheGeneriche.messaggio("Chiave del seminterrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
                     if sottovoceSelezionata:
                         xImgOggetto = GlobalHWVar.gsx // 32 * 20.1
                         yImgOggetto = GlobalHWVar.gsy // 18 * 3
@@ -1385,6 +1392,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Chiave ufficio di Neil", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"La chiave dell'ufficio di Neil. Era di un soldato. Io mi sono solo difesa...", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 11 and dictOggettiSbloccati["ChiaveSeminterratoPalazzoRod"]:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveSeminterratoPalazzoRod, (xImgOggetto, yImgOggetto))
+                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
+                            FunzioniGraficheGeneriche.messaggio("Chiave del seminterrato", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(u"La chiave di una stanza nel seminterrato del palazzo di Rod. L'ho trovata in mezzo a dei suoi appunti.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 2:
                     if voceMarcataSottoMenu <= 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))

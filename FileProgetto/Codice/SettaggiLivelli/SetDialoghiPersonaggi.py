@@ -195,6 +195,15 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
                 dialogo.append("tu")
                 dialogo.append(u"(Ma... si è presa la mia roba?!)")
                 partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Bauli aperti e svuotati... allora non deruba solo me...)")
+                partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
                 avanzaStoria = False
@@ -213,6 +222,15 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(Adesso non mi serve questa roba...)")
+                partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Roba di Neil, non m'interessa...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False

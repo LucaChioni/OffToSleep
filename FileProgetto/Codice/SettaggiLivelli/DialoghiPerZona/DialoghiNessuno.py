@@ -2333,6 +2333,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Non voglio perdere tempo, devo parlare con Sara adesso...)")
                 partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod3"]:
+            if (x == GlobalHWVar.gpx * 12 and y == GlobalHWVar.gpy * 5) or (x == GlobalHWVar.gpx * 21 and y == GlobalHWVar.gpy * 12):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+            if x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 4:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È chiuso a chiave...)")
+                partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodCercandoSaraAlPalazzo2"]:
                 oggettoDato = False

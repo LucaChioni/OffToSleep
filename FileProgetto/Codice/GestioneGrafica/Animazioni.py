@@ -1771,9 +1771,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 68:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Collana medicinale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 69:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Assorbilampo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
-        elif tesoro == 70:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Portafortuna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+        elif tesoro == 70:
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Assorbilampo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 71:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica piccola", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 72:

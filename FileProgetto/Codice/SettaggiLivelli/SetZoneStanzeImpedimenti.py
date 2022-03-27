@@ -178,6 +178,8 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
         procedi = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello17"] and xPorta == GlobalHWVar.gpx * 8 and yPorta == GlobalHWVar.gpy * 3:
         procedi = False
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoChiavePianoInterratoPalazzoRod"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod4"] and xPorta == GlobalHWVar.gpx * 15 and yPorta == GlobalHWVar.gpy * 4:
+        procedi = False
 
     return procedi
 
@@ -477,6 +479,11 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"]:
             nomeStanza = "StanzaA"
         else:

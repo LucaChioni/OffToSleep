@@ -188,5 +188,102 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoPalazzo1PostEsplosioneVulcano"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+        # azzero avanzamentoDialogo di Rod
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.tipo == "Mercante":
+                personaggio.avanzamentoDialogo = 0
+                break
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "Mercante-0":
+                listaAvanzamentoDialoghi[i + 1] = 0
+                break
+            i += 2
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoEntrataPalazzoDiRodConTempoBloccato"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod3"] and x == GlobalHWVar.gpx * 17 and y == GlobalHWVar.gpy * 8:
+        GlobalHWVar.canaleSoundPassiRallo.stop()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoEntrataPalazzoDiRodConTempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoVistoLevaNelPalazzoDiRod"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+        avanzamentoDialogoAmmassoImpo = 0
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "OggettoMucchioImpo-0":
+                avanzamentoDialogoAmmassoImpo = listaAvanzamentoDialoghi[i + 1]
+                break
+            i += 2
+        if avanzamentoDialogoAmmassoImpo == 0 and x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 8:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoMucchioImpo-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+            if personaggio.avanzamentoDialogo == 1:
+                percorsoDaEseguire = ["w", "d", "d", "d", "d", "w"]
+            else:
+                avanzaIlTurnoSenzaMuoverti = True
+                evitaTurnoDiColco = True
+        elif avanzamentoDialogoAmmassoImpo == 1 and x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 7 and npers == 3:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoMucchioImpo-0", stanza, avanzamentoStoria, False, avanzamentoDialogo=avanzamentoDialogoAmmassoImpo)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+        elif avanzamentoDialogoAmmassoImpo >= 2:
+            portaAperta = False
+            i = 0
+            while i < len(porte):
+                if porte[i] == GlobalGameVar.dictStanze["palazzoDiRod4"] and porte[i + 1] == GlobalHWVar.gpx * 15 and porte[i + 2] == GlobalHWVar.gpx * 4:
+                    portaAperta = porte[i + 3]
+                    break
+                i += 4
+            if portaAperta:
+                i = 0
+                while i < 5:
+                    pygame.time.wait(100)
+                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    i += 1
+                personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+                avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+                caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tiratoLeva"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+        avanzamentoStoria += 1
+        stanza = GlobalGameVar.dictStanze["palazzoDiRod4"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        avanzaIlTurnoSenzaMuoverti = True
+        evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire

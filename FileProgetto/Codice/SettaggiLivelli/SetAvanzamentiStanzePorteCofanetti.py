@@ -801,10 +801,22 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoFreddoNonPercepitoPassoMontanoPostTempoBloccato"] = i
     i += 1
     dictAvanzamentoStoria["monologoArrivoPalazzo1PostEsplosioneVulcano"] = i
-
-    i += 100
+    i += 1
+    dictAvanzamentoStoria["monologoEntrataPalazzoDiRodConTempoBloccato"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoVistoStanzaPappagalliPalazzoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["presoChiavePianoInterratoPalazzoRod"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoVistoLevaNelPalazzoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["tiratoLeva"] = i
     i += 1
     dictAvanzamentoStoria["sbloccatoCaverna"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPostSbloccoCaverna"] = i
+
+    i += 100
     i += 1
     dictAvanzamentoStoria["arrivoIngressoVulcano"] = i
     i += 1
@@ -1320,6 +1332,10 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 12, 8, False]
     vetPorte += [stanza, 17, 10, False]
     vetPorte += [stanza, 22, 13, False]
+    stanza = dictStanze["palazzoDiRod3"]
+    vetPorte += [stanza, 17, 9, False]
+    stanza = dictStanze["palazzoDiRod4"]
+    vetPorte += [stanza, 15, 4, False]
 
     return vetPorte
 
@@ -1435,6 +1451,8 @@ def definisciCofanetti(dictStanze):
     vetCofanetti += [stanza, 18, 8, False]
     stanza = dictStanze["labirinto11"]
     vetCofanetti += [stanza, 24, 9, False]
+    stanza = dictStanze["labirinto13"]
+    vetCofanetti += [stanza, 9, 8, False]
     stanza = dictStanze["labirinto14"]
     vetCofanetti += [stanza, 7, 8, False]
     stanza = dictStanze["labirinto17"]
@@ -1525,6 +1543,16 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["palazzoDiRod2"]
     vetCofanetti += [stanza, 26, 10, False]
+    stanza = dictStanze["palazzoDiRod3"]
+    vetCofanetti += [stanza, 17, 14, False]
+    vetCofanetti += [stanza, 18, 14, False]
+    vetCofanetti += [stanza, 19, 14, False]
+    vetCofanetti += [stanza, 20, 14, False]
+    stanza = dictStanze["palazzoDiRod4"]
+    vetCofanetti += [stanza, 21, 8, False]
+    vetCofanetti += [stanza, 22, 8, False]
+    vetCofanetti += [stanza, 24, 7, False]
+    vetCofanetti += [stanza, 24, 8, False]
 
     stanza = dictStanze["tunnelDiRod2"]
     vetCofanetti += [stanza, 17, 8, False]

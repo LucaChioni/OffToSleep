@@ -965,7 +965,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 print ("Percorso Colco verso obiettivo 1 non trovato")
 
         # effetto assorbilampo
-        if dati[130] == 3:
+        if dati[130] == 4:
             i = 0
             while i < len(attaccoDiColco):
                 if attaccoDiColco[i] == "Rallo" and attaccoDiColco[i + 1] < 0:
@@ -1412,7 +1412,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
 
         # effetto assorbilampo
-        if dati[130] == 3:
+        if dati[130] == 4:
             i = 0
             while i < len(attaccoDiColco):
                 if attaccoDiColco[i] == "Rallo" and attaccoDiColco[i + 1] < 0:

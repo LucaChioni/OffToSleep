@@ -2517,7 +2517,7 @@ def gameloop():
                         # metto il suo denaro nella casella in cui è morto (vettore => qta, x, y)
                         denaroDroppato = nemico.denaro
                         # effetto portafortuna
-                        if dati[130] == 4:
+                        if dati[130] == 3:
                             denaroDroppato += int(nemico.denaro * 1.5)
                         if denaroDroppato > 0:
                             # se sei nel castello metto le monete nella casella di rallo (non possono stare in quella del nemio perché c'é il loro cadavere)

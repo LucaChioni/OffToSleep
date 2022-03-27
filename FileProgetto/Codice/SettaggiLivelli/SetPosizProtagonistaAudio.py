@@ -4217,12 +4217,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gpy * 2
                 if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod3"]:
                     npers = "w"
-                    x = GlobalHWVar.gpx * 5
-                    y = GlobalHWVar.gpy * 10
+                    if y == GlobalHWVar.gpy * 13:
+                        x = GlobalHWVar.gpx * 5
+                        y = GlobalHWVar.gpy * 10
+                    elif y == GlobalHWVar.gpy * 14:
+                        x = GlobalHWVar.gpx * 4
+                        y = GlobalHWVar.gpy * 10
                 if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod4"]:
                     npers = "d"
-                    x = GlobalHWVar.gpx * 8
-                    y = GlobalHWVar.gpy * 4
+                    if x == GlobalHWVar.gpx * 5:
+                        x = GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 4
+                    elif x == GlobalHWVar.gpx * 6:
+                        x = GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 3
                 if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"]:
                     npers = "w"
                     x = GlobalHWVar.gpx * 11
@@ -4231,6 +4239,65 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "d"
                     x = GlobalHWVar.gpx * 20
                     y = GlobalHWVar.gpy * 5
+        if stanza == GlobalGameVar.dictStanze["palazzoDiRod3"]:
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PalazzoDiRod/Interno"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = GlobalSndVar.suonoaperturaportePalazzoDiRod
+            rumoreChiusuraPorte = GlobalSndVar.suonochiusuraportePalazzoDiRod
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+                    npers = "d"
+                    if x == GlobalHWVar.gpx * 4:
+                        x = GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 14
+                    elif x == GlobalHWVar.gpx * 5:
+                        x = GlobalHWVar.gpx * 8
+                        y = GlobalHWVar.gpy * 13
+        if stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+            nomeCanzoneLuogo = "11-ProprietaDiRod"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "PalazzoDiRod/Interno"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Vento1 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento1.wav")
+                audioAmbiente_Vento2 = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Vento2.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Vento1, audioAmbiente_Vento2]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = GlobalSndVar.suonoaperturaportePalazzoDiRod
+            rumoreChiusuraPorte = GlobalSndVar.suonochiusuraportePalazzoDiRod
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+                    npers = "w"
+                    if y == GlobalHWVar.gpy * 3:
+                        x = GlobalHWVar.gpx * 6
+                        y = GlobalHWVar.gpy * 10
+                    elif y == GlobalHWVar.gpy * 4:
+                        x = GlobalHWVar.gpx * 5
+                        y = GlobalHWVar.gpy * 10
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLevaTunnelDiRod)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
         if stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
             nomeCanzoneLuogo = "11-ProprietaDiRod"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
