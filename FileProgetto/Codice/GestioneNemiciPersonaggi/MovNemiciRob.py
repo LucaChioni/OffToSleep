@@ -63,10 +63,10 @@ def creaCadaveriNemici(listaNemici, stanza, avanzamentoStoria, listaPersonaggi, 
                                 if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
                                     percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
                                     if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
-                                        vatCadaveriDaCreare.append(["OggettoDictCadavereSoldatoCastello" + str(random.randint(1, 3)) + "-0", nemicoTemp1.x, nemicoTemp1.y])
+                                        vatCadaveriDaCreare.append(["OggettoDictCadavereSoldatoCastello" + str(nemico.posizMorte) + "-0", nemicoTemp1.x, nemicoTemp1.y])
                                         break
             elif not (stanza == GlobalGameVar.dictStanze["città4"] or GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello21"]):
-                vatCadaveriDaCreare.append(["OggettoDictCadavere" + nemico.tipo + str(random.randint(1, 3)) + "-0", nemico.x, nemico.y])
+                vatCadaveriDaCreare.append(["OggettoDictCadavere" + nemico.tipo + str(nemico.posizMorte) + "-0", nemico.x, nemico.y])
     for cadavere in vatCadaveriDaCreare:
         creaCadavere = True
         i = 0

@@ -487,6 +487,11 @@ class NemicoObj(object):
 
         self.imgDanneggiamentoRallo = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoRalloNemico"]
         self.imgDanneggiamentoColco = GlobalImgVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoColcoNemico"]
+        self.posizMorte = random.randint(1, 3)
+        if self.tipo.startswith("Servo"):
+            self.imgMorte = GlobalImgVar.dictImgPersonaggiOggettoSpecifici["OggettoDictCadavereSoldatoCastello" + str(self.posizMorte)]
+        else:
+            self.imgMorte = GlobalImgVar.dictImgPersonaggiOggettoSpecifici["OggettoDictCadavere" + self.tipo + str(self.posizMorte)]
 
         if nonCaricareImg:
             self.imgCampoAttaccabile = False
@@ -520,6 +525,7 @@ class NemicoObj(object):
 
         self.imgDanneggiamentoRallo = nemicoDaCopiare.imgDanneggiamentoRallo
         self.imgDanneggiamentoColco = nemicoDaCopiare.imgDanneggiamentoColco
+        self.imgMorte = nemicoDaCopiare.imgMorte
 
         self.imgCampoAttaccabile = nemicoDaCopiare.imgCampoAttaccabile
 

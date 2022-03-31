@@ -637,8 +637,13 @@ def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, anima
 def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, nemicoInquadrato, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento) or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento)) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte)):
-                if nemico.animazioneFatta:
+            nemicoMorto = False
+            if nemico.inCasellaVista and nemico.animaMorte and nemico.animazioneFatta:
+                nemicoMorto = True
+            if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento) or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento)) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte) or nemicoMorto):
+                if nemicoMorto:
+                    GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgMorte, (nemico.x, nemico.y))
+                elif nemico.animazioneFatta:
                     GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAttuale, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x, nemico.y))
