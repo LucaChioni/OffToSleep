@@ -37,6 +37,29 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"...")
         partiDialogo.append(dialogo)
+    elif tipo.startswith("OggettoDict"):
+        partiDialogo = []
+        if tipo.startswith("OggettoDictCadavereTartarugaVerde"):
+            nome = "Tartaruga verde"
+        elif tipo.startswith("OggettoDictCadavereTartarugaMarrone"):
+            nome = "Tartaruga marrone"
+        elif tipo.startswith("OggettoDictCadavereLupoGrigio"):
+            nome = "Lupo grigio"
+        elif tipo.startswith("OggettoDictCadavereLupoBianco"):
+            nome = "Lupo bianco"
+        elif tipo.startswith("OggettoDictCadavereLupoNero"):
+            nome = "Lupo nero"
+        elif tipo.startswith("OggettoDictCadavereCinghiale"):
+            nome = "Cinghiale"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = True
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
     elif tipo == "OggettoSiepe":
         partiDialogo = []
         nome = "OggettoSiepe"

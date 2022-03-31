@@ -4,6 +4,85 @@ import random
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
+import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
+
+
+def creaCadaveriNemici(listaNemici, stanza, avanzamentoStoria, listaPersonaggi, listaPersonaggiTotali, porte, x, y, rx, ry, casellePercorribiliPorteEscluse, carim=False, caricaTutto=False):
+    # creazione personaggi-oggetto cadaveri (nel castello => solo se non ti bloccano per andare avanti)
+    vatCadaveriDaCreare = []
+    for nemico in listaNemici:
+        if nemico.vita <= 0:
+            if GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello21"] and GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
+                listaCaselleUscitaTemp = []
+                if stanza == GlobalGameVar.dictStanze["internoCastello2"]:
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 6, GlobalHWVar.gpy * 2])
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 2])
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 2])
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 23, GlobalHWVar.gpy * 2])
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 24, GlobalHWVar.gpy * 2])
+                    listaCaselleUscitaTemp.append([GlobalHWVar.gpx * 25, GlobalHWVar.gpy * 2])
+                else:
+                    if stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+                        stanzaDestinazioneTemp = GlobalGameVar.dictStanze["esternoCastello5"]
+                    elif stanza == GlobalGameVar.dictStanze["internoCastello9"] and ((x <= GlobalHWVar.gpx * 16 and y >= GlobalHWVar.gpy * 7) or y >= GlobalHWVar.gpy * 12):
+                        stanzaDestinazioneTemp = GlobalGameVar.dictStanze["internoCastello11"]
+                    elif stanza == GlobalGameVar.dictStanze["internoCastello12"]:
+                        stanzaDestinazioneTemp = GlobalGameVar.dictStanze["internoCastello9"]
+                    else:
+                        stanzaDestinazioneTemp = stanza - 1
+                    vetEntrateTemp = SetOstacoliContenutoCofanetti.getEntrateStanze(stanza, avanzamentoStoria)
+                    i = 0
+                    while i < len(vetEntrateTemp):
+                        if vetEntrateTemp[i + 4] == stanzaDestinazioneTemp:
+                            listaCaselleUscitaTemp.append([vetEntrateTemp[i], vetEntrateTemp[i + 1]])
+                        i += 5
+                for nemicoTemp1 in listaNemici:
+                    if nemicoTemp1.morto:
+                        nemicoSovrappostoTemp = False
+                        for nemicoTemp2 in listaNemici:
+                            if nemicoTemp1 != nemicoTemp2 and nemicoTemp1.x == nemicoTemp2.x and nemicoTemp1.y == nemicoTemp2.y:
+                                nemicoSovrappostoTemp = True
+                        if not nemicoSovrappostoTemp:
+                            vetNemiciSoloConXeY = []
+                            for personaggio in listaPersonaggi:
+                                vetNemiciSoloConXeY.append(personaggio.x)
+                                vetNemiciSoloConXeY.append(personaggio.y)
+                            vetNemiciSoloConXeY.append(nemicoTemp1.x)
+                            vetNemiciSoloConXeY.append(nemicoTemp1.y)
+                            # aggiungo anche le porte che non si possono aprire
+                            k = 0
+                            while k < len(porte):
+                                if stanza == porte[k] and not SetZoneStanzeImpedimenti.possibileAprirePorta(stanza, porte[k + 1], porte[k + 2], avanzamentoStoria):
+                                    vetNemiciSoloConXeY.append(porte[k + 1])
+                                    vetNemiciSoloConXeY.append(porte[k + 2])
+                                k += 4
+                            for casellaUscita in listaCaselleUscitaTemp:
+                                percorsoTrovato = GenericFunc.pathFinding(x, y, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                                if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                                    percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                                    if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                                        vatCadaveriDaCreare.append(["OggettoDictCadavereSoldatoCastello" + str(random.randint(1, 3)) + "-0", nemicoTemp1.x, nemicoTemp1.y])
+                                        break
+            elif not (stanza == GlobalGameVar.dictStanze["città4"] or GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello21"]):
+                vatCadaveriDaCreare.append(["OggettoDictCadavere" + nemico.tipo + str(random.randint(1, 3)) + "-0", nemico.x, nemico.y])
+    for cadavere in vatCadaveriDaCreare:
+        creaCadavere = True
+        i = 0
+        while i < len(listaPersonaggi):
+            if listaPersonaggi[i].x == cadavere[1] and listaPersonaggi[i].y == cadavere[2]:
+                creaCadavere = False
+                break
+            i += 1
+        if creaCadavere:
+            personaggio = PersonaggioObj.PersonaggioObj(cadavere[1], cadavere[2], "s", cadavere[0], stanza, avanzamentoStoria, [])
+            listaPersonaggiTotali.append(personaggio)
+            listaPersonaggi.append(personaggio)
+            carim = True
+            caricaTutto = True
+
+    return listaPersonaggi, listaPersonaggiTotali, carim, caricaTutto
 
 
 def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste, impossibileParare):

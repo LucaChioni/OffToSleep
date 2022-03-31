@@ -184,7 +184,7 @@ def menu(caricaSalvataggio, gameover):
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- condizioni
         0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
-        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False,  # <- info aggiunte per poter salvare ovunque
+        rxInizialie, ryInizialie, -1, -1, -1, 0, 1, 3, False,  # <- info aggiunte per poter salvare ovunque
         False, False, 0  # <- pazzoStrabico, cambiataCastello e moneteSpeseDaRod
         ]
 

@@ -239,11 +239,11 @@ def definisciImgOggetti(tipo):
         numImg = 3
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
-    if tipo.startswith("OggettoDictCadavereSoldato"):
+    if tipo.startswith("OggettoDictCadavere"):
         disegnaImg = True
         numImg = 1
         numImgDialogo = 1
-        nomeImgDialogo = ["OggettoDictCadavereSoldatoDialogo"]
+        nomeImgDialogo = [tipo[:-1] + "Dialogo"]
     if tipo == "OggettoSaraNelLago":
         disegnaImg = True
         numImg = 5

@@ -6,6 +6,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiNessuno as DialoghiNessuno
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTutorial as DialoghiTutorial
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiSogno as DialoghiSogno
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCasa as DialoghiCasa
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiForestaCadetta as DialoghiForestaCadetta
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiStradaPerCitta as DialoghiStradaPerCitta
@@ -71,7 +72,7 @@ def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
         GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] and personaggio.tipo.startswith("OggettoDictCadavereSoldato"):
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] and personaggio.tipo.startswith("OggettoDictCadavereSoldatoCastello"):
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
 
     return avanzamentoStoria
@@ -241,6 +242,8 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
                 dialogo.append("tu")
                 dialogo.append(u"(Non ho voglia di mettere a posto questa roba... e poi qua sembra non dar fastidio a nessuno...)")
                 partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["sognoSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["sognoSara4"]:
+        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSogno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaHansSara4"]:
         partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCasa.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["forestaCadetta9"]:

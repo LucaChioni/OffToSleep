@@ -331,7 +331,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("tu")
         dialogo.append(u"(Un lago all'alba...)")
         partiDialogo.append(dialogo)
-    elif tipoId.startswith("OggettoDictCadavereSoldato"):
+    elif tipoId.startswith("OggettoDictCadavereSoldatoCastello"):
         partiDialogo = []
         nome = "Cadavere soldato"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"]:
@@ -3191,7 +3191,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non preoccuparti per me, io sono un po'... un po' diversa perché... perché mi hanno rifatto alcune parti del corpo... forse tornerò come prima col tempo...")
+                dialogo.append(u"Non preoccuparti per me, sono un po'... ma forse tornerò come prima col tempo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3199,11 +3199,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Va beh, l'importante è che siamo vivi entrambi...")
+                dialogo.append(u"L'importante è che siamo vivi entrambi...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Forse qua intorno c'è qualcosa che potrebbe farmi capire meglio cosa mi hanno fatto...")
+                dialogo.append(u"Ok... forse qua intorno c'è qualcosa che potrebbe farmi capire meglio cosa mi hanno fatto...")
                 partiDialogo.append(dialogo)
         elif tipo == "Bibliotecario":
             partiDialogo = []

@@ -638,7 +638,7 @@ if len(datiFileImpostazioniString) == 6:
             if not (gsx == maxGsx and gsy == maxGsy):
                 os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
             else:
-                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + gpy)
+                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
             opzioni_schermo = pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
             pygame.display.set_caption(titolo)

@@ -891,7 +891,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             if not (GlobalHWVar.gsx == GlobalHWVar.maxGsx and GlobalHWVar.gsy == GlobalHWVar.maxGsy):
                                 os.environ['SDL_VIDEO_WINDOW_POS'] = str((GlobalHWVar.maxGsx // 2) - (GlobalHWVar.gsx // 2)) + "," + str((GlobalHWVar.maxGsy // 2) - (GlobalHWVar.gsy // 2))
                             else:
-                                os.environ['SDL_VIDEO_WINDOW_POS'] = str((GlobalHWVar.maxGsx // 2) - (GlobalHWVar.gsx // 2)) + "," + str((GlobalHWVar.maxGsy // 2) - (GlobalHWVar.gsy // 2) + GlobalHWVar.gpy)
+                                os.environ['SDL_VIDEO_WINDOW_POS'] = str((GlobalHWVar.maxGsx // 2) - (GlobalHWVar.gsx // 2)) + "," + str((GlobalHWVar.maxGsy // 2) - (GlobalHWVar.gsy // 2) + (GlobalHWVar.gpy // 3))
                             GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx + 1, GlobalHWVar.gsy), opzioni_schermo)
                             GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), opzioni_schermo)
                             pygame.display.set_caption(GlobalHWVar.titolo)

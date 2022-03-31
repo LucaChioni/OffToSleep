@@ -37,6 +37,29 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"...")
         partiDialogo.append(dialogo)
+    elif tipo.startswith("OggettoDict"):
+        partiDialogo = []
+        if tipo.startswith("OggettoDictCadavereGufoMarrone"):
+            nome = "Gufo marrone"
+        elif tipo.startswith("OggettoDictCadavereGufoBianco"):
+            nome = "Gufo bianco"
+        elif tipo.startswith("OggettoDictCadavereStruzzo"):
+            nome = "Struzzo"
+        elif tipo.startswith("OggettoDictCadavereCasuario"):
+            nome = "Casuario"
+        elif tipo.startswith("OggettoDictCadavereFalco"):
+            nome = "Falco"
+        elif tipo.startswith("OggettoDictCadavereAquila"):
+            nome = "Aquila"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = True
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []

@@ -960,3 +960,10 @@ def animaTremolioSchermo():
         i -= 1
     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
     GlobalHWVar.aggiornaSchermo()
+
+
+def disegnaCasellaSulloSchermo(imgCasella, xCasella, yCasella, listaNemiciSotterrati, imgNemicoSotterrato):
+    GlobalHWVar.disegnaImmagineSuSchermo(imgCasella, (xCasella, yCasella))
+    for nemicoSotterrato in listaNemiciSotterrati:
+        if nemicoSotterrato[0] == xCasella and nemicoSotterrato[1] == yCasella:
+            GlobalHWVar.disegnaImmagineSuSchermo(imgNemicoSotterrato, (nemicoSotterrato[0], nemicoSotterrato[1]))

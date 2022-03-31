@@ -10,8 +10,6 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
-import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
-import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
 
 
 def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire):
@@ -690,7 +688,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             while (spawnCadavereX == x and spawnCadavereY == y) or (spawnCadavereX == rx and spawnCadavereY == ry):
                 spawnCadavereX += GlobalHWVar.gpx * 1
             percorsoPersonaggio = []
-            personaggio = PersonaggioObj.PersonaggioObj(spawnCadavereX, spawnCadavereY, "s", "OggettoDictCadavereSoldato" + str(random.randint(1, 3)) + "-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj.PersonaggioObj(spawnCadavereX, spawnCadavereY, "s", "OggettoDictCadavereSoldatoCastello" + str(random.randint(1, 3)) + "-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
             listaPersonaggi.append(personaggio)
             avanzamentoStoria += 1
@@ -1637,63 +1635,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
 
-    # creazione personaggi-oggetto cadaveri soldati (solo se non ti bloccano per andare avanti)
-    if GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
-        listaCaselleUscita = []
-        if stanza == GlobalGameVar.dictStanze["internoCastello2"]:
-            listaCaselleUscita.append([GlobalHWVar.gpx * 6, GlobalHWVar.gpy * 2])
-            listaCaselleUscita.append([GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 2])
-            listaCaselleUscita.append([GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 2])
-            listaCaselleUscita.append([GlobalHWVar.gpx * 23, GlobalHWVar.gpy * 2])
-            listaCaselleUscita.append([GlobalHWVar.gpx * 24, GlobalHWVar.gpy * 2])
-            listaCaselleUscita.append([GlobalHWVar.gpx * 25, GlobalHWVar.gpy * 2])
-        else:
-            if stanza == GlobalGameVar.dictStanze["internoCastello1"]:
-                stanzaDestinazione = GlobalGameVar.dictStanze["esternoCastello5"]
-            elif stanza == GlobalGameVar.dictStanze["internoCastello9"] and ((x <= GlobalHWVar.gpx * 16 and y >= GlobalHWVar.gpy * 7) or y >= GlobalHWVar.gpy * 12):
-                stanzaDestinazione = GlobalGameVar.dictStanze["internoCastello11"]
-            elif stanza == GlobalGameVar.dictStanze["internoCastello12"]:
-                stanzaDestinazione = GlobalGameVar.dictStanze["internoCastello9"]
-            else:
-                stanzaDestinazione = stanza - 1
-            vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(stanza, avanzamentoStoria)
-            i = 0
-            while i < len(vetEntrate):
-                if vetEntrate[i + 4] == stanzaDestinazione:
-                    listaCaselleUscita.append([vetEntrate[i], vetEntrate[i + 1]])
-                i += 5
-        for nemico in listaNemici:
-            if nemico.morto:
-                nemicoSovrapposto = False
-                for nemicoTemp in listaNemici:
-                    if nemico != nemicoTemp and nemico.x == nemicoTemp.x and nemico.y == nemicoTemp.y:
-                        nemicoSovrapposto = True
-                if not nemicoSovrapposto:
-                    vetNemiciSoloConXeY = []
-                    for personaggio in listaPersonaggi:
-                        vetNemiciSoloConXeY.append(personaggio.x)
-                        vetNemiciSoloConXeY.append(personaggio.y)
-                    vetNemiciSoloConXeY.append(nemico.x)
-                    vetNemiciSoloConXeY.append(nemico.y)
-                    # aggiungo anche le porte che non si possono aprire
-                    k = 0
-                    while k < len(porte):
-                        if stanza == porte[k] and not SetZoneStanzeImpedimenti.possibileAprirePorta(stanza, porte[k + 1], porte[k + 2], avanzamentoStoria):
-                            vetNemiciSoloConXeY.append(porte[k + 1])
-                            vetNemiciSoloConXeY.append(porte[k + 2])
-                        k += 4
-                    for casellaUscita in listaCaselleUscita:
-                        percorsoTrovato = GenericFunc.pathFinding(x, y, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
-                        if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
-                            percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
-                            if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
-                                percorsoPersonaggio = []
-                                personaggio = PersonaggioObj.PersonaggioObj(nemico.x, nemico.y, "s", "OggettoDictCadavereSoldato" + str(random.randint(1, 3)) + "-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-                                listaPersonaggiTotali.append(personaggio)
-                                listaPersonaggi.append(personaggio)
-                                carim = True
-                                caricaTutto = True
-                                break
     # se un nemico ti vede, tutti sanno dove sei
     if GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         listaObiettiviVisti = []

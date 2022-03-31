@@ -126,6 +126,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append("La mappa e il diario si possono aprire dal menu cliccando sulle relative voci.")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["armaturaNonnoCompletata"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Quando uccidi un nemico è possibile interagire col suo cadavere per sotterrarlo e depredarlo.")
+        partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"]:
         oggettoDato = False
         avanzaStoria = True

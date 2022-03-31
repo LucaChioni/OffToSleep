@@ -38,6 +38,7 @@ def gameloop():
     if True:
         casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
 
+        listaNemiciSotterrati = []
         avanzaManualmentePercorsoDaEseguire = False
         evitaAggiornamentoStatoInizioTurno = True
         cambiatoRisoluzione = False
@@ -118,7 +119,7 @@ def gameloop():
         vx = x
         vy = y
         # 1->d , 2->a , 3->w , 4->s
-        npers = 4
+        npers = 1
         rx = 0
         ry = 0
         vrx = rx
@@ -142,9 +143,10 @@ def gameloop():
         impossibileCliccarePulsanti = True
 
         # stanza
-        imgSfondoStanza = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+        imgSfondoStanza = casellaVuotaPreset
         portaVert = False
         portaOriz = False
+        imgNemicoSotterrato = casellaVuotaPreset
 
         caseviste = []
         casevisteDaRallo = []
@@ -258,6 +260,7 @@ def gameloop():
             print (u"Max RAM necessitata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            listaNemiciSotterrati = []
             cambiatoRisoluzione = False
             if not gameover:
                 riavviaAudioMusica = False
@@ -378,6 +381,7 @@ def gameloop():
                 npers = 4
 
             if cambiosta or cambiatoRisoluzione:
+                listaNemiciSotterrati = []
                 posizioneRalloAggiornamentoCaseAttac = [0, 0]
                 if not inizio and not cambiatoRisoluzione:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
@@ -551,6 +555,10 @@ def gameloop():
                         GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
 
                 if cambiatoRisoluzione:
+                    vx = x
+                    vy = y
+                    vrx = rx
+                    vry = ry
                     if obbiettivoCasualeColco:
                         obbiettivoCasualeColco.caricaImg()
                         obbiettivoCasualeColco.girati(obbiettivoCasualeColco.direzione)
@@ -587,7 +595,10 @@ def gameloop():
                 else:
                     portaVert = False
                     portaOriz = False
-                schermoOriginale = imgSfondoStanza
+                if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/CadavereSotterrato.png"):
+                    imgNemicoSotterrato = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/CadavereSotterrato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                else:
+                    imgNemicoSotterrato = casellaVuotaPreset
 
                 # fermare la camminata dopo il cambio stanza
                 bottoneDown = False
@@ -600,7 +611,7 @@ def gameloop():
                 while i < len(caseviste):
                     vettoreImgCaselle.append(caseviste[i])
                     vettoreImgCaselle.append(caseviste[i + 1])
-                    vettoreImgCaselle.append(schermoOriginale.subsurface(pygame.Rect(caseviste[i], caseviste[i + 1], GlobalHWVar.gpx, GlobalHWVar.gpy)).convert())
+                    vettoreImgCaselle.append(imgSfondoStanza.subsurface(pygame.Rect(caseviste[i], caseviste[i + 1], GlobalHWVar.gpx, GlobalHWVar.gpy)).convert())
                     i += 3
 
                 impossibileCliccarePulsanti = True
@@ -1201,7 +1212,7 @@ def gameloop():
                                 personaggio.girati("s", perDialogo=True)
                             elif npers == 4:
                                 personaggio.girati("w", perDialogo=True)
-                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                         if personaggio.oggettoEnigma:
                             dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                         else:
@@ -1558,7 +1569,7 @@ def gameloop():
                             personaggio.girati("s", perDialogo=True)
                         elif npers == 4:
                             personaggio.girati("w", perDialogo=True)
-                    EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                    EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                     if personaggio.oggettoEnigma:
                         dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                     else:
@@ -1926,7 +1937,7 @@ def gameloop():
         if not inizio and not cambiatoRisoluzione and not carim:
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                 FunzioniGraficheGeneriche.animaOggettoSpecialeRicevuto(oggettoRicevuto)
                 oggettoRicevuto = False
                 caricaTutto = True
@@ -1959,7 +1970,10 @@ def gameloop():
             # gestione attacchi
             attaccoADistanza = False
             if attacco != 0:
-                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse)
+                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse, listaNemiciSotterrati, imgNemicoSotterrato)
+                # creo cadaveri nemici
+                listaPersonaggi, listaPersonaggiTotali, carim, caricaTutto = MovNemiciRob.creaCadaveriNemici(listaNemici, dati[1], dati[0], listaPersonaggi, listaPersonaggiTotali, porte, x, y, rx, ry, casellePercorribiliPorteEscluse, carim, caricaTutto)
+
                 refreshSchermo = True
                 caricaTutto = True
                 # cancello apertura porta se non si può aprire
@@ -2163,7 +2177,7 @@ def gameloop():
                             elif npers == 4:
                                 personaggio.girati("w", perDialogo=True)
                         # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
-                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                         if personaggio.oggettoEnigma:
                             dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
                         else:
@@ -2253,7 +2267,7 @@ def gameloop():
                 caricaTutto = True
                 bottoneDown = False
 
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                 personaggio = PersonaggioObj.PersonaggioObj(xPrimaDiCambioStanza, yPrimaDiCambioStanza, False, "Nessuno-0", dati[1], dati[0], False)
                 if personaggio.oggettoEnigma:
                     dati[0] = MenuEnigmi.mostraEnigma(personaggio.tipo, dati[0])
@@ -2382,6 +2396,8 @@ def gameloop():
                 # movimento - gambit
                 if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
                     rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche = MovNemiciRob.movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, analizzaColco=False)
+                    # creo cadaveri nemici
+                    listaPersonaggi, listaPersonaggiTotali, carim, caricaTutto = MovNemiciRob.creaCadaveriNemici(listaNemici, dati[1], dati[0], listaPersonaggi, listaPersonaggiTotali, porte, x, y, rx, ry, casellePercorribiliPorteEscluse, carim, caricaTutto)
 
                 if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                     mosseRimasteRob -= 2
@@ -2520,24 +2536,9 @@ def gameloop():
                         if dati[130] == 3:
                             denaroDroppato += int(nemico.denaro * 1.5)
                         if denaroDroppato > 0:
-                            # se sei nel castello metto le monete nella casella di rallo (non possono stare in quella del nemio perché c'é il loro cadavere)
-                            if GlobalGameVar.dictStanze["internoCastello1"] <= dati[1] <= GlobalGameVar.dictStanze["internoCastello21"]:
-                                denaroGiaPresente = False
-                                i = 0
-                                while i < len(vettoreDenaro):
-                                    if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
-                                        vettoreDenaro[i] += denaroDroppato
-                                        denaroGiaPresente = True
-                                        break
-                                    i += 3
-                                if not denaroGiaPresente:
-                                    vettoreDenaro.append(denaroDroppato)
-                                    vettoreDenaro.append(x)
-                                    vettoreDenaro.append(y)
-                            else:
-                                vettoreDenaro.append(denaroDroppato)
-                                vettoreDenaro.append(nemico.x)
-                                vettoreDenaro.append(nemico.y)
+                            vettoreDenaro.append(denaroDroppato)
+                            vettoreDenaro.append(nemico.x)
+                            vettoreDenaro.append(nemico.y)
                         nemico.morto = True
                         nemico.animaMorte = True
 
@@ -2598,10 +2599,10 @@ def gameloop():
                 refreshSchermo = True
                 if aumentoliv != 0:
                     pvtot = GenericFunc.getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
                 caricaTutto = False
             if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and not stanzaCambiata:
-                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia, animaCuraCollana, animaEffettoVeleno, animaEffettoVelenoNemico, animaEffettoSurriscaldamento)
+                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia, animaCuraCollana, animaEffettoVeleno, animaEffettoVelenoNemico, animaEffettoSurriscaldamento, listaNemiciSotterrati, imgNemicoSotterrato)
             if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta):
                 refreshSchermo = False
                 apriocchio = False
@@ -2610,7 +2611,7 @@ def gameloop():
                         apriocchio = True
                         break
                 pvtot = GenericFunc.getVitaTotRallo(dati[4], dati[129])
-                EnvPrint.disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa)
+                EnvPrint.disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcos, faretras, armaturas, collanas, armas, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato)
 
             if GlobalHWVar.testOstacoliAttivi:
                 FunzioniPerTest.testOstacoli(x, y, rx, ry, dati[1], porte, cofanetti, dati[0], entrateStanza)
@@ -2620,7 +2621,7 @@ def gameloop():
                 porteTemp = porte[:]
                 if movimentoDaCompiere and len(percorsoDaEseguire) == 0:
                     GlobalHWVar.canaleSoundPassiRallo.stop()
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno, avanzaManualmentePercorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire)
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno, avanzaManualmentePercorsoDaEseguire, listaNemiciSotterrati = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire, listaNemiciSotterrati)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True
@@ -2662,6 +2663,8 @@ def gameloop():
                 if not escaCancellata:
                     i += 4
 
+            # creo cadaveri nemici nel caso non siano morti per azioni di Rallo o di Colco (non dovrebbero esserci altre cause, ma magari non hai tenuto conto di qualcosa, eh?! O magari metterai qualcos'altro in futuro...)
+            listaPersonaggi, listaPersonaggiTotali, carim, caricaTutto = MovNemiciRob.creaCadaveriNemici(listaNemici, dati[1], dati[0], listaPersonaggi, listaPersonaggiTotali, porte, x, y, rx, ry, casellePercorribiliPorteEscluse, carim, caricaTutto)
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
             i = len(listaNemici) - 1
             while i >= 0:

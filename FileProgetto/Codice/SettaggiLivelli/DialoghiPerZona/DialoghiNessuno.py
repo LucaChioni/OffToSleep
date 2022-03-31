@@ -257,7 +257,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"(Meglio prendere la legna e accamparsi qui per la notte...)")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["armaturaNonnoCompletata"]:
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialSeppellireCadaveri"]:
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -1901,25 +1901,24 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
-            elif ((x == GlobalHWVar.gpx * 10 or x == GlobalHWVar.gpx * 11) and y == GlobalHWVar.gpy * 3) or y == GlobalHWVar.gpy * 1:
-                if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Non si apre...)")
-                    partiDialogo.append(dialogo)
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Forse nella stanza in cui mi sono risvegliata posso trovare qualcosa che mi aiuti a capire cos'è successo...)")
-                    partiDialogo.append(dialogo)
+            elif (x == GlobalHWVar.gpx * 10 or x == GlobalHWVar.gpx * 11) and y == GlobalHWVar.gpy * 3:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non si apre...)")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Forse nella stanza in cui mi sono risvegliata posso trovare qualcosa che mi aiuti a capire cos'è successo...)")
+                partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 16:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2010,11 +2009,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Neil?")
+                dialogo.append(u"... Neil?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Posso... posso muovermi...")
+                dialogo.append(u"... Ma dove cavolo...?!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oh, posso... posso muovermi...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 2:
                 oggettoDato = False

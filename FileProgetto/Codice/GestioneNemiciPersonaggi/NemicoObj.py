@@ -347,7 +347,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(50, 53)
+            denaro = 0
             esp = 158
             ignoraEsche = True
         if self.tipo == "ServoArco":
@@ -360,7 +360,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(54, 57)
+            denaro = 0
             esp = 181
             ignoraEsche = True
         if self.tipo == "ServoLancia":
@@ -373,7 +373,7 @@ class NemicoObj(object):
             velenoso = True
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(58, 60)
+            denaro = 0
             esp = 203
             ignoraEsche = True
 
@@ -387,7 +387,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = 0
             esp = 5
         if self.tipo == "RoboVolante":
             vitaTotale = 25
@@ -399,7 +399,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = 0
             esp = 5
         if self.tipo == "RoboPesante":
             vitaTotale = 25
@@ -411,7 +411,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = 0
             esp = 5
 
         if self.tipo == "RoboPesanteVolante":
@@ -424,7 +424,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = 0
             esp = 5
         if self.tipo == "RoboTorre":
             vitaTotale = 25
@@ -436,7 +436,7 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = 0
             esp = 5
 
         self.vita = vitaTotale
