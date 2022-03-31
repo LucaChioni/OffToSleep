@@ -210,14 +210,10 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
             GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
         aggressoreAncoraVivo = False
-        spawnCadavereX = 0
-        spawnCadavereY = 0
         for nemico in listaNemici:
             if nemico.tipo == "Cittadino3":
                 if nemico.vita > 0:
                     aggressoreAncoraVivo = True
-                spawnCadavereX = nemico.x
-                spawnCadavereY = nemico.y
                 break
         if aggressoreAncoraVivo:
             for personaggio in listaPersonaggi:
@@ -233,13 +229,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                         personaggio.numeroMovimento = 0
                     break
         else:
-            percorsoPersonaggio = []
-            personaggio = PersonaggioObj.PersonaggioObj(spawnCadavereX, spawnCadavereY, "s", "OggettoPersonaCittadino3Cadavere-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-            listaPersonaggiTotali.append(personaggio)
-            listaPersonaggi.append(personaggio)
             avanzamentoStoria += 1
-            carim = True
-            caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"] and stanza == GlobalGameVar.dictStanze["città4"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
@@ -262,23 +252,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoDopoPrimoOmicidio"] and stanza == GlobalGameVar.dictStanze["città4"]:
         aggressoreAncoraVivo = False
-        spawnCadavereX = 0
-        spawnCadavereY = 0
         for nemico in listaNemici:
             if nemico.tipo == "Cittadino1":
                 if nemico.vita > 0:
                     aggressoreAncoraVivo = True
-                spawnCadavereX = nemico.x
-                spawnCadavereY = nemico.y
                 break
         if not aggressoreAncoraVivo:
-            percorsoPersonaggio = []
-            personaggio = PersonaggioObj.PersonaggioObj(spawnCadavereX, spawnCadavereY, "s", "OggettoPersonaCittadino1Cadavere-0", stanza, avanzamentoStoria, percorsoPersonaggio)
-            listaPersonaggiTotali.append(personaggio)
-            listaPersonaggi.append(personaggio)
             avanzamentoStoria += 1
-            carim = True
-            caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoSecondoAggressore"] and stanza == GlobalGameVar.dictStanze["città4"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)

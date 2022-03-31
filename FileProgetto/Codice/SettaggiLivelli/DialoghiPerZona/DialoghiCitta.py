@@ -509,6 +509,22 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("tu")
         dialogo.append(u"(Non ho niente da chiedergli...)")
         partiDialogo.append(dialogo)
+    elif tipo.startswith("OggettoDict"):
+        partiDialogo = []
+        nome = "Cadavere"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"...")
+        partiDialogo.append(dialogo)
 
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città1"]:
         if tipo == "GuardiaCitta":
@@ -1753,18 +1769,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
-        elif tipo == "OggettoPersonaCittadino1Cadavere" or tipo == "OggettoPersonaCittadino3Cadavere":
-            partiDialogo = []
-            nome = "Cadavere"
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"...")
-            partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città5"]:
         if tipo == "OggettoImpo":
             partiDialogo = []

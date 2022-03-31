@@ -258,7 +258,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1884
+numImgTotali = 1892
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -1038,7 +1038,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     dictImgPersonaggiOggettoSpecifici = {}
     dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoAperto"] = cofaniaper
     dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoChiuso"] = cofanichiu
-    vettoreNomiCadaveriNemici = ["CadavereSoldatoCastello", "CadavereOrco", "CadaverePipistrello", "CadavereTartarugaVerde", "CadavereTartarugaMarrone", "CadavereLupoGrigio", "CadavereLupoBianco", "CadavereLupoNero", "CadavereCinghiale", "CadavereSerpeVerde", "CadavereSerpeArancio", "CadavereScorpione", "CadavereRagnoNero", "CadavereRagnoRosso", "CadavereGufoMarrone", "CadavereGufoBianco", "CadavereFalco", "CadavereAquila", "CadavereStruzzo", "CadavereCasuario", "CadavereRoboLeggero", "CadavereRoboVolante", "CadavereRoboPesante", "CadavereRoboPesanteVolante", "CadavereRoboTorre"]
+    vettoreNomiCadaveriNemici = ["CadavereSoldatoCastello", "CadavereOrco", "CadaverePipistrello", "CadavereTartarugaVerde", "CadavereTartarugaMarrone", "CadavereLupoGrigio", "CadavereLupoBianco", "CadavereLupoNero", "CadavereCinghiale", "CadavereCittadino1", "CadavereCittadino3", "CadavereSerpeVerde", "CadavereSerpeArancio", "CadavereScorpione", "CadavereRagnoNero", "CadavereRagnoRosso", "CadavereGufoMarrone", "CadavereGufoBianco", "CadavereFalco", "CadavereAquila", "CadavereStruzzo", "CadavereCasuario", "CadavereRoboLeggero", "CadavereRoboVolante", "CadavereRoboPesante", "CadavereRoboPesanteVolante", "CadavereRoboTorre"]
     for nomeCadavereNemico in vettoreNomiCadaveriNemici:
         dictImgDialoghiPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "Dialogo"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
         dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "1"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)

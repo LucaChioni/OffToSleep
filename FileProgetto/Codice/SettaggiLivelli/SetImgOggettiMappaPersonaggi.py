@@ -164,16 +164,6 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
-    if tipo == "OggettoPersonaCittadino3Cadavere":
-        disegnaImg = True
-        numImg = 1
-        numImgDialogo = 1
-        nomeImgDialogo = ["Cittadino3CadavereDialogo"]
-    if tipo == "OggettoPersonaCittadino1Cadavere":
-        disegnaImg = True
-        numImg = 1
-        numImgDialogo = 1
-        nomeImgDialogo = ["Cittadino1CadavereDialogo"]
     if tipo == "OggettoAssistBiblioteca":
         disegnaImg = False
         numImg = 1
