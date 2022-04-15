@@ -513,7 +513,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Ok... non mi sembri molto \"istintivo\" o \"bestiale\" ora che ci stai pensando...")
+            dialogo.append(u"... Ok... ma non mi sembri molto \"istintivo\" o \"bestiale\" ora che ci stai pensando...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

@@ -25,6 +25,7 @@ import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizStradaPerPassoMo
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizPassoMontano as PosizPassoMontano
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizPalazzoDiRod as PosizPalazzoDiRod
 import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizTunnelDiRod as PosizTunnelDiRod
+import Codice.SettaggiLivelli.PosizNemiciPersonaggiPerZona.PosizCavernaImpo as PosizCavernaImpo
 import Codice.SettaggiLivelli.EventiPerZona.EventiSogno as EventiSogno
 import Codice.SettaggiLivelli.EventiPerZona.EventiCasa as EventiCasa
 import Codice.SettaggiLivelli.EventiPerZona.EventiForestaCadetta as EventiForestaCadetta
@@ -43,6 +44,7 @@ import Codice.SettaggiLivelli.EventiPerZona.EventiStradaPerPassoMontano as Event
 import Codice.SettaggiLivelli.EventiPerZona.EventiPassoMontano as EventiPassoMontano
 import Codice.SettaggiLivelli.EventiPerZona.EventiPalazzoDiRod as EventiPalazzoDiRod
 import Codice.SettaggiLivelli.EventiPerZona.EventiTunnelDiRod as EventiTunnelDiRod
+import Codice.SettaggiLivelli.EventiPerZona.EventiCavernaImpo as EventiCavernaImpo
 
 
 def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi, cofanetti):
@@ -89,6 +91,8 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaNemiciTotali, listaNemici = PosizPalazzoDiRod.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
             listaNemiciTotali, listaNemici = PosizTunnelDiRod.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+            listaNemiciTotali, listaNemici = PosizCavernaImpo.setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria)
     else:
         for nemico in listaNemiciTotali:
             if nemico.stanzaDiAppartenenza == stanza:
@@ -146,6 +150,8 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaPersonaggiTotali, listaPersonaggi = PosizPalazzoDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
             listaPersonaggiTotali, listaPersonaggi = PosizTunnelDiRod.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
+        elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+            listaPersonaggiTotali, listaPersonaggi = PosizCavernaImpo.setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi)
         # metto i personaggi-cofanetto per quando usi Rod
         if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
             i = 0
@@ -181,6 +187,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     if not stanza in stanzeGiaVisitate:
         stanzeGiaVisitate.append(stanza)
 
+    # eccezioni col tempo bloccato
     if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
         # trasformo i nemici in personaggi se il tempo è bloccato (eccetto quelli nella caverna e nel vulcano)
         for nemico in listaNemici:
@@ -205,6 +212,30 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
         for personaggio in listaPersonaggiTotali:
             personaggio.percorso = []
             personaggio.numeroMovimento = 0
+    # eccezioni per caverna impo
+    if GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+        for nemico in listaNemici:
+            nemico.x, nemico.y = nemico.posizioneOriginale
+            nemico.vx, nemico.vy = nemico.posizioneOriginale
+            nemico.vita = nemico.vitaTotale
+            nemico.avvelenato = False
+            nemico.appiccicato = False
+            nemico.triggerato = False
+            nemico.obbiettivo = ["", 0, 0, []]
+            nemico.xPosizioneUltimoBersaglio = False
+            nemico.yPosizioneUltimoBersaglio = False
+            nemico.numeroMovimento = False
+        for nemico in listaNemiciTotali:
+            nemico.x, nemico.y = nemico.posizioneOriginale
+            nemico.vx, nemico.vy = nemico.posizioneOriginale
+            nemico.vita = nemico.vitaTotale
+            nemico.avvelenato = False
+            nemico.appiccicato = False
+            nemico.triggerato = False
+            nemico.obbiettivo = ["", 0, 0, []]
+            nemico.xPosizioneUltimoBersaglio = False
+            nemico.yPosizioneUltimoBersaglio = False
+            nemico.numeroMovimento = False
 
     return listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi
 
@@ -252,6 +283,8 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, rx, ry, nrob, c
         x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire = EventiPalazzoDiRod.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire)
     elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
         x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire = EventiTunnelDiRod.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire)
+    elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+        x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire = EventiCavernaImpo.gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire)
 
     # elimino i personaggi-oggetto dei cadaveri sotterrati
     sotterratoCadaveri = False

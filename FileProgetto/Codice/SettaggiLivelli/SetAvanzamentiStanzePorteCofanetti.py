@@ -818,6 +818,14 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoPostSbloccoCaverna"] = i
 
+    i += 1
+    dictAvanzamentoStoria["vistoImpoOstile"] = i
+    i += 1
+    dictAvanzamentoStoria["resoOstileImpoInCaverna1"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"] = i
+    dictAvanzamentoStoria["mappaCaverna"] = i
+
     i += 100
     i += 1
     dictAvanzamentoStoria["arrivoIngressoVulcano"] = i
@@ -828,8 +836,6 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnni"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaCaverna"] = i
     i += 1
     dictAvanzamentoStoria["mappaVulcano"] = i
     i += 1
@@ -1192,10 +1198,45 @@ def definisciStanze():
     i += 1
     dictStanze["tunnelDiRod3"] = i
     vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["caverna1"] = i
+    i += 1
+    dictStanze["caverna2"] = i
+    i += 1
+    dictStanze["caverna3"] = i
+    i += 1
+    dictStanze["caverna4"] = i
+    i += 1
+    dictStanze["caverna5"] = i
+    i += 1
+    dictStanze["caverna6"] = i
+    i += 1
+    dictStanze["caverna7"] = i
+    i += 1
+    dictStanze["caverna8"] = i
+    i += 1
+    dictStanze["caverna9"] = i
+    i += 1
+    dictStanze["caverna10"] = i
+    i += 1
+    dictStanze["caverna11"] = i
+    i += 1
+    dictStanze["caverna12"] = i
+    i += 1
+    dictStanze["caverna13"] = i
+    i += 1
+    dictStanze["caverna14"] = i
+    i += 1
+    dictStanze["caverna15"] = i
+    i += 1
+    dictStanze["caverna16"] = i
+    i += 1
+    dictStanze["caverna17"] = i
 
     i += 100
     i += 1
-    dictStanze["caverna1"] = i
+    dictStanze["vulcano1"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["tunnelSubacqueo1"] = i
     vetStanzePacifiche.append(i)
@@ -1558,5 +1599,18 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["tunnelDiRod2"]
     vetCofanetti += [stanza, 17, 8, False]
+
+    stanza = dictStanze["caverna1"]
+    vetCofanetti += [stanza, 18, 5, False]
+    stanza = dictStanze["caverna3"]
+    vetCofanetti += [stanza, 21, 13, False]
+    stanza = dictStanze["caverna7"]
+    vetCofanetti += [stanza, 12, 3, False]
+    stanza = dictStanze["caverna9"]
+    vetCofanetti += [stanza, 15, 13, False]
+    vetCofanetti += [stanza, 17, 11, False]
+    stanza = dictStanze["caverna10"]
+    vetCofanetti += [stanza, 10, 3, False]
+    vetCofanetti += [stanza, 12, 5, False]
 
     return vetCofanetti

@@ -244,6 +244,11 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoCumuloImpo":
+        disegnaImg = True
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
 
     return disegnaImg, numImg, numImgDialogo, nomeImgDialogo
 

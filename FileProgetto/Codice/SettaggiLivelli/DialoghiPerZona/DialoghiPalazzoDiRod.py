@@ -1058,10 +1058,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(E li ha uccisi...)")
                 partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Hanno tutti un buco dietro la testa...)")
-                partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 2:
                 oggettoDato = False
                 avanzaStoria = False

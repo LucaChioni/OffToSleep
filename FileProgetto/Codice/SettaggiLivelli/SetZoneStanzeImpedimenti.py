@@ -216,10 +216,12 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Strada per Passo Montano"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano2"] and stanza == GlobalGameVar.dictStanze["passoMontano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["passoMontano10"]):
         nomeDaScrivere = u"Passo Montano"
-    elif (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano10"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello3"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]):
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano10"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello3"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]):
         nomeDaScrivere = u"Palazzo di Rod"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]):
         nomeDaScrivere = u"Tunnel di Rod"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["caverna1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"] and stanza == GlobalGameVar.dictStanze["caverna8"]):
+        nomeDaScrivere = u"Caverna Impo"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)

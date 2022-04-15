@@ -2380,7 +2380,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Ah, ecco come fa... quanti complessi si sarà fatto prima di accettare questi interveti su di sé?)")
+                    dialogo.append(u"(Ah, ecco come fa... quanti complessi si sarà fatto prima di accettare questi interventi su di sé?)")
                     partiDialogo.append(dialogo)
                 else:
                     dialogo = []

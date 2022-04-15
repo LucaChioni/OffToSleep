@@ -424,10 +424,10 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"È un passaggio sicuro e veloce tra il palazzo di Rod e il suo avamposto. Al suo interno passa un tubo molliccio che parte dal palazzo e va da qualche parte nella Selva Arida. Dev'essere di Rod, ma mi domando a che cosa serva...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 13:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        FunzioniGraficheGeneriche.messaggio("Caverna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne che conduce a un vulcano. All'interno vivono degli animali simili a Impo ma aggressivi. Rod è solito avventurarsi in quel posto per recuperare ImpoFrutti. Non mi spiego perché abbia deciso di viverci così vicino... forse ne è geloso e ne vuole controllare gli accessi?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["caverna1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["caverna17"]
+                        FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare ImpoFrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
@@ -506,7 +506,7 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.9, grandezzaScritteNormali)
                 if postiSbloccati["Caverna"]:
-                    FunzioniGraficheGeneriche.messaggio("Caverna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
                 if postiSbloccati["Tunnel Subacqueo"]:

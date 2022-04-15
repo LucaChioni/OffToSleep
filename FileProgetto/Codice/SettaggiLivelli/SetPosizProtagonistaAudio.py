@@ -4190,7 +4190,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gpy * 12
                 if stanzaVecchia == GlobalGameVar.dictStanze["caverna1"]:
                     npers = "s"
-                    x -= GlobalHWVar.gpx * 6
+                    x -= GlobalHWVar.gpx * 13
                     y = GlobalHWVar.gpy * 5
         if stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]:
             nomeCanzoneLuogo = "11-ProprietaDiRod"
@@ -4407,10 +4407,464 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
+    elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+        if stanza == GlobalGameVar.dictStanze["caverna1"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 13
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna2"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 10
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna9"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna2"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna1"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 10
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna3"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna11"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 4
+        if stanza == GlobalGameVar.dictStanze["caverna3"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna2"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna4"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 21
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna9"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 10
+        if stanza == GlobalGameVar.dictStanze["caverna4"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna3"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 21
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna5"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna13"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 9
+        if stanza == GlobalGameVar.dictStanze["caverna5"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Centro"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleMedie.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna4"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna6"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 8
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna15"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna6"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Centro"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleMedie.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna5"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 8
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna7"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna16"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 17
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["caverna7"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Fine"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleAlte.wav")
+                audioAmbiente_Lava = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/LavaBassa.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole, audioAmbiente_Lava]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna6"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 4
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna8"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 7
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna17"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 11
+        if stanza == GlobalGameVar.dictStanze["caverna8"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Fine/UltimaStanza"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleAlte.wav")
+                audioAmbiente_Lava = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/LavaAlta.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole, audioAmbiente_Lava]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna7"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 7
+                if stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 1
+        if stanza == GlobalGameVar.dictStanze["caverna9"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna1"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna3"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 10
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna10"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 8
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna10"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna9"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 8
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["caverna11"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna2"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 4
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna12"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna14"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 6
+        if stanza == GlobalGameVar.dictStanze["caverna12"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna11"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 20
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna13"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna4"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 9
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna14"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 23
+                    y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["caverna14"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Inizio"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna11"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 6
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna13"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 23
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna15"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Centro"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleMedie.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna5"]:
+                    npers = "w"
+                    x -= GlobalHWVar.gpx * 11
+                    y = GlobalHWVar.gpy * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna17"]:
+                    npers = "s"
+                    x -= GlobalHWVar.gpx * 15
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna16"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Centro"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleMedie.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna6"]:
+                    npers = "s"
+                    x += GlobalHWVar.gpx * 17
+                    y = GlobalHWVar.gpy * 2
+        if stanza == GlobalGameVar.dictStanze["caverna17"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Centro"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleMedie.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna7"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 11
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna15"]:
+                    npers = "w"
+                    x += GlobalHWVar.gpx * 15
+                    y = GlobalHWVar.gpy * 15
 
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
         listaSottofondoAmbientale = []
+        sottofondoAmbientaleCambiato = True
         canzone = False
+        canzoneCambiata = True
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -4450,6 +4904,8 @@ def decidiSeStoppareMusica(stanza, avanzamentoStoria):
     elif (avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoMusicaFugaCastello"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["stoppatoMusicaFugaCastello"]) and (GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello21"] or GlobalGameVar.dictStanze["esternoCastello1"] <= stanza <= GlobalGameVar.dictStanze["esternoCastello5"]):
         stoppaMusica = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
+        stoppaMusica = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"] and (stanza == GlobalGameVar.dictStanze["caverna1"] or stanza == GlobalGameVar.dictStanze["caverna9"]):
         stoppaMusica = True
 
     return stoppaMusica

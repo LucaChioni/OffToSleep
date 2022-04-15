@@ -505,6 +505,7 @@ def gameloop():
                     for nemico in listaNemici:
                         if nemico.x == x and nemico.y == y:
                             nemico.x, nemico.y = nemico.posizioneOriginale
+                            nemico.vx, nemico.vy = nemico.posizioneOriginale
                             # controllo se nella casella originale c'è un altro nemico
                             nemicoAppenaSpostato = nemico
                             nemiciSovrappostiRisolti = False
@@ -514,6 +515,7 @@ def gameloop():
                                     if nemicoAppenaSpostato.id != nemicoDaControllare.id and nemicoAppenaSpostato.x == nemicoDaControllare.x and nemicoAppenaSpostato.y == nemicoDaControllare.y:
                                         nemiciSovrappostiRisolti = False
                                         nemicoDaControllare.x, nemicoDaControllare.y = nemicoDaControllare.posizioneOriginale
+                                        nemicoDaControllare.vx, nemicoDaControllare.vy = nemicoDaControllare.posizioneOriginale
                                         nemicoAppenaSpostato = nemicoDaControllare
                                         break
                             break
@@ -2518,7 +2520,7 @@ def gameloop():
                                     del vettoreEsche[i]
                                     del vettoreEsche[i - 1]
                                 i += 4
-                            if nemico.animaSpostamento or (len(nemico.percorso) > 0 and nemico.percorso[nemico.numeroMovimento] == ""):
+                            if nemico.animaSpostamento or (len(nemico.percorso) > 0 and (nemico.percorso[nemico.numeroMovimento] == "" or nemico.percorso[nemico.numeroMovimento].endswith("Gira"))):
                                 if nemico.numeroMovimento < len(nemico.percorso) - 1:
                                     nemico.numeroMovimento += 1
                                 else:

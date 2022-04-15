@@ -284,6 +284,10 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                 casellaOccupata = True
                                 break
                             i += 4
+                        for personaggio in listaPersonaggi:
+                            if personaggio.x == mxProbabile and personaggio.y == myProbabile:
+                                casellaOccupata = True
+                                break
                         if not casellaOccupata:
                             nmosPossibili.append(1)
                         nmxProbabile = -GlobalHWVar.gpx
@@ -309,6 +313,10 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                 casellaOccupata = True
                                 break
                             i += 4
+                        for personaggio in listaPersonaggi:
+                            if personaggio.x == mxProbabile and personaggio.y == myProbabile:
+                                casellaOccupata = True
+                                break
                         if not casellaOccupata:
                             nmosPossibili.append(2)
                         nmxProbabile = 0
@@ -334,6 +342,10 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                 casellaOccupata = True
                                 break
                             i += 4
+                        for personaggio in listaPersonaggi:
+                            if personaggio.x == mxProbabile and personaggio.y == myProbabile:
+                                casellaOccupata = True
+                                break
                         if not casellaOccupata:
                             nmosPossibili.append(3)
                         nmxProbabile = 0
@@ -359,6 +371,10 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                 casellaOccupata = True
                                 break
                             i += 4
+                        for personaggio in listaPersonaggi:
+                            if personaggio.x == mxProbabile and personaggio.y == myProbabile:
+                                casellaOccupata = True
+                                break
                         if not casellaOccupata:
                             nmosPossibili.append(4)
 
@@ -431,6 +447,10 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                     casellaOccupata = True
                                     break
                                 j += 4
+                            for personaggio in listaPersonaggi:
+                                if personaggio.x == mxProbabile and personaggio.y == myProbabile:
+                                    casellaOccupata = True
+                                    break
                             if not casellaOccupata:
                                 nmos = i
                                 sposta = True
@@ -613,6 +633,9 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                 nmos = 3
             elif direzione == "d":
                 nmos = 1
+            elif direzione.endswith("Gira"):
+                nemico.girati(direzione[0])
+                nmos = 0
             else:
                 nmos = 0
         sposta = True
