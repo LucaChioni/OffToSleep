@@ -369,15 +369,23 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"No, no. Io... cercavo solo un posto per accamparmi... mi chiamo Hans...")
+            dialogo.append(u"No, no. Io... cercavo solo un posto per accamparmi... cercavo...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Che ci fai in mezzo alla foresta disarmato?")
+            dialogo.append("...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Stavo... stavo cercando di attraversarla per arrivare in città, e... disarmato perché mi aspettavo meno pericoli, ah ah...")
+            dialogo.append(u"Mi chiamo Hans...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Sei disarmato?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Sì, io stavo... stavo solo cercando di attraversare la foresta per arrivare in città...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -409,15 +417,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ok, ma... tu... che ci fai qui?")
+            dialogo.append(u"Ok, ma... tu... che stai facendo qui?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Il mio nome è Sam, sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Fai in fretta con la legna, tra poco sarà molto più pericoloso. Io mi occuperò del cibo.")
+            dialogo.append(u"Il mio nome è Sam, sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Muoviti con la legna, tra poco sarà molto più pericoloso. Io mi occuperò del cibo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ok...")
+            dialogo.append(u"Ok...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
             nome = "Sam"

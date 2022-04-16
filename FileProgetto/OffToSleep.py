@@ -418,6 +418,12 @@ def gameloop():
                     i += 4
 
                 if cambiosta:
+                    # resetto l'animazione del valore dei danni
+                    GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"] = [False, 0, -1]
+                    GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"] = [False, 0, -1]
+                    GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"] = [False, 0, -1]
+                    GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"] = [False, 0, -1]
+
                     # necessario ridefinire le stanze pacifiche in caso di carica partita nel castello (inizialmente quelle stanze sono pacifiche)
                     SetZoneStanzeImpedimenti.modificaStanzePacifiche(dati[0])
 
