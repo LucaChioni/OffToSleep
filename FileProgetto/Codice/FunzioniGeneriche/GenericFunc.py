@@ -23,20 +23,20 @@ def getStatistiche(dati, difesa=0, inMenu=False):
     par = 2
 
     # effetti armi
-    attVicino += (dati[6] * dati[6]) * 10
-    attLontano += (dati[128] * dati[128]) * 10
-    dif += ((dati[8] * dati[8]) * 10) + ((dati[7] * dati[7]) * 5)
-    par += (dati[7] * dati[7]) * 3
+    attVicino += GlobalGameVar.statisticheEquipaggiamento["spade"][dati[6]]
+    attLontano += GlobalGameVar.statisticheEquipaggiamento["archi"][dati[128]]
+    dif += GlobalGameVar.statisticheEquipaggiamento["armature"][dati[8]] + GlobalGameVar.statisticheEquipaggiamento["scudiDif"][dati[7]]
+    par += GlobalGameVar.statisticheEquipaggiamento["scudiPar"][dati[7]]
     # effetti accessori
     if dati[129] == 1:
-        pvtot += 50
+        pvtot += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
     if dati[129] == 3:
-        attVicino += 20
-        attLontano += 20
+        attVicino += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
+        attLontano += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
     if dati[129] == 2:
-        dif += 30
+        dif += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
     if dati[129] == 4:
-        par += 10
+        par += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
     # effetti tecniche
     if dati[123] > 0:
         attVicino += attVicino // 2
@@ -45,11 +45,11 @@ def getStatistiche(dati, difesa=0, inMenu=False):
         dif += dif // 2
     # effetto difesa
     if difesa != 0:
-        par += par // 4
+        par += par // 2
         dif += dif
 
-    entot = 220 + (dati[9] * dati[9] * 80)
-    difro = 80 + (dati[9] * dati[9] * 20)
+    entot = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+    difro = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
 
     return esptot, pvtot, entot, attVicino, attLontano, dif, difro, par
 
@@ -57,7 +57,7 @@ def getStatistiche(dati, difesa=0, inMenu=False):
 def getVitaTotRallo(livello, guanti):
     pvtot = GlobalGameVar.statistichePerLivello[livello-1][0]
     if guanti == 1:
-        pvtot += 50
+        pvtot += GlobalGameVar.statisticheEquipaggiamento["guanti"][1]
     return pvtot
 
 
@@ -2095,9 +2095,7 @@ def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemici
 
 
 def calcoloDanni(danno, difesa):
-    difesa /= 10.0
-    difesa += 1
-    dannoEffettivo = int(danno / difesa)
+    dannoEffettivo = int((danno - (difesa / 2.0)) / ((difesa / 30.0) + 1))
     if dannoEffettivo < 0:
         dannoEffettivo = 0
 

@@ -2271,27 +2271,31 @@ def equiprobo(dati):
                     if dati[71] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca piccola:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica che può contenere poca alimentazione.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                        diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
-                        if dati[9] > 0:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][0] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 0 - (dati[9] * dati[9] * 20)
-                        if dati[9] > 0:
+                        elif diff > 0:
+                            FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][0] - GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
+                        elif diff > 0:
+                            FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 2:
                     if dati[72] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca discreta:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica con una buona capienza e ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                        diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
-                        if dati[9] > 1:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][1] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 1:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 20 - (dati[9] * dati[9] * 20)
-                        if dati[9] > 1:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][1] - GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 1:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
@@ -2299,15 +2303,15 @@ def equiprobo(dati):
                     if dati[73] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca capiente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica con una grande capacità e un ottimo sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                        diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
-                        if dati[9] > 2:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][2] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 2:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 80 - (dati[9] * dati[9] * 20)
-                        if dati[9] > 2:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][2] - GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 2:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
@@ -2315,15 +2319,15 @@ def equiprobo(dati):
                     if dati[74] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca enorme:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Grande Sacca Energetica che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                        diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
-                        if dati[9] > 3:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][3] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 3:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 180 - (dati[9] * dati[9] * 20)
-                        if dati[9] > 3:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][3] - GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 3:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
@@ -2331,15 +2335,15 @@ def equiprobo(dati):
                     if dati[75] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca illimitata:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                        diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
-                        if dati[9] > 4:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][4] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 4:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 320 - (dati[9] * dati[9] * 20)
-                        if dati[9] > 4:
+                        diff = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][4] - GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
+                        if diff < 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
-                        elif dati[9] < 4:
+                        elif diff > 0:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)

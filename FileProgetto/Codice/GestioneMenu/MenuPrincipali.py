@@ -172,11 +172,12 @@ def menu(caricaSalvataggio, gameover):
     yInizialie = 0
     rxInizialie = 0
     ryInizialie = 0
+    pvIniziali = GlobalGameVar.statistichePerLivello[0][0]
     # dimensione: 0-144 (=> 145 variabili)
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
     # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello - moneteSpeseDaRod
-    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 48, 0, 0, 0, 0, 0,  # <- statistiche
+    datiIniziali = [0, 1, xInizialie, yInizialie, 1, pvIniziali, 0, 0, 0, 0, 0,  # <- statistiche
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
         2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,  # <- equpaggiamento
