@@ -601,7 +601,7 @@ def aggiornaSchermo():
     gc.collect()
 
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
-linguaImpostata = "inglese"
+linguaImpostata = "eng"
 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
 leggi.close()
@@ -617,9 +617,9 @@ if len(datiFileImpostazioniString) == 6:
             erroreFileImpostazioni = True
     if not erroreFileImpostazioni:
         if datiFileImpostazioni[0] == 0:
-            linguaImpostata = "italiano"
+            linguaImpostata = "ita"
         elif datiFileImpostazioni[0] == 1:
-            linguaImpostata = "inglese"
+            linguaImpostata = "eng"
         if 0 <= int(datiFileImpostazioni[1]) <= 10:
             volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
         if 0 <= int(datiFileImpostazioni[2]) <= 10:

@@ -75,7 +75,7 @@ statisticheEquipaggiamento["scudiPar"] = [0, 3, 8, 18, 38]
 statisticheEquipaggiamento["guanti"] = [0, 20, 20, 20, 10]
 statisticheEquipaggiamento["batteriaPe"] = [200, 300, 500, 900, 1500]
 statisticheEquipaggiamento["batteriaDif"] = [60, 80, 120, 180, 250]
-dannoAttacchiColco = {"scossa": 80, "freccia": 70, "tempesta": 60, "scossa+": 150, "freccia+": 135, "tempesta+": 120, "scossa++": 250, "freccia++": 225, "tempesta++": 200}
+dannoAttacchiColco = {"scossa": 90, "freccia": 75, "tempesta": 60, "scossa+": 160, "freccia+": 140, "tempesta+": 120, "scossa++": 300, "freccia++": 250, "tempesta++": 200}
 
 # vettore che conterrà tutti i dati dei salvataggi
 vetDatiSalvataggi = []
@@ -90,7 +90,7 @@ vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [2000, 100, 0, 100, 5000]
+dannoOggetti = [100, 50, 0, 50, 200]
 # frecce trasportabili per faretra
 frecceMaxPerFaretra = [3, 20, 100, 800]
 
@@ -134,6 +134,8 @@ global impoPietraPosseduta
 global cambiataAlCastello
 global armaturaIndossata
 global datiAnimazioniDanniInflitti
+global idDialoghiLetti
+global idDialoghiLettiGameOver
 def inizializzaVariabiliGlobali():
     global nomiImgDaAggiornareAvanzandoStoriaAttuali
     global imgDaAggiornareAvanzandoStoria
@@ -151,6 +153,8 @@ def inizializzaVariabiliGlobali():
     global cambiataAlCastello
     global armaturaIndossata
     global datiAnimazioniDanniInflitti
+    global idDialoghiLetti
+    global idDialoghiLettiGameOver
     nomiImgDaAggiornareAvanzandoStoriaAttuali = {"imgMappaAttuale":False, "imgProtagonistaStartAttuale": False, "imgProtagonistaMenuOggettiAttuale":False, "imgProtagonistaDialogoAttuale":False}
     imgDaAggiornareAvanzandoStoria = {"imgMappa":False, "imgMappaZoom":False, "imgPersonaggioStart":False, "imgPersonaggioMenuOggetti":False, "imgPersonaggioDialoghi":False}
     nomePersonaggioDialoghi = False
@@ -176,6 +180,8 @@ def inizializzaVariabiliGlobali():
     cambiataAlCastello = [False, False]
     armaturaIndossata = 0
     datiAnimazioniDanniInflitti = {"dannoRallo":[False, 0, -1], "dannoImpo":[False, 0, -1], "dannoEsche":[False, 0, -1], "dannoNemico":[False, 0, -1], "tempoAnimazione":60}
+    idDialoghiLetti = []
+    idDialoghiLettiGameOver = []
 inizializzaVariabiliGlobali()
 
 def settaRisoluzioneOttimale():
@@ -422,14 +428,14 @@ def disegnaSchermataSelezioneLingua():
     GlobalHWVar.aggiornaSchermo()
 
     if voceMarcata == 2:
-        GlobalHWVar.linguaImpostata = "italiano"
+        GlobalHWVar.linguaImpostata = "ita"
     elif voceMarcata == 1:
-        GlobalHWVar.linguaImpostata = "inglese"
+        GlobalHWVar.linguaImpostata = "eng"
     # inizializzo il file di impostazioni
     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
-    if GlobalHWVar.linguaImpostata == "italiano":
+    if GlobalHWVar.linguaImpostata == "ita":
         scrivi.write("0_")
-    elif GlobalHWVar.linguaImpostata == "inglese":
+    elif GlobalHWVar.linguaImpostata == "eng":
         scrivi.write("1_")
     scrivi.write(str(int(GlobalHWVar.volumeEffetti * 10)) + "_")
     scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 10)) + "_")

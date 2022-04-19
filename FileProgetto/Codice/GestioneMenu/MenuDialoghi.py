@@ -26,11 +26,15 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     nomePersonaggio = GlobalGameVar.nomePersonaggioDialoghi
     imgPersDialogo = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioDialoghi"]
 
-    if personaggio.nome != "Tutorial":
+    nomeInterlocutore = personaggio.nome[GlobalHWVar.linguaImpostata]
+    partiDialogo = personaggio.partiDialogoTradotte[GlobalHWVar.linguaImpostata]
+    oggettoDato = personaggio.oggettoDato[GlobalHWVar.linguaImpostata]
+
+    if nomeInterlocutore != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
-    if personaggio.imgDialogo and personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
+    if personaggio.imgDialogo and nomeInterlocutore != "Tutorial" and nomeInterlocutore != "Nessuno":
         GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
-    elif personaggio.nome == "Impo":
+    elif nomeInterlocutore == "Impo":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
@@ -43,7 +47,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalHWVar.gsy // 18 * 3.5, GlobalHWVar.gsx, GlobalHWVar.gsy // 18 * 14.5)).convert()
 
     primoframe = True
-    numeroMessaggiTotali = len(personaggio.partiDialogo)
+    numeroMessaggiTotali = len(partiDialogo)
     numeromessaggioAttuale = 0
     prosegui = True
     fineDialogo = False
@@ -54,7 +58,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         if GlobalHWVar.mouseVisibile:
-            if numeromessaggioAttuale < len(personaggio.partiDialogo) and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+            if numeromessaggioAttuale < len(partiDialogo) and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                 if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 15.1 <= yMouse <= GlobalHWVar.gsy // 18 * 16.2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
@@ -88,7 +92,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             fineDialogo = True
             bottoneDown = False
-        if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+        if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             if voceMarcata != 1 and voceMarcata != 3:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -96,7 +100,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             else:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
-        if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+        if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             if voceMarcata != 1 and voceMarcata != 2:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -104,7 +108,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             else:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
-        if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+        if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             if voceMarcata != 2 and voceMarcata != 4:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -112,7 +116,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             else:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
-        if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+        if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             if voceMarcata != 3 and voceMarcata != 4:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -135,8 +139,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
                 if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata) or personaggio.scelta == -1:
                     if personaggio.avanzaStoria:
                         avanzamentoStoria += 1
-                    if personaggio.oggettoDato:
-                        oggettoRicevuto = personaggio.oggettoDato
+                    if oggettoDato:
+                        oggettoRicevuto = oggettoDato
                     if personaggio.menuMercante:
                         menuMercante = personaggio.menuMercante
                 if personaggio.avanzaColDialogo:
@@ -149,8 +153,11 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
                             break
                         i += 2
                 fineDialogo = True
+                # segno il dialogo come già letto
+                if not personaggio.idDialogoCorrente in GlobalGameVar.idDialoghiLetti:
+                    GlobalGameVar.idDialoghiLetti.append(personaggio.idDialogoCorrente)
             else:
-                if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+                if personaggio.scelta and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     sceltaEffettuata = voceMarcata
                     if sceltaEffettuata != personaggio.scelta and personaggio.scelta != -1:
                         SetDialoghiPersonaggi.gestisciRisposteSbagliate(avanzamentoStoria)
@@ -168,30 +175,30 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             if puntatoreSpostato and not prosegui:
                 numeromessaggioAttuale -= 1
             GlobalHWVar.disegnaImmagineSuSchermo(background, (0, GlobalHWVar.gsy // 18 * 3.5))
-            if personaggio.nome != "Tutorial":
-                if personaggio.imgDialogo and personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
+            if nomeInterlocutore != "Tutorial":
+                if personaggio.imgDialogo and partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore != "Nessuno":
                     GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
-                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome == "Impo":
+                elif partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore == "Impo":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu" or personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+                if partiDialogo[numeromessaggioAttuale][0] == "tu" or partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
                     GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
-            if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
+            if partiDialogo[numeromessaggioAttuale][0] == "personaggio":
                 parlante = personaggio.gender
-                FunzioniGraficheGeneriche.messaggio(personaggio.nome + ":", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 4 // 5), 80)
-            elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
+                FunzioniGraficheGeneriche.messaggio(nomeInterlocutore + ":", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 4 // 5), 80)
+            elif partiDialogo[numeromessaggioAttuale][0] == "tu":
                 FunzioniGraficheGeneriche.messaggio(nomePersonaggio + ":", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 4 // 5), 80)
-            if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
-                bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
-            elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+            if partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+                bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
+            elif partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
                 if puntatoreSpostato and not prosegui:
-                    bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante, scriviTutto=True)
+                    bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, partiDialogo[numeromessaggioAttuale][2], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante, scriviTutto=True)
                 else:
-                    bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
-                FunzioniGraficheGeneriche.messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 1.2), 50)
-                FunzioniGraficheGeneriche.messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 2.2), 50)
-                FunzioniGraficheGeneriche.messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 1.2), 50)
-                FunzioniGraficheGeneriche.messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 2.2), 50)
+                    bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, partiDialogo[numeromessaggioAttuale][2], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
+                FunzioniGraficheGeneriche.messaggio(partiDialogo[numeromessaggioAttuale][3], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 1.2), 50)
+                FunzioniGraficheGeneriche.messaggio(partiDialogo[numeromessaggioAttuale][4], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 2.2), 50)
+                FunzioniGraficheGeneriche.messaggio(partiDialogo[numeromessaggioAttuale][5], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 1.2), 50)
+                FunzioniGraficheGeneriche.messaggio(partiDialogo[numeromessaggioAttuale][6], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 2.2), 50)
                 if voceMarcata == 1:
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (GlobalHWVar.gsx // 32 * 1, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 1.2)))
                 if voceMarcata == 2:
@@ -201,7 +208,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
                 if voceMarcata == 4:
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (GlobalHWVar.gsx // 32 * 16, ((GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3)) + int(GlobalHWVar.gpy * 2.2)))
             else:
-                bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
+                bottoneDown, fineDialogo = FunzioniGraficheGeneriche.messaggioParlato(bottoneDown, fineDialogo, partiDialogo[numeromessaggioAttuale][1], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy * 2 // 3) + (GlobalHWVar.gpy * 7 // 3), 50, GlobalHWVar.gpx * 30, GlobalHWVar.gpy * 4 // 5, parlante)
             numeromessaggioAttuale += 1
             prosegui = False
             puntatoreSpostato = False

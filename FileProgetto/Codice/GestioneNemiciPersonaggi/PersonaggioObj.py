@@ -38,6 +38,7 @@ class PersonaggioObj(object):
         # le variabili "self.avanzamentoDialogo" e "self.avanzaColDialogo" servono per cambiare dialogo e/o immagine quando l'avanzamento della storia non è abbastanza per definire l'evento che fa scatenare queste modifiche
         self.avanzamentoDialogo = avanzamentoDialogo
         self.avanzaColDialogo = False
+        self.idDialogoCorrente = ""
 
         if self.tipo in GlobalImgVar.vettoreNomiNemici and self.tipo != "ServoLancia" and self.tipo != "ServoSpada" and self.tipo != "ServoArco":
             self.mantieniSempreASchermo = False
@@ -195,7 +196,7 @@ class PersonaggioObj(object):
                 self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria, monetePossedute=0):
-        self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = SetDialoghiPersonaggi.caricaDialogo(self.tipoId, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo, monetePossedute)
+        self.partiDialogoTradotte, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo, self.idDialogoCorrente = SetDialoghiPersonaggi.caricaDialogo(self.tipoId, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo, monetePossedute)
 
     def spostati(self, x, y, rx, ry, listaNemici, listaPersonaggi, caseviste):
         self.vx = self.x

@@ -248,6 +248,7 @@ global imgChiaveAvamposto
 global imgStrumentiDiRod
 global imgChiaveUfficioNeil
 global imgEvidenziaInterzaione
+global imgEvidenziaInterzaioneCompiuta
 global imgEvidenziaUsciteStanzaSu
 global imgEvidenziaUsciteStanzaGiu
 global imgEvidenziaUsciteStanzaDestra
@@ -258,7 +259,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1892
+numImgTotali = 1893
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -524,6 +525,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgStrumentiDiRod
     global imgChiaveUfficioNeil
     global imgEvidenziaInterzaione
+    global imgEvidenziaInterzaioneCompiuta
     global imgEvidenziaUsciteStanzaSu
     global imgEvidenziaUsciteStanzaGiu
     global imgEvidenziaUsciteStanzaDestra
@@ -862,6 +864,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sacchettoDenaro = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgFrecciaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaInterzaione = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneDisponibile.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgEvidenziaInterzaioneCompiuta = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneEffettuata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaUsciteStanzaSu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaUsciteStanzaGiu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaUsciteStanzaDestra = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

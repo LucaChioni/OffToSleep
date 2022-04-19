@@ -561,6 +561,7 @@ def gameloop():
                         dati[143] = GlobalGameVar.pazzoStrabico
                         dati[144] = GlobalGameVar.cambiataAlCastello[0]
                         GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
+                        GlobalGameVar.idDialoghiLettiGameOver = GlobalGameVar.idDialoghiLetti[:]
 
                 if cambiatoRisoluzione:
                     vx = x

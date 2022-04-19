@@ -2,6 +2,7 @@
 
 import pygame
 import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -150,7 +151,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "OggettoMadreUfficialeSeduta":
                     listaPersonaggi.remove(personaggio)
                     break
-            percorsoPersonaggio = ["w", "w", "w", "w", "w"]
+            percorsoPersonaggio = ["w", "w", "w", "w", "d", "w"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 7, "w", "MadreUfficiale-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
             listaPersonaggi.append(personaggio)
@@ -160,7 +161,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         else:
             personaggioArrivato = False
             for personaggio in listaPersonaggi:
-                if personaggio.tipo == "MadreUfficiale" and personaggio.x == GlobalHWVar.gpx * 8 and personaggio.y == GlobalHWVar.gpy * 2:
+                if personaggio.tipo == "MadreUfficiale" and personaggio.x == GlobalHWVar.gpx * 9 and personaggio.y == GlobalHWVar.gpy * 2:
                     personaggioArrivato = True
                     break
             if personaggioArrivato:
@@ -172,12 +173,18 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "MadreUfficiale":
                         listaPersonaggi.remove(personaggio)
                         break
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
                 avanzamentoStoria += 1
                 carim = True
                 caricaTutto = True
             else:
                 avanzaIlTurnoSenzaMuoverti = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mammaUfficialeUscitaDallaCena"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "PadreUfficialeCasa-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -300,13 +307,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoServoCasaDavidDopoSuicidio"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
         for personaggio in listaPersonaggi:
             if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "ServoDavid":
-                if personaggio.percorso != ["a", "a", "a", "w", "w"]:
-                    personaggio.percorso = ["a", "a", "a", "w", "w"]
+                if personaggio.percorso != ["a", "a", "a", "a", "w", "w"]:
+                    personaggio.percorso = ["a", "a", "a", "a", "w", "w"]
                     personaggio.numeroMovimento = 0
                 break
         personaggioArrivato = False
         for personaggio in listaPersonaggi:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "ServoDavid" and personaggio.x == GlobalHWVar.gpx * 21 and personaggio.y == GlobalHWVar.gpy * 2:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "ServoDavid" and personaggio.x == GlobalHWVar.gpx * 20 and personaggio.y == GlobalHWVar.gpy * 2:
                 personaggioArrivato = True
                 break
         if personaggioArrivato:
@@ -318,6 +325,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and personaggio.tipo == "ServoDavid":
                     listaPersonaggi.remove(personaggio)
                     break
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
             avanzamentoStoria += 1
             carim = True
             caricaTutto = True

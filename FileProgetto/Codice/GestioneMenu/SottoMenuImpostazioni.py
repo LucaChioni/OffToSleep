@@ -923,9 +923,9 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
                     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
-                    if GlobalHWVar.linguaImpostata == "italiano":
+                    if GlobalHWVar.linguaImpostata == "ita":
                         scrivi.write("0_")
-                    elif GlobalHWVar.linguaImpostata == "inglese":
+                    elif GlobalHWVar.linguaImpostata == "eng":
                         scrivi.write("1_")
                     scrivi.write(str(int(GlobalHWVar.volumeEffetti * 10)) + "_")
                     scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 10)) + "_")
@@ -979,10 +979,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if linguaTemp == "italiano":
-                        linguaTemp = "inglese"
-                    elif linguaTemp == "inglese":
-                        linguaTemp = "italiano"
+                    if linguaTemp == "ita":
+                        linguaTemp = "eng"
+                    elif linguaTemp == "eng":
+                        linguaTemp = "ita"
                 elif voceMarcata == 2:
                     if volumeEffettiTemp != 0:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1057,10 +1057,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if linguaTemp == "italiano":
-                        linguaTemp = "inglese"
-                    elif linguaTemp == "inglese":
-                        linguaTemp = "italiano"
+                    if linguaTemp == "ita":
+                        linguaTemp = "eng"
+                    elif linguaTemp == "eng":
+                        linguaTemp = "ita"
                 elif voceMarcata == 2:
                     if volumeEffettiTemp != 10:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1114,10 +1114,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if linguaTemp == "italiano":
-                        linguaTemp = "inglese"
-                    elif linguaTemp == "inglese":
-                        linguaTemp = "italiano"
+                    if linguaTemp == "ita":
+                        linguaTemp = "eng"
+                    elif linguaTemp == "eng":
+                        linguaTemp = "ita"
                 elif voceMarcata == 2:
                     if volumeEffettiTemp != 0:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1163,10 +1163,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if linguaTemp == "italiano":
-                        linguaTemp = "inglese"
-                    elif linguaTemp == "inglese":
-                        linguaTemp = "italiano"
+                    if linguaTemp == "ita":
+                        linguaTemp = "eng"
+                    elif linguaTemp == "eng":
+                        linguaTemp = "ita"
                 elif voceMarcata == 2:
                     if volumeEffettiTemp != 10:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1257,9 +1257,9 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 4.3), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.23), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 16.2), 2)
 
-            if linguaTemp == "italiano":
+            if linguaTemp == "ita":
                 FunzioniGraficheGeneriche.messaggio("Italiano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
-            if linguaTemp == "inglese":
+            if linguaTemp == "eng":
                 FunzioniGraficheGeneriche.messaggio("English", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if voceMarcata == 1:
                 if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":

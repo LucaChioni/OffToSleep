@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import GlobalHWVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
@@ -173,6 +174,17 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("-1_")
                 scrivi.write("-1_")
                 scrivi.write("-1_")
+            scrivi.write("\n")
+            if salvandoGameover:
+                i = 0
+                while i < len(GlobalGameVar.idDialoghiLettiGameOver):
+                    scrivi.write("%s_" % GlobalGameVar.idDialoghiLettiGameOver[i])
+                    i += 1
+            else:
+                i = 0
+                while i < len(GlobalGameVar.idDialoghiLetti):
+                    scrivi.write("%s_" % GlobalGameVar.idDialoghiLetti[i])
+                    i += 1
 
             # conversione della posizione in pixel
             dati[2] = dati[2] * GlobalHWVar.gpx
@@ -245,7 +257,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
             tipoErrore = 2
 
         if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
-            if len(datiTotali) == 25:
+            if len(datiTotali) == 27:
                 caricandoGameover = False
                 gameoverCaricato = False
                 c = 0
@@ -262,6 +274,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     oggettiRimastiAHans = []
                     ultimoObbiettivoColco = []
                     obbiettivoCasualeColco = False
+                    datiDialoghiLetti = []
 
                     datiStringa = datiTotali[c].split("_")
                     datiStringa.pop(len(datiStringa) - 1)
@@ -477,14 +490,24 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoStringa[0]) and nemico.x == int(obbiettivoCasualeColcoStringa[1] * GlobalHWVar.gpx) and nemico.y == int(obbiettivoCasualeColcoStringa[2] * GlobalHWVar.gpy):
                                     obbiettivoCasualeColco = nemico
                                     break
+                    datiDialoghiLettiStringa = datiTotali[c + 12].split("_")
+                    datiDialoghiLettiStringa.pop(len(datiDialoghiLettiStringa) - 1)
+                    i = 0
+                    while i < len(datiDialoghiLettiStringa):
+                        try:
+                            datiDialoghiLetti.append(datiDialoghiLettiStringa[i])
+                        except:
+                            errore = True
+                            break
+                        i += 1
 
                     if not caricandoGameover:
-                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
+                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori), datiDialoghiLetti[:]]
                         caricandoGameover = True
                     else:
-                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
+                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori), datiDialoghiLetti[:]]
                         gameoverCaricato = True
-                    c += 13
+                    c += 14
             else:
                 errore = True
             if errore:

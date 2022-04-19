@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import hashlib
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
@@ -103,9 +104,9 @@ def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
     tipo = tipoId.split("-")[0]
-    partiDialogo = []
-    nome = "---"
-    oggettoDato = False
+    partiDialogoTradotte = {"ita": [], "eng": []}
+    nome = {"ita": "---", "eng": "---"}
+    oggettoDato = {"ita": False, "eng": False}
     avanzaStoria = False
     menuMercante = False
     scelta = False
@@ -115,7 +116,6 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
     # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
     if tipo == "test":
-        partiDialogo = []
         nome = "Bob"
         if avanzamentoStoria == 0:
             oggettoDato = False
@@ -125,11 +125,11 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Ciao, ecco la merce")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Ecco la merceee")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
         elif avanzamentoStoria == 1:
             oggettoDato = "oggetto speciale"
             avanzaStoria = True
@@ -138,11 +138,11 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Ciao, la merce è finita")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"È finita?")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
         else:
             oggettoDato = False
             avanzaStoria = True
@@ -151,7 +151,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Ti sto per fare una domanda")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("???DOMANDA???")
@@ -160,7 +160,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append("(cambia discorso parlando di carote)")
             dialogo.append("Almeno 3")
             dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("!!!RISPOSTA!!!")
@@ -168,118 +168,68 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append("Scusa, non mi interessano le carote")
             dialogo.append(u"Mmh... è giusto...")
             dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Non ho più merce")
-            partiDialogo.append(dialogo)
+            partiDialogoTradotte["ita"].append(dialogo)
 
     if tipo == "Nessuno":
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif tipo == "Tutorial":
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTutorial.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
-    elif tipo.startswith("OggettoDictCofanetto"):
-        tipo = tipoId.split("-")[0]
-        partiDialogo = []
-        nome = "Cofanetto"
-        oggettoDato = False
-        avanzaStoria = False
-        menuMercante = False
-        scelta = False
-        avanzaColDialogo = False
-        if tipo == "OggettoDictCofanettoAperto":
-            if GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["palazzoDiRod5"] or GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelDiRod3"] or GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Ma... si è presa la mia roba?!)")
-                partiDialogo.append(dialogo)
-            elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Bauli aperti e svuotati... allora non deruba solo me...)")
-                partiDialogo.append(dialogo)
-            else:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Devo smetterla di lasciare roba in giro...)")
-                partiDialogo.append(dialogo)
-        elif tipo == "OggettoDictCofanettoChiuso":
-            if GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["palazzoDiRod5"] or GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelDiRod3"] or GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Adesso non mi serve questa roba...)")
-                partiDialogo.append(dialogo)
-            elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Roba di Neil, non m'interessa...)")
-                partiDialogo.append(dialogo)
-            else:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Non ho voglia di mettere a posto questa roba... e poi qua sembra non dar fastidio a nessuno...)")
-                partiDialogo.append(dialogo)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTutorial.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["sognoSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["sognoSara4"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSogno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSogno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaHansSara4"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCasa.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCasa.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiForestaCadetta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiForestaCadetta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["stradaPerCittà1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerCittà3"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerCitta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerCitta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["città1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["città10"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCitta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCitta.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["casaDavid1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaDavid3"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCasaUfficiale.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCasaUfficiale.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["biblioteca1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["biblioteca3"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiBiblioteca.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiBiblioteca.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["stradaPerSelvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerSelvaArida.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerSelvaArida.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["selvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["selvaArida16"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSelvaArida.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSelvaArida.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiAvampostoDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiAvampostoDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["labirinto1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["labirinto23"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["esternoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["esternoCastello5"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiEsternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiEsternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["internoCastello1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["internoCastello21"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiInternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiInternoCastello.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiScorciatoiaLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiScorciatoiaLabirinto.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["stradaPerPassoMontano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerPassoMontano2"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiStradaPerPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["passoMontano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["passoMontano10"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPassoMontano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["palazzoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["palazzoDiRod5"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPalazzoDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiPalazzoDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["tunnelDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelDiRod3"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTunnelDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTunnelDiRod.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["caverna1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["caverna17"]:
-        partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCavernaImpo.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiCavernaImpo.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
-    return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+    # !!! - temporaneo finché non sistemi tutti i dialoghi per includere le traduzioni - !!!
+    sistematoDialoghi = False
+    if not sistematoDialoghi:
+        partiDialogoTradotte = {"ita": partiDialogoTradotte, "eng": partiDialogoTradotte}
+        nome = {"ita": nome, "eng": nome}
+        oggettoDato = {"ita": oggettoDato, "eng": oggettoDato}
+
+    # creo un digest dell'intero dialogo per avere un id da usare per il controllo dei dialoghi già letti
+    idDialogoCorrente = tipo
+    for dialogo in partiDialogoTradotte["ita"]:
+        idDialogoCorrente += dialogo[0] + dialogo[1]
+    md5 = hashlib.md5()
+    md5.update(idDialogoCorrente.encode("utf-8"))
+    idDialogoCorrente = md5.hexdigest()
+
+    return partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo, idDialogoCorrente

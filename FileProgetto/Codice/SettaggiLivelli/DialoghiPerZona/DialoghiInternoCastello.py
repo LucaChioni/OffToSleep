@@ -14,7 +14,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and (tipo in GlobalImgVar.vettoreNomiNemici or tipo == "ServoSpada" or tipo == "ServoArco" or tipo == "ServoLancia" or tipo.startswith("OggettoQuadro")):
+
+    if tipo.startswith("OggettoDictCofanetto"):
+        nome = "Cofanetto"
+        if tipo == "OggettoDictCofanettoAperto":
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Bauli aperti e svuotati... allora non deruba solo me...)")
+            partiDialogo.append(dialogo)
+        elif tipo == "OggettoDictCofanettoChiuso":
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Roba di Neil, non m'interessa...)")
+            partiDialogo.append(dialogo)
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and (tipo in GlobalImgVar.vettoreNomiNemici or tipo == "ServoSpada" or tipo == "ServoArco" or tipo == "ServoLancia" or tipo.startswith("OggettoQuadro")):
         if tipo in GlobalImgVar.vettoreNomiNemici:
             partiDialogo = []
             if tipo == "ServoLancia":

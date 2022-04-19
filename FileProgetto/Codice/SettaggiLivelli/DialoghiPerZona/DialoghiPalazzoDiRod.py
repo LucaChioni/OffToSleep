@@ -13,7 +13,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod1"]:
+
+    if tipo.startswith("OggettoDictCofanetto"):
+        nome = "Cofanetto"
+        if tipo == "OggettoDictCofanettoAperto":
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Ma... si è presa la mia roba?!)")
+            partiDialogo.append(dialogo)
+        elif tipo == "OggettoDictCofanettoChiuso":
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Adesso non mi serve questa roba...)")
+            partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["palazzoDiRod1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
             nome = "Impo"

@@ -934,7 +934,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     # disegno evidenziazione ai personaggi-oggetto interagibili
     for personaggio in listaPersonaggi:
         if personaggio.vicinoACasellaVista or personaggio.inCasellaVista:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
+            if personaggio.idDialogoCorrente in GlobalGameVar.idDialoghiLetti:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaioneCompiuta, (personaggio.x, personaggio.y))
+            else:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
     # disegno evidenziazione delle uscite della stanza
     vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(dati[1], avanzamentoStoria)
     i = 0

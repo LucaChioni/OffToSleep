@@ -581,7 +581,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Uhm... poi non si mangiano spesso cose così buone. A meno che... cioè... è un piatto comune qui?")
+            dialogo.append(u"... Ehm... non sono abituata a mangiare cose così buone. È un piatto comune qui?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -597,11 +597,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah... beh sicuramente, nella caccia, dev'essere una delle prede principali per chiunque...")
+            dialogo.append(u"Ah... dev'essere una preda desiderata e cacciata da chiunque...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Per chiunque sia capace di cacciare, quantomeno. Non di certo per i deboli...")
+            dialogo.append(u"... Da chiunque sia capace di cacciare, quantomeno. Non di certo dai deboli...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mammaUfficialeUscitaDallaCena"]:
             oggettoDato = False
@@ -719,7 +719,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... E perché mi hai ospitata per cena allora?!")
+            dialogo.append(u"... E perché mi hai ospitata per cena allora?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -731,7 +731,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Il soldato da cui hai preso quell'armatura d'acciao... dove l'hai seploto?")
+            dialogo.append(u"... Il soldato da cui hai preso quell'armatura d'acciaio... dove l'hai seploto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

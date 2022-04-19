@@ -211,6 +211,7 @@ def menu(caricaSalvataggio, gameover):
         ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10][:]
         obbiettivoCasualeColco = GenericFunc.copiaNemico(GlobalGameVar.vetDatiSalvataggioGameOver[11])
         GlobalGameVar.inizializzaVariabiliGlobali()
+        GlobalGameVar.idDialoghiLetti = GlobalGameVar.idDialoghiLettiGameOver[:]
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
@@ -228,6 +229,7 @@ def menu(caricaSalvataggio, gameover):
         oggettiRimastiAHans = datiTotaliAttuali[9]
         ultimoObbiettivoColco = datiTotaliAttuali[10]
         obbiettivoCasualeColco = datiTotaliAttuali[11]
+        GlobalGameVar.idDialoghiLetti = datiTotaliAttuali[12]
         datiGameover = datiTotaliGameover[0]
         tutteporteGameover = datiTotaliGameover[1]
         tutticofanettiGameover = datiTotaliGameover[2]
@@ -240,6 +242,7 @@ def menu(caricaSalvataggio, gameover):
         oggettiRimastiAHansGameover = datiTotaliGameover[9]
         ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
         obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
+        GlobalGameVar.idDialoghiLettiGameOver = datiTotaliGameover[12]
 
         GlobalGameVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
         GlobalGameVar.numSalvataggioCaricato = caricaSalvataggio
@@ -395,6 +398,7 @@ def menu(caricaSalvataggio, gameover):
                             oggettiRimastiAHans = datiTotaliAttuali[9]
                             ultimoObbiettivoColco = datiTotaliAttuali[10]
                             obbiettivoCasualeColco = datiTotaliAttuali[11]
+                            GlobalGameVar.idDialoghiLetti = datiTotaliAttuali[12]
                             datiGameover = datiTotaliGameover[0]
                             tutteporteGameover = datiTotaliGameover[1]
                             tutticofanettiGameover = datiTotaliGameover[2]
@@ -407,6 +411,7 @@ def menu(caricaSalvataggio, gameover):
                             oggettiRimastiAHansGameover = datiTotaliGameover[9]
                             ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
                             obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
+                            GlobalGameVar.idDialoghiLettiGameOver = datiTotaliGameover[12]
 
                             GlobalGameVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                             if dati:
