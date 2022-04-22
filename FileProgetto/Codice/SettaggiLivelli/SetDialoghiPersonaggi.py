@@ -116,6 +116,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
     # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
     if tipo == "test":
+        partiDialogoTradotte = []
         nome = "Bob"
         if avanzamentoStoria == 0:
             oggettoDato = False
@@ -125,11 +126,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Ciao, ecco la merce")
-            partiDialogoTradotte["ita"].append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Ecco la merceee")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
         elif avanzamentoStoria == 1:
             oggettoDato = "oggetto speciale"
             avanzaStoria = True
@@ -138,11 +135,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Ciao, la merce è finita")
-            partiDialogoTradotte["ita"].append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"È finita?")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
         else:
             oggettoDato = False
             avanzaStoria = True
@@ -151,7 +144,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Ti sto per fare una domanda")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("???DOMANDA???")
@@ -160,7 +153,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append("(cambia discorso parlando di carote)")
             dialogo.append("Almeno 3")
             dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("!!!RISPOSTA!!!")
@@ -168,11 +161,11 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append("Scusa, non mi interessano le carote")
             dialogo.append(u"Mmh... è giusto...")
             dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Non ho più merce")
-            partiDialogoTradotte["ita"].append(dialogo)
+            partiDialogoTradotte.append(dialogo)
 
     if tipo == "Nessuno":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
@@ -224,12 +217,15 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         nome = {"ita": nome, "eng": nome}
         oggettoDato = {"ita": oggettoDato, "eng": oggettoDato}
 
-    # creo un digest dell'intero dialogo per avere un id da usare per il controllo dei dialoghi già letti
-    idDialogoCorrente = tipo
-    for dialogo in partiDialogoTradotte["ita"]:
-        idDialogoCorrente += dialogo[0] + dialogo[1]
-    md5 = hashlib.md5()
-    md5.update(idDialogoCorrente.encode("utf-8"))
-    idDialogoCorrente = md5.hexdigest()
+    # creo un digest dell'intero dialogo per avere un id da usare per il controllo dei dialoghi già letti (non lo faccio per i dialoghi con nessuno, tutorial e cadaveri (eccetto i soldati nel castello))
+    if tipo == "Nessuno" or tipo == "Tutorial" or (tipo.startswith("OggettoDictCadavere") and not tipo.startswith("OggettoDictCadavereSoldatoCastello")):
+        idDialogoCorrente = False
+    else:
+        idDialogoCorrente = tipo
+        for dialogo in partiDialogoTradotte["ita"]:
+            idDialogoCorrente += dialogo[0] + dialogo[1]
+        md5 = hashlib.md5()
+        md5.update(idDialogoCorrente.encode("utf-8"))
+        idDialogoCorrente = md5.hexdigest()
 
     return partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo, idDialogoCorrente

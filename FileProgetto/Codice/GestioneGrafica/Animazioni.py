@@ -1266,7 +1266,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
             i = 0
             while i < len(attaccoDiRallo):
                 if attaccoDiRallo[i] == nemico:
-                    if attaccoDiRallo[i + 1] != 0:
+                    if attaccoDiRallo[i + 1] != 0 and nemico == nemicoInquadrato:
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] = attaccoDiRallo[i + 1]
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
                         if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] > 0:
@@ -1284,7 +1284,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
             i = 0
             while i < len(attaccoDiColco):
                 if attaccoDiColco[i] == nemico:
-                    if attaccoDiColco[i + 1] != 0:
+                    if attaccoDiColco[i + 1] != 0 and nemico == nemicoInquadrato:
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] = attaccoDiColco[i + 1]
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
                         if GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] > 0:
@@ -1394,11 +1394,16 @@ def animaValoreEffettoSurriscaldamento(nemicoInquadrato, animaEffettoSurriscalda
 
 
 def animaValoreEffettoVelenoNemici(nemicoInquadrato, animaEffettoVelenoNemico):
-    if nemicoInquadrato and not type(nemicoInquadrato) is str and animaEffettoVelenoNemico > 0:
-        GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0] = "veleno"
-        GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] = -animaEffettoVelenoNemico
-        GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
-        FunzioniGraficheGeneriche.disegnaVitaNemici(nemicoInquadrato.vita, nemicoInquadrato.vitaTotale, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
+    if nemicoInquadrato and not type(nemicoInquadrato) is str and nemicoInquadrato.id in animaEffettoVelenoNemico:
+        i = 0
+        while i < len(animaEffettoVelenoNemico):
+            if nemicoInquadrato.id == animaEffettoVelenoNemico[i]:
+                GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][0] = "veleno"
+                GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][1] = -animaEffettoVelenoNemico[i + 1]
+                GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
+                FunzioniGraficheGeneriche.disegnaVitaNemici(nemicoInquadrato.vita, nemicoInquadrato.vitaTotale, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
+                break
+            i += 2
 
 
 def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio, saltaTurno, stanzaVecchia, animaCuraCollana, animaEffettoVeleno, animaEffettoVelenoNemico, animaEffettoSurriscaldamento, listaNemiciSotterrati, imgNemicoSotterrato):

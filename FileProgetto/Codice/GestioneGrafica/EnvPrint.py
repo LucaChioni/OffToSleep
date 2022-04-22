@@ -660,6 +660,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     nyp = 0
     risposta = False
     difesa = 0
+    # resetto l'animazione del valore dei danni
+    GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"] = [False, 0, -1]
+    GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"] = [False, 0, -1]
+    GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"] = [False, 0, -1]
+    GlobalGameVar.datiAnimazioniDanniInflitti["dannoNemico"] = [False, 0, -1]
 
     usandoRod = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:

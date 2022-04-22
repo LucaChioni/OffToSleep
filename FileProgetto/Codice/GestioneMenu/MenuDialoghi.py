@@ -154,7 +154,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
                         i += 2
                 fineDialogo = True
                 # segno il dialogo come già letto
-                if not personaggio.idDialogoCorrente in GlobalGameVar.idDialoghiLetti:
+                if personaggio.idDialogoCorrente and not personaggio.idDialogoCorrente in GlobalGameVar.idDialoghiLetti:
                     GlobalGameVar.idDialoghiLetti.append(personaggio.idDialogoCorrente)
             else:
                 if personaggio.scelta and partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":

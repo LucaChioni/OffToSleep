@@ -875,6 +875,15 @@ class NemicoObj(object):
                         while i < len(vettoreDenaro):
                             if self.caseattactot[j] == vettoreDenaro[i + 1] and self.caseattactot[j + 1] == vettoreDenaro[i + 2]:
                                 if self.caseattactot[j + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
+                                    eliminatoOstocoloSulleMonete = False
+                                    k = 0
+                                    while k < len(vetNemiciSoloConXeY):
+                                        if vetNemiciSoloConXeY[k] == vettoreDenaro[i + 1] and vetNemiciSoloConXeY[k + 1] == vettoreDenaro[i + 2]:
+                                            del vetNemiciSoloConXeY[k + 1]
+                                            del vetNemiciSoloConXeY[k]
+                                            eliminatoOstocoloSulleMonete = True
+                                            break
+                                        k += 2
                                     if primoDenaro:
                                         pathPerDenaro = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
                                         if pathPerDenaro and len(pathPerDenaro) > 0:
@@ -895,6 +904,9 @@ class NemicoObj(object):
                                             distMinYDenaro = vettoreDenaro[i + 2]
                                             xDenaro = distMinXDenaro
                                             yDenaro = distMinYDenaro
+                                    if eliminatoOstocoloSulleMonete:
+                                        vetNemiciSoloConXeY.append(vettoreDenaro[i + 1])
+                                        vetNemiciSoloConXeY.append(vettoreDenaro[i + 2])
                                 break
                             i += 3
                         j += 3
@@ -908,10 +920,10 @@ class NemicoObj(object):
                     if self.attaccaDaLontano:
                         distanzaDaRallo = abs(self.x - x) + abs(self.y - y)
                         distanzaDaColco = abs(self.x - rx) + abs(self.y - ry)
-                    if vistoRob and (not vistoRallo or -1 < distanzaDaColco <= distanzaDaRallo or -1 == distanzaDaRallo < distanzaDaColco or distanzaDaColco == distanzaDaRallo):
-                        self.obbiettivo = ["Colco", rx, ry, pathPerColco]
-                    elif vistoRallo:
+                    if vistoRallo and (not vistoRob or -1 < distanzaDaRallo <= distanzaDaColco or -1 == distanzaDaColco < distanzaDaRallo or distanzaDaRallo == distanzaDaColco):
                         self.obbiettivo = ["Rallo", x, y, pathPerRallo]
+                    elif vistoRob:
+                        self.obbiettivo = ["Colco", rx, ry, pathPerColco]
 
         if self.obbiettivo[0] != "":
             self.xPosizioneUltimoBersaglio = self.obbiettivo[1]

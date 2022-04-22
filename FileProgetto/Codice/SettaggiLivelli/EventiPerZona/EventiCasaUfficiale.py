@@ -330,18 +330,24 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoConGuardiaCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid2"] and y == GlobalHWVar.gpy * 3 and (x == GlobalHWVar.gpx * 19 or x == GlobalHWVar.gpx * 20 or x == GlobalHWVar.gpx * 21):
-        spawnServoX = x
+        spawnServoX = GlobalHWVar.gpx * 20
         spawnServoY = GlobalHWVar.gpy * 2
         npers = 3
         percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(spawnServoX, spawnServoY, "s", "ServoDavid-1", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggiTotali.append(personaggio)
         listaPersonaggi.append(personaggio)
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumorePortoniCambioStanza)
         avanzamentoStoria += 1
         avanzaIlTurnoSenzaMuoverti = True
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoArrivaConCertificazione"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "ServoDavid-1", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True

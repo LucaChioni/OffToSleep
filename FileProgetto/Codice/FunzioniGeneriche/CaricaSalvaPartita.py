@@ -50,7 +50,7 @@ def salvataggio(n, datiAttuali, datiGameover):
             listaAvanzamentoDialoghi_Temp = listaAvanzamentoDialoghi[:]
             i = len(listaAvanzamentoDialoghi_Temp) - 2
             while i >= 0:
-                if listaAvanzamentoDialoghi_Temp[i + 1] == 0:
+                if listaAvanzamentoDialoghi_Temp[i + 1] == 0 or listaAvanzamentoDialoghi_Temp[i].startswith("OggettoDictCadavere"):
                     del listaAvanzamentoDialoghi_Temp[i + 1]
                     del listaAvanzamentoDialoghi_Temp[i]
                 i -= 2
@@ -125,7 +125,8 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("%i_" % vettoreDenaro[i])
                 scrivi.write("%i_" % (vettoreDenaro[i + 1] // GlobalHWVar.gpx))
                 scrivi.write("%i_" % (vettoreDenaro[i + 2] // GlobalHWVar.gpy))
-                i += 3
+                scrivi.write("%i_" % vettoreDenaro[i + 3])
+                i += 4
             scrivi.write("\n")
             i = 0
             while i < len(stanzeGiaVisitate):
@@ -389,7 +390,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             i += 4
                     listaMoneteStringa = datiTotali[c + 5].split("_")
                     listaMoneteStringa.pop(len(listaMoneteStringa) - 1)
-                    if len(listaMoneteStringa) % 3 != 0:
+                    if len(listaMoneteStringa) % 4 != 0:
                         errore = True
                     else:
                         i = 0
@@ -398,10 +399,11 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 listaMonete.append(int(listaMoneteStringa[i]))
                                 listaMonete.append(GlobalHWVar.gpx * int(listaMoneteStringa[i + 1]))
                                 listaMonete.append(GlobalHWVar.gpy * int(listaMoneteStringa[i + 2]))
+                                listaMonete.append(int(listaMoneteStringa[i + 3]))
                             except:
                                 errore = True
                                 break
-                            i += 3
+                            i += 4
                     stanzeGiaVisitateStringa = datiTotali[c + 6].split("_")
                     stanzeGiaVisitateStringa.pop(len(stanzeGiaVisitateStringa) - 1)
                     i = 0

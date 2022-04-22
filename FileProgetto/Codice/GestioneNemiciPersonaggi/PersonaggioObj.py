@@ -38,7 +38,7 @@ class PersonaggioObj(object):
         # le variabili "self.avanzamentoDialogo" e "self.avanzaColDialogo" servono per cambiare dialogo e/o immagine quando l'avanzamento della storia non è abbastanza per definire l'evento che fa scatenare queste modifiche
         self.avanzamentoDialogo = avanzamentoDialogo
         self.avanzaColDialogo = False
-        self.idDialogoCorrente = ""
+        self.idDialogoCorrente = False
 
         if self.tipo in GlobalImgVar.vettoreNomiNemici and self.tipo != "ServoLancia" and self.tipo != "ServoSpada" and self.tipo != "ServoArco":
             self.mantieniSempreASchermo = False

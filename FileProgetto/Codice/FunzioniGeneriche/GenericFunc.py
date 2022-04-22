@@ -2078,7 +2078,7 @@ def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemici
     while i < len(vettoreDenaro):
         vettoreDenaro[i + 1] = vettoreDenaro[i + 1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
         vettoreDenaro[i + 2] = vettoreDenaro[i + 2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
-        i += 3
+        i += 4
     for personaggio in listaPersonaggiTotali:
         personaggio.x = personaggio.x // gpxPreCambioRisoluzione * GlobalHWVar.gpx
         personaggio.y = personaggio.y // gpyPreCambioRisoluzione * GlobalHWVar.gpy
