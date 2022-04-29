@@ -201,8 +201,8 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("personaggio")
                 dialogo.append("!!!RISPOSTA!!!")
                 dialogo.append(u"Io sono il capo di questa percezione. Quello che vedo ha fede in me.")
-                dialogo.append(u"Di Frrelloww, capo di questa percezione.")
-                dialogo.append(u"Può darsi...")
+                dialogo.append(u"Di Frrelloww, <*>#italic#capo<*> di questa percezione.")
+                dialogo.append(u"Io non lo farei...")
                 dialogo.append(u"<*>#italic#Mmh...<*> pazzo... Pazzo Montano...")
                 partiDialogo.append(dialogo)
                 dialogo = []
@@ -257,7 +257,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... L'aria è fredda, ma non si sente quasi per niente... forse si riscalda più velocemente... o è la mia pelle che... è diversa...")
+                dialogo.append(u"L'aria è fredda, ma non si sente quasi per niente... si riscalda subito...")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

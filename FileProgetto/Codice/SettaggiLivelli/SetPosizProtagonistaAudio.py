@@ -3699,6 +3699,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalHWVar.gpx * 10
                     y = GlobalHWVar.gpy * 9
                     mantieniPosizioneImpo = True
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] or avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoNeilRene1"] or avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]):
+                    mantieniPosizioneImpo = True
                 if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
                     x = GlobalHWVar.gpx * 14
                     y = GlobalHWVar.gpy * 11
@@ -4292,6 +4294,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         x = GlobalHWVar.gpx * 5
                         y = GlobalHWVar.gpy * 10
                 if stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod4"]:
+                    mantieniPosizioneImpo = True
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLevaTunnelDiRod)
                     i = 0
                     while i < 10:
@@ -4401,6 +4404,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x += GlobalHWVar.gpx * 12
                     y = GlobalHWVar.gpy * 15
                 if stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+                    mantieniPosizioneImpo = True
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLevaTunnelDiRod)
                     i = 0
                     while i < 10:
@@ -4860,7 +4864,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x += GlobalHWVar.gpx * 15
                     y = GlobalHWVar.gpy * 15
 
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
         listaSottofondoAmbientale = []
         sottofondoAmbientaleCambiato = True
         canzone = False

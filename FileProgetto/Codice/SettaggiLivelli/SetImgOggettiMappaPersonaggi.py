@@ -221,7 +221,7 @@ def definisciImgOggetti(tipo):
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoTavoloVuotoCastelloA":
         disegnaImg = True
-        numImg = 4
+        numImg = 5
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoTavoloVuotoCastelloB":
@@ -310,6 +310,10 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiataSulTavoloPostRianimazione"]:
             numImgAttuale = 3
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"]:
+            numImgAttuale = 4
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+            numImgAttuale = 3
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
             numImgAttuale = 1
     if tipo == "OggettoTavoloVuotoCastelloB":
@@ -391,6 +395,9 @@ def setImgDialogoProtagonista(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         GlobalGameVar.nomePersonaggioDialoghi = "Rod"
         imgDaUsare = "RodDialogo"
+    elif GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostdialogoNeilRene1"]:
+        GlobalGameVar.nomePersonaggioDialoghi = u"René"
+        imgDaUsare = "ReneDialogo"
     else:
         GlobalGameVar.nomePersonaggioDialoghi = "Sara"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:

@@ -219,19 +219,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"... Cioè, non che abbia qualcosa contro il silezio, sia chiaro... è solo un po' inquietante, tutto qui...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoDalCastelloPostTempoBloccato"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Chissà com'è la città adesso...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Magari in giro troviamo qualcun altro che si muove... come noi...")
-                partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
             nome = "Soldato con lancia"
@@ -434,14 +421,22 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Ok... adesso dobbiamo trovare Rod. Che sia sempre al suo \"avamposto\"?")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPerplessitàIntenzioniDiNeilERenéPostTempoBloccato"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoScomparsaDiNeilPostTempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"C'è un silenzio tombale... ancor più di prima...")
+                dialogo.append(u"... C'è un silenzio tombale anche qua fuori...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Chissà com'è la città adesso...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... E Rod... magari lui...")
                 partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []

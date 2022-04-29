@@ -210,8 +210,10 @@ def menu(caricaSalvataggio, gameover):
         oggettiRimastiAHans = GlobalGameVar.vetDatiSalvataggioGameOver[9][:]
         ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10][:]
         obbiettivoCasualeColco = GenericFunc.copiaNemico(GlobalGameVar.vetDatiSalvataggioGameOver[11])
+        idDialoghiLettiTemp = GlobalGameVar.idDialoghiLettiGameOver[:]
         GlobalGameVar.inizializzaVariabiliGlobali()
-        GlobalGameVar.idDialoghiLetti = GlobalGameVar.idDialoghiLettiGameOver[:]
+        GlobalGameVar.idDialoghiLetti = idDialoghiLettiTemp
+        GlobalGameVar.idDialoghiLettiGameOver = idDialoghiLettiTemp[:]
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:

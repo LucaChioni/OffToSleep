@@ -365,6 +365,17 @@ def gameloop():
 
             SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(dati[0])
 
+            statoRalloInizioTurno = []
+            statoRalloInizioTurno.append(dati[5])
+            statoRalloInizioTurno.append(dati[121])
+            statoRalloInizioTurno.append(dati[123])
+            statoRalloInizioTurno.append(dati[124])
+            statoColcoInizioTurno = []
+            statoColcoInizioTurno.append(dati[10])
+            statoColcoInizioTurno.append(dati[122])
+            statoColcoInizioTurno.append(dati[125])
+            statoColcoInizioTurno.append(dati[126])
+
             carim = True
             cambiosta = True
             impossibileCliccarePulsanti = True

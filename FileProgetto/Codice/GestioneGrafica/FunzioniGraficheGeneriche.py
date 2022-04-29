@@ -967,3 +967,100 @@ def disegnaCasellaSulloSchermo(imgCasella, xCasella, yCasella, listaNemiciSotter
     for nemicoSotterrato in listaNemiciSotterrati:
         if nemicoSotterrato[0] == xCasella and nemicoSotterrato[1] == yCasella:
             GlobalHWVar.disegnaImmagineSuSchermo(imgNemicoSotterrato, (nemicoSotterrato[0], nemicoSotterrato[1]))
+
+
+def animaDormiveglia(illumina, screen):
+    rect = pygame.display.get_surface().get_rect()
+    if illumina:
+        # fase 1: illuminazione parziale
+        qtaIlluminazione = 5
+        vetImg = []
+        i = 250
+        while i > 120:
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, i))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+            i -= qtaIlluminazione
+        i = 0
+        while i < len(vetImg):
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        # fase 2: rioscuramento
+        image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        image.fill((0, 0, 0, 30))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()
+        # fase 3: illuminazione totale
+        qtaIlluminazione = 5
+        rect = pygame.display.get_surface().get_rect()
+        vetImg = []
+        i = 250
+        while i > 0:
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, i))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+            i -= qtaIlluminazione
+        i = 0
+        while i < len(vetImg):
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+    else:
+        # fase 1: oscuramento
+        image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        image.fill((0, 0, 0, 30))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()
+        # fase 2: reilluminazione parziale
+        qtaIlluminazione = 5
+        vetImg = []
+        i = 250
+        while i > 180:
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, i))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+            i -= qtaIlluminazione
+        i = 0
+        while i < len(vetImg):
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        # fase 3: oscuramento totale
+        image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        image.fill((0, 0, 0, 30))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()

@@ -817,6 +817,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                break
             j += 3
         i += 4
     # esche: id, vita, xesca, yesca
@@ -943,6 +944,18 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaioneCompiuta, (personaggio.x, personaggio.y))
             else:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
+    # disegno evidenziazione ai cofanetti ancora chiusi (non quando sei Rod)
+    if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        i = 0
+        while i < len(cofanetti):
+            j = 0
+            while j < len(caselleNonVisibili):
+                if ((caselleNonVisibili[j] == cofanetti[i + 1] - GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] + GlobalHWVar.gpx and caselleNonVisibili[j + 1] == cofanetti[i + 2]) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] - GlobalHWVar.gpy) or (caselleNonVisibili[j] == cofanetti[i + 1] and caselleNonVisibili[j + 1] == cofanetti[i + 2] + GlobalHWVar.gpy)) and caselleNonVisibili[j + 2]:
+                    if not cofanetti[i + 3]:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (cofanetti[i + 1], cofanetti[i + 2]))
+                    break
+                j += 3
+            i += 4
     # disegno evidenziazione delle uscite della stanza
     vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(dati[1], avanzamentoStoria)
     i = 0

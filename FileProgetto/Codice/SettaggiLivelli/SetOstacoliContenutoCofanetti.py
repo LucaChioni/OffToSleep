@@ -2186,7 +2186,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             # ottieni cella di memoria
             if cx == GlobalHWVar.gpx * 19 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 1000
-            # ottieni batteria (Sacca Energetica enorme)
+            # ottieni batteria (Sacca Energetica grande)
             if cx == GlobalHWVar.gpx * 25 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 74
         if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
@@ -2316,7 +2316,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 13:
                 tesoro = 1000
         if stanza == GlobalGameVar.dictStanze["caverna7"]:
-            # ottieni batteria (Sacca Energetica illimitata)
+            # ottieni batteria (Sacca Energetica enorme)
             if cx == GlobalHWVar.gpx * 12 and cy == GlobalHWVar.gpy * 3:
                 tesoro = 75
         if stanza == GlobalGameVar.dictStanze["caverna9"]:

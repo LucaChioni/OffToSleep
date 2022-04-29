@@ -38,33 +38,29 @@ def creaCadaveriNemici(listaNemici, stanza, avanzamentoStoria, listaPersonaggi, 
                         if vetEntrateTemp[i + 4] == stanzaDestinazioneTemp:
                             listaCaselleUscitaTemp.append([vetEntrateTemp[i], vetEntrateTemp[i + 1]])
                         i += 5
-                for nemicoTemp1 in listaNemici:
-                    if nemicoTemp1.morto:
-                        nemicoSovrappostoTemp = False
-                        for nemicoTemp2 in listaNemici:
-                            if nemicoTemp1 != nemicoTemp2 and nemicoTemp1.x == nemicoTemp2.x and nemicoTemp1.y == nemicoTemp2.y:
-                                nemicoSovrappostoTemp = True
-                        if not nemicoSovrappostoTemp:
-                            vetNemiciSoloConXeY = []
-                            for personaggio in listaPersonaggi:
-                                vetNemiciSoloConXeY.append(personaggio.x)
-                                vetNemiciSoloConXeY.append(personaggio.y)
-                            vetNemiciSoloConXeY.append(nemicoTemp1.x)
-                            vetNemiciSoloConXeY.append(nemicoTemp1.y)
-                            # aggiungo anche le porte che non si possono aprire
-                            k = 0
-                            while k < len(porte):
-                                if stanza == porte[k] and not SetZoneStanzeImpedimenti.possibileAprirePorta(stanza, porte[k + 1], porte[k + 2], avanzamentoStoria):
-                                    vetNemiciSoloConXeY.append(porte[k + 1])
-                                    vetNemiciSoloConXeY.append(porte[k + 2])
-                                k += 4
-                            for casellaUscita in listaCaselleUscitaTemp:
-                                percorsoTrovato = GenericFunc.pathFinding(x, y, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
-                                if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
-                                    percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
-                                    if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
-                                        vatCadaveriDaCreare.append(["OggettoDictCadavereSoldatoCastello" + str(nemico.posizMorte) + "-" + str(nemico.id), nemicoTemp1.x, nemicoTemp1.y])
-                                        break
+                vetNemiciSoloConXeY = []
+                for personaggio in listaPersonaggi:
+                    vetNemiciSoloConXeY.append(personaggio.x)
+                    vetNemiciSoloConXeY.append(personaggio.y)
+                vetNemiciSoloConXeY.append(nemico.x)
+                vetNemiciSoloConXeY.append(nemico.y)
+                for cadavere in vatCadaveriDaCreare:
+                    vetNemiciSoloConXeY.append(cadavere[1])
+                    vetNemiciSoloConXeY.append(cadavere[2])
+                # aggiungo anche le porte che non si possono aprire
+                k = 0
+                while k < len(porte):
+                    if stanza == porte[k] and not SetZoneStanzeImpedimenti.possibileAprirePorta(stanza, porte[k + 1], porte[k + 2], avanzamentoStoria):
+                        vetNemiciSoloConXeY.append(porte[k + 1])
+                        vetNemiciSoloConXeY.append(porte[k + 2])
+                    k += 4
+                for casellaUscita in listaCaselleUscitaTemp:
+                    percorsoTrovato = GenericFunc.pathFinding(x, y, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                    if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                        percorsoTrovato = GenericFunc.pathFinding(rx, ry, casellaUscita[0], casellaUscita[1], vetNemiciSoloConXeY, casellePercorribiliPorteEscluse)
+                        if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) > 0:
+                            vatCadaveriDaCreare.append(["OggettoDictCadavereSoldatoCastello" + str(nemico.posizMorte) + "-" + str(nemico.id), nemico.x, nemico.y])
+                            break
             elif not GlobalGameVar.dictStanze["internoCastello1"] <= stanza <= GlobalGameVar.dictStanze["internoCastello21"]:
                 vatCadaveriDaCreare.append(["OggettoDictCadavere" + nemico.tipo + str(nemico.posizMorte) + "-" + str(nemico.id), nemico.x, nemico.y])
     for cadavere in vatCadaveriDaCreare:
@@ -2348,6 +2344,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     if ultimoObbiettivoColco[1] == personaggio.x and ultimoObbiettivoColco[2] == personaggio.y:
                         posizioneOstacolata = True
                         break
+                # per evitare di non mostrare l'intento di Colco nella schermata di previsione (altrimenti l'obiettivo verrebbe mostrato sempre tranne quando gli è accanto)
+                if analizzaColco:
+                    posizioneOstacolata = False
                 i = 0
                 while i < len(porte):
                     if ultimoObbiettivoColco[1] == porte[i + 1] and ultimoObbiettivoColco[2] == porte[i + 2]:

@@ -75,7 +75,7 @@ statisticheEquipaggiamento["scudiPar"] = [0, 3, 8, 18, 38]
 statisticheEquipaggiamento["guanti"] = [0, 20, 20, 20, 10]
 statisticheEquipaggiamento["batteriaPe"] = [200, 300, 500, 900, 1500]
 statisticheEquipaggiamento["batteriaDif"] = [60, 80, 120, 180, 250]
-dannoAttacchiColco = {"scossa": 90, "freccia": 75, "tempesta": 60, "scossa+": 160, "freccia+": 140, "tempesta+": 120, "scossa++": 300, "freccia++": 250, "tempesta++": 200}
+dannoAttacchiColco = {"scossa": 100, "freccia": 85, "tempesta": 70, "scossa+": 200, "freccia+": 175, "tempesta+": 150, "scossa++": 380, "freccia++": 330, "tempesta++": 280}
 
 # vettore che conterrà tutti i dati dei salvataggi
 vetDatiSalvataggi = []

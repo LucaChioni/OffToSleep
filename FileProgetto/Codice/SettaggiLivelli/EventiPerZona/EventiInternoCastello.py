@@ -436,10 +436,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoListaStrumentiDaNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
-        if GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
-            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
-            GlobalHWVar.canaleSoundBattitoCardiaco.stop()
-            GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -460,6 +456,10 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     personaggioArrivato = True
                 break
         if personaggioArrivato:
+            if GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+                GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
+                GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+                GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
             i = 0
             while i < 5:
                 pygame.time.wait(100)
@@ -956,24 +956,24 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
         # oscuro lo schermo lentamente
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=5)
-        # inserisci suoni di transizione per resuscitare
         i = 0
         while i < 10:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
-        GlobalHWVar.canaleSoundMelodieEventi.set_volume(0)
-        GlobalHWVar.canaleSoundMelodieEventi.play(GlobalSndVar.rumoreSottofondoProcessoRianimazione, -1)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti], False)
+        # riproduco suoni della rianimazione (sfrutto canaleSoundBattitoCardiaco)
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(0)
+        GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreSottofondoProcessoRianimazione, -1)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti], False)
         i = 0
         while i < 50:
             pygame.time.wait(100)
@@ -1040,18 +1040,18 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
-        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [0], False)
-        GlobalHWVar.canaleSoundMelodieEventi.stop()
-        GlobalHWVar.canaleSoundMelodieEventi.set_volume(GlobalHWVar.volumeEffetti)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False)
+        GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
         i = 0
         while i < 10:
             pygame.time.wait(100)
@@ -1465,24 +1465,106 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False)
         GlobalHWVar.canaleSoundBattitoCardiaco.stop()
         GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
-        for personaggio in listaPersonaggiTotali:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"] and personaggio.tipo == "Neil":
-                listaPersonaggiTotali.remove(personaggio)
-                break
-        for personaggio in listaPersonaggi:
-            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello20"] and personaggio.tipo == "Neil":
-                listaPersonaggi.remove(personaggio)
-                break
-        # apro le porte nel palazzo di Rod (per evitare di dover prendere chiavi)
-        i = 0
-        while i < len(tutteporte):
-            if tutteporte[i] == GlobalGameVar.dictStanze["palazzoDiRod2"]:
-                tutteporte[i + 3] = True
-            i += 4
+        # oscuro lo schermo lentamente
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=5)
+        # riproduco rumori ovattati durante le sperimentazioni di Neil (sfrutto canaleSoundBattitoCardiaco)
+        GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(0)
+        GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreDuranteOperazioneNeil, -1)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti], False)
+        # tolgo il sottofondo ambientale
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [0], False)
         GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+        i = 0
+        while i < 30:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         avanzamentoStoria += 1
+        stanza = GlobalGameVar.dictStanze["internoCastello20"]
+        cambiosta = True
         carim = True
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        screenPerDormiveglia = GlobalHWVar.schermo.copy().convert()
+        # oscuro lo schermo lentamente
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=5)
+        # animazione dormiveglia
+        FunzioniGraficheGeneriche.animaDormiveglia(illumina=True, screen=screenPerDormiveglia)
+        avanzamentoStoria += 1
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostIniezioneNeil"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostIniezioneNeil"]:
+            screenPerDormiveglia = GlobalHWVar.schermo.copy().convert()
+            FunzioniGraficheGeneriche.animaDormiveglia(illumina=False, screen=screenPerDormiveglia)
+            stanza = GlobalGameVar.dictStanze["internoCastello20"]
+            cambiosta = True
+            carim = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoNeilRene1"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        screenPerDormiveglia = GlobalHWVar.schermo.copy().convert()
+        # oscuro lo schermo lentamente
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=5)
+        # animazione dormiveglia
+        FunzioniGraficheGeneriche.animaDormiveglia(illumina=True, screen=screenPerDormiveglia)
+        avanzamentoStoria += 1
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostdialogoNeilRene1"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Neil-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostdialogoNeilRene1"]:
+            # animazione dormiveglia
+            screenPerDormiveglia = GlobalHWVar.schermo.copy().convert()
+            FunzioniGraficheGeneriche.animaDormiveglia(illumina=False, screen=screenPerDormiveglia)
+            i = 0
+            while i < 20:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 9.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 8.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 7.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 6.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 5.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 4.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 3.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 2.0], False)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [GlobalHWVar.volumeEffetti / 10.0 * 1.0], False)
+            GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(0)
+            GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+            GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
+            # apro le porte nel palazzo di Rod (per evitare di dover prendere chiavi)
+            i = 0
+            while i < len(tutteporte):
+                if tutteporte[i] == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+                    tutteporte[i + 3] = True
+                i += 4
+            stanza = GlobalGameVar.dictStanze["internoCastello20"]
+            cambiosta = True
+            carim = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
         i = 0
         while i < 10:
@@ -1595,28 +1677,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostLetturaAppuntiNeilSuRatti"] and stanza == GlobalGameVar.dictStanze["internoCastello19"] and y == GlobalHWVar.gpy * 10:
-        GlobalHWVar.canaleSoundPassiRallo.stop()
-        if npers != 4:
-            i = 0
-            while i < 5:
-                pygame.time.wait(100)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                i += 1
-            npers = 4
-            avanzaIlTurnoSenzaMuoverti = True
-            carim = True
-            caricaTutto = True
-        else:
-            i = 0
-            while i < 5:
-                pygame.time.wait(100)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                i += 1
-            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
-            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-            caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPerImpoNonBloccatoPostTempoBloccato"] and stanza == GlobalGameVar.dictStanze["internoCastello2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riletturaLibroNeilSulTempo"] and stanza == GlobalGameVar.dictStanze["internoCastello2"]:
         i = 0
         while i < 5:
             pygame.time.wait(100)
@@ -1625,7 +1686,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoScomparsaDiNeilPostTempoBloccato"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoApprofondimentoParadossiTempoBloccato"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
         i = 0
         while i < 5:
             pygame.time.wait(100)

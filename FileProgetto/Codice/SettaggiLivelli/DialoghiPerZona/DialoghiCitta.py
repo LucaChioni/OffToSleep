@@ -269,7 +269,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Tsk!<*> Non rivelo informazioni di questo tipo senza nessun tipo di compenso.")
+            dialogo.append(u"... Non rivelo informazioni di questo tipo senza nessun tipo di compenso.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -512,11 +512,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Non voglio parlare coi soldati...)")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Poi potrebbero insospettirsi per Impo...)")
+            dialogo.append(u"(Non voglio parlare coi soldati... poi potrebbero insospettirsi per Impo...)")
             partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta" and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
         partiDialogo = []
@@ -3184,7 +3180,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Non ti è permesso entrare nel castello, se è quello che vuoi sapere.")
+                    dialogo.append(u"Non ti è permesso entrare nel castello se è quello che vuoi sapere.")
                     partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 22:
                 if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and avanzamentoDialogo == 0:

@@ -2317,7 +2317,7 @@ def equiprobo(dati):
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 4:
                     if dati[74] != 0:
-                        FunzioniGraficheGeneriche.messaggio("Sacca enorme:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        FunzioniGraficheGeneriche.messaggio("Sacca grande:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Grande Sacca Energetica che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][3] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
                         if diff < 0:
@@ -2333,7 +2333,7 @@ def equiprobo(dati):
                         FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 5:
                     if dati[75] != 0:
-                        FunzioniGraficheGeneriche.messaggio("Sacca illimitata:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        FunzioniGraficheGeneriche.messaggio("Sacca enorme:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                         FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][4] - GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
                         if diff < 0:

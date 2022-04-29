@@ -661,6 +661,18 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.vx, nemicoInquadrato.vy))
 
 
+def cancellaNemiciMorti(listaNemici, vettoreImgCaselle, listaNemiciSotterrati, imgNemicoSotterrato):
+    for nemico in listaNemici:
+        if nemico.inCasellaVista and nemico.animaMorte and nemico.animazioneFatta:
+            i = 0
+            while i < len(vettoreImgCaselle):
+                if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
+                    FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                    FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
+                    break
+                i += 3
+
+
 def animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata, nemicoInquadrato, listaNemiciSotterrati, imgNemicoSotterrato):
     if "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
         c = 0
@@ -1098,7 +1110,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
                 GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.imgDanneggiamentoOggettoLanciato, (xFineRetta, yFineRetta))
 
 
-def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob, saltaTurno):
+def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, apriocchio, chiamarob, saltaTurno):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
     # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
@@ -1152,10 +1164,6 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     velenoRallo = statoRalloInizioTurno[1]
     attPRallo = statoRalloInizioTurno[2]
     difPRallo = statoRalloInizioTurno[3]
-    if aumentoliv != 0:
-        pvtot = GenericFunc.getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-        pvRallo = pvtot
-        velenoRallo = False
     FunzioniGraficheGeneriche.disegnaVitaRallo(pvRallo, pvtot, dati[132], velenoRallo, attPRallo, difPRallo, dati[0])
 
     # disegno la vita del Colco / esca / mostro selezionato
@@ -1616,7 +1624,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento Rallo
                 animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, tecnicaUsata, azioniDaEseguire, fineanimaz)
 
-            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob, saltaTurno)
+            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, apriocchio, chiamarob, saltaTurno)
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
@@ -1680,6 +1688,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     animaValoreEffettoSurriscaldamento(nemicoInquadrato, animaEffettoSurriscaldamento, dati)
     animaValoreEffettoVelenoNemici(nemicoInquadrato, animaEffettoVelenoNemico)
 
+    # è necessario cancellare i cadaveri (solo img) perché sennò potrebbero rimanere anche se dovrebbero sparire durante la fuga nel castello
+    cancellaNemiciMorti(listaNemici, vettoreImgCaselle, listaNemiciSotterrati, imgNemicoSotterrato)
+
     if tesoro != -1:
         if GlobalHWVar.mouseBloccato:
             GlobalHWVar.configuraCursore(False)
@@ -1736,9 +1747,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 43:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Spadone d'acciaio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 44:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Lykother", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Spada di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 45:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Mendaxritas", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Spada di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 46:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 47:
@@ -1746,9 +1757,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 48:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Arco di ferro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 49:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Arco di precisione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Arco di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 50:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Accipiter", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Arco di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 51:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 52:
@@ -1756,9 +1767,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 53:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Armatura d'acciaio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 54:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Lykodes", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Armatura di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 55:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Loriquam", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Armatura di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 56:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 57:
@@ -1766,9 +1777,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 58:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Scudo d'acciaio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 59:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Lykethmos", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Scudo di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 60:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Clipequam", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Scudo di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 61:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 62:
@@ -1796,9 +1807,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 73:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica capiente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 74:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica enorme", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 75:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica illimitata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica enorme", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro >= 81 and tesoro <= 100:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 1000:

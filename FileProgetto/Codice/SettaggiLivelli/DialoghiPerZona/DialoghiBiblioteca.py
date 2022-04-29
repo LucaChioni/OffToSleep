@@ -900,7 +900,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Beh, penso che voglia studiarlo. Non gli farà del male, se è quello che ti preoccupa. Gli impo sono praticamente immortali, te l'ho già detto.")
+                dialogo.append(u"... Beh, penso che voglia studiarlo. Non gli farà del male se è quello che ti preoccupa. Gli impo sono praticamente immortali, te l'ho già detto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

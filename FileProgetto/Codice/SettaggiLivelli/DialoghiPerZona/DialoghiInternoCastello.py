@@ -397,7 +397,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoScomparsaDiNeilPostTempoBloccato"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoApprofondimentoParadossiTempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -405,11 +405,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E poi che dovrei fare io di preciso?")
+                dialogo.append(u"... E poi Neil dov'è andato?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non mi hanno spiegato niente... cioè, potevano almeno dirmi con calma tutto quello che stavano studiando e poi spiegarmi a modo cosa fare...")
+                dialogo.append(u"... René è rimasto lì nel suo ufficio... e poi perché Renè era lì?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -417,11 +417,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Più nel dettaglio, dico...")
+                dialogo.append(u"... E poi perché mi hanno lasciata libera? Potrei andarmene e non tornare più...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Dovrei cercare qualcosa? Dovrei andare da qualche parte? Dovrei solo aspettare? E per quanto tempo?")
+                dialogo.append(u"... Dal loro punto di vista, io sarò tipo... sparita all'improvviso...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -429,11 +429,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Uff...<*>")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Oppure mi sta solo usando per... testare l'\"apparecchio cerebrale\"...?")
+                dialogo.append(u"<*>#italic#Mmmh...<*>")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-3":
             partiDialogo = []
@@ -571,7 +567,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipo == "OggettoImpo":
             partiDialogo = []
             nome = "Impo"
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPerImpoNonBloccatoPostTempoBloccato"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riletturaLibroNeilSulTempo"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -579,15 +575,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E poi Neil dov'è andato?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"È scomparso appena prima che il tempo si \"bloccasse\"... ha usato un... teletrasporto?!")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Mentre René è rimasto lì... e poi perché Renè era lì?!")
+                dialogo.append(u"Ma, aspetta un attimo... se il tempo è bloccato, perché tu ti muovi?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -595,7 +583,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Probabilmente era interessato alle ricerche di Neil... o forse l'ha chiamato Neil per velocizzare le sue ricerche su di te...?")
+                dialogo.append(u"... E perché l'aria si sposta quando camminiamo? Non dovrebbe rimanere tutto immobile? Gli eventi non si stanno succedendo...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E anche il mio corpo, e i ratti... dovrebbe rimanere tutto immobile. Se io mi muovo, sto tipo... provocando una successione di eventi...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Se degli eventi scorrono, vuol dire che anche il tempo scorre, no?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1561,7 +1557,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non credo che questa parete costituisca una minaccia, non occorre... va beh...")
+                dialogo.append(u"Non credo che questa parete costituisca una minaccia...")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -1571,7 +1567,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Non so se riuscirei a fare il loro lavoro...)")
+                dialogo.append(u"(Non so se riuscirei a fare questo lavoro...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-3":
             partiDialogo = []
@@ -1602,7 +1598,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Due soldati per una sola parete. Chi è l'incompetente che organizza la guardia?!)")
+                dialogo.append(u"(Due soldati a guardia di una parete...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoFinestraCastello-0":
             partiDialogo = []
@@ -1778,11 +1774,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Dove stiamo andando?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Tu continui a seguirmi, ma...")
+                dialogo.append(u"Non so bene dove stiamo andando...")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-4":
             partiDialogo = []
@@ -2093,7 +2085,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Non voglio lasciarvi il mio Impo!")
+                dialogo.append(u"... Poi non voglio lasciarvi il mio Impo!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2113,7 +2105,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Neil è occupato. Puoi andartene e tornare domani, se vuoi tenere l'impo.")
+                dialogo.append(u"... Neil è occupato. Puoi andartene e tornare domani se vuoi tenere l'impo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2164,7 +2156,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Neil ha detto che puoi staccare prima oggi, se sei stanco.")
+                dialogo.append(u"Neil ha detto che puoi staccare prima oggi se sei stanco.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2180,306 +2172,400 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Se imparassi a imitare la voce di Neil...)")
                 partiDialogo.append(dialogo)
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-            if tipoId == "OggettoLibreriaCastello-1":
-                partiDialogo = []
-                nome = "Libro (Sulla coscienza Vol.1 - Etica)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.1 - Etica\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... La cultura, di cui l'etica è fondamento, si crea e si evolve negli esseri viventi quando questi crescono e fanno esperienza. Tanto più due animali sono in contatto, tanto più la loro esperienza, e quindi anche la loro cultura, è comune...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Nel momento in cui le circostanze impongono una convivenza tra animali con culture diverse, è necessario che nasca una nuova cultura, e talvolta una nuova etica, come frutto dell'unione delle precedenti. Spesso però, l'impegno nell'adattarsi a una cultura con un'etica molto differente, può richiedere sforzi che non vogliono essere accettati. Sono questi i casi in cui possono nascere scontri...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Nel pensiero di alcuni, nel momento in cui esisterà una sola cultura condivisa da tutti, sarà finalmente chiaro quale sia la giusta etica. È scopo di questi fanatici esportare le proprie credenze presso gli altri, anche attraverso l'uso della forza...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Osservando uno scontro tra due fazioni contrapposte, risulta irrilevante e insensato domandarsi quale delle due abbia torto: ognuna è il male dell'altra, poiché ognuna è giudicata tramite le regole etiche dell'altra...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Non può esistere conciliazione tra culture inconciliabili, quindi non può esistere un'etica oggettivamente giusta. E non esisterà neanche nel momento in cui ne rimarrà una: quella che risulterà vincente, dovrà la sua sopravvivenza all'aggressività dei suoi sostenitori, non alla sua oggettività.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Mmh...<*> si potrebbe fare lo stesso ragionamento su un sacco di altre cose...")
-                partiDialogo.append(dialogo)
-            elif tipoId == "OggettoLibreriaCastello-2":
-                partiDialogo = []
-                nome = "Libro (Sulla coscienza Vol.2 - Libero arbitrio)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.2 - Libero arbitrio\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Per discutere sul libero arbitrio è innanzitutto necessario distinguere due possibilità: la prima è quella in cui si ritiene che tutto ciò che esiste è costituito da materia; la seconda, invece, è quella in cui si cosidera possibile l'esistenza di elementi non materiali, tra cui rientrerebbe l'anima, come motore di ogni essere vivente...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Decidendo di percorrere la prima ipotesi, è chiaro che non può esserci libero arbitrio: allo stesso modo in cui è possibile calcolare \"azioni\" di oggetti inanimati, sarà possibile calcolare le azioni degli esseri animati. L'unica differenza tra le due categorie rimarrebbe la presenza, nel secondo raggruppamento, della coscienza, a cui la parola \"vita\" ridurrebbe tutto il suo significato.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Percorrendo la seconda ipotesi, invece, è vero che l'anima non sarebbe governata dalle stesse leggi della materia, ma da queste leggi comunque dipenderebbe, anche se in maniera indiretta. Il comportamento degli individui, così come il loro pensiero, viene plasmato dall'esperienza che gli stessi compiono sul mondo materiale. L'anima verrebbe in questo modo influenzata e \"corrotta\" dalla materia, risultando quindi non più libera.")
-                partiDialogo.append(dialogo)
-                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Più ci penso, più sembra assurdo...)")
-                    partiDialogo.append(dialogo)
-                else:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"<*>#italic#Mmh...<*> In sostanza, le cose di cui mi ha parlato René...")
-                    partiDialogo.append(dialogo)
-            elif tipoId == "OggettoLibreriaCastello-3":
-                partiDialogo = []
-                nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.3 - Tempo\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Sviluppando l'ipotesi per cui la realtà si evolve in modo deterministico, viene spontaneo chiedersi in che modo il tempo scorra in avanti. Potremmo considerare due possibilità: il tempo è composto da un susseguirsi di eventi determinati e separati tra loro, oppure da un \"flusso\" infinito di eventi indistinguibili e inseparabili tra loro.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Prendendo la prima ipotesi, in cui gli eventi sono distinti e separati, dovremmo ipotizzare che, tra un evento e l'altro, ci sia un \"momento\" in cui nessun evento accade, ma in cui avviene un qualcosa che fa andare avanti la serie di eventi. Dovremmo ipotizzare che, in quei lassi di tempo (non più considerabili \"tempo\"), ci sia un \"Motore Immobile\" che, senza essere mosso o \"causato\" da altri eventi, muova in avanti il tempo.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Seguendo la seconda ipotesi, in cui gli eventi sono inseparabili e indistinguibili, non si presenta un fenomeno di causa-effetto tra gli eventi. Gli eventi sono, in questo caso, un unico blocco che esiste \"sempre\". La percezione \"temporale\" del tempo risulta, quindi, propria degli esseri viventi: una percezione simile alla lettura di un libro che, pur esistendo per intero, viene compreso parzialmente in diversi momenti del tempo.")
-                partiDialogo.append(dialogo)
-                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Questa è roba di anni fa. Mi domando quanto sia riuscito ad approfondire...)")
-                    partiDialogo.append(dialogo)
-                else:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"... Assurdo...")
-                    partiDialogo.append(dialogo)
-            elif tipoId == "OggettoLibreriaCastello-4":
-                partiDialogo = []
-                nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.4 - Realtà\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Cosa distingue la realtà dall'immaginazione? La realtà che sentiamo, viene catturata da dei sensori, che abbiamo sparsi nel corpo, e poi inviata al cervello tramite impulsi nervosi. Il cervello poi, che si trova al buio dentro un cranio, interpreta e immagina ciò che sta al di fuori di lui, \"ispirato\" da quegli impulsi...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... La coscienza, tuttavia, non ha modo di verificare la veridicità di quei segnali, dato che quelli sono l'unica fonte di informazione che ha a disposizione...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... È lecito pensare che tutto ciò che risiede al di fuori della coscienza, potrebbe non essere reale. In questo senso, le differenze tra una vita vissuta tramite i filtri dei sensi e una vissuta tramite i filtri dei sogni, sarebbero quasi nulle...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... In entrambi i casi la realtà viene immaginata, ma, se nel primo caso i sensi impongono dei pensieri e delle reazioni, nel secondo, la coscienza è \"libera\" di concentrarsi su ciò che più gli interessa, senza distrazioni. In questo senso alcuni sostengono che la vera libertà la si può sperimentare solo sognando.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Ma ciò che avviene quando si è \"liberi\" di immaginare una realtà, ad esempio sognando, non differsce molto da ciò che percepiamo attraverso i sensi. Ciò dovrebbe indurci a pensare che, o l'immaginazione è creata e plasmata dalla realtà esterna, oppure che, in qualche modo, nell'immaginazione è già contenuta la realtà...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Conseguenza del primo caso è l'inesistenza del pensiero se non come prodotto della realtà. In questo modo, un individuo privo di sensi che non ha mai fatto esperienza della realtà, non potrebbe produrre alcun pensiero. L'individuo esisterebbe senza essere cosciente (e forse, senza essere vivente). La coscienza, dunque, nascerebbe e si evolverebbe solo nel momento in cui entra in contatto con ciò che sta al di fuori di lei.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Seguendo la seconda ipotesi, in cui si sostiene che la realtà è contenuta nell'immaginazione, deduciamo che è la coscienza a produrre la realtà. Ciò che sta \"fuori di noi\", sarebbe una sorta di lista di ricordi che costruiremmo attraverso l'immaginazione. E, data l'evoluzione deterministica della realtà, dovremmo pensare che le leggi fisiche che la governano, siano in verità i meccanismi con cui la coscienza sviluppa i sui pensieri.")
-                partiDialogo.append(dialogo)
-                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Ma come fa ad avere così tante monete se non fa altro che pensare a questa roba? Come fa a convertire in denaro?)")
-                    partiDialogo.append(dialogo)
-                else:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Non so... sembrano assurde entrambe le ipotesi...)")
-                    partiDialogo.append(dialogo)
-            elif tipoId == "OggettoLibreriaCastello-5":
-                partiDialogo = []
-                nome = "Libro (Sull'evoluzione)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sull'evoluzione\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... La frequenza di campionamento della realtà, da parte di un soggetto, varia al variarie della sua età. L'invecchiamento degli organi che influenzano le abilità cognitive, fa sì che la presa di coscienza degli eventi e dei pensieri, sia sempre meno frequente...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Se a questo aggiungiamo che gli eventi, accumulati come ricordi nel cervello, vengono dimenticati sempre più rapidamente, risulterà chiaro che, invecchiando, varierà anche la percezione del tempo: il tempo passerà sempre più velocemente rispetto al passato...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Per evitare questo lento degrado, è possibile fare delle operazioni sugli organi non solo per mantenerli giovani, ma anche per potenziarli. Usando materiali che sopportano carichi di lavoro più intensi e che non si degradano nel tempo, si possono ottenere organi che permettono di invertire quella tendenza \"naturale\" di percezione del tempo precedentemente descritta...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Occorre innanzitutto sostituire diverse componenti di alcuni organi sensoriali: completa sostituzione del nervo ottico e della retina, ...")
-                partiDialogo.append(dialogo)
-                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Ah, ecco come fa... quanti complessi si sarà fatto prima di accettare questi interventi su di sé?)")
-                    partiDialogo.append(dialogo)
-                else:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose... sostituzione del midollo spinale... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
-                    partiDialogo.append(dialogo)
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Quindi è possibile che questi soldati...?)")
-                    partiDialogo.append(dialogo)
-            elif tipoId == "OggettoLibreriaCastello-6":
-                partiDialogo = []
-                nome = "Libro (Sul conflitto)"
-                if avanzamentoDialogo == 0:
-                    oggettoDato = False
-                    avanzaStoria = True
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = True
-                else:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Sul conflitto\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Non sono note le ragioni del conflitto e i tentativi di riappacificazione vengono sistematicamente respinti. Impossibile stabilire il dialogo. Il Nemico, di cui ci è noto ben poco, parrebbe aver insediato e colonizzato tutte le regioni circostanti la nostra. Ci è infatti impossibile l'esplorazione ad est, nord e sud. Le spedizioni verso ovest, invece, sono sempre risultate problematiche per via delle catene montuose e la fauna che le popola...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Ciò che sappiamo sul Nemico sono le loro forme umanoidi e alcune delle loro tecnologie belliche. Non ci è nota la loro anatomia esatta, le loro forme di comunicazione, la loro cultura e né tantomeno i loro intenti. Sappiamo solo che vogliono combatterci...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Non si sa quando sia iniziato il conflitto. Il più vecchio reperto che ce ne testimonia l'esistenza risale a qualche migliaio di anni fa. Negli ultimi centosettant'anni (unico periodo di cui ho esperienza diretta) abbiamo perso diversi territori nonostante gli enormi sviluppi tecnologici che siamo riusciti a compiere...")
-                partiDialogo.append(dialogo)
-                if not (GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]):
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Centosettant'anni di esperienza diretta?!)")
-                    partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Negli ultimi cinquant'anni, in particolare, gli attacchi si sono intensificati. Dopo una serie di successi della nostra difensa, hanno iniziato ad attaccare su tutti i fronti orientali contemporaneamente e in maniera massiccia. Nel momento in cui pensavamo di avere un vantaggio, ci hanno sorpreso conquistando quasi tutti gli avamposti. I pochi sopravvissuti parlano di armi esplosive tecnologicamente avanzate...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"... Ancora nessun segnale del Costruttore, ma il suo intervento dovrebbe essere imminente...")
-                partiDialogo.append(dialogo)
-                if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(... L'intervento del... \"Costruttore\"? Che significa?)")
-                    partiDialogo.append(dialogo)
-                else:
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Ok, quindi c'è una guerra che stiamo perdendo, chi ha scritto questo libro ha centosettant'anni e sta per intervenire un... \"Costruttore\"?)")
-                    partiDialogo.append(dialogo)
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Che significa?)")
-                    partiDialogo.append(dialogo)
         elif tipo.startswith("OggettoLibreriaCastello"):
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Libri di Neil...)")
-            partiDialogo.append(dialogo)
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                if tipoId == "OggettoLibreriaCastello-1":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.1 - Etica)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.1 - Etica\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... La cultura, di cui l'etica è fondamento, si crea e si evolve negli esseri viventi quando questi crescono e fanno esperienza. Tanto più due animali sono in contatto, tanto più la loro esperienza, e quindi anche la loro cultura, è comune...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Nel momento in cui le circostanze impongono una convivenza tra animali con culture diverse, è necessario che nasca una nuova cultura, e talvolta una nuova etica, come frutto dell'unione delle precedenti. Spesso però, l'impegno nell'adattarsi a una cultura con un'etica molto differente, può richiedere sforzi che non vogliono essere accettati. Sono questi i casi in cui possono nascere scontri...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Nel pensiero di alcuni, nel momento in cui esisterà una sola cultura condivisa da tutti, sarà finalmente chiaro quale sia la giusta etica. È scopo di questi fanatici esportare le proprie credenze presso gli altri, anche attraverso l'uso della forza...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Osservando uno scontro tra due fazioni contrapposte, risulta irrilevante e insensato domandarsi quale delle due abbia torto: ognuna è il male dell'altra, poiché ognuna è giudicata tramite le regole etiche dell'altra...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Non può esistere conciliazione tra culture inconciliabili, quindi non può esistere un'etica oggettivamente giusta. E non esisterà neanche nel momento in cui ne rimarrà una: quella che risulterà vincente, dovrà la sua sopravvivenza all'aggressività dei suoi sostenitori, non alla sua oggettività.")
+                    partiDialogo.append(dialogo)
+                    if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"<*>#italic#Mmh...<*>")
+                        partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-2":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.2 - Libero arbitrio)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.2 - Libero arbitrio\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Per discutere sul libero arbitrio è innanzitutto necessario distinguere due possibilità: la prima è quella in cui si ritiene che tutto ciò che esiste è costituito da materia; la seconda, invece, è quella in cui si cosidera possibile l'esistenza di elementi non materiali, tra cui rientrerebbe l'anima, come motore di ogni essere vivente...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Decidendo di percorrere la prima ipotesi, è chiaro che non può esserci libero arbitrio: allo stesso modo in cui è possibile calcolare \"azioni\" di oggetti inanimati, sarà possibile calcolare le azioni degli esseri animati. L'unica differenza tra le due categorie rimarrebbe la presenza, nel secondo raggruppamento, della coscienza, a cui la parola \"vita\" ridurrebbe tutto il suo significato.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Percorrendo la seconda ipotesi, invece, è vero che l'anima non sarebbe governata dalle stesse leggi della materia, ma da queste leggi comunque dipenderebbe, anche se in maniera indiretta. Il comportamento degli individui, così come il loro pensiero, viene plasmato dall'esperienza che gli stessi compiono sul mondo materiale. L'anima verrebbe in questo modo influenzata e \"corrotta\" dalla materia, risultando quindi non più libera.")
+                    partiDialogo.append(dialogo)
+                    if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"<*>#italic#Mmh...<*> In sostanza, le cose di cui mi ha parlato René...")
+                        partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-3":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.3 - Tempo\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Sviluppando l'ipotesi per cui la realtà si evolve in modo deterministico, viene spontaneo chiedersi in che modo il tempo scorra in avanti. Potremmo considerare due possibilità: il tempo è composto da un susseguirsi di eventi determinati e separati tra loro, oppure da un \"flusso\" infinito di eventi indistinguibili e inseparabili tra loro.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Prendendo la prima ipotesi, in cui gli eventi sono distinti e separati, dovremmo ipotizzare che, tra un evento e l'altro, ci sia un \"momento\" in cui il tempo non scorre, ma in cui avviene un qualche cosa che permette all'evento successivo di avvenire. Dovremmo ipotizzare che ci sia una sorta di \"Motore Immobile\" che, senza essere mosso o \"causato\" da altri eventi, riesca a far scorrere spontaneamente la sequenza temporale in avanti.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Seguendo la seconda ipotesi, in cui gli eventi sono inseparabili e indistinguibili, non si presenta un fenomeno di causa-effetto tra gli eventi. Gli eventi sono, in questo caso, un unico blocco che esiste \"sempre\". La percezione \"temporale\" del tempo risulta, quindi, propria degli esseri viventi: una percezione simile alla lettura di un libro che, pur esistendo per intero, viene compreso parzialmente in diversi momenti del tempo.")
+                    partiDialogo.append(dialogo)
+                    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Questa è roba di anni fa. Mi domando quanto sia riuscito ad approfondire...)")
+                        partiDialogo.append(dialogo)
+                    else:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"<*>#italic#Mmh...<*> mi domando se sia riuscito ad approfondire queste ipotesi...")
+                        partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-4":
+                    partiDialogo = []
+                    nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.4 - Realtà\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Cosa distingue la realtà dall'immaginazione? La realtà che sentiamo, viene catturata da dei sensori, che abbiamo sparsi nel corpo, e poi inviata al cervello tramite impulsi nervosi. Il cervello poi, che si trova al buio dentro un cranio, interpreta e immagina ciò che sta al di fuori di lui, \"ispirato\" da quegli impulsi...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... La coscienza, tuttavia, non ha modo di verificare la veridicità di quei segnali, dato che quelli sono l'unica fonte di informazione che ha a disposizione...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... È lecito pensare che tutto ciò che risiede al di fuori della coscienza, potrebbe non essere reale. In questo senso, le differenze tra una vita vissuta tramite i filtri dei sensi e una vissuta tramite i filtri dei sogni, sarebbero quasi nulle...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... In entrambi i casi la realtà viene immaginata, ma, se nel primo caso i sensi impongono dei pensieri e delle reazioni, nel secondo, la coscienza è \"libera\" di concentrarsi su ciò che più gli interessa, senza distrazioni. In questo senso alcuni sostengono che la vera libertà la si può sperimentare solo sognando.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Ma ciò che avviene quando si è \"liberi\" di immaginare una realtà, ad esempio sognando, non differsce molto da ciò che percepiamo attraverso i sensi. Ciò dovrebbe indurci a pensare che, o l'immaginazione è creata e plasmata dalla realtà esterna, oppure che, in qualche modo, nell'immaginazione è già contenuta la realtà...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Conseguenza del primo caso è l'inesistenza del pensiero se non come prodotto della realtà. In questo modo, un individuo privo di sensi che non ha mai fatto esperienza della realtà, non potrebbe produrre alcun pensiero. L'individuo esisterebbe senza essere cosciente (e forse, senza essere vivente). La coscienza, dunque, nascerebbe e si evolverebbe solo nel momento in cui entra in contatto con ciò che sta al di fuori di lei.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Seguendo la seconda ipotesi, in cui si sostiene che la realtà è contenuta nell'immaginazione, deduciamo che è la coscienza a produrre la realtà. Ciò che sta \"fuori di noi\", sarebbe una sorta di lista di ricordi che costruiremmo attraverso l'immaginazione. E, data l'evoluzione deterministica della realtà, dovremmo pensare che le leggi fisiche che la governano, siano in verità i meccanismi con cui la coscienza sviluppa i sui pensieri.")
+                    partiDialogo.append(dialogo)
+                    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Mi domando come faccia ad avere così tante monete se non fa altro che pensare a questa roba... come fa a convertire in denaro?)")
+                        partiDialogo.append(dialogo)
+                    else:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"<*>#italic#Mmh...<*> mi sembra più sensata la prima ipotesi...")
+                        partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-5":
+                    partiDialogo = []
+                    nome = "Libro (Sull'evoluzione)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sull'evoluzione\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... La frequenza di campionamento della realtà, da parte di un soggetto, varia al variarie della sua età. L'invecchiamento degli organi che influenzano le abilità cognitive, fa sì che la presa di coscienza degli eventi e dei pensieri, sia sempre meno frequente...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Se a questo aggiungiamo che gli eventi, accumulati come ricordi nel cervello, vengono dimenticati sempre più rapidamente, risulterà chiaro che, invecchiando, varierà anche la percezione del tempo: il tempo passerà sempre più velocemente rispetto al passato...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Per evitare questo lento degrado, è possibile fare delle operazioni sugli organi non solo per mantenerli giovani, ma anche per potenziarli. Usando materiali che sopportano carichi di lavoro più intensi e che non si degradano nel tempo, si possono ottenere organi che permettono di invertire quella tendenza \"naturale\" di percezione del tempo precedentemente descritta...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Occorre innanzitutto sostituire diverse componenti di alcuni organi sensoriali: completa sostituzione del nervo ottico e della retina, ...")
+                    partiDialogo.append(dialogo)
+                    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Ah, ecco come fa... quanti complessi si sarà fatto prima di accettare questi interventi su di sé?)")
+                        partiDialogo.append(dialogo)
+                    else:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose... sostituzione del midollo spinale... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
+                        partiDialogo.append(dialogo)
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Quindi è possibile che questi soldati...?)")
+                        partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-6":
+                    partiDialogo = []
+                    nome = "Libro (Sul conflitto)"
+                    if avanzamentoDialogo == 0:
+                        oggettoDato = False
+                        avanzaStoria = True
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = True
+                    else:
+                        oggettoDato = False
+                        avanzaStoria = False
+                        menuMercante = False
+                        scelta = False
+                        avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sul conflitto\"...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Non sono note le ragioni del conflitto e i tentativi di riappacificazione vengono sistematicamente respinti. Impossibile stabilire il dialogo. Il Nemico, di cui ci è noto ben poco, parrebbe aver insediato e colonizzato tutte le regioni circostanti la nostra. Ci è infatti impossibile l'esplorazione a est, nord e sud. Le spedizioni verso ovest, invece, sono sempre risultate problematiche per via delle catene montuose e la fauna che le popola...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Ciò che sappiamo sul Nemico sono le loro forme umanoidi e alcune delle loro tecnologie belliche. Non ci è nota la loro anatomia esatta, le loro forme di comunicazione, la loro cultura e né tantomeno i loro intenti. Sappiamo solo che vogliono combatterci...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Non si sa quando sia iniziato il conflitto. Il più vecchio reperto che ce ne testimonia l'esistenza risale a qualche migliaio di anni fa. Negli ultimi centosettant'anni (unico periodo di cui ho esperienza diretta) abbiamo perso diversi territori nonostante gli enormi sviluppi tecnologici che siamo riusciti a compiere...")
+                    partiDialogo.append(dialogo)
+                    if not (GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]):
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Centosettant'anni di esperienza diretta?!)")
+                        partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Negli ultimi cinquant'anni, in particolare, gli attacchi si sono intensificati. Dopo una serie di successi della nostra difensa, hanno iniziato ad attaccare su tutti i fronti orientali contemporaneamente e in maniera massiccia. Nel momento in cui pensavamo di avere un vantaggio, ci hanno sorpreso conquistando quasi tutti gli avamposti. I pochi sopravvissuti parlano di armi esplosive tecnologicamente avanzate...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Ancora nessun segnale del Costruttore, ma il suo intervento dovrebbe essere imminente...")
+                    partiDialogo.append(dialogo)
+                    if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(L'intervento del... \"Costruttore\"?)")
+                        partiDialogo.append(dialogo)
+                    else:
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"(Quindi... c'è una guerra che stiamo perdendo, chi ha scritto questo libro ha centosettant'anni e sta per intervenire un... \"Costruttore\"?)")
+                        partiDialogo.append(dialogo)
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Ok...")
+                        partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riletturaLibroNeilSulTempo"]:
+                if tipoId == "OggettoLibreriaCastello-1":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.1 - Etica)"
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.1 - Etica\"... non era questo...)")
+                    partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-2":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.2 - Libero arbitrio)"
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.2 - Libero arbitrio\"... non era questo...)")
+                    partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-3":
+                    partiDialogo = []
+                    nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
+                    oggettoDato = False
+                    avanzaStoria = True
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.3 - Tempo\"... è questo!)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Sviluppando l'ipotesi per cui la realtà si evolve in modo deterministico, viene spontaneo chiedersi in che modo il tempo scorra in avanti. Potremmo considerare due possibilità: il tempo è composto da un susseguirsi di eventi determinati e separati tra loro, oppure da un \"flusso\" infinito di eventi indistinguibili e inseparabili tra loro.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... Prendendo la prima ipotesi, in cui gli eventi sono distinti e separati, dovremmo ipotizzare che, tra un evento e l'altro, ci sia un \"momento\" in cui il tempo non scorre, ma in cui avviene un qualche cosa che permette all'evento successivo di avvenire. Dovremmo ipotizzare che ci sia una sorta di \"Motore Immobile\" che, senza essere mosso o \"causato\" da altri eventi, riesca a far scorrere spontaneamente la sequenza temporale in avanti.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Ecco! Tra un evento e l'altro... hanno \"esperito\" più di quei due minuti perché con quell' apparecchio continuavano a vivere mentre il tempo era bloccato... 840 anni per ogni evento che passava... per un totale di 700 miliardi di anni...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(E l'esperimento è durato finché... finché...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(... Ok, dev'esserci un altro modo, non mi lascerebbero... non mi...)")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(... Non mi...)")
+                    partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-4":
+                    partiDialogo = []
+                    nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sulla coscienza Vol.4 - Realtà\"... non era questo...)")
+                    partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-5":
+                    partiDialogo = []
+                    nome = "Libro (Sull'evoluzione)"
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sull'evoluzione\"... non era questo...)")
+                    partiDialogo.append(dialogo)
+                elif tipoId == "OggettoLibreriaCastello-6":
+                    partiDialogo = []
+                    nome = "Libro (Sul conflitto)"
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Questo libro s'intitola: \"Sul conflitto\"... non era questo...)")
+                    partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Libri di Neil...)")
+                partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello19"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -2501,24 +2587,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Quindi sono tutti bloccati adesso...?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Non che questi soldati non lo fossero anche prima...")
-                partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostLetturaAppuntiNeilSuRatti"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Ma, aspetta... se il tempo è bloccato...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Perché tu ti muovi?")
+                dialogo.append(u"C'è più silenzio di prima...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2526,35 +2595,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E perché l'aria si sposta quando camminiamo? Non dovrebbe rimanere tutto immobile? Gli eventi non si stanno succedendo...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... E anche il mio corpo e i ratti di prima dovrebbero rimanere immobili. Se io mi muovo, sto tipo... facendo una successione di eventi...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Se degli eventi stanno scorrendo, vuol dire che anche il tempo sta scorrendo, no?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Forse... forse ci sono tipo... diversi \"livelli\" temporali?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Forse c'è qualcun altro che vive in questi... momenti?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Mmmh...<*>")
+                dialogo.append(u"... Quella stanza è ancora aperta...")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-11":
             partiDialogo = []
@@ -2700,7 +2745,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, cioè... sono morti tutti dopo l'inquinamento della selva, no?")
+                dialogo.append(u"Sì, cioè... gli altri sono... morti, no?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2728,7 +2773,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Va bene. Allora Sara, cosa richiede René in cambio dell'impo?")
+                dialogo.append(u"Va bene, Sara. Cosa richiede René in cambio dell'impo?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2784,11 +2829,27 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Tutto quello che so io... vale molto.")
+                dialogo.append(u"Tutto quello che so io... René vorrebbe che tu studiassi le mie ricerche?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì... a-anche il mio Impo...")
+                dialogo.append(u"Mh...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sì...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"\"Tutto quello che so\" vale molto...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... A-anche Impo... vale molto...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2804,7 +2865,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, collaborare...")
+                dialogo.append(u"Sì, collaborare!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2812,15 +2873,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non... nessuno, credo...")
+                dialogo.append(u"Ah, io... nessuno, credo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Hai detto di essere qui per conto di René...")
+                dialogo.append(u"... Sei una studente di René?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, ma l'ho conosciuto ieri...")
+                dialogo.append(u"No, io... René l'ho conosciuto ieri, ah ah...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2882,7 +2943,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... <*>#italic#Mmh...<*>")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2890,7 +2951,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... D'accordo. Sarà l'ultima volta che potrai averlo. Quando tornerai, me lo restituirai con gli strumenti, e tu avrai i miei studi.")
+                dialogo.append(u"... D'accordo, ma sarà l'ultima volta che potrai averlo. Quando tornerai, me lo restituirai con gli strumenti, e tu avrai i miei studi.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2898,7 +2959,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Abbiamo un accordo. Al secondo piano puoi trovare delle armi, se ne hai bisogno. Usa il piano ascensore per tornare all'ingresso.")
+                dialogo.append(u"Abbiamo un accordo. Al secondo piano puoi trovare delle armi se ne hai bisogno. Usa il piano ascensore per tornare all'ingresso.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3070,11 +3131,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Perché sono... così?")
+                dialogo.append(u"... Perché sono così?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Perché l'acqua del lago ti ha corrosa. È penetrata nell'armatura e ti ha logorato l'apparato digerente, il cuore, un polmone, quasi tutti i muscoli, i bulbi oculari, i canali olfattivi e uditivi.")
+                dialogo.append(u"Perché l'acqua del lago ti ha corrosa. È penetrata nell'armatura e ti ha logorato l'apparato digerente, un polmone, quasi tutti i muscoli, i bulbi oculari, i canali olfattivi e uditivi.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3082,7 +3143,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Il cervello e il sistema nervoso sono rimasti per lo più intatti. Le ossa hanno retto...")
+                dialogo.append(u"Il cervello e il sistema nervoso sono rimasti per lo più intatti... e le ossa hanno retto...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3090,7 +3151,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Tornerai autonoma tra poco.")
+                dialogo.append(u"Tornerai autonoma tra poco, non preoccuparti.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3106,31 +3167,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Avrai notato che quei libri che hai letto nella mia libreria propongono alcune teorie sulla consequenzialità degli eventi. Ebbene, una di quelle teorie si è dimostrata corretta. Gli eventi si susseguono l'un l'altro con un principio di causalità, e vengono intervallati da dei momenti di pausa con una precisa frequenza. Adesso, ciò che dovrai fare tu, è capire cos'è che scandisce quella frequenza.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... Cosa?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Il tuo cervello ora dovrebbe essere in grado di prendere coscienza della realtà a una frequenza molto superiore rispetto alla frequenza con cui gli eventi si susseguono.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Quindi riuscirai a percepire per molto tempo tra un evento e l'altro, così da poter notare ciò che avviene più nel dettaglio. Poi tornerai per fare rapporto.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"E... perché non lo fai tu?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Perché non l'ho ancora testato su un essere umano.")
+                dialogo.append(u"Non dovrai fare niente di impegnativo. Osserva solo ciò che ti accade intorno.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3142,7 +3179,55 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Aspetta! René...")
+                dialogo.append(u"Aspetta! René-")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostIniezioneNeil"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sarebbe stato meglio provarlo su un soldato.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No, è necessario un ambiente pulito.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Mmh...<*> speriamo di aver previsto tutto con quei sistemi di emergenza...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Non farà danni...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostdialogoNeilRene1"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... E per quanto rimarrà bloccata?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Qualche decennio probabilmente.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Potrebbe impazzire...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Possiamo passare all'ultima fase.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sì...")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoImpo":
             partiDialogo = []
@@ -3204,7 +3289,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Oh, grazie a Dio, tu sei ancora a posto!")
+                dialogo.append(u"Oh, grazie a Dio, tu sei ancora a posto! D'ora in poi non ti abbandonerò mai più.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3212,19 +3297,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non preoccuparti per me, sono un po'... ma forse tornerò come prima col tempo...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"L'importante è che siamo vivi entrambi...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"Ok... forse qua intorno c'è qualcosa che potrebbe farmi capire meglio cosa mi hanno fatto...")
+                dialogo.append(u"Andiamocene da qui...")
                 partiDialogo.append(dialogo)
         elif tipo == "Bibliotecario":
             partiDialogo = []
@@ -3297,11 +3370,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"È bloccato...")
+                dialogo.append(u"... René?!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Quindi sono già...?")
+                dialogo.append(u"(È immobile...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -3310,7 +3387,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Stava scrivendo qualcosa...)")
+                dialogo.append(u"(È immobile... sta scrivendo qualcosa, ma la penna è bloccata sul foglio e lui continua a fissarla...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3587,7 +3664,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ha ucciso metà dai miei uomini. Poi si è gettata nel lago mentre cercava di scappare.")
+                dialogo.append(u"Ha ucciso metà dai miei uomini, poi si è gettata nel lago mentre cercava di scappare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3613,6 +3690,30 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
+                dialogo.append(u"Quindi è la confraternita che ha ucciso i miei soldati?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Quello che fate tra di voi, sono affari vostri. Io non c'entro con questa storia.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ahhh, capisco...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non vorrai farmi credere che è impazzita tutt'a un tratto e ha iniziato a uccidere chiunque senza motivo...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Ha infranto un accordo.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E a me non me ne frega un cazzo dei vostri accordi, l'impo è proprietà della confraternita.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append(u"... Su questo potrà esprimersi lei stessa quando si sveglierà.")
                 partiDialogo.append(dialogo)
                 dialogo = []
@@ -3621,23 +3722,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Hai distrutto tutti gli impo che hai trovato per ricavarne del liquido energetico con cui hai inquinato mezza regione. Perché dovremmo affidare a te l'ultimo esemplare?")
+                dialogo.append(u"Non è necessario rischiare altri disastri ambientali, soltanto un idiota ti affiderebbe l'ultimo esemplare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Questo non c'entra! Non spetta a te decidere a chi deve essere affidato. Se lo vuoi, dovrai pagarlo...")
+                dialogo.append(u"Peccato che non sia tu a dover compiere questa decisione allora...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"... L'impo è proprietà della confraternita.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"E infatti continuerà ad appartenere a un suo membro... rimarrà dove è stato lasciato soltanto finché il suo proprietario non si sveglierà.")
+                dialogo.append(u"... Neanche tu dovrai compierla. L'impo rimarrà dove è stato lasciato finché il suo proprietario non si sveglierà.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3651,7 +3744,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Povero Rod. Non sai nemmeno tu se disperarti di più per le tue prospettive economiche o per quelle sentimentali.")
+                dialogo.append(u"Povero Rod. Non sai nemmeno tu se disperarti di più per le tue prospettive economiche o per quelle sentimentali...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3659,7 +3752,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(u"Bene... se hai finito con le tue stupidaggini, puoi anche andartene.")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil5"]:
                 oggettoDato = False
@@ -3667,6 +3760,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 menuMercante = False
                 scelta = False
                 avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"... Mi serve, Neil.")
@@ -3677,7 +3774,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Devo andare nel vulcano. Credo che ci sia qualcuno là dentro. Qualcuno che li fabbrica...")
+                dialogo.append(u"Nel vulcano c'è qualcuno... qualcuno che li fabbrica.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3685,7 +3782,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... C-che ne sai tu?")
+                dialogo.append(u"Che... che ne sai tu?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3705,7 +3802,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ma queste sono faccende che non ti riguardano. Tornatene al tuo palazzo e continua la tua tranquilla e spensierata vita di sempre, Rod. Avrai il tuo compenso per l'impo e i nostri scambi per gli impoFrutti continueranno come prima.")
+                dialogo.append(u"Ma queste sono faccende che non ti riguardano. Tornatene al tuo palazzo, Rod, e continua la tua tranquilla e spensierata vita di sempre. Avrai il tuo compenso per l'impo e i nostri scambi per gli impoFrutti continueranno come prima.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3723,7 +3820,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non ci sono molte alternative. Ma se può esserti di conforto, le saranno riservate condizioni privilegiate. Ho degli accordi da rispettare dopotutto...")
+                dialogo.append(u"Devono essere sostituiti gran parte dei suoi organi. Ma se può esserti di conforto, le saranno riservate condizioni privilegiate. Ho degli accordi da rispettare dopotutto...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3785,7 +3882,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Però sono tipo immortale come Neil adesso... certo, con un \"apparecchio cerebrale\" nel cervello mai testato prima, ma... perlomeno non sono morta... non ancora almeno... credo...)")
+                dialogo.append(u"(... Però sono tipo immortale come Neil adesso... certo, con un po' di difetti fisici e un \"apparecchio cerebrale\" installato da qualche parte, ma... perlomeno non sono morta... non ancora almeno... credo...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -3832,11 +3929,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ci sono degli strani ratti qua...)")
+                dialogo.append(u"(Ci sono degli strani ratti qua... alcuni si muovono, ma sono quasi tutti morti...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Alcuni si muovono! Ma... com'è possibile)")
+                dialogo.append(u"(Aspetta, non sono morti... alcuni stanno in piedi, ma sono immobili... non respirano neanche...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -3846,15 +3943,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono degli strani ratti...)")
+                dialogo.append(u"(Sono cavie... credo che, su alcune di queste, stia testato l'\"apparecchio cerebrale\" che ho anch'io...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Deve aver testato anche su di loro l'\"apparecchio cerebrale\"...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Alcuni camminano lentamente in tondo, altri stanno sdraiati e respirano a malapena. Ma sembrano tutti molto... stanchi...)")
+                dialogo.append(u"(Alcune camminano lentamente in tondo, altre stanno sdraiate e respirano a malapena, ma... sembrano tutte molto... stanche...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiRatti-0":
             partiDialogo = []
@@ -3870,32 +3963,60 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Sono appunti di Neil su degli esperimenti su questi ratti...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(A quanto pare alcuni di questi sono vivi da più di settecento... SETTECENTO MILIARDI DI SECOLI?!)")
+                dialogo.append("personaggio")
+                dialogo.append(u"... Test apparecchio cerebrale AC73.9 sulla novantaquattresima generazione in corso...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ma come cavolo...?!)")
+                dialogo.append(u"(È tipo quello che ha messo a me...?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Cavie stabilizzate alla fase adulta in due ore e tranta minuti utilizzando i protocolli standard. Installazione dell'apparecchio effettuata in trenta minuti...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Le cavie non mostrano segni di invecchiamento fisico. L'attività cerebrale non mostra logoramento: necessaria installazione di un comparto mnemonico più sviluppato per comprendere la frequenza di successione temporale...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Però accanto c'è scritto che sono nati solo qualche ora fa...)")
+                dialogo.append(u"(Che cavolo...?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Installazione del comparto mnemonico M24.5 conclusa con successo...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... L'implementazione mostra una successione di eventi ogni 846 anni, 3 mesi, 19 giorni, 15 ore, 21 minuti e 4 secondi...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Forse... forse sta considerando anche il tempo di... adesso. Perché vivono anche mentre il tempo è bloccato...?)")
+                dialogo.append(u"(Che significa...?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... 41 cavie decedute al minuto 2 e 18 secondi. 76 cavie decedute al minuto 2 e 19 secondi. Ultime 27 cavie decedute al minuto 2 e 20 secondi...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Settecento miliardi di secoli in sette ore... vuol dire che io rimarrò bloccata per... per...)")
+                dialogo.append(u"(Oh merda, due minuti... due minuti sono già passati per me...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Durata totale esperimento: 2 minuti e 20 secondi. Tempo esperito dai soggetti: 700 miliardi di anni. Causa interruzione: logoramento psicologico...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Test apparecchio cerebrale AC76.2 sulla novantacinquesima generazione in corso...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Ok, dev'esserci un altro modo, non mi lascerebbero... non mi...)")
+                dialogo.append(u"(Qua si interrompe, ma... tempo esperito...?)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Non mi...)")
+                dialogo.append(u"(D-devo rileggere un attimo quel libro di Neil sul tempo...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -3905,11 +4026,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono appunti di Neil su degli esperimenti su questi ratti...)")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(A quanto pare ha testato anche su di loro l'\"apparecchio cerebrale\" che ha messo anche a me...)")
+                dialogo.append(u"(Sono dei test che Neil sta facendo su queste cavie con l'\"apparecchio cerebrale\" che ha messo anche a me...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiRianimazioneSara-0":
             partiDialogo = []
@@ -3964,7 +4081,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(C'è scritto che sono stata rianimata con un processo durato due settimane. E poi mi è stato intallato un \"prototipo\"... credo si tratti dell'\"apparecchio cerebrale\" di cui mi parlava Neil...)")
+                dialogo.append(u"(C'è scritto che sono stata rianimata con un processo durato due settimane. E poi mi è stato intallato un \"prototipo\"... credo si tratti dell'\"apparecchio cerebrale\" di cui parlava Neil...)")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -50,7 +50,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"E... nella porta in fondo al corridoio c'è il bagno, se hai bisogno di darti una ripulita.")
+            dialogo.append(u"E... nella porta in fondo al corridoio c'è il bagno se hai bisogno di darti una ripulita.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

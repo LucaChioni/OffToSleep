@@ -46,7 +46,7 @@ def getStatistiche(dati, difesa=0, inMenu=False):
     # effetto difesa
     if difesa != 0:
         par += par // 2
-        dif += dif
+        dif += dif // 2
 
     entot = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
     difro = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]

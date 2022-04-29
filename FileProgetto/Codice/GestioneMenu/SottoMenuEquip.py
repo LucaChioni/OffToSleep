@@ -706,7 +706,7 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 4:
                 if dati[44] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Lykother:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Spada di Neil:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                     FunzioniGraficheGeneriche.messaggio("Spada molto leggera e affilata. Sembra essere stata ricavata da un dente di una bestia enorme.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["spade"][3] - GlobalGameVar.statisticheEquipaggiamento["spade"][dati[6]]
                     if diff < 0:
@@ -717,8 +717,8 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 5:
                 if dati[45] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Mendaxritas:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Potentissima spada composta da materiali ignoti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Spada di Rod:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Potentissima spada composta da materiali leggeri ma molto resistenti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["spade"][4] - GlobalGameVar.statisticheEquipaggiamento["spade"][dati[6]]
                     if diff < 0:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
@@ -762,7 +762,7 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 9:
                 if dati[49] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Arco di precisione:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Arco di Neil:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                     FunzioniGraficheGeneriche.messaggio("Sofisticato arco in legno e acciaio. Molto leggero e potente.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["archi"][3] - GlobalGameVar.statisticheEquipaggiamento["archi"][dati[128]]
                     if diff < 0:
@@ -773,8 +773,8 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 10:
                 if dati[50] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Accipiter:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio("Potentissimo arco di origine sconosciuta.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Arco di Rod:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Potentissimo arco composto da materiali leggeri ma molto resistenti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["archi"][4] - GlobalGameVar.statisticheEquipaggiamento["archi"][dati[128]]
                     if diff < 0:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
@@ -818,7 +818,7 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 14:
                 if dati[54] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Lykodes:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Armatura di Neil:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                     FunzioniGraficheGeneriche.messaggio("Armatura formata da materiali leggeri e resistenti. Sembra essere stata ricavata dalle ossa di una bestia.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["armature"][3] - GlobalGameVar.statisticheEquipaggiamento["armature"][dati[8]]
                     if diff < 0:
@@ -829,8 +829,8 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 15:
                 if dati[55] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Loriquam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Armatura incredibilmente resistente e leggera. La sua origine è ignota.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Armatura di Rod:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Armatura incredibilmente resistente e leggera.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["armature"][4] - GlobalGameVar.statisticheEquipaggiamento["armature"][dati[8]]
                     if diff < 0:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
@@ -889,7 +889,7 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 19:
                 if dati[59] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Lykethmos:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio("Scudo di Neil:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                     FunzioniGraficheGeneriche.messaggio(u"Scudo molto leggero e resistente. Sembra essere stato ricavato dalle ossa più resistenti di una qualche bestia.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["scudiDif"][3] - GlobalGameVar.statisticheEquipaggiamento["scudiDif"][dati[7]]
                     if diff < 0:
@@ -905,8 +905,8 @@ def equip(dati):
                     FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 20:
                 if dati[60] != 0:
-                    FunzioniGraficheGeneriche.messaggio("Clipequam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Scudo incredibilmente resistente e leggero. Non è nota l'origine.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Scudo di Rod:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Scudo incredibilmente resistente e leggero.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = GlobalGameVar.statisticheEquipaggiamento["scudiDif"][4] - GlobalGameVar.statisticheEquipaggiamento["scudiDif"][dati[7]]
                     if diff < 0:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)

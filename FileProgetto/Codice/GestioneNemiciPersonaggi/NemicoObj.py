@@ -278,7 +278,7 @@ class NemicoObj(object):
             esp = 82
         if self.tipo == "GufoBianco":
             vitaTotale = 800
-            attacco = 150
+            attacco = 140
             difesa = 20
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -290,7 +290,7 @@ class NemicoObj(object):
             esp = 168
         if self.tipo == "Struzzo":
             vitaTotale = 1000
-            attacco = 300
+            attacco = 200
             difesa = 25
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 4
@@ -302,7 +302,7 @@ class NemicoObj(object):
             esp = 124
         if self.tipo == "Casuario":
             vitaTotale = 1500
-            attacco = 250
+            attacco = 180
             difesa = 25
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 4
@@ -352,7 +352,7 @@ class NemicoObj(object):
             ignoraEsche = True
         if self.tipo == "ServoArco":
             vitaTotale = 1000
-            attacco = 150
+            attacco = 200
             difesa = 30
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -415,7 +415,7 @@ class NemicoObj(object):
             esp = 500
         if self.tipo == "RoboPesanteVolante":
             vitaTotale = 1500
-            attacco = 350
+            attacco = 400
             difesa = 35
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 7

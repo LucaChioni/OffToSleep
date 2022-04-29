@@ -134,7 +134,11 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
         nonProcedere = True
-    elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPerImpoNonBloccatoPostTempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and (stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello18"] or stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello2"]):
+    elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostLetturaAppuntiNeilSuRatti"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and (stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello18"] or stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello2"]):
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riletturaLibroNeilSulTempo"] and ((stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello2"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello18"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello17"])):
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoApprofondimentoParadossiTempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello18"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello17"]:
         nonProcedere = True
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod3"] and not tiratoLevaTunnelDiRod:
         nonProcedere = True

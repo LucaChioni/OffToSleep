@@ -134,7 +134,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Senti, ho studiato personalmente questo sistema di blocco, se trovi un modo per passare provaci pure, ma sappi che ne subirai le conseguenze!")
+                    dialogo.append(u"Senti, ho studiato personalmente questo sistema di blocco. Se trovi un modo per passare provaci pure, ma sappi che ne subirai le conseguenze!")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
