@@ -2383,14 +2383,6 @@ def gameloop():
                     # surriscalda
                     if dati[122] > 0:
                         dati[122] -= 1
-                    # efficienza
-                    if dati[126] > 0:
-                        dati[126] -= 1
-                    # vel+
-                    if dati[125] > 0:
-                        dati[125] -= 1
-                        if dati[125] == 0:
-                            dati[122] = 10
                     # raffred
                     if raffredda >= 0:
                         raffredda -= 1

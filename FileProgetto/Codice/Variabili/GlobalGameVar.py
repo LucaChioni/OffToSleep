@@ -85,12 +85,14 @@ numSalvataggioCaricato = 0
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
 costoTecniche = [3, 5, 3, 3, 6, 10, 5, 10, 10, 10, 15, 10, 10, 15, 20, 20, 20, 30, 30, 60]
-dannoTecniche = [dannoAttacchiColco["scossa"], 50, 0, dannoAttacchiColco["freccia"], dannoAttacchiColco["tempesta"], 0, 300, 150, dannoAttacchiColco["scossa+"], dannoAttacchiColco["freccia+"], 30, 50, 50, 30, dannoAttacchiColco["tempesta+"], 500, 1000, dannoAttacchiColco["scossa++"], dannoAttacchiColco["freccia++"], dannoAttacchiColco["tempesta++"]]
+dannoTecniche = [dannoAttacchiColco["scossa"], 50, 0, dannoAttacchiColco["freccia"], dannoAttacchiColco["tempesta"], 0, 300, 150, dannoAttacchiColco["scossa+"], dannoAttacchiColco["freccia+"], 1, 50, 50, 1, dannoAttacchiColco["tempesta+"], 500, 1000, dannoAttacchiColco["scossa++"], dannoAttacchiColco["freccia++"], dannoAttacchiColco["tempesta++"]]
 vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
 dannoOggetti = [200, 100, 0, 100, 500]
+# cura oggetti => curaOggetti[pozione, caricabatterie piccolo, medicina, super pozione, caricabatterie grande]
+curaOggetti = [100, 250, 0, 300, 800]
 # frecce trasportabili per faretra
 frecceMaxPerFaretra = [3, 20, 100, 800]
 

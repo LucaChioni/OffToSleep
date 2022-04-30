@@ -1329,7 +1329,7 @@ def oggetti(dati, colcoInCasellaVista):
                     usadue = False
                     # pozione
                     if usa == 1:
-                        dati[5] = dati[5] + 100
+                        dati[5] = dati[5] + GlobalGameVar.curaOggetti[0]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         if not usandoRod:
@@ -1337,7 +1337,7 @@ def oggetti(dati, colcoInCasellaVista):
                         yp = GlobalHWVar.gsy // 18 * 6.2
                     # carica batt
                     if usa == 2:
-                        dati[10] = dati[10] + 250
+                        dati[10] = dati[10] + GlobalGameVar.curaOggetti[1]
                         if dati[10] > entot:
                             dati[10] = entot
                         if not usandoRod:
@@ -1351,7 +1351,7 @@ def oggetti(dati, colcoInCasellaVista):
                         yp = GlobalHWVar.gsy // 18 * 8.2
                     # super pozione
                     if usa == 4:
-                        dati[5] = dati[5] + 300
+                        dati[5] = dati[5] + GlobalGameVar.curaOggetti[3]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         if not usandoRod:
@@ -1359,7 +1359,7 @@ def oggetti(dati, colcoInCasellaVista):
                         yp = GlobalHWVar.gsy // 18 * 9.2
                     # carica migliorato
                     if usa == 5:
-                        dati[10] = dati[10] + 600
+                        dati[10] = dati[10] + GlobalGameVar.curaOggetti[4]
                         if dati[10] > entot:
                             dati[10] = entot
                         if not usandoRod:

@@ -1362,7 +1362,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 # pozione
                 if voceMarcata == 1 and (dati[31] > 0 or usandoRod):
                     animaOggetto[0] = "pozione"
-                    dati[5] = dati[5] + 100
+                    dati[5] = dati[5] + GlobalGameVar.curaOggetti[0]
                     if dati[5] > pvtot:
                         dati[5] = pvtot
                     if not usandoRod:
@@ -1372,7 +1372,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 # carica batt
                 if voceMarcata == 2 and (dati[32] > 0 or usandoRod) and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                     animaOggetto[0] = "caricaBatterie"
-                    dati[10] = dati[10] + 250
+                    dati[10] = dati[10] + GlobalGameVar.curaOggetti[1]
                     if dati[10] > entot:
                         dati[10] = entot
                     if not usandoRod:
@@ -1399,7 +1399,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 # super pozione
                 if voceMarcata == 4 and (dati[34] > 0 or usandoRod):
                     animaOggetto[0] = "superPozione"
-                    dati[5] = dati[5] + 300
+                    dati[5] = dati[5] + GlobalGameVar.curaOggetti[3]
                     if dati[5] > pvtot:
                         dati[5] = pvtot
                     if not usandoRod:
@@ -1409,7 +1409,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 # carica migliorato
                 if voceMarcata == 5 and (dati[35] > 0 or usandoRod) and GlobalGameVar.impoPresente and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                     animaOggetto[0] = "caricaBatterieMigliorato"
-                    dati[10] = dati[10] + 600
+                    dati[10] = dati[10] + GlobalGameVar.curaOggetti[4]
                     if dati[10] > entot:
                         dati[10] = entot
                     if not usandoRod:

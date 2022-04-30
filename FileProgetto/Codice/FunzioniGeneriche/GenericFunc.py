@@ -39,14 +39,14 @@ def getStatistiche(dati, difesa=0, inMenu=False):
         par += GlobalGameVar.statisticheEquipaggiamento["guanti"][dati[129]]
     # effetti tecniche
     if dati[123] > 0:
-        attVicino += attVicino // 2
-        attLontano += attLontano // 2
+        attVicino += int(attVicino // 3)
+        attLontano += int(attLontano // 3)
     if dati[124] > 0:
-        dif += dif // 2
+        dif += int(dif // 3)
     # effetto difesa
     if difesa != 0:
-        par += par // 2
-        dif += dif // 2
+        par += int(par // 4)
+        dif += int(dif // 2)
 
     entot = GlobalGameVar.statisticheEquipaggiamento["batteriaPe"][dati[9]]
     difro = GlobalGameVar.statisticheEquipaggiamento["batteriaDif"][dati[9]]
