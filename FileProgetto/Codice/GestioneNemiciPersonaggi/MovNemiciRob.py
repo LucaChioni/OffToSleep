@@ -176,29 +176,47 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                     sposta = True
                 else:
                     print ("Percorso nemico verso obiettivo non trovato")
-                    if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
-                        if nemico.x < nemico.obbiettivo[1]:
+                    # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
+                    vetNemiciSoloConXeY = []
+                    if dati[10] <= 0:
+                        vetNemiciSoloConXeY.append(rx)
+                        vetNemiciSoloConXeY.append(ry)
+                    percorsoTrovato = GenericFunc.pathFinding(nemico.x, nemico.y, nemico.obbiettivo[1], nemico.obbiettivo[2], vetNemiciSoloConXeY, caseviste)
+                    if percorsoTrovato and not percorsoTrovato == "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y):
+                        if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
                             nmos = 1
-                        if nemico.x > nemico.obbiettivo[1]:
+                        if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
                             nmos = 2
-                        sposta = True
-                    elif abs(nemico.obbiettivo[2] - nemico.y) > abs(nemico.obbiettivo[1] - nemico.x):
-                        if nemico.y < nemico.obbiettivo[2]:
+                        if percorsoTrovato[len(percorsoTrovato) - 3] > nemico.y:
                             nmos = 3
-                        if nemico.y > nemico.obbiettivo[2]:
+                        if percorsoTrovato[len(percorsoTrovato) - 3] < nemico.y:
                             nmos = 4
                         sposta = True
-                    elif (abs(nemico.obbiettivo[1] - nemico.x) == abs(nemico.obbiettivo[2] - nemico.y)) and (nemico.obbiettivo[1] != nemico.x) and (nemico.obbiettivo[2] != nemico.y):
-                        c = random.randint(1, 2)
-                        if nemico.x < nemico.obbiettivo[1] and c == 1:
-                            nmos = 1
-                        if nemico.x > nemico.obbiettivo[1] and c == 1:
-                            nmos = 2
-                        if nemico.y < nemico.obbiettivo[2] and c == 2:
-                            nmos = 3
-                        if nemico.y > nemico.obbiettivo[2] and c == 2:
-                            nmos = 4
-                        sposta = True
+                    else:
+                        print ("Percorso nemico verso obiettivo non trovato (senza nemici e personaggi come ostacoli)")
+                        if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
+                            if nemico.x < nemico.obbiettivo[1]:
+                                nmos = 1
+                            if nemico.x > nemico.obbiettivo[1]:
+                                nmos = 2
+                            sposta = True
+                        elif abs(nemico.obbiettivo[2] - nemico.y) > abs(nemico.obbiettivo[1] - nemico.x):
+                            if nemico.y < nemico.obbiettivo[2]:
+                                nmos = 3
+                            if nemico.y > nemico.obbiettivo[2]:
+                                nmos = 4
+                            sposta = True
+                        elif (abs(nemico.obbiettivo[1] - nemico.x) == abs(nemico.obbiettivo[2] - nemico.y)) and (nemico.obbiettivo[1] != nemico.x) and (nemico.obbiettivo[2] != nemico.y):
+                            c = random.randint(1, 2)
+                            if nemico.x < nemico.obbiettivo[1] and c == 1:
+                                nmos = 1
+                            if nemico.x > nemico.obbiettivo[1] and c == 1:
+                                nmos = 2
+                            if nemico.y < nemico.obbiettivo[2] and c == 2:
+                                nmos = 3
+                            if nemico.y > nemico.obbiettivo[2] and c == 2:
+                                nmos = 4
+                            sposta = True
         # nemici che attaccano da lontano
         elif nemico.attaccaDaLontano:
             if nemico.obbiettivo[0] == "Esca":
@@ -526,29 +544,47 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
             sposta = True
         else:
             print ("Percorso nemico verso monete non trovato")
-            if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
-                if nemico.x < nemico.obbiettivo[1]:
+            # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
+            vetNemiciSoloConXeY = []
+            if dati[10] <= 0:
+                vetNemiciSoloConXeY.append(rx)
+                vetNemiciSoloConXeY.append(ry)
+            percorsoTrovato = GenericFunc.pathFinding(nemico.x, nemico.y, nemico.obbiettivo[1], nemico.obbiettivo[2], vetNemiciSoloConXeY, caseviste)
+            if percorsoTrovato and not percorsoTrovato == "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y):
+                if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
                     nmos = 1
-                if nemico.x > nemico.obbiettivo[1]:
+                if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
                     nmos = 2
-                sposta = True
-            elif abs(nemico.obbiettivo[2] - nemico.y) > abs(nemico.obbiettivo[1] - nemico.x):
-                if nemico.y < nemico.obbiettivo[2]:
+                if percorsoTrovato[len(percorsoTrovato) - 3] > nemico.y:
                     nmos = 3
-                if nemico.y > nemico.obbiettivo[2]:
+                if percorsoTrovato[len(percorsoTrovato) - 3] < nemico.y:
                     nmos = 4
                 sposta = True
-            elif (abs(nemico.obbiettivo[1] - nemico.x) == abs(nemico.obbiettivo[2] - nemico.y)) and (nemico.obbiettivo[1] != nemico.x) and (nemico.obbiettivo[2] != nemico.y):
-                c = random.randint(1, 2)
-                if nemico.x < nemico.obbiettivo[1] and c == 1:
-                    nmos = 1
-                if nemico.x > nemico.obbiettivo[1] and c == 1:
-                    nmos = 2
-                if nemico.y < nemico.obbiettivo[2] and c == 2:
-                    nmos = 3
-                if nemico.y > nemico.obbiettivo[2] and c == 2:
-                    nmos = 4
-                sposta = True
+            else:
+                print ("Percorso nemico verso monete non trovato (senza nemici e personaggi come ostacoli)")
+                if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
+                    if nemico.x < nemico.obbiettivo[1]:
+                        nmos = 1
+                    if nemico.x > nemico.obbiettivo[1]:
+                        nmos = 2
+                    sposta = True
+                elif abs(nemico.obbiettivo[2] - nemico.y) > abs(nemico.obbiettivo[1] - nemico.x):
+                    if nemico.y < nemico.obbiettivo[2]:
+                        nmos = 3
+                    if nemico.y > nemico.obbiettivo[2]:
+                        nmos = 4
+                    sposta = True
+                elif (abs(nemico.obbiettivo[1] - nemico.x) == abs(nemico.obbiettivo[2] - nemico.y)) and (nemico.obbiettivo[1] != nemico.x) and (nemico.obbiettivo[2] != nemico.y):
+                    c = random.randint(1, 2)
+                    if nemico.x < nemico.obbiettivo[1] and c == 1:
+                        nmos = 1
+                    if nemico.x > nemico.obbiettivo[1] and c == 1:
+                        nmos = 2
+                    if nemico.y < nemico.obbiettivo[2] and c == 2:
+                        nmos = 3
+                    if nemico.y > nemico.obbiettivo[2] and c == 2:
+                        nmos = 4
+                    sposta = True
     elif nemico.xPosizioneUltimoBersaglio and nemico.yPosizioneUltimoBersaglio:
         nemico.triggerato = True
         if (nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalHWVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalHWVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalHWVar.gpy) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalHWVar.gpy):
@@ -589,29 +625,47 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                 sposta = True
             else:
                 print ("Percorso nemico verso ultimo bersaglio non trovato")
-                if abs(nemico.xPosizioneUltimoBersaglio - nemico.x) > abs(nemico.yPosizioneUltimoBersaglio - nemico.y):
-                    if nemico.x < nemico.xPosizioneUltimoBersaglio:
+                # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
+                vetNemiciSoloConXeY = []
+                if dati[10] <= 0:
+                    vetNemiciSoloConXeY.append(rx)
+                    vetNemiciSoloConXeY.append(ry)
+                percorsoTrovato = GenericFunc.pathFinding(nemico.x, nemico.y, nemico.xPosizioneUltimoBersaglio, nemico.yPosizioneUltimoBersaglio, vetNemiciSoloConXeY, caseviste)
+                if percorsoTrovato and not percorsoTrovato == "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y):
+                    if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
                         nmos = 1
-                    if nemico.x > nemico.xPosizioneUltimoBersaglio:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
                         nmos = 2
-                    sposta = True
-                elif abs(nemico.yPosizioneUltimoBersaglio - nemico.y) > abs(nemico.xPosizioneUltimoBersaglio - nemico.x):
-                    if nemico.y < nemico.yPosizioneUltimoBersaglio:
+                    if percorsoTrovato[len(percorsoTrovato) - 3] > nemico.y:
                         nmos = 3
-                    if nemico.y > nemico.yPosizioneUltimoBersaglio:
+                    if percorsoTrovato[len(percorsoTrovato) - 3] < nemico.y:
                         nmos = 4
                     sposta = True
-                elif (abs(nemico.xPosizioneUltimoBersaglio - nemico.x) == abs(nemico.yPosizioneUltimoBersaglio - nemico.y)) and (nemico.xPosizioneUltimoBersaglio != nemico.x) and (nemico.yPosizioneUltimoBersaglio != nemico.y):
-                    c = random.randint(1, 2)
-                    if nemico.x < nemico.xPosizioneUltimoBersaglio and c == 1:
-                        nmos = 1
-                    if nemico.x > nemico.xPosizioneUltimoBersaglio and c == 1:
-                        nmos = 2
-                    if nemico.y < nemico.yPosizioneUltimoBersaglio and c == 2:
-                        nmos = 3
-                    if nemico.y > nemico.yPosizioneUltimoBersaglio and c == 2:
-                        nmos = 4
-                    sposta = True
+                else:
+                    print ("Percorso nemico verso ultimo bersaglio non trovato (senza nemici e personaggi come ostacoli)")
+                    if abs(nemico.xPosizioneUltimoBersaglio - nemico.x) > abs(nemico.yPosizioneUltimoBersaglio - nemico.y):
+                        if nemico.x < nemico.xPosizioneUltimoBersaglio:
+                            nmos = 1
+                        if nemico.x > nemico.xPosizioneUltimoBersaglio:
+                            nmos = 2
+                        sposta = True
+                    elif abs(nemico.yPosizioneUltimoBersaglio - nemico.y) > abs(nemico.xPosizioneUltimoBersaglio - nemico.x):
+                        if nemico.y < nemico.yPosizioneUltimoBersaglio:
+                            nmos = 3
+                        if nemico.y > nemico.yPosizioneUltimoBersaglio:
+                            nmos = 4
+                        sposta = True
+                    elif (abs(nemico.xPosizioneUltimoBersaglio - nemico.x) == abs(nemico.yPosizioneUltimoBersaglio - nemico.y)) and (nemico.xPosizioneUltimoBersaglio != nemico.x) and (nemico.yPosizioneUltimoBersaglio != nemico.y):
+                        c = random.randint(1, 2)
+                        if nemico.x < nemico.xPosizioneUltimoBersaglio and c == 1:
+                            nmos = 1
+                        if nemico.x > nemico.xPosizioneUltimoBersaglio and c == 1:
+                            nmos = 2
+                        if nemico.y < nemico.yPosizioneUltimoBersaglio and c == 2:
+                            nmos = 3
+                        if nemico.y > nemico.yPosizioneUltimoBersaglio and c == 2:
+                            nmos = 4
+                        sposta = True
     else:
         nemico.obbiettivo = ["", 0, 0, []]
         if nemico.triggerato:
