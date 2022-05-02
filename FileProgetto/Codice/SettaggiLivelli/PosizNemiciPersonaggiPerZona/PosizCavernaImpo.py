@@ -8,10 +8,11 @@ import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 
 def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
     if stanza == GlobalGameVar.dictStanze["caverna1"]:
-        percorsoNemico = ["s", "a", "sGira", "", "", "", "d", "w", "d", "w", "dGira", "", "", "", "s", "a"]
-        nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, "a", "RoboLeggero", stanza, percorsoNemico)
-        listaNemiciTotali.append(nemico)
-        listaNemici.append(nemico)
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["resoOstileImpoInCaverna1"]:
+            percorsoNemico = ["s", "a", "sGira", "", "", "", "d", "w", "d", "w", "dGira", "", "", "", "s", "a"]
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, "a", "RoboLeggero", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
     elif stanza == GlobalGameVar.dictStanze["caverna2"]:
         percorsoNemico = ["s", "", "", "", "", "", "d", "", "", "", "", "", "w", "", "", "", "", "", "a", "", "", "", "", ""]
         nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 6, "a", "RoboVolante", stanza, percorsoNemico)
@@ -390,6 +391,11 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
 
 def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi):
     if stanza == GlobalGameVar.dictStanze["caverna1"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["resoOstileImpoInCaverna1"]:
+            percorsoPersonaggio = ["s", "a", "sGira", "", "", "", "d", "w", "d", "w", "dGira", "", "", "", "s", "a"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, "a", "RoboLeggero-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 6, "s", "OggettoCumuloImpo-0", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)

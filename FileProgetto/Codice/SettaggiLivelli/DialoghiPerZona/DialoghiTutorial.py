@@ -164,7 +164,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Sara. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
+        dialogo.append(u"Durante la battaglia puoi usare gli impofrutti solo se Impo è in una casella adiacente a quella di Sara. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostRisoluzioneEnigma"]:
         oggettoDato = False

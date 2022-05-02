@@ -3802,7 +3802,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ma queste sono faccende che non ti riguardano. Tornatene al tuo palazzo, Rod, e continua la tua tranquilla e spensierata vita di sempre. Avrai il tuo compenso per l'impo e i nostri scambi per gli impoFrutti continueranno come prima.")
+                dialogo.append(u"Ma queste sono faccende che non ti riguardano. Tornatene al tuo palazzo, Rod, e continua la tua tranquilla e spensierata vita di sempre. Avrai il tuo compenso per l'impo e i nostri scambi per gli impofrutti continueranno come prima.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

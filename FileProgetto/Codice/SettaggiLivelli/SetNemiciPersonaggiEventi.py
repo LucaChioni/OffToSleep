@@ -207,11 +207,13 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             i -= 1
         # cancello il percorso dei personaggi se il tempo è bloccato
         for personaggio in listaPersonaggi:
-            personaggio.percorso = []
-            personaggio.numeroMovimento = 0
+            if personaggio.stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"]:
+                personaggio.percorso = []
+                personaggio.numeroMovimento = 0
         for personaggio in listaPersonaggiTotali:
-            personaggio.percorso = []
-            personaggio.numeroMovimento = 0
+            if personaggio.stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"]:
+                personaggio.percorso = []
+                personaggio.numeroMovimento = 0
     # eccezioni per caverna impo
     if GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
         for nemico in listaNemici:

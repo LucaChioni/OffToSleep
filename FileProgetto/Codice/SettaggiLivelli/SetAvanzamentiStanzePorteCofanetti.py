@@ -823,13 +823,18 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["sbloccatoCaverna"] = i
     i += 1
     dictAvanzamentoStoria["monologoPostSbloccoCaverna"] = i
-
     i += 1
-    dictAvanzamentoStoria["vistoImpoOstile"] = i
+    dictAvanzamentoStoria["monologoArrivoCaverna1"] = i
+    i += 1
+    dictAvanzamentoStoria["vistoPrimoImpoNellaCaverna"] = i
     i += 1
     dictAvanzamentoStoria["resoOstileImpoInCaverna1"] = i
     i += 1
+    dictAvanzamentoStoria["attaccatoDaImpoInCaverna1"] = i
+    i += 1
     dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPostUccisioneImpoOstile"] = i
     dictAvanzamentoStoria["mappaCaverna"] = i
 
     i += 100

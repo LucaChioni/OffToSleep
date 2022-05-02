@@ -1707,7 +1707,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 32:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -32:
-            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi ImpoFrutti piccoli!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi impofrutti piccoli!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 33:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -33:
@@ -1719,7 +1719,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 35:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -35:
-            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi ImpoFrutti grandi!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi impofrutti grandi!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 36:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -36:

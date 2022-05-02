@@ -427,7 +427,7 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["caverna1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["caverna17"]
                         FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare ImpoFrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare impofrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
@@ -640,7 +640,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnni"]:
         dictPersonaggiSbloccati["Sara"] = 1
 
-    dictNemiciSbloccati = {"nemiciSogno":False, "nemiciForesta":False, "nemiciCitta":False, "nemiciSelva":False, "nemiciMontagne":False, "nemiciCastello":False, "nemiciCaverna":False, "nemiciVulcano":False}
+    dictNemiciSbloccati = {"nemiciSogno":False, "nemiciForesta":False, "nemiciCitta":False, "nemiciSelva":False, "nemiciMontagne":False, "nemiciCastello":False, "nemiciCaverna":False}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         dictNemiciSbloccati["nemiciSogno"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["uscitoDaForesta"]:
@@ -655,8 +655,6 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictNemiciSbloccati["nemiciCastello"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["arrivoIngressoVulcano"]:
         dictNemiciSbloccati["nemiciCaverna"] = True
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
-        dictNemiciSbloccati["nemiciVulcano"] = True
 
     while not risposta:
         # rallenta per i 30 fps
@@ -1105,10 +1103,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         nomeVoceMarcataPerControllo = "nemiciMontagne"
                     elif 22 <= voceMarcataSottoMenu <= 24:
                         nomeVoceMarcataPerControllo = "nemiciCastello"
-                    elif 25 <= voceMarcataSottoMenu <= 27:
+                    elif 25 <= voceMarcataSottoMenu <= 29:
                         nomeVoceMarcataPerControllo = "nemiciCaverna"
-                    elif 28 <= voceMarcataSottoMenu <= 29:
-                        nomeVoceMarcataPerControllo = "nemiciVulcano"
                     if dictNemiciSbloccati[nomeVoceMarcataPerControllo]:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         sottovoceSelezionata = True
@@ -1713,14 +1709,12 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                             FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                             FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
-                        if dictNemiciSbloccati["nemiciVulcano"]:
-                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
-                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
-                        else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                     if sottovoceSelezionata:
@@ -1856,27 +1850,27 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboLeggero"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Vaga in giro accumulando impofrutti che ricava scavando nelle rocce della caverna. Nelle rocce... non piante! Non sono \"frutti\".", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 26 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboVolante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Sorveglia la zona mentre gli altri impo raccolgono impofrutti. Credo che sia suo compito anche indicare agli altri dove scavare.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 27 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 28 and dictNemiciSbloccati["nemiciVulcano"]:
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Come gli impo leggeri, ricava impofrutti dalle rocce della caverna. È più grosso e lento degli altri, ma è in grado di trasportare più materiale.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 28 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesanteVolante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 29 and dictNemiciSbloccati["nemiciVulcano"]:
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Come i normali impo volanti, sorveglia la zona mentre gli altri raccolgono impofrutti. È più grosso e lento degli altri, ma molto più forte.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 29 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboTorre"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Non ha un ruolo effettivo nella raccolta degli impofrutti se non quello di proteggere gli altri. È lento, ma quando colpisce fa parecchio male.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 4:
                     FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
                     FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)

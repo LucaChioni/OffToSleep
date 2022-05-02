@@ -66,6 +66,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"... Che sia stato Rod a fare quel casino?")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Ma che cavolo!")
+                partiDialogo.append(dialogo)
         elif tipo == "OggettoPortaPalazzoDiRod":
             partiDialogo = []
             nome = "OggettoPortaPalazzoDiRod"
@@ -727,11 +737,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono appunti su un progetto di Rod... sembrano dei metodi per estrarre qualcosa dagli ImpoFrutti... tipo un liquido...)")
+                dialogo.append(u"(Sono appunti su un progetto di Rod... sembrano dei metodi per estrarre qualcosa dagli impofrutti... tipo un liquido...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ci sono dei disegni che mostrano l'interno degli ImpoFrutti... sono parecchio strani...)")
+                dialogo.append(u"(Ci sono dei disegni che mostrano l'interno degli impofrutti... sono parecchio strani...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -941,15 +951,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... La raccolta di impoFrutti verrà notevolmente incrementata, il vecchio trombone la smettarà di lamentarsi della scarsità...")
+                dialogo.append(u"... La raccolta di impofrutti verrà notevolmente incrementata, il vecchio trombone la smettarà di lamentarsi della scarsità...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Che c'entra l'armatura con gli impoFrutti...?)")
+                dialogo.append(u"(Che c'entra l'armatura con gli impofrutti...?)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... E poi... ha un traffico di impoFrutti con Neil...?)")
+                dialogo.append(u"(... E poi... ha un traffico di impofrutti con Neil...?)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -1202,7 +1212,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Ho iniziato il prelievo, sto ricavando una quantità incredibile di liquido. Ogni impo vale più di trenta impoFrutti... con queste quantità posso testare seriamente la mia nuova pompa idraulica...")
+                dialogo.append(u"... Ho iniziato il prelievo, sto ricavando una quantità incredibile di liquido. Ogni impo vale più di trenta impofrutti... con queste quantità posso testare seriamente la mia nuova pompa idraulica...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
