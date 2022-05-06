@@ -2489,7 +2489,7 @@ def gameloop():
             impossibileParare = SetZoneStanzeImpedimenti.decidiSePoterParare(dati[0])
             if len(listaNemici) > 0 and not cambiosta:
                 for nemico in listaNemici:
-                    if nemico.vita > 0 and nemico.inCasellaVista:
+                    if nemico.vita > 0 and nemico.inCasellaVista and dati[5] > 0:
                         if sposta and nemico.mosseRimaste == 0:
                             nemico.resettaMosseRimaste()
                         if nemico.mosseRimaste > 0:

@@ -4411,7 +4411,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
-    elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna17"]:
+    elif GlobalGameVar.dictStanze["caverna1"] <= stanza <= GlobalGameVar.dictStanze["caverna18"]:
         if stanza == GlobalGameVar.dictStanze["caverna1"]:
             nomeCanzoneLuogo = "14-CavernaImpo"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -4622,11 +4622,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
                 canzoneCambiata = True
-            sottofondoLuogo = "CavernaImpo/Fine/UltimaStanza"
+            sottofondoLuogo = "CavernaImpo/Fine"
             if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
                 GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
                 audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleAlte.wav")
-                audioAmbiente_Lava = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/LavaAlta.wav")
+                audioAmbiente_Lava = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/LavaBassa.wav")
                 listaSottofondoAmbientale = [audioAmbiente_Ventole, audioAmbiente_Lava]
                 sottofondoAmbientaleCambiato = True
             # rumore porte
@@ -4638,10 +4638,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "a"
                     x = GlobalHWVar.gpx * 29
                     y += GlobalHWVar.gpy * 7
-                if stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"]:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna18"]:
                     npers = "d"
                     x = GlobalHWVar.gpx * 2
-                    y -= GlobalHWVar.gpy * 1
+                    y += GlobalHWVar.gpy * 4
         if stanza == GlobalGameVar.dictStanze["caverna9"]:
             nomeCanzoneLuogo = "14-CavernaImpo"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -4863,6 +4863,32 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "w"
                     x += GlobalHWVar.gpx * 15
                     y = GlobalHWVar.gpy * 15
+        if stanza == GlobalGameVar.dictStanze["caverna18"]:
+            nomeCanzoneLuogo = "14-CavernaImpo"
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
+                canzoneCambiata = True
+            sottofondoLuogo = "CavernaImpo/Fine/UltimaStanza"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleAlte.wav")
+                audioAmbiente_Lava = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/LavaAlta.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole, audioAmbiente_Lava]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna8"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+                    y -= GlobalHWVar.gpy * 4
+                if stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y += GlobalHWVar.gpy * 8
 
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
         listaSottofondoAmbientale = []

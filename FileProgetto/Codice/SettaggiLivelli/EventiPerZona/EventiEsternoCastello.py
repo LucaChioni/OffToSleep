@@ -285,7 +285,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
-        # tolgo l'equipaggiamento (spada, arco, armatura, scudo, guanti e collana) perché passo a Rod
+        # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana) perché passo a Rod
         dati[6] = 0
         dati[128] = 0
         dati[8] = 0

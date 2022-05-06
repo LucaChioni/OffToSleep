@@ -940,26 +940,89 @@ def mostraSchermataCitazione():
     oscuraIlluminaSchermo(illumina=False)
 
 
-def animaTremolioSchermo():
+def animaTremolioSchermo(nelVulcano=False):
     rect = pygame.display.get_surface().get_rect()
     oscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
     oscuramento.fill((0, 0, 0, 100))
     oscuramento = oscuramento.convert_alpha(GlobalHWVar.schermo)
 
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
-    i = 50
-    while i > 0:
-        apprI = int(i // 5)
-        n = random.randint(-apprI, apprI) / 20.0
-        m = random.randint(-apprI, apprI) / 20.0
-        GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+    if not nelVulcano:
+        i = 50
+        while i > 0:
+            apprI = int(i // 5)
+            n = random.randint(-apprI, apprI) / 20.0
+            m = random.randint(-apprI, apprI) / 20.0
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            GlobalHWVar.aggiornaSchermo()
+            pygame.time.wait(20)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
         GlobalHWVar.aggiornaSchermo()
-        pygame.time.wait(20)
-        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        i -= 1
-    GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
-    GlobalHWVar.aggiornaSchermo()
+    elif nelVulcano == 1:
+        # oscuro anche lo schermo con marrone-sabbia
+        oscuramentoSabbia = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        oscuramentoSabbia.fill((79, 43, 38, 0))
+        oscuramentoSabbia = oscuramentoSabbia.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 50:
+            apprI = int(i // 5)
+            n = random.randint(-apprI, apprI) / 20.0
+            m = random.randint(-apprI, apprI) / 20.0
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            oscuramentoSabbia.fill((79, 43, 38, i * 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramentoSabbia, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
+            pygame.time.wait(20)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
+        oscuramentoSabbia.fill((79, 43, 38, 200))
+        GlobalHWVar.disegnaImmagineSuSchermo(oscuramentoSabbia, (0, 0))
+        GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
+    elif nelVulcano == 2:
+        # oscuro anche lo schermo con marrone-sabbia
+        oscuramentoSabbia = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        oscuramentoSabbia.fill((79, 43, 38, 200))
+        oscuramentoSabbia = oscuramentoSabbia.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 10:
+            apprI = int(50 // 5)
+            n = random.randint(-apprI, apprI) / 20.0
+            m = random.randint(-apprI, apprI) / 20.0
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramentoSabbia, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
+            pygame.time.wait(20)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(oscuramentoSabbia, (0, 0))
+        GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
+    elif nelVulcano == 3:
+        # oscuro anche lo schermo con marrone-sabbia
+        oscuramentoSabbia = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        oscuramentoSabbia.fill((79, 43, 38, 200))
+        oscuramentoSabbia = oscuramentoSabbia.convert_alpha(GlobalHWVar.schermo)
+        i = 50
+        while i > 0:
+            apprI = int(i // 5)
+            n = random.randint(-apprI, apprI) / 20.0
+            m = random.randint(-apprI, apprI) / 20.0
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramento, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            oscuramentoSabbia.fill((79, 43, 38, i * 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(oscuramentoSabbia, (GlobalHWVar.gpx * n, GlobalHWVar.gpy * m))
+            GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
+            pygame.time.wait(20)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
+        GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
 
 
 def disegnaCasellaSulloSchermo(imgCasella, xCasella, yCasella, listaNemiciSotterrati, imgNemicoSotterrato):

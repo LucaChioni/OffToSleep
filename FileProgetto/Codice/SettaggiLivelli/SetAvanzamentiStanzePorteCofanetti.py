@@ -836,10 +836,16 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoPostUccisioneImpoOstile"] = i
     dictAvanzamentoStoria["mappaCaverna"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoUltimaStanzaCavernaImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["terremotoUltimaStanzaCavernaImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["uccisoDagliImpoTorri"] = i
+    i += 1
+    dictAvanzamentoStoria["risvegliatoNelVulcano"] = i
 
     i += 100
-    i += 1
-    dictAvanzamentoStoria["arrivoIngressoVulcano"] = i
     i += 1
     dictAvanzamentoStoria["liberatoDaiControllori"] = i
     i += 1
@@ -1243,11 +1249,19 @@ def definisciStanze():
     dictStanze["caverna16"] = i
     i += 1
     dictStanze["caverna17"] = i
-
-    i += 100
+    i += 1
+    dictStanze["caverna18"] = i
     i += 1
     dictStanze["vulcano1"] = i
     vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["vulcano2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["vulcano3"] = i
+    vetStanzePacifiche.append(i)
+
+    i += 100
     i += 1
     dictStanze["tunnelSubacqueo1"] = i
     vetStanzePacifiche.append(i)

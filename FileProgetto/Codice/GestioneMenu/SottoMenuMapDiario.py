@@ -425,7 +425,7 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         FunzioniGraficheGeneriche.messaggio(u"È un passaggio sicuro e veloce tra il palazzo di Rod e il suo avamposto. Al suo interno passa un tubo molliccio che parte dal palazzo e va da qualche parte nella Selva Arida. Dev'essere di Rod, ma mi domando a che cosa serva...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 13:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["caverna1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["caverna17"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["caverna18"]
                         FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare impofrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
@@ -653,7 +653,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictNemiciSbloccati["nemiciMontagne"] = True
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
         dictNemiciSbloccati["nemiciCastello"] = True
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["arrivoIngressoVulcano"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoArrivoUltimaStanzaCavernaImpo"]:
         dictNemiciSbloccati["nemiciCaverna"] = True
 
     while not risposta:

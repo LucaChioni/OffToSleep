@@ -226,6 +226,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Tunnel di Rod"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["caverna1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"] and stanza == GlobalGameVar.dictStanze["caverna8"]):
         nomeDaScrivere = u"Caverna Impo"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano3"]):
+        nomeDaScrivere = u"Vulcano"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -534,7 +536,7 @@ def settaPresenzaDiColco(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["riapparsoImpoInternoCastello20PostRianimazione"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presoImpoPietraPostRianimazione"]:
         GlobalGameVar.impoPresente = True
         GlobalGameVar.impoPietraPosseduta = False
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presoImpoPietraPostRianimazione"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["presoImpoPietraPostRianimazione"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"]:
         GlobalGameVar.impoPresente = True
         GlobalGameVar.impoPietraPosseduta = True
     else:
@@ -561,6 +563,8 @@ def decidiSePoterParare(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"]:
         impossibileParare = True
     elif GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
+        impossibileParare = True
+    elif GlobalGameVar.dictAvanzamentoStoria["terremotoUltimaStanzaCavernaImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"]:
         impossibileParare = True
 
     return impossibileParare

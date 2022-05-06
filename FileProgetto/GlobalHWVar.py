@@ -392,6 +392,9 @@ def inizializzaModuloJoistick():
 inizializzaModuloJoistick()
 usandoIlController = False
 
+# nonAggiornareSchermo => usata solo per un evento (terremoto nel vulcano in cui viene messo un "filtro" marrone-sabbia sullo schermo)
+nonAggiornareSchermo = False
+
 # funzioni per disegnare tutto sullo schermo (serve per ottimizzare)
 listaRettangoliDaAggiornare = []
 aggiornaTuttoLoSchermo = False
@@ -589,16 +592,17 @@ def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
                     listaRettangoliDaAggiornare.append(rectOrig)
     else:
         print ("Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")")
-def aggiornaSchermo():
+def aggiornaSchermo(ignoraBloccoAggiornamento=False):
     global listaRettangoliDaAggiornare
     global aggiornaTuttoLoSchermo
-    if aggiornaTuttoLoSchermo or vSyncEnabled:
-        pygame.display.flip()
-    else:
-        pygame.display.update(listaRettangoliDaAggiornare)
-    listaRettangoliDaAggiornare = []
-    aggiornaTuttoLoSchermo = False
-    gc.collect()
+    if not nonAggiornareSchermo or ignoraBloccoAggiornamento:
+        if aggiornaTuttoLoSchermo or vSyncEnabled:
+            pygame.display.flip()
+        else:
+            pygame.display.update(listaRettangoliDaAggiornare)
+        listaRettangoliDaAggiornare = []
+        aggiornaTuttoLoSchermo = False
+        gc.collect()
 
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
 linguaImpostata = "eng"

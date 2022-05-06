@@ -2,8 +2,11 @@
 
 import pygame
 import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
@@ -108,6 +111,135 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
         if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"]:
             GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostUccisioneImpoOstile"] and stanza == GlobalGameVar.dictStanze["caverna18"]:
+        GlobalHWVar.canaleSoundPassiRallo.stop()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoUltimaStanzaCavernaImpo"] and stanza == GlobalGameVar.dictStanze["caverna18"] and x <= GlobalHWVar.gpx * 20:
+        xDestinazione = GlobalHWVar.gpx * 17
+        yDestinazione = GlobalHWVar.gpy * 8
+        GlobalHWVar.nonAggiornareSchermo = True
+        if x == GlobalHWVar.gpx * 20 and npers == 2:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreTerremotoCavernaImpo)
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni * 0.8], True, posizioneCanaleMusica=0)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni * 0.6], True, posizioneCanaleMusica=0)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni * 0.4], True, posizioneCanaleMusica=0)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni * 0.2], True, posizioneCanaleMusica=0)
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], True, posizioneCanaleMusica=0)
+            GlobalHWVar.canaleSoundCanzone.stop()
+            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [0], True)
+            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+            FunzioniGraficheGeneriche.animaTremolioSchermo(nelVulcano=1)
+        elif not (x == xDestinazione and y == yDestinazione):
+            FunzioniGraficheGeneriche.animaTremolioSchermo(nelVulcano=2)
+        else:
+            FunzioniGraficheGeneriche.animaTremolioSchermo(nelVulcano=3)
+        npers = 4
+        if x == xDestinazione and y == yDestinazione:
+            carim = True
+            GlobalHWVar.nonAggiornareSchermo = False
+            avanzamentoStoria += 1
+        elif x == GlobalHWVar.gpx * 20 and y == GlobalHWVar.gpy * 5:
+            y += GlobalHWVar.gpy
+        elif x == GlobalHWVar.gpx * 19 and y == GlobalHWVar.gpy * 6:
+            y += GlobalHWVar.gpy
+        elif x != GlobalHWVar.gpx * 18:
+            x -= GlobalHWVar.gpx
+        elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 7:
+            y += GlobalHWVar.gpy
+        elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 8:
+            x -= GlobalHWVar.gpx
+        elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 9:
+            y -= GlobalHWVar.gpy
+        if x == GlobalHWVar.gpx * 18 and len(listaNemiciTotali) == 0:
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 7, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 8, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 9, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 10, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 10, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 10, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 9, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 8, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 7, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 6, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = []
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 6, "s", "RoboTorre", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["terremotoUltimaStanzaCavernaImpo"] and stanza == GlobalGameVar.dictStanze["caverna18"]:
+        if dati[5] > 0:
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
+        else:
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
+            dati[5] = pvtot
+            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+            GlobalHWVar.canaleSoundInterazioni.stop()
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+            GlobalHWVar.aggiornaSchermo()
+            # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
+            dati[6] = 0
+            dati[7] = 0
+            dati[8] = 0
+            dati[128] = 0
+            dati[129] = 0
+            dati[130] = 0
+            avanzamentoStoria += 1
+            stanza = GlobalGameVar.dictStanze["vulcano3"]
+            cambiosta = True
+            carim = True
+            aggiornaImgEquip = True
+            caricaTutto = True
 
     # se un nemico ti vede, tutti sanno dove sei
     listaObiettiviVisti = []
