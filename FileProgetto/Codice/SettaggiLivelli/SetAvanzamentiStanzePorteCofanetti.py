@@ -844,17 +844,22 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["uccisoDagliImpoTorri"] = i
     i += 1
     dictAvanzamentoStoria["risvegliatoNelVulcano"] = i
+    dictAvanzamentoStoria["apertoPortaStanza8Castello"] = i
+
+    i += 1
+    dictAvanzamentoStoria["monologoPostRisveglioNelVulcano"] = i
+    i += 1
+    dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoCapitoCheTiTroviNelVulcano"] = i
+    dictAvanzamentoStoria["mappaVulcano"] = i
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["liberatoDaiControllori"] = i
-    i += 1
-    dictAvanzamentoStoria["apertoPortaStanza8Castello"] = i
+    dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"] = i
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnni"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaVulcano"] = i
     i += 1
     dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i
     i += 1

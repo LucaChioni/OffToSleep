@@ -2374,6 +2374,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"(Devo tirare la leva se voglio passare...)")
                     partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["vulcano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["vulcano3"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano3"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Uh?!<*>")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

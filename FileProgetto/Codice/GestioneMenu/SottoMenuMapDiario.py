@@ -622,9 +622,9 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Rene"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"]:
         dictPersonaggiSbloccati["Rene"] = 2
-    if GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+    if GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["scopertoNaturaDegliImpo"]:
         dictPersonaggiSbloccati["Impo"] = 1
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["scopertoNaturaDegliImpo"]:
         dictPersonaggiSbloccati["Impo"] = 3
     if GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
         dictPersonaggiSbloccati["Neil"] = 1
@@ -634,7 +634,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Pappagallo"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"]:
         dictPersonaggiSbloccati["Pappagallo"] = 2
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"]:
         dictPersonaggiSbloccati["Controllore1"] = 1
         dictPersonaggiSbloccati["Controllore2"] = 1
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnni"]:

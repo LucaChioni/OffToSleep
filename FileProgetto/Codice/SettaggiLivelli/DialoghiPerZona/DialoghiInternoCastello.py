@@ -3870,7 +3870,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipoId == "OggettoSpecchio-0":
             partiDialogo = []
             nome = "Specchio"
-            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["liberatoDaiControllori"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

@@ -215,6 +215,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             carim = True
+        if not (x == xDestinazione and y == yDestinazione):
+            evitaTurnoDiColco = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["terremotoUltimaStanzaCavernaImpo"] and stanza == GlobalGameVar.dictStanze["caverna18"]:
         if dati[5] > 0:
@@ -227,6 +229,11 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.canaleSoundInterazioni.stop()
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
+            i = 0
+            while i < 30:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
             # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
             dati[6] = 0
             dati[7] = 0
@@ -235,6 +242,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             dati[129] = 0
             dati[130] = 0
             avanzamentoStoria += 1
+            nonMostrarePersonaggio = True
             stanza = GlobalGameVar.dictStanze["vulcano3"]
             cambiosta = True
             carim = True
