@@ -224,7 +224,7 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Palazzo di Rod"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]):
         nomeDaScrivere = u"Tunnel di Rod"
-    elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["caverna1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"] and stanza == GlobalGameVar.dictStanze["caverna8"]):
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["caverna1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"] and stanza == GlobalGameVar.dictStanze["caverna18"]):
         nomeDaScrivere = u"Caverna Impo"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano3"]):
         nomeDaScrivere = u"Vulcano"
