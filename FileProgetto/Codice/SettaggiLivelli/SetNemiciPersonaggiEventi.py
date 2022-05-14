@@ -197,18 +197,18 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
         # trasformo i nemici in personaggi se il tempo è bloccato (eccetto quelli nella caverna e nel vulcano)
         for nemico in listaNemici:
-            if nemico.stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"]:
+            if nemico.stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
                 personaggio = PersonaggioObj.PersonaggioObj(nemico.x, nemico.y, nemico.direzione, nemico.tipo + "-0", stanza, avanzamentoStoria, nemico.percorso)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
         i = len(listaNemici) - 1
         while i >= 0:
-            if listaNemici[i].stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"]:
+            if listaNemici[i].stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
                 del listaNemici[i]
             i -= 1
         i = len(listaNemiciTotali) - 1
         while i >= 0:
-            if listaNemiciTotali[i].stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"]:
+            if listaNemiciTotali[i].stanzaDiAppartenenza < GlobalGameVar.dictStanze["caverna1"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
                 del listaNemiciTotali[i]
             i -= 1
         # cancello il percorso dei personaggi se il tempo è bloccato

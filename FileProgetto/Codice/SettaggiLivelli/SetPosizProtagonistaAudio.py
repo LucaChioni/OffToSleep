@@ -6,6 +6,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
 def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, avanzamentoStoria, bottoneDown):
@@ -164,7 +165,25 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gsy // 18 * 13
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
                     i = 0
-                    while i < 30:
+                    while i < 20:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello10"]:
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.9], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.8], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.7], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.6], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.5], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.4], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.3], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.2], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni * 0.1], False, posizioneCanaleMusica=0)
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [0], False, posizioneCanaleMusica=0)
+                        GlobalHWVar.canaleSoundMelodieEventi.stop()
+                        GlobalHWVar.canaleSoundMelodieEventi.set_volume(GlobalHWVar.volumeCanzoni)
+                    i = 0
+                    while i < 10:
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
@@ -4970,7 +4989,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gpy * 5
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
                     i = 0
-                    while i < 15:
+                    while i < 10:
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1

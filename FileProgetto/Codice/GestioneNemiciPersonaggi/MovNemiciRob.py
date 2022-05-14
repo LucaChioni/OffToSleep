@@ -1683,7 +1683,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         else:
             ultimoObbiettivoColco = []
     else:
-        vettorePrevisione[0][1] = "ImpoPietra spenta"
+        vettorePrevisione[0][1] = "Impopietra spenta"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
         if GlobalGameVar.impoPresente and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):

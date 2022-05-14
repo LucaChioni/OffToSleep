@@ -132,7 +132,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append("???DOMANDA???")
-                dialogo.append(u"QUARTA DOMANDA: Dove sei?")
+                dialogo.append(u"QUARTA DOMANDA: dove sei?")
                 dialogo.append(u"Sono davanti a te.")
                 dialogo.append(u"Sono nel Passo Montano.")
                 dialogo.append(u"Sono sulla terra.")
@@ -191,7 +191,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append("???DOMANDA???")
-                dialogo.append(u"Quinta domanda: Ti fidi di quello che vedi e racconti?")
+                dialogo.append(u"QUINTA DOMANDA: ti fidi di quello che vedi e racconti?")
                 dialogo.append(u"Certo, tu no?")
                 dialogo.append(u"Di cosa dovrei fidarmi se non di quello?")
                 dialogo.append(u"Non dovrei fidarmi di quello che vedo?")

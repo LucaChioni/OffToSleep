@@ -1699,7 +1699,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(5) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
         elif tesoro >= 11 and tesoro <= 30:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Azio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 31:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -31:
@@ -1811,7 +1811,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         elif tesoro == 75:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica enorme", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro >= 81 and tesoro <= 100:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Condizio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 1000:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Cella di memoria", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 131:

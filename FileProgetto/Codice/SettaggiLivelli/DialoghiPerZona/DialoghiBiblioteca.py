@@ -628,7 +628,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Ah! Trovato.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            oggettoDato = "ImpoPietra"
+            oggettoDato = "Impopietra"
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -727,15 +727,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah... e cos'è un \"ImpoFoglio\"?")
+            dialogo.append(u"Ah... e cos'è un \"impofoglio\"?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"L'ImpoFoglio è una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli ImpoFogli sono diversi tra loro e si dividono in due categorie: \"Condizio-ImpoFogli\", che indicano delle condizioni, e \"Azio-ImpoFogli\", che indicano delle azioni da compiere...")
+            dialogo.append(u"L'impofoglio è una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli impofogli sono diversi tra loro e si dividono in due categorie: \"Condizio-Impofogli\", che indicano delle condizioni, e \"Azio-ImpoFogli\", che indicano delle azioni da compiere...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per dare un'istruzione a un impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. L'impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione, altrimenti sta fermo.")
+            dialogo.append(u"Per dare un'istruzione a un impo devi inserire un Condizio-Impofoglio e un Azio-Impofoglio nella cella di memoria. L'impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione, altrimenti sta fermo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -743,7 +743,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Certo... Se vuoi dare un'occhiata, in biblioteca ci sono diversi libri che parlano più dettagliatamente del loro funzionamento, ma sono sicuro che imparerai in fretta facendo qualche prova. Al momento io ho solo questi due di ImpoFogli: questo Condizio-ImpoFoglio individua una situazione in cui qualcuno vuole aggredirti, mentre questo Azio-ImpoFoglio fa eseguire un attacco folgorante.")
+            dialogo.append(u"Certo... Se vuoi dare un'occhiata, in biblioteca ci sono diversi libri che parlano più dettagliatamente del loro funzionamento, ma sono sicuro che imparerai in fretta facendo qualche prova. Al momento io ho solo questi due di impofogli: questo Condizio-Impofoglio individua una situazione in cui qualcuno vuole aggredirti, mentre questo Azio-Impofoglio fa eseguire un attacco folgorante.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -1548,15 +1548,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Come già spiegato in precedenza, ciò che spinge gli impo ad agire è determinato dagli ImpoFogli. Tuttavia esistono due casi eccezionali in cui l'azione compiuta è dovuta ad altre ragioni...")
+                dialogo.append(u"... Come già spiegato in precedenza, ciò che spinge gli impo ad agire è determinato dagli impofogli. Tuttavia esistono due casi eccezionali in cui l'azione compiuta è dovuta ad altre ragioni...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la ImpoPietra è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi a essa...")
+                dialogo.append(u"... Il primo caso in cui gli impofogli non vengono eseguiti si presenta quando l'impopietra è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi a essa...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, l'impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
+                dialogo.append(u"... Il secondo caso si presenta quando nessun impofoglio può essere eseguito ma è stato soddisfatto un Condizio-Impofoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, l'impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-Impofoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18:
                 nome = "Libro (Sacche Energetiche)"

@@ -389,10 +389,10 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         FunzioniGraficheGeneriche.messaggio("Palazzo di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Il palazzo in cui dimora Rod. Dentro è tutto molto disordinato, ci sono fogli e cartacce ovunque con dei suoi studi o progetti. Sembra più una specie di magazzino dove tiene un sacco di roba. Vista la polvere sugli scatoloni, non credo che utilizzi effettivamente tutti quegli oggetti. Mi domando perché non li butti... <br> L'ambiente ricorda vagamente il castello di Neil, ma un po' più piccolo e con il Passo Montano al posto del labirinto per scoraggiare l'avvicinamento di viaggiatori indesiderati.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 6:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["vulcano1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["vulcano3"]
                         FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un vulcano sommerso nelle montagne a ovest della città. È simile a una montagna ma più grande e con un cratere sulla cima. A detta di Rod, da lì spesso fuoriesce del vapore incandescente. Chissà cosa c'è là dentro...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Una montagna con un cratere sulla cima. Si trova a ovest della città oltre il Passo Montano. L'ho vista esplodere mentre uscivo dal castello di Neil. All'interno c'è un'enorme distesa di acqua incandescente che va a creare una nube di fumo che sgorga in continuazione verso l'alto. Qualcuno è già stato lì: ho visto dei disegni su una roccia e c'è una strana stanza con un armadio pieno di tubi...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 7:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
@@ -625,7 +625,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     if GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["scopertoNaturaDegliImpo"]:
         dictPersonaggiSbloccati["Impo"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["scopertoNaturaDegliImpo"]:
-        dictPersonaggiSbloccati["Impo"] = 3
+        dictPersonaggiSbloccati["Impo"] = 2
     if GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
         dictPersonaggiSbloccati["Neil"] = 1
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
@@ -1302,7 +1302,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
                     if dictOggettiSbloccati["ImpoPietra"]:
-                        FunzioniGraficheGeneriche.messaggio("ImpoPietra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                        FunzioniGraficheGeneriche.messaggio("Impopietra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
                     if dictOggettiSbloccati["ChiaveStanzaCastello"]:
@@ -1361,7 +1361,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         elif voceMarcataSottoMenu == 5 and dictOggettiSbloccati["ImpoPietra"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgImpoPietra, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("ImpoPietra", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Impopietra", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"Una strana pietra che s'illumina premendo il piccolo pulsante che si trova nella parte superiore. Non ho ben capito perché, ma Impo è attratto quasi ipnoticamente dalla sua luce.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 6 and dictOggettiSbloccati["ChiaveStanzaCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveStanzaCastello, (xImgOggetto, yImgOggetto))
@@ -1937,7 +1937,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("Mouse: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio("Su casella libera - Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su impopietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
                             FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
@@ -1951,7 +1951,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("Mouse: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio("Su casella nemica - Inquadra / Attacca", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio("Su impopietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
                             FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
                             FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)

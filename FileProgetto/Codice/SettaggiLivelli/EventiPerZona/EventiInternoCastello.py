@@ -223,19 +223,22 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"] and stanza == GlobalGameVar.dictStanze["internoCastello7"]:
         if GlobalHWVar.canaleSoundMelodieEventi.get_busy():
             GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [0], False, posizioneCanaleMusica=0)
-            GlobalHWVar.canaleSoundMelodieEventi.stop()
-            GlobalHWVar.canaleSoundMelodieEventi.set_volume(GlobalHWVar.volumeCanzoni)
+            GlobalHWVar.canaleSoundMelodieEventi.pause()
+        screen = GlobalHWVar.schermo.copy().convert()
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
+        if avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoCenaAlCastello2"]:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            i = 0
+            while i < 20:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            GlobalHWVar.canaleSoundMelodieEventi.unpause()
+            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [GlobalHWVar.volumeCanzoni], False, posizioneCanaleMusica=0)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["urloDuranteCenaAlCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello7"]:
-        i = 0
-        while i < 20:
-            pygame.time.wait(100)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            i += 1
-        if not GlobalHWVar.canaleSoundMelodieEventi.get_busy():
-            GlobalHWVar.canaleSoundMelodieEventi.play(GlobalSndVar.rumoreMelodiaFantasticare, -1)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -300,10 +303,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoAndatoALettoCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
-        if GlobalHWVar.canaleSoundMelodieEventi.get_busy():
-            GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundMelodieEventi], [0], False, posizioneCanaleMusica=0)
-            GlobalHWVar.canaleSoundMelodieEventi.stop()
-            GlobalHWVar.canaleSoundMelodieEventi.set_volume(GlobalHWVar.volumeCanzoni)
         # chiudo la porta della tua stanza nel castello
         i = 0
         while i < len(tutteporte):

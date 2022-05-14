@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
@@ -144,6 +146,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"] and not tiratoLevaTunnelDiRod:
         nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["interagitoConComputerVulcano"] and stanzaVecchia == GlobalGameVar.dictStanze["vulcano2"] and stanzaDestinazione == GlobalGameVar.dictStanze["vulcano1"]:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -235,6 +239,11 @@ def scriviNomeZona(stanza, stanzaVecchia):
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
 
 
 def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):

@@ -317,8 +317,8 @@ def sceglicondiz(dati, condizione):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Condizio-ImpoFogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Togli Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
+                FunzioniGraficheGeneriche.messaggio("Condizio-Impofogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio("Togli Condizio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
                 if dati[81] > 0:
                     FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
@@ -420,8 +420,8 @@ def sceglicondiz(dati, condizione):
             spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if voceMarcata == 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(scecond[0], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                FunzioniGraficheGeneriche.messaggio("Togli Condizio-ImpoFoglio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Togli il Condizio-ImpoFoglio dalla cella di memoria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                FunzioniGraficheGeneriche.messaggio("Togli Condizio-Impofoglio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                FunzioniGraficheGeneriche.messaggio("Togli il Condizio-Impofoglio dalla cella di memoria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if voceMarcata == 1:
                 if dati[81] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[1], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
@@ -458,7 +458,7 @@ def sceglicondiz(dati, condizione):
                 if dati[89] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sempre a Sara:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Sara in continuazione quando la vede (se l'Azio-ImpoFoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Sara in continuazione quando la vede (se l'Azio-Impofoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -498,7 +498,7 @@ def sceglicondiz(dati, condizione):
                 if dati[90] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[10], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sempre a Impo:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Impo in continuazione (se l'Azio-ImpoFoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione su Impo in continuazione (se l'Azio-Impofoglio associato comporta un'alterazione di stato, viene eseguito solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -562,7 +562,7 @@ def sceglicondiz(dati, condizione):
                 if dati[98] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[18], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di Azio-Impofoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -570,7 +570,7 @@ def sceglicondiz(dati, condizione):
                 if dati[99] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[19], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 2 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 2 nemici (in caso di Azio-Impofoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -578,7 +578,7 @@ def sceglicondiz(dati, condizione):
                 if dati[100] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[20], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 3 nemici (in caso di Azio-ImpoFoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 3 nemici (in caso di Azio-Impofoglio a bersaglio singolo, l'azione viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     FunzioniGraficheGeneriche.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -957,8 +957,8 @@ def sceglitecn(dati, tecnica):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Azio-ImpoFogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
+                FunzioniGraficheGeneriche.messaggio("Azio-Impofogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio("Togli Azio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
                 if dati[12] > 0:
                     FunzioniGraficheGeneriche.messaggio("Cura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
@@ -1060,8 +1060,8 @@ def sceglitecn(dati, tecnica):
             spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if voceMarcata == 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(scetecn[0], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
-                FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Togli l'Azio-ImpoFoglio dalla cella di memoria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                FunzioniGraficheGeneriche.messaggio("Togli Azio-Impofoglio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
+                FunzioniGraficheGeneriche.messaggio("Togli l'Azio-Impofoglio dalla cella di memoria.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if voceMarcata == 1:
                 if dati[12] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[2], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
@@ -2074,8 +2074,8 @@ def equiprobo(dati):
                 FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 FunzioniGraficheGeneriche.messaggio("Sacche Energetiche", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(u"Priorità", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.8, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
-                FunzioniGraficheGeneriche.messaggio("Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
-                FunzioniGraficheGeneriche.messaggio("Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.8, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                FunzioniGraficheGeneriche.messaggio("Condizio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                FunzioniGraficheGeneriche.messaggio("Azio-Impofoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.8, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
                 # equip batteria
                 i = 0
                 while i < 5:
@@ -2353,12 +2353,12 @@ def equiprobo(dati):
                     FunzioniGraficheGeneriche.messaggio(u"Indica la priorità dell'azione. Impo eseguirà l'azione associata alla prima condizione verificata della lista.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
                 if 16 <= voceMarcata <= 25:
-                    FunzioniGraficheGeneriche.messaggio("Condizio-ImpoFoglio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Indica la situazione che si deve verificare affinché Impo esegua l'Azio-ImpoFoglio associato.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Condizio-Impofoglio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Indica la situazione che si deve verificare affinché Impo esegua l'Azio-Impofoglio associato.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
                 if 26 <= voceMarcata <= 35:
-                    FunzioniGraficheGeneriche.messaggio("Azio-ImpoFoglio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Indica l'azione che Impo eseguirà quando si verifica la condizione nel Condizio-ImpoFoglio associato.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Azio-Impofoglio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    FunzioniGraficheGeneriche.messaggio(u"Indica l'azione che Impo eseguirà quando si verifica la condizione nel Condizio-Impofoglio associato.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 5.8, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 10.3))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (xp, yp - (GlobalHWVar.gpy // 4), GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 1))

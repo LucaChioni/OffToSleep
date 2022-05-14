@@ -251,7 +251,7 @@ def definisciImgOggetti(tipo):
         nomeImgDialogo = ["Vuota"]
     if tipo == "OggettoSaraSdraiata":
         disegnaImg = True
-        numImg = 1
+        numImg = 2
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
 
@@ -341,6 +341,9 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 3
         if GlobalGameVar.armaturaIndossata == 3:
             numImgAttuale = 4
+    if tipo == "OggettoSaraSdraiata":
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
+            numImgAttuale = 1
 
     return numImgAttuale
 

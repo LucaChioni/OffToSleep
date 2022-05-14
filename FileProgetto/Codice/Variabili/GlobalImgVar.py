@@ -259,7 +259,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1893
+numImgTotali = 1898
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -1150,7 +1150,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
         imgDanneggiamentoColcoNemico = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
-        if nomeNemico == "Orco" or nomeNemico == "Pipistrello" or nomeNemico == "Cinghiale" or nomeNemico == "Cittadino1" or nomeNemico == "Cittadino3" or nomeNemico == "Scorpione" or nomeNemico == "ServoSpada" or nomeNemico == "ServoArco" or nomeNemico == "ServoLancia" or nomeNemico == "Aquila" or nomeNemico == "RoboLeggero" or nomeNemico == "RoboVolante" or nomeNemico == "RoboPesante" or nomeNemico == "RoboPesanteVolante" or nomeNemico == "RoboTorre":
+        if nomeNemico == "Orco" or nomeNemico == "Pipistrello" or nomeNemico == "Cinghiale" or nomeNemico == "Cittadino1" or nomeNemico == "Cittadino3" or nomeNemico == "Scorpione" or nomeNemico == "ServoSpada" or nomeNemico == "ServoArco" or nomeNemico == "ServoLancia" or nomeNemico == "Aquila":
             imgDialogo = casellaVuotaPreset
         else:
             imgDialogo = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
@@ -13,7 +14,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipo.startswith("OggettoDict"):
+    if tipo in GlobalImgVar.vettoreNomiNemici:
+        partiDialogo = []
+        if tipo == "RoboLeggero":
+            nome = "Impo leggero"
+        elif tipo == "RoboVolante":
+            nome = "Impo volante"
+        elif tipo == "RoboPesante":
+            nome = "Impo pesante"
+        elif tipo == "RoboPesanteVolante":
+            nome = "Impo volante pesante"
+        elif tipo == "RoboTorre":
+            nome = "Impo torre"
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        avanzaColDialogo = False
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"(Mi ignorano...)")
+        partiDialogo.append(dialogo)
+    elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereRoboLeggero"):
             nome = "Impo leggero"
@@ -42,10 +64,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         menuMercante = False
         scelta = False
         avanzaColDialogo = False
-        dialogo = []
-        dialogo.append("tu")
-        dialogo.append(u"(È un cumulo di impofrutti, ma sono senza quel... tubicino per alimentare Impo...)")
-        partiDialogo.append(dialogo)
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(È un cumulo di impofrutti, ma sono senza quel... tubicino per alimentare Impo...)")
+            partiDialogo.append(dialogo)
+        else:
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(È un cumulo di impofrutti...)")
+            partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["caverna1"]:
         if tipo == "OggettoImpo":
             partiDialogo = []
@@ -130,7 +158,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Uff...<*> forse sono finiti.")
+                dialogo.append(u"<*>#italic#Uff...<*> forse sono finiti...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Mamma mia, questo caldo... da dove proviene?")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

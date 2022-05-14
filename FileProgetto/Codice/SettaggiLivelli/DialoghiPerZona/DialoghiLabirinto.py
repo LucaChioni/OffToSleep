@@ -73,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append("???DOMANDA???")
-                dialogo.append(u"TERZA DOMANDA: Come fai a vedermi?")
+                dialogo.append(u"TERZA DOMANDA: come fai a vedermi?")
                 dialogo.append(u"Sei qui davanti a me, ti vedo...")
                 dialogo.append(u"Con gli occhi.")
                 dialogo.append(u"Posso vedere le cose che riflettono la luce.")
