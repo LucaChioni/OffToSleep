@@ -605,7 +605,10 @@ def gameloop():
                             personaggio.caricaImgOggetto()
                             personaggio.aggiornaImgOggetto(dati[0])
                         else:
-                            personaggio.caricaImgPersonaggio()
+                            if personaggio.tipo in GlobalImgVar.vettoreNomiNemici and personaggio.tipo != "ServoLancia" and personaggio.tipo != "ServoSpada" and personaggio.tipo != "ServoArco":
+                                personaggio.caricaImgNemico()
+                            else:
+                                personaggio.caricaImgPersonaggio()
                             personaggio.girati(personaggio.direzione)
                     if GlobalGameVar.vetDatiSalvataggioGameOver[11]:
                         GlobalGameVar.vetDatiSalvataggioGameOver[11].caricaImg()
@@ -618,7 +621,10 @@ def gameloop():
                             personaggio.caricaImgOggetto()
                             personaggio.aggiornaImgOggetto(dati[0])
                         else:
-                            personaggio.caricaImgPersonaggio()
+                            if personaggio.tipo in GlobalImgVar.vettoreNomiNemici and personaggio.tipo != "ServoLancia" and personaggio.tipo != "ServoSpada" and personaggio.tipo != "ServoArco":
+                                personaggio.caricaImgNemico()
+                            else:
+                                personaggio.caricaImgPersonaggio()
                             personaggio.girati(personaggio.direzione)
 
                 # stanza
