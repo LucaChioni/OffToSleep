@@ -637,7 +637,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"]:
         dictPersonaggiSbloccati["Controllore1"] = 1
         dictPersonaggiSbloccati["Controllore2"] = 1
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnni"]:
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
         dictPersonaggiSbloccati["Sara"] = 1
 
     dictNemiciSbloccati = {"nemiciSogno":False, "nemiciForesta":False, "nemiciCitta":False, "nemiciSelva":False, "nemiciMontagne":False, "nemiciCastello":False, "nemiciCaverna":False}

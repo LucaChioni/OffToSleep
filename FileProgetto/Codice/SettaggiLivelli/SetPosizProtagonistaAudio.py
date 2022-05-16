@@ -4979,11 +4979,14 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             rumoreChiusuraPorte = False
             # posizione personaggio e robot al cambio stanza
             if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["caverna18"]:
+                    mantieniPosizioneImpo = True
                 if stanzaVecchia == GlobalGameVar.dictStanze["vulcano2"]:
                     npers = "d"
                     x = GlobalHWVar.gpx * 2
                     y += GlobalHWVar.gpy * 8
                 if stanzaVecchia == GlobalGameVar.dictStanze["vulcano3"]:
+                    mantieniPosizioneImpo = True
                     npers = "d"
                     x = GlobalHWVar.gpx * 13
                     y = GlobalHWVar.gpy * 5

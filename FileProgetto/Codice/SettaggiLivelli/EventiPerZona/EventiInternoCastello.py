@@ -1074,7 +1074,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             # apro le porte nell'ufficio di Neil e nella stanza8 per accedere al tunnel (evitare di dover prendere chiavi)
             i = 0
             while i < len(tutteporte):
-                if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"] or tutteporte[i] == GlobalGameVar.dictStanze["internoCastello8"]:
+                if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"]:
                     tutteporte[i + 3] = True
                 i += 4
             nonMostrarePersonaggio = False
@@ -1692,6 +1692,15 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRiconosciutoIngressoVulcano3"] and stanza == GlobalGameVar.dictStanze["internoCastello8"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
 

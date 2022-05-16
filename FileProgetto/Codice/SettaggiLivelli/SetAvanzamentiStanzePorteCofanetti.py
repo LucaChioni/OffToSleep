@@ -848,17 +848,19 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["esclamazionePostRisveglioNelVulcano"] = i
     i += 1
+    dictAvanzamentoStoria["dialogoImpoPostRisveglioVulcano"] = i
+    i += 1
     dictAvanzamentoStoria["monologo1PostRisveglioNelVulcano"] = i
     i += 1
     dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"] = i
-    i += 1
-    dictAvanzamentoStoria["monologo3PostRisveglioNelVulcano"] = i
     i += 1
     dictAvanzamentoStoria["monologoVistoComputerVulcano"] = i
     i += 1
     dictAvanzamentoStoria["interagitoConComputerVulcano"] = i
     i += 1
-    dictAvanzamentoStoria["monologoVistoImpoNonOstili"] = i
+    dictAvanzamentoStoria["monologoVistoImpoNonOstili1"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoVistoImpoNonOstili2"] = i
     i += 1
     dictAvanzamentoStoria["monologoRiconosciutoIngressoVulcano1"] = i
     i += 1
@@ -866,14 +868,17 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoRiconosciutoIngressoVulcano3"] = i
     dictAvanzamentoStoria["mappaVulcano"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoVistoIngressoTunnelSubaqueoAperto"] = i
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
-    i += 1
     dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"] = i
     i += 1
-    dictAvanzamentoStoria["passatiMoltiAnni"] = i
+    dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] = i
+    dictAvanzamentoStoria["lasciatoImpoNelLaboratorioDiNeil"] = i
 
     i += 1
     dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i

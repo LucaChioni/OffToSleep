@@ -152,7 +152,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Non ho idea di cosa sia questo affare. Ci sono degli impo disegnati sopra...)")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano3"]:
-        if tipo == "OggettoCellaCostruttore":
+        if tipo == "OggettoImpo":
+            partiDialogo = []
+            nome = "Impo"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["esclamazionePostRisveglioNelVulcano"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Impo...")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoCellaCostruttore":
             partiDialogo = []
             nome = "Cella"
             oggettoDato = False

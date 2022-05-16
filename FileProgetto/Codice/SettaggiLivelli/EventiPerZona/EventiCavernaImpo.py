@@ -215,8 +215,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             carim = True
-        if not (x == xDestinazione and y == yDestinazione):
-            evitaTurnoDiColco = True
+        evitaTurnoDiColco = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["terremotoUltimaStanzaCavernaImpo"] and stanza == GlobalGameVar.dictStanze["caverna18"]:
         if dati[5] > 0:
@@ -243,12 +242,25 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             dati[130] = 0
             avanzamentoStoria += 1
             nonMostrarePersonaggio = True
+            rx = GlobalHWVar.gpx * 13
+            ry = GlobalHWVar.gpy * 4
+            nrob = 3
+            if dati[10] <= 0:
+                dati[10] = 1
+            dati[122] = 0
+            if not chiamarob:
+                chiamarob = True
+                ultimoObbiettivoColco = []
+                ultimoObbiettivoColco.append("Telecomando")
+                ultimoObbiettivoColco.append(x)
+                ultimoObbiettivoColco.append(y)
+                ultimoObbiettivoColco.append("spostamento")
             stanza = GlobalGameVar.dictStanze["vulcano3"]
             cambiosta = True
             carim = True
             aggiornaImgEquip = True
             caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili"] and stanza == GlobalGameVar.dictStanze["caverna18"] and x == GlobalHWVar.gpx * 20:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili2"] and stanza == GlobalGameVar.dictStanze["caverna18"] and x == GlobalHWVar.gpx * 20:
         GlobalHWVar.canaleSoundPassiRallo.stop()
         i = 0
         while i < 5:

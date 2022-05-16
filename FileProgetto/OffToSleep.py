@@ -980,7 +980,7 @@ def gameloop():
         elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti or uscitoDaMenu > 0 or evitaAvanzamentoTurno:
             bottoneDown = False
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        elif len(percorsoDaEseguire) > 0:
+        elif len(percorsoDaEseguire) > 0 and mosseRimasteRob <= 0 and not nemiciInMovimento:
             bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
             if avanzaManualmentePercorsoDaEseguire:
                 if (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato and (inquadratoQualcosa.startswith("movimento") or inquadratoQualcosa.startswith("personaggio") or inquadratoQualcosa.startswith("porta") or inquadratoQualcosa.startswith("cofanetto") or inquadratoQualcosa == "saltaTurno")) or bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_s or bottoneDown == pygame.K_d or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padGiu" or bottoneDown == "padDestra" or bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect" or bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
