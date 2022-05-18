@@ -112,7 +112,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria):
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 7, GlobalHWVar.gpx * 6, GlobalHWVar.gpy * 1, x, y, nx, ny):
                 nx = 0
                 ny = 0
-    if stanza == GlobalGameVar.dictStanze["vulcano2"]:
+    elif stanza == GlobalGameVar.dictStanze["vulcano2"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:
@@ -200,7 +200,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria):
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 9, x, y, nx, ny):
                 nx = 0
                 ny = 0
-    if stanza == GlobalGameVar.dictStanze["vulcano3"]:
+    elif stanza == GlobalGameVar.dictStanze["vulcano3"]:
         # bordi stanza
         if not escludiOggettiBassi:
             if nx == -GlobalHWVar.gpx and x <= GlobalHWVar.gpx * 2:

@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+
+
+def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
+    tipo = tipoId.split("-")[0]
+
+    partiDialogo = []
+    nome = "---"
+    oggettoDato = False
+    avanzaStoria = False
+    menuMercante = False
+    scelta = False
+    avanzaColDialogo = False
+
+    if stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+        if tipo == "OggettoPortaSfondata":
+            partiDialogo = []
+            nome = "OggettoPortaSfondata"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Qualcuno ha sfondato la porta per entrare...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(È la porta del laboratorio...)")
+                partiDialogo.append(dialogo)
+
+    return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

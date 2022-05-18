@@ -2515,6 +2515,21 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"... Cos'è questo posto?")
                 partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["tunnelSubacqueo1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoIngressoTunnelSubaqueoAperto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Questo è il lago...?)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Siamo sul fondo del lago...)")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

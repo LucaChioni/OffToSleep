@@ -216,7 +216,7 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Labirinto"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]):
         nomeDaScrivere = u"Castello di Neil - Esterno"
-    elif stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]:
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo1"] and stanza == GlobalGameVar.dictStanze["internoCastello8"]):
         nomeDaScrivere = u"Castello di Neil - Interno"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]):
         nomeDaScrivere = u"Scorciatoia sulle montagne"
@@ -232,6 +232,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Caverna Impo"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano3"]):
         nomeDaScrivere = u"Vulcano"
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo2"]):
+        nomeDaScrivere = u"Tunnel Subacqueo"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)

@@ -870,6 +870,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["mappaVulcano"] = i
     i += 1
     dictAvanzamentoStoria["monologoVistoIngressoTunnelSubaqueoAperto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoTunnelSubacqueo"] = i
 
     i += 100
     i += 1
@@ -1285,10 +1287,14 @@ def definisciStanze():
     i += 1
     dictStanze["vulcano3"] = i
     vetStanzePacifiche.append(i)
-
-    i += 100
     i += 1
     dictStanze["tunnelSubacqueo1"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["tunnelSubacqueo2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["laboratorioSegretoNeil1"] = i
     vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche

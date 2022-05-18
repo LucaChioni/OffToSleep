@@ -394,9 +394,9 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Una montagna con un cratere sulla cima. Si trova a ovest della città oltre il Passo Montano. L'ho vista esplodere mentre uscivo dal castello di Neil. All'interno c'è un'enorme distesa di acqua incandescente che va a creare una nube di fumo che sgorga in continuazione verso l'alto. Qualcuno è già stato lì: ho visto dei disegni su una roccia e c'è una strana stanza con un armadio pieno di tubi...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 7:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        FunzioniGraficheGeneriche.messaggio("Laboratorio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
+                        FunzioniGraficheGeneriche.messaggio("Laboratorio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Il laboratorio in cui Neil svolge le sue ricerche. È molto piccolo ma al suo interno è presente tutto ciò che serve, ossia un calcolatore di eventi, che si estende anche sotto il terreno, e diversi altri calcolatori che credo servano per gestire i sistemi di alimentazione e raffreddamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["forestaCadetta1"]
@@ -429,10 +429,10 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare impofrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
-                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
-                        stanzaFineCofanetti = GlobalGameVar.dictStanze["sognoSara1"]
+                        stanzaInizioCofanetti = GlobalGameVar.dictStanze["tunnelSubacqueo1"]
+                        stanzaFineCofanetti = GlobalGameVar.dictStanze["tunnelSubacqueo2"]
                         FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio segreto nei sotterranei del castello di Neil che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce a osservare chiaramente il fondale del bacino a causa delle sostanze con cui questo è stato contaminato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio segreto nei sotterranei del castello di Neil che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce a osservare chiaramente il fondale del bacino a causa delle sostanze con cui è stato contaminato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     cofanettiTotali = 0
                     cofanettiTrovati = 0
                     i = 0
@@ -482,7 +482,7 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, grandezzaScritteNormali)
                 if postiSbloccati["Laboratorio"]:
-                    FunzioniGraficheGeneriche.messaggio("Laboratorio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio("Laboratorio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
                 if postiSbloccati["Foresta Cadetta"]:

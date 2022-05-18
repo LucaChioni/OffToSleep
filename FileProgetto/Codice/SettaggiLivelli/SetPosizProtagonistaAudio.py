@@ -4996,6 +4996,54 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
+    elif GlobalGameVar.dictStanze["tunnelSubacqueo1"] <= stanza <= GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        if stanza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+            nomeCanzoneLuogo = ""
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = False
+                canzoneCambiata = True
+            sottofondoLuogo = "TunnelSubacqueo/PrimaStanza"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleBasse.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y = GlobalHWVar.gpy * 9
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
+        if stanza == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+            nomeCanzoneLuogo = ""
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = False
+                canzoneCambiata = True
+            sottofondoLuogo = "TunnelSubacqueo/SecondaStanza"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/VentoleAlte.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                if stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+                    npers = "a"
+                    x = GlobalHWVar.gpx * 29
 
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
         listaSottofondoAmbientale = []
