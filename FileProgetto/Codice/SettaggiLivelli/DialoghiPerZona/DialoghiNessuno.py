@@ -2434,7 +2434,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Devo vedere le ricerche di Neil!")
+                dialogo.append(u"Devo iniziare a studiare le ricerche di Neil!")
                 partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["vulcano1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["vulcano3"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano1"]:
@@ -2461,7 +2461,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Ci sta ignorando...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano2"]:
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore2"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False

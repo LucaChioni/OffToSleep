@@ -182,22 +182,8 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore1"]:
-                oggettoDato = False
-                avanzaStoria = True
-                menuMercante = False
-                scelta = False
-                avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"...")
-                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Ehi!")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
             else:
@@ -208,7 +194,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(C'è una persona con dei tubi che gli escono dal corpo... sembra sveglio, ma non risponde...)")
+                dialogo.append(u"(C'è un cadavere... ha dei tubi che gli escono dal corpo...)")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

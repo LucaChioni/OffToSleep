@@ -854,9 +854,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"] = i
     i += 1
-    dictAvanzamentoStoria["interazioneCellaCostruttore1"] = i
-    i += 1
-    dictAvanzamentoStoria["interazioneCellaCostruttore2"] = i
+    dictAvanzamentoStoria["interazioneCellaCostruttore"] = i
     i += 1
     dictAvanzamentoStoria["monologoVistoComputerVulcano"] = i
     i += 1

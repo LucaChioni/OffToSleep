@@ -130,22 +130,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCellaCostruttore-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore1"] and stanza == GlobalGameVar.dictStanze["vulcano3"]:
-        i = 0
-        while i < 5:
-            pygame.time.wait(100)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            i += 1
-        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreBussareVetro)
-        i = 0
-        while i < 20:
-            pygame.time.wait(100)
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            i += 1
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCellaCostruttore-0", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-        caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore2"] and stanza == GlobalGameVar.dictStanze["vulcano2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore"] and stanza == GlobalGameVar.dictStanze["vulcano2"]:
         i = 0
         while i < 10:
             pygame.time.wait(100)
