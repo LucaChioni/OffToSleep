@@ -2,6 +2,7 @@
 
 import pygame
 import GlobalHWVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
@@ -90,32 +91,61 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 caricaTutto = True
         elif x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 8:
             GlobalHWVar.canaleSoundPassiRallo.stop()
-            if npers == 4:
-                i = 0
-                while i < 5:
-                    pygame.time.wait(100)
-                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                    i += 1
-                npers = 3
-                carim = True
-                caricaTutto = True
-            elif npers == 3:
-                i = 0
-                while i < 5:
-                    pygame.time.wait(100)
-                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                    i += 1
-                personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
-                avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
-                caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo1PostRisveglioNelVulcano"] and stanza == GlobalGameVar.dictStanze["vulcano3"]:
-        if y == GlobalHWVar.gpy * 8:
-            percorsoDaEseguire = ["w"]
-        else:
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
             caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"] and stanza == GlobalGameVar.dictStanze["vulcano2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo1PostRisveglioNelVulcano"] and stanza == GlobalGameVar.dictStanze["vulcano3"]:
+        if npers == 4:
+            i = 0
+            while i < 2:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            npers = 3
+            carim = True
+            caricaTutto = True
+        elif npers == 3:
+            i = 0
+            while i < 2:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"] and stanza == GlobalGameVar.dictStanze["vulcano3"]:
+        if y == GlobalHWVar.gpy * 8 and len(percorsoDaEseguire) == 0:
+            percorsoDaEseguire = ["w", "w"]
+        elif y == GlobalHWVar.gpy * 6:
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCellaCostruttore-0", stanza, avanzamentoStoria, False)
+            avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore1"] and stanza == GlobalGameVar.dictStanze["vulcano3"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreBussareVetro)
+        i = 0
+        while i < 20:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoCellaCostruttore-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore2"] and stanza == GlobalGameVar.dictStanze["vulcano2"]:
         i = 0
         while i < 10:
             pygame.time.wait(100)

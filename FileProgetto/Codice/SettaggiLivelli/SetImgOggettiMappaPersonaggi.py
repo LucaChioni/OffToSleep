@@ -254,6 +254,16 @@ def definisciImgOggetti(tipo):
         numImg = 2
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoCellaCostruttore":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["CostruttoreDialogo"]
+    if tipo == "OggettoCellaNeil":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["NeilDialogo"]
 
     return disegnaImg, numImg, numImgDialogo, nomeImgDialogo
 

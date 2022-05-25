@@ -854,6 +854,10 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"] = i
     i += 1
+    dictAvanzamentoStoria["interazioneCellaCostruttore1"] = i
+    i += 1
+    dictAvanzamentoStoria["interazioneCellaCostruttore2"] = i
+    i += 1
     dictAvanzamentoStoria["monologoVistoComputerVulcano"] = i
     i += 1
     dictAvanzamentoStoria["interagitoConComputerVulcano"] = i
@@ -872,20 +876,36 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoVistoIngressoTunnelSubaqueoAperto"] = i
     i += 1
     dictAvanzamentoStoria["monologoArrivoTunnelSubacqueo"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoArrivoLaboratorioNeil"] = i
+    dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoNotatoCellaDiNeil"] = i
+    i += 1
+    dictAvanzamentoStoria["interazioneConCellaDiNeil1"] = i
+    i += 1
+    dictAvanzamentoStoria["interazioneConCellaDiNeil2"] = i
+    i += 1
+    dictAvanzamentoStoria["lettoLetteraInvitoReneLaboratorio"] = i
+    i += 1
+    dictAvanzamentoStoria["creatoPersonaggioOggettoIstruzioniCalcolatoreLaboratorio"] = i
+    i += 1
+    dictAvanzamentoStoria["lettoAppuntiIstruzioniCalcolatoreLaboratorio"] = i
+    i += 1
+    dictAvanzamentoStoria["interagitoConCalcolatoreDiEventi"] = i
+    i += 1
+    dictAvanzamentoStoria["sedutaSulCalcolatore"] = i
+    i += 1
+    dictAvanzamentoStoria["messoCascoCalcolatore"] = i
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"] = i
-    i += 1
-    dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
-    i += 1
     dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] = i
     dictAvanzamentoStoria["lasciatoImpoNelLaboratorioDiNeil"] = i
-
-    i += 1
-    dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i
-    i += 1
+    dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
     dictAvanzamentoStoria["mappaLaboratorio"] = i
+    i += 1
+    dictAvanzamentoStoria["rialzataDalCalcolatore"] = i
 
     return dictAvanzamentoStoria
 

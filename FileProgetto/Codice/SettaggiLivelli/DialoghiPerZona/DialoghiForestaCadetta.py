@@ -71,11 +71,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(C'è un cinghiale incastrato in questo cespuglio. Sta facendo degli strani lamenti e sta perdendo sangue... Cosa stava cercando di fare? Inseguiva qualcosa?)")
+            dialogo.append(u"...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("(Credo che mi attaccherebbe se lo liberassi, quindi... sono costretta a lasciarlo qui e sperare che riesca a cavarsela in qualche modo...)")
+            dialogo.append(u"(Questo cinghiale sta facendo degli strani lamenti e sta perdendo molto sangue... ma credo che mi attaccherebbe se lo liberassi, quindi...)")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(... Magari riuscirà a cavarsela in qualche modo...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and avanzamentoDialogo == 1:
             oggettoDato = False
@@ -85,7 +89,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Mi attaccherebbe se lo liberassi, quindi lo lascerò qui sperando che riesca farcela da solo...)")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Mi attaccherebbe se lo liberassi...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoForestaSognoCastello"]:
             oggettoDato = False

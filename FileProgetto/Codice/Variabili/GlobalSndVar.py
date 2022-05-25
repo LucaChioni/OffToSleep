@@ -96,9 +96,12 @@ global rumoreEsplosioneVulcano
 global rumoreScavareBreve
 global rumoreDuranteOperazioneNeil
 global rumoreTerremotoCavernaImpo
+global rumoreLamentoHansCinghiale
+global rumoreLamentoCinghiale
+global rumoreBussareVetro
 
 
-numSndTotali = 91
+numSndTotali = 94
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -204,6 +207,9 @@ def loadSounds(numSndCaricato):
     global rumoreScavareBreve
     global rumoreDuranteOperazioneNeil
     global rumoreTerremotoCavernaImpo
+    global rumoreLamentoHansCinghiale
+    global rumoreLamentoCinghiale
+    global rumoreBussareVetro
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -300,6 +306,9 @@ def loadSounds(numSndCaricato):
     rumoreScavareBreve = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScavareBreve.wav")
     rumoreDuranteOperazioneNeil = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/RumoriDuranteOperazione.wav")
     rumoreTerremotoCavernaImpo = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/TerremotoCavernaImpo.wav")
+    rumoreLamentoHansCinghiale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LamentoHansCinghiale.wav")
+    rumoreLamentoCinghiale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LamentoCinghiale.wav")
+    rumoreBussareVetro = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/BussareVetro.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

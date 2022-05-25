@@ -986,11 +986,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Rod, ti informo che i trattamenti estetici su Sara da te suggeriti sono stati sospesi in consegueza a delle anomalie comportamentali del soggetto in fase di ricostruzione...")
+                dialogo.append(u"Rod, ti informo che i trattamenti estetici su Sara da te suggeriti sono stati sospesi in consegueza a delle anomalie comportamentali del soggetto in fase di ricostruzione...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Ti invito a rivedere e correggere la terapia e di testarla su soggetti non cruciali. Rimango in attesa di novità, Neil...")
+                dialogo.append(u"... Ti invito a rivedere e correggere la terapia e di testarla su soggetti non cruciali. Rimango in attesa di novità, Neil.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

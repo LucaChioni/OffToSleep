@@ -24,6 +24,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliTunnelDiRod as OstacoliTun
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliCavernaImpo as OstacoliCavernaImpo
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliVulcano as OstacoliVulcano
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliTunnelSubacqueo as OstacoliTunnelSubacqueo
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliLaboratorioNeil as OstacoliLaboratorioNeil
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -1767,6 +1768,11 @@ def getEntrateStanze(stanza, avanzamentoStoria):
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 8, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 9, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]])
             entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 10, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]])
+    elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        if stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["tunnelSubacqueo2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["tunnelSubacqueo2"]])
+            entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["tunnelSubacqueo2"]])
 
     return entrateStanza
 
@@ -1835,6 +1841,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliVulcano.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["tunnelSubacqueo1"] <= stanza <= GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliTunnelSubacqueo.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
+        elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliLaboratorioNeil.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):

@@ -148,6 +148,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["interagitoConComputerVulcano"] and stanzaVecchia == GlobalGameVar.dictStanze["vulcano2"] and stanzaDestinazione == GlobalGameVar.dictStanze["vulcano1"]:
         nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoNotatoCellaDiNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["interagitoConCalcolatoreDiEventi"] and stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -234,6 +236,8 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Vulcano"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo2"]):
         nomeDaScrivere = u"Tunnel Subacqueo"
+    elif stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        nomeDaScrivere = u"Laboratorio di Neil"
 
     if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
@@ -509,6 +513,11 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod):
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"

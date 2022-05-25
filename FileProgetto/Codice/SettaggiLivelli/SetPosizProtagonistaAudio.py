@@ -5044,6 +5044,40 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
                     npers = "a"
                     x = GlobalHWVar.gpx * 29
+                    y += GlobalHWVar.gpy * 1
+    elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        if stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+            nomeCanzoneLuogo = ""
+            if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
+                GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
+                canzone = False
+                canzoneCambiata = True
+            sottofondoLuogo = "LaboratorioNeil"
+            if GlobalGameVar.audioSottofondoAttuale != sottofondoLuogo:
+                GlobalGameVar.audioSottofondoAttuale = sottofondoLuogo
+                audioAmbiente_Ventole = CaricaFileProgetto.loadSound(pathSottofondi + sottofondoLuogo + "/Ventole.wav")
+                listaSottofondoAmbientale = [audioAmbiente_Ventole]
+                sottofondoAmbientaleCambiato = True
+            # rumore porte
+            rumoreAperturaPorte = False
+            rumoreChiusuraPorte = False
+            # posizione personaggio e robot al cambio stanza
+            if not inizio:
+                if stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+                    npers = "d"
+                    x = GlobalHWVar.gpx * 2
+                    y -= GlobalHWVar.gpy * 1
+                if stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"]:
+                    mantieniPosizioneImpo = True
+                    npers = "s"
+                    x = GlobalHWVar.gpx * 15
+                    y = GlobalHWVar.gpy * 7
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
 
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
         listaSottofondoAmbientale = []

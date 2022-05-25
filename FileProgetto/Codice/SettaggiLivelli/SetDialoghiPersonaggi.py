@@ -28,6 +28,7 @@ import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelDiRod as DialoghiTun
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCavernaImpo as DialoghiCavernaImpo
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiVulcano as DialoghiVulcano
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelSubacqueo as DialoghiTunnelSubacqueo
+import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiLaboratorioNeil as DialoghiLaboratorioNeil
 
 
 def setGender(tipo):
@@ -78,6 +79,11 @@ def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
         GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"] and personaggio.tipo.startswith("OggettoDictCadavereSoldatoCastello"):
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAttimoPericoloso)
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and personaggio.tipo == "OggettoSiepe":
+        if personaggio.avanzamentoDialogo == 0:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLamentoHansCinghiale)
+        else:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLamentoCinghiale)
 
     return avanzamentoStoria
 
@@ -215,6 +221,8 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiVulcano.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["tunnelSubacqueo1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTunnelSubacqueo.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+    elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiLaboratorioNeil.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
     # !!! - temporaneo finché non sistemi tutti i dialoghi per includere le traduzioni - !!!
     sistematoDialoghi = False

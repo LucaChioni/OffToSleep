@@ -392,12 +392,12 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["vulcano1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["vulcano3"]
                         FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una montagna con un cratere sulla cima. Si trova a ovest della città oltre il Passo Montano. L'ho vista esplodere mentre uscivo dal castello di Neil. All'interno c'è un'enorme distesa di acqua incandescente che va a creare una nube di fumo che sgorga in continuazione verso l'alto. Qualcuno è già stato lì: ho visto dei disegni su una roccia e c'è una strana stanza con un armadio pieno di tubi...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Una montagna con un cratere sulla cima. Si trova a ovest della città oltre il Passo Montano. L'ho vista esplodere mentre uscivo dal castello di Neil. All'interno, oltre a un'enorme distesa di acqua incandescente e una strana roccia con dei disegni di impo, c'è una persona che giace in una cella di vetro. Ho provato a parlargli, ma non ha reagito... non semra essere cosciente...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 7:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
                         FunzioniGraficheGeneriche.messaggio("Laboratorio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Il laboratorio in cui Neil svolge le sue ricerche. È molto piccolo ma al suo interno è presente tutto ciò che serve, ossia un calcolatore di eventi, che si estende anche sotto il terreno, e diversi altri calcolatori che credo servano per gestire i sistemi di alimentazione e raffreddamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Il laboratorio segreto di Neil. Si trova sul fondale del lago. Non è molto grande, dentro c'è qualche tavolo con degli appunti, un calcolatore di eventi che mi ha permesso di vedere e studiare tutta la realtà di questa dimensione e una cella simile a quella presente nel Vulcano. Dentro la cella c'è il corpo di Neil.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["forestaCadetta1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["forestaCadetta9"]
@@ -584,7 +584,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     pazzoNumDialogo = pazzo1NumDialogo
     if pazzo2NumDialogo != 0:
         pazzoNumDialogo = pazzo2NumDialogo
-    dictPersonaggiSbloccati = {"Hans":0, "Norm":0, "Teresa":0, "Lino":0, "Sam":0, "David":0, "Olivia":0, "Rod":0, "Pazzo":0, "Rene":0, "Impo":0, "Neil":0, "Pappagallo":0, "Controllore1":0, "Controllore2":0, "Sara":0}
+    dictPersonaggiSbloccati = {"Hans":0, "Norm":0, "Teresa":0, "Lino":0, "Sam":0, "David":0, "Olivia":0, "Rod":0, "Pazzo":0, "Rene":0, "Impo":0, "Neil":0, "Pappagallo":0, "Costruttore":0, "Sara":0}
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
         dictPersonaggiSbloccati["Hans"] = 1
         dictPersonaggiSbloccati["Norm"] = 1
@@ -635,8 +635,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"]:
         dictPersonaggiSbloccati["Pappagallo"] = 2
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"]:
-        dictPersonaggiSbloccati["Controllore1"] = 1
-        dictPersonaggiSbloccati["Controllore2"] = 1
+        dictPersonaggiSbloccati["Costruttore"] = 1
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
         dictPersonaggiSbloccati["Sara"] = 1
 
@@ -788,16 +787,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 voceMarcataSottoMenu = 26
                         xp = GlobalHWVar.gsx // 32 * 10
                         yp = GlobalHWVar.gsy // 18 * 8
-                    elif GlobalHWVar.gsy // 18 * 8.75 <= yMouse <= GlobalHWVar.gsy // 18 * 9.75:
+                    elif GlobalHWVar.gsy // 18 * 8.75 <= yMouse <= GlobalHWVar.gsy // 18 * 9.75 and (((voceMarcata == 1 or voceMarcata == 2) and voceMarcataSottoMenu <= 11) or (voceMarcata == 3)):
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
-                        if voceMarcata == 1:
+                        if voceMarcata == 1 or voceMarcata == 2:
                             voceMarcataSottoMenu = 5
-                        elif voceMarcata == 2:
-                            if voceMarcataSottoMenu <= 11:
-                                voceMarcataSottoMenu = 5
-                            else:
-                                voceMarcataSottoMenu = 16
                         elif voceMarcata == 3:
                             if voceMarcataSottoMenu <= 11:
                                 voceMarcataSottoMenu = 5
@@ -1078,10 +1072,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                     elif voceMarcataSottoMenu == 13:
                         nomeVoceMarcataPerControllo = "Pappagallo"
                     elif voceMarcataSottoMenu == 14:
-                        nomeVoceMarcataPerControllo = "Controllore1"
+                        nomeVoceMarcataPerControllo = "Costruttore"
                     elif voceMarcataSottoMenu == 15:
-                        nomeVoceMarcataPerControllo = "Controllore2"
-                    elif voceMarcataSottoMenu == 16:
                         nomeVoceMarcataPerControllo = "Sara"
                     if dictPersonaggiSbloccati[nomeVoceMarcataPerControllo] > 0:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -1208,7 +1200,7 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             voceMarcataSottoMenu += 1
                             yp += GlobalHWVar.gpy * 1
                     elif voceMarcata == 2:
-                        if voceMarcataSottoMenu != 16:
+                        if voceMarcataSottoMenu != 15:
                             GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                             if voceMarcataSottoMenu == 11:
                                 voceMarcataSottoMenu += 1
@@ -1458,18 +1450,14 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
-                        if dictPersonaggiSbloccati["Controllore1"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Controllore 1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                        if dictPersonaggiSbloccati["Costruttore"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
-                        if dictPersonaggiSbloccati["Controllore2"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Controllore 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                        if dictPersonaggiSbloccati["Sara"] >= 1:
+                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
-                        if dictPersonaggiSbloccati["Sara"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
-                        else:
-                            FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                     if sottovoceSelezionata:
                         xImgPersonaggio = GlobalHWVar.gsx // 32 * 20.7
                         yImgPersonaggio = GlobalHWVar.gsy // 18 * 3.5
@@ -1618,17 +1606,12 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Un pappagallo parlante addestrato da Rod per vendere merci. Da quello che ho capito, mi dà l'accesso al catalogo perché sono stata in qualche modo associata a un suo ricordo...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 14 and dictPersonaggiSbloccati["Controllore1"] == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Alieno1"], (xImgPersonaggio, yImgPersonaggio))
+                        elif voceMarcataSottoMenu == 14 and dictPersonaggiSbloccati["Costruttore"] == 1:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Controllore - 1", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 15 and dictPersonaggiSbloccati["Controllore2"] == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Alieno2"], (xImgPersonaggio, yImgPersonaggio))
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Controllore - 2", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 16 and dictPersonaggiSbloccati["Sara"] == 1:
+                        elif voceMarcataSottoMenu == 15 and dictPersonaggiSbloccati["Sara"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.ralloDiario, (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
