@@ -12,7 +12,7 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
-def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False, superficie=False):
+def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False, superficie=False, restituisciLarghezza=False):
     x = int(x)
     y = int(y)
 
@@ -92,6 +92,9 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     else:
         testo = font.render(msg, True, colore)
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x, y))
+        if restituisciLarghezza:
+            dimX, dimY = font.size(msg)
+            return dimX
 
 
 def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe, parlante, scriviTutto=False):
@@ -275,7 +278,11 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
 
 def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
     mostraArmatura = True
-    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or \
+            GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] or \
+            GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCasaDavid"] or \
+            GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"] or \
+            GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
         mostraArmatura = False
 
     # personaggio: 1=d, 2=a, 3=w, 4=s

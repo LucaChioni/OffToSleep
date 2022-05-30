@@ -254,6 +254,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             if tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and not (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
                 tutteporte[i + 3] = False
             i += 4
+        # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
+        dati[6] = 0
+        dati[7] = 0
+        dati[8] = 0
+        dati[128] = 0
+        dati[129] = 0
+        dati[130] = 0
         stanza = GlobalGameVar.dictStanze["casaHansSara1"]
         cambiosta = True
         carim = True

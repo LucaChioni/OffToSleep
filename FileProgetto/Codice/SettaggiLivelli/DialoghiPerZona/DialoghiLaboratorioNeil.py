@@ -71,8 +71,12 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 avanzaColDialogo = False
                 dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È Neil...)")
+                dialogo.append(u"(... Forse tornerà...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoLetteraInvitoReneLaboratorio":
             partiDialogo = []
@@ -165,7 +169,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È l'invito per René...)")
+                dialogo.append(u"(È l'invito per René... Neil ha colto l'occasione per velocizzare le sue ricerche...)")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiIstruzioniCalcolatoreLaboratorio":
             partiDialogo = []
@@ -178,11 +182,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È una lista d'istruzioni per il... \"Calcolatore di eventi\"...?)")
+                dialogo.append(u"(È una lista di comandi... \"Comandi cerebrali del Calcolatore di eventi\"...?)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Posiziona il casco: occhi paralleli all'orizzonte, occhi chiusi <br> Comando d'avvio: <*>#italic#Navigazione<*> <br> Progresso temporale: <*>#italic#Procedi *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti<*> <br> Regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti<*>")
+                dialogo.append(u"Comandi cerebrali del Calcolatore di eventi (posiziona il casco: occhi chiusi e paralleli all'orizzonte): <br> Comando di accensione: <*>#italic#Navigazione<*> <br> Comando d'avvio sequenza di eventi: <*>#italic#Avvia sequenza<*> <br> Comando d'arresto sequenza di eventi: <*>#italic#Stop<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Comando progresso temporale: <*>#italic#Procedi *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando movimento: <*>#italic#Movimento spaziale in *inserisci luogo*<*> <br> Il sistema proietterà gli eventi nella mente dell'utente.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ecco a te tutta la mia conoscenza.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -204,7 +216,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Posiziona il casco: occhi paralleli all'orizzonte, occhi chiusi <br> Comando d'avvio: <*>#italic#Navigazione<*> <br> Progresso temporale: <*>#italic#Procedi *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti<*> <br> Regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti<*>")
+                dialogo.append(u"Comandi cerebrali del Calcolatore di eventi (posiziona il casco: occhi chiusi e paralleli all'orizzonte): <br> Comando di accensione: <*>#italic#Navigazione<*> <br> Comando d'avvio sequenza di eventi: <*>#italic#Avvia sequenza<*> <br> Comando d'arresto sequenza di eventi: <*>#italic#Stop<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Comando progresso temporale: <*>#italic#Procedi *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando movimento: <*>#italic#Movimento spaziale in *inserisci luogo*<*> <br> Il sistema proietterà gli eventi nella mente dell'utente.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ecco a te tutta la mia conoscenza.")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -214,9 +234,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono i comandi per utilizzare il calcolatore di eventi...)")
+                dialogo.append(u"(Sono i comandi per utilizzare il calcolatore di eventi... me li ha lasciati Neil...)")
                 partiDialogo.append(dialogo)
-        elif tipo == "OggettoAppuntiGenericiLaboratorio":
+        elif tipo == "OggettoAppuntiGenerici0Laboratorio":
             partiDialogo = []
             nome = "Appunti di Neil"
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and avanzamentoDialogo == 0:
@@ -263,16 +283,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(... Il resto sono formule e calcoli... credo sarebbe meglio iniziare da cose più... leggibili...)")
                 partiDialogo.append(dialogo)
-            else:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Appunti di Neil... da qui si capisce come abbia fatto a renderlo infinitamente più veloce ed efficiente del calcolatore nel vulcano: non considera l'esistenza di agenti esterni... gli eventi futuri che ho visto sono ciò che succederebbe se il Costruttore e i suoi impo non influensassero più la realtà...)")
-                partiDialogo.append(dialogo)
         elif tipo == "OggettoCalcolatoreEventi":
             partiDialogo = []
             nome = "Macchinario"
@@ -305,6 +315,95 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"(È il calcolatore di eventi...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoAppuntiGenerici1Laboratorio":
+            partiDialogo = []
+            nome = "Appunti di Neil"
+            if avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Neil... qua spiega nel dettaglio il funzionamento del sistema usato dal Costruttore per creare gli eventi reali: quella \"roccia\" in mezzo alla lava è il calcolatore, gli impo sono operai...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non c'è spiegazione dell'esplosione del vulcano... forse il calore generato dal sistema... in quel caso dovrebbe farlo ogni volta che si avvia...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Potrò verificare tra qualche centinaio di anni...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Neil in cui descrive il funzionamento del sistema usato dal Costruttore per creare gli eventi reali... dal calcolatore di Neil non si vede come è stato fatto, nel primo evento in assoluto che viene mostrato, è semplicemente già presente insieme al Costruttore...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoAppuntiGenerici2Laboratorio":
+            partiDialogo = []
+            nome = "Appunti di Neil"
+            if avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Neil... qua ci sono tutte le spiegazioni di come abbia fatto a rendere il suo calcolatore infinitamente più veloce ed efficiente di quello del Costruttore...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Principalmente per due motivi, il primo: l'output è più immediato e sfrutta le capacità cerebrali dell'utente che lo utilizza, il seecondo: non considera l'esistenza di agenti esterni... tutti coloro che sono stati fuori dalla serie di eventi, vengono cancellati dal sistema...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Appunti di Neil in cui descrive il funzionamento del calcolatore di eventi... io non sono considerata nelle previsioni, quindi potrei ancora cambiare qualcosa... poi farò delle prove... dovrò solo aspettare qualche miliardo di anni per controllare i risultati...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoAppuntiGenerici3Laboratorio":
+            partiDialogo = []
+            nome = "Appunti di Neil"
+            if avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Neil... qua spiega come abbia elaborato un sistema identico a quello del Costruttore per \"evadere dalla dimensione\"... \"uscire da questo universo\"... ma non è possibile utilizzarlo finché almeno un'altra persona è fuori...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Si può \"uscire\" solo uno alla volta. Il motivo non lo spiega, non lo sa... e fuori c'è già il Costruttore. Quando torna? Semplice: quando una ragazzina stupida che non ha niente da fare cercherà di entrare nel suo laboratorio distruggendo i suoi impo e facendo scattare tutti gli allarmi...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Alla fine il Costruttore è morto nella sua cella, quindi credo che... ci abbia provato comunque...)")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Appunti di Neil in cui spiega il funzionamento del macchinario che permette di \"uscire da questo universo\"... credo un giorno... lo proverò...)")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

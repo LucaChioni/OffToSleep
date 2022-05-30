@@ -691,7 +691,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Umpf!<*> ... Sara... torna nella tua stanza. E dormi, domani dovrai svegliarti presto.")
+            dialogo.append(u"<*>#italic#Tsk...<*> Sara... torna nella tua stanza. E dormi, domani dovrai svegliarti presto.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -723,7 +723,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... <*>#italic#Umpf...<*>")
+            dialogo.append(u"... <*>#italic#Umpf!<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

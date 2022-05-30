@@ -405,7 +405,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E poi Neil dov'è andato?")
+                dialogo.append(u"... E Neil dov'è andato?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -417,7 +417,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... E poi perché mi hanno lasciata libera? Potrei andarmene e non tornare più...")
+                dialogo.append(u"... E perché mi hanno lasciata libera? Potrei andarmene e non tornare più...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -575,7 +575,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma, aspetta un attimo... se il tempo è bloccato, perché tu ti muovi?")
+                dialogo.append(u"... Neil aveva detto che avrei visto tutto bloccato, ma... perché tu non lo sei?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2516,7 +2516,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Ecco! Tra un evento e l'altro... hanno \"esperito\" più di quei due minuti perché con quell' apparecchio continuavano a vivere mentre il tempo era bloccato... 840 anni per ogni evento che passava... per un totale di 700 miliardi di anni...)")
+                    dialogo.append(u"(Ecco! Tra un evento e l'altro... hanno \"esperito\" più di quei due minuti perché con quell' apparecchio continuavano a vivere mentre il tempo era bloccato... 840 anni per ogni evento che passava... per un totale di 700 miliardi di anni... in due minuti...)")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -3179,7 +3179,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Dobbiamo fare degli esperimenti adesso. Ho sviluppato nuovi apparecchi cerebrali e li dovrai testare.")
+                dialogo.append(u"Dobbiamo fare degli esperimenti adesso. Ho sviluppato degli apparecchi cerebrali capaci di incrementare le capacita percettive e cognitive. Tu li dovrai testare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3187,7 +3187,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non dovrai fare niente di impegnativo. Osserva solo ciò che ti accade intorno.")
+                dialogo.append(u"Non dovrai fare niente di specifico. Se, quando ti sveglierai, vedrai tutto bloccato, vorrà dire che tutto ha funzionato correttamente. A quel punto tornerai a muoverti liberamente.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3235,7 +3235,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Qualche decennio probabilmente.")
+                dialogo.append(u"... Per qualche secolo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3309,7 +3309,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Oh, grazie a Dio, tu sei ancora a posto! D'ora in poi non ti abbandonerò mai più.")
+                dialogo.append(u"Oh, grazie a Dio, tu sei ancora a posto. D'ora in poi non ti abbandonerò più.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3356,7 +3356,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Lo stiamo facendo, Sara.")
+                dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3753,7 +3753,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"E a me non me ne frega un cazzo dei vostri accordi, l'impo è proprietà della confraternita.")
+                dialogo.append(u"E a me non me ne frega niente dei vostri accordi! L'impo è proprietà della confraternita.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3765,15 +3765,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non è necessario rischiare altri disastri ambientali, soltanto un idiota ti affiderebbe l'ultimo esemplare.")
+                dialogo.append(u"Non è necessario rischiare altri disastri ambientali. Soltanto un idiota ti affiderebbe l'ultimo esemplare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Peccato che non sia tu a dover compiere questa decisione allora...")
+                dialogo.append(u"Peccato che non sia tu a dover decidere allora...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Neanche tu dovrai compierla. L'impo rimarrà dove è stato lasciato finché il suo proprietario non si sveglierà.")
+                dialogo.append(u"... Neanche tu dovrai. L'impo rimarrà dove è stato lasciato finché il suo proprietario non si sveglierà.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3787,11 +3787,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Povero Rod. Non sai nemmeno tu se disperarti di più per le tue prospettive economiche o per quelle sentimentali...")
+                dialogo.append(u"Povero Rod. Non sai nemmeno tu se disperarti di più per le tue prospettive economiche o quelle sentimentali...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma stai zitto, vecchio <*>#italic#trombone.<*> Non parlarmi di prospettive, ti sei rinchiuso in questo castello per decenni passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare.")
+                dialogo.append(u"<*>#italic#Umpf!<*> Non parlarmi di prospettive tu. Ti sei rinchiuso in questo castello per decenni passando metà del tempo a pentirti di come ti sei mutilato e l'altra metà a studiare dei modi per rimediare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3986,7 +3986,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Sono cavie... credo che, su alcune di queste, stia testato l'\"apparecchio cerebrale\" che ho anch'io...)")
+                dialogo.append(u"(Sono cavie... credo che, su alcune di queste, stia testando l'\"apparecchio cerebrale\" che ho anch'io...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -4086,7 +4086,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Sono passate diciotto ore e il soggetto si sta comportando meglio del previsto. Di questo passo, il processo di rianimazione sarà completato in meno di due settimane...")
+                dialogo.append(u"... Sono passate diciotto ore e il soggetto si sta comportando meglio del previsto. Di questo passo, il processo di rianimazione sarà completato in circa due settimane...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -4102,7 +4102,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... L'installazione si è conclusa con successo, nessun elemento dell'ospite è stato danneggiato. I test sul prototipo inizieranno non appena il soggetto tornerà operativo...")
+                dialogo.append(u"... L'installazione si è conclusa con successo, nessun elemento dell'ospite è stato danneggiato. Tempo d'installazione: quindici ore. I test sul prototipo inizieranno non appena il soggetto tornerà operativo. Tempo stimato: due giorni...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -4124,7 +4124,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(C'è scritto che sono stata rianimata in due settimane. E poi mi è stato intallato un \"prototipo\"... credo si tratti dell'\"apparecchio cerebrale\" di cui parlava Neil...)")
+                dialogo.append(u"(C'è scritto che sono stata rianimata e che mi è stato intallato un \"prototipo\"... credo si tratti dell'\"apparecchio cerebrale\" di cui parlava Neil...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... In totale sono passati 20 giorni da quando mi sono buttata nel lago...)")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -318,6 +318,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 tutteporte[i + 3] = False
             i += 4
         avanzamentoStoria += 1
+        # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
+        dati[6] = 0
+        dati[7] = 0
+        dati[8] = 0
+        dati[128] = 0
+        dati[129] = 0
+        dati[130] = 0
         stanza = GlobalGameVar.dictStanze["casaHansSara1"]
         cambiosta = True
         carim = True

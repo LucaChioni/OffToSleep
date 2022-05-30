@@ -894,14 +894,20 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["sedutaSulCalcolatore"] = i
     i += 1
+    dictAvanzamentoStoria["monologoPostSedutaSulCalcolatore"] = i
+    i += 1
     dictAvanzamentoStoria["messoCascoCalcolatore"] = i
 
     i += 100
+    i += 1
+    dictAvanzamentoStoria["inizioUsoCalcolatore"] = i
     i += 1
     dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] = i
     dictAvanzamentoStoria["lasciatoImpoNelLaboratorioDiNeil"] = i
     dictAvanzamentoStoria["scopertoNaturaDegliImpo"] = i
     dictAvanzamentoStoria["mappaLaboratorio"] = i
+    i += 1
+    dictAvanzamentoStoria["fineUsoCalcolatore"] = i
     i += 1
     dictAvanzamentoStoria["rialzataDalCalcolatore"] = i
 

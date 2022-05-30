@@ -447,7 +447,7 @@ def gameloop():
                     # necessario ridefinire le stanze pacifiche in caso di carica partita nel castello (inizialmente quelle stanze sono pacifiche)
                     SetZoneStanzeImpedimenti.modificaStanzePacifiche(dati[0])
 
-                    SetZoneStanzeImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
+                    SetZoneStanzeImpedimenti.scriviNomeZona(dati[1], stanzaVecchia, attesa=False)
                     stoppaMusica = SetPosizProtagonistaAudio.decidiSeStoppareMusica(dati[1], dati[0])
                     SetPosizProtagonistaAudio.riproduciAudioSpeciali(dati[0])
 
@@ -518,6 +518,9 @@ def gameloop():
                             canaliDaRiavviare.append(GlobalHWVar.canaliSoundSottofondoAmbientale)
                             volumiRiattivati.append(GlobalHWVar.volumeEffetti)
                         GenericFunc.cambiaVolumeCanaliAudio(canaliDaRiavviare, volumiRiattivati, False, posizioneCanaleMusica=posizioneCanaleMusica)
+
+                    SetZoneStanzeImpedimenti.scriviNomeZona(dati[1], stanzaVecchia, attesa=True)
+                    SetZoneStanzeImpedimenti.mostraTempoPassato(dati[0], dati[1], stanzaVecchia)
 
                     # resetto obiettivo Colco
                     if not inizio:

@@ -194,7 +194,7 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
     return procedi
 
 
-def scriviNomeZona(stanza, stanzaVecchia):
+def scriviNomeZona(stanza, stanzaVecchia, attesa):
     nomeDaScrivere = False
     if (stanzaVecchia == GlobalGameVar.dictStanze["sognoSara4"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"] and stanza == GlobalGameVar.dictStanze["casaHansSara4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]):
         nomeDaScrivere = "Casa"
@@ -240,13 +240,70 @@ def scriviNomeZona(stanza, stanzaVecchia):
         nomeDaScrivere = u"Laboratorio di Neil"
 
     if nomeDaScrivere:
+        if attesa:
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        else:
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+            FunzioniGraficheGeneriche.messaggio(nomeDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+            FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
+            GlobalHWVar.aggiornaSchermo()
+
+
+def mostraTempoPassato(avanzamentoStoria, stanza, stanzaVecchia):
+    tempoPassato1 = False
+    tempoPassato2 = ""
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        tempoPassato1 = "Giorno 2"
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
+        tempoPassato1 = "Giorno 3"
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
+        tempoPassato1 = "Giorno 23"
+    # elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanzaVecchia == GlobalGameVar.dictStanze[""] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+    #     tempoPassato1 = "Giorno 23"
+    #     tempoPassato2 = " - Anno 12"
+
+    if tempoPassato1:
+        xScritta = GlobalHWVar.gpx * 3
+        yScritta = GlobalHWVar.gpy * 13
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(nomeDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        larghezzaTesto = FunzioniGraficheGeneriche.messaggio(tempoPassato1, GlobalHWVar.grigiochi, xScritta, yScritta, 150, restituisciLarghezza=True)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
         i = 0
-        while i < 10:
+        while i < 30:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        if tempoPassato2 != "":
+            superficieSecondaScritta = pygame.Surface((GlobalHWVar.gpx * 15, GlobalHWVar.gpy * 3), flags=pygame.SRCALPHA)
+            i = 0
+            while i <= 255:
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xScritta + larghezzaTesto, yScritta, GlobalHWVar.gpx * 15, GlobalHWVar.gpy * 3))
+                FunzioniGraficheGeneriche.messaggio(tempoPassato2, GlobalHWVar.grigiochi, xScritta + larghezzaTesto, yScritta, 150)
+                superficieSecondaScritta.fill((0, 0, 0, 255 - i))
+                GlobalHWVar.disegnaImmagineSuSchermo(superficieSecondaScritta, (xScritta + larghezzaTesto, yScritta))
+                GlobalHWVar.aggiornaSchermo()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                i += 10
+            i = 0
+            while i < 30:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
+        i = 0
+        while i < 20:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
