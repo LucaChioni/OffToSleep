@@ -175,7 +175,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append(u"Non ho più merce")
             partiDialogoTradotte.append(dialogo)
 
-    if tipo == "Nessuno":
+    if tipo == "Nessuno" or tipo == "NessunoPov":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif tipo == "Tutorial":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTutorial.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)

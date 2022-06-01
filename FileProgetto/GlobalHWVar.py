@@ -392,6 +392,102 @@ def inizializzaModuloJoistick():
 inizializzaModuloJoistick()
 usandoIlController = False
 
+# lettura configurazione tastiera
+tastiConfigurabiliTastiera = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]
+def caricaImpostazioniTastiera():
+    impoTastieraErrato = False
+    leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "r")
+    leggifile = leggi.read()
+    leggi.close()
+    datiImpostazioniTastiera = leggifile.split("_")
+    if len(datiImpostazioniTastiera) == 0:
+        impoTastieraErrato = True
+        print ("File di configurazione della tastiera vuoto")
+    elif len(datiImpostazioniTastiera) != 6:
+        contaGlobale = 0
+        while contaGlobale < len(datiImpostazioniTastiera):
+            setteggioTastiera = datiImpostazioniTastiera[contaGlobale].split("=")
+            if len(setteggioTastiera) != 2:
+                impoTastieraErrato = True
+                print ("File di configurazione della tastiera corrotto 1")
+                break
+            else:
+                test1 = setteggioTastiera[0]
+                test2 = setteggioTastiera[1]
+                if test1 not in tastiConfigurabiliTastiera or test2 not in tastiConfigurabiliTastiera:
+                    impoTastieraErrato = True
+                    print ("File di configurazione della tastiera corrotto 2")
+                    break
+            contaGlobale += 1
+    else:
+        impoTastieraErrato = True
+        print ("File di configurazione della tastiera incompleto")
+    if impoTastieraErrato:
+        # cancello il file se c'è un errore
+        scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "w")
+        scrivi.write("Q=Q_W=W_E=E_A=A_S=S_D=D")
+        scrivi.close()
+    leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "r")
+    leggifile = leggi.read()
+    leggi.close()
+    datiImpostazioniTastiera = leggifile.split("_")
+    listaTastiUtilizzatiTastiera = {"Q": pygame.K_q, "W": pygame.K_w, "E": pygame.K_e, "A": pygame.K_a, "S": pygame.K_s, "D": pygame.K_d}
+    for tasto in datiImpostazioniTastiera:
+        tasto = tasto.split("=")
+        if tasto[1] == "Q":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_q
+        elif tasto[1] == "W":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_w
+        elif tasto[1] == "E":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_e
+        elif tasto[1] == "R":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_r
+        elif tasto[1] == "T":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_t
+        elif tasto[1] == "Y":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_y
+        elif tasto[1] == "U":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_u
+        elif tasto[1] == "I":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_i
+        elif tasto[1] == "O":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_o
+        elif tasto[1] == "P":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_p
+        elif tasto[1] == "A":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_a
+        elif tasto[1] == "S":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_s
+        elif tasto[1] == "D":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_d
+        elif tasto[1] == "F":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_f
+        elif tasto[1] == "G":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_g
+        elif tasto[1] == "H":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_h
+        elif tasto[1] == "J":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_j
+        elif tasto[1] == "K":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_k
+        elif tasto[1] == "L":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_l
+        elif tasto[1] == "Z":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_z
+        elif tasto[1] == "X":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_x
+        elif tasto[1] == "C":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_c
+        elif tasto[1] == "V":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_v
+        elif tasto[1] == "B":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_b
+        elif tasto[1] == "N":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_n
+        elif tasto[1] == "M":
+            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_m
+    return listaTastiUtilizzatiTastiera
+
 # nonAggiornareSchermo => usata solo per un evento (terremoto nel vulcano in cui viene messo un "filtro" marrone-sabbia sullo schermo)
 nonAggiornareSchermo = False
 

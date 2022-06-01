@@ -128,23 +128,13 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
     return animazioneRallo
 
 
-def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, avvele, difesa, animazioneRallo, nemicoAttaccante, fineanimaz):
+def animaDifesaRallo(avanzamentoStoria, npers, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, avvele, difesa, animazioneRallo, nemicoAttaccante, fineanimaz):
     if nemicoAttaccante and nemicoAttaccante.ralloParato and fineanimaz == 4:
         GlobalHWVar.canaleSoundAttacco.stop()
         GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreParata)
     if difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato):
         animazioneRallo = True
-        GlobalHWVar.disegnaImmagineSuSchermo(arcoS, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(faretraS, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (x, y))
-        if avvele:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(armaturaS, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(collanaS, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persmbDifesa, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(armaS, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(guantiDifesa, (x, y))
-        GlobalHWVar.disegnaImmagineSuSchermo(scudoDifesa, (x, y))
+        FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, GlobalImgVar.perss, armaS, armaturaS, scudoDifesa, collanaS, arcoS, faretraS, guantiDifesa, difesa=True)
     return animazioneRallo
 
 
@@ -1571,7 +1561,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if not "movimentoRallo" in azioniDaEseguire and GlobalHWVar.canaleSoundPassiRallo.get_busy():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
             # animazione difesa Rallo
-            animazioneRallo = animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, statoRalloInizioTurno[1], difesa, animazioneRallo, nemicoAttaccante, fineanimaz)
+            animazioneRallo = animaDifesaRallo(dati[0], npers, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, statoRalloInizioTurno[1], difesa, animazioneRallo, nemicoAttaccante, fineanimaz)
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo

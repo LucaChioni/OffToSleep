@@ -783,6 +783,9 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     usandoRod = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         usandoRod = True
+    usandoCalcolatore = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+        usandoCalcolatore = True
     if dati[133] == 0 or usandoRod:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
     elif dati[133] == 1:
@@ -907,9 +910,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                 # non far cliccare su "Setta Colco" se Colco non è in una casella vista
                 if voceMarcata == 3 and not colcoInCasellaVista:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                    if not usandoRod:
+                    if not usandoRod and not usandoCalcolatore:
                         aperturaSettaColcoNonRiuscita = True
                 elif (voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5) and usandoRod:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                elif (voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5) and usandoCalcolatore:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -1057,8 +1062,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 15.5))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
                     FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                    FunzioniGraficheGeneriche.messaggio("Oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
-                    if not usandoRod:
+                    if not usandoCalcolatore:
+                        FunzioniGraficheGeneriche.messaggio("Oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("Oggetti", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
+                    if not usandoRod and not usandoCalcolatore:
                         FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
@@ -1068,7 +1076,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                         else:
                             FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                        if not usandoRod:
+                        if not usandoRod and not usandoCalcolatore:
                             FunzioniGraficheGeneriche.messaggio("Mappa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 50)
                             FunzioniGraficheGeneriche.messaggio("Diario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, 50)
                         else:

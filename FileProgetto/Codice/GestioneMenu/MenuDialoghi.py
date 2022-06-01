@@ -30,14 +30,15 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     partiDialogo = personaggio.partiDialogoTradotte[GlobalHWVar.linguaImpostata]
     oggettoDato = personaggio.oggettoDato[GlobalHWVar.linguaImpostata]
 
-    if nomeInterlocutore != "Tutorial":
+    if nomeInterlocutore != "Tutorial" and personaggio.tipo != "NessunoPov":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
-    if personaggio.imgDialogo and nomeInterlocutore != "Tutorial" and nomeInterlocutore != "Nessuno":
+    if personaggio.imgDialogo and nomeInterlocutore != "Tutorial" and nomeInterlocutore != "Nessuno" and personaggio.tipo != "NessunoPov":
         GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
     elif nomeInterlocutore == "Impo":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
-    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
+    if personaggio.tipo != "NessunoPov":
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
 
     usandoRod = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
@@ -53,7 +54,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     fineDialogo = False
     bottoneDown = False
 
-    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni / 2.0], True, posizioneCanaleMusica=0)
+    if personaggio.tipo != "NessunoPov":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni / 2.0], True, posizioneCanaleMusica=0)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
@@ -175,7 +177,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             if puntatoreSpostato and not prosegui:
                 numeromessaggioAttuale -= 1
             GlobalHWVar.disegnaImmagineSuSchermo(background, (0, GlobalHWVar.gsy // 18 * 3.5))
-            if nomeInterlocutore != "Tutorial":
+            if nomeInterlocutore != "Tutorial" and personaggio.tipo != "NessunoPov":
                 if personaggio.imgDialogo and partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore != "Nessuno":
                     GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
                 elif partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore == "Impo":
@@ -218,7 +220,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
-    GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
+    if personaggio.tipo != "NessunoPov":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
 
     avanzamentoStoria = SetDialoghiPersonaggi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi

@@ -2557,7 +2557,103 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... E metto il casco...?)")
+                dialogo.append(u"(... E \"posiziono il casco\"...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoCascoCalcolatore"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... Ok, quella linea immagino sia l'\"orizzonte\"...)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(... \"Occhi paralleli\" e... chiusi...)")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoGliOcchiSulCalcolatore"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E... uhm...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Navigazione?")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apparizioneNelCalcolatore"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Uhm...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apparizioneStanzaNelCalcolatore"]:
+                nome = "Voce sconosciuta"
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"<*>#italic#Momento serie di eventi: Attuale.<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Oh...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sentitoVoceCalcolatore"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sono nel laboratorio...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostApparizioneStanzaNelCalcolatore1"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Perché non sono seduta lì?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Ha detto \"Momento serie di eventi: attuale\"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Forse si riferiva agli eventi... normali...?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Forse sono ancora nell'ufficio di Neil allora...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostApparizioneStanzaNelCalcolatore2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Ma non faccio...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oddio sono trasparente!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... E non faccio più nessun rumore...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 1:
                 oggettoDato = False

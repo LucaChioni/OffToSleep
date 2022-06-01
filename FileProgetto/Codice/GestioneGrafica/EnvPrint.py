@@ -267,17 +267,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         if difesa == 0:
             FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         else:
-            GlobalHWVar.disegnaImmagineSuSchermo(arcoS, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(faretraS, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (x, y))
-            if avvele:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armaturaS, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(collanaS, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persmbDifesa, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(armaS, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(guantiDifesa, (x, y))
-            GlobalHWVar.disegnaImmagineSuSchermo(scudoDifesa, (x, y))
+            FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, GlobalImgVar.perss, armaS, armaturaS, scudoDifesa, collanaS, arcoS, faretraS, guantiDifesa, difesa=True)
 
     # disegnare i nemici
     for nemico in listaNemici:

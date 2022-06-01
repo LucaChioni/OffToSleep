@@ -78,7 +78,27 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo == "GuardiaCitta":
         partiDialogo = []
         nome = "Soldato"
-        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
+            partiDialogo.append(dialogo)
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Non voglio parlare coi soldati... potrebbero insospettirsi per Impo...)")
+            partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -178,7 +198,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del giudizio altrui. Adesso vattene, ho molto da fare qui!")
+                    dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del giudizio altrui. Adesso vattene, ho del lavoro da fare qui!")
+                    partiDialogo.append(dialogo)
+                elif avanzamentoDialogo == 4 and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Meglio lasciarlo al suo lavoro...)")
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 4:
                     oggettoDato = False
@@ -188,7 +218,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Meglio lasciarlo al suo lavoro...)")
+                    dialogo.append(u"(Non lo disturberò ancora...)")
                     partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo > 1:
@@ -227,27 +257,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Non voglio parlare coi soldati... poi potrebbero insospettirsi per Impo...)")
-                    partiDialogo.append(dialogo)
-                elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
-                    oggettoDato = False
-                    avanzaStoria = False
-                    menuMercante = False
-                    scelta = False
-                    avanzaColDialogo = False
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
-                    partiDialogo.append(dialogo)
-                elif y == GlobalHWVar.gpy * 5:
+                if y == GlobalHWVar.gpy * 5:
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False

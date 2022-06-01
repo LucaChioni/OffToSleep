@@ -574,10 +574,15 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["vulcano3"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
 
     return nomeStanza
 

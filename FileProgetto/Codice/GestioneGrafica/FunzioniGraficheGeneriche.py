@@ -276,7 +276,7 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
     return inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente
 
 
-def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
+def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False, difesa=False):
     mostraArmatura = True
     if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or \
             GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] or \
@@ -286,7 +286,21 @@ def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, s
         mostraArmatura = False
 
     # personaggio: 1=d, 2=a, 3=w, 4=s
-    if attaccoDaLontano:
+    if difesa:
+        GlobalHWVar.disegnaImmagineSuSchermo(arco, (x, y))
+        if mostraArmatura:
+            GlobalHWVar.disegnaImmagineSuSchermo(faretra, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
+        if avvele:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persAvvele, (x, y))
+        if mostraArmatura:
+            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(collana, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.persmbDifesa, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(arma, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(guanti, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(scudo, (x, y))
+    elif attaccoDaLontano:
         if npers == 1:
             GlobalHWVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:

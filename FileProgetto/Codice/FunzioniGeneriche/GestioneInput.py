@@ -6,7 +6,7 @@ import GlobalHWVar
 
 aggiornaInterfacciaDuranteLePause = False
 
-def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, gestioneDuranteLePause=False):
+def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, gestioneDuranteLePause=False, configurandoTastiera=False):
     global aggiornaInterfacciaDuranteLePause
     if aggiornaInterfacciaDuranteLePause:
         aggiornaInterfaccia = True

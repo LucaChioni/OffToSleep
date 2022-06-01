@@ -636,6 +636,8 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
         dictPersonaggiSbloccati["Pappagallo"] = 2
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vistoCostruttoreInLaboratorioNeil"]:
         dictPersonaggiSbloccati["Costruttore"] = 1
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
+        dictPersonaggiSbloccati["Costruttore"] = 2
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
         dictPersonaggiSbloccati["Sara"] = 1
 
@@ -1450,7 +1452,9 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
-                        if dictPersonaggiSbloccati["Costruttore"] >= 1:
+                        if dictPersonaggiSbloccati["Costruttore"] == 1:
+                            FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                        elif dictPersonaggiSbloccati["Costruttore"] == 2:
                             FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
@@ -1606,13 +1610,19 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                                 FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                                 FunzioniGraficheGeneriche.messaggio(u"Un pappagallo parlante addestrato da Rod per vendere merci. Da quello che ho capito, mi dà l'accesso al catalogo perché sono stata in qualche modo associata a un suo ricordo...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
-                        elif voceMarcataSottoMenu == 14 and dictPersonaggiSbloccati["Costruttore"] == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
-                            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                        elif voceMarcataSottoMenu == 14:
+                            if dictPersonaggiSbloccati["Costruttore"] == 1:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"È un tizio che ho trovato morto dentro una cella nella Caverna Impo. Indossa una strana tuta e ha dei tubi che gli escono dal corpo. Mi domando cosa ci facesse lì dentro...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            elif dictPersonaggiSbloccati["Costruttore"] == 2:
+                                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
+                                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
+                                FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 15 and dictPersonaggiSbloccati["Sara"] == 1:
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.ralloDiario, (xImgPersonaggio, yImgPersonaggio))
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgProtagonistaDiario, (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
                             FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
                             FunzioniGraficheGeneriche.messaggio(u"", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)

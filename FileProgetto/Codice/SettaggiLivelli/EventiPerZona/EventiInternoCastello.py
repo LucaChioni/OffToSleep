@@ -328,6 +328,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         stanza = GlobalGameVar.dictStanze["casaHansSara1"]
         cambiosta = True
         carim = True
+        aggiornaImgEquip = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
         i = 0

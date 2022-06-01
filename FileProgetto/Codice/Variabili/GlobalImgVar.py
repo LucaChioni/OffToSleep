@@ -210,7 +210,7 @@ global dictionaryImgPersonaggi
 global dictImgPersonaggiDiario
 global fraMaggioreDiario
 global roboDiario
-global ralloDiario
+global imgProtagonistaDiario
 global neilSconosciutoDiario
 global pappagalloDiario
 global imgDanneggiamentoCausaRallo
@@ -219,6 +219,7 @@ global persoSara1
 global persoSara2
 global persoSara3
 global persoSara4
+global persoSara5
 global persobSara
 global persoFraMaggiore
 global persobFraMaggiore
@@ -487,7 +488,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global dictImgPersonaggiDiario
     global fraMaggioreDiario
     global roboDiario
-    global ralloDiario
+    global imgProtagonistaDiario
     global neilSconosciutoDiario
     global pappagalloDiario
     global imgDanneggiamentoCausaRallo
@@ -496,6 +497,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persoSara2
     global persoSara3
     global persoSara4
+    global persoSara5
     global persobSara
     global persoFraMaggiore
     global persobFraMaggiore
@@ -602,6 +604,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara4 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara5 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara5Menu.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
@@ -1096,7 +1099,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
     fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     roboDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    ralloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    imgProtagonistaDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     neilSconosciutoDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     pappagalloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/PappagalloGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
 

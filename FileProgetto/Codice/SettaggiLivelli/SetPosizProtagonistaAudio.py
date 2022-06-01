@@ -5078,8 +5078,12 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         pygame.time.wait(100)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         i += 1
+                if stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostApparizioneNelCalcolatore"]:
+                    npers = "s"
+                    x = GlobalHWVar.gpx * 15
+                    y = GlobalHWVar.gpy * 9
 
-    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
+    if ((GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]) and stanza < GlobalGameVar.dictStanze["caverna1"]) or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
         listaSottofondoAmbientale = []
         sottofondoAmbientaleCambiato = True
         canzone = False
@@ -5126,7 +5130,7 @@ def decidiSeStoppareMusica(stanza, avanzamentoStoria):
         stoppaMusica = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"] and (stanza == GlobalGameVar.dictStanze["caverna1"] or stanza == GlobalGameVar.dictStanze["caverna9"]):
         stoppaMusica = True
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
         stoppaMusica = True
 
     return stoppaMusica
