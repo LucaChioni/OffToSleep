@@ -394,7 +394,10 @@ usandoIlController = False
 
 # lettura configurazione tastiera
 tastiConfigurabiliTastiera = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]
+idTastiConfigurabiliTastiera = [pygame.K_q, pygame.K_w, pygame.K_e, pygame.K_r, pygame.K_t, pygame.K_y, pygame.K_u, pygame.K_i, pygame.K_o, pygame.K_p, pygame.K_a, pygame.K_s, pygame.K_d, pygame.K_f, pygame.K_g, pygame.K_h, pygame.K_j, pygame.K_k, pygame.K_l, pygame.K_z, pygame.K_x, pygame.K_c, pygame.K_v, pygame.K_b, pygame.K_n, pygame.K_m]
+tastiConfiguratiTastiera = {"Q": pygame.K_q, "W": pygame.K_w, "E": pygame.K_e, "A": pygame.K_a, "S": pygame.K_s, "D": pygame.K_d}
 def caricaImpostazioniTastiera():
+    global tastiConfiguratiTastiera
     impoTastieraErrato = False
     leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "r")
     leggifile = leggi.read()
@@ -403,7 +406,7 @@ def caricaImpostazioniTastiera():
     if len(datiImpostazioniTastiera) == 0:
         impoTastieraErrato = True
         print ("File di configurazione della tastiera vuoto")
-    elif len(datiImpostazioniTastiera) != 6:
+    elif len(datiImpostazioniTastiera) == 6:
         contaGlobale = 0
         while contaGlobale < len(datiImpostazioniTastiera):
             setteggioTastiera = datiImpostazioniTastiera[contaGlobale].split("=")
@@ -431,62 +434,61 @@ def caricaImpostazioniTastiera():
     leggifile = leggi.read()
     leggi.close()
     datiImpostazioniTastiera = leggifile.split("_")
-    listaTastiUtilizzatiTastiera = {"Q": pygame.K_q, "W": pygame.K_w, "E": pygame.K_e, "A": pygame.K_a, "S": pygame.K_s, "D": pygame.K_d}
     for tasto in datiImpostazioniTastiera:
         tasto = tasto.split("=")
         if tasto[1] == "Q":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_q
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_q
         elif tasto[1] == "W":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_w
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_w
         elif tasto[1] == "E":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_e
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_e
         elif tasto[1] == "R":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_r
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_r
         elif tasto[1] == "T":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_t
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_t
         elif tasto[1] == "Y":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_y
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_y
         elif tasto[1] == "U":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_u
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_u
         elif tasto[1] == "I":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_i
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_i
         elif tasto[1] == "O":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_o
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_o
         elif tasto[1] == "P":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_p
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_p
         elif tasto[1] == "A":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_a
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_a
         elif tasto[1] == "S":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_s
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_s
         elif tasto[1] == "D":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_d
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_d
         elif tasto[1] == "F":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_f
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_f
         elif tasto[1] == "G":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_g
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_g
         elif tasto[1] == "H":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_h
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_h
         elif tasto[1] == "J":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_j
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_j
         elif tasto[1] == "K":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_k
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_k
         elif tasto[1] == "L":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_l
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_l
         elif tasto[1] == "Z":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_z
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_z
         elif tasto[1] == "X":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_x
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_x
         elif tasto[1] == "C":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_c
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_c
         elif tasto[1] == "V":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_v
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_v
         elif tasto[1] == "B":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_b
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_b
         elif tasto[1] == "N":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_n
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_n
         elif tasto[1] == "M":
-            listaTastiUtilizzatiTastiera[tasto[0]] = pygame.K_m
-    return listaTastiUtilizzatiTastiera
+            tastiConfiguratiTastiera[tasto[0]] = pygame.K_m
+caricaImpostazioniTastiera()
 
 # nonAggiornareSchermo => usata solo per un evento (terremoto nel vulcano in cui viene messo un "filtro" marrone-sabbia sullo schermo)
 nonAggiornareSchermo = False

@@ -125,26 +125,26 @@ def enigmaBiblioteca():
         if not primoFrame:
             aggiornaInterfacciaPerCambioInput = False
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             esci = True
             bottoneDown = False
-        if pygame.K_w in GlobalHWVar.listaTastiPremuti or "padSu" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["W"] in GlobalHWVar.listaTastiPremuti or "padSu" in GlobalHWVar.listaTastiPremuti:
             spostandoCursore = True
             yStrumento -= unitaSpostamentoCursore
             if yStrumento < yInizioFoglio:
                 yStrumento = yInizioFoglio
-        if pygame.K_a in GlobalHWVar.listaTastiPremuti or "padSinistra" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["A"] in GlobalHWVar.listaTastiPremuti or "padSinistra" in GlobalHWVar.listaTastiPremuti:
             spostandoCursore = True
             xStrumento -= unitaSpostamentoCursore
             if xStrumento < xInizioFoglio:
                 xStrumento = xInizioFoglio
-        if pygame.K_s in GlobalHWVar.listaTastiPremuti or "padGiu" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["S"] in GlobalHWVar.listaTastiPremuti or "padGiu" in GlobalHWVar.listaTastiPremuti:
             spostandoCursore = True
             yStrumento += unitaSpostamentoCursore
             if yStrumento > yFineFoglio:
                 yStrumento = yFineFoglio
-        if pygame.K_d in GlobalHWVar.listaTastiPremuti or "padDestra" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["D"] in GlobalHWVar.listaTastiPremuti or "padDestra" in GlobalHWVar.listaTastiPremuti:
             spostandoCursore = True
             xStrumento += unitaSpostamentoCursore
             if xStrumento > xFineFoglio:
@@ -238,10 +238,10 @@ def enigmaBiblioteca():
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                     FunzioniGraficheGeneriche.messaggio("Tasto centrale: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.3, GlobalHWVar.gsy // 18 * 2.5, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("L1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("R1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.1, GlobalHWVar.gsy // 18 * 1, 50)
-                    FunzioniGraficheGeneriche.messaggio("Triangolo: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.9, GlobalHWVar.gsy // 18 * 2.5, 50)
+                    FunzioniGraficheGeneriche.messaggio("LB:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("RB:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("Y: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 2.5, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("2:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio("3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
@@ -434,14 +434,14 @@ def enigmaLabirinto(avanzamentoStoria):
         if not primoFrame:
             aggiornaInterfacciaPerCambioInput = False
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             esci = True
             bottoneDown = False
 
-        if bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_s or bottoneDown == pygame.K_d:
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"]:
             tastotempfps = 8
-        if pygame.K_w in GlobalHWVar.listaTastiPremuti or "padSu" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["W"] in GlobalHWVar.listaTastiPremuti or "padSu" in GlobalHWVar.listaTastiPremuti:
             if tastotempfps == 0 or tastotempfps == 8:
                 spostandoCursore = True
                 yStrumento -= unitaSpostamentoCursore
@@ -455,7 +455,7 @@ def enigmaLabirinto(avanzamentoStoria):
                 spostandoCursore = False
                 tastotempfps -= 1
             bottoneDown = False
-        if pygame.K_a in GlobalHWVar.listaTastiPremuti or "padSinistra" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["A"] in GlobalHWVar.listaTastiPremuti or "padSinistra" in GlobalHWVar.listaTastiPremuti:
             if tastotempfps == 0 or tastotempfps == 8:
                 spostandoCursore = True
                 xStrumento -= unitaSpostamentoCursore
@@ -469,7 +469,7 @@ def enigmaLabirinto(avanzamentoStoria):
                 spostandoCursore = False
                 tastotempfps -= 1
             bottoneDown = False
-        if pygame.K_s in GlobalHWVar.listaTastiPremuti or "padGiu" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["S"] in GlobalHWVar.listaTastiPremuti or "padGiu" in GlobalHWVar.listaTastiPremuti:
             if tastotempfps == 0 or tastotempfps == 8:
                 spostandoCursore = True
                 yStrumento += unitaSpostamentoCursore
@@ -483,7 +483,7 @@ def enigmaLabirinto(avanzamentoStoria):
                 spostandoCursore = False
                 tastotempfps -= 1
             bottoneDown = False
-        if pygame.K_d in GlobalHWVar.listaTastiPremuti or "padDestra" in GlobalHWVar.listaTastiPremuti:
+        if GlobalHWVar.tastiConfiguratiTastiera["D"] in GlobalHWVar.listaTastiPremuti or "padDestra" in GlobalHWVar.listaTastiPremuti:
             if tastotempfps == 0 or tastotempfps == 8:
                 spostandoCursore = True
                 xStrumento += unitaSpostamentoCursore
@@ -598,10 +598,10 @@ def enigmaLabirinto(avanzamentoStoria):
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                     FunzioniGraficheGeneriche.messaggio("Tasto centrale: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.3, GlobalHWVar.gsy // 18 * 2.5, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("L1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("R1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.1, GlobalHWVar.gsy // 18 * 1, 50)
-                    FunzioniGraficheGeneriche.messaggio("Triangolo: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.9, GlobalHWVar.gsy // 18 * 2.5, 50)
+                    FunzioniGraficheGeneriche.messaggio("LB:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("RB:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("Y: cancella tutto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 2.5, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("2:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio("3:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)

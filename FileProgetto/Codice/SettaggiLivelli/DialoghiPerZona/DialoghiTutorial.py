@@ -24,7 +24,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Muoviti verso il baule davanti a te e prova ad aprirlo utilizzando il tasto <*>#bold#SPAZIO<*> della tastiera, la <*>#bold#Croce<*> del controller oppure cliccandoci sopra con il tasto <*>#bold#Sinistro<*> del mouse.")
+        dialogo.append("Muoviti verso il baule davanti a te e prova ad aprirlo utilizzando il tasto <*>#bold#SPAZIO<*> della tastiera, <*>#bold#A<*> del controller oppure cliccandoci sopra con il tasto <*>#bold#Sinistro<*> del mouse.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["aperturaPrimoCofanetto"]:
         oggettoDato = False
@@ -33,7 +33,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Hai trovato una pozione. Puoi usarla dal menu a cui puoi accedere premendo <*>#bold#Esc<*> sulla tastiera, <*>#bold#Start<*> del controller o il tasto <*>#bold#Centrale<*> del mouse.")
+        dialogo.append("Hai trovato una pozione. Puoi usarla dal menu a cui puoi accedere premendo <*>#bold#Esc<*> sulla tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
@@ -46,15 +46,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Davanti a te c'è un nemico. Per vedere le sue informazioni, passa alla modalità interazione (premendo il tasto <*>#bold#E<*> della tastiera, <*>#bold#Quadrato<*> del controller o il tasto <*>#bold#Destro<*> del mouse) e inquadralo spostando il puntatore sulla sua casella.")
+        dialogo.append(u"Davanti a te c'è un nemico. Per vedere le sue informazioni, passa alla modalità interazione (premendo il tasto <*>#bold#E<*> della tastiera, <*>#bold#X<*> del controller o il tasto <*>#bold#Destro<*> del mouse) e inquadralo spostando il puntatore sulla sua casella.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Una volta inquadrato, puoi selezionarlo e attaccarlo premendo <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> del controller o il tasto <*>#bold#Sinistro<*> del mouse (dato che al momento non hai frecce, puoi attaccarlo solo da vicino). <br> Per deselezionare l'obiettivo, premi <*>#bold#Q<*> sulla tastiera, <*>#bold#Cerchio<*> del controller o il tasto <*>#bold#Destro<*> del mouse sul suo stato (in alto a sinistra dello schermo).")
+        dialogo.append("Una volta inquadrato, puoi selezionarlo e attaccarlo premendo <*>#bold#SPAZIO<*> sulla tastiera, <*>#bold#A<*> del controller o il tasto <*>#bold#Sinistro<*> del mouse (dato che al momento non hai frecce, puoi attaccarlo solo da vicino). <br> Per deselezionare l'obiettivo, premi <*>#bold#Q<*> sulla tastiera, <*>#bold#B<*> del controller o il tasto <*>#bold#Destro<*> del mouse sul suo stato (in alto a sinistra dello schermo).")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc,<*> <*>#bold#Start<*> o il tasto <*>#bold#Centrale<*> del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu normale.")
+        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu normale.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialBattaglia"]:
         oggettoDato = False
@@ -71,7 +71,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Oppure puoi semplicemente evitarlo aspettando il momento giusto per passare. Per saltare un turno, premi il tasto <*>#bold#0<*> della tastiera, <*>#bold#Select<*> del controller oppure clicca con il tasto <*>#bold#Sinistro<*> del mouse sulla relativa icona in alto a destra dello schermo.")
+        dialogo.append("Oppure puoi semplicemente evitarlo aspettando il momento giusto per passare. Per saltare un turno, premi il tasto <*>#bold#0<*> della tastiera, <*>#bold#View<*> del controller oppure clicca con il tasto <*>#bold#Sinistro<*> del mouse sulla relativa icona in alto a destra dello schermo.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara1"]:
         oggettoDato = False
@@ -142,7 +142,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Per attivare e disattivare l'impopietra usa il tasto <*>#bold#SHIFT<*> della tastiera, il <*>#bold#Triangolo<*> del controller oppure clicca sulla sua icona in alto a destra dello schermo con il tasto <*>#bold#Sinistro<*> del mouse.")
+        dialogo.append(u"Per attivare e disattivare l'impopietra usa il tasto <*>#bold#SHIFT<*> della tastiera, <*>#bold#Y<*> del controller oppure clicca sulla sua icona in alto a destra dello schermo con il tasto <*>#bold#Sinistro<*> del mouse.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
@@ -173,7 +173,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Finché sei nel labirinto, premendo il tasto <*>#bold#Esc<*> della tastiera, <*>#bold#Start<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, andrai direttamente alla mappa. Da lì potrai spostarti normalmente nel menu.")
+        dialogo.append(u"Finché sei nel labirinto, premendo il tasto <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, andrai direttamente alla mappa. Da lì potrai spostarti normalmente nel menu.")
         partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

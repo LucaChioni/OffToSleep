@@ -201,7 +201,7 @@ def settaController(arrivatoDaMenuPrincipale):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if configurando or testando:
                 configurando = False
@@ -356,7 +356,7 @@ def settaController(arrivatoDaMenuPrincipale):
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu" or ((voceMarcata == 2 or voceMarcata == 6 or voceMarcata == 7) and (bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
+        if bottoneDown == "mouseSinistro" or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padGiu" or bottoneDown == "padSu" or ((voceMarcata == 2 or voceMarcata == 6 or voceMarcata == 7) and (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -366,7 +366,7 @@ def settaController(arrivatoDaMenuPrincipale):
             if countdownAggiornamentoModulo == 0:
                 countdownAggiornamentoModulo = -1
             aggiornaSchermo = False
-            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if not (configurando or testando):
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if voceMarcata == 1:
@@ -390,7 +390,7 @@ def settaController(arrivatoDaMenuPrincipale):
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
-            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
                 if voceMarcata == 2:
                     if len(GlobalHWVar.configPadConnessi) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -428,7 +428,7 @@ def settaController(arrivatoDaMenuPrincipale):
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
                     xp = GlobalHWVar.gsx // 32 * 4.4
-            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if not (configurando or testando):
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if voceMarcata == 1 or voceMarcata == 3 or voceMarcata == 4:
@@ -452,7 +452,7 @@ def settaController(arrivatoDaMenuPrincipale):
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
-            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
                 if voceMarcata == 2:
                     if len(GlobalHWVar.configPadConnessi) > 1:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -562,6 +562,10 @@ def settaController(arrivatoDaMenuPrincipale):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                FunzioniGraficheGeneriche.messaggio("A", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 9.3, 70)
+                FunzioniGraficheGeneriche.messaggio("B", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 28.85, GlobalHWVar.gsy // 18 * 8.2, 70)
+                FunzioniGraficheGeneriche.messaggio("Y", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 7, 70)
+                FunzioniGraficheGeneriche.messaggio("X", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 26.45, GlobalHWVar.gsy // 18 * 8.2, 70)
                 FunzioniGraficheGeneriche.messaggio("Seleziona il controller da configurare:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Inizia configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Cancella configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
@@ -577,6 +581,10 @@ def settaController(arrivatoDaMenuPrincipale):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                FunzioniGraficheGeneriche.messaggio("A", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 9.3, 70)
+                FunzioniGraficheGeneriche.messaggio("B", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 28.85, GlobalHWVar.gsy // 18 * 8.2, 70)
+                FunzioniGraficheGeneriche.messaggio("Y", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 7, 70)
+                FunzioniGraficheGeneriche.messaggio("X", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 26.45, GlobalHWVar.gsy // 18 * 8.2, 70)
                 if mostraErrore == "nonInMenuPrincipale":
                     FunzioniGraficheGeneriche.messaggio("Opzione disponibile solo accedendo da menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
                 if mostraErrore == "attendiQualcheSecondo":
@@ -588,7 +596,7 @@ def settaController(arrivatoDaMenuPrincipale):
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
@@ -604,11 +612,11 @@ def settaController(arrivatoDaMenuPrincipale):
             else:
                 FunzioniGraficheGeneriche.messaggio(nomeController, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 7.8, 50, centrale=True, lungMax=11)
             if voceMarcata == 2:
-                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 7.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 7.6))
-                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 14.5, GlobalHWVar.gsy // 18 * 7.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 14.5, GlobalHWVar.gsy // 18 * 7.6))
@@ -706,7 +714,7 @@ def settaTastiera():
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     xp = GlobalHWVar.gsx // 32 * 1
-    yp = GlobalHWVar.gsy // 18 * 5.1
+    yp = GlobalHWVar.gsy // 18 * 6.6
     risposta = False
     voceMarcata = 1
     aggiornaSchermo = False
@@ -716,12 +724,9 @@ def settaTastiera():
     bottoneDown = False
     tastotempfps = 8
 
-    tastoDaConfigurare = False
-    tastiDaNonModificare = [pygame.K_0, pygame.K_KP0, pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_3, pygame.K_KP3, pygame.K_2, pygame.K_KP2, pygame.K_SPACE, pygame.K_ESCAPE]
-    configAttuale = GlobalHWVar.caricaImpostazioniTastiera()
-    configTemp = configAttuale.copy()
-
     configurando = False
+    configTemp = GlobalHWVar.tastiConfiguratiTastiera.copy()
+
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -737,20 +742,44 @@ def settaTastiera():
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 4.7 <= yMouse <= GlobalHWVar.gsy // 18 * 6.2 and not configurando:
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 6.1 <= yMouse <= GlobalHWVar.gsy // 18 * 7.6 and not configurando:
                 voceMarcata = 1
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 xp = GlobalHWVar.gsx // 32 * 1
-                yp = GlobalHWVar.gsy // 18 * 5.1
-            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 9.2 <= yMouse <= GlobalHWVar.gsy // 18 * 10.7 and not configurando:
+                yp = GlobalHWVar.gsy // 18 * 6.6
+            elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 6.1 <= yMouse <= GlobalHWVar.gsy // 18 * 7.6 and not configurando:
+                voceMarcata = 2
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                xp = GlobalHWVar.gsx // 32 * 8.5
+                yp = GlobalHWVar.gsy // 18 * 6.6
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 7.6 <= yMouse <= GlobalHWVar.gsy // 18 * 9.1 and not configurando:
                 voceMarcata = 3
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 xp = GlobalHWVar.gsx // 32 * 1
-                yp = GlobalHWVar.gsy // 18 * 9.6
-            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 10.7 <= yMouse <= GlobalHWVar.gsy // 18 * 12.2 and not configurando:
+                yp = GlobalHWVar.gsy // 18 * 8.1
+            elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 7.6 <= yMouse <= GlobalHWVar.gsy // 18 * 9.1 and not configurando:
                 voceMarcata = 4
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                xp = GlobalHWVar.gsx // 32 * 8.5
+                yp = GlobalHWVar.gsy // 18 * 8.1
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 9.1 <= yMouse <= GlobalHWVar.gsy // 18 * 10.6 and not configurando:
+                voceMarcata = 5
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                xp = GlobalHWVar.gsx // 32 * 1
+                yp = GlobalHWVar.gsy // 18 * 9.6
+            elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 9.1 <= yMouse <= GlobalHWVar.gsy // 18 * 10.6 and not configurando:
+                voceMarcata = 6
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                xp = GlobalHWVar.gsx // 32 * 8.5
+                yp = GlobalHWVar.gsy // 18 * 9.6
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 10.6 <= yMouse <= GlobalHWVar.gsy // 18 * 12.1 and not configurando:
+                voceMarcata = 7
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 xp = GlobalHWVar.gsx // 32 * 1
@@ -758,13 +787,13 @@ def settaTastiera():
             elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 8.5 and GlobalHWVar.gsy // 18 * 14.4 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5 and not configurando:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
-                voceMarcata = 6
+                voceMarcata = 8
                 xp = GlobalHWVar.gsx // 32 * 4.4
                 yp = GlobalHWVar.gsy // 18 * 15.2
             elif GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 16 and GlobalHWVar.gsy // 18 * 14.4 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5 and not configurando:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
-                voceMarcata = 7
+                voceMarcata = 9
                 xp = GlobalHWVar.gsx // 32 * 8.5
                 yp = GlobalHWVar.gsy // 18 * 15.2
             elif not GlobalHWVar.mouseBloccato:
@@ -780,12 +809,35 @@ def settaTastiera():
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if configurando and type(bottoneDown) is int:
+            if bottoneDown == pygame.K_ESCAPE:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+                configurando = False
+                aggiornaInterfacciaPerCambioInput = True
+                aggiornaSchermo = True
+            elif bottoneDown in GlobalHWVar.idTastiConfigurabiliTastiera:
+                for key, idTasto in configTemp.items():
+                    if idTasto == bottoneDown:
+                        configTemp[key] = configTemp[configurando]
+                        break
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                configTemp[configurando] = bottoneDown
+                configurando = False
+                aggiornaInterfacciaPerCambioInput = True
+                aggiornaSchermo = True
+            else:
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
+            bottoneDown = False
+        elif bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if configurando:
                 configurando = False
+                aggiornaInterfacciaPerCambioInput = True
             else:
                 risposta = True
+            bottoneDown = False
+        elif configurando and bottoneDown and not (bottoneDown == "mouseSinistro" and suTornaIndietro):
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
         elif bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if bottoneDown == "mouseSinistro" and suTornaIndietro:
@@ -794,54 +846,72 @@ def settaTastiera():
                     configurando = False
                 else:
                     risposta = True
-            # aggiorna tasto Q
+            # aggiorna tasto W
             elif voceMarcata == 1:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                tastoDaConfigurare = "Q"
-                configurando = True
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "W"
+                aggiornaSchermo = True
+            # aggiorna tasto S
+            elif voceMarcata == 2:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "S"
+                aggiornaSchermo = True
+            # aggiorna tasto A
+            elif voceMarcata == 3:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "A"
+                aggiornaSchermo = True
+            # aggiorna tasto D
+            elif voceMarcata == 4:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "D"
+                aggiornaSchermo = True
+            # aggiorna tasto Q
+            elif voceMarcata == 5:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "Q"
+                aggiornaSchermo = True
+            # aggiorna tasto E
+            elif voceMarcata == 6:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                aggiornaInterfacciaPerCambioInput = True
+                configurando = "E"
                 aggiornaSchermo = True
             # resetta configurazione
             elif voceMarcata == 7:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                configTemp = {"Q": pygame.K_q, "W": pygame.K_w, "E": pygame.K_e, "A": pygame.K_a, "S": pygame.K_s, "D": pygame.K_d}
                 aggiornaSchermo = True
             # salva
             elif voceMarcata == 8:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
-                for padConf in configTemp:
-                    for elemento in padConf:
-                        scrivi.write(str(elemento) + "_")
-                    scrivi.write("\n")
+                listaTasti = ["Q", "W", "E", "A", "S", "D"]
+                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "w")
+                for tasto in listaTasti:
+                    stringaDaAggiungere = tasto + "="
+                    if configTemp[tasto] == pygame.K_q:
+                        stringaDaAggiungere += "Q"
+                    elif configTemp[tasto] == pygame.K_w:
+                        stringaDaAggiungere += "W"
+                    elif configTemp[tasto] == pygame.K_e:
+                        stringaDaAggiungere += "E"
+                    elif configTemp[tasto] == pygame.K_a:
+                        stringaDaAggiungere += "A"
+                    elif configTemp[tasto] == pygame.K_s:
+                        stringaDaAggiungere += "S"
+                    elif configTemp[tasto] == pygame.K_d:
+                        stringaDaAggiungere += "D"
+                    if tasto != "D":
+                        stringaDaAggiungere += "_"
+                    scrivi.write(stringaDaAggiungere)
                 scrivi.close()
-                for pad in GlobalHWVar.listaPadConnessiConfigurati:
-                    pad.quit()
-                if controllerDaConfigurare and controllerDaConfigurare.get_init():
-                    controllerDaConfigurare.quit()
-                GlobalHWVar.assegnaConfigurazioneController()
-
-                listaIdPadConfigModificata = []
-                numPadSelezionato = 0
-                if len(GlobalHWVar.configPadConnessi) > 0:
-                    controllerDaConfigurare = False
-                    idController = GlobalHWVar.configPadConnessi[numPadSelezionato][0]
-                    nomeController = GlobalHWVar.configPadConnessi[numPadSelezionato][1]
-                    padInizialmeteConfigurato = False
-                    for pad in GlobalHWVar.listaPadConnessiConfigurati:
-                        if idController == pad.get_id():
-                            controllerDaConfigurare = pad
-                            padInizialmeteConfigurato = True
-                            break
-                    if not controllerDaConfigurare:
-                        for pad in GlobalHWVar.listaPadConnessiSconosciuti:
-                            if idController == pad.get_id():
-                                controllerDaConfigurare = pad
-                                padInizialmeteConfigurato = False
-                                break
-                else:
-                    controllerDaConfigurare = False
-                    idController = -1
-                    nomeController = "Nessun controller rilevato"
-                    padInizialmeteConfigurato = False
+                GlobalHWVar.tastiConfiguratiTastiera = configTemp.copy()
+                aggiornaSchermo = True
             # esci
             elif voceMarcata == 9:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
@@ -853,7 +923,7 @@ def settaTastiera():
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padDestra":
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -861,51 +931,105 @@ def settaTastiera():
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaSchermo = False
-            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
-                if configurando:
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
+                if not configurando:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if voceMarcata == 1:
-                        voceMarcata += 5
+                        voceMarcata = 8
                         xp = GlobalHWVar.gsx // 32 * 4.4
                         yp = GlobalHWVar.gsy // 18 * 15.2
-                    elif voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5:
-                        voceMarcata -= 1
-                        yp = yp - GlobalHWVar.gsy // 18 * 1.5
-                    elif voceMarcata == 3:
-                        voceMarcata -= 1
-                        yp = GlobalHWVar.gsy // 18 * 6.6
-                    elif voceMarcata == 6:
+                    elif voceMarcata == 2:
+                        voceMarcata = 9
+                        xp = GlobalHWVar.gsx // 32 * 8.5
+                        yp = GlobalHWVar.gsy // 18 * 15.2
+                    elif voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6 or voceMarcata == 7:
+                        voceMarcata -= 2
+                        yp -= GlobalHWVar.gsy // 18 * 1.5
+                    elif voceMarcata == 8:
                         voceMarcata -= 1
                         xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 12.6
-                    elif voceMarcata == 7:
+                        yp = GlobalHWVar.gsy // 18 * 11.1
+                    elif voceMarcata == 9:
                         voceMarcata -= 2
                         xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 12.6
+                        yp = GlobalHWVar.gsy // 18 * 11.1
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
-            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
+            elif (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if not configurando:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if voceMarcata == 1 or voceMarcata == 3 or voceMarcata == 4:
-                        voceMarcata += 1
-                        yp = yp + GlobalHWVar.gsy // 18 * 1.5
-                    elif voceMarcata == 2:
-                        voceMarcata += 1
-                        yp = GlobalHWVar.gsy // 18 * 9.6
-                    elif voceMarcata == 5:
-                        voceMarcata += 1
+                    if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
+                        voceMarcata += 2
+                        yp += GlobalHWVar.gsy // 18 * 1.5
+                    elif voceMarcata == 6:
+                        voceMarcata = 7
+                        xp = GlobalHWVar.gsx // 32 * 1
+                        yp += GlobalHWVar.gsy // 18 * 1.5
+                    elif voceMarcata == 7:
+                        voceMarcata = 8
                         xp = GlobalHWVar.gsx // 32 * 4.4
                         yp = GlobalHWVar.gsy // 18 * 15.2
-                    elif voceMarcata == 6:
-                        voceMarcata -= 5
+                    elif voceMarcata == 8:
+                        voceMarcata = 1
                         xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 5.1
-                    elif voceMarcata == 7:
-                        voceMarcata -= 6
-                        xp = GlobalHWVar.gsx // 32 * 1
-                        yp = GlobalHWVar.gsy // 18 * 5.1
+                        yp = GlobalHWVar.gsy // 18 * 6.6
+                    elif voceMarcata == 9:
+                        voceMarcata = 2
+                        xp = GlobalHWVar.gsx // 32 * 8.5
+                        yp = GlobalHWVar.gsy // 18 * 6.6
+                else:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                    bottoneDown = False
+            elif (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
+                if not configurando:
+                    if voceMarcata == 1 or voceMarcata == 3 or voceMarcata == 5:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata += 1
+                        xp = GlobalHWVar.gsy // 18 * 8.5
+                    elif voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 6:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata -= 1
+                        xp = GlobalHWVar.gsy // 18 * 1
+                    elif voceMarcata == 8:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata = 9
+                        xp = GlobalHWVar.gsx // 32 * 8.5
+                        yp = GlobalHWVar.gsy // 18 * 15.2
+                    elif voceMarcata == 9:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata = 8
+                        xp = GlobalHWVar.gsx // 32 * 4.4
+                        yp = GlobalHWVar.gsy // 18 * 15.2
+                    else:
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        bottoneDown = False
+                else:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                    bottoneDown = False
+            elif (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
+                if not configurando:
+                    if voceMarcata == 1 or voceMarcata == 3 or voceMarcata == 5:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata += 1
+                        xp = GlobalHWVar.gsy // 18 * 8.5
+                    elif voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 6:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata -= 1
+                        xp = GlobalHWVar.gsy // 18 * 1
+                    elif voceMarcata == 8:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata = 9
+                        xp = GlobalHWVar.gsx // 32 * 8.5
+                        yp = GlobalHWVar.gsy // 18 * 15.2
+                    elif voceMarcata == 9:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        voceMarcata = 8
+                        xp = GlobalHWVar.gsx // 32 * 4.4
+                        yp = GlobalHWVar.gsy // 18 * 15.2
+                    else:
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        bottoneDown = False
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
@@ -915,71 +1039,222 @@ def settaTastiera():
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
                 GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                FunzioniGraficheGeneriche.messaggio("Configura controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio("Configura tastiera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                FunzioniGraficheGeneriche.messaggio("Seleziona il controller da configurare:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Inizia configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Cancella configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
-                FunzioniGraficheGeneriche.messaggio("Testa configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
-
+                FunzioniGraficheGeneriche.messaggio(u"Se la tua tastiera non rispetta lo standard QWERTY, configura le lettere da usare al posto di Q, W, E, A, S e D. <br> <br> ATTENZIONE: nei tutorial ci si riferirà sempre allo standard QWERTY quando verranno spiegati i comandi di gioco.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4.1, 40, largezzaFoglio=GlobalHWVar.gpy * 15, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniTastiera, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2))
+                FunzioniGraficheGeneriche.messaggio("Esc", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.27, 40)
+                FunzioniGraficheGeneriche.messaggio("2", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.95, GlobalHWVar.gpy * 8, 50)
+                FunzioniGraficheGeneriche.messaggio("3", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.95, GlobalHWVar.gpy * 8, 50)
+                FunzioniGraficheGeneriche.messaggio("0", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 27.04, GlobalHWVar.gpy * 8, 50)
+                lettereImpostate = {"Q": "Q", "W": "W", "E": "E", "A": "A", "S": "S", "D": "D"}
+                # scrivo le lettere personalizzate sulla tastiera
+                for key, idTasto in configTemp.items():
+                    letteraDaScrivere = ""
+                    if idTasto == pygame.K_q:
+                        letteraDaScrivere = "Q"
+                    elif idTasto == pygame.K_w:
+                        letteraDaScrivere = "W"
+                    elif idTasto == pygame.K_e:
+                        letteraDaScrivere = "E"
+                    elif idTasto == pygame.K_r:
+                        letteraDaScrivere = "R"
+                    elif idTasto == pygame.K_t:
+                        letteraDaScrivere = "T"
+                    elif idTasto == pygame.K_y:
+                        letteraDaScrivere = "Y"
+                    elif idTasto == pygame.K_u:
+                        letteraDaScrivere = "U"
+                    elif idTasto == pygame.K_i:
+                        letteraDaScrivere = "I"
+                    elif idTasto == pygame.K_o:
+                        letteraDaScrivere = "O"
+                    elif idTasto == pygame.K_p:
+                        letteraDaScrivere = "P"
+                    elif idTasto == pygame.K_a:
+                        letteraDaScrivere = "A"
+                    elif idTasto == pygame.K_s:
+                        letteraDaScrivere = "S"
+                    elif idTasto == pygame.K_d:
+                        letteraDaScrivere = "D"
+                    elif idTasto == pygame.K_f:
+                        letteraDaScrivere = "F"
+                    elif idTasto == pygame.K_g:
+                        letteraDaScrivere = "G"
+                    elif idTasto == pygame.K_h:
+                        letteraDaScrivere = "H"
+                    elif idTasto == pygame.K_j:
+                        letteraDaScrivere = "J"
+                    elif idTasto == pygame.K_k:
+                        letteraDaScrivere = "K"
+                    elif idTasto == pygame.K_l:
+                        letteraDaScrivere = "L"
+                    elif idTasto == pygame.K_z:
+                        letteraDaScrivere = "Z"
+                    elif idTasto == pygame.K_x:
+                        letteraDaScrivere = "X"
+                    elif idTasto == pygame.K_c:
+                        letteraDaScrivere = "C"
+                    elif idTasto == pygame.K_v:
+                        letteraDaScrivere = "V"
+                    elif idTasto == pygame.K_b:
+                        letteraDaScrivere = "B"
+                    elif idTasto == pygame.K_n:
+                        letteraDaScrivere = "N"
+                    elif idTasto == pygame.K_m:
+                        letteraDaScrivere = "M"
+                    lettereImpostate[key] = letteraDaScrivere
+                    if key == "Q":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.05, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("Q", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 18.45, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "W":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.05, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("W", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 19.4, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "E":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 20.1, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("E", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.5, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "A":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.3, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("A", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 18.65, GlobalHWVar.gpy * 10.43, 35)
+                    elif key == "S":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.3, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("S", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 19.7, GlobalHWVar.gpy * 10.43, 35)
+                    elif key == "D":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 20.35, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("D", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.7, GlobalHWVar.gpy * 10.43, 35)
+                FunzioniGraficheGeneriche.messaggio("Seleziona il tasto da configurare:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + u": Su", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + u": Giù", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + u": Sinistra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + u": Destra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + u": Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + u": Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio("Resetta configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
                 FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
                 FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
             else:
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 1.3))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 7.5, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 1.3))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.8, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 9.7))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniTastiera, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2))
+                FunzioniGraficheGeneriche.messaggio("Esc", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.27, 40)
+                FunzioniGraficheGeneriche.messaggio("2", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.95, GlobalHWVar.gpy * 8, 50)
+                FunzioniGraficheGeneriche.messaggio("3", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.95, GlobalHWVar.gpy * 8, 50)
+                FunzioniGraficheGeneriche.messaggio("0", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 27.04, GlobalHWVar.gpy * 8, 50)
+                lettereImpostate = {"Q": "Q", "W": "W", "E": "E", "A": "A", "S": "S", "D": "D"}
+                # scrivo le lettere personalizzate sulla tastiera
+                for key, idTasto in configTemp.items():
+                    letteraDaScrivere = ""
+                    if idTasto == pygame.K_q:
+                        letteraDaScrivere = "Q"
+                    elif idTasto == pygame.K_w:
+                        letteraDaScrivere = "W"
+                    elif idTasto == pygame.K_e:
+                        letteraDaScrivere = "E"
+                    elif idTasto == pygame.K_r:
+                        letteraDaScrivere = "R"
+                    elif idTasto == pygame.K_t:
+                        letteraDaScrivere = "T"
+                    elif idTasto == pygame.K_y:
+                        letteraDaScrivere = "Y"
+                    elif idTasto == pygame.K_u:
+                        letteraDaScrivere = "U"
+                    elif idTasto == pygame.K_i:
+                        letteraDaScrivere = "I"
+                    elif idTasto == pygame.K_o:
+                        letteraDaScrivere = "O"
+                    elif idTasto == pygame.K_p:
+                        letteraDaScrivere = "P"
+                    elif idTasto == pygame.K_a:
+                        letteraDaScrivere = "A"
+                    elif idTasto == pygame.K_s:
+                        letteraDaScrivere = "S"
+                    elif idTasto == pygame.K_d:
+                        letteraDaScrivere = "D"
+                    elif idTasto == pygame.K_f:
+                        letteraDaScrivere = "F"
+                    elif idTasto == pygame.K_g:
+                        letteraDaScrivere = "G"
+                    elif idTasto == pygame.K_h:
+                        letteraDaScrivere = "H"
+                    elif idTasto == pygame.K_j:
+                        letteraDaScrivere = "J"
+                    elif idTasto == pygame.K_k:
+                        letteraDaScrivere = "K"
+                    elif idTasto == pygame.K_l:
+                        letteraDaScrivere = "L"
+                    elif idTasto == pygame.K_z:
+                        letteraDaScrivere = "Z"
+                    elif idTasto == pygame.K_x:
+                        letteraDaScrivere = "X"
+                    elif idTasto == pygame.K_c:
+                        letteraDaScrivere = "C"
+                    elif idTasto == pygame.K_v:
+                        letteraDaScrivere = "V"
+                    elif idTasto == pygame.K_b:
+                        letteraDaScrivere = "B"
+                    elif idTasto == pygame.K_n:
+                        letteraDaScrivere = "N"
+                    elif idTasto == pygame.K_m:
+                        letteraDaScrivere = "M"
+                    lettereImpostate[key] = letteraDaScrivere
+                    if key == "Q":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.05, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("Q", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 18.45, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "W":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.05, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("W", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 19.4, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "E":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 20.1, GlobalHWVar.gpy * 8.95, 40)
+                        FunzioniGraficheGeneriche.messaggio("E", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.5, GlobalHWVar.gpy * 9.4, 35)
+                    elif key == "A":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.3, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("A", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 18.65, GlobalHWVar.gpy * 10.43, 35)
+                    elif key == "S":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.3, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("S", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 19.7, GlobalHWVar.gpy * 10.43, 35)
+                    elif key == "D":
+                        FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 20.35, GlobalHWVar.gpy * 9.98, 40)
+                        FunzioniGraficheGeneriche.messaggio("D", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.7, GlobalHWVar.gpy * 10.43, 35)
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 6, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4.7))
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + u": Su", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + u": Giù", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + u": Sinistra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + u": Destra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + u": Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + u": Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    if configurando:
+                        FunzioniGraficheGeneriche.messaggio("Esc: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.8, GlobalHWVar.gsy // 18 * 1, 50)
+                    else:
+                        FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 6.2), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 10.5), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 7.6) - 1), (GlobalHWVar.gpx * 8.2, (GlobalHWVar.gpy * 7.6) - 1), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 8.8, (GlobalHWVar.gpy * 7.6) - 1), (GlobalHWVar.gpx * 15.5, (GlobalHWVar.gpy * 7.6) - 1), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 9.1) - 1), (GlobalHWVar.gpx * 8.2, (GlobalHWVar.gpy * 9.1) - 1), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 8.8, (GlobalHWVar.gpy * 9.1) - 1), (GlobalHWVar.gpx * 15.5, (GlobalHWVar.gpy * 9.1) - 1), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 14.4) - 1), (GlobalHWVar.gpx * 15.5, (GlobalHWVar.gpy * 14.4) - 1), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if configurando:
-                FunzioniGraficheGeneriche.messaggio("Clicca i tasti illuminati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
-                if ordineConfigTasti[tastoDaConfigurare] == "croce":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroce, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "cerchio":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCerchio, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "quadrato":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerQuadrato, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "triangolo":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerTriangolo, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "l1":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerL1, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "r1":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerR1, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "start":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerStart, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "select":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                if ordineConfigTasti[tastoDaConfigurare] == "croceDir":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-            padConfiguratoTemp = False
-            if padInizialmeteConfigurato != padConfiguratoTemp:
-                if padConfiguratoTemp:
-                    FunzioniGraficheGeneriche.messaggio("Configurazione temporaneamente modificata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
-                else:
-                    FunzioniGraficheGeneriche.messaggio("Configurazione salvata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
-            else:
-                if idController in listaIdPadConfigModificata:
-                    FunzioniGraficheGeneriche.messaggio("Configurazione temporaneamente modificata", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio("Imposta il tasto indicato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+
+            if configTemp != GlobalHWVar.tastiConfiguratiTastiera:
+                FunzioniGraficheGeneriche.messaggio("Configurazione temporaneamente modificata", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
 
             if configurando:
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
@@ -1134,7 +1409,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
             bottoneDown = False
@@ -1146,6 +1421,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 elif bottoneDown == "mouseSinistro" and cursoreSuImpoTastiera:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     settaTastiera()
+                    primoFrame = True
                 elif voceMarcata == 3 and not bottoneDown == "mouseSinistro":
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     settaTastiera()
@@ -1241,7 +1517,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu" or ((voceMarcata != 3 and voceMarcata != 4) and (bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
+        if bottoneDown == "mouseSinistro" or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padGiu" or bottoneDown == "padSu" or ((voceMarcata != 3 and voceMarcata != 4) and (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -1249,7 +1525,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaSchermo = False
-            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6 or voceMarcata == 7:
                     voceMarcata -= 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1270,7 +1546,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = GlobalHWVar.gsy // 18 * 15.2
                     xp = GlobalHWVar.gsx // 32 * 11.9
-            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if linguaTemp == "ita":
@@ -1321,7 +1597,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
                     xp = GlobalHWVar.gsx // 32 * 11.9
-            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1342,7 +1618,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = GlobalHWVar.gsy // 18 * 4.8
                     xp = GlobalHWVar.gsx // 32 * 1
-            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if linguaTemp == "ita":
@@ -1520,7 +1796,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
@@ -1532,25 +1808,25 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if linguaTemp == "eng":
                 FunzioniGraficheGeneriche.messaggio("English", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if voceMarcata == 1:
-                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.6))
-                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 19.9, GlobalHWVar.gsy // 18 * 4.6))
             FunzioniGraficheGeneriche.messaggio(str(int(volumeEffettiTemp)), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 6.1, 60)
             if voceMarcata == 2:
                 if volumeEffettiTemp != 0:
-                    if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                    if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 6))
                 if volumeEffettiTemp != 10:
-                    if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                    if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
@@ -1560,11 +1836,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8.9, 60)
             FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 10.3, 60)
             if voceMarcata == 5:
-                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
-                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.2))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.2))
@@ -1575,11 +1851,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             else:
                 FunzioniGraficheGeneriche.messaggio("Finestra senza bordi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             if voceMarcata == 6:
-                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 11.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 11.6))
-                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
@@ -1588,11 +1864,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             else:
                 FunzioniGraficheGeneriche.messaggio(u"Disattivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
             if voceMarcata == 7:
-                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
-                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 20.9, GlobalHWVar.gsy // 18 * 13))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 20.9, GlobalHWVar.gsy // 18 * 13))

@@ -52,7 +52,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
 
             # gestione degli input
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
-            if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCerchio":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 aggiornaSchermata = True
                 indietro = True
@@ -69,7 +69,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 FunzioniGraficheGeneriche.messaggio("Slot di memoria vuoto...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14, 100)
@@ -95,7 +95,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
 
             # gestione degli input
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
-            if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCerchio":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 aggiornaSchermata = True
                 indietro = True
@@ -112,7 +112,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 FunzioniGraficheGeneriche.messaggio("Slot di memoria danneggiato...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 14, 100)
@@ -238,7 +238,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             if conferma:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 xp = vxp
@@ -364,7 +364,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -372,7 +372,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or salMarcatoVecchio != salMarcato or aggiornaInterfacciaPerCambioInput:
             aggiornaSchermo = False
-            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if conferma:
                     if voceMarcata == 2:
                         voceMarcata -= 1
@@ -394,7 +394,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                         salMarcato += 2
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         xp = GlobalHWVar.gsx // 32 * 20.6
-            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if conferma:
                     if voceMarcata == 1:
                         voceMarcata += 1
@@ -499,7 +499,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio("Tasto centrale: cancella partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
                     elif GlobalHWVar.usandoIlController:
-                        FunzioniGraficheGeneriche.messaggio("Triangolo: cancella partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio("Y: cancella partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
                     else:
                         FunzioniGraficheGeneriche.messaggio("SHIFT: cancella partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
                 if cosa == 2:
@@ -507,27 +507,27 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                         if GlobalHWVar.mouseVisibile:
                             FunzioniGraficheGeneriche.messaggio("Tasto centrale: salva partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
                         elif GlobalHWVar.usandoIlController:
-                            FunzioniGraficheGeneriche.messaggio("Triangolo: salva partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio("Y: salva partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
                         else:
                             FunzioniGraficheGeneriche.messaggio("SHIFT: salva partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
                     else:
                         if GlobalHWVar.mouseVisibile:
                             FunzioniGraficheGeneriche.messaggio("Tasto centrale: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
                         elif GlobalHWVar.usandoIlController:
-                            FunzioniGraficheGeneriche.messaggio("Triangolo: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio("Y: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
                         else:
                             FunzioniGraficheGeneriche.messaggio("SHIFT: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
                 if cosa == 3:
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio("Tasto centrale: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
                     elif GlobalHWVar.usandoIlController:
-                        FunzioniGraficheGeneriche.messaggio("Triangolo: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio("Y: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
                     else:
                         FunzioniGraficheGeneriche.messaggio("SHIFT: carica partita", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 

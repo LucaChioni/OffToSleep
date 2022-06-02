@@ -159,7 +159,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                         if fineDialogo:
                             break
                         bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-                        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+                        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                             fineDialogo = True
                             bottoneDown = False

@@ -612,7 +612,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     while not risposta:
         # gestione degli input
         bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
             bottoneDown = False
@@ -1273,7 +1273,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             nyp = 0
             tastotempfps = 8
         # esci
-        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
             bottoneDown = False
@@ -1391,7 +1391,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
             bottoneDown = False
         # inquadra bersaglio
-        if bottoneDown == pygame.K_e or bottoneDown == "padQuadrato":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["E"] or bottoneDown == "padQuadrato":
             selezioneAvvenuta = False
             if xp == rx and yp == ry:
                 selezioneAvvenuta = True
@@ -1414,22 +1414,22 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         # movimento puntatore
-        if bottoneDown == pygame.K_w or bottoneDown == "padSu":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu":
             suPorta = False
             suCofanetto = False
             nyp = -GlobalHWVar.gpy
             nxp = 0
-        if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra":
             suPorta = False
             suCofanetto = False
             nxp = -GlobalHWVar.gpx
             nyp = 0
-        if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu":
             suPorta = False
             suCofanetto = False
             nyp = GlobalHWVar.gpy
             nxp = 0
-        if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra":
             suPorta = False
             suCofanetto = False
             nxp = GlobalHWVar.gpx
@@ -1498,13 +1498,13 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 nyp = 0
             tastotempfps -= 1
         if tastotempfps == 0 and bottoneDown:
-            if bottoneDown == pygame.K_w or bottoneDown == "padSu":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu":
                 nyp = -GlobalHWVar.gpy
-            if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra":
                 nxp = -GlobalHWVar.gpx
-            if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu":
                 nyp = GlobalHWVar.gpy
-            if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra":
                 nxp = GlobalHWVar.gpx
             tastotempfps = 2
 

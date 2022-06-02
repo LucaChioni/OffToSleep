@@ -380,7 +380,7 @@ def disegnaSchermataSelezioneLingua():
 
         # gestione degli input
         bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-        if bottoneDown == pygame.K_w or bottoneDown == "padSu" or bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+        if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu" or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu":
             GlobalHWVar.canaleSoundPuntatoreSposta.play(sndSpostapun)
             aggiornaSchermo = True
             bottoneDown = False

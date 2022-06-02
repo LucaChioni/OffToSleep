@@ -188,6 +188,7 @@ global impostaControllerR1
 global impostaControllerStart
 global impostaControllerSelect
 global impostaControllerCroceDirezionale
+global impostazioniTastiera
 global robograf1
 global robograf2
 global robograf2b
@@ -260,7 +261,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1884
+numImgTotali = 1886
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -466,6 +467,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global impostaControllerStart
     global impostaControllerSelect
     global impostaControllerCroceDirezionale
+    global impostazioniTastiera
     global robograf1
     global robograf2
     global robograf2b
@@ -1032,6 +1034,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     impostaControllerStart = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerSelect = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerSelect.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostazioniTastiera = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoTastiera.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 16, False)
 
     # img grafiche / dialoghi
     sfondoDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False, imgImpenetrabile=True)

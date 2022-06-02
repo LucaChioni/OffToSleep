@@ -13,7 +13,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
         GlobalHWVar.aggiornaInterfacciaPerCambioInputMainFunc = True
         aggiornaInterfacciaDuranteLePause = False
 
-    if controllerDaConfigurare:
+    if controllerDaConfigurare or configurandoTastiera:
         GlobalHWVar.listaInputInSospeso = []
     if not gestioneDuranteLePause and len(GlobalHWVar.listaInputInSospeso) > 0:
         for inputInSospeso in GlobalHWVar.listaInputInSospeso:
@@ -102,98 +102,103 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
 
         # tasto tastiera
         if (event.type == pygame.KEYDOWN or event.type == pygame.KEYUP) and not cambioInput and not (GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
-            if event.type == pygame.KEYDOWN and (event.key == pygame.K_0 or event.key == pygame.K_KP0):
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
+            if configurandoTastiera:
+                if event.type == pygame.KEYDOWN:
                     bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_e:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and (event.key == pygame.K_3 or event.key == pygame.K_KP3):
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and (event.key == pygame.K_2 or event.key == pygame.K_KP2):
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                GlobalHWVar.listaTastiPremuti.append(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
-                elif not tastoTrovato:
-                    bottoneDown = event.key
-                tastoTrovato = True
+                    tastoTrovato = True
+            else:
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_0 or event.key == pygame.K_KP0):
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["W"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["A"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["S"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["D"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["E"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == GlobalHWVar.tastiConfiguratiTastiera["Q"]:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_3 or event.key == pygame.K_KP3):
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_2 or event.key == pygame.K_KP2):
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    GlobalHWVar.listaTastiPremuti.append(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                    elif not tastoTrovato:
+                        bottoneDown = event.key
+                    tastoTrovato = True
 
-            if event.type == pygame.KEYUP and event.key in GlobalHWVar.listaTastiPremuti:
-                GlobalHWVar.listaTastiPremuti.remove(event.key)
-                if gestioneDuranteLePause:
-                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Up")
+                if event.type == pygame.KEYUP and event.key in GlobalHWVar.listaTastiPremuti:
+                    GlobalHWVar.listaTastiPremuti.remove(event.key)
+                    if gestioneDuranteLePause:
+                        GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Up")
 
-            if event.type == pygame.KEYUP and event.key == bottoneDown:
-                bottoneDown = False
+                if event.type == pygame.KEYUP and event.key == bottoneDown:
+                    bottoneDown = False
 
         # tasto mouse
         if (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP) and not cambioInput and GlobalHWVar.mouseVisibile:

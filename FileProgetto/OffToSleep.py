@@ -986,7 +986,7 @@ def gameloop():
         elif len(percorsoDaEseguire) > 0 and mosseRimasteRob <= 0 and not nemiciInMovimento:
             bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
             if avanzaManualmentePercorsoDaEseguire:
-                if (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato and (inquadratoQualcosa.startswith("movimento") or inquadratoQualcosa.startswith("personaggio") or inquadratoQualcosa.startswith("porta") or inquadratoQualcosa.startswith("cofanetto") or inquadratoQualcosa == "saltaTurno")) or bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_s or bottoneDown == pygame.K_d or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padGiu" or bottoneDown == "padDestra" or bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect" or bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
+                if (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato and (inquadratoQualcosa.startswith("movimento") or inquadratoQualcosa.startswith("personaggio") or inquadratoQualcosa.startswith("porta") or inquadratoQualcosa.startswith("cofanetto") or inquadratoQualcosa == "saltaTurno")) or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padGiu" or bottoneDown == "padDestra" or bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect" or bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
                     movimentoDaCompiere = percorsoDaEseguire.pop(0)
                 elif bottoneDown:
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -1010,7 +1010,7 @@ def gameloop():
                 saltaTurno = True
 
             # movimenti personaggio
-            if bottoneDown == pygame.K_w or bottoneDown == "padSu" or movimentoDaCompiere == "w":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or bottoneDown == "padSu" or movimentoDaCompiere == "w":
                 refreshSchermo = True
                 npers = 3
                 pers = GlobalImgVar.persw
@@ -1030,7 +1030,7 @@ def gameloop():
                 collana = collanaw
                 ny = -GlobalHWVar.gpy
                 nx = 0
-            if bottoneDown == pygame.K_a or bottoneDown == "padSinistra" or movimentoDaCompiere == "a":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra" or movimentoDaCompiere == "a":
                 refreshSchermo = True
                 npers = 2
                 pers = GlobalImgVar.persa
@@ -1050,7 +1050,7 @@ def gameloop():
                 collana = collanaa
                 nx = -GlobalHWVar.gpx
                 ny = 0
-            if bottoneDown == pygame.K_s or bottoneDown == "padGiu" or movimentoDaCompiere == "s":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["S"] or bottoneDown == "padGiu" or movimentoDaCompiere == "s":
                 refreshSchermo = True
                 npers = 4
                 pers = GlobalImgVar.perss
@@ -1070,7 +1070,7 @@ def gameloop():
                 collana = collanas
                 ny = GlobalHWVar.gpy
                 nx = 0
-            if bottoneDown == pygame.K_d or bottoneDown == "padDestra" or movimentoDaCompiere == "d":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra" or movimentoDaCompiere == "d":
                 refreshSchermo = True
                 npers = 1
                 pers = GlobalImgVar.persd
@@ -1091,7 +1091,7 @@ def gameloop():
                 nx = GlobalHWVar.gpx
                 ny = 0
             # vado in mod. interazione
-            if bottoneDown == pygame.K_e or bottoneDown == "padQuadrato":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["E"] or bottoneDown == "padQuadrato":
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
@@ -1099,7 +1099,7 @@ def gameloop():
                 attacco = 1
                 bottoneDown = False
             # tolgo l'obiettivo se presente
-            if bottoneDown == pygame.K_q or bottoneDown == "padCerchio":
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
