@@ -62,7 +62,7 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
             if cambiosta:
                 fineanimaz = animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
                 if fineanimaz == 0:
-                    SetPosizProtagonistaAudio.riproduciSuoniCambioStanza(numStanza, stanzaVecchia)
+                    SetPosizProtagonistaAudio.riproduciSuoniCambioStanza(numStanza, stanzaVecchia, avanzamentoStoria)
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
             else:
@@ -482,8 +482,8 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, nemicoInqua
     if not cambiosta:
         for nemico in listaNemici:
             if nemico.animaSpostamento and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
-                if not GlobalHWVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
-                    GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemici)
+                if not GlobalHWVar.canaleSoundPassiNemici.get_busy() and fineanimaz > 6:
+                    GlobalHWVar.canaleSoundPassiNemici.play(GlobalSndVar.rumoreMovimentoNemici)
                 nemico.animazioneFatta = True
                 animazioneNemici = True
                 # rumorecamminataNemico.play()
@@ -1339,8 +1339,12 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
             if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
                 personaggio.animazioneFatta = True
                 animazionePersonaggi = True
-                if not GlobalHWVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
-                    GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoPersonaggi)
+                if personaggio.tipo in GlobalImgVar.vettoreNomiNemici:
+                    if not GlobalHWVar.canaleSoundPassiNemici.get_busy() and fineanimaz > 6:
+                        GlobalHWVar.canaleSoundPassiNemici.play(GlobalSndVar.rumoreMovimentoNemici)
+                else:
+                    if not GlobalHWVar.canaleSoundPassiPersonaggi.get_busy() and fineanimaz > 6:
+                        GlobalHWVar.canaleSoundPassiPersonaggi.play(GlobalSndVar.rumoreMovimentoPersonaggi)
                 if personaggio.direzione == "d":
                     if 5 < fineanimaz <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDMov1, (personaggio.x - (GlobalHWVar.gpx * fineanimaz // 10), personaggio.y))

@@ -125,7 +125,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"(Questo cinghiale non è riuscito a liberarsi... almeno ha smesso di fare quegli strazianti lamenti...)")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -134,6 +134,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Un cinghiale mezzo mangiato da altri animali...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Il corpo è già in decomposizione...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoFuoco":
         partiDialogo = []
@@ -284,7 +294,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"(Qualche animale dev'essersi divorato tutto...)")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -292,6 +302,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"(Non c'è più niente qua sopra...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Una tavoletta di legno...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoMucchioLegna":
         partiDialogo = []
@@ -543,15 +562,101 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Quindi sei tipo... ricchissimo!")
+            dialogo.append(u"Quindi sei tipo... ricchissimo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Tsk...<*> vai in cerca di ricchezza, ragazzo?")
+            dialogo.append(u"<*>#italic#Tsk...<*> vai in cerca di ricchezze, ragazzo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Sì, cioè... non so, mi piacerebbe... diciamo che vorrei usare il mio tempo per cose più interessan-")
+            dialogo.append(u"No, cioè... non so, mi piacerebbe... diciamo che vorrei usare il mio tempo per cose più interessan-")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"OH CAZZO, ATTENTO!")
+            partiDialogo.append(dialogo)
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivataInForestaCadetta5Calcolatore"]:
+            nome = "Sam"
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... Cinghiale?! Hanno le ossa così piccole?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Mmh...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Ehm ehm...<*> da quanto sei in questa foresta?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Cinque giorni.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"E quanti giorni ci devi rimanere ancora?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Nove.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Nove... e cosa succede se torni prima, o se non torni affatto?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Non supero la prova.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ah beh, certo... ma, scusa se te lo chiedo, in questo genere di prove non dovrebbe essere vietato l'aiuto di altre persone?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Mi è concesso sfruttare tutto ciò che mi viene messo a disposizione dalla natura. Tu non ne fai parte, ragazzo?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Mah... senz'altro, <*>#italic#ragazzo...<*>")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ma... quindi tu vivi in città?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Mh...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Quindi sei tipo... ricchissimo?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"<*>#italic#Tsk...<*> vai in cerca di ricchezze, ragazzo?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"No, cioè... non so, mi piacerebbe... diciamo che vorrei usare il mio tempo per cose più interessan-")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

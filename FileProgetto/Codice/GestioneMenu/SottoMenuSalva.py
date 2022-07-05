@@ -463,15 +463,21 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             scusalva = GlobalImgVar.vetImgScudiPixellate[dati[7]]
                             guasalva = GlobalImgVar.vetImgGuantiPixellate[dati[129]]
                             colsalva = GlobalImgVar.vetImgCollanePixellate[dati[130]]
-                            FunzioniGraficheGeneriche.messaggio("Livello: " + str(dati[4]), GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.6) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 11, 60, centrale=True)
-                            GlobalHWVar.disegnaImmagineSuSchermo(arcsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(persalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(persSalvaBraccia, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(armsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(colsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(spasalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(guasalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
-                            GlobalHWVar.disegnaImmagineSuSchermo(scusalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.5))
+                            FunzioniGraficheGeneriche.messaggio("Livello: " + str(dati[4]), GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.6) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 10.4, 60, centrale=True)
+                            tempoGioco_secondi = dati[146]
+                            hours = str(int(tempoGioco_secondi // 3600)).zfill(2)
+                            minutes = str(int((tempoGioco_secondi % 3600) // 60)).zfill(2)
+                            seconds = str(int(tempoGioco_secondi % 60)).zfill(2)
+                            tempoGioco = str(hours) + ":" + str(minutes) + ":" + str(seconds)
+                            FunzioniGraficheGeneriche.messaggio(tempoGioco, GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.6) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 11.2, 60, centrale=True)
+                            GlobalHWVar.disegnaImmagineSuSchermo(arcsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(persalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(persSalvaBraccia, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(armsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(colsalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(spasalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(guasalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
+                            GlobalHWVar.disegnaImmagineSuSchermo(scusalva, ((GlobalHWVar.gpx * 6.1) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gpy * 5.1))
                         else:
                             FunzioniGraficheGeneriche.messaggio("Slot corrotto", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.6) + ((contasalva - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 8, 60, centrale=True)
                     contasalva += 1

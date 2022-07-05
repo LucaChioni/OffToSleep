@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -73,6 +74,13 @@ def salvataggio(n, datiAttuali, datiGameover):
                 tutticofanetti[i + 1] = tutticofanetti[i + 1] // GlobalHWVar.gpx
                 tutticofanetti[i + 2] = tutticofanetti[i + 2] // GlobalHWVar.gpy
                 i += 4
+            # aggiorno il tempo di gioco
+            if not salvataggioFatto:
+                tempoAttuale = datetime.datetime.now()
+                tempoSessione = tempoAttuale - GlobalHWVar.tempoInizioPartita
+                tempoSessione_secondi = tempoSessione.total_seconds()
+                dati[146] += tempoSessione_secondi
+                GlobalHWVar.tempoInizioPartita = datetime.datetime.now()
 
             for i in range(0, len(dati)):
                 scrivi.write("%i_" % dati[i])
@@ -546,5 +554,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
             datiAttuali = [[], [], [], [], [], [], [], [], [], [], [], []]
         if len(datiGameover) == 0:
             datiGameover = [[], [], [], [], [], [], [], [], [], [], [], []]
+
+    if not checkErrori:
+        GlobalHWVar.tempoInizioPartita = datetime.datetime.now()
 
     return datiAttuali, datiGameover, tipoErrore

@@ -173,10 +173,10 @@ def menu(caricaSalvataggio, gameover):
     rxInizialie = 0
     ryInizialie = 0
     pvIniziali = GlobalGameVar.statistichePerLivello[0][0]
-    # dimensione: 0-144 (=> 145 variabili)
+    # dimensione: 0-146 (=> 147 variabili)
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello - moneteSpeseDaRod
+    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob - pazzoStrabico - cambiataCastello - moneteSpeseDaRod - tempo di gioco
     datiIniziali = [0, 1, xInizialie, yInizialie, 1, pvIniziali, 0, 0, 0, 0, 0,  # <- statistiche
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
@@ -186,7 +186,7 @@ def menu(caricaSalvataggio, gameover):
         0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
         rxInizialie, ryInizialie, -1, -1, -1, 0, 1, 3, False,  # <- info aggiunte per poter salvare ovunque
-        False, False, 0  # <- pazzoStrabico, cambiataCastello e moneteSpeseDaRod
+        False, False, 0, 0  # <- pazzoStrabico, cambiataCastello, moneteSpeseDaRod e tempo di gioco
         ]
 
     # posizione porte e cofanetti nel vettore dati

@@ -92,17 +92,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(È la leva che ho usato per aprire il tunnel...)")
                 partiDialogo.append(dialogo)
-            elif avanzamentoDialogo == 0:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                avanzaColDialogo = True
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"(Tiro la leva...)")
-                partiDialogo.append(dialogo)
-            else:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -110,7 +100,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È la leva che ho usato per aprire il tunnel...)")
+                dialogo.append(u"(Non posso tirarla adesso...)")
                 partiDialogo.append(dialogo)
+            else:
+                if avanzamentoDialogo == 0:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = True
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(Tiro la leva...)")
+                    partiDialogo.append(dialogo)
+                else:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"(È la leva che ho usato per aprire il tunnel...)")
+                    partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

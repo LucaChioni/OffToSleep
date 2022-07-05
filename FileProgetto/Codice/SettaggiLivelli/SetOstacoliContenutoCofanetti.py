@@ -25,6 +25,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliCavernaImpo as OstacoliCav
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliVulcano as OstacoliVulcano
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliTunnelSubacqueo as OstacoliTunnelSubacqueo
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliLaboratorioNeil as OstacoliLaboratorioNeil
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliStanzaEsplosa as OstacoliStanzaEsplosa
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -1843,6 +1844,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliTunnelSubacqueo.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
         elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliLaboratorioNeil.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
+        elif stanza == GlobalGameVar.dictStanze["stanzaEsplosa"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliStanzaEsplosa.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi, avanzamentoStoria)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):

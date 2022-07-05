@@ -267,7 +267,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["buttataNelLagoDuranteLaFuga"] and stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
-        GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemici)
+        GlobalHWVar.canaleSoundPassiNemici.play(GlobalSndVar.rumoreMovimentoNemici)
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreTuffoLago)
         if GlobalHWVar.volumeCanzoni <= 0:
             i = 0
@@ -372,6 +372,97 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 i += 1
             personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
             avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaInternoCastello1PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 14 and personaggio.y == GlobalHWVar.gpy * 2:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello5"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello5"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaEsternoCastello5PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["esternoCastello4"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 16 and personaggio.y == GlobalHWVar.gpy * 2:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            avanzamentoStoria += 1
+            stanza = GlobalGameVar.dictStanze["esternoCastello4"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+            GlobalHWVar.nonAggiornareSchermo = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoCancelloCastelloDaRenéPreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["esternoCastello4"]:
+        if GlobalHWVar.nonAggiornareSchermo:
+            GlobalHWVar.nonAggiornareSchermo = False
+            GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello4"] and personaggio.tipo == "BibliotecarioOperato":
+                listaPersonaggiTotali.remove(personaggio)
+                break
+        for personaggio in listaPersonaggi:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello4"] and personaggio.tipo == "BibliotecarioOperato":
+                listaPersonaggi.remove(personaggio)
+                break
+        avanzamentoStoria += 1
+        carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaEsternoCastello4PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["esternoCastello2"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 2 and personaggio.y == GlobalHWVar.gpy * 6:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaEsternoCastello2PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 2 and personaggio.y == GlobalHWVar.gpy * 9:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello1"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["esternoCastello1"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
             caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire

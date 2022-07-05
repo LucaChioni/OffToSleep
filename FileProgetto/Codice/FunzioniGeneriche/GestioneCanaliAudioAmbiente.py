@@ -47,3 +47,15 @@ class CanaliAudioAmbiente(object):
                 break
             i += 1
         return audioInEsecuzione
+
+    def mettiInPausa(self):
+        i = 0
+        while i < self.numCanali:
+            self.vetCanali[i].pause()
+            i += 1
+
+    def togliPausa(self):
+        i = 0
+        while i < self.numCanali:
+            self.vetCanali[i].unpause()
+            i += 1

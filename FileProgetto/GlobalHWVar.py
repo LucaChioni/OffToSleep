@@ -147,7 +147,7 @@ def quit():
 # canali audio / volume (0-1)
 volumeCanzoni = 0.5
 volumeEffetti = 0.5
-maxCanaliAudio = 17
+maxCanaliAudio = 18
 pygame.mixer.set_num_channels(maxCanaliAudio)
 numCanaleAudioAttuale = 0
 canaleSoundCanzone = pygame.mixer.Channel(numCanaleAudioAttuale)
@@ -160,7 +160,9 @@ canaleSoundPassiRallo = pygame.mixer.Channel(numCanaleAudioAttuale)
 numCanaleAudioAttuale += 1
 canaleSoundPassiColco = pygame.mixer.Channel(numCanaleAudioAttuale)
 numCanaleAudioAttuale += 1
-canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(numCanaleAudioAttuale)
+canaleSoundPassiNemici = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPassiPersonaggi = pygame.mixer.Channel(numCanaleAudioAttuale)
 numCanaleAudioAttuale += 1
 canaleSoundMorteNemici = pygame.mixer.Channel(numCanaleAudioAttuale)
 numCanaleAudioAttuale += 1
@@ -181,7 +183,8 @@ def initVolumeSounds():
     canaleSoundPuntatoreSposta.set_volume(volumeEffetti)
     canaleSoundPassiRallo.set_volume(volumeEffetti)
     canaleSoundPassiColco.set_volume(volumeEffetti)
-    canaleSoundPassiNemiciPersonaggi.set_volume(volumeEffetti)
+    canaleSoundPassiNemici.set_volume(volumeEffetti)
+    canaleSoundPassiPersonaggi.set_volume(volumeEffetti)
     canaleSoundMorteNemici.set_volume(volumeEffetti)
     canaleSoundLvUp.set_volume(volumeEffetti)
     canaleSoundInterazioni.set_volume(volumeEffetti)
@@ -779,3 +782,6 @@ while i > 0:
     i -= 1
 listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
 print (listaRisoluzioniDisponibili)
+
+# definisco la variabile che mi serve per sapere quanto tempo hai giocato (per metterlo nel salvataggio)
+tempoInizioPartita = False

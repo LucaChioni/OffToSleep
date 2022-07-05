@@ -100,9 +100,15 @@ global rumoreLamentoHansCinghiale
 global rumoreLamentoCinghiale
 global rumoreBussareVetro
 global rumoreIndossareCasco
+global suonoPortaLaboratorioSegretoDiNeil
+global rumoreTaglioSbarreTunnelDiRod
+global rumoreGettareSbarreATerra
+global rumoreLancioMissile
+global rumoreEsplosioneMissile
+global rumoreAttaccoCinghialeAdHans
 
 
-numSndTotali = 95
+numSndTotali = 101
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -212,6 +218,12 @@ def loadSounds(numSndCaricato):
     global rumoreLamentoCinghiale
     global rumoreBussareVetro
     global rumoreIndossareCasco
+    global suonoPortaLaboratorioSegretoDiNeil
+    global rumoreTaglioSbarreTunnelDiRod
+    global rumoreGettareSbarreATerra
+    global rumoreLancioMissile
+    global rumoreEsplosioneMissile
+    global rumoreAttaccoCinghialeAdHans
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -312,6 +324,12 @@ def loadSounds(numSndCaricato):
     rumoreLamentoCinghiale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LamentoCinghiale.wav")
     rumoreBussareVetro = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/BussareVetro.wav")
     rumoreIndossareCasco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/IndossareCasco.wav")
+    suonoPortaLaboratorioSegretoDiNeil = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/PortaLaboratorioNeil.wav")
+    rumoreTaglioSbarreTunnelDiRod = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/TaglioSbarreTunnelDiRod.wav")
+    rumoreGettareSbarreATerra = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/GettareSbarreATerra.wav")
+    rumoreLancioMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LancioMissile.wav")
+    rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
+    rumoreAttaccoCinghialeAdHans = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttaccoCinghialeAdHans.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

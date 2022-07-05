@@ -222,13 +222,13 @@ def definisciImgOggetti(tipo):
     if tipo == "OggettoTavoloVuotoCastelloA":
         disegnaImg = True
         numImg = 5
-        numImgDialogo = 1
-        nomeImgDialogo = ["Vuota"]
+        numImgDialogo = 2
+        nomeImgDialogo = ["Vuota", "SaraDuranteOperazioneDialogo"]
     if tipo == "OggettoTavoloVuotoCastelloB":
         disegnaImg = True
         numImg = 3
-        numImgDialogo = 1
-        nomeImgDialogo = ["Vuota"]
+        numImgDialogo = 2
+        nomeImgDialogo = ["Vuota", "SaraDuranteOperazioneDialogo"]
     if tipo.startswith("OggettoDictCadavere"):
         disegnaImg = True
         numImg = 1
@@ -262,8 +262,33 @@ def definisciImgOggetti(tipo):
     if tipo == "OggettoCellaNeil":
         disegnaImg = False
         numImg = 1
+        numImgDialogo = 2
+        nomeImgDialogo = ["Vuota", "NeilDialogo"]
+    if tipo == "OggettoImpoScarico":
+        disegnaImg = True
+        numImg = 1
         numImgDialogo = 1
-        nomeImgDialogo = ["NeilDialogo"]
+        nomeImgDialogo = ["ImpoScaricoDialogo"]
+    if tipo == "OggettoLettoNeilA":
+        disegnaImg = True
+        numImg = 3
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoLettoNeilB":
+        disegnaImg = True
+        numImg = 2
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoBibliotecarioCalcolatore":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["BibliotecarioConCascoDialogo"]
+    if tipo == "OggettoImpoFermo":
+        disegnaImg = True
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
 
     return disegnaImg, numImg, numImgDialogo, nomeImgDialogo
 
@@ -278,6 +303,10 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 2
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
             numImgAttuale = 3
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["monologoPerTornareIndietroNelTempoAllaSeraDellInizioDelGioco"]:
+            numImgAttuale = 2
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa2NellaSeraDellInizioDelGioco"]:
+            numImgAttuale = 3
     if tipo == "OggettoSiepe":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             numImgAttuale = 1
@@ -285,16 +314,24 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 2
         if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
             numImgAttuale = 3
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            numImgAttuale = 1
     if tipo == "OggettoFuoco":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             numImgAttuale = 2
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            numImgAttuale = 1
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["colpitoHansDalCinghialeCalcolatore"]:
+                numImgAttuale = 2
     if tipo == "OggettoCibo":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"]:
             numImgAttuale = 1
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             numImgAttuale = 2
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            numImgAttuale = 1
     if tipo == "OggettoMucchioLegna":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
             numImgAttuale = 1
@@ -331,6 +368,14 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
             numImgAttuale = 3
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
             numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"]:
+            numImgAttuale = 4
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
+            numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioTemporaleIndietroDi10MinutiInInternoCastello20"]:
+            numImgAttuale = 4
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["NeilEntratoNellaCellaDelSuoLaboratorio"]:
+            numImgAttuale = 1
     if tipo == "OggettoTavoloVuotoCastelloB":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rimossoImpoMessoSulTavoloDopoConsegnaStrumenti"]:
             numImgAttuale = 1
@@ -339,6 +384,14 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiataSulTavoloPostRianimazione"]:
             numImgAttuale = 2
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzataDaTavoloPostBloccoTempo"]:
+            numImgAttuale = 0
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"]:
+            numImgAttuale = 2
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
+            numImgAttuale = 0
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioTemporaleIndietroDi10MinutiInInternoCastello20"]:
+            numImgAttuale = 2
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["NeilEntratoNellaCellaDelSuoLaboratorio"]:
             numImgAttuale = 0
     if tipo == "OggettoSaraNelLago":
         if GlobalGameVar.armaturaIndossata == 0 and not GlobalGameVar.cambiataAlCastello[0]:
@@ -354,6 +407,14 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
     if tipo == "OggettoSaraSdraiata":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
             numImgAttuale = 1
+    if tipo == "OggettoLettoNeilA":
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiatoNeilSulLettoDelLaboratorio"]:
+            numImgAttuale = 1
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["chiusoOcchiNeilSulLettoDelLaboratorio"]:
+            numImgAttuale = 2
+    if tipo == "OggettoLettoNeilB":
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sdraiatoNeilSulLettoDelLaboratorio"]:
+            numImgAttuale = 1
 
     return numImgAttuale
 
@@ -364,7 +425,7 @@ def impostaImgOggettoDialogoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo)
     if tipo == "OggettoLettoSara":
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
             numImgAttualeDialogo = 0
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["monologoPerTornareIndietroNelTempoAllaSeraDellInizioDelGioco"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa2NellaSeraDellInizioDelGioco"]:
             numImgAttualeDialogo = 1
         else:
             numImgAttualeDialogo = 2
@@ -375,6 +436,25 @@ def impostaImgOggettoDialogoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo)
             numImgAttualeDialogo = 1
     if tipo == "OggettoCellaCostruttore":
         if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            numImgAttualeDialogo = 1
+        else:
+            numImgAttualeDialogo = 0
+    if tipo == "OggettoTavoloVuotoCastelloA":
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
+            numImgAttualeDialogo = 1
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioViaggioTemporaleIndietroDi10MinutiInInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["NeilEntratoNellaCellaDelSuoLaboratorio"]:
+            numImgAttualeDialogo = 1
+        else:
+            numImgAttualeDialogo = 0
+    if tipo == "OggettoTavoloVuotoCastelloB":
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"]:
+            numImgAttualeDialogo = 1
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioViaggioTemporaleIndietroDi10MinutiInInternoCastello20"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["NeilEntratoNellaCellaDelSuoLaboratorio"]:
+            numImgAttualeDialogo = 1
+        else:
+            numImgAttualeDialogo = 0
+    if tipo == "OggettoCellaNeil":
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sparitoNeilDallaCellaDelLaboratorioSecondaVolta"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             numImgAttualeDialogo = 1
         else:
             numImgAttualeDialogo = 0
@@ -421,6 +501,15 @@ def setImgDialogoProtagonista(avanzamentoStoria):
     elif GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["apertoOcchiPostdialogoNeilRene1"]:
         GlobalGameVar.nomePersonaggioDialoghi = u"René"
         imgDaUsare = "ReneDialogo"
+    elif GlobalGameVar.dictAvanzamentoStoria["tornatoIndietroNelTempoAPrimaCheNeilLasciasseIlSuoUfficio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogo2RenéNeilPostAvvioSequenzaNelCalcolatore"]:
+        GlobalGameVar.nomePersonaggioDialoghi = u"René"
+        imgDaUsare = "ReneDialogo"
+    elif GlobalGameVar.dictAvanzamentoStoria["uscitoRodDalPalazzoPreLancioMissile"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avvioLancioMissileNucleare"]:
+        GlobalGameVar.nomePersonaggioDialoghi = u"Rod"
+        imgDaUsare = "RodFuturoDialogo"
+    elif GlobalGameVar.dictAvanzamentoStoria["arrivataInForestaCadetta5Calcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoHansSamCalcolatore"]:
+        GlobalGameVar.nomePersonaggioDialoghi = u"Hans"
+        imgDaUsare = "FratelloMaggioreDialogo"
     else:
         GlobalGameVar.nomePersonaggioDialoghi = "Sara"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
@@ -469,7 +558,7 @@ def setImgMenuStartProtagonista(avanzamentoStoria):
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoConImpoPostTempoBloccato"]:
             imgDaUsare = "Sara4SconvoltaGrafMenu"
         elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-            imgDaUsare = "Sara4OcchiChiusiGrafMenu"
+            imgDaUsare = "Sara5GrafMenu"
         else:
             imgDaUsare = "Sara4GrafMenu"
 
@@ -522,7 +611,7 @@ def setImgMenuSalvaProtagonista(avanzamentoStoria, abitiCastello):
         persSalvaBraccia = GlobalImgVar.persobRod
     elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
         persalva = GlobalImgVar.persoSara5
-        persSalvaBraccia = GlobalImgVar.persobSara
+        persSalvaBraccia = GlobalImgVar.persobSara5
     else:
         persalva = GlobalImgVar.persoSara4
         persSalvaBraccia = GlobalImgVar.persobSara
@@ -546,6 +635,8 @@ def cambiaProtagonista(avanzamentoStoria, personaggioUsato=False):
         personaggioDaUsare = "RodGiocabile"
     elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
         personaggioDaUsare = "Sara5"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["scesoDalCalcolatorePostScopertaFineDelMondo"]:
+            personaggioDaUsare = "Sara4"
     else:
         personaggioDaUsare = "Sara4"
     if personaggioDaUsare != personaggioUsato:

@@ -36,7 +36,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È la porta del laboratorio...)")
+                dialogo.append(u"(È la porta del laboratorio... penso che l'unico che possa averla sfondata sia il Costruttore...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Bibliotecario":
+            partiDialogo = []
+            nome = u"René"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo2PostSecondaSparizioneDiNeilDalLaboratorio"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Neil!")
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

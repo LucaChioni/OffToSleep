@@ -222,6 +222,7 @@ global persoSara3
 global persoSara4
 global persoSara5
 global persobSara
+global persobSara5
 global persoFraMaggiore
 global persobFraMaggiore
 global persoRod
@@ -261,7 +262,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1886
+numImgTotali = 1952
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -501,6 +502,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persoSara4
     global persoSara5
     global persobSara
+    global persobSara5
     global persoFraMaggiore
     global persobFraMaggiore
     global persoRod
@@ -606,8 +608,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara4 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara5 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara5Menu.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persobSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoRod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
@@ -1063,7 +1066,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False)
 
     # img personaggi
-    vettoreNomiPersonaggi = ["AssistBiblioteca", "Bibliotecario", "CaneCasa", "Costruttore", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada", "FratelloMaggiore"]
+    vettoreNomiPersonaggi = ["AssistBiblioteca", "Bambino1", "Bambino2", "Bibliotecario", "BibliotecarioOperato", "CaneCasa", "Costruttore", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "MercanteFuturo", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada", "FratelloMaggiore", "SaraArmaturaPelle"]
     dictionaryImgPersonaggi = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
         dictionaryImgPosizioni = {}
@@ -1097,7 +1100,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         dictionaryImgPersonaggi[nomePersonaggi] = dictionaryImgPosizioni
     dictImgPersonaggiDiario = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
-        if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada" and nomePersonaggi != "FratelloMaggiore":
+        if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada" and nomePersonaggi != "FratelloMaggiore" and nomePersonaggi != "BibliotecarioOperato" and nomePersonaggi != "MercanteFuturo" and nomePersonaggi != "Bambino1" and nomePersonaggi != "Bambino2" and nomePersonaggi != "SaraArmaturaPelle":
             imgPersonaggi = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/" + nomePersonaggi + "GrafMenu.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
             dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
     fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)

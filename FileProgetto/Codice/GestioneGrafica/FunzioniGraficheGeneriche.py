@@ -239,7 +239,8 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
         GlobalHWVar.canaleSoundPuntatoreSeleziona.stop()
         GlobalHWVar.canaleSoundPassiRallo.stop()
         GlobalHWVar.canaleSoundPassiColco.stop()
-        GlobalHWVar.canaleSoundPassiNemiciPersonaggi.stop()
+        GlobalHWVar.canaleSoundPassiNemici.stop()
+        GlobalHWVar.canaleSoundPassiPersonaggi.stop()
         GlobalHWVar.canaleSoundMorteNemici.stop()
         GlobalHWVar.canaleSoundLvUp.stop()
         GlobalHWVar.canaleSoundInterazioni.stop()
@@ -626,16 +627,29 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
         GlobalHWVar.aggiornaSchermo()
 
 
-def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio):
+def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio, tuttoSchermo=False, battito=-1):
+    casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    screen = False
+    if tuttoSchermo:
+        screen = GlobalHWVar.schermo.copy().convert()
     dimX, dimY = dimensioniImgAnimata
     vetImgAnimazione = []
+    numImgAnimazione = 0
     if pathImgs:
-        numImgAnimazione = len(os.listdir(GlobalHWVar.gamePath + pathImgs))
-    else:
-        numImgAnimazione = 0
+        listaImg = os.listdir(GlobalHWVar.gamePath + pathImgs)
+        for img in listaImg:
+            numImg = int(img[3:-4])
+            if numImg > numImgAnimazione:
+                numImgAnimazione = numImg
+    ultimaImgAnimazione = casellaVuotaPreset
     i = 1
     while i <= numImgAnimazione:
-        vetImgAnimazione.append(CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", dimX, dimY, True))
+        aumenteRisoluzione = True
+        if tuttoSchermo:
+            aumenteRisoluzione = False
+        if os.path.exists(GlobalHWVar.gamePath + pathImgs + "img" + str(i) + ".png"):
+            ultimaImgAnimazione = CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", dimX, dimY, aumenteRisoluzione)
+        vetImgAnimazione.append(ultimaImgAnimazione)
         i += 1
     # metto i suoni marcati con "-1" nell'ultimo frame dell'animazione
     i = 0
@@ -647,15 +661,27 @@ def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio
     # animazione effettiva
     numFrameAttuale = 0
     while len(vetImgAnimazione) > 0:
+        if battito > -1 and battito == numFrameAttuale:
+            if not GlobalHWVar.canaleSoundBattitoCardiaco.get_busy():
+                GlobalHWVar.canaleSoundBattitoCardiaco.play(GlobalSndVar.rumoreBattitoCardiaco, -1)
+            else:
+                GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
+                GlobalHWVar.canaleSoundBattitoCardiaco.stop()
+                GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
         if len(listaAudio) > 0 and listaAudio[0] == numFrameAttuale:
             GlobalHWVar.canaleSoundInterazioni.play(listaAudio[1])
             del listaAudio[1]
             del listaAudio[0]
+        if tuttoSchermo:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.disegnaImmagineSuSchermo(vetImgAnimazione.pop(0), coordinateImgAnimata)
 
         GlobalHWVar.aggiornaSchermo()
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
+        if tuttoSchermo:
+            GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsVideo)
+        else:
+            GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
         numFrameAttuale += 1
 
 
@@ -1148,3 +1174,391 @@ def animaDormiveglia(illumina, screen):
             i += 1
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
+
+
+def animaCambioScenaCalcolatore(x, y, direzione, stato, nonMostrarePersonaggio, carim, caricaTutto, personaggioGiaNelloScreen=False):
+    if stato == "avvia":
+        GlobalHWVar.canaliSoundSottofondoAmbientale.mettiInPausa()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        image = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+        image.fill((255, 255, 255, 50))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        i = 0
+        while i <= 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
+        GlobalHWVar.aggiornaSchermo()
+        GlobalHWVar.nonAggiornareSchermo = True
+        nonMostrarePersonaggio = True
+        carim = True
+        caricaTutto = True
+    elif stato == "compari":
+        GlobalHWVar.nonAggiornareSchermo = False
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
+        GlobalHWVar.aggiornaSchermo()
+        # carico le img del personaggio
+        imgPers = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+        imgPersb = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+        if direzione == "w":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "a":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "s":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "d":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        image = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+        i = 0
+        while i <= 255:
+            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco, (x, y, GlobalHWVar.gpx, GlobalHWVar.gpy))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
+            image.fill((255, 255, 255, 255 - i))
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (x, y))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 10
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
+        GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
+        GlobalHWVar.aggiornaSchermo()
+        GlobalHWVar.nonAggiornareSchermo = True
+    elif stato == "concludi":
+        screen = GlobalHWVar.schermo.copy().convert()
+        GlobalHWVar.nonAggiornareSchermo = False
+        # carico le img del personaggio
+        imgPers = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+        imgPersb = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+        if direzione == "w":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "a":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "s":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        elif direzione == "d":
+            imgPers = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgPersb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/Sara5/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
+        GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
+        GlobalHWVar.aggiornaSchermo()
+        # animazione apparizione stanza
+        image = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+        imgTrasparenza = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), pygame.SRCALPHA)
+        i = 0
+        while i <= 255:
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((255, 255, 255, 255 - i))
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            if personaggioGiaNelloScreen:
+                imgTrasparenza.fill((255, 255, 255, 255 - i))
+                imgPersTemp = imgPers.copy()
+                imgPersTemp.blit(imgTrasparenza, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                GlobalHWVar.disegnaImmagineSuSchermo(imgPersTemp, (x, y))
+                imgPersbTemp = imgPersb.copy()
+                imgPersbTemp.blit(imgTrasparenza, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                GlobalHWVar.disegnaImmagineSuSchermo(imgPersbTemp, (x, y))
+            else:
+                GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 10
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        if not personaggioGiaNelloScreen:
+            GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
+        GlobalHWVar.aggiornaSchermo()
+        GlobalHWVar.canaliSoundSottofondoAmbientale.togliPausa()
+        nonMostrarePersonaggio = False
+        carim = True
+        caricaTutto = True
+
+    return nonMostrarePersonaggio, carim, caricaTutto
+
+
+def animaMancamento(intensita):
+    screen = GlobalHWVar.schermo.copy().convert()
+    image = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+    if intensita == "lieve":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.8], True)
+        i = 0
+        while i < 10:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 100))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)
+
+        i = 20
+        while i > 5:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 5))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 25))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.8], True)
+
+        i = 6
+        while i < 10:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 5))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 50))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.7], True)
+
+        i = 10
+        while i > 0:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 5))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
+    elif intensita == "media":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)
+        i = 0
+        while i < 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 200))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.2], True)
+
+        i = 40
+        while i > 10:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 5))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 100))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.4], True)
+
+        i = 10
+        while i < 15:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 150))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)
+
+        i = 30
+        while i > 0:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 5))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
+    elif intensita == "pesanteOut":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)
+        i = 0
+        while i < 22:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 220))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.2], True)
+
+        i = 22
+        while i > 15:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 150))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.4], True)
+
+        i = 15
+        while i < 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 200))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.3], True)
+
+        i = 20
+        while i > 12:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 120))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)
+
+        i = 12
+        while i < 25:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.1], True)
+    elif intensita == "pesanteIn":
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.2], True)
+        i = 25
+        while i > 15:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 150))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.4], True)
+
+        i = 15
+        while i < 20:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        image.fill((0, 0, 0, 200))
+        image = image.convert_alpha(GlobalHWVar.schermo)
+        GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.3], True)
+
+        i = 20
+        while i > 0:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            image.fill((0, 0, 0, i * 10))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i -= 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)

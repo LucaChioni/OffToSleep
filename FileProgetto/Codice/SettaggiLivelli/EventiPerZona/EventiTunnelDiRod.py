@@ -2,10 +2,8 @@
 
 import pygame
 import GlobalHWVar
-import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
-import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
@@ -28,6 +26,63 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         caricaTutto = True
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaAvampostoDiRod2PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 12 and personaggio.y == GlobalHWVar.gpy * 2:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod3"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod3"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaTunnelDiRod3PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 13 and personaggio.y == GlobalHWVar.gpy * 2:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaTunnelDiRod2PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 9 and personaggio.y == GlobalHWVar.gpy * 2:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod1"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod1"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
 
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
         tiratoLevaTunnelDiRod = False

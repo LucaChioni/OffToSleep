@@ -26,15 +26,26 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             nome = "Impo volante pesante"
         elif tipo == "RoboTorre":
             nome = "Impo torre"
-        oggettoDato = False
-        avanzaStoria = False
-        menuMercante = False
-        scelta = False
-        avanzaColDialogo = False
-        dialogo = []
-        dialogo.append("tu")
-        dialogo.append(u"(Mi ignorano...)")
-        partiDialogo.append(dialogo)
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"(Mi ignorano...)")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereRoboLeggero"):
@@ -158,7 +169,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Uff...<*> forse sono finiti...")
+                dialogo.append(u"<*>#italic#Uff!<*> Forse sono finiti...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

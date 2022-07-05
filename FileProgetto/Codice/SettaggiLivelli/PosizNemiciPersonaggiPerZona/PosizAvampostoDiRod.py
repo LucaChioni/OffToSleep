@@ -65,9 +65,23 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
         percorsoPersonaggio = []
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 4, "s", "OggettoTuboRod-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+        listaPersonaggi.append(personaggio)
+        listaPersonaggiTotali.append(personaggio)
+        percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 5, "s", "OggettoTuboRod-0", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaScorciatoiaLabirinto2PreFineDelMondo"]:
+            percorsoPersonaggio = ["w", "w", "w", "w", "w", "d", "w", "w"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 11, "w", "BibliotecarioOperato-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoSbarreTunnelDiRodDaRenéPreFineDelMondo"]:
+            percorsoPersonaggio = ["wGira"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 4, "d", "BibliotecarioOperato-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
     elif stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
         percorsoPersonaggio = []
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 6, "s", "OggettoLibriInquinamentoRod-0", stanza, avanzamentoStoria, percorsoPersonaggio)

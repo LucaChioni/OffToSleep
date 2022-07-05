@@ -934,8 +934,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaioneCompiuta, (personaggio.x, personaggio.y))
             else:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgEvidenziaInterzaione, (personaggio.x, personaggio.y))
-    # disegno evidenziazione ai cofanetti ancora chiusi (non quando sei Rod)
-    if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+    # disegno evidenziazione ai cofanetti ancora chiusi (non quando sei Rod o quando usi il calcolatore)
+    if not (GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]):
         i = 0
         while i < len(cofanetti):
             j = 0

@@ -175,10 +175,21 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append(u"Non ho più merce")
             partiDialogoTradotte.append(dialogo)
 
-    if tipo == "Nessuno" or tipo == "NessunoPov":
+    if tipo == "Nessuno":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif tipo == "Tutorial":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTutorial.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
+    elif tipo == "OggettoDictCofanettoChiuso" and GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+        nome = "Cofanetto"
+        partiDialogoTradotte = []
+        oggettoDato = False
+        avanzaStoria = False
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("tu")
+        dialogo.append(u"(Non posso aprirlo adesso...)")
+        partiDialogoTradotte.append(dialogo)
     elif GlobalGameVar.dictStanze["sognoSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["sognoSara4"]:
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSogno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaHansSara4"]:

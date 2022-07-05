@@ -160,5 +160,54 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "OggettoImpo-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoRenéDaScorciatoiaLabirinto2PreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.x == GlobalHWVar.gpx * 7 and personaggio.y == GlobalHWVar.gpy * 4:
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreTaglioSbarreTunnelDiRod)
+            i = 0
+            while i < 52:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            avanzamentoStoria += 1
+            stanza = GlobalGameVar.dictStanze["avampostoDiRod2"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+            GlobalHWVar.nonAggiornareSchermo = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoSbarreTunnelDiRodDaRenéPreFineDelMondo"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
+        if GlobalHWVar.nonAggiornareSchermo:
+            GlobalHWVar.nonAggiornareSchermo = False
+            GlobalHWVar.aggiornaSchermo()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "BibliotecarioOperato":
+                if personaggio.direzione == "w":
+                    personaggioArrivato = True
+                break
+        if personaggioArrivato:
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggi:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod2"] and personaggio.tipo == "BibliotecarioOperato":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire

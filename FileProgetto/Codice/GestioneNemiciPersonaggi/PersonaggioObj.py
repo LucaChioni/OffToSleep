@@ -44,7 +44,7 @@ class PersonaggioObj(object):
             self.mantieniSempreASchermo = False
             self.caricaImgNemico()
             self.girati(direzione)
-        elif self.tipo != "Tutorial" and self.tipo != "Nessuno" and self.tipo != "NessunoPov":
+        elif self.tipo != "Tutorial" and self.tipo != "Nessuno":
             if self.tipo.startswith("Oggetto"):
                 if self.tipo.startswith("OggettoPersona"):
                     self.mantieniSempreASchermo = False

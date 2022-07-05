@@ -437,6 +437,10 @@ def gameloop():
                         vettoreDenaroStanza.append(vettoreDenaroTotale[i + 2])
                     i += 4
 
+                # decido se rendere le porte e i cofanetti non interagibili
+                porte = SetZoneStanzeImpedimenti.decidiInteragibilitaPorte(dati[0], porte)
+                cofanetti = SetZoneStanzeImpedimenti.decidiInteragibilitaCofanetti(dati[0], dati[1], cofanetti)
+
                 if cambiosta:
                     # resetto l'animazione del valore dei danni
                     GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"] = [False, 0, -1]
@@ -449,6 +453,7 @@ def gameloop():
 
                     SetZoneStanzeImpedimenti.scriviNomeZona(dati[1], stanzaVecchia, attesa=False)
                     stoppaMusica = SetPosizProtagonistaAudio.decidiSeStoppareMusica(dati[1], dati[0])
+                    stoppaAudioAmbientale = SetPosizProtagonistaAudio.decidiSeStoppareAudioAmbientale(dati[1], dati[0])
                     SetPosizProtagonistaAudio.riproduciAudioSpeciali(dati[0])
 
                     canzoneCambiata = False
@@ -481,6 +486,9 @@ def gameloop():
                     if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
                         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
                         GlobalHWVar.canaleSoundCanzone.stop()
+                    if stoppaAudioAmbientale and GlobalHWVar.canaliSoundSottofondoAmbientale.getBusy():
+                        GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [0], False)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
                     if riavviaAudioMusica:
                         canzoneCambiata = True
                     if riavviaAudioAmbiente:
@@ -505,7 +513,7 @@ def gameloop():
                                 GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
                         if sottofondoAmbientaleCambiato:
                             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
-                            if len(listaSottofondoAmbientale) > 0:
+                            if len(listaSottofondoAmbientale) > 0 and not stoppaAudioAmbientale:
                                 GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
                         canaliDaRiavviare = []
                         volumiRiattivati = []
@@ -1004,8 +1012,9 @@ def gameloop():
         movimentoPerMouse = False
         if mosseRimasteRob <= 0 and not nemiciInMovimento:
             # salta il turno
-            if bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect":
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
+            if bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect" or movimentoDaCompiere == "saltaTurno":
+                if not movimentoDaCompiere == "saltaTurno":
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
                 sposta = True
                 saltaTurno = True
 
@@ -1640,6 +1649,10 @@ def gameloop():
 
         # decido quando si deve dimezzare il volume della musica
         SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(dati[0])
+        # decido quando togliere il volume dei passi e degli attacchi
+        SetPosizProtagonistaAudio.decidiSeRiprodurreSuoniPassiAttacchi(dati[0])
+        # decido se riavviare il sottofono ambientale
+        SetPosizProtagonistaAudio.decidiSeRiavviareSottofondoAmbientale(dati[0], listaSottofondoAmbientale)
 
         # resetta stati/pv al cambio personaggio
         if dati[0] == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["risveglioSaraResuscitata"]:
@@ -2123,13 +2136,21 @@ def gameloop():
                     dati[5] = pvtot
                     difesa = 0
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
+                    riavviaMusicaPostDifesa = False
+                    if GlobalHWVar.canaleSoundCanzone.get_busy():
+                        riavviaMusicaPostDifesa = True
+                    riavviaAudioAmbientePostDifesa = False
+                    if GlobalHWVar.canaliSoundSottofondoAmbientale.getBusy():
+                        riavviaAudioAmbientePostDifesa = True
                     GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
-                    GlobalHWVar.canaleSoundCanzone.stop()
-                    GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
-                    if canzone:
-                        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-                    if len(listaSottofondoAmbientale) > 0:
-                        GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
+                    if riavviaMusicaPostDifesa:
+                        GlobalHWVar.canaleSoundCanzone.stop()
+                        if canzone:
+                            GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+                    if riavviaAudioAmbientePostDifesa:
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                        if len(listaSottofondoAmbientale) > 0:
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
                     GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeCanzoni, GlobalHWVar.volumeEffetti], False, posizioneCanaleMusica=0)
                     caricaTutto = True
                     uscitoDaMenu = 2
@@ -2826,7 +2847,8 @@ def gameloop():
             GlobalHWVar.canaleSoundPuntatoreSeleziona.stop()
             GlobalHWVar.canaleSoundPassiRallo.stop()
             GlobalHWVar.canaleSoundPassiColco.stop()
-            GlobalHWVar.canaleSoundPassiNemiciPersonaggi.stop()
+            GlobalHWVar.canaleSoundPassiNemici.stop()
+            GlobalHWVar.canaleSoundPassiPersonaggi.stop()
             GlobalHWVar.canaleSoundMorteNemici.stop()
             GlobalHWVar.canaleSoundLvUp.stop()
             GlobalHWVar.canaleSoundInterazioni.stop()

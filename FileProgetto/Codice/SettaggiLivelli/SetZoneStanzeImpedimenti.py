@@ -142,13 +142,109 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoApprofondimentoParadossiTempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello18"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello17"]:
         nonProcedere = True
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod3"] and not tiratoLevaTunnelDiRod:
+    elif (GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]) and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod3"] and not tiratoLevaTunnelDiRod:
         nonProcedere = True
-    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"] and not tiratoLevaTunnelDiRod:
+    elif (GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]) and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"] and not tiratoLevaTunnelDiRod:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["interagitoConComputerVulcano"] and stanzaVecchia == GlobalGameVar.dictStanze["vulcano2"] and stanzaDestinazione == GlobalGameVar.dictStanze["vulcano1"]:
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["monologoNotatoCellaDiNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["interagitoConCalcolatoreDiEventi"] and stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello19"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello5"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello20"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello19"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello20"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello21"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello19"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello18"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello4"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello6"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello7"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello9"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo1"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello8"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sparitoNeilDallaCellaDelLaboratorioSecondaVolta"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["viaggioRapidoCalcolatore1UfficioNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sparitoNeilDallaCellaDelLaboratorioSecondaVolta"] and stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"] and stanzaDestinazione == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo1"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello9"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello8"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello6"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello7"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello4"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello7"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanzaDestinazione == GlobalGameVar.dictStanze["internoCastello1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello4"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello5"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello4"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello2"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["labirinto20"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] and stanzaDestinazione == GlobalGameVar.dictStanze["esternoCastello1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"] and stanzaDestinazione == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanzaDestinazione == GlobalGameVar.dictStanze["tunnelDiRod1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara2"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansSara1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara2"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansSara3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara4"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansSara2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansSara4"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta2"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta3"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta2"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta4"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta3"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta4"]:
         nonProcedere = True
 
     return nonProcedere
@@ -263,9 +359,9 @@ def mostraTempoPassato(avanzamentoStoria, stanza, stanzaVecchia):
         tempoPassato1 = "Giorno 3"
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
         tempoPassato1 = "Giorno 23"
-    # elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanzaVecchia == GlobalGameVar.dictStanze[""] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-    #     tempoPassato1 = "Giorno 23"
-    #     tempoPassato2 = " - Anno 12"
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        tempoPassato1 = "Giorno 23"
+        tempoPassato2 = " - Anno 12"
 
     if tempoPassato1:
         xScritta = GlobalHWVar.gpx * 3
@@ -327,10 +423,12 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaB"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             nomeStanza = "StanzaC"
+        elif GlobalGameVar.dictAvanzamentoStoria["monologoPerTornareIndietroNelTempoAllaSeraDellInizioDelGioco"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa2NellaSeraDellInizioDelGioco"]:
+            nomeStanza = "StanzaE"
         else:
             nomeStanza = "StanzaD"
     if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"] or GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa1NellaSeraDellInizioDelGioco"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa4NellaSeraDellInizioDelGioco"]:
             nomeStanza = "StanzaA"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             nomeStanza = "StanzaB"
@@ -342,19 +440,19 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["casaHansSara4"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["forestaCadetta1"] or stanza == GlobalGameVar.dictStanze["forestaCadetta2"] or stanza == GlobalGameVar.dictStanze["forestaCadetta3"] or stanza == GlobalGameVar.dictStanze["forestaCadetta4"] or stanza == GlobalGameVar.dictStanze["forestaCadetta6"] or stanza == GlobalGameVar.dictStanze["forestaCadetta7"] or stanza == GlobalGameVar.dictStanze["forestaCadetta8"] or stanza == GlobalGameVar.dictStanze["forestaCadetta9"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
-        if GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["colpitoHansDalCinghialeCalcolatore"]:
             nomeStanza = "StanzaB"
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] or GlobalGameVar.dictAvanzamentoStoria["inizioSognoCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineSognoCastello"] or GlobalGameVar.dictAvanzamentoStoria["colpitoHansDalCinghialeCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaC"
@@ -420,6 +518,11 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["esternoCastello4"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoCancelloCastelloDaRenéPreFineDelMondo"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
     if stanza == GlobalGameVar.dictStanze["internoCastello1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"]:
             nomeStanza = "StanzaA"
@@ -470,6 +573,10 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaA"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoPortaStanza8Castello"]:
             nomeStanza = "StanzaB"
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaD"
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["apertoPortaInternoCastello8DaRenéPreFineDelMondo"]:
+                nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["internoCastello9"]:
@@ -554,27 +661,59 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
         else:
             nomeStanza = "StanzaC"
     if stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod):
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod) or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             nomeStanza = "StanzaA"
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["apertoSbarreTunnelDiRodDaRenéPreFineDelMondo"]:
+                nomeStanza = "StanzaC"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalGameVar.dictStanze["palazzoDiRod3"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["palazzoDiRod4"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoCaverna"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
-    if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod):
+    if stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaB"
+        else:
             nomeStanza = "StanzaA"
+    if stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sbloccatoTunnelDiRod"] or (avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not tiratoLevaTunnelDiRod) or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaA"
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["apertoSbarreTunnelDiRodDaRenéPreFineDelMondo"]:
+                nomeStanza = "StanzaC"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
+        if GlobalGameVar.dictAvanzamentoStoria["tornatoIndietroNelTempoAPrimaCheNeilLasciasseIlSuoUfficio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trasformatoLaboratorioDiNeil"]:
+            nomeStanza = "StanzaC"
+        elif GlobalGameVar.dictAvanzamentoStoria["sparitoNeilDallaCellaDelLaboratorio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologo2PostScomparsaNeilDallaCella"] or GlobalGameVar.dictAvanzamentoStoria["monologoPostTornatoIndietroNelTempo10SecInLaboratorio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoSulCalcolatoreRenéNelLaboratorioDiNeil"]:
+            nomeStanza = "StanzaD"
+        elif GlobalGameVar.dictAvanzamentoStoria["sedutoSulCalcolatoreRenéNelLaboratorioDiNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["RenéOperatoComeTeENeilSulCalcolatore"]:
+            nomeStanza = "StanzaE"
+        elif GlobalGameVar.dictAvanzamentoStoria["RenéOperatoComeTeENeilSulCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"]:
+            nomeStanza = "StanzaF"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPerPassareUnGiornoAspettandoRenéSulCalcolatorePostVisioneDellaDistruzione"] or avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPerPassareUnOra3AspettandoRenéSulCalcolatorePostVisioneDellaDistruzione"]:
+                nomeStanza = "StanzaD"
+        elif GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaD"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riapertoGliOcchiSulCalcolatorePostStopTempoACasaTua"]:
+                nomeStanza = "StanzaB"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["scesoDalCalcolatorePostScopertaFineDelMondo"]:
+                nomeStanza = "StanzaA"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
+                nomeStanza = "StanzaG"
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
@@ -583,6 +722,27 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaA"
+    if stanza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
+    if stanza == GlobalGameVar.dictStanze["caverna1"]:
+        if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
+    if stanza == GlobalGameVar.dictStanze["stanzaEsplosa"]:
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["aggiornatoStanzaPerDistruzioneDelMondo1"]:
+            nomeStanza = "StanzaA"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatoUnAnno2AspettandoRenéSulCalcolatorePostVisioneDellaDistruzione"]:
+            nomeStanza = "StanzaB"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatoUnMese2AspettandoRenéSulCalcolatorePostVisioneDellaDistruzione"]:
+            nomeStanza = "StanzaC"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["missileNucleareScoppiato"]:
+            nomeStanza = "StanzaD"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostFineDelMondo2"]:
+            nomeStanza = "StanzaE"
 
     return nomeStanza
 
@@ -650,3 +810,17 @@ def decidiSePoterParare(avanzamentoStoria):
         impossibileParare = True
 
     return impossibileParare
+
+
+def decidiInteragibilitaPorte(avanzamentoStoria, porte):
+    if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+        porte = []
+
+    return porte
+
+
+def decidiInteragibilitaCofanetti(avanzamentoStoria, stanza, cofanetti):
+    if GlobalGameVar.dictAvanzamentoStoria["monologoPerTornareIndietroNelTempoAllaSeraDellInizioDelGioco"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa1NellaSeraDellInizioDelGioco"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        cofanetti = []
+
+    return cofanetti

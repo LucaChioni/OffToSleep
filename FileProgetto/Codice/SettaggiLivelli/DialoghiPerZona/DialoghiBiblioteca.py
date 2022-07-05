@@ -1581,18 +1581,18 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... In uno degli ultimi studi, si è scoperto che le Sacche Energetiche sono responsabili anche dell'efficienza del sistema difensivo: alcune sacche permettono di resistere alle aggressioni spendendo meno energia...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 22:
-                nome = "Libro (Gestione dell'impoForza)"
+                nome = "Libro (Gestione dell'impo-forza)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"Gestione dell'impoForza\"...)")
+                dialogo.append(u"(Questo libro s'intitola: \"Gestione dell'impo-forza\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... L'energia degli impo, detta anche \"impoForza\", può essere gestita solo in parte dagli umani...")
+                dialogo.append(u"... L'energia degli impo, detta anche \"impo-forza\", può essere gestita solo in parte dagli umani...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1603,14 +1603,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Anche se relativamente poco influente, questo loro comportamento non può essere alterato da agenti esterni...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 25:
-                nome = "Libro (impoMalus)"
+                nome = "Libro (Impo-malus)"
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Questo libro s'intitola: \"impoMalus\"...)")
+                dialogo.append(u"(Questo libro s'intitola: \"Impo-malus\"...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

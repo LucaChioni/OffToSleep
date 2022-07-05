@@ -30,14 +30,29 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     partiDialogo = personaggio.partiDialogoTradotte[GlobalHWVar.linguaImpostata]
     oggettoDato = personaggio.oggettoDato[GlobalHWVar.linguaImpostata]
 
-    if nomeInterlocutore != "Tutorial" and personaggio.tipo != "NessunoPov":
-        GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
-    if personaggio.imgDialogo and nomeInterlocutore != "Tutorial" and nomeInterlocutore != "Nessuno" and personaggio.tipo != "NessunoPov":
-        GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
+    xProtagonista = 0
+    xInterlocutore = GlobalHWVar.gpx * 16
+
+    usandoCalcolatore = False
+    if GlobalGameVar.dictAvanzamentoStoria["monologoPostSedutaSulCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+        usandoCalcolatore = True
+    # diaologoTraAltri => è "True" quando sei nel calcolatore e c'è un dialogo tra due personaggi
+    diaologoTraAltri = False
+    if GlobalGameVar.dictAvanzamentoStoria["tornatoIndietroNelTempoAPrimaCheNeilLasciasseIlSuoUfficio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogo2RenéNeilPostAvvioSequenzaNelCalcolatore"]:
+        diaologoTraAltri = True
+    elif GlobalGameVar.dictAvanzamentoStoria["uscitoRodDalPalazzoPreLancioMissile"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["avvioLancioMissileNucleare"]:
+        diaologoTraAltri = True
+    elif GlobalGameVar.dictAvanzamentoStoria["arrivataInForestaCadetta5Calcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoHansSamCalcolatore"]:
+        diaologoTraAltri = True
+
+    if nomeInterlocutore != "Tutorial" and not (usandoCalcolatore and not diaologoTraAltri):
+        GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (xProtagonista, GlobalHWVar.gsy // 18 * 3.5))
+    if personaggio.imgDialogo and nomeInterlocutore != "Tutorial" and nomeInterlocutore != "Nessuno":
+        GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (xInterlocutore, GlobalHWVar.gsy // 18 * 3.5))
     elif nomeInterlocutore == "Impo":
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (xInterlocutore, GlobalHWVar.gsy // 18 * 3.5))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
-    if personaggio.tipo != "NessunoPov":
+    if diaologoTraAltri or not (usandoCalcolatore and (personaggio.tipo == "Nessuno" or not personaggio.imgDialogo)):
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
 
     usandoRod = False
@@ -54,7 +69,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     fineDialogo = False
     bottoneDown = False
 
-    if personaggio.tipo != "NessunoPov":
+    if not usandoCalcolatore:
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni / 2.0], True, posizioneCanaleMusica=0)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
@@ -177,13 +192,13 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
             if puntatoreSpostato and not prosegui:
                 numeromessaggioAttuale -= 1
             GlobalHWVar.disegnaImmagineSuSchermo(background, (0, GlobalHWVar.gsy // 18 * 3.5))
-            if nomeInterlocutore != "Tutorial" and personaggio.tipo != "NessunoPov":
+            if nomeInterlocutore != "Tutorial":
                 if personaggio.imgDialogo and partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore != "Nessuno":
-                    GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
+                    GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (xInterlocutore, GlobalHWVar.gsy // 18 * 3.5))
                 elif partiDialogo[numeromessaggioAttuale][0] == "personaggio" and nomeInterlocutore == "Impo":
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
-                if partiDialogo[numeromessaggioAttuale][0] == "tu" or partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
-                    GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDialogoColco, (xInterlocutore, GlobalHWVar.gsy // 18 * 3.5))
+                if (partiDialogo[numeromessaggioAttuale][0] == "tu" or partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???") and not (usandoCalcolatore and not diaologoTraAltri):
+                    GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (xProtagonista, GlobalHWVar.gsy // 18 * 3.5))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
             if partiDialogo[numeromessaggioAttuale][0] == "personaggio":
                 parlante = personaggio.gender
@@ -220,7 +235,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     SetPosizProtagonistaAudio.decidiSeDimezzareVolumeMusica(avanzamentoStoria)
-    if personaggio.tipo != "NessunoPov":
+    if not usandoCalcolatore:
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [GlobalHWVar.volumeCanzoni], True, posizioneCanaleMusica=0)
 
     avanzamentoStoria = SetDialoghiPersonaggi.gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone)
