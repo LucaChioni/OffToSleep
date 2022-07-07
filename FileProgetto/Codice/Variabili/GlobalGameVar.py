@@ -392,6 +392,7 @@ def disegnaSchermataSelezioneLingua():
     scrivi.write(str(GlobalHWVar.modalitaSchermo) + "_")
     scrivi.write(str(GlobalHWVar.gsx) + "_")
     scrivi.write(str(GlobalHWVar.gsy) + "_")
+    scrivi.write(str(int(GlobalHWVar.controlloRisoluzione)) + "_")
     scrivi.close()
 def disegnaSchermataDiCaricamento():
     global schemataDiCaricamento

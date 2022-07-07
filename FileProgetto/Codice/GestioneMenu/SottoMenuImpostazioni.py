@@ -1281,7 +1281,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     modalitaSchermoTemp = GlobalHWVar.modalitaSchermo
-    vSyncTemp = GlobalHWVar.vSyncEnabled
+    controlloRisoluzioneTemp = GlobalHWVar.controlloRisoluzione
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1439,7 +1439,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.linguaImpostata = linguaTemp
                     GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
                     GlobalHWVar.volumeCanzoni = volumeEffettiTemp / 10.0
-                    GlobalHWVar.vSyncEnabled = vSyncTemp
+                    GlobalHWVar.controlloRisoluzione = controlloRisoluzioneTemp
                     GlobalHWVar.initVolumeSounds()
                     if dimezzaVolumeCanzone:
                         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2.0)
@@ -1502,6 +1502,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     scrivi.write(str(GlobalHWVar.modalitaSchermo) + "_")
                     scrivi.write(str(GlobalHWVar.gsx) + "_")
                     scrivi.write(str(GlobalHWVar.gsy) + "_")
+                    scrivi.write(str(int(GlobalHWVar.controlloRisoluzione)) + "_")
                     scrivi.close()
                     puntatore = GlobalImgVar.puntatore
                     yp = GlobalHWVar.gsy // 18 * 15.2
@@ -1585,10 +1586,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 1
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if vSyncTemp:
-                        vSyncTemp = False
+                    if controlloRisoluzioneTemp:
+                        controlloRisoluzioneTemp = False
                     else:
-                        vSyncTemp = True
+                        controlloRisoluzioneTemp = True
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
@@ -1657,10 +1658,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 0
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if vSyncTemp:
-                        vSyncTemp = False
+                    if controlloRisoluzioneTemp:
+                        controlloRisoluzioneTemp = False
                     else:
-                        vSyncTemp = True
+                        controlloRisoluzioneTemp = True
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
@@ -1708,10 +1709,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 1
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if vSyncTemp:
-                        vSyncTemp = False
+                    if controlloRisoluzioneTemp:
+                        controlloRisoluzioneTemp = False
                     else:
-                        vSyncTemp = True
+                        controlloRisoluzioneTemp = True
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1751,10 +1752,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         modalitaSchermoTemp = 0
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    if vSyncTemp:
-                        vSyncTemp = False
+                    if controlloRisoluzioneTemp:
+                        controlloRisoluzioneTemp = False
                     else:
-                        vSyncTemp = True
+                        controlloRisoluzioneTemp = True
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -1774,7 +1775,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 FunzioniGraficheGeneriche.messaggio("Controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.9, 60)
                 FunzioniGraficheGeneriche.messaggio("Risoluzione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.3, 60)
                 FunzioniGraficheGeneriche.messaggio(u"Modalità finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.7, 60)
-                FunzioniGraficheGeneriche.messaggio("VSync", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, 60)
+                FunzioniGraficheGeneriche.messaggio("Controllo risoluzione ottimale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, 60)
                 FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 15, 70)
                 FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 15, 70)
             else:
@@ -1835,6 +1836,10 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 7.5, 60)
             FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8.9, 60)
             FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 10.3, 60)
+            if GlobalHWVar.ramDisponibile < GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp):
+                FunzioniGraficheGeneriche.messaggio("Risoluzione sconsigliata! <br> RAM richiesta: " + str(GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0) + "GB (sistema: " + str(GlobalHWVar.ramDisponibile / 1000.0) + "GB)", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+            elif voceMarcata == 5:
+                FunzioniGraficheGeneriche.messaggio("Risoluzione supportata! <br> RAM richiesta: " + str(GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0) + "GB (sistema: " + str(GlobalHWVar.ramDisponibile / 1000.0) + "GB)", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
             if voceMarcata == 5:
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
@@ -1859,11 +1864,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
-            if vSyncTemp:
+            if controlloRisoluzioneTemp:
                 FunzioniGraficheGeneriche.messaggio(u"Attivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
             else:
                 FunzioniGraficheGeneriche.messaggio(u"Disattivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
             if voceMarcata == 7:
+                FunzioniGraficheGeneriche.messaggio("Disattiva se vuoi utilizzare <br> una risoluzione sconsigliata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 13, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
                 else:

@@ -729,6 +729,27 @@ print (listaRisoluzioniDisponibili)
 
 ramDisponibile = (psutil.virtual_memory().total / 1000000000) * 1000
 print ("RAM disponibile: " + str(ramDisponibile) + " MB")
+def getRAMNecessariaPerRisoluzione(dimX):
+    ramNecessaria = RAMnHD
+    if dimX > 3840:
+        ramNecessaria = RAMUHD5k
+    elif 3200 < dimX <= 3840:
+        ramNecessaria = RAMUHD4k
+    elif 2560 < dimX <= 3200:
+        ramNecessaria = RAMUHD
+    elif 1920 < dimX <= 2560:
+        ramNecessaria = RAMQHD
+    elif 1600 < dimX <= 1920:
+        ramNecessaria = RAMFHD
+    elif 1280 < dimX <= 1600:
+        ramNecessaria = RAMHDPLUS
+    elif 960 < dimX <= 1280:
+        ramNecessaria = RAMHD
+    elif 640 < dimX <= 960:
+        ramNecessaria = RAMqHD
+    elif dimX <= 640:
+        ramNecessaria = RAMnHD
+    return ramNecessaria
 def settaRisoluzioneOttimale(testaPrestazioni):
     global gsx
     global gsy
@@ -739,24 +760,7 @@ def settaRisoluzioneOttimale(testaPrestazioni):
     ramNecessaria = RAMnHD
     risoluzioneConfermata = False
     while not risoluzioneConfermata:
-        if gsx > 3840:
-            ramNecessaria = RAMUHD5k
-        elif 3200 < gsx <= 3840:
-            ramNecessaria = RAMUHD4k
-        elif 2560 < gsx <= 3200:
-            ramNecessaria = RAMUHD
-        elif 1920 < gsx <= 2560:
-            ramNecessaria = RAMQHD
-        elif 1600 < gsx <= 1920:
-            ramNecessaria = RAMFHD
-        elif 1280 < gsx <= 1600:
-            ramNecessaria = RAMHDPLUS
-        elif 960 < gsx <= 1280:
-            ramNecessaria = RAMHD
-        elif 640 < gsx <= 960:
-            ramNecessaria = RAMqHD
-        elif gsx <= 640:
-            ramNecessaria = RAMnHD
+        ramNecessaria = getRAMNecessariaPerRisoluzione(gsx)
         abbassaRisoluzione = False
         for i in range(0, 20):
             disegnaColoreSuTuttoLoSchermo(schermo, nero)
@@ -812,13 +816,14 @@ def settaRisoluzioneOttimale(testaPrestazioni):
         print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
 linguaImpostata = "eng"
+controlloRisoluzione = True
 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
 leggi.close()
 datiFileImpostazioniString = leggifile.split("_")
 datiFileImpostazioniString.pop(len(datiFileImpostazioniString) - 1)
 erroreFileImpostazioni = False
-if len(datiFileImpostazioniString) == 6:
+if len(datiFileImpostazioniString) == 7:
     datiFileImpostazioni = []
     for i in range(0, len(datiFileImpostazioniString)):
         try:
@@ -834,13 +839,15 @@ if len(datiFileImpostazioniString) == 6:
             volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
         if 0 <= int(datiFileImpostazioni[2]) <= 10:
             volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
-        if modalitaSchermo == 0 or modalitaSchermo == 1 or modalitaSchermo == 2:
+        if datiFileImpostazioni[3] == 0 or datiFileImpostazioni[3] == 1 or datiFileImpostazioni[3] == 2:
             modalitaSchermo = int(datiFileImpostazioni[3])
         if (maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5]) and (datiFileImpostazioni[4] % 32 == 0 and datiFileImpostazioni[5] % 18 == 0):
             gsx = int(datiFileImpostazioni[4])
             gsy = int(datiFileImpostazioni[5])
             gpx = gsx // 32
             gpy = gsy // 18
+        if datiFileImpostazioni[6] == 0 or datiFileImpostazioni[6] == 1:
+            controlloRisoluzione = bool(datiFileImpostazioni[6])
         if modalitaSchermo == 0:
             opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
@@ -860,8 +867,9 @@ if len(datiFileImpostazioniString) == 6:
                 os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
             opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        # setto la risoluzione ottimale nel caso non ci fosse abbastanza RAM
-        settaRisoluzioneOttimale(testaPrestazioni=False)
+        # setto la risoluzione ottimale nel caso non ci fosse abbastanza RAM (solo se l'opzione "controlloRisoluzione" è True)
+        if controlloRisoluzione:
+            settaRisoluzioneOttimale(testaPrestazioni=False)
         initVolumeSounds()
 else:
     erroreFileImpostazioni = True
