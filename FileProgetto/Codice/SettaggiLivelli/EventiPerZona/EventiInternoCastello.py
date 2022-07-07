@@ -1323,9 +1323,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["riapparsoImpoInternoCastello20PostRianimazione"] and stanza == GlobalGameVar.dictStanze["internoCastello20"]:
         percorsoDaEseguire = ["d", "d", "d", "d", "d", "d", "d", "d", "s", "s", "s", "s", "s", "d", "d", "d", "s"]
         avanzaManualmentePercorsoDaEseguire = True
-        rx = GlobalHWVar.gpx * 15
-        ry = GlobalHWVar.gpy * 13
-        dati[10] = 0
         carim = True
         caricaTutto = True
         avanzamentoStoria += 1

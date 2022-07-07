@@ -808,6 +808,11 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     caricaSalvataggio = False
     aperturaSettaColcoNonRiuscita = False
     cambiatoRisoluzione = False
+    # faccio in modo di poter accedere al menu "setta impo" alla fine del gioco solo quando sei nel laboratorio segreto
+    mostraImpoFineGioco = False
+    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and dati[1] == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        colcoInCasellaVista = True
+        mostraImpoFineGioco = True
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1111,7 +1116,12 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioStart"], (GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 2.5))
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 12), int(GlobalHWVar.gpy * 12.5)), (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 12.5)), 2)
 
-                    if GlobalGameVar.impoPresente:
+                    if GlobalGameVar.impoPresente or mostraImpoFineGioco:
+                        if mostraImpoFineGioco:
+                            dati[10] = entot
+                            dati[122] = 0
+                            dati[125] = 0
+                            dati[126] = 0
                         # vita-status robo
                         if dati[10] < 0:
                             dati[10] = 0

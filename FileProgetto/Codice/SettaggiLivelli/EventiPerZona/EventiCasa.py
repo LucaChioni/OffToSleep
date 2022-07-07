@@ -591,9 +591,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             listaSoggetti = infoCrediti[1]
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             if c == 4:
-                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 0.9, 60, centrale=True)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 2) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 2) - 1), 2)
-                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2.5, 35, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.4)
+                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.2, 60, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 4.3) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 4.3) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.8, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.6)
             elif c == 5:
                 FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.4, 60, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 7.5) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 7.5) - 1), 2)

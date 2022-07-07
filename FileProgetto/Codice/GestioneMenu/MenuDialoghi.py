@@ -266,6 +266,10 @@ def menuMercante(dati):
     elif interlocutore == "Sara":
         imgMercante = GlobalImgVar.saraMenuMercante
 
+    # tolgo tutte le monete se il tempo è bloccato
+    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+        dati[131] = 0
+
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False

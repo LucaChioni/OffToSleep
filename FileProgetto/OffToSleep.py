@@ -528,6 +528,16 @@ def gameloop():
                         vrx = rx
                         vry = ry
 
+                    # aggiorno presenza di Impo (perché altrimenti non riappare subito dopo che entri in internoCastello21 prima dell'operazione per bloccare il tempo)
+                    if dati[0] == GlobalGameVar.dictAvanzamentoStoria["riapparsoImpoInternoCastello20PostRianimazione"]:
+                        SetZoneStanzeImpedimenti.settaPresenzaDiColco(dati[0])
+                        rx = GlobalHWVar.gpx * 15
+                        ry = GlobalHWVar.gpy * 13
+                        dati[10] = 0
+                        dati[122] = 0
+                        dati[125] = 0
+                        dati[126] = 0
+
                     if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
                         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)
                         GlobalHWVar.canaleSoundCanzone.stop()

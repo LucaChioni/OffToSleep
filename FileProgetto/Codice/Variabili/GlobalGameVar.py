@@ -464,13 +464,22 @@ GlobalSndVar.loadSounds(numSndCaricato)
 partitaAppenaAvviataPostFinale = True
 
 listaCreditiSuoni = ""
-listaCreditiSuoni += "\"Fast Car Passing by\" by danlucaz -- https://freesound.org/s/517738/ -- License: Creative Commons 0" + " <br> "
-listaCreditiSuoni += "\"Metal Bar\" by stevenmaertens -- https://freesound.org/s/449842/ -- License: Creative Commons 0" + " <br> "
-listaCreditiSuoni += "\"Iron Bar Drop onto Wood & Straw Floor\" by dkudos -- https://freesound.org/s/213124/ -- License: Creative Commons 0" + " <br> "
-listaCreditiSuoni += "\"door metal heavy push bar beep open close with security deadbolt unlock click3 +tone.flac\" by kyles -- https://freesound.org/s/453966/ -- License: Creative Commons 0" + " <br> "
-listaCreditiSuoni += "\"helmet motorbike put on a head\" by cupido-1 -- https://freesound.org/s/614199/ -- License: Creative Commons 0" + " <br> "
-
-listaCreditiSuoni += "\"Forest at dawn with birds, crickets and insects in the Sian Ka'an Biosphere Reserve\" by felix.blume -- https://freesound.org/s/328296/ -- License: Creative Commons 0" + " <br> "
-
+listaCreditiSuoni += "\"Knock Monitor Screen.wav\" by Angel_Perez_Grandi -- https://freesound.org/s/71175/ -- License: Attribution 4.0" + " <br> "
+listaCreditiSuoni += "\"Wild Boar / Grunting Growling\" by TheVeoMammoth11 -- https://freesound.org/s/492655/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Lava loop.wav\" by Audionautics -- https://freesound.org/s/133901/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Woodman's grocery store ambiance 2\" by ChrisReierson -- https://freesound.org/s/384379/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"MITSUBISHI IMIEV electric car HATCHBACK lever int.wav\" by jakobthiesen -- https://freesound.org/s/174826/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Hissing.m4a\" by TheScarlettWitch89 -- https://freesound.org/s/415287/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"cooling down hot saucepan with water.wav\" by laspaziale -- https://freesound.org/s/92738/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Splash, Jumping, E.wav\" by InspectorJ -- https://freesound.org/s/352105/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Water, Pouring, A.wav\" by InspectorJ -- https://freesound.org/s/421184/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Knife_Sharpen_Large.wav\" by digifishmusic -- https://freesound.org/s/41508/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"The ticking of a mechanical watch HQ.wav\" by tosha73 -- https://freesound.org/s/547534/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"spinning metal\" by baryy -- https://freesound.org/s/163420/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"forest stick sticks wood crackle snap step squash squashing break breaking.wav\" by bulbastre -- https://freesound.org/s/126909/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Pencil, Writing, Close, A.wav\" by InspectorJ -- https://freesound.org/s/398271/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"ChainLodingBayDoor01.WAV\" by mmaruska -- https://freesound.org/s/241108/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Digging with shovel.wav\" by CGEffex -- https://freesound.org/s/96211/ -- License: Attribution 3.0" + " <br> "
+listaCreditiSuoni += "\"Wind_blowing_gusting_through_french_castle_tower.wav\" by Astounded -- https://freesound.org/s/483479/ -- License: Attribution 3.0"
 listaCreditiRingraziamenti = "My family <br> Pygame community <br> Freesound community"
 listaCrediti = [["Written & Developed by:", "Luca Chioni"], ["English Translation by:", "Someone"], ["Music by:", "Luca Chioni"], ["Developed with:", "Python 2 & Pygame"], ["Sound Effects by Freesound:", listaCreditiSuoni], ["Special Thanks to:", listaCreditiRingraziamenti]]

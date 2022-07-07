@@ -1608,6 +1608,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
         avanzamentoStoria += 1
+        # aumento il livello a 100
+        dati[4] = 100
         i = 0
         while i < 30:
             pygame.time.wait(100)
