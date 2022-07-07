@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import psutil
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
@@ -186,61 +185,6 @@ def inizializzaVariabiliGlobali():
     idDialoghiLettiGameOver = []
 inizializzaVariabiliGlobali()
 
-def settaRisoluzioneOttimale():
-    ramDisponibile = psutil.virtual_memory().free / 1000000.0
-    print ("RAM disponibile: " + str(ramDisponibile) + " MB")
-    ramNecessaria = GlobalHWVar.RAMnHD
-    risoluzioneConfermata = False
-    while not risoluzioneConfermata:
-        if GlobalHWVar.gsx > 3840:
-            ramNecessaria = GlobalHWVar.RAMUHD5k
-        elif 3200 < GlobalHWVar.gsx <= 3840:
-            ramNecessaria = GlobalHWVar.RAMUHD4k
-        elif 2560 < GlobalHWVar.gsx <= 3200:
-            ramNecessaria = GlobalHWVar.RAMUHD
-        elif 1920 < GlobalHWVar.gsx <= 2560:
-            ramNecessaria = GlobalHWVar.RAMQHD
-        elif 1600 < GlobalHWVar.gsx <= 1920:
-            ramNecessaria = GlobalHWVar.RAMFHD
-        elif 1280 < GlobalHWVar.gsx <= 1600:
-            ramNecessaria = GlobalHWVar.RAMHDPLUS
-        elif 960 < GlobalHWVar.gsx <= 1280:
-            ramNecessaria = GlobalHWVar.RAMHD
-        elif 640 < GlobalHWVar.gsx <= 960:
-            ramNecessaria = GlobalHWVar.RAMqHD
-        elif GlobalHWVar.gsx <= 640:
-            ramNecessaria = GlobalHWVar.RAMnHD
-        abbassaRisoluzione = False
-        for i in range(0, 20):
-            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-            GlobalHWVar.aggiornaSchermo()
-
-            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-            if (GlobalHWVar.erroreFileImpostazioni and i > 10 and GlobalHWVar.clockMenu.get_fps() < 25) or ramNecessaria > ramDisponibile:
-                abbassaRisoluzione = True
-        if abbassaRisoluzione:
-            if len(GlobalHWVar.listaRisoluzioniDisponibili) > 1:
-                if GlobalHWVar.gsx == GlobalHWVar.listaRisoluzioniDisponibili[0][0]:
-                    risoluzioneConfermata = True
-                else:
-                    i = len(GlobalHWVar.listaRisoluzioniDisponibili) - 1
-                    while i >= 0:
-                        if GlobalHWVar.listaRisoluzioniDisponibili[i][0] < GlobalHWVar.gsx:
-                            GlobalHWVar.gsx = GlobalHWVar.listaRisoluzioniDisponibili[i][0]
-                            GlobalHWVar.gsy = GlobalHWVar.listaRisoluzioniDisponibili[i][1]
-                            break
-                        i -= 1
-            else:
-                risoluzioneConfermata = True
-            GlobalHWVar.gpx = GlobalHWVar.gsx // 32
-            GlobalHWVar.gpy = GlobalHWVar.gsy // 18
-            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
-            GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), opzioni_schermo)
-        else:
-            risoluzioneConfermata = True
-    if ramNecessaria > ramDisponibile:
-        print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
 def mostraLogo():
     effettoAvvio = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriAmbiente/EffettoAvvio.wav")
     logo = CaricaFileProgetto.loadImage("Risorse/Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
@@ -506,7 +450,6 @@ def disegnaSchermataDiCaricamento():
 
     GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
 
-settaRisoluzioneOttimale()
 mostraLogo()
 if GlobalHWVar.erroreFileImpostazioni:
     disegnaSchermataSelezioneLingua()

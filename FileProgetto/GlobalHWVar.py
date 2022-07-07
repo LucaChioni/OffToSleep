@@ -3,6 +3,7 @@
 import os
 import sys
 import gc
+import psutil
 import pygame
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAudioAmbiente
@@ -705,6 +706,110 @@ def aggiornaSchermo(ignoraBloccoAggiornamento=False):
         aggiornaTuttoLoSchermo = False
         gc.collect()
 
+# RAM in MB necessaria per le varie risoluzioni
+RAMUHD5k = 8000
+RAMUHD4k = 6000
+RAMUHD = 5000
+RAMQHD = 4000
+RAMFHD = 3000
+RAMHDPLUS = 2500
+RAMHD = 2000
+RAMqHD = 1500
+RAMnHD = 1000
+
+# definisco la lista di risoluzioni utilizzabili (in ordine crescente)
+listaRisoluzioniDisponibili = [[640, 360], [960, 540], [1280, 720], [1600, 900], [1920, 1080], [2560, 1440], [3200, 1800], [3840, 2160]]
+i = len(listaRisoluzioniDisponibili) - 1
+while i > 0:
+    if listaRisoluzioniDisponibili[i][0] >= maxGsx:
+        del listaRisoluzioniDisponibili[i]
+    i -= 1
+listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
+print (listaRisoluzioniDisponibili)
+
+ramDisponibile = (psutil.virtual_memory().total / 1000000000) * 1000
+print ("RAM disponibile: " + str(ramDisponibile) + " MB")
+def settaRisoluzioneOttimale(testaPrestazioni):
+    global gsx
+    global gsy
+    global gpx
+    global gpy
+    global schermo
+    global opzioni_schermo
+    ramNecessaria = RAMnHD
+    risoluzioneConfermata = False
+    while not risoluzioneConfermata:
+        if gsx > 3840:
+            ramNecessaria = RAMUHD5k
+        elif 3200 < gsx <= 3840:
+            ramNecessaria = RAMUHD4k
+        elif 2560 < gsx <= 3200:
+            ramNecessaria = RAMUHD
+        elif 1920 < gsx <= 2560:
+            ramNecessaria = RAMQHD
+        elif 1600 < gsx <= 1920:
+            ramNecessaria = RAMFHD
+        elif 1280 < gsx <= 1600:
+            ramNecessaria = RAMHDPLUS
+        elif 960 < gsx <= 1280:
+            ramNecessaria = RAMHD
+        elif 640 < gsx <= 960:
+            ramNecessaria = RAMqHD
+        elif gsx <= 640:
+            ramNecessaria = RAMnHD
+        abbassaRisoluzione = False
+        for i in range(0, 20):
+            disegnaColoreSuTuttoLoSchermo(schermo, nero)
+            aggiornaSchermo()
+
+            for event in pygame.event.get():
+                # l'unico evento che può avvenire è l'uscita dal gioco
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            clockMenu.tick(fpsMenu)
+            if (testaPrestazioni and i > 10 and clockMenu.get_fps() < 25) or ramNecessaria > ramDisponibile:
+                abbassaRisoluzione = True
+        if abbassaRisoluzione:
+            if len(listaRisoluzioniDisponibili) > 1:
+                if gsx == listaRisoluzioniDisponibili[0][0]:
+                    risoluzioneConfermata = True
+                else:
+                    i = len(listaRisoluzioniDisponibili) - 1
+                    while i >= 0:
+                        if listaRisoluzioniDisponibili[i][0] < gsx:
+                            gsx = listaRisoluzioniDisponibili[i][0]
+                            gsy = listaRisoluzioniDisponibili[i][1]
+                            break
+                        i -= 1
+            else:
+                risoluzioneConfermata = True
+            gpx = gsx // 32
+            gpy = gsy // 18
+            if modalitaSchermo == 0:
+                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+            elif modalitaSchermo == 1:
+                if not (gsx == maxGsx and gsy == maxGsy):
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+                else:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
+                opzioni_schermo = pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+                pygame.display.set_caption(titolo)
+                pygame.display.set_icon(icona)
+            else:
+                if gsx == maxGsx and gsy == maxGsy:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
+                else:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+                opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        else:
+            risoluzioneConfermata = True
+    if ramNecessaria > ramDisponibile:
+        print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
 linguaImpostata = "eng"
 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
@@ -755,6 +860,8 @@ if len(datiFileImpostazioniString) == 6:
                 os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
             opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        # setto la risoluzione ottimale nel caso non ci fosse abbastanza RAM
+        settaRisoluzioneOttimale(testaPrestazioni=False)
         initVolumeSounds()
 else:
     erroreFileImpostazioni = True
@@ -762,28 +869,8 @@ if erroreFileImpostazioni:
     print ("Errore nella lettura del file di configurazione delle impostazioni")
     opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+    settaRisoluzioneOttimale(testaPrestazioni=True)
     initVolumeSounds()
-
-# RAM in MB necessaria per le varie risoluzioni
-RAMUHD5k = 5000
-RAMUHD4k = 4000
-RAMUHD = 3000
-RAMQHD = 1800
-RAMFHD = 1000
-RAMHDPLUS = 850
-RAMHD = 700
-RAMqHD = 500
-RAMnHD = 400
-
-# definisco la lista di risoluzioni utilizzabili (in ordine crescente)
-listaRisoluzioniDisponibili = [[640, 360], [960, 540], [1280, 720], [1600, 900], [1920, 1080], [2560, 1440], [3200, 1800], [3840, 2160]]
-i = len(listaRisoluzioniDisponibili) - 1
-while i > 0:
-    if listaRisoluzioniDisponibili[i][0] >= maxGsx:
-        del listaRisoluzioniDisponibili[i]
-    i -= 1
-listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
-print (listaRisoluzioniDisponibili)
 
 # definisco la variabile che mi serve per sapere quanto tempo hai giocato (per metterlo nel salvataggio)
 tempoInizioPartita = False
