@@ -122,7 +122,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, listaAvanzamentoDialoghi, oggettiRimastiAHansAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, listaAvanzamentoDialoghi, oggettiRimastiAHansAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco, fineDelGioco=False):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     xp = GlobalHWVar.gsx // 32 * 2
@@ -149,6 +149,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     n = -1
     confermaSalvataggioCancellazione = False
 
+    primissimoFrame = True
+
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -163,11 +165,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
         suCambiaOperazione = False
         if GlobalHWVar.mouseVisibile:
             if not conferma:
-                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2 and not fineDelGioco:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     suTornaIndietro = True
-                elif 0 <= xMouse <= GlobalHWVar.gsx // 32 * 10 and GlobalHWVar.gsy // 18 * 16.2 <= yMouse <= GlobalHWVar.gsy:
+                elif 0 <= xMouse <= GlobalHWVar.gsx // 32 * 10 and GlobalHWVar.gsy // 18 * 16.2 <= yMouse <= GlobalHWVar.gsy and not fineDelGioco:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     suCambiaOperazione = True
@@ -244,12 +246,14 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 xp = vxp
                 yp = vyp
                 conferma = False
-            else:
+            elif not fineDelGioco:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 n = -1
                 return n, cosa
+            else:
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
-        if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "mouseCentrale" or bottoneDown == "padTriangolo":
+        if (bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "mouseCentrale" or bottoneDown == "padTriangolo") and not fineDelGioco:
             GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
             aggiornaTutto = True
             xp = vxp
@@ -269,7 +273,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     cosa = 1
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
-            if bottoneDown == "mouseSinistro" and suTornaIndietro:
+            if bottoneDown == "mouseSinistro" and suTornaIndietro and not fineDelGioco:
                 if conferma:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     xp = vxp
@@ -279,7 +283,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     n = -1
                     return n, cosa
-            elif bottoneDown == "mouseSinistro" and suCambiaOperazione:
+            elif bottoneDown == "mouseSinistro" and suCambiaOperazione and not fineDelGioco:
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
                 aggiornaTutto = True
                 xp = vxp
@@ -497,7 +501,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuro, (GlobalHWVar.gsx // 32 * 20.6, GlobalHWVar.gsy // 18 * 8.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 11.3) - 1, GlobalHWVar.gsy // 18 * 5.5), ((GlobalHWVar.gsx // 32 * 11.3) - 1, GlobalHWVar.gsy // 18 * 11.5), 2)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 20.6) - 1, GlobalHWVar.gsy // 18 * 5.5), ((GlobalHWVar.gsx // 32 * 20.6) - 1, GlobalHWVar.gsy // 18 * 11.5), 2)
-            if aggiornaInterfacciaPerCambioInput:
+            if aggiornaInterfacciaPerCambioInput and not fineDelGioco:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (0, GlobalHWVar.gsy // 18 * 16, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2))
@@ -594,7 +598,26 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
                 confermaSalvataggioCancellazione = False
                 aggiornaSchermo = True
+                if fineDelGioco:
+                    risposta = True
 
+            if primissimoFrame and fineDelGioco:
+                GlobalHWVar.nonAggiornareSchermo = False
+                imgOscuramentoSchermo = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+                screen = GlobalHWVar.schermo.copy().convert()
+                i = 0
+                while i <= 50:
+                    GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                    imgOscuramentoSchermo.fill((0, 0, 0, 255 - (i * 5)))
+                    GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+                    GlobalHWVar.aggiornaSchermo()
+                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                    i += 1
+                GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                GlobalHWVar.aggiornaSchermo()
+
+            primissimoFrame = False
             primoFrame = False
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             GlobalHWVar.aggiornaSchermo()

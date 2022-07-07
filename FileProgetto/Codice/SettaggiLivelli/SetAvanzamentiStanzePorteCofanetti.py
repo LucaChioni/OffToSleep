@@ -1269,13 +1269,24 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoNotatoDiPoterCapireGliAppuntiDiNeil"] = i
     i += 1
     dictAvanzamentoStoria["monologoUscitaLaboratorioPostPassatiMoltiAnni"] = i
-
     i += 1
-    dictAvanzamentoStoria["interazioneLettoDiCasaPostPassatiMoltiAnni"] = i
+    dictAvanzamentoStoria["sdraiataSulLettoDiCasaPostPassatiMoltiAnni"] = i
+    i += 1
+    dictAvanzamentoStoria["chiusoGliOcchiSulLettoDiCasaPostPassatiMoltiAnni"] = i
     i += 1
     dictAvanzamentoStoria["fine"] = i
-
-    i += 100
+    i += 1
+    dictAvanzamentoStoria["oltreFinale"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaCasa"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaCalcolatore"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaSpecchio"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaRod"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaCittà"] = i
 
     return dictAvanzamentoStoria
 

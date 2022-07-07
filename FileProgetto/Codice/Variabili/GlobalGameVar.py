@@ -193,18 +193,22 @@ def settaRisoluzioneOttimale():
     risoluzioneConfermata = False
     while not risoluzioneConfermata:
         if GlobalHWVar.gsx > 3840:
-            ramNecessaria = GlobalHWVar.RAMUUHD
-        elif 2560 < GlobalHWVar.gsx <= 3840:
+            ramNecessaria = GlobalHWVar.RAMUHD5k
+        elif 3200 < GlobalHWVar.gsx <= 3840:
+            ramNecessaria = GlobalHWVar.RAMUHD4k
+        elif 2560 < GlobalHWVar.gsx <= 3200:
             ramNecessaria = GlobalHWVar.RAMUHD
         elif 1920 < GlobalHWVar.gsx <= 2560:
             ramNecessaria = GlobalHWVar.RAMQHD
-        elif 1280 < GlobalHWVar.gsx <= 1920:
+        elif 1600 < GlobalHWVar.gsx <= 1920:
             ramNecessaria = GlobalHWVar.RAMFHD
+        elif 1280 < GlobalHWVar.gsx <= 1600:
+            ramNecessaria = GlobalHWVar.RAMHDPLUS
         elif 960 < GlobalHWVar.gsx <= 1280:
             ramNecessaria = GlobalHWVar.RAMHD
         elif 640 < GlobalHWVar.gsx <= 960:
             ramNecessaria = GlobalHWVar.RAMqHD
-        else:
+        elif GlobalHWVar.gsx <= 640:
             ramNecessaria = GlobalHWVar.RAMnHD
         abbassaRisoluzione = False
         for i in range(0, 20):
@@ -511,3 +515,18 @@ numImgCaricata = 0
 GlobalImgVar.loadImgs(numImgCaricata, cambioRisoluzione=False)
 numSndCaricato = 0
 GlobalSndVar.loadSounds(numSndCaricato)
+
+# partitaAppenaAvviataPostFinale serve per le animazioni dopo il finale (in cui ti alzi dal letto o dal calcolatore)
+partitaAppenaAvviataPostFinale = True
+
+listaCreditiSuoni = ""
+listaCreditiSuoni += "\"Fast Car Passing by\" by danlucaz -- https://freesound.org/s/517738/ -- License: Creative Commons 0" + " <br> "
+listaCreditiSuoni += "\"Metal Bar\" by stevenmaertens -- https://freesound.org/s/449842/ -- License: Creative Commons 0" + " <br> "
+listaCreditiSuoni += "\"Iron Bar Drop onto Wood & Straw Floor\" by dkudos -- https://freesound.org/s/213124/ -- License: Creative Commons 0" + " <br> "
+listaCreditiSuoni += "\"door metal heavy push bar beep open close with security deadbolt unlock click3 +tone.flac\" by kyles -- https://freesound.org/s/453966/ -- License: Creative Commons 0" + " <br> "
+listaCreditiSuoni += "\"helmet motorbike put on a head\" by cupido-1 -- https://freesound.org/s/614199/ -- License: Creative Commons 0" + " <br> "
+
+listaCreditiSuoni += "\"Forest at dawn with birds, crickets and insects in the Sian Ka'an Biosphere Reserve\" by felix.blume -- https://freesound.org/s/328296/ -- License: Creative Commons 0" + " <br> "
+
+listaCreditiRingraziamenti = "My family <br> Pygame community <br> Freesound community"
+listaCrediti = [["Written & Developed by:", "Luca Chioni"], ["English Translation by:", "Someone"], ["Music by:", "Luca Chioni"], ["Developed with:", "Python 2 & Pygame"], ["Sound Effects by Freesound:", listaCreditiSuoni], ["Special Thanks to:", listaCreditiRingraziamenti]]

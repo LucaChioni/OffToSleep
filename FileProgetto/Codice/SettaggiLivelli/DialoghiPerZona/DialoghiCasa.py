@@ -126,7 +126,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Il mio letto...)")
+            dialogo.append(u"(È il mio letto...)")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoLavandinoCucina" or tipo == "OggettoLavandinoBagno":
         partiDialogo = []

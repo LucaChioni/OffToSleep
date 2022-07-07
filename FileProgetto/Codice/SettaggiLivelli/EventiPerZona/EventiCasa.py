@@ -5,6 +5,7 @@ import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
@@ -461,5 +462,261 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria += 1
             carim = True
             caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaLaboratorioPostPassatiMoltiAnni"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        # npers: 1=d, 2=a, 3=w, 4=s
+        if x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 8 and npers != 4:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            npers = 4
+            carim = True
+            caricaTutto = True
+        elif x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 8 and npers == 4:
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            GlobalHWVar.canaleSoundMelodieEventi.play(canzone)
+            i = 0
+            while i < 30:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            percorsoDaEseguire = ["s", "s", "s", "s", "s"]
+        elif x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 10:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        elif x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 13 and npers == 4:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            percorsoDaEseguire = ["a", "a", "a"]
+        elif x == GlobalHWVar.gpx * 4 and y == GlobalHWVar.gpy * 13 and npers == 2:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+        elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 13 and npers == 2:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            npers = 4
+            carim = True
+            caricaTutto = True
+        elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 13 and npers == 4:
+            i = 0
+            while i < 80:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            npers = 1
+            carim = True
+            caricaTutto = True
+        elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 13 and npers == 1:
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            percorsoDaEseguire = ["d", "d", "d"]
+        elif x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpy * 13 and npers == 1:
+            GlobalHWVar.canaleSoundPassiRallo.stop()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            avanzamentoStoria += 1
+            npers = 2
+            stanza = GlobalGameVar.dictStanze["casaHansSara1"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+            nonMostrarePersonaggio = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sdraiataSulLettoDiCasaPostPassatiMoltiAnni"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        avanzamentoStoria += 1
+        i = 0
+        while i < 245:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        stanza = GlobalGameVar.dictStanze["casaHansSara1"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        GlobalHWVar.nonAggiornareSchermo = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoGliOcchiSulLettoDiCasaPostPassatiMoltiAnni"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
+        if GlobalHWVar.nonAggiornareSchermo:
+            GlobalHWVar.nonAggiornareSchermo = False
+            GlobalHWVar.aggiornaSchermo()
+        avanzamentoStoria += 1
+        imgOscuramentoSchermo = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
+        i = 0
+        while i < 100:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        screen = GlobalHWVar.schermo.copy().convert()
+        i = 0
+        while i <= 510:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            imgOscuramentoSchermo.fill((0, 0, 0, i // 2))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 80:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        c = 0
+        while c < len(GlobalGameVar.listaCrediti):
+            infoCrediti = GlobalGameVar.listaCrediti[c]
+            descrizione = infoCrediti[0]
+            listaSoggetti = infoCrediti[1]
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+            if c == 4:
+                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 0.9, 60, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 2) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 2) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2.5, 35, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.4)
+            elif c == 5:
+                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.4, 60, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 7.5) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 7.5) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 8, 80, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 1.3)
+            else:
+                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 7.4, 60, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 8.5) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 8.5) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 9, 100, centrale=True)
+            screen = GlobalHWVar.schermo.copy().convert()
+            i = 0
+            while i <= 50:
+                GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                imgOscuramentoSchermo.fill((0, 0, 0, 255 - (i * 5)))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+                GlobalHWVar.aggiornaSchermo()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                i += 1
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            i = 0
+            while i < 100:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            i = 0
+            while i <= 50:
+                GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                imgOscuramentoSchermo.fill((0, 0, 0, i * 5))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+                GlobalHWVar.aggiornaSchermo()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                i += 1
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+            GlobalHWVar.aggiornaSchermo()
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            c += 1
+        i = 0
+        while i < 25:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        logo = CaricaFileProgetto.loadImage("Risorse/Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
+        GlobalHWVar.disegnaImmagineSuSchermo(logo, (GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 3))
+        screen = GlobalHWVar.schermo.copy().convert()
+        i = 0
+        while i <= 50:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            imgOscuramentoSchermo.fill((0, 0, 0, 255 - (i * 5)))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 30:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        xRingraziamento = GlobalHWVar.gpx * 16
+        yRingraziamento = GlobalHWVar.gpy * 15
+        xRettangoloRingra = GlobalHWVar.gpx * 11
+        yRettangoloRingra = GlobalHWVar.gpy * 14.5
+        xDimensioneRettangoloRingra = GlobalHWVar.gpx * 10
+        yDimensioneRettangoloRingra = GlobalHWVar.gpy * 2.5
+        imgOscuramentoSchermo2 = pygame.Surface((xDimensioneRettangoloRingra, yDimensioneRettangoloRingra), flags=pygame.SRCALPHA)
+        i = 0
+        while i <= 50:
+            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xRettangoloRingra, yRettangoloRingra, xDimensioneRettangoloRingra, yDimensioneRettangoloRingra))
+            FunzioniGraficheGeneriche.messaggio("Thank you", GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
+            imgOscuramentoSchermo2.fill((0, 0, 0, 255 - (i * 5)))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo2, (xRettangoloRingra, yRettangoloRingra))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xRettangoloRingra, yRettangoloRingra, xDimensioneRettangoloRingra, yDimensioneRettangoloRingra))
+        FunzioniGraficheGeneriche.messaggio("Thank you", GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
+        GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 170:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        screen = GlobalHWVar.schermo.copy().convert()
+        i = 0
+        while i <= 510:
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            imgOscuramentoSchermo.fill((0, 0, 0, i // 2))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+            i += 1
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 100:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        # obbligo a fare il salvataggio
+        nonMostrarePersonaggio = False
+        GlobalHWVar.nonAggiornareSchermo = True
+        caricaTutto = True
+    elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"] and GlobalGameVar.partitaAppenaAvviataPostFinale:
+        i = 0
+        while i < 30:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        stanza = GlobalGameVar.dictStanze["casaHansSara1"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        nonMostrarePersonaggio = False
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire

@@ -765,13 +765,15 @@ if erroreFileImpostazioni:
     initVolumeSounds()
 
 # RAM in MB necessaria per le varie risoluzioni
-RAMUUHD = 5000
-RAMUHD = 2800
-RAMQHD = 1500
-RAMFHD = 850
-RAMHD = 550
-RAMqHD = 400
-RAMnHD = 300
+RAMUHD5k = 5000
+RAMUHD4k = 4000
+RAMUHD = 3000
+RAMQHD = 1800
+RAMFHD = 1000
+RAMHDPLUS = 850
+RAMHD = 700
+RAMqHD = 500
+RAMnHD = 400
 
 # definisco la lista di risoluzioni utilizzabili (in ordine crescente)
 listaRisoluzioniDisponibili = [[640, 360], [960, 540], [1280, 720], [1600, 900], [1920, 1080], [2560, 1440], [3200, 1800], [3840, 2160]]

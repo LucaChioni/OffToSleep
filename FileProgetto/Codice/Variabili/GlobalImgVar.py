@@ -221,6 +221,7 @@ global persoSara2
 global persoSara3
 global persoSara4
 global persoSara5
+global persoSara6
 global persobSara
 global persobSara5
 global persoFraMaggiore
@@ -262,7 +263,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1952
+numImgTotali = 1953
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -501,6 +502,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persoSara3
     global persoSara4
     global persoSara5
+    global persoSara6
     global persobSara
     global persobSara5
     global persoFraMaggiore
@@ -609,6 +611,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara4 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persoSara6 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara6Menu.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persobSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
     persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)

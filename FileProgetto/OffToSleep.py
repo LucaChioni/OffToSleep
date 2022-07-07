@@ -10,10 +10,12 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
 import Codice.GestioneMenu.MenuPrincipali as MenuPrincipali
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneMenu.MenuEnigmi as MenuEnigmi
+import Codice.GestioneMenu.SottoMenuSalva as SottoMenuSalva
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneGrafica.EnvPrint as EnvPrint
 import Codice.GestioneGrafica.Animazioni as Animazioni
@@ -315,6 +317,49 @@ def gameloop():
 
             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
             print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
+
+            # decido dove ripartire per il prossimo salvataggio
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["oltreFinale"]:
+                GlobalGameVar.partitaAppenaAvviataPostFinale = True
+                if dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinale"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCittà"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"]
+                    dati[1] = GlobalGameVar.dictStanze["casaHansSara1"]
+                    dati[2] = GlobalHWVar.gpx * 6
+                    dati[3] = GlobalHWVar.gpx * 13
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 2
+                    nonMostrarePersonaggio = True
+                elif dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCalcolatore"]
+                    dati[1] = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
+                    dati[2] = GlobalHWVar.gpx * 15
+                    dati[3] = GlobalHWVar.gpx * 7
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 4
+                    nonMostrarePersonaggio = True
+                elif dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCalcolatore"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaSpecchio"]
+                    dati[1] = GlobalGameVar.dictStanze["internoCastello21"]
+                    dati[2] = GlobalHWVar.gpx * 27
+                    dati[3] = GlobalHWVar.gpx * 8
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 1
+                elif dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaSpecchio"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaRod"]
+                    dati[1] = GlobalGameVar.dictStanze["palazzoDiRod3"]
+                    dati[2] = GlobalHWVar.gpx * 25
+                    dati[3] = GlobalHWVar.gpx * 5
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 1
+                elif dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaRod"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCittà"]
+                    dati[1] = GlobalGameVar.dictStanze["stradaPerCittà3"]
+                    dati[2] = GlobalHWVar.gpx * 14
+                    dati[3] = GlobalHWVar.gpx * 13
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 4
+                datiAttualiTotali = [dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco]
+                CaricaSalvaPartita.salvataggio(GlobalGameVar.numSalvataggioCaricato, datiAttualiTotali, datiAttualiTotali[:])
 
             # se è nuova partita => mostro schemata con citazione
             if GlobalGameVar.numSalvataggioCaricato == 0 and not gameover:
@@ -2864,6 +2909,48 @@ def gameloop():
             # controlla se devi cambiare personaggio giocabile
             personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0])
             personaggioUsato = personaggioDaUsare
+
+        if dati[0] == GlobalGameVar.dictAvanzamentoStoria["fine"]:
+            dati[0] += 1
+            # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
+            dati[6] = 0
+            dati[7] = 0
+            dati[8] = 0
+            dati[128] = 0
+            dati[129] = 0
+            dati[130] = 0
+            # aggiorno il vettore "dati"
+            dati[2] = x
+            dati[3] = y
+            dati[140] = npers
+            dati[134] = rx
+            dati[135] = ry
+            if robot == GlobalImgVar.robod:
+                dati[141] = 1
+            elif robot == GlobalImgVar.roboa:
+                dati[141] = 2
+            elif robot == GlobalImgVar.robos:
+                dati[141] = 3
+            elif robot == GlobalImgVar.robow:
+                dati[141] = 4
+            elif robot == GlobalImgVar.robomo:
+                dati[141] = 0
+            dati[142] = chiamarob
+            dati[139] = mosseRimasteRob
+            dati[136] = raffredda
+            dati[137] = autoRic1
+            dati[138] = autoRic2
+            dati[143] = GlobalGameVar.pazzoStrabico
+            dati[144] = GlobalGameVar.cambiataAlCastello[0]
+            SottoMenuSalva.scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaroTotale, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, fineDelGioco=True)
+            FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
+            i = 0
+            while i < 30:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            inizio = True
+        GlobalGameVar.partitaAppenaAvviataPostFinale = False
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)

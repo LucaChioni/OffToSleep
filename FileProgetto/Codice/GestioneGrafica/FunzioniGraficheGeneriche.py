@@ -35,19 +35,29 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         dimX, dimY = font.size(msg)
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x - dimX, y))
     elif centrale:
-        msgIniziale = msg
-        font.render(msg, True, colore)
-        dimX, dimY = font.size(msg)
-        if lungMax and dimX > lungMax * GlobalHWVar.gpx:
-            while dimX > lungMax * GlobalHWVar.gpx:
-                msg = msg[:-1]
-                font.render(msg + "...", True, colore)
-                dimX, dimY = font.size(msg)
-        if msgIniziale != msg:
-            msg += "..."
-        testo = font.render(msg, True, colore)
-        dimX, dimY = font.size(msg)
-        GlobalHWVar.disegnaImmagineSuSchermo(testo, (x - (dimX // 2), y))
+        if "<br>" in msg and spazioTraLeRighe != -1:
+            righeMsg = msg.split(" <br> ")
+            i = 0
+            while i < len(righeMsg):
+                font.render(righeMsg[i], True, colore)
+                testo = font.render(righeMsg[i], True, colore)
+                dimX, dimY = font.size(righeMsg[i])
+                GlobalHWVar.disegnaImmagineSuSchermo(testo, (x - (dimX // 2), y + (i * spazioTraLeRighe)))
+                i += 1
+        else:
+            msgIniziale = msg
+            font.render(msg, True, colore)
+            dimX, dimY = font.size(msg)
+            if lungMax and dimX > lungMax * GlobalHWVar.gpx:
+                while dimX > lungMax * GlobalHWVar.gpx:
+                    msg = msg[:-1]
+                    font.render(msg + "...", True, colore)
+                    dimX, dimY = font.size(msg)
+            if msgIniziale != msg:
+                msg += "..."
+            testo = font.render(msg, True, colore)
+            dimX, dimY = font.size(msg)
+            GlobalHWVar.disegnaImmagineSuSchermo(testo, (x - (dimX // 2), y))
     elif superficie:
         testo = font.render(msg, True, colore)
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x, y), superficie=superficie)

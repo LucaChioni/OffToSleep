@@ -612,6 +612,9 @@ def setImgMenuSalvaProtagonista(avanzamentoStoria, abitiCastello):
     elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
         persalva = GlobalImgVar.persoSara5
         persSalvaBraccia = GlobalImgVar.persobSara5
+    elif avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["fine"]:
+        persalva = GlobalImgVar.persoSara6
+        persSalvaBraccia = GlobalImgVar.persobSara
     else:
         persalva = GlobalImgVar.persoSara4
         persSalvaBraccia = GlobalImgVar.persobSara

@@ -117,7 +117,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gsy // 18 * 15
     elif GlobalGameVar.dictStanze["casaHansSara1"] <= stanza <= GlobalGameVar.dictStanze["casaHansSara4"]:
         if stanza == GlobalGameVar.dictStanze["casaHansSara1"]:
-            nomeCanzoneLuogo = "02-Casa"
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"]:
+                nomeCanzoneLuogo = "16-Finale"
+            else:
+                nomeCanzoneLuogo = "02-Casa"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
                 GlobalGameVar.canzoneAttuale = nomeCanzoneLuogo
                 canzone = CaricaFileProgetto.loadSound(pathMusiche + GlobalGameVar.canzoneAttuale + ".wav")
@@ -191,6 +194,20 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "a"
                     x = GlobalHWVar.gsx // 32 * 4
                     y = GlobalHWVar.gsy // 18 * 13
+                if stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sdraiataSulLettoDiCasaPostPassatiMoltiAnni"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                if stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"]:
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
         if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
             nomeCanzoneLuogo = "02-Casa"
             if GlobalGameVar.canzoneAttuale != nomeCanzoneLuogo:
@@ -5181,6 +5198,19 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     npers = "s"
                     x = GlobalHWVar.gpx * 15
                     y = GlobalHWVar.gpy * 7
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreIndossareCasco)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                    i = 0
+                    while i < 10:
+                        pygame.time.wait(100)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        i += 1
+                if stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCalcolatore"]:
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreIndossareCasco)
                     i = 0
                     while i < 10:

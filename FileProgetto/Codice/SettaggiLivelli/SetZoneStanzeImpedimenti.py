@@ -345,7 +345,7 @@ def scriviNomeZona(stanza, stanzaVecchia, attesa):
         else:
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             FunzioniGraficheGeneriche.messaggio(nomeDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6) - 1), (int(GlobalHWVar.gpx * 28), int(GlobalHWVar.gpy * 10.6) - 1), 2)
             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
             GlobalHWVar.aggiornaSchermo()
 
@@ -425,6 +425,10 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
             nomeStanza = "StanzaC"
         elif GlobalGameVar.dictAvanzamentoStoria["monologoPerTornareIndietroNelTempoAllaSeraDellInizioDelGioco"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa2NellaSeraDellInizioDelGioco"]:
             nomeStanza = "StanzaE"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sdraiataSulLettoDiCasaPostPassatiMoltiAnni"] or (avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"] and GlobalGameVar.partitaAppenaAvviataPostFinale):
+            nomeStanza = "StanzaF"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiusoGliOcchiSulLettoDiCasaPostPassatiMoltiAnni"]:
+            nomeStanza = "StanzaG"
         else:
             nomeStanza = "StanzaD"
     if stanza == GlobalGameVar.dictStanze["casaHansSara2"]:
@@ -713,6 +717,8 @@ def settaNomeImgStanza(avanzamentoStoria, stanza, listaAvanzamentoDialoghi):
                 nomeStanza = "StanzaA"
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 nomeStanza = "StanzaG"
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCalcolatore"] and GlobalGameVar.partitaAppenaAvviataPostFinale:
+            nomeStanza = "StanzaG"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutaSulCalcolatore"] or GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["rialzataDalCalcolatore"]:
             nomeStanza = "StanzaA"
         else:
