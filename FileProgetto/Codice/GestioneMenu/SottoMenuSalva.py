@@ -35,7 +35,7 @@ def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti
 
 def mostraErroreCaricamentoSalvataggio(errore):
     if errore == 1:
-        print ("Slot vuoto")
+        # print ("Slot vuoto")
         aggiornaSchermata = True
         bottoneDown = False
         aggiornaInterfacciaPerCambioInput = True
@@ -78,7 +78,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if errore == 2:
-        print ("Dati corrotti")
+        # print ("Dati corrotti")
         aggiornaSchermata = True
         bottoneDown = False
         aggiornaInterfacciaPerCambioInput = True

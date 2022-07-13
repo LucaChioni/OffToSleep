@@ -217,11 +217,11 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
                 percorsoPersonaggio = []
-                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "d", "Bambino1-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12, "d", "Bambino1-0", stanza, avanzamentoStoria, percorsoPersonaggio)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
                 percorsoPersonaggio = []
-                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12, "d", "Bambino2-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "d", "Bambino2-0", stanza, avanzamentoStoria, percorsoPersonaggio)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
                 percorsoPersonaggio = []

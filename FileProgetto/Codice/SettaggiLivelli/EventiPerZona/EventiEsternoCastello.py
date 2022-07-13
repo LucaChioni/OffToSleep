@@ -99,6 +99,11 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaCastello"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -247,15 +252,21 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoNeilBordoLagoDuranteLaFuga"] and stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
         for personaggio in listaPersonaggi:
             if personaggio.tipo == "Neil":
-                if personaggio.x == GlobalHWVar.gpx * 8 and personaggio.y == GlobalHWVar.gpy * 6:
+                if personaggio.x == GlobalHWVar.gpx * 9 and personaggio.y == GlobalHWVar.gpy * 6:
                     avanzamentoStoria += 1
                 break
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["avvicinatoNeilBordoLagoDuranteLaFuga"] and stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
+        personaggioArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "Neil":
+                if personaggio.x == GlobalHWVar.gpx * 12 and personaggio.y == GlobalHWVar.gpy * 6:
+                    personaggioArrivato = True
+                break
         if x == GlobalHWVar.gpx * 16 and y == GlobalHWVar.gpy * 6:
             percorsoDaEseguire = ["d"]
-        else:
+        elif personaggioArrivato:
             GlobalHWVar.canaleSoundPassiRallo.stop()
             avanzamentoStoria += 1
             percorsoPersonaggio = []
@@ -266,6 +277,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             nonMostrarePersonaggio = True
             carim = True
             caricaTutto = True
+        else:
+            avanzaIlTurnoSenzaMuoverti = True
+            evitaTurnoDiColco = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["buttataNelLagoDuranteLaFuga"] and stanza == GlobalGameVar.dictStanze["esternoCastello3"]:
         GlobalHWVar.canaleSoundPassiNemici.play(GlobalSndVar.rumoreMovimentoNemici)
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreTuffoLago)
@@ -281,7 +295,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         GlobalHWVar.aggiornaSchermo()
         GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
         i = 0
-        while i < 50:
+        while i < 80:
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1

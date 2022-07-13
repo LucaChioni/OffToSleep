@@ -860,7 +860,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     percorsoDaEseguire.append("w")
                     percorsoDaEseguire.append("w")
             else:
-                print ("Percorso Rallo verso uscita internoCastello21 non trovato")
+                # print ("Percorso Rallo verso uscita internoCastello21 non trovato")
                 percorsoDaEseguire = []
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoDaInternoCastello21ConRod"] and stanza == GlobalGameVar.dictStanze["internoCastello19"]:
         i = 0

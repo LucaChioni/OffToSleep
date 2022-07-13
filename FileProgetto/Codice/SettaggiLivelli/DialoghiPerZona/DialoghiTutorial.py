@@ -54,7 +54,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu normale.")
+        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, verrà aperto un menu rapido che permetterà di compiere meno operazioni ripetto al menu normale.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialBattaglia"]:
         oggettoDato = False
@@ -82,7 +82,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"È possibile richiudere le porte utilizzando la modalità interazione.")
         partiDialogo.append(dialogo)
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansSara2"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoBicchiereConAcquaSulComodino"]:
         oggettoDato = False
         avanzaStoria = True
         menuMercante = False
@@ -106,7 +106,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni. Facendolo in un luogo sicuro, invece, ti permetterà di riposare e recuperare tutti i <*>#italic#Pv.<*>")
+        dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni. Facendolo in un luogo sicuro invece ti permetterà di riposare e recuperare tutti i <*>#italic#Pv.<*>")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
         oggettoDato = False

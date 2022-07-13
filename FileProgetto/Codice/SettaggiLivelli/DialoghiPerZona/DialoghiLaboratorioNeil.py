@@ -167,7 +167,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(L'apparecchio cerebrale... l'ha ricavato dall'impo...)")
+                dialogo.append(u"(L'apparecchio cerebrale...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -248,7 +248,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È una lista di comandi... \"Comandi cerebrali del Calcolatore di eventi\"...?)")
+                dialogo.append(u"(È una lista di comandi...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -540,7 +540,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Merda...")
+                dialogo.append(u"... Per Dio...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo3RenéNelLaboratorioDiNeil"]:
                 oggettoDato = False
@@ -584,7 +584,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Si è operato...")
+                dialogo.append(u"... Si è...")
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoImpoFermo":
             partiDialogo = []

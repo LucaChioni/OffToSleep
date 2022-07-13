@@ -57,19 +57,19 @@ elif sistemaOperativo == "Linux":
     gsx = int(resolution[0])
     gsy = int(resolution[1])
 
-print ("Origine", gsx, gsy)
+# print ("Origine", gsx, gsy)
 if gsx % 32 != 0 or gsy % 18 != 0:
     while gsx % 32 != 0:
         gsx = gsx - 1
     while gsy % 18 != 0:
         gsy = gsy - 1
 if gsx // 16 < gsy // 9:
-    print ("Altezza piu grande")
+    # print ("Altezza piu grande")
     gsy = gsx * 9 // 16
 elif gsx // 16 > gsy // 9:
-    print ("Larghezza piu grande")
+    # print ("Larghezza piu grande")
     gsx = gsy * 16 // 9
-print ("Modificato", gsx, gsy)
+# print ("Modificato", gsx, gsy)
 
 maxGsx = gsx
 maxGsy = gsy
@@ -308,7 +308,7 @@ def caricaImpostazioniController():
     datiImpostazioniController.pop(len(datiImpostazioniController) - 1)
     if len(datiImpostazioniController) == 0:
         impoControllerErrato = True
-        print ("File di configurazione dei controller vuoto")
+        # print ("File di configurazione dei controller vuoto")
     else:
         contaGlobale = 0
         while contaGlobale < len(datiImpostazioniController):
@@ -316,7 +316,7 @@ def caricaImpostazioniController():
             setteggioController.pop(len(setteggioController) - 1)
             if len(setteggioController) != 10:
                 impoControllerErrato = True
-                print ("File di configurazione dei controller corrotto 1")
+                # print ("File di configurazione dei controller corrotto 1")
                 break
             else:
                 for i in range(1, len(setteggioController)):
@@ -324,11 +324,11 @@ def caricaImpostazioniController():
                         test = int(setteggioController[i])
                         if type(test) is not int:
                             impoControllerErrato = True
-                            print ("File di configurazione dei controller corrotto 2")
+                            # print ("File di configurazione dei controller corrotto 2")
                             break
                     except ValueError:
                         impoControllerErrato = True
-                        print ("File di configurazione dei controller corrotto 3")
+                        # print ("File di configurazione dei controller corrotto 3")
                         break
             contaGlobale += 1
     if impoControllerErrato:
@@ -409,26 +409,26 @@ def caricaImpostazioniTastiera():
     datiImpostazioniTastiera = leggifile.split("_")
     if len(datiImpostazioniTastiera) == 0:
         impoTastieraErrato = True
-        print ("File di configurazione della tastiera vuoto")
+        # print ("File di configurazione della tastiera vuoto")
     elif len(datiImpostazioniTastiera) == 6:
         contaGlobale = 0
         while contaGlobale < len(datiImpostazioniTastiera):
             setteggioTastiera = datiImpostazioniTastiera[contaGlobale].split("=")
             if len(setteggioTastiera) != 2:
                 impoTastieraErrato = True
-                print ("File di configurazione della tastiera corrotto 1")
+                # print ("File di configurazione della tastiera corrotto 1")
                 break
             else:
                 test1 = setteggioTastiera[0]
                 test2 = setteggioTastiera[1]
                 if test1 not in tastiConfigurabiliTastiera or test2 not in tastiConfigurabiliTastiera:
                     impoTastieraErrato = True
-                    print ("File di configurazione della tastiera corrotto 2")
+                    # print ("File di configurazione della tastiera corrotto 2")
                     break
             contaGlobale += 1
     else:
         impoTastieraErrato = True
-        print ("File di configurazione della tastiera incompleto")
+        # print ("File di configurazione della tastiera incompleto")
     if impoTastieraErrato:
         # cancello il file se c'è un errore
         scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoTastiera.txt", "w")
@@ -692,8 +692,8 @@ def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
                         i += 1
                 if aggiungiRettangolo:
                     listaRettangoliDaAggiornare.append(rectOrig)
-    else:
-        print ("Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")")
+    # else:
+    #     print ("Impossibile disegnare immagine. Coordinate: (" + str(x // gpx) + ", " + str(y // gpy) + ")")
 def aggiornaSchermo(ignoraBloccoAggiornamento=False):
     global listaRettangoliDaAggiornare
     global aggiornaTuttoLoSchermo
@@ -725,10 +725,10 @@ while i > 0:
         del listaRisoluzioniDisponibili[i]
     i -= 1
 listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
-print (listaRisoluzioniDisponibili)
+# print (listaRisoluzioniDisponibili)
 
 ramDisponibile = (psutil.virtual_memory().total / 1000000000) * 1000
-print ("RAM disponibile: " + str(ramDisponibile) + " MB")
+# print ("RAM disponibile: " + str(ramDisponibile) + " MB")
 def getRAMNecessariaPerRisoluzione(dimX):
     ramNecessaria = RAMnHD
     if dimX > 3840:
@@ -812,8 +812,8 @@ def settaRisoluzioneOttimale(testaPrestazioni):
                 schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         else:
             risoluzioneConfermata = True
-    if ramNecessaria > ramDisponibile:
-        print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
+    # if ramNecessaria > ramDisponibile:
+        # print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
 linguaImpostata = "eng"
 controlloRisoluzione = True
@@ -874,7 +874,7 @@ if len(datiFileImpostazioniString) == 7:
 else:
     erroreFileImpostazioni = True
 if erroreFileImpostazioni:
-    print ("Errore nella lettura del file di configurazione delle impostazioni")
+    # print ("Errore nella lettura del file di configurazione delle impostazioni")
     opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
     settaRisoluzioneOttimale(testaPrestazioni=True)

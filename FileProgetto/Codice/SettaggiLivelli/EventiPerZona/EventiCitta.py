@@ -125,6 +125,11 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] and stanza == GlobalGameVar.dictStanze["città6"]:
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone)
         caricaTutto = True
@@ -297,7 +302,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                     percorsoDaEseguire.append("w")
                     percorsoDaEseguire.append("d")
             else:
-                print ("Percorso Rallo verso uscita città4 non trovato")
+                # print ("Percorso Rallo verso uscita città4 non trovato")
                 percorsoDaEseguire = []
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 27:

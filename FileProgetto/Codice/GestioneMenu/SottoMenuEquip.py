@@ -1122,6 +1122,10 @@ def oggetti(dati, colcoInCasellaVista):
     if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         usandoRod = True
     qtaOggettiDiRod = 99
+    # faccio in modo di poter usare gli impofrutti alla fine del gioco solo quando sei nel laboratorio segreto
+    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and dati[1] == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        colcoInCasellaVista = True
+        GlobalGameVar.impoPresente = True
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1864,4 +1868,9 @@ def oggetti(dati, colcoInCasellaVista):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+
+    # rimetto a False la variabile globale "GlobalGameVar.impoPresente" (serviva a True per poter usare gli impofrutti alla fine del gioco)
+    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and dati[1] == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
+        GlobalGameVar.impoPresente = False
+
     return dati, attacco, esci

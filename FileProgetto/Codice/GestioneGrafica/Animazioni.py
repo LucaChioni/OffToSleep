@@ -1301,6 +1301,11 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
         pvmtot = nemicoInquadrato.vitaTotale
         FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, nemicoInquadrato.imgS)
 
+    if not nemicoInquadrato and not GlobalGameVar.impoPresente:
+        # mostro l'icona per poter andare in mod. interazione
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+
     # backbround saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
     if saltaTurno:
@@ -1339,7 +1344,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
             if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
                 personaggio.animazioneFatta = True
                 animazionePersonaggi = True
-                if personaggio.tipo in GlobalImgVar.vettoreNomiNemici:
+                if personaggio.tipo in GlobalImgVar.vettoreNomiNemici or personaggio.tipo == "CaneCasa":
                     if not GlobalHWVar.canaleSoundPassiNemici.get_busy() and fineanimaz > 6:
                         GlobalHWVar.canaleSoundPassiNemici.play(GlobalSndVar.rumoreMovimentoNemici)
                 else:

@@ -213,7 +213,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Sì...")
+                dialogo.append(u"... Mh, sì...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -249,7 +249,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"No, non ci posso credere... e poi cosa vuol dire che me la presti?")
+                dialogo.append(u"No, non ci posso credere... e poi cosa vuol dire che me la presti?!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -257,7 +257,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma sei completamente impazzito!? Come faccio a memorizzare tutte le strade di un labirinto?")
+                dialogo.append(u"Ma sei completamente impazzito?! Come faccio a memorizzare tutte le strade di un labirinto?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -827,7 +827,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(I miei vecchi appunti sul labirinto. Ci sono stato tre giorni la dentro...)")
+                dialogo.append(u"(I miei vecchi appunti sul labirinto. Ci sono stato tre giorni là dentro...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False

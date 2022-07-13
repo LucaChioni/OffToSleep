@@ -36,7 +36,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È la porta del laboratorio... penso che l'unico che possa averla sfondata sia il Costruttore...)")
+                dialogo.append(u"(È la porta del laboratorio... credo che l'unico che possa averla sfondata sia il Costruttore...)")
                 partiDialogo.append(dialogo)
         elif tipo == "Bibliotecario":
             partiDialogo = []

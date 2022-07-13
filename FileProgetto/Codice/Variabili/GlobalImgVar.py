@@ -78,6 +78,7 @@ global sfondoRallo
 global sfondoColco
 global sfondoMostro
 global sfondoEsche
+global sfondoLogoInterazione
 global sfondoStartBattaglia
 global sfondoTriangolinoAltoDestra
 global sfondoTriangolinoAltoSinistra
@@ -263,7 +264,7 @@ global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 
-numImgTotali = 1953
+numImgTotali = 1954
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -359,6 +360,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global sfondoColco
     global sfondoMostro
     global sfondoEsche
+    global sfondoLogoInterazione
     global sfondoStartBattaglia
     global sfondoTriangolinoAltoDestra
     global sfondoTriangolinoAltoSinistra
@@ -823,10 +825,11 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     frecciaMenu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/FrecciaMenu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
 
     # sfondi
-    sfondoRallo = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoRallo.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy, False, imgImpenetrabile=True)
-    sfondoColco = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoColco.png', GlobalHWVar.gpx * 6, GlobalHWVar.gpy, False, imgImpenetrabile=True)
-    sfondoMostro = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoNemici.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy, False, imgImpenetrabile=True)
+    sfondoRallo = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoRallo.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoColco = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoColco.png', GlobalHWVar.gpx * 6, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoMostro = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoNemici.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy, True, imgImpenetrabile=True)
     sfondoEsche = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoEsche.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoLogoInterazione = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoLogoInterazione.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, imgImpenetrabile=True)
     sfondoStartBattaglia = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SfondoStartBattaglia.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 10, False, imgImpenetrabile=True)
     sfondoTriangolinoAltoDestra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloAltoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sfondoTriangolinoAltoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

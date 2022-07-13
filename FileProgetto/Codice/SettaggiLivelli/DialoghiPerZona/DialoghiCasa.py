@@ -119,6 +119,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"Zzz...")
             partiDialogo.append(dialogo)
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaLaboratorioPostPassatiMoltiAnni"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"!!!Per evidenziare l'interazione alla fine del gioco!!!")
+            partiDialogo.append(dialogo)
         else:
             oggettoDato = False
             avanzaStoria = False

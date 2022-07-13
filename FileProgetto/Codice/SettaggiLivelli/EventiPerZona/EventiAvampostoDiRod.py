@@ -76,8 +76,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                         personaggio.percorso.append("w")
                         personaggio.percorso.append("dGira")
                         personaggio.percorso.append("mantieniPosizione")
-                else:
-                    print ("Percorso Mercante verso altro tavolo non trovato")
+                # else:
+                #     print ("Percorso Mercante verso altro tavolo non trovato")
                 break
         avanzamentoStoria += 1
         avanzaIlTurnoSenzaMuoverti = True

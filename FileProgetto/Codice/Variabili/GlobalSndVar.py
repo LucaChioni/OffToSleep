@@ -106,9 +106,10 @@ global rumoreGettareSbarreATerra
 global rumoreLancioMissile
 global rumoreEsplosioneMissile
 global rumoreAttaccoCinghialeAdHans
+global rumoreRiempimentoBicchiere
 
 
-numSndTotali = 101
+numSndTotali = 102
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -224,6 +225,7 @@ def loadSounds(numSndCaricato):
     global rumoreLancioMissile
     global rumoreEsplosioneMissile
     global rumoreAttaccoCinghialeAdHans
+    global rumoreRiempimentoBicchiere
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -330,6 +332,7 @@ def loadSounds(numSndCaricato):
     rumoreLancioMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LancioMissile.wav")
     rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
     rumoreAttaccoCinghialeAdHans = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttaccoCinghialeAdHans.wav")
+    rumoreRiempimentoBicchiere = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/RiempimentoBicchiereLavandino.wav")
 
     # suoni apertura-chiusura porte
     rumorePortoniCambioStanza = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/PortoniCambioStanza.wav")

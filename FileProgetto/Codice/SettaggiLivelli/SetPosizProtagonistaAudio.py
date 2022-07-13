@@ -1554,6 +1554,18 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                             pygame.time.wait(100)
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             i += 1
+                    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
+                        i = 0
+                        while i < 5:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
+                        i = 0
+                        while i < 10:
+                            pygame.time.wait(100)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            i += 1
                     elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
                         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMovimentoVestiti)
                         i = 0
@@ -5282,6 +5294,8 @@ def decidiSeStoppareMusica(stanza, avanzamentoStoria):
         stoppaMusica = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaInternoCastello20Fuggendo"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]:
         stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanza < GlobalGameVar.dictStanze["caverna1"]:
+        stoppaMusica = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoPostAttaccoDiImpoOstile"] and (stanza == GlobalGameVar.dictStanze["caverna1"] or stanza == GlobalGameVar.dictStanze["caverna9"]):
         stoppaMusica = True
     elif GlobalGameVar.dictAvanzamentoStoria["uccisoDagliImpoTorri"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
@@ -5401,7 +5415,7 @@ def riproduciSuoniCambioStanza(stanzaVecchia, stanzaDestinazione, avanzamentoSto
 
 
 def decidiSeRiprodurreSuoniPassiAttacchi(avanzamentoStoria):
-    if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+    if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["toltoCascoCalcolatorePostScopertaFineDelMondo"] or GlobalGameVar.dictAvanzamentoStoria["tornatoNelCalcolatoreACasaTua"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
         if GlobalHWVar.canaleSoundPassiRallo.get_volume() > 0:
             GlobalHWVar.canaleSoundPassiRallo.set_volume(0)
         if GlobalHWVar.canaleSoundAttacco.get_volume() > 0:

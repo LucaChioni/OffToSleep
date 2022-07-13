@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import psutil
+# import psutil
 import os
 import pygame
 import GlobalHWVar
@@ -31,8 +31,8 @@ import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
 
 def gameloop():
-    p = psutil.Process()
-    maxMemoryUsage = 0
+    # p = psutil.Process()
+    # maxMemoryUsage = 0
     caricaSalvataggio = False
     inizio = True
     gameover = False
@@ -257,10 +257,10 @@ def gameloop():
         caricaTutto = True
 
     while True:
-        memoriaUsata = p.memory_info().rss / 1000000.0
-        if memoriaUsata > maxMemoryUsage:
-            maxMemoryUsage = memoriaUsata
-            print (u"Max RAM necessitata: " + str(maxMemoryUsage) + " MB")
+        # memoriaUsata = p.memory_info().rss / 1000000.0
+        # if memoriaUsata > maxMemoryUsage:
+        #     maxMemoryUsage = memoriaUsata
+        #     print (u"Max RAM necessitata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
             listaNemiciSotterrati = []
@@ -316,7 +316,7 @@ def gameloop():
             ny = 0
 
             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
-            print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
+            # print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
 
             # decido dove ripartire per il prossimo salvataggio
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["oltreFinale"]:
@@ -956,6 +956,10 @@ def gameloop():
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
             elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                inquadratoQualcosa = "battaglia"
+            elif not nemicoInquadrato and not GlobalGameVar.impoPresente and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 1:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1767,7 +1771,7 @@ def gameloop():
                             npers = 3
                         sposta = True
                     else:
-                        print ("Percorso Rallo verso cursore non trovato")
+                        # print ("Percorso Rallo verso cursore non trovato")
                         bottoneDown = False
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 # cambiare posizione
@@ -2486,7 +2490,7 @@ def gameloop():
                         attaccoDiColco.append(qtaRicarica)
                         attaccoDiColco.append("")
                         tecnicaUsata = "conclusioneRicarica"
-                        dati[122] = 10
+                        dati[122] = GlobalGameVar.durataSurriscaldamento
                     # autoric+
                     if autoRic2 >= 0:
                         autoRic2 -= 1
@@ -2500,7 +2504,7 @@ def gameloop():
                         attaccoDiColco.append(qtaRicarica)
                         attaccoDiColco.append("")
                         tecnicaUsata = "conclusioneRicarica+"
-                        dati[122] = 10
+                        dati[122] = GlobalGameVar.durataSurriscaldamento
             if GlobalGameVar.impoPresente and mosseRimasteRob > 0 and not morterob and not cambiosta and not evitaTurnoDiColco:
                 vrx = rx
                 vry = ry

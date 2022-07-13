@@ -348,6 +348,10 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             nemicoAppiccicato = nemicoInquadrato.statoInizioTurno[2]
         pvmtot = nemicoInquadrato.vitaTotale
         FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, nemicoInquadrato.imgS)
+    else:
+        # mostro l'icona per poter andare in mod. interazione
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
 
     # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
@@ -428,6 +432,10 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     # altrimenti mostro solo la vita di colco
     elif GlobalGameVar.impoPresente:
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
+    else:
+        # mostro l'icona per poter andare in mod. interazione
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
 
     # vita-status rallo
     FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, dati[0])
@@ -1026,6 +1034,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     # altrimenti mostro solo la vita di colco
     elif GlobalGameVar.impoPresente:
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
+    else:
+        # mostro l'icona per poter andare in mod. interazione
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
 
     GlobalHWVar.aggiornaSchermo()
 
@@ -1136,6 +1148,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
             elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 5:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                inquadratoQualcosa = "battaglia"
+            elif not nemicoInquadrato and not GlobalGameVar.impoPresente and 0 < yMouse < GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 < xMouse < GlobalHWVar.gsx // 32 * 1:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -2283,6 +2299,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         # altrimenti mostro solo la vita di colco
         elif not puntandoSuUnNemicoOColcoOEsca and GlobalGameVar.impoPresente:
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
+        elif not puntandoSuUnNemicoOColcoOEsca:
+            # mostro l'icona per poter andare in mod. interazione
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
 
         # vita-status rallo
         FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria)

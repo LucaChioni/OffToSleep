@@ -1910,7 +1910,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(La porte sono aperte, ma ci sono comunque dei soldati di guardia...)")
+                dialogo.append(u"(Le porte sono aperte, ma ci sono comunque dei soldati di guardia...)")
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-6":
             partiDialogo = []
@@ -2259,7 +2259,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Per discutere sul libero arbitrio è innanzitutto necessario distinguere due possibilità: la prima è quella in cui si ritiene che tutto ciò che esiste è costituito da materia; la seconda, invece, è quella in cui si cosidera possibile l'esistenza di elementi non materiali, tra cui rientrerebbe l'anima, come motore di ogni essere vivente...")
+                    dialogo.append(u"... Per discutere sul libero arbitrio è innanzitutto necessario distinguere due possibilità: la prima è quella in cui si ritiene che tutto ciò che esiste è costituito da materia; la seconda invece è quella in cui si cosidera possibile l'esistenza di elementi non materiali, tra cui rientrerebbe l'anima, come motore di ogni essere vivente...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -2267,12 +2267,12 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Percorrendo la seconda ipotesi, invece, è vero che l'anima non sarebbe governata dalle stesse leggi della materia, ma da queste leggi comunque dipenderebbe, anche se in maniera indiretta. Il comportamento degli individui, così come il loro pensiero, viene plasmato dall'esperienza che gli stessi compiono sul mondo materiale. L'anima verrebbe in questo modo influenzata e \"corrotta\" dalla materia, risultando quindi non più libera.")
+                    dialogo.append(u"... Percorrendo la seconda ipotesi invece, è vero che l'anima non sarebbe governata dalle stesse leggi della materia, ma da queste leggi comunque dipenderebbe. Il comportamento degli individui, così come il loro pensiero, viene plasmato dall'esperienza che gli stessi compiono sul mondo materiale. L'anima verrebbe in questo modo influenzata e \"corrotta\" dalla materia, risultando quindi non più libera.")
                     partiDialogo.append(dialogo)
                     if not GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"<*>#italic#Mmh...<*> In sostanza, le cose di cui mi ha parlato René...")
+                        dialogo.append(u"<*>#italic#Mmh...<*> in sostanza, le cose di cui mi ha parlato René...")
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-3":
                     partiDialogo = []
@@ -2336,7 +2336,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Cosa distingue la realtà dall'immaginazione? La realtà che sentiamo, viene catturata da dei sensori, che abbiamo sparsi nel corpo, e poi inviata al cervello tramite impulsi nervosi. Il cervello poi, che si trova al buio dentro un cranio, interpreta e immagina ciò che sta al di fuori di lui, \"ispirato\" da quegli impulsi...")
+                    dialogo.append(u"... Cosa distingue la realtà dall'immaginazione? La realtà che sentiamo viene catturata da dei sensori, che abbiamo sparsi nel corpo, e poi inviata al cervello tramite impulsi nervosi. Il cervello poi, che si trova al buio dentro un cranio, interpreta e immagina ciò che sta al di fuori di lui, \"ispirato\" da quegli impulsi...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -2356,7 +2356,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Conseguenza del primo caso è l'inesistenza del pensiero se non come prodotto della realtà. In questo modo, un individuo privo di sensi che non ha mai fatto esperienza della realtà, non potrebbe produrre alcun pensiero. L'individuo esisterebbe senza essere cosciente (e forse, senza essere vivente). La coscienza, dunque, nascerebbe e si evolverebbe solo nel momento in cui entra in contatto con ciò che sta al di fuori di lei.")
+                    dialogo.append(u"... Conseguenza del primo caso è l'inesistenza del pensiero se non come prodotto della realtà. In questo modo, un individuo privo di sensi e che non ha mai fatto esperienza della realtà, non potrebbe produrre alcun pensiero. L'individuo esisterebbe senza essere cosciente (e forse, senza essere vivente). La coscienza, dunque, nascerebbe e si evolverebbe solo nel momento in cui entra in contatto con ciò che sta al di fuori di lei.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -2370,7 +2370,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     else:
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"<*>#italic#Mmh...<*> mi sembra più sensata la prima ipotesi...")
+                        dialogo.append(u"<*>#italic#Mmh...<*> mi sembra più sensata la prima ipotesi... ma la seconda... è molto affascinante...")
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-5":
                     partiDialogo = []
@@ -2397,7 +2397,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Se a questo aggiungiamo che gli eventi, accumulati come ricordi nel cervello, vengono dimenticati sempre più rapidamente, risulterà chiaro che, invecchiando, varierà anche la percezione del tempo: il tempo passerà sempre più velocemente rispetto al passato...")
+                    dialogo.append(u"... Se a questo aggiungiamo che gli eventi, accumulati come ricordi nel cervello, vengono dimenticati sempre più rapidamente, risulterà chiaro che, invecchiando, varierà anche la percezione stessa del tempo: il tempo passerà sempre più velocemente rispetto al passato...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -2415,7 +2415,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     else:
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose... sostituzione del midollo spinale... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
+                        dialogo.append(u"Ok, qua inizia una lunga lista di organi di cui non capisco niente... \"nervi ottici, bulbi olfattivi, membrana timpanica, derma, terminazioni nervose\"... \"sostituzione del midollo spinale\"... ci sono anche diverse cose sulla corteccia celebrale e... altre cose sul cervello... poi continua con alimentazione, respirazione e... illuminazione...")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
@@ -2442,7 +2442,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Non sono note le ragioni del conflitto e i tentativi di riappacificazione vengono sistematicamente respinti. Impossibile stabilire il dialogo. Il Nemico, di cui ci è noto ben poco, parrebbe aver insediato e colonizzato tutte le regioni circostanti la nostra. Ci è infatti impossibile l'esplorazione a est, nord e sud. Le spedizioni verso ovest, invece, sono sempre risultate problematiche per via delle catene montuose e la fauna che le popola...")
+                    dialogo.append(u"... Non sono note le ragioni del conflitto e i tentativi di riappacificazione vengono sistematicamente respinti. Impossibile stabilire il dialogo. Il Nemico, di cui ci è noto ben poco, parrebbe aver insediato e colonizzato tutte le regioni circostanti la nostra. Ci è infatti impossibile l'esplorazione a est, nord e sud. Le spedizioni verso ovest invece sono sempre risultate problematiche per via delle catene montuose e la fauna che le popola...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -2922,7 +2922,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"No, io... René l'ho conosciuto ieri, ah ah...")
+                dialogo.append(u"No, io... in realtà René l'ho conosciuto ieri...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2930,7 +2930,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Però ho letto alcuni dei tuoi libri prima, mentre aspettavo...")
+                dialogo.append(u"Però ho letto alcuni dei tuoi libri prima... mentre aspettavo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2938,7 +2938,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Posso comunque rendermi utile in qualche modo mentre mi metto in pari con gli studi...")
+                dialogo.append(u"... Posso comunque rendermi utile in qualche modo mentre mi metto in pari con gli studi.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -3200,7 +3200,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Dobbiamo fare degli esperimenti adesso. Ho sviluppato degli apparecchi cerebrali capaci di incrementare le capacita percettive e cognitive. Tu li dovrai testare.")
+                dialogo.append(u"Dobbiamo fare degli esperimenti adesso. Ho sviluppato degli apparecchi cerebrali capaci di incrementare le capacità percettive e cognitive. Tu li dovrai testare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

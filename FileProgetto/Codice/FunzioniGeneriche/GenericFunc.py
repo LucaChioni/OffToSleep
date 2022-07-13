@@ -2034,8 +2034,8 @@ def cambiaVolumeCanaliAudio(listaCanali, listaVolumiFinali, daMenu, posizioneCan
                 pygame.time.wait(tempoPerCiclo)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 numeroCicloAttuale += 1
-    elif len(listaCanali) != len(listaVolumiFinali):
-        print ("Errore: il numero dei canali audio non corrisponde ai numero dei volumi. NumCanali=" + str(len(listaCanali)) + ", NumVolumi=" + str(len(listaVolumiFinali)))
+    # elif len(listaCanali) != len(listaVolumiFinali):
+        # print ("Errore: il numero dei canali audio non corrisponde al numero dei volumi. NumCanali=" + str(len(listaCanali)) + ", NumVolumi=" + str(len(listaVolumiFinali)))
 
 
 def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione):

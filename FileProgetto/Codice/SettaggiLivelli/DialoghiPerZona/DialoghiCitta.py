@@ -84,6 +84,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
             dialogo.append(u"... Sai i lupi, i cinghiali e... quelle tartarughine...")
             partiDialogo.append(dialogo)
             dialogo = []
@@ -185,7 +193,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Del petto?")
+            dialogo.append(u"Uhm... ok, quindi...?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -209,7 +217,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene, va bene. Ho capito... adesso lo so...")
+            dialogo.append(u"Va bene, va bene, ho capito... adesso lo so...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1638,7 +1646,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Questi due sono parecchio ubriachi... meglio evitare.)")
+                dialogo.append(u"(Questi due sono parecchio ubriachi, meglio evitare...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
                 oggettoDato = False
@@ -2896,7 +2904,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Beh, ha senso che ci siano dei programmi, però...")
+                dialogo.append(u"Beh, ha senso che ci siano dei programmi però...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

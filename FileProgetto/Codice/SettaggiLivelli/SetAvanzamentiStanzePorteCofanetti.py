@@ -36,6 +36,8 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["dialogoCasaHansSara2"] = i
     i += 1
+    dictAvanzamentoStoria["messoBicchiereConAcquaSulComodino"] = i
+    i += 1
     dictAvanzamentoStoria["ingressoForestaCadetta"] = i
     i += 1
     dictAvanzamentoStoria["tutorialCampoVisivo"] = i

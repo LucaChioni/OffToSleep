@@ -55,7 +55,7 @@ def loadSound(path):
     try:
         sound = pygame.mixer.Sound(GlobalHWVar.gamePath + path)
     except Exception:
-        print ("Impossibile caricare " + path)
+        # print ("Errore: Impossibile caricare " + path)
         sound = False
 
     # per poter chiudere il gioco durante il caricamento

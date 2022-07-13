@@ -35,7 +35,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Immobile... ma... com'è arrivato fin qui...?")
+                    dialogo.append(u"... Immobile... ma com'è arrivato fin qui...?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -43,11 +43,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... C'è scritto: \"SESTA DOMANDA: che fai?\"... Ma come...?!")
+                    dialogo.append(u"... C'è scritto: \"SESTA DOMANDA: che fai?\"...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Poi che senso ha se non puoi neanche sentire la risposta?")
+                    dialogo.append(u"... Ma come...?! Poi che senso ha se non puoi neanche sentire la risposta?")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")

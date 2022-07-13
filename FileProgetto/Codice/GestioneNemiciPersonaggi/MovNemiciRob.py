@@ -114,14 +114,14 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                             nemico.bersaglioColpito.append(True)
                         else:
                             nemico.bersaglioColpito.append(False)
-                        print ("attacco vicino", nemico.tipo, "a esca", danno)
+                        # print ("attacco vicino", nemico.tipo, "a esca", danno)
                         vettoreEsche[escabersaglio + 1] = vettoreEsche[escabersaglio + 1] - danno
                 elif nemico.obbiettivo[0] == "Colco":
                     danno = GenericFunc.calcoloDanni(nemico.attacco, difro)
                     nemico.bersaglioColpito.append("Colco")
                     nemico.bersaglioColpito.append(-danno)
                     if surriscalda:
-                        dati[122] = 10
+                        dati[122] = GlobalGameVar.durataSurriscaldamento
                         nemico.bersaglioColpito.append("surriscalda")
                     else:
                         nemico.bersaglioColpito.append("")
@@ -129,7 +129,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nemico.bersaglioColpito.append(True)
                     else:
                         nemico.bersaglioColpito.append(False)
-                    print ("attacco vicino", nemico.tipo, "a robo", danno)
+                    # print ("attacco vicino", nemico.tipo, "a robo", danno)
                     dati[10] = dati[10] - danno
                 elif nemico.obbiettivo[0] == "Rallo":
                     danno = GenericFunc.calcoloDanni(nemico.attacco, dif)
@@ -137,7 +137,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         danno = 0
                         avvelena = False
                         nemico.ralloParato = True
-                        print ("parato:", par)
+                        # print ("parato:", par)
                     nemico.bersaglioColpito.append("Rallo")
                     nemico.bersaglioColpito.append(-danno)
                     if avvelena and not dati[130] == 2:
@@ -149,7 +149,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nemico.bersaglioColpito.append(True)
                     else:
                         nemico.bersaglioColpito.append(False)
-                    print ("attacco vicino", nemico.tipo, "a rallo", danno)
+                    # print ("attacco vicino", nemico.tipo, "a rallo", danno)
                     dati[5] = dati[5] - danno
                 nmos = 0
                 if nemico.obbiettivo[1] == nemico.x + GlobalHWVar.gpx and nemico.obbiettivo[2] == nemico.y:
@@ -175,7 +175,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nmos = 4
                     sposta = True
                 else:
-                    print ("Percorso nemico verso obiettivo non trovato")
+                    # print ("Percorso nemico verso obiettivo non trovato")
                     # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
                     vetNemiciSoloConXeY = []
                     if dati[10] <= 0:
@@ -193,7 +193,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                             nmos = 4
                         sposta = True
                     else:
-                        print ("Percorso nemico verso obiettivo non trovato (senza nemici e personaggi come ostacoli)")
+                        # print ("Percorso nemico verso obiettivo non trovato (senza nemici e personaggi come ostacoli)")
                         if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
                             if nemico.x < nemico.obbiettivo[1]:
                                 nmos = 1
@@ -238,7 +238,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nemico.bersaglioColpito.append(True)
                     else:
                         nemico.bersaglioColpito.append(False)
-                    print ("attacco lontano", nemico.tipo, "a esca", danno)
+                    # print ("attacco lontano", nemico.tipo, "a esca", danno)
                     vettoreEsche[escabersaglio + 1] = vettoreEsche[escabersaglio + 1] - danno
                 nmos = 0
                 if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
@@ -476,7 +476,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nemico.bersaglioColpito.append("Colco")
                         nemico.bersaglioColpito.append(-danno)
                         if surriscalda:
-                            dati[122] = 10
+                            dati[122] = GlobalGameVar.durataSurriscaldamento
                             nemico.bersaglioColpito.append("surriscalda")
                         else:
                             nemico.bersaglioColpito.append("")
@@ -484,7 +484,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                             nemico.bersaglioColpito.append(True)
                         else:
                             nemico.bersaglioColpito.append(False)
-                        print ("attacco lontano", nemico.tipo, "a robo", danno)
+                        # print ("attacco lontano", nemico.tipo, "a robo", danno)
                         dati[10] = dati[10] - danno
                     elif nemico.obbiettivo[0] == "Rallo":
                         danno = GenericFunc.calcoloDanni(nemico.attacco, dif)
@@ -492,7 +492,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                             danno = 0
                             avvelena = False
                             nemico.ralloParato = True
-                            print ("parato:", par)
+                            # print ("parato:", par)
                         nemico.bersaglioColpito.append("Rallo")
                         nemico.bersaglioColpito.append(-danno)
                         if avvelena and not dati[130] == 2:
@@ -504,7 +504,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                             nemico.bersaglioColpito.append(True)
                         else:
                             nemico.bersaglioColpito.append(False)
-                        print ("attacco lontano", nemico.tipo, "a rallo", danno)
+                        # print ("attacco lontano", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                     nmos = 0
                     if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
@@ -543,7 +543,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                 nmos = 4
             sposta = True
         else:
-            print ("Percorso nemico verso monete non trovato")
+            # print ("Percorso nemico verso monete non trovato")
             # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
             vetNemiciSoloConXeY = []
             if dati[10] <= 0:
@@ -561,7 +561,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                     nmos = 4
                 sposta = True
             else:
-                print ("Percorso nemico verso monete non trovato (senza nemici e personaggi come ostacoli)")
+                # print ("Percorso nemico verso monete non trovato (senza nemici e personaggi come ostacoli)")
                 if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
                     if nemico.x < nemico.obbiettivo[1]:
                         nmos = 1
@@ -624,7 +624,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                     nmos = 4
                 sposta = True
             else:
-                print ("Percorso nemico verso ultimo bersaglio non trovato")
+                # print ("Percorso nemico verso ultimo bersaglio non trovato")
                 # ricalcolo togliendo i nemici e i personaggi dagli ostacoli
                 vetNemiciSoloConXeY = []
                 if dati[10] <= 0:
@@ -642,7 +642,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                         nmos = 4
                     sposta = True
                 else:
-                    print ("Percorso nemico verso ultimo bersaglio non trovato (senza nemici e personaggi come ostacoli)")
+                    # print ("Percorso nemico verso ultimo bersaglio non trovato (senza nemici e personaggi come ostacoli)")
                     if abs(nemico.xPosizioneUltimoBersaglio - nemico.x) > abs(nemico.yPosizioneUltimoBersaglio - nemico.y):
                         if nemico.x < nemico.xPosizioneUltimoBersaglio:
                             nmos = 1
@@ -1113,8 +1113,8 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                     nrob = 4
                 sposta = True
-            else:
-                print ("Percorso Colco verso obiettivo 1 non trovato")
+            # else:
+                # print ("Percorso Colco verso obiettivo 1 non trovato")
 
         # effetto assorbilampo
         if dati[130] == 4:
@@ -1429,8 +1429,8 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                             nrob = 4
                         sposta = True
-                    else:
-                        print ("Percorso Colco verso obiettivo 2 non trovato")
+                    # else:
+                        # print ("Percorso Colco verso obiettivo 2 non trovato")
         if suAlleato == 2:
             if dati[10] > costoTecnicaUsata:
                 azioneEseguita = True
@@ -1675,8 +1675,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                     nrob = 4
                 sposta = True
-            else:
-                print ("Percorso Colco verso ImpoPietra non trovato")
+            # else:
+                # print ("Percorso Colco verso ImpoPietra non trovato")
         if azioneEseguita and sposta:
             tecnicaUsata = "spostamento"
             ultimoObbiettivoColco = ["Telecomando", x, y, "spostamento"]
@@ -1900,7 +1900,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             if not trovatoNemicoCasuale:
                                 nemicoBersaglio = False
                             obbiettivoCasualeColco = nemicoBersaglio
-                        else:
+                        if not nemicoBersaglio:
                             obbiettivoCasualeColco = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
@@ -1915,7 +1915,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                         previsionePosizioneObbiettivo.append([nemico.x, nemico.y])
                             else:
                                 ultimoObbiettivoColco = []
-                            if len(attaccoDiColco) > 0:
+                            if len(attaccoDiColco) > 0 and not analizzaColco:
                                 obbiettivoCasualeColco = False
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
@@ -2432,8 +2432,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                         nrob = 4
                     sposta = True
-                else:
-                    print ("Percorso Colco verso ultimo obiettivo non trovato")
+                # else:
+                #     print ("Percorso Colco verso ultimo obiettivo non trovato")
             else:
                 ultimoObbiettivoColco = []
             if azioneEseguita and sposta:

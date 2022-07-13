@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
+import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiNessuno as DialoghiNessuno
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTutorial as DialoghiTutorial
@@ -84,6 +86,13 @@ def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLamentoHansCinghiale)
         else:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreLamentoCinghiale)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"] and (personaggio.tipo == "OggettoLavandinoCucina" or personaggio.tipo == "OggettoLavandinoBagno"):
+        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreRiempimentoBicchiere)
+        i = 0
+        while i < 30:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
 
     return avanzamentoStoria
 
@@ -123,58 +132,6 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     # se c'è una scelta la variabile scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i numeri di queste una dopo l'altra (es. 12, 134))
     # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
     # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
-    if tipo == "test":
-        partiDialogoTradotte = []
-        nome = "Bob"
-        if avanzamentoStoria == 0:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = True
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Ciao, ecco la merce")
-            partiDialogoTradotte.append(dialogo)
-        elif avanzamentoStoria == 1:
-            oggettoDato = "oggetto speciale"
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Ciao, la merce è finita")
-            partiDialogoTradotte.append(dialogo)
-        else:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = 3
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Ti sto per fare una domanda")
-            partiDialogoTradotte.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("???DOMANDA???")
-            dialogo.append("Quanto fa 2+3?")
-            dialogo.append("Che schifo di domanda!")
-            dialogo.append("(cambia discorso parlando di carote)")
-            dialogo.append("Almeno 3")
-            dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-            partiDialogoTradotte.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("!!!RISPOSTA!!!")
-            dialogo.append("Scusa...")
-            dialogo.append("Scusa, non mi interessano le carote")
-            dialogo.append(u"Mmh... è giusto...")
-            dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-            partiDialogoTradotte.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Non ho più merce")
-            partiDialogoTradotte.append(dialogo)
-
     if tipo == "Nessuno":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiNessuno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif tipo == "Tutorial":
