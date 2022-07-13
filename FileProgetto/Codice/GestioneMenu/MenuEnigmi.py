@@ -56,16 +56,17 @@ def enigmaBiblioteca():
     cursoreGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
     sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
     sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True, imgImpenetrabile=True)
+    # font utilizzato: "Ink Free"
     if GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 1:
-        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel1-" + GlobalHWVar.linguaImpostata + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 2:
-        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel2.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel2-" + GlobalHWVar.linguaImpostata + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 3:
-        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel3.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel3-" + GlobalHWVar.linguaImpostata + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 4:
-        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel4.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel4-" + GlobalHWVar.linguaImpostata + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 5:
-        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel5.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel5-" + GlobalHWVar.linguaImpostata + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     else:
         imgDatiVel = False
 
