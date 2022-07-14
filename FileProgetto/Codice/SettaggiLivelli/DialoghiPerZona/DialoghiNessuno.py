@@ -8,7 +8,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     tipo = tipoId.split("-")[0]
 
     if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-        frasePortaChiusa = u"Potrei entrare, ma... non mi pare il caso di richiedere al calcolatore di fare del lavoro superfluo ai fini della storia principale..."
+        frasePortaChiusa = u"(Potrei entrare, ma... non mi pare il caso di richiedere al calcolatore di fare del lavoro superfluo ai fini della storia principale...)"
     else:
         frasePortaChiusa = u"(È chiuso a chiave...)"
 

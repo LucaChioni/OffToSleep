@@ -7,6 +7,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
@@ -366,73 +367,73 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                     if voceMarcata == 1:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["casaHansSara1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["casaHansSara4"]
-                        FunzioniGraficheGeneriche.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo mio padre, Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durante diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte e della spietata concorrenza.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.CASA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI._LAB_IN_CUI_HO_VIS_CON_LA_MIA_FAM_FIN__STA_COS_DA_UN_MIO_VEC_ANT_E_DA_ALL__SEM_STA_ABI_DAL_VAR_GEN_DEL_MIA_FAM_SEC_MIO_PAD_HAN_SAR_IL_PRO_PRO_E_LID_NON_LO_ENT_AFF_DUR_DIV_DIS_HAN_HA_DET_DI_NON_VOL_FAR_QUE_LAV_PER_TUT_LA_VIT_DIC_CHE__MON_FAT_E_ANC_INS_A_CAU_DEL_ENO_IMP_E_DEL_SPI_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 2:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["stradaPerCittà1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["stradaPerSelvaArida2"]
-                        FunzioniGraficheGeneriche.messaggio(u"Città", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Da quando ne ho sentito parlare per la prima volta, ho sempre avuto il desiderio di viverci. Da quello che so, lì a tutti è concesso scegliere quale mansione svolgere nella vita. Questo è diventato possibile grazie ai nuovi strumenti di produzione, che hanno permesso la realizzazione di un sistema in cui poche persone riescono a produrre abbastanza anche per tutte le altre. La parte di popolazione \"impoduttiva\" può quindi dedicarsi ad altre attività come musica, teatro, studio, sport e chissà cos'altro...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.CITT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.DA_QUA_NE_HO_SEN_PAR_PER_LA_PRI_VOL_HO_SEM_AVU_IL_DES_DI_VIV_DA_QUE_CHE_SO_L_A_TUT__CON_SCE_QUA_MAN_SVO_NEL_VIT_QUE__DIV_POS_GRA_AI_NUO_STR_DI_PRO_CHE_HAN_PER_LA_REA_DI_UN_SIS_IN_CUI_POC_PER_RIE_A_PRO_ABB_ANC_PER_TUT_LE_ALT_LA_PAR_DI_POP_IM_PU_QUI_DED_AD_ALT_ATT_COM_MUS_TEA_STU_SPO_E_CHI_COS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 3:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["avampostoDiRod1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["avampostoDiRod3"]
-                        FunzioniGraficheGeneriche.messaggio("Avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una piccola baracca che Rod esalta in maniera esagerata definendola \"avamposto\". Quella non è la sua abitazione, ma, a suo dire, un luogo fondamentale per il mantenimento dell'ecosistema cittadino. Nonostante Rod non mi abbia mai ispirato molta fiducia, i suoi ragionamenti non mi sono mai sembrati quelli di un folle esaltato... forse stava semplicemente scherzando...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.AVA_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UNA_PIC_BAR_CHE_ROD_ESA_IN_MAN_ESA_DEF_AV_QUE_NON__LA_SUA_ABI_MA_A_SUO_DIR_UN_LUO_FON_PER_IL_MAN_DEL_CIT_NON_ROD_NON_MI_ABB_MAI_ISP_MOL_FID_I_SUO_RAG_NON_MI_SON_MAI_SEM_QUE_DI_UN_FOL_ESA_FOR_STA_SEM_SCH[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 4:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["esternoCastello1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["internoCastello21"]
-                        FunzioniGraficheGeneriche.messaggio("Castello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"La più grande struttura che abbia mai visto fino ad ora. È un castello composto da almeno un centinaio di stanze, abitato da Neil e dai suoi numerosi servitori. Il vasto terreno su cui è stato costruito comprende anche l'intero labirinto, che dev'essere stato appositamente elaborato per tenere lontani i visitatori indesiderati. Il silenzio e il comportamento dei servi creano un'atmosfera cupa e surreale...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.CASTELLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.LA_PI_GRA_STR_CHE_ABB_MAI_VIS_FIN_AD_ORA__UN_CAS_COM_DA_ALM_UN_CEN_DI_STA_ABI_DA_NEI_E_DAI_SUO_NUM_SER_IL_VAS_TER_SU_CUI__STA_COS_COM_ANC_LIN_LAB_CHE_DEV_STA_APP_ELA_PER_TEN_LON_I_VIS_IND_IL_SIL_E_IL_COM_DEI_SER_CRE_UNA_CUP_E_SUR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 5:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["palazzoDiRod1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["palazzoDiRod5"]
-                        FunzioniGraficheGeneriche.messaggio("Palazzo di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Il palazzo in cui dimora Rod. Dentro è tutto molto disordinato, ci sono fogli e cartacce ovunque con dei suoi studi o progetti. Sembra più una specie di magazzino dove tiene un sacco di roba. Vista la polvere sugli scatoloni, non credo che utilizzi effettivamente tutti quegli oggetti. Mi domando perché non li butti... <br> L'ambiente ricorda vagamente il castello di Neil, ma un po' più piccolo e con il Passo Montano al posto del labirinto per scoraggiare l'avvicinamento di viaggiatori indesiderati.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.PAL_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.IL_PAL_IN_CUI_DIM_ROD_DEN__TUT_MOL_DIS_CI_SON_FOG_E_CAR_OVU_CON_DEI_SUO_STU_O_PRO_SEM_PI_UNA_SPE_DI_MAG_DOV_TIE_UN_SAC_DI_ROB_VIS_LA_POL_SUG_SCA_NON_CRE_CHE_UTI_EFF_TUT_QUE_OGG_MI_DOM_PER_NON_LI_BUT_BR_LAM_RIC_VAG_IL_CAS_DI_NEI_MA_UN_PO_PI_PIC_E_CON_IL_PAS_MON_AL_POS_DEL_LAB_PER_SCO_LAV_DI_VIA_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 6:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["vulcano1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["vulcano3"]
-                        FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una montagna con un cratere sulla cima. Si trova a ovest della città oltre il Passo Montano. L'ho vista esplodere mentre uscivo dal castello di Neil. All'interno, oltre a un'enorme distesa di acqua incandescente e una strana roccia con dei disegni di impo, c'è un cadavere che giace in una cella di vetro.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.VULCANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UNA_MON_CON_UN_CRA_SUL_CIM_SI_TRO_A_OVE_DEL_CIT_OLT_IL_PAS_MON_LHO_VIS_ESP_MEN_USC_DAL_CAS_DI_NEI_ALL_OLT_A_UNE_DIS_DI_ACQ_INC_E_UNA_STR_ROC_CON_DEI_DIS_DI_IMP_C_UN_CAD_CHE_GIA_IN_UNA_CEL_DI_VET[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 7:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]
-                        FunzioniGraficheGeneriche.messaggio("Laboratorio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Il laboratorio segreto di Neil. Si trova sul fondale del lago. Non è molto grande, dentro c'è qualche tavolo con degli appunti, un calcolatore di eventi e una cella simile a quella presente nel vulcano per \"evadere da questa dimensione\". Dentro la cella c'è il corpo di Neil.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.LAB_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.IL_LAB_SEG_DI_NEI_SI_TRO_SUL_FON_DEL_LAG_NON__MOL_GRA_DEN_C_QUA_TAV_CON_DEG_APP_UN_CAL_DI_EVE_E_UNA_CEL_SIM_A_QUE_PRE_NEL_VUL_PER_EV_DA_QUE_DIM_DEN_LA_CEL_C_IL_COR_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["forestaCadetta1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["forestaCadetta9"]
-                        FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"La foresta che mi ha sempre separata dalla città... non ho mai avuto il permesso di attraversarla perché i miei genitori la ritenevano troppo pericolosa per me. Il nome deriva dal fatto che viene utilizzata come terreno di prova per selezionare, tra i giovani appartenenti alla nobiltà, i futuri ufficiali dell'esercito.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.FORESTA_CADETTA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.LA_FOR_CHE_MI_HA_SEM_SEP_DAL_CIT_NON_HO_MAI_AVU_IL_PER_DI_ATT_PER_I_MIE_GEN_LA_RIT_TRO_PER_PER_ME_IL_NOM_DER_DAL_FAT_CHE_VIE_UTI_COM_TER_DI_PRO_PER_SEL_TRA_I_GIO_APP_ALL_NOB_I_FUT_UFF_DEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 9:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["selvaArida1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["selvaArida16"]
-                        FunzioniGraficheGeneriche.messaggio("Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Denominata in questo modo perché un tempo fitta e intricata ed ora composta soltanto da secchi abusti e funghi. Le ragioni di questo suo decadimento non sono note agli abitanti locali, ma si dà praticamente per scontato che ci sia stato un intervento umano dietro... perché qualcuno avrebbe interesse nel fare una cosa del genere?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.SELVA_ARIDA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.DEN_IN_QUE_MOD_PER_UN_TEM_FIT_E_INT_ED_ORA_COM_SOL_DA_SEC_ABU_E_FUN_LE_RAG_DI_QUE_SUO_DEC_NON_SON_NOT_AGL_ABI_LOC_MA_SI_D_PRA_PER_SCO_CHE_CI_SIA_STA_UN_INT_UMA_DIE_PER_QUA_AVR_INT_NEL_FAR_UNA_COS_DEL_GEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 10:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["labirinto1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["labirinto23"]
-                        FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un enorme terreno estremamente complicato da superare a causa delle innumerevoli strade percorribili prive di punti di riferimento. Rod mi ha fornito una mappa che mostra nel dettaglio la sua struttura sconsigliandomi di procedere: è molto probabile non riuscire a uscirne se non si ha un buon senso dell'orientamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.LABIRINTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UN_ENO_TER_EST_COM_DA_SUP_A_CAU_DEL_INN_STR_PER_PRI_DI_PUN_DI_RIF_ROD_MI_HA_FOR_UNA_MAP_CHE_MOS_NEL_DET_LA_SUA_STR_SCO_DI_PRO__MOL_PRO_NON_RIU_A_USC_SE_NON_SI_HA_UN_BUO_SEN_DEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 11:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["passoMontano1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["passoMontano10"]
-                        FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio tra le alture a ovest della città. In pochi mettono piede in quei territori, e quelli che lo fanno ne parlano come se fosse il posto più pericoloso al mondo. In città nessuno sa molto di quei passaggi. Alcuni mi hanno detto di aver visto diverse volte Rod arrivare da quelle parti...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.PASSO_MONTANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UN_PAS_TRA_LE_ALT_A_OVE_DEL_CIT_IN_POC_MET_PIE_IN_QUE_TER_E_QUE_CHE_LO_FAN_NE_PAR_COM_SE_FOS_IL_POS_PI_PER_AL_MON_IN_CIT_NES_SA_MOL_DI_QUE_PAS_ALC_MI_HAN_DET_DI_AVE_VIS_DIV_VOL_ROD_ARR_DA_QUE_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 12:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["tunnelDiRod1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["tunnelDiRod3"]
-                        FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"È un passaggio sicuro e veloce tra il palazzo di Rod e il suo avamposto. Al suo interno passa un tubo molliccio che parte dal palazzo e va da qualche parte nella Selva Arida. Dev'essere di Rod, ma mi domando a che cosa serva...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.TUN_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI._UN_PAS_SIC_E_VEL_TRA_IL_PAL_DI_ROD_E_IL_SUO_AVA_AL_SUO_INT_PAS_UN_TUB_MOL_CHE_PAR_DAL_PAL_E_VA_DA_QUA_PAR_NEL_SEL_ARI_DEV_DI_ROD_MA_MI_DOM_A_CHE_COS_SER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 13:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["caverna1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["caverna18"]
-                        FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Una caverna in mezzo alle montagne occidentali. All'interno vivono degli animali simili a Impo ma aggressivi. Da quello che ho capito, Rod era solito avventurarsi in questi cunicoli per recuperare impofrutti. Probabilmente è per questo che ha deciso di costruire il suo palazzo lì accanto... per assicurarsi che nessun altro vi accedesse e tenere per sé tutto il bottino...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.CAVERNA_IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UNA_CAV_IN_MEZ_ALL_MON_OCC_ALL_VIV_DEG_ANI_SIM_A_IMP_MA_AGG_DA_QUE_CHE_HO_CAP_ROD_ERA_SOL_AVV_IN_QUE_CUN_PER_REC_IMP_PRO__PER_QUE_CHE_HA_DEC_DI_COS_IL_SUO_PAL_L_ACC_PER_ASS_CHE_NES_ALT_VI_ACC_E_TEN_PER_S_TUT_IL_BOT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
                         stanzaInizioCofanetti = GlobalGameVar.dictStanze["tunnelSubacqueo1"]
                         stanzaFineCofanetti = GlobalGameVar.dictStanze["tunnelSubacqueo2"]
-                        FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
-                        FunzioniGraficheGeneriche.messaggio(u"Un passaggio segreto nei sotterranei del castello di Neil che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce a osservare chiaramente il fondale del bacino a causa delle sostanze con cui è stato contaminato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(LI.TUNNEL_SUBACQUEO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio(LI.UN_PAS_SEG_NEI_SOT_DEL_CAS_DI_NEI_CHE_POR_AL_SUO_LAB_PRI_SUL_FON_DEL_LAG_NON_LE_PAR_DEL_TUN_SIA_FAT_DI_UN_MAT_TRA_SIM_AL_VET_NON_SI_RIE_A_OSS_CHI_IL_FON_DEL_BAC_A_CAU_DEL_SOS_CON_CUI__STA_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     cofanettiTotali = 0
                     cofanettiTrovati = 0
                     i = 0
@@ -443,74 +444,74 @@ def menuMappa(avanzamentoStoria, tutticofanetti, apriLabirinto=False):
                                 cofanettiTrovati += 1
                         i += 4
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cofanichiu, (GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 15.1))
-                    FunzioniGraficheGeneriche.messaggio("        Cofanetti trovati: " + str(cofanettiTrovati) + "/" + str(cofanettiTotali), GlobalHWVar.grigiochi, GlobalHWVar.gpx * 15, GlobalHWVar.gpy * 15.5, grandezzaScritteDescrizioni, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.________COF_TRO___STR__[GlobalHWVar.linguaImpostata] %(cofanettiTrovati, cofanettiTotali), GlobalHWVar.grigiochi, GlobalHWVar.gpx * 15, GlobalHWVar.gpy * 15.5, grandezzaScritteDescrizioni, centrale=True)
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaImmagineSuSchermo(backgroundTornaIndietro, (GlobalHWVar.gsx // 32 * 21, 0))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             if primoFrame:
-                FunzioniGraficheGeneriche.messaggio("Mappa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio(LI.MAPPA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 grandezzaScritteNormali = 45
                 if postiSbloccati["Casa"]:
-                    FunzioniGraficheGeneriche.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.5, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.CASA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.5, grandezzaScritteNormali)
                 if postiSbloccati["Città"]:
-                    FunzioniGraficheGeneriche.messaggio(u"Città", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.3, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.CITT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.3, grandezzaScritteNormali)
                 if postiSbloccati["Avamposto di Rod"]:
-                    FunzioniGraficheGeneriche.messaggio("Avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.AVA_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, grandezzaScritteNormali)
                 if postiSbloccati["Castello"]:
-                    FunzioniGraficheGeneriche.messaggio("Castello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.9, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.CASTELLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.9, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.9, grandezzaScritteNormali)
                 if postiSbloccati["Palazzo di Rod"]:
-                    FunzioniGraficheGeneriche.messaggio("Palazzo di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.7, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.PAL_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.7, grandezzaScritteNormali)
                 if postiSbloccati["Vulcano"]:
-                    FunzioniGraficheGeneriche.messaggio("Vulcano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.VULCANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, grandezzaScritteNormali)
                 if postiSbloccati["Laboratorio"]:
-                    FunzioniGraficheGeneriche.messaggio("Laboratorio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.LAB_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
                 if postiSbloccati["Foresta Cadetta"]:
-                    FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.FORESTA_CADETTA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
                 if postiSbloccati["Selva Arida"]:
-                    FunzioniGraficheGeneriche.messaggio("Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.SELVA_ARIDA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
                 if postiSbloccati["Labirinto"]:
-                    FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.3, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.LABIRINTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.3, grandezzaScritteNormali)
                 if postiSbloccati["Passo Montano"]:
-                    FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.PASSO_MONTANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
                 if postiSbloccati["Tunnel di Rod"]:
-                    FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.9, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.TUN_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.9, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.9, grandezzaScritteNormali)
                 if postiSbloccati["Caverna"]:
-                    FunzioniGraficheGeneriche.messaggio("Caverna Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.CAVERNA_IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
                 if postiSbloccati["Tunnel Subacqueo"]:
-                    FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
+                    FunzioniGraficheGeneriche.messaggio(LI.TUNNEL_SUBACQUEO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
 
@@ -1249,11 +1250,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
 
-                FunzioniGraficheGeneriche.messaggio("Diario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Oggetti speciali", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.5, 55)
-                FunzioniGraficheGeneriche.messaggio("Persone incontrate", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 55)
-                FunzioniGraficheGeneriche.messaggio("Nemici incontrati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, 55)
-                FunzioniGraficheGeneriche.messaggio("Guida comandi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.5, 55)
+                FunzioniGraficheGeneriche.messaggio(LI.DIARIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio(LI.OGGETTI_SPECIALI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5.5, 55)
+                FunzioniGraficheGeneriche.messaggio(LI.PERSONE_INCONTRATE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 55)
+                FunzioniGraficheGeneriche.messaggio(LI.NEMICI_INCONTRATI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.5, 55)
+                FunzioniGraficheGeneriche.messaggio(LI.GUIDA_COMANDI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.5, 55)
 
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDiarioChiusoMenu, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
             else:
@@ -1267,11 +1268,11 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             if voceMarcataSottoMenu != 0:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 12.5))
@@ -1280,47 +1281,47 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
                 if voceMarcata == 1:
                     if dictOggettiSbloccati["BicchiereConAcqua"]:
-                        FunzioniGraficheGeneriche.messaggio("Bicchiere con acqua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.BIC_CON_ACQ[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
                     if dictOggettiSbloccati["ChiaveRipostiglio"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave del ripostiglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_DEL_RIP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
                     if dictOggettiSbloccati["ChiaveStanzaCasaDavid"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave stanza casa di David", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_STA_CAS_DI_DAV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
                     if dictOggettiSbloccati["CertificatoResidenza"]:
-                        FunzioniGraficheGeneriche.messaggio("Certificato di residenza", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CER_DI_RES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 8, 45)
                     if dictOggettiSbloccati["ImpoPietra"]:
-                        FunzioniGraficheGeneriche.messaggio("Impopietra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.IMPOPIETRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
                     if dictOggettiSbloccati["ChiaveStanzaCastello"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave stanza castello di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_STA_CAS_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
                     if dictOggettiSbloccati["ListaStrumenti"]:
-                        FunzioniGraficheGeneriche.messaggio("Lista strumenti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.LISTA_STRUMENTI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
                     if dictOggettiSbloccati["ChiaveAvamposto"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_AVA_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 12, 45)
                     if dictOggettiSbloccati["StrumentiDiRod"]:
-                        FunzioniGraficheGeneriche.messaggio("Strumenti di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.STR_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
                     if dictOggettiSbloccati["ChiaveUfficioDiNeil"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave ufficio di Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_UFF_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
                     if dictOggettiSbloccati["ChiaveSeminterratoPalazzoRod"]:
-                        FunzioniGraficheGeneriche.messaggio("Chiave del seminterrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                        FunzioniGraficheGeneriche.messaggio(LI.CHI_DEL_SEM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
                     if sottovoceSelezionata:
@@ -1335,131 +1336,131 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         if voceMarcataSottoMenu == 1 and dictOggettiSbloccati["BicchiereConAcqua"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgBicchiereConAcqua, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Bicchiere con acqua", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Il bicchiere d'acqua che ho chiesto a Hans. Perché me lo sto portando dietro?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.BIC_CON_ACQ[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.IL_BIC_DAC_CHE_HO_CHI_A_HAN_PER_ME_LO_STO_POR_DIE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 2 and dictOggettiSbloccati["ChiaveRipostiglio"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveRipostiglio, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave del ripostiglio", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave del ripostiglio dei miei genitori. Ci sono un sacco di cose interessanti là dentro.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_DEL_RIP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DEL_RIP_DEI_MIE_GEN_CI_SON_UN_SAC_DI_COS_INT_L_DEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 3 and dictOggettiSbloccati["ChiaveStanzaCasaDavid"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveStanzaCasaDavid, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave stanza casa di David", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave della mia stanza a casa di David. Credo ci siano molte altre stanze disponibili... perché non le utilizzano al posto di ammassare tutti agli alloggi profughi?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_STA_CAS_DI_DAV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DEL_MIA_STA_A_CAS_DI_DAV_CRE_CI_SIA_MOL_ALT_STA_DIS_PER_NON_LE_UTI_AL_POS_DI_AMM_TUT_AGL_ALL_PRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 4 and dictOggettiSbloccati["CertificatoResidenza"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgCertificazioneResidenza, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Certificato di residenza", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Documento che dimostra la mia permanenza in città. Non capisco perché ce ne sia bisogno... non basta la mia presenza per dimostrare la mia permanenza in città?", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CER_DI_RES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.DOC_CHE_DIM_LA_MIA_PER_IN_CIT_NON_CAP_PER_CE_NE_SIA_BIS_NON_BAS_LA_MIA_PRE_PER_DIM_LA_MIA_PER_IN_CIT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 5 and dictOggettiSbloccati["ImpoPietra"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgImpoPietra, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impopietra", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Una strana pietra che s'illumina premendo il piccolo pulsante che si trova nella parte superiore. Non ho ben capito perché, ma Impo è attratto quasi ipnoticamente dalla sua luce.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPOPIETRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.UNA_STR_PIE_CHE_SIL_PRE_IL_PIC_PUL_CHE_SI_TRO_NEL_PAR_SUP_NON_HO_BEN_CAP_PER_MA_IMP__ATT_QUA_IPN_DAL_SUA_LUC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 6 and dictOggettiSbloccati["ChiaveStanzaCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveStanzaCastello, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave stanza castello di Neil", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave della camera da letto che mi hanno assegnato nel castello di Neil.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_STA_CAS_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DEL_CAM_DA_LET_CHE_MI_HAN_ASS_NEL_CAS_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 7 and dictOggettiSbloccati["ListaStrumenti"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgListaStrumentiStudioImpo, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lista strumenti", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Questa busta contiene la lista degli strumenti necessari per studiare Impo. Neil mi ha incaricata di richiederli a Rod.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.LISTA_STRUMENTI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.QUE_BUS_CON_LA_LIS_DEG_STR_NEC_PER_STU_IMP_NEI_MI_HA_INC_DI_RIC_A_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 8 and dictOggettiSbloccati["ChiaveAvamposto"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveAvamposto, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave avamposto di Rod", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave dell'avamposto di Rod. L'ho trovata in mezzo alle sue cianfrusaglie.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_AVA_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DEL_DI_ROD_LHO_TRO_IN_MEZ_ALL_SUE_CIA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 9 and dictOggettiSbloccati["StrumentiDiRod"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgStrumentiDiRod, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Strumenti di Rod", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Gli strumenti necessari per studiare Impo. Rod era sorpreso quando gli ho mostrato la lista... per qualche motivo non si aspettava che Neil li avrebbe richiesti a lui.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.STR_DI_ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.GLI_STR_NEC_PER_STU_IMP_ROD_ERA_SOR_QUA_GLI_HO_MOS_LA_LIS_PER_QUA_MOT_NON_SI_ASP_CHE_NEI_LI_AVR_RIC_A_LUI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 10 and dictOggettiSbloccati["ChiaveUfficioDiNeil"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveUfficioNeil, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave ufficio di Neil", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave dell'ufficio di Neil. Era di un soldato. Io mi sono solo difesa...", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_UFF_DI_NEI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DEL_DI_NEI_ERA_DI_UN_SOL_IO_MI_SON_SOL_DIF[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 11 and dictOggettiSbloccati["ChiaveSeminterratoPalazzoRod"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgChiaveSeminterratoPalazzoRod, (xImgOggetto, yImgOggetto))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizioneOggetto, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), (xDescrizioneOggetto + largezzaFoglio, yDescrizioneOggetto - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Chiave del seminterrato", GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"La chiave di una stanza nel seminterrato del palazzo di Rod. L'ho trovata in mezzo a dei suoi appunti.", GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CHI_DEL_SEM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomeOggetto, yNomeOggetto, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LA_CHI_DI_UNA_STA_NEL_SEM_DEL_PAL_DI_ROD_LHO_TRO_IN_MEZ_A_DEI_SUO_APP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizioneOggetto, yDescrizioneOggetto, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 2:
                     if voceMarcataSottoMenu <= 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
                         if dictPersonaggiSbloccati["Hans"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Hans", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.HANS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                         if dictPersonaggiSbloccati["Norm"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Norm", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.NORM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         if dictPersonaggiSbloccati["Teresa"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Teresa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.TERESA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         if dictPersonaggiSbloccati["Lino"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Lino", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.LINO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         if dictPersonaggiSbloccati["Sam"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SOLDATO_DECEDUTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                         if dictPersonaggiSbloccati["David"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.DAVID[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
                         if dictPersonaggiSbloccati["Olivia"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.OLIVIA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         if dictPersonaggiSbloccati["Rod"] == 1:
-                            FunzioniGraficheGeneriche.messaggio("Ragazzo strano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.RAGAZZO_STRANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         elif dictPersonaggiSbloccati["Rod"] == 2:
-                            FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         elif dictPersonaggiSbloccati["Rod"] == 3 or dictPersonaggiSbloccati["Rod"] == 4:
-                            FunzioniGraficheGeneriche.messaggio("Rodolfo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.RODOLFO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         if dictPersonaggiSbloccati["Pazzo"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Rallo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.RALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
                         if dictPersonaggiSbloccati["Rene"] == 1:
-                            FunzioniGraficheGeneriche.messaggio("Bibliotecario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.BIBLIOTECARIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         elif dictPersonaggiSbloccati["Rene"] == 2:
-                            FunzioniGraficheGeneriche.messaggio(u"René", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.REN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         if dictPersonaggiSbloccati["Impo"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                     elif voceMarcataSottoMenu > 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
                         if dictPersonaggiSbloccati["Neil"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.NEIL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                         if dictPersonaggiSbloccati["Pappagallo"] == 1:
-                            FunzioniGraficheGeneriche.messaggio("Pappagallo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.PAPPAGALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         elif dictPersonaggiSbloccati["Pappagallo"] == 2:
-                            FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.PAPPALIBROSONORO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         if dictPersonaggiSbloccati["Costruttore"] == 1:
-                            FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SCONOSCIUTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         elif dictPersonaggiSbloccati["Costruttore"] == 2:
-                            FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.COSTRUTTORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                         if dictPersonaggiSbloccati["Sara"] >= 1:
-                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SARA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                     if sottovoceSelezionata:
@@ -1474,174 +1475,174 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         if voceMarcataSottoMenu == 1 and dictPersonaggiSbloccati["Hans"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.fraMaggioreDiario, (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Hans", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Mio fratello. Mi piace stare con lui, anche se in questo periodo è sempre più pensieroso e irritabile. Forse succede crescendo... Mio padre dice che si sta \"rincoglionendo\".", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.HANS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MIO_FRA_MI_PIA_STA_CON_LUI_ANC_SE_IN_QUE_PER__SEM_PI_PEN_E_IRR_FOR_SUC_CRE_MIO_PAD_DIC_CHE_SI_STA_RI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 2 and dictPersonaggiSbloccati["Norm"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Padre"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Norm", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Il padrone, il governante, il capo supremo della famiglia: mio padre. Io e Hans \"dobbiamo ancora crescere\", quindi è lui l'unico illuminato da Dio per prendere le scelte giuste per tutti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.NORM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.IL_PAD_IL_GOV_IL_CAP_SUP_DEL_FAM_MIO_PAD_IO_E_HAN_DO_ANC_CRE_QUI__LUI_LUN_ILL_DA_DIO_PER_PRE_LE_SCE_GIU_PER_TUT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 3 and dictPersonaggiSbloccati["Teresa"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Madre"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Teresa", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Mia madre. Ascolta e ripete quello che dice mio padre. Mi sento un po' stupida e arrogante ora che l'ho pure scritto... A parte questo, si prende cura della casa e ama la sua famiglia.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.TERESA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MIA_MAD_ASC_E_RIP_QUE_CHE_DIC_MIO_PAD_MI_SEN_UN_PO_STU_E_ARR_ORA_CHE_LHO_PUR_SCR_A_PAR_QUE_SI_PRE_CUR_DEL_CAS_E_AMA_LA_SUA_FAM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 4 and dictPersonaggiSbloccati["Lino"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["CaneCasa"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lino", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Linooo... Mio padre l'ha portato a casa circa 5 anni fa quando era ancora un cucciolo. Adesso è ben addestrato per la caccia e per tenere lontani i malintenzionati.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.LINO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LIN_MIO_PAD_LHA_POR_A_CAS_CIR_5_ANN_FA_QUA_ERA_ANC_UN_CUC_ADE__BEN_ADD_PER_LA_CAC_E_PER_TEN_LON_I_MAL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 5:
                             if dictPersonaggiSbloccati["Sam"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un soldato che ho trovato a terra martoriato nella Foresta Cadetta. L'armatura che gli ho preso lo teneva più o meno insieme... me ne sono accorta troppo tardi...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.SOLDATO_DECEDUTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_SOL_CHE_HO_TRO_A_TER_MAR_NEL_FOR_CAD_LAR_CHE_GLI_HO_PRE_LO_TEN_PI_O_MEN_INS_ME_NE_SON_ACC_TRO_TAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Sam"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["FiglioUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Soldato deceduto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Quel soldato nella foresta era il figlio di David e Olivia. Non avrei dovuto rubargli l'armatura...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.SOLDATO_DECEDUTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.QUE_SOL_NEL_FOR_ERA_IL_FIG_DI_DAV_E_OLI_NON_AVR_DOV_RUB_LAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 6:
                             if dictPersonaggiSbloccati["David"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["PadreUfficialeServizio"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Il \"Capitano della guardia notturna\". Mi ha fatta entrare in città nonostante non ci fosse più spazio per altri profughi. Ha detto che mi ospiterà in casa sua.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.DAVID[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.IL_CA_DEL_GUA_NOT_MI_HA_FAT_ENT_IN_CIT_NON_NON_CI_FOS_PI_SPA_PER_ALT_PRO_HA_DET_CHE_MI_OSP_IN_CAS_SUA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["David"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["PadreUfficialeCasa"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("David", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Il capitano della guardia notturna. Mi ha ospitata solo perché voleva che gli parlassi del soldato morto nella foresta, suo figlio... Ha anche parlato di una guerra in corso...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.DAVID[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.IL_CAP_DEL_GUA_NOT_MI_HA_OSP_SOL_PER_VOL_CHE_GLI_PAR_DEL_SOL_MOR_NEL_FOR_SUO_FIG_HA_ANC_PAR_DI_UNA_GUE_IN_COR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 7:
                             if dictPersonaggiSbloccati["Olivia"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Moglie di David e madre del soldato a cui ho rubato l'armatura. Era visibilmente sconvolta durante la cena. Alla fine se n'è andata senza dire una parola.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.OLIVIA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.MOG_DI_DAV_E_MAD_DEL_SOL_A_CUI_HO_RUB_LAR_ERA_VIS_SCO_DUR_LA_CEN_ALL_FIN_SE_N_AND_SEN_DIR_UNA_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             elif dictPersonaggiSbloccati["Olivia"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["MadreUfficiale"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Olivia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Moglie di David. Ha deciso di suicidarsi... Possibile che per lei non aveva senso vivere se non per suo figlio? Cosa avrebbe fatto se non ne avesse mai avuto uno?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.OLIVIA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.MOG_DI_DAV_HA_DEC_DI_SUI_POS_CHE_PER_LEI_NON_AVE_SEN_VIV_SE_NON_PER_SUO_FIG_COS_AVR_FAT_SE_NON_NE_AVE_MAI_AVU_UNO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 8:
                             if dictPersonaggiSbloccati["Rod"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Ragazzo strano", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un tipo strano che ho trovato in città. Si guardava intorno di continuo, ma il suo sguardo ricadeva continuamente su una ragazza poco distante. Mi ha aiutata a trovare gli alloggi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RAGAZZO_STRANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_TIP_STR_CHE_HO_TRO_IN_CIT_SI_GUA_INT_DI_CON_MA_IL_SUO_SGU_RIC_CON_SU_UNA_RAG_POC_DIS_MI_HA_AIU_A_TRO_GLI_ALL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Rod"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rod", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un tipo losco a cui ho dato " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per entrare nella sua \"confraternita\"... complimenti Sara. Non sembra molto affidabile, ma potrebbe rivelarsi utile in caso di necessità. Spero...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.ROD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_TIP_LOS_A_CUI_HO_DAT___STR__U_MON_PER_ENT_NEL_SUA_CO_COM_SAR_NON_SEM_MOL_AFF_MA_POT_RIV_UTI_IN_CAS_DI_NEC_SPE[GlobalHWVar.linguaImpostata] %GlobalGameVar.monetePerEntrareNellaConfraternita, GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Rod"] == 3:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rodolfo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Si fa chiamare Rod, penso non gli piaccia il suo nome completo. Potrei chiamarlo solo \"Olfo\"... Non sembra molto affidabile, ma devo dire che si è rivelato utile in diverse occasioni.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RODOLFO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.SI_FA_CHI_ROD_PEN_NON_GLI_PIA_IL_SUO_NOM_COM_POT_CHI_SOL_OL_NON_SEM_MOL_AFF_MA_DEV_DIR_CHE_SI__RIV_UTI_IN_DIV_OCC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Rod"] == 4:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Mercante"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rodolfo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Penso non gli piaccia il suo nome, quindi si fa chiamare \"Rod\" o semplicemente \"Olfo\". Non sembra molto affidabile, ma devo dire che si è rivelato utile in diverse occasioni.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RODOLFO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.PEN_NON_GLI_PIA_IL_SUO_NOM_QUI_SI_FA_CHI_RO_O_SEM_OL_NON_SEM_MOL_AFF_MA_DEV_DIR_CHE_SI__RIV_UTI_IN_DIV_OCC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 9:
                             if dictPersonaggiSbloccati["Pazzo"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo1"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rallo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Uno strano individuo che ho trovato in città. Parlava in maniera assurda e aveva lo sguardo perso nel vuoto.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UNO_STR_IND_CHE_HO_TRO_IN_CIT_PAR_IN_MAN_ASS_E_AVE_LO_SGU_PER_NEL_VUO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Pazzo"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo1"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rallo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Uno strano individuo che ho trovato in città. Parlava in maniera assurda e aveva lo sguardo perso nel vuoto. Mi ha proposto di partecipare al test \"Sono Pazzo o sono Rallo\".", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UNO_STR_IND_CHE_HO_TRO_IN_CIT_PAR_IN_MAN_ASS_E_AVE_LO_SGU_PER_NEL_VUO_MI_HA_PRO_DI_PAR_AL_TES_SO_PAZ_O_SON_RAL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Pazzo"] == 3:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo1"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rallo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Il suo nome dovrebbe essere \"Rallo\", anche se ogni volta lo pronuncia diversamente. Dà l'impressione di essere un pazzo, ma è cosciente di quello che gli accade: si è ricordato di me.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.IL_SUO_NOM_DOV_ESS_RA_ANC_SE_OGN_VOL_LO_PRO_DIV_D_LIM_DI_ESS_UN_PAZ_MA__COS_DI_QUE_CHE_GLI_ACC_SI__RIC_DI_ME[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Pazzo"] == 4:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Pazzo2"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Rallo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Il suo nome dovrebbe essere \"Rallo\", anche se ogni volta lo pronuncia diversamente. Dà l'impressione di essere un pazzo, ma è cosciente di quello che gli accade: si è ricordato di me.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.RALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.IL_SUO_NOM_DOV_ESS_RA_ANC_SE_OGN_VOL_LO_PRO_DIV_D_LIM_DI_ESS_UN_PAZ_MA__COS_DI_QUE_CHE_GLI_ACC_SI__RIC_DI_ME[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 10:
                             if dictPersonaggiSbloccati["Rene"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Bibliotecario"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Bibliotecario", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Gestisce la biblioteca in città. Ha deciso di aiutarmi nonostante fossi stata abbastanza molesta. Poi gli ho pure vomitato nello studio... Come fa ad avere così tanta pazienza?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.BIBLIOTECARIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.GES_LA_BIB_IN_CIT_HA_DEC_DI_AIU_NON_FOS_STA_ABB_MOL_POI_GLI_HO_PUR_VOM_NEL_STU_COM_FA_AD_AVE_COS_TAN_PAZ[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             if dictPersonaggiSbloccati["Rene"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Bibliotecario"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio(u"René", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Gestisce la biblioteca in città. È una persona molto interessante, le sue teorie sulla realtà sono abbastanza sconvolgenti soprattutto perché sono incredibilmente sensate.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.REN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.GES_LA_BIB_IN_CIT__UNA_PER_MOL_INT_LE_SUE_TEO_SUL_REA_SON_ABB_SCO_SOP_PER_SON_INC_SEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 11:
                             if dictPersonaggiSbloccati["Impo"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboDiario, (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"La scritta \"Impo\" è incisa sulla nuca di tutti gli animali di questa specie, assurdo! È l'ultimo della sua specie, gli altri si sono estinti poco prima che il lago si contaminasse.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.LA_SCR_IM__INC_SUL_NUC_DI_TUT_GLI_ANI_DI_QUE_SPE_ASS__LUL_DEL_SUA_SPE_GLI_ALT_SI_SON_EST_POC_PRI_CHE_IL_LAG_SI_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             elif dictPersonaggiSbloccati["Impo"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboDiario, (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Impo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Molto probabilmente sono stati progettati dal Costruttore. La loro funzione è quella di mantenere in attività il calcolatore nel vulcano e produrre ciò che quest'ultimo richiede.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.MOL_PRO_SON_STA_PRO_DAL_COS_LA_LOR_FUN__QUE_DI_MAN_IN_ATT_IL_CAL_NEL_VUL_E_PRO_CI_CHE_QUE_RIC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 12:
                             if dictPersonaggiSbloccati["Neil"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.neilSconosciutoDiario, (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un potente che, a detta di René, controlla gli spostamenti di tutta la regione. Che sia stato delegato dall'autorità cittadina? Non importa, spero che potrà aiutarmi con Hans.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.NEIL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_POT_CHE_A_DET_DI_REN_CON_GLI_SPO_DI_TUT_LA_REG_CHE_SIA_STA_DEL_DAL_CIT_NON_IMP_SPE_CHE_POT_AIU_CON_HAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             elif dictPersonaggiSbloccati["Neil"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Neil"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Neil", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"È alto due metri, ha la pelle pallidissima e i suoi occhi sono sproporzionati. Credo si sia fatto delle operazioni per diventare così. A quanto pare ha centosettant'anni.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.NEIL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI._ALT_DUE_MET_HA_LA_PEL_PAL_E_I_SUO_OCC_SON_SPR_CRE_SI_SIA_FAT_DEL_OPE_PER_DIV_COS_A_QUA_PAR_HA_CEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 13:
                             if dictPersonaggiSbloccati["Pappagallo"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.pappagalloDiario, (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Pappagallo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un pappagallo parlante che vende le stesse merci di Rod. Che faccia parte della sua \"confraternita\"? Gli è bastato vedermi per riconoscermi e darmi l'accesso al catalogo...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.PAPPAGALLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_PAP_PAR_CHE_VEN_LE_STE_MER_DI_ROD_CHE_FAC_PAR_DEL_SUA_CO_GLI__BAS_VED_PER_RIC_E_DAR_LAC_AL_CAT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             elif dictPersonaggiSbloccati["Pappagallo"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.pappagalloDiario, (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("PappaLibroSonoro", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Un pappagallo parlante addestrato da Rod per vendere merci. Da quello che ho capito, mi dà l'accesso al catalogo perché sono stata in qualche modo associata a un suo ricordo...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.PAPPALIBROSONORO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.UN_PAP_PAR_ADD_DA_ROD_PER_VEN_MER_DA_QUE_CHE_HO_CAP_MI_D_LAC_AL_CAT_PER_SON_STA_IN_QUA_MOD_ASS_A_UN_SUO_RIC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 14:
                             if dictPersonaggiSbloccati["Costruttore"] == 1:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"È un tizio che ho trovato morto dentro una cella nella Caverna Impo. Indossa una strana tuta e ha dei tubi che gli escono dal corpo. Mi domando cosa ci facesse lì dentro...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.SCONOSCIUTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI._UN_TIZ_CHE_HO_TRO_MOR_DEN_UNA_CEL_NEL_CAV_IMP_IND_UNA_STR_TUT_E_HA_DEI_TUB_CHE_GLI_ESC_DAL_COR_MI_DOM_COS_CI_FAC_L_DEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                             elif dictPersonaggiSbloccati["Costruttore"] == 2:
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgPersonaggiDiario["Costruttore"], (xImgPersonaggio, yImgPersonaggio))
                                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                                FunzioniGraficheGeneriche.messaggio("Costruttore", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                                FunzioniGraficheGeneriche.messaggio(u"Lui è colui che ha mantenuto aperto e in equilibrio il conflitto tra noi e il Nemico. Neil ipotizzava che volesse imporre all'uomo delle ricerche intensive e continue in ambito bellico.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                                FunzioniGraficheGeneriche.messaggio(LI.COSTRUTTORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                                FunzioniGraficheGeneriche.messaggio(LI.LUI__COL_CHE_HA_MAN_APE_E_IN_EQU_IL_CON_TRA_NOI_E_IL_NEM_NEI_IPO_CHE_VOL_IMP_ALL_DEL_RIC_INT_E_CON_IN_AMB_BEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 15 and dictPersonaggiSbloccati["Sara"] == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgProtagonistaDiario, (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sara", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Potrei portare avanti le ricerche di Rod, ma che senso ha? Sono ancora io? <br> Forse non ha senso neanche porsi il problema.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SARA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.POT_POR_AVA_LE_RIC_DI_ROD_MA_CHE_SEN_HA_SON_ANC_IO_BR_FOR_NON_HA_SEN_NEA_POR_IL_PRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 3:
                     if voceMarcataSottoMenu <= 11:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
                         if dictNemiciSbloccati["nemiciSogno"]:
-                            FunzioniGraficheGeneriche.messaggio("Orco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
-                            FunzioniGraficheGeneriche.messaggio("Pipistrello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.ORCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.PIPISTRELLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         if dictNemiciSbloccati["nemiciForesta"]:
-                            FunzioniGraficheGeneriche.messaggio("Tartaruga verde", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
-                            FunzioniGraficheGeneriche.messaggio("Tartaruga marrone", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
-                            FunzioniGraficheGeneriche.messaggio("Lupo grigio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
-                            FunzioniGraficheGeneriche.messaggio("Lupo bianco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
-                            FunzioniGraficheGeneriche.messaggio("Lupo nero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
-                            FunzioniGraficheGeneriche.messaggio("Cinghiale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.TARTARUGA_VERDE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.TARTARUGA_MARRONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_GRIGIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_BIANCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_NERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.CINGHIALE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
@@ -1650,35 +1651,35 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
                         if dictNemiciSbloccati["nemiciCitta"] == 1:
-                            FunzioniGraficheGeneriche.messaggio("Aggressore 1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
-                            FunzioniGraficheGeneriche.messaggio("Aggressore 2", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.AGGRESSORE_1[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.AGGRESSORE_2[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         if dictNemiciSbloccati["nemiciSelva"]:
-                            FunzioniGraficheGeneriche.messaggio("Serpente verde", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SERPENTE_VERDE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                     elif 11 < voceMarcataSottoMenu <= 22:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 15.8))
                         if dictNemiciSbloccati["nemiciSelva"]:
-                            FunzioniGraficheGeneriche.messaggio("Serpente arancione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
-                            FunzioniGraficheGeneriche.messaggio("Ragno nero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
-                            FunzioniGraficheGeneriche.messaggio("Ragno rosso", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
-                            FunzioniGraficheGeneriche.messaggio("Scorpione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SERPENTE_ARANCIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.RAGNO_NERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.RAGNO_ROSSO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SCORPIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
                         if dictNemiciSbloccati["nemiciMontagne"]:
-                            FunzioniGraficheGeneriche.messaggio("Gufo marrone", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
-                            FunzioniGraficheGeneriche.messaggio("Gufo bianco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
-                            FunzioniGraficheGeneriche.messaggio("Struzzo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
-                            FunzioniGraficheGeneriche.messaggio("Casuario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
-                            FunzioniGraficheGeneriche.messaggio("Falco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
-                            FunzioniGraficheGeneriche.messaggio("Aquila", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.GUFO_MARRONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.GUFO_BIANCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.STRUZZO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.CASUARIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.FALCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.AQUILA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
@@ -1687,23 +1688,23 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 14, 45)
                         if dictNemiciSbloccati["nemiciCastello"]:
-                            FunzioniGraficheGeneriche.messaggio("Servo con spada", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_SPA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 45)
                     elif voceMarcataSottoMenu > 22:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 13.5, GlobalHWVar.gpy * 3.7))
                         if dictNemiciSbloccati["nemiciCastello"]:
-                            FunzioniGraficheGeneriche.messaggio("Servo con arco", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
-                            FunzioniGraficheGeneriche.messaggio("Servo con lancia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_ARC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_LAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, 45)
                         if dictNemiciSbloccati["nemiciCaverna"]:
-                            FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
-                            FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
-                            FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
-                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
-                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_LEGGERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_VOLANTE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_PESANTE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 9, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMP_VOL_PES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 10, 45)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_TORRE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 11, 45)
                         else:
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 7, 45)
                             FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8, 45)
@@ -1722,293 +1723,293 @@ def menuDiario(avanzamentoStoria, listaAvanzamentoDialoghi):
                         if voceMarcataSottoMenu == 1 and dictNemiciSbloccati["nemiciSogno"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Orco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Orco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Dei giganteschi orchi che impugnano enormi spadoni. Mio padre ne parla spesso e ho notato che a volte alcuni racconti si contraddicono tra loro... forse non esistono veramente.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.ORCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.DEI_GIG_ORC_CHE_IMP_ENO_SPA_MIO_PAD_NE_PAR_SPE_E_HO_NOT_CHE_A_VOL_ALC_RAC_SI_CON_TRA_LOR_FOR_NON_ESI_VER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 2 and dictNemiciSbloccati["nemiciSogno"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Pipistrello"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Pipistrello", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Dei pipistrelli velenosi. Non li ho mai visti al di fuori dei miei incubi, quindi anche questi potrebbero essere un'altra invenzione di mio padre per non farmi andare nella foresta.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.PIPISTRELLO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.DEI_PIP_VEL_NON_LI_HO_MAI_VIS_AL_DI_FUO_DEI_MIE_INC_QUI_ANC_QUE_POT_ESS_UNA_INV_DI_MIO_PAD_PER_NON_FAR_AND_NEL_FOR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 3 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["TartarugaVerde"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Tartaruga verde", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Non è molto pericolosa in quanto si muove molto lentamente e i suoi morsi non sono per niente dolorosi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.TARTARUGA_VERDE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_NON__MOL_PER_IN_QUA_SI_MUO_MOL_LEN_E_I_SUO_MOR_NON_SON_PER_NIE_DOL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 4 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["TartarugaMarrone"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Tartaruga marrone", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Un po' più forte della Tartaruga verde, ma niente di troppo preoccupante. Si muove lentamente.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.TARTARUGA_MARRONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_UN_PO_PI_FOR_DEL_TAR_VER_MA_NIE_DI_TRO_PRE_SI_MUO_LEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 5 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoGrigio"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lupo grigio", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. Linooo... un tuo simile. Un lupo abbastanza aggressivo ma poco resistente. È abbastanza veloce, non facile da seminare.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_GRIGIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_LIN_UN_TUO_SIM_UN_LUP_ABB_AGG_MA_POC_RES__ABB_VEL_NON_FAC_DA_SEM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 6 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoBianco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lupo bianco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. È un po' più forte e resistente del Lupo grigio. Quei pochi secondi in cui ti fissa prima di attaccharti sono gelanti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_BIANCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD__UN_PO_PI_FOR_E_RES_DEL_LUP_GRI_QUE_POC_SEC_IN_CUI_TI_FIS_PRI_DI_ATT_SON_GEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 7 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["LupoNero"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Lupo nero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. La razza di lupo più forte. Nel buio della foresta, sarebbe difficile notarli se non viaggiassero in branco.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.LUPO_NERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_LA_RAZ_DI_LUP_PI_FOR_NEL_BUI_DEL_FOR_SAR_DIF_NOT_SE_NON_VIA_IN_BRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 8 and dictNemiciSbloccati["nemiciForesta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cinghiale"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cinghiale", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Foresta Cadetta. È un bestione grande il doppio di me. Ne ho dovuto affrontare uno e per poco non ci rimanevo secca come quel soldato...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CINGHIALE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_FOR_CAD__UN_BES_GRA_IL_DOP_DI_ME_NE_HO_DOV_AFF_UNO_E_PER_POC_NON_CI_RIM_SEC_COM_QUE_SOL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 9 and dictNemiciSbloccati["nemiciCitta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cittadino1"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Aggressore 1", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Non volevo ucciderlo. Aveva un tono violento, mi avrebbe stuprata... forse sarebbe stato meglio non opporsi...?", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.AGGRESSORE_1[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.NON_VOL_UCC_AVE_UN_TON_VIO_MI_AVR_STU_FOR_SAR_STA_MEG_NON_OPP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 10 and dictNemiciSbloccati["nemiciCitta"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Cittadino3"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Aggressore 2", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"L'ho ucciso prima che potesse toccarmi. Non sono una pazza assassina, voleva chiaramente farmi del male... che cazzo ho fatto...", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.AGGRESSORE_2[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.LHO_UCC_PRI_CHE_POT_TOC_NON_SON_UNA_PAZ_ASS_VOL_CHI_FAR_DEL_MAL_CHE_CAZ_HO_FAT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 11 and dictNemiciSbloccati["nemiciSelva"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["SerpeVerde"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Serpente verde", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Li odio, fanno troppa confusione con i loro sonagli! Si muovono lentamente finché non trovano una preda, poi accelerano di colpo.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SERPENTE_VERDE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_SEL_ARI_LI_ODI_FAN_TRO_CON_CON_I_LOR_SON_SI_MUO_LEN_FIN_NON_TRO_UNA_PRE_POI_ACC_DI_COL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 12 and dictNemiciSbloccati["nemiciSelva"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["SerpeArancio"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Serpente arancione", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Questi maledetti sono velenosi! Sembrano muoversi lentamente ma, quando avvistano la preda, sono fulminei nel raggiungerla.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SERPENTE_ARANCIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_SEL_ARI_QUE_MAL_SON_VEL_SEM_MUO_LEN_MA_QUA_AVV_LA_PRE_SON_FUL_NEL_RAG[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 13 and dictNemiciSbloccati["nemiciSelva"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RagnoNero"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Ragno nero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Sono enormi, veloci e abbastanza resistenti. I loro morsi fanno abbastanza male, ma per fortuna non sono velenosi.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.RAGNO_NERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_SEL_ARI_SON_ENO_VEL_E_ABB_RES_I_LOR_MOR_FAN_ABB_MAL_MA_PER_FOR_NON_SON_VEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 14 and dictNemiciSbloccati["nemiciSelva"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RagnoRosso"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Ragno rosso", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Questi sono veramente i più fastidiosi. Attaccano a distanza lanciando la loro saliva velenosa. Per fortuna non sono molto resistenti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.RAGNO_ROSSO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_SEL_ARI_QUE_SON_VER_I_PI_FAS_ATT_A_DIS_LAN_LA_LOR_SAL_VEL_PER_FOR_NON_SON_MOL_RES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 15 and dictNemiciSbloccati["nemiciSelva"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Scorpione"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Scorpione", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Selva Arida. Senza dubbio la belva più temibile del posto. È forte, veloce, resistente e pure velenoso... Impossibile affrontarli in branco.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SCORPIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_SEL_ARI_SEN_DUB_LA_BEL_PI_TEM_DEL_POS__FOR_VEL_RES_E_PUR_VEL_IMP_AFF_IN_BRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 16 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoMarrone"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Gufo marrone", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Questi gufetti sembrano tanto innoqui e amichevoli, ma, appena ti vedono, ti piombano addosso e iniziano ad artigliarti senza sosta.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.GUFO_MARRONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_QUE_GUF_SEM_TAN_INN_E_AMI_MA_APP_TI_VED_TI_PIO_ADD_E_INI_AD_ART_SEN_SOS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 17 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["GufoBianco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Gufo bianco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. A primo impatto, anche loro innoqui e amichevoli, ma, come i loro simili gufi marroni, sono ostili e persino più aggressivi e resistenti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.GUFO_BIANCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_A_PRI_IMP_ANC_LOR_INN_E_AMI_MA_COM_I_LOR_SIM_GUF_MAR_SON_OST_E_PER_PI_AGG_E_RES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 18 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Struzzo"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Struzzo", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Degli strani volatili che però non ho mai visto volare... immagino non possano per la loro stazza. Sono un po' goffi, ma molto forti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.STRUZZO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_DEG_STR_VOL_CHE_PER_NON_HO_MAI_VIS_VOL_IMM_NON_POS_PER_LA_LOR_STA_SON_UN_PO_GOF_MA_MOL_FOR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 19 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Casuario"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Casuario", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Degli struzzi un po' più bassi, tozzi e velenosi. Le loro piume nere sono unte e appiccicose, non è bello vederseli arrivare addosso.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.CASUARIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_DEG_STR_UN_PO_PI_BAS_TOZ_E_VEL_LE_LOR_PIU_NER_SON_UNT_E_APP_NON__BEL_VED_ARR_ADD[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 20 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Falco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Falco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. Uno dei volatili più temibili. La loro apertura alare misura quasi il doppio della mia altezza. Sono veloci, aggressivi e molto resistenti.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.FALCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_UNO_DEI_VOL_PI_TEM_LA_LOR_APE_ALA_MIS_QUA_IL_DOP_DEL_MIA_ALT_SON_VEL_AGG_E_MOL_RES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 21 and dictNemiciSbloccati["nemiciMontagne"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["Aquila"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Aquila", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nel Passo Montano. La più pericolosa della zona. È grande circa quanto un falco, ma è più feroce e resistente. Fortunatamente non si incontra spesso.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.AQUILA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_PAS_MON_LA_PI_PER_DEL_ZON__GRA_CIR_QUA_UN_FAL_MA__PI_FER_E_RES_FOR_NON_SI_INC_SPE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 22 and dictNemiciSbloccati["nemiciCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoSpada"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Servo con spada", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Soldato di Neil a guardia del castello. Il suo compito è stare immobile in un punto del castello. Capace di infliggere ingenti danni data la sua abilità nell'utilizzo della spada.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_SPA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SOL_DI_NEI_A_GUA_DEL_CAS_IL_SUO_COM__STA_IMM_IN_UN_PUN_DEL_CAS_CAP_DI_INF_ING_DAN_DAT_LA_SUA_ABI_NEL_DEL_SPA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 23 and dictNemiciSbloccati["nemiciCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoArco"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Servo con arco", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Soldato di Neil a guardia del castello. Il suo compito è stare immobile in un punto del castello. Specializzato nell'uso dell'arco, attacca di continuo il nemico dalla distanza.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_ARC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SOL_DI_NEI_A_GUA_DEL_CAS_IL_SUO_COM__STA_IMM_IN_UN_PUN_DEL_CAS_SPE_NEL_DEL_ATT_DI_CON_IL_NEM_DAL_DIS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 24 and dictNemiciSbloccati["nemiciCastello"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["ServoLancia"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Servo con lancia", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Soldato di Neil a guardia del castello. Il suo compito è stare immobile in un punto del castello. Usa una lunga lancia non particolarmente efficace, ma pregna di veleno.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.SER_CON_LAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SOL_DI_NEI_A_GUA_DEL_CAS_IL_SUO_COM__STA_IMM_IN_UN_PUN_DEL_CAS_USA_UNA_LUN_LAN_NON_PAR_EFF_MA_PRE_DI_VEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 25 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboLeggero"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impo leggero", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Vaga in giro accumulando impofrutti che ricava scavando nelle rocce della caverna. Nelle rocce, non piante... non sono \"frutti\"!", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_LEGGERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_CAV_IMP_VAG_IN_GIR_ACC_IMP_CHE_RIC_SCA_NEL_ROC_DEL_CAV_NEL_ROC_NON_PIA_NON_SON_FR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 26 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboVolante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impo volante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Sorveglia la zona mentre gli altri impo raccolgono impofrutti. Credo che sia suo compito anche indicare agli altri dove scavare.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_VOLANTE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_CAV_IMP_SOR_LA_ZON_MEN_GLI_ALT_IMP_RAC_IMP_CRE_CHE_SIA_SUO_COM_ANC_IND_AGL_ALT_DOV_SCA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 27 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impo pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Come gli impo leggeri, ricava impofrutti dalle rocce della caverna. È più grosso e lento degli altri, ma è in grado di trasportare più materiale.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_PESANTE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_CAV_IMP_COM_GLI_IMP_LEG_RIC_IMP_DAL_ROC_DEL_CAV__PI_GRO_E_LEN_DEG_ALT_MA__IN_GRA_DI_TRA_PI_MAT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 28 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboPesanteVolante"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impo volante pesante", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Come i normali impo volanti, sorveglia la zona mentre gli altri raccolgono impofrutti. È più grosso e lento degli altri, ma molto più forte.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMP_VOL_PES[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_CAV_IMP_COM_I_NOR_IMP_VOL_SOR_LA_ZON_MEN_GLI_ALT_RAC_IMP__PI_GRO_E_LEN_DEG_ALT_MA_MOL_PI_FOR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                         elif voceMarcataSottoMenu == 29 and dictNemiciSbloccati["nemiciCaverna"]:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.dictImgNemiciDiario["RoboTorre"], (xImgPersonaggio, yImgPersonaggio))
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xDescrizionePersonaggio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), (xDescrizionePersonaggio + largezzaFoglio, yDescrizionePersonaggio - GlobalHWVar.gpy * 0.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Impo torre", GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio(u"Creatura ostile che si trova nella Caverna Impo. Non ha un ruolo effettivo nella raccolta degli impofrutti se non quello di proteggere gli altri. È lento, ma quando colpisce fa parecchio male.", GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
+                            FunzioniGraficheGeneriche.messaggio(LI.IMPO_TORRE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xNomePersonaggio, yNomePersonaggio, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CRE_OST_CHE_SI_TRO_NEL_CAV_IMP_NON_HA_UN_RUO_EFF_NEL_RAC_DEG_IMP_SE_NON_QUE_DI_PRO_GLI_ALT__LEN_MA_QUA_COL_FA_PAR_MAL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xDescrizionePersonaggio, yDescrizionePersonaggio, 40, largezzaFoglio=largezzaFoglio, spazioTraLeRighe=spazioTraLeRighe)
                 elif voceMarcata == 4:
-                    FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
-                    FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
-                    FunzioniGraficheGeneriche.messaggio("Tastiera: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
-                    FunzioniGraficheGeneriche.messaggio("Mouse: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
-                    FunzioniGraficheGeneriche.messaggio("Mouse: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
-                    FunzioniGraficheGeneriche.messaggio("Mouse: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
-                    FunzioniGraficheGeneriche.messaggio("Controller: Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
-                    FunzioniGraficheGeneriche.messaggio("Controller: Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
-                    FunzioniGraficheGeneriche.messaggio("Controller: Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 5, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 6, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.TASTIERA_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 7, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.MOU_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 9, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.MOU_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 10, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.MOUSE_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 11, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.CON_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 13, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.CON_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 14, 45)
+                    FunzioniGraficheGeneriche.messaggio(LI.CONTROLLER_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 15, 45)
                     if sottovoceSelezionata:
                         xInizioTutorialComandi = GlobalHWVar.gsx // 32 * 20.1
                         yInizioTutorialComandi = GlobalHWVar.gsy // 18 * 5.2
                         if voceMarcataSottoMenu == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.TAS_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_BER_INQ[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), 2)
-                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.DESELEZIONA_BERSAGLIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_INTERAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), 2)
-                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MOVIMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SALTA_TURNO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), 2)
-                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.INTERAGISCI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
                         elif voceMarcataSottoMenu == 2:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Tastiera: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.TAS_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.6, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.PUN_SUL_PRO_BER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 1.73, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.43), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_MOVIMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.96, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.66), 2)
-                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.INQ_BER_PUN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.19, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.89), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SPOSTA_PUNTATORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.9, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.73, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.43), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SALTA_TURNO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.96, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.66), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.19, 35)
                         elif voceMarcataSottoMenu == 3:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInMenu, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Tastiera: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.1, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.TASTIERA_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.ESC_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.3, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.IND__ESC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.3, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.1), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.1), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SPOSTA_PUNTATORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_OPE_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8), 2)
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.6, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SELEZIONA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.6, 35)
                         elif voceMarcataSottoMenu == 4:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Mouse: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Su casella libera - Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su impopietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
-                            FunzioniGraficheGeneriche.messaggio(u"Su icona \"Lente\" - Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MOU_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_CAS_LIB__MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_CAS_INT__INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_IMP__ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_STA_PER__MEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_ICO_LE__MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_ICO_SA__SAL_TUR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.1, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su icona \"Lente\" - Rimuovi selezione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.6, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_INTERAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.1, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_ICO_LE__RIM_SEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.6, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
                         elif voceMarcataSottoMenu == 5:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Mouse: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Su casella nemica - Inquadra / Attacca", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su impopietra - Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
-                            FunzioniGraficheGeneriche.messaggio(u"Su icona \"Lente\" - Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
-                            FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MOU_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_CAS_NEM__INQ__ATT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_CAS_INT__INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_IMP__ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_STA_PER__MEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.2, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_ICO_LE__MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SU_ICO_SA__SAL_TUR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_MOVIMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.7, 35)
                         elif voceMarcataSottoMenu == 6:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Mouse: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.8, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MOUSE_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.SELEZIONA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.8, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.8), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.IND__ESC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.3, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_OPE_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ESC_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 2.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9, 35)
                         elif voceMarcataSottoMenu == 7:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Controller: Mod. movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CON_MOD_MOV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_BER_INQ[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), 2)
-                            FunzioniGraficheGeneriche.messaggio("Deseleziona bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.DESELEZIONA_BERSAGLIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_INTERAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), 2)
-                            FunzioniGraficheGeneriche.messaggio("Movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MOVIMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SALTA_TURNO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.INTERAGISCI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
                         elif voceMarcataSottoMenu == 8:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Controller: Mod. interazione", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CON_MOD_INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 0.7, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 1.5), 2)
-                            FunzioniGraficheGeneriche.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.PUN_SUL_PRO_BER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.05, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 2.85), 2)
-                            FunzioniGraficheGeneriche.messaggio(u"Modalità movimento", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.MODALIT_MOVIMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.4, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.INQ_BER_PUN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 5.55), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SPOSTA_PUNTATORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.9), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attiva / Disattiva Impo", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__DIS_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 7.45, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 8.25), 2)
-                            FunzioniGraficheGeneriche.messaggio("Salta turno", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SALTA_TURNO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.8, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 9.6), 2)
-                            FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.ATT__INT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 10.15, 35)
                         elif voceMarcataSottoMenu == 9:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInMenu, (xInizioTutorialComandi, yInizioTutorialComandi))
-                            FunzioniGraficheGeneriche.messaggio("Controller: Menu", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
-                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.3, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CONTROLLER_MENU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 5.05, yInizioTutorialComandi - GlobalHWVar.gpy * 1.1, 60, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.ESC_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 2.3, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 3.2), 2)
-                            FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.85, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.IND__ESC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 3.85, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 4.75), 2)
-                            FunzioniGraficheGeneriche.messaggio("Sposta puntatore", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.4, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SPOSTA_PUNTATORE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 5.4, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 6.3), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 6.3), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.95, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_OPE_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 6.95, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (xInizioTutorialComandi + GlobalHWVar.gpx * 0.3, yInizioTutorialComandi + GlobalHWVar.gpy * 7.85), (xInizioTutorialComandi + GlobalHWVar.gpx * 9.8, yInizioTutorialComandi + GlobalHWVar.gpy * 7.85), 2)
-                            FunzioniGraficheGeneriche.messaggio("Seleziona", GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
+                            FunzioniGraficheGeneriche.messaggio(LI.SELEZIONA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, xInizioTutorialComandi + GlobalHWVar.gpx * 4, yInizioTutorialComandi + GlobalHWVar.gpy * 8.5, 35)
 
             if sottovoceSelezionata:
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))

@@ -11,6 +11,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcoS, faretraS, armaturaS, collanaS, armaS, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato):
@@ -381,11 +382,11 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     if raffredda > 0 or autoRic1 > 0 or autoRic2 > 0 or mosseRimasteRob < 0:
         messaggioDiErrore = ""
         if raffredda > 0:
-            messaggioDiErrore = "Raffreddamento in corso"
+            messaggioDiErrore = LI.RAF_IN_COR[GlobalHWVar.linguaImpostata]
         elif autoRic1 > 0 or autoRic2 > 0:
-            messaggioDiErrore = "Sacca Energetica in carica"
+            messaggioDiErrore = LI.SAC_ENE_IN_CAR[GlobalHWVar.linguaImpostata]
         elif mosseRimasteRob < 0:
-            messaggioDiErrore = "Temperatura troppo elevata"
+            messaggioDiErrore = LI.TEM_TRO_ELE[GlobalHWVar.linguaImpostata]
         vettorePrevisione = [["telecolco", messaggioDiErrore], [1, messaggioDiErrore], [2, messaggioDiErrore], [3, messaggioDiErrore], [4, messaggioDiErrore], [5, messaggioDiErrore], [6, messaggioDiErrore], [7, messaggioDiErrore], [8, messaggioDiErrore], [9, messaggioDiErrore], [10, messaggioDiErrore], ["ultimoObbiettivo", messaggioDiErrore]]
         previsionePosizioneObbiettivi = []
     else:
@@ -480,12 +481,12 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     dark.fill((0, 0, 0, 160))
     GlobalHWVar.disegnaImmagineSuSchermo(dark, (xPartenzaPannello, 0))
 
-    FunzioniGraficheGeneriche.messaggio("Previsione prossima azione", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
+    FunzioniGraficheGeneriche.messaggio(LI.PRE_PRO_AZI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
     azionePrevistaTrovata = False
-    FunzioniGraficheGeneriche.messaggio("Movimento verso impopietra", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
+    FunzioniGraficheGeneriche.messaggio(LI.MOV_VER_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 2.5))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio(LI.IST_ESE_SAL_INT_DI_SAR[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
         azionePrevistaTrovata = True
     else:
         FunzioniGraficheGeneriche.messaggio(vettorePrevisione[0][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
@@ -494,7 +495,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     for i in range(1, 11):
         if not azionePrevistaTrovata and vettorePrevisione[i][1] == "":
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * c))
-            FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
+            FunzioniGraficheGeneriche.messaggio(LI.IST_ESE_SAL_INT_DI_SAR[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
             azionePrevistaTrovata = True
         elif not azionePrevistaTrovata and vettorePrevisione[i][1] != "":
             FunzioniGraficheGeneriche.messaggio(vettorePrevisione[i][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
@@ -511,45 +512,45 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 0:
             FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SAR_CON_PV__80[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SAR_CON_PV__50[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            FunzioniGraficheGeneriche.messaggio("Sara con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SAR_CON_PV__30[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            FunzioniGraficheGeneriche.messaggio("Sara con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SAR_CON_VEL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
-            FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.IMPO_SURRISCALDATO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.IMP_CON_PE__80[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.IMP_CON_PE__50[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.IMP_CON_PE__30[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            FunzioniGraficheGeneriche.messaggio("Sempre a Sara", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SEM_A_SAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
-            FunzioniGraficheGeneriche.messaggio("Sempre a Impo", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SEM_A_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 11:
-            FunzioniGraficheGeneriche.messaggio("Nemico a caso", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEM_A_CAS[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 12:
-            FunzioniGraficheGeneriche.messaggio("Nemico vicino", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEMICO_VICINO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 13:
-            FunzioniGraficheGeneriche.messaggio("Nemico lontano", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEMICO_LONTANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEM_CON_PV__80[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEM_CON_PV__50[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEM_CON_PV__30[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            FunzioniGraficheGeneriche.messaggio("Nemico con meno <*>#italic#Pv<*>", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NEM_CON_MEN_PV[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 18:
-            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NUM_DI_NEM__1[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:
-            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 2", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NUM_DI_NEM__2[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 20:
-            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 3", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.NUM_DI_NEM__3[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
     xListaTecniche = xPartenzaPannello + (GlobalHWVar.gsx // 32 * 7.2)
     c = 3.8
@@ -559,57 +560,57 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 0:
             FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            FunzioniGraficheGeneriche.messaggio("Scossa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SCOSSA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            FunzioniGraficheGeneriche.messaggio("Cura", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.CURA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            FunzioniGraficheGeneriche.messaggio("Antidoto", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.ANTIDOTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            FunzioniGraficheGeneriche.messaggio("Freccia elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.FRECCIA_ELETTRICA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
-            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.TEMPESTA_ELETTRICA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            FunzioniGraficheGeneriche.messaggio("Raffreddamento", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.RAFFREDDAMENTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            FunzioniGraficheGeneriche.messaggio("Auto-ricarica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.AUTORICARICA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            FunzioniGraficheGeneriche.messaggio("Cura +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.CURA_P[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            FunzioniGraficheGeneriche.messaggio("Scossa +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SCOSSA_P[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
-            FunzioniGraficheGeneriche.messaggio("Freccia elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.FRE_ELE_P[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 11:
-            FunzioniGraficheGeneriche.messaggio("Velocizza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.VELOCIZZA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 12:
-            FunzioniGraficheGeneriche.messaggio("Carica attacco", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.CARICA_ATTACCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 13:
-            FunzioniGraficheGeneriche.messaggio("Carica difesa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.CARICA_DIFESA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            FunzioniGraficheGeneriche.messaggio("Efficienza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.EFFICIENZA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.TEM_ELE_P[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            FunzioniGraficheGeneriche.messaggio("Cura ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.CURA_PP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            FunzioniGraficheGeneriche.messaggio("Auto-ricarica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.AUTORICARICA_P[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 18:
-            FunzioniGraficheGeneriche.messaggio("Scossa ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.SCOSSA_PP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:
-            FunzioniGraficheGeneriche.messaggio("Freccia Elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.FRE_ELE_PP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 20:
-            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio(LI.TEM_ELE_PP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
-    FunzioniGraficheGeneriche.messaggio("Movimento verso obiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
+    FunzioniGraficheGeneriche.messaggio(LI.MOV_VER_OBI_SAL_IN_MEM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
     if not azionePrevistaTrovata and vettorePrevisione[11][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 14.8))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio(LI.IST_ESE_SAL_INT_DI_SAR[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
         azionePrevistaTrovata = True
     elif not azionePrevistaTrovata and vettorePrevisione[11][1] != "":
         FunzioniGraficheGeneriche.messaggio(vettorePrevisione[11][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
-    FunzioniGraficheGeneriche.messaggio("Nessuna azione da eseguire", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 16, 40)
+    FunzioniGraficheGeneriche.messaggio(LI.NES_AZI_DA_ESE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 16, 40)
     if not azionePrevistaTrovata:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 15.9))
-        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio(LI.IST_ESE_SAL_INT_DI_SAR[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
 
     GlobalHWVar.aggiornaSchermo()
 

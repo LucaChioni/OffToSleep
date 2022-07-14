@@ -10,6 +10,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False, superficie=False, restituisciLarghezza=False):
@@ -267,7 +268,7 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
-        messaggio("Sei morto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 13, 150)
+        messaggio(LI.SEI_MORTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 13, 150)
         GlobalHWVar.aggiornaSchermo()
 
         bottoneDown = False
@@ -474,7 +475,7 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
         GlobalHWVar.configuraCursore(False)
     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfocontcof, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 0))
-    messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+    messaggio(LI.HAI_OTT_[GlobalHWVar.linguaImpostata] + oggettoRicevuto, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
     GlobalHWVar.aggiornaSchermo()
     i = 0
     while i < 5:
@@ -976,8 +977,8 @@ def aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, 
 
 def mostraSchermataCitazione():
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-    messaggio(u"A noi uomini, nascendo, è toccato un triste privilegio: quello di sentirci vivere, con la bella illusione di prendere come una realtà fuori di noi questo nostro interno sentimento...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 8, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
-    # messaggio("- Luigi Pirandello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
+    messaggio(LI.A_NOI_UOM_NAS__TOC_UN_TRI_PRI_QUE_DI_SEN_VIV_CON_LA_BEL_ILL_DI_PRE_COM_UNA_REA_FUO_DI_NOI_QUE_NOS_INT_SEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 8, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
+    # messaggio(LI._LUI_PIR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
     oscuraIlluminaSchermo(illumina=2)
 
     if GlobalHWVar.mouseBloccato:

@@ -10,6 +10,7 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetImgOggettiMappaPersonaggi as SetImgOggettiMappaPersonaggi
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def settaController(arrivatoDaMenuPrincipale):
@@ -554,7 +555,7 @@ def settaController(arrivatoDaMenuPrincipale):
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
                 GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                FunzioniGraficheGeneriche.messaggio("Configura controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio(LI.CONFIGURA_CONTROLLER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
@@ -566,13 +567,13 @@ def settaController(arrivatoDaMenuPrincipale):
                 FunzioniGraficheGeneriche.messaggio("B", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 28.85, GlobalHWVar.gsy // 18 * 8.2, 70)
                 FunzioniGraficheGeneriche.messaggio("Y", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 7, 70)
                 FunzioniGraficheGeneriche.messaggio("X", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 26.45, GlobalHWVar.gsy // 18 * 8.2, 70)
-                FunzioniGraficheGeneriche.messaggio("Seleziona il controller da configurare:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Inizia configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Cancella configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
-                FunzioniGraficheGeneriche.messaggio("Testa configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.SEL_IL_CON_DA_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.INIZIA_CONFIGURAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.CANCELLA_CONFIGURAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.TESTA_CONFIGURAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.5, 60)
 
-                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
-                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.SALVA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.INDIETRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 1.3))
@@ -586,27 +587,27 @@ def settaController(arrivatoDaMenuPrincipale):
                 FunzioniGraficheGeneriche.messaggio("Y", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 27.6, GlobalHWVar.gsy // 18 * 7, 70)
                 FunzioniGraficheGeneriche.messaggio("X", GlobalHWVar.grigioscurino, GlobalHWVar.gsx // 32 * 26.45, GlobalHWVar.gsy // 18 * 8.2, 70)
                 if mostraErrore == "nonInMenuPrincipale":
-                    FunzioniGraficheGeneriche.messaggio("Opzione disponibile solo accedendo da menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.OPZ_DIS_SOL_ACC_DA_MEN_PRI[GlobalHWVar.linguaImpostata], GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
                 if mostraErrore == "attendiQualcheSecondo":
-                    FunzioniGraficheGeneriche.messaggio("Attendi qualche secondo", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.ATT_QUA_SEC[GlobalHWVar.linguaImpostata], GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
                 mostraErrore = False
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 14.4) - 1), (GlobalHWVar.gpx * 15.5, (GlobalHWVar.gpy * 14.4) - 1), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if countdownAggiornamentoModulo <= 0 and arrivatoDaMenuPrincipale:
-                FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.AGG_LIS_CON_COL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
             else:
-                FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.AGG_LIS_CON_COL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
             if idController != -1:
                 FunzioniGraficheGeneriche.messaggio("#" + str(idController) + " " + nomeController, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 7.8, 50, centrale=True, lungMax=11)
             else:
@@ -622,7 +623,7 @@ def settaController(arrivatoDaMenuPrincipale):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 14.5, GlobalHWVar.gsy // 18 * 7.6))
 
             if configurando:
-                FunzioniGraficheGeneriche.messaggio("Clicca i tasti illuminati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(LI.CLI_I_TAS_ILL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
                 if ordineConfigTasti[tastoDaConfigurare] == "croce":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroce, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 if ordineConfigTasti[tastoDaConfigurare] == "cerchio":
@@ -674,27 +675,27 @@ def settaController(arrivatoDaMenuPrincipale):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                     if configurazioneDaTestare[8] in tastiPremutiPadConfig:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                FunzioniGraficheGeneriche.messaggio("Controlla che i tasti premuti corrispondano a quelli illuminati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(LI.CON_CHE_I_TAS_PRE_COR_A_QUE_ILL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
             else:
                 if controllerDaConfigurare:
                     if padInizialmeteConfigurato:
-                        FunzioniGraficheGeneriche.messaggio(u"Controller configurato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio(LI.CONTROLLER_CONFIGURATO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio(u"Controller non configurato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio(LI.CON_NON_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Nessun controller rilevato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.NES_CON_RIL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
             padConfiguratoTemp = False
             for padConf in configTemp:
                 if padConf[0] == nomeController:
                     padConfiguratoTemp = True
             if padInizialmeteConfigurato != padConfiguratoTemp:
                 if padConfiguratoTemp:
-                    FunzioniGraficheGeneriche.messaggio("Controller temporaneamente configurato", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.CON_TEM_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Controller temporaneamente non configurato", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.CON_TEM_NON_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
             else:
                 if idController in listaIdPadConfigModificata:
-                    FunzioniGraficheGeneriche.messaggio("Configurazione temporaneamente modificata", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(LI.CON_TEM_MOD[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
 
             if configurando or testando:
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
@@ -1039,16 +1040,16 @@ def settaTastiera():
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
                 GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                FunzioniGraficheGeneriche.messaggio("Configura tastiera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio(LI.CONFIGURA_TASTIERA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio(u"Se la tua tastiera non rispetta lo standard QWERTY, configura le lettere da usare al posto di Q, W, E, A, S e D. <br> <br> ATTENZIONE: nei tutorial ci si riferirà sempre allo standard QWERTY quando verranno spiegati i comandi di gioco.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4.1, 40, largezzaFoglio=GlobalHWVar.gpy * 15, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+                FunzioniGraficheGeneriche.messaggio(LI.SE_LA_TUA_TAS_NON_RIS_LO_STA_QWE_CON_LE_LET_DA_USA_AL_POS_DI_Q_W_E_A_S_E_D_BR_BR_ATT_NEI_TUT_CI_SI_RIF_SEM_ALL_STA_QWE_QUA_VER_SPI_I_COM_DI_GIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4.1, 40, largezzaFoglio=GlobalHWVar.gpy * 15, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniTastiera, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2))
-                FunzioniGraficheGeneriche.messaggio("Esc", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.28, 40)
+                FunzioniGraficheGeneriche.messaggio(LI.ESC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.28, 40)
                 FunzioniGraficheGeneriche.messaggio("2", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.95, GlobalHWVar.gpy * 8, 50)
                 FunzioniGraficheGeneriche.messaggio("3", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.95, GlobalHWVar.gpy * 8, 50)
                 FunzioniGraficheGeneriche.messaggio("0", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 27.04, GlobalHWVar.gpy * 8, 50)
@@ -1127,22 +1128,22 @@ def settaTastiera():
                     elif key == "D":
                         FunzioniGraficheGeneriche.messaggio(letteraDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 20.35, GlobalHWVar.gpy * 9.98, 40)
                         FunzioniGraficheGeneriche.messaggio("D", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.7, GlobalHWVar.gpy * 10.43, 35)
-                FunzioniGraficheGeneriche.messaggio("Seleziona il tasto da configurare:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + u": Su", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + u": Giù", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + u": Sinistra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + u": Destra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + u": Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + u": Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
-                FunzioniGraficheGeneriche.messaggio("Resetta configurazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
-                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
-                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.SEL_IL_TAS_DA_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + LI._SU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + LI._GIU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + LI._SINISTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + LI._DESTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + LI._INDIETRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + LI._MOD_INTERAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(LI.RESETTA_CONFIGURAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.SALVA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.INDIETRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.4, GlobalHWVar.gsy // 18 * 15, 70)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 15.2, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.8, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 9.7))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniTastiera, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 2))
-                FunzioniGraficheGeneriche.messaggio("Esc", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.28, 40)
+                FunzioniGraficheGeneriche.messaggio(LI.ESC[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16.8, GlobalHWVar.gpy * 7.28, 40)
                 FunzioniGraficheGeneriche.messaggio("2", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 18.95, GlobalHWVar.gpy * 8, 50)
                 FunzioniGraficheGeneriche.messaggio("3", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 19.95, GlobalHWVar.gpy * 8, 50)
                 FunzioniGraficheGeneriche.messaggio("0", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 27.04, GlobalHWVar.gpy * 8, 50)
@@ -1223,24 +1224,24 @@ def settaTastiera():
                         FunzioniGraficheGeneriche.messaggio("D", GlobalHWVar.grigioscuPiuScu, GlobalHWVar.gpx * 20.7, GlobalHWVar.gpy * 10.43, 35)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 6, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4.7))
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + u": Su", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + u": Giù", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + u": Sinistra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + u": Destra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + u": Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
-                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + u": Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["W"] + LI._SU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["S"] + LI._GIU[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 6.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["A"] + LI._SINISTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["D"] + LI._DESTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 8.1, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["Q"] + LI._INDIETRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.6, 50)
+                FunzioniGraficheGeneriche.messaggio(lettereImpostate["E"] + LI._MOD_INTERAZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 9.6, 50)
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     if configurando:
-                        FunzioniGraficheGeneriche.messaggio("Esc: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.8, GlobalHWVar.gsy // 18 * 1, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.ESC_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.8, GlobalHWVar.gsy // 18 * 1, 50)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 6.2), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 10.5), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1.5, (GlobalHWVar.gpy * 7.6) - 1), (GlobalHWVar.gpx * 8.2, (GlobalHWVar.gpy * 7.6) - 1), 2)
@@ -1251,10 +1252,10 @@ def settaTastiera():
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if configurando:
-                FunzioniGraficheGeneriche.messaggio("Imposta il tasto indicato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(LI.IMP_IL_TAS_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
 
             if configTemp != GlobalHWVar.tastiConfiguratiTastiera:
-                FunzioniGraficheGeneriche.messaggio("Configurazione temporaneamente modificata", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(LI.CON_TEM_MOD[GlobalHWVar.linguaImpostata], GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
 
             if configurando:
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
@@ -1474,7 +1475,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), opzioni_schermo)
                         if ricaricaImgs:
                             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                            FunzioniGraficheGeneriche.messaggio("Cambio risoluzione in corso...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 7.5, 120, centrale=True)
+                            FunzioniGraficheGeneriche.messaggio(LI.CAM_RIS_IN_COR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 7.5, 120, centrale=True)
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
@@ -1762,22 +1763,22 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
                 GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-                FunzioniGraficheGeneriche.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio(LI.IMPOSTAZIONI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Lingua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.7, 60)
-                FunzioniGraficheGeneriche.messaggio("Volume audio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, 60)
-                FunzioniGraficheGeneriche.messaggio("Tastiera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.9, 60)
-                FunzioniGraficheGeneriche.messaggio("Risoluzione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.3, 60)
-                FunzioniGraficheGeneriche.messaggio(u"Modalità finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.7, 60)
-                FunzioniGraficheGeneriche.messaggio("Controllo risoluzione ottimale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, 60)
-                FunzioniGraficheGeneriche.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 15, 70)
-                FunzioniGraficheGeneriche.messaggio("Indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.LINGUA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.VOLUME_AUDIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.1, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.TASTIERA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.5, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.CONTROLLER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.9, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.RISOLUZIONE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.3, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.MODALIT_FINESTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.CON_RIS_OTT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.SALVA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 15, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.INDIETRO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.9, GlobalHWVar.gsy // 18 * 15, 70)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 9.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.55, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.3))
@@ -1795,19 +1796,19 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio("B: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 4.3), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.23), 2)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 14.65), ((GlobalHWVar.gpx * 16) - 1, GlobalHWVar.gpy * 16.2), 2)
 
             if linguaTemp == "ita":
-                FunzioniGraficheGeneriche.messaggio("Italiano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.ITALIANO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if linguaTemp == "eng":
-                FunzioniGraficheGeneriche.messaggio("English", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.ENGLISH[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 4.7, 60)
             if voceMarcata == 1:
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 4.6))
@@ -1833,13 +1834,13 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 6))
-            FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 7.5, 60)
-            FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8.9, 60)
+            FunzioniGraficheGeneriche.messaggio(LI.CONFIGURA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 7.5, 60)
+            FunzioniGraficheGeneriche.messaggio(LI.CONFIGURA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 8.9, 60)
             FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 10.3, 60)
             if GlobalHWVar.ramDisponibile < GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp):
-                FunzioniGraficheGeneriche.messaggio("Risoluzione sconsigliata! <br> RAM richiesta: " + str(GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0) + "GB (sistema: " + str(GlobalHWVar.ramDisponibile / 1000.0) + "GB)", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+                FunzioniGraficheGeneriche.messaggio(LI.RIS_SCO_BR_RAM_RIC___STR__100__GB_SIS___STR__100__GB[GlobalHWVar.linguaImpostata] %((GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0), (GlobalHWVar.ramDisponibile / 1000.0)), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
             elif voceMarcata == 5:
-                FunzioniGraficheGeneriche.messaggio("Risoluzione supportata! <br> RAM richiesta: " + str(GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0) + "GB (sistema: " + str(GlobalHWVar.ramDisponibile / 1000.0) + "GB)", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+                FunzioniGraficheGeneriche.messaggio(LI.RIS_SUP_BR_RAM_RIC___STR__100__GB_SIS___STR__100__GB[GlobalHWVar.linguaImpostata] %((GlobalHWVar.getRAMNecessariaPerRisoluzione(gsxTemp) / 1000.0), (GlobalHWVar.ramDisponibile / 1000.0)), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 10.2, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
             if voceMarcata == 5:
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.2))
@@ -1850,11 +1851,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 10.2))
             if modalitaSchermoTemp == 0:
-                FunzioniGraficheGeneriche.messaggio(u"Schermo intero", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.SCHERMO_INTERO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             elif modalitaSchermoTemp == 1:
-                FunzioniGraficheGeneriche.messaggio(u"Finestra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.FINESTRA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             else:
-                FunzioniGraficheGeneriche.messaggio("Finestra senza bordi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.FIN_SEN_BOR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11.7, 60)
             if voceMarcata == 6:
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 11.6))
@@ -1865,11 +1866,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 23.9, GlobalHWVar.gsy // 18 * 11.6))
             if controlloRisoluzioneTemp:
-                FunzioniGraficheGeneriche.messaggio(u"Attivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.ATTIVATO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
             else:
-                FunzioniGraficheGeneriche.messaggio(u"Disattivato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
+                FunzioniGraficheGeneriche.messaggio(LI.DISATTIVATO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 13.1, 60)
             if voceMarcata == 7:
-                FunzioniGraficheGeneriche.messaggio("Disattiva se vuoi utilizzare <br> una risoluzione sconsigliata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 13, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
+                FunzioniGraficheGeneriche.messaggio(LI.DIS_SE_VUO_UTI_BR_UNA_RIS_SCO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 13, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.5)
                 if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 13))
                 else:

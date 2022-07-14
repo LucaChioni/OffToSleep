@@ -7,6 +7,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def creaCadaveriNemici(listaNemici, stanza, avanzamentoStoria, listaPersonaggi, listaPersonaggiTotali, porte, x, y, rx, ry, casellePercorribiliPorteEscluse, carim=False, caricaTutto=False):
@@ -1631,7 +1632,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         if dati[10] <= 0:
             i = 0
             while i < len(vettorePrevisione):
-                vettorePrevisione[i][1] = "Energia insufficiente"
+                vettorePrevisione[i][1] = LI.ENERGIA_INSUFFICIENTE[GlobalHWVar.linguaImpostata]
                 i += 1
         else:
             previsionePosizioneObbiettivo.append([x, y])
@@ -1683,7 +1684,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         else:
             ultimoObbiettivoColco = []
     else:
-        vettorePrevisione[0][1] = "Impopietra spenta"
+        vettorePrevisione[0][1] = LI.IMPOPIETRA_SPENTA[GlobalHWVar.linguaImpostata]
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
         if GlobalGameVar.impoPresente and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
@@ -1738,7 +1739,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 costoTecnicaUsata = GlobalGameVar.costoTecniche[dati[i + 10] - 1]
             rigaGambitAttuale = i - 100
             if dati[i] <= 0 or dati[i + 10] <= 0:
-                vettorePrevisione[rigaGambitAttuale][1] = "Cella di memoria incompleta"
+                vettorePrevisione[rigaGambitAttuale][1] = LI.CEL_DI_MEM_INC[GlobalHWVar.linguaImpostata]
             elif dati[10] > costoTecnicaUsata:
                 if not (dati[122] > 0 and (dati[i + 10] == 11 or dati[i + 10] == 14)):
                     pathToNemico = []
@@ -1761,11 +1762,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Rallo", x, y, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         elif not dati[5] < pvtot / float(100) * 80:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.POS_OBI_SCO[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                     # pv rallo < 50
                     if dati[i] == 2:
                         if dati[5] < pvtot / float(100) * 50 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1774,11 +1775,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Rallo", x, y, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         elif not dati[5] < pvtot / float(100) * 50:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.POS_OBI_SCO[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                     # pv rallo < 30
                     if dati[i] == 3:
                         if dati[5] < pvtot / float(100) * 30 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1787,11 +1788,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Rallo", x, y, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         elif not dati[5] < pvtot / float(100) * 30:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.POS_OBI_SCO[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                     # rallo avvelenato
                     if dati[i] == 4:
                         if dati[121] and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1800,11 +1801,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Rallo", x, y, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         elif not dati[121]:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.POS_OBI_SCO[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                     # colco surriscaldato
                     if dati[i] == 5:
                         if dati[122] > 0:
@@ -1813,7 +1814,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Colco", rx, ry, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # pe colco < 80
                     if dati[i] == 6:
                         if dati[10] < entot / float(100) * 80:
@@ -1822,7 +1823,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Colco", rx, ry, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # pe colco < 50
                     if dati[i] == 7:
                         if dati[10] < entot / float(100) * 50:
@@ -1831,7 +1832,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Colco", rx, ry, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # pe colco < 30
                     if dati[i] == 8:
                         if dati[10] < entot / float(100) * 30:
@@ -1840,7 +1841,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Colco", rx, ry, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # sempre rallo
                     if dati[i] == 9:
                         if not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0) and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1849,11 +1850,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Rallo", x, y, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         elif (dati[i + 10] == 12 and dati[123] > 0) or (dati[i + 10] == 13 and dati[124] > 0):
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.POS_OBI_SCO[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                     # sempre colco
                     if dati[i] == 10:
                         if not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
@@ -1862,7 +1863,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = ["Colco", rx, ry, str(dati[i + 10])]
                                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
 
                     # azioni su nemici
                     nemicoBersaglio = False
@@ -1918,7 +1919,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             if len(attaccoDiColco) > 0 and not analizzaColco:
                                 obbiettivoCasualeColco = False
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico vicino
                     if dati[i] == 12:
                         for nemico in nemiciVistiDaColco:
@@ -1935,7 +1936,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             else:
                                 ultimoObbiettivoColco = []
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico lontano
                     if dati[i] == 13:
                         distMin = False
@@ -1977,9 +1978,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico pv < 80
                     if dati[i] == 14:
                         distMin = False
@@ -2021,9 +2022,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico pv < 50
                     if dati[i] == 15:
                         distMin = False
@@ -2065,9 +2066,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico pv < 30
                     if dati[i] == 16:
                         distMin = False
@@ -2109,9 +2110,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # nemico con meno pv
                     if dati[i] == 17:
                         distMin = False
@@ -2158,9 +2159,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # numero nemici > 1
                     if dati[i] == 18:
                         if len(nemiciVistiDaColco) > 1:
@@ -2204,9 +2205,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # numero nemici > 2
                     if dati[i] == 19:
                         if len(nemiciVistiDaColco) > 2:
@@ -2250,9 +2251,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
                     # numero nemici > 3
                     if dati[i] == 20:
                         if len(nemiciVistiDaColco) > 3:
@@ -2296,9 +2297,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                            vettorePrevisione[rigaGambitAttuale][1] = LI.CON_NON_RIS[GlobalHWVar.linguaImpostata]
 
                     # nel caso in cui viene fatta un'azione e non c'è un target specifico resetto ultimoObbiettivoColco
                     if azioneEseguita and dati[i] >= 11 and not nemicoBersaglio:
@@ -2349,9 +2350,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         if dati[i + 10] == 20:
                             tecnicaUsata = "tempesta++"
                 else:
-                    vettorePrevisione[rigaGambitAttuale][1] = "Azione impraticabile con surriscaldamento"
+                    vettorePrevisione[rigaGambitAttuale][1] = LI.AZI_IMP_CON_SUR[GlobalHWVar.linguaImpostata]
             else:
-                vettorePrevisione[rigaGambitAttuale][1] = "Energia insufficiente"
+                vettorePrevisione[rigaGambitAttuale][1] = LI.ENERGIA_INSUFFICIENTE[GlobalHWVar.linguaImpostata]
 
             i += 1
 
@@ -2438,20 +2439,20 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 ultimoObbiettivoColco = []
             if azioneEseguita and sposta:
                 if dati[10] <= 0:
-                    vettorePrevisione[11][1] = "Energia insufficiente"
+                    vettorePrevisione[11][1] = LI.ENERGIA_INSUFFICIENTE[GlobalHWVar.linguaImpostata]
                 else:
                     previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                 tecnicaUsata = "spostamento"
             else:
                 if dati[10] <= 0:
-                    vettorePrevisione[11][1] = "Energia insufficiente"
+                    vettorePrevisione[11][1] = LI.ENERGIA_INSUFFICIENTE[GlobalHWVar.linguaImpostata]
                 else:
-                    vettorePrevisione[11][1] = "Obiettivo irraggiungibile"
+                    vettorePrevisione[11][1] = LI.OBIETTIVO_IRRAGGIUNGIBILE[GlobalHWVar.linguaImpostata]
         elif not azioneEseguita:
             if dati[10] <= 0:
-                vettorePrevisione[11][1] = "Energia insufficiente"
+                vettorePrevisione[11][1] = LI.ENERGIA_INSUFFICIENTE[GlobalHWVar.linguaImpostata]
             else:
-                vettorePrevisione[11][1] = "Nessun obiettivo in memoria"
+                vettorePrevisione[11][1] = LI.NES_OBI_IN_MEM[GlobalHWVar.linguaImpostata]
 
     # cancello ultimoObbiettivoColco se ho appena compiuto la tecnica (altrimenti andrebbe sopra la casella dell'ultimoObbiettivoColco inutilmente)
     if tecnicaUsata and tecnicaUsata != "spostamento":

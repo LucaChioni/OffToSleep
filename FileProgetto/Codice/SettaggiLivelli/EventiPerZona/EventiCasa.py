@@ -10,6 +10,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, porte, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse, casellePercorribiliPorteEscluse, equipaggiamentoIndossato, chiamarob, ultimoObbiettivoColco, avanzaManualmentePercorsoDaEseguire):
@@ -609,14 +610,18 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             descrizione = infoCrediti[0]
             listaSoggetti = infoCrediti[1]
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-            if c == 4:
+            if c == 3:
+                FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 5, 60, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 6.1) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 6.1) - 1), 2)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.6, 70, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 1.2)
+            elif c == 4:
                 FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.2, 60, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 4.3) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 4.3) - 1), 2)
                 FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.8, 40, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 0.6)
             elif c == 5:
                 FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.4, 60, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 7.5) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 7.5) - 1), 2)
-                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 8, 80, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 1.3)
+                FunzioniGraficheGeneriche.messaggio(listaSoggetti, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 8, 70, centrale=True, spazioTraLeRighe=GlobalHWVar.gpy * 1.2)
             else:
                 FunzioniGraficheGeneriche.messaggio(descrizione, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 7.4, 60, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 5, (GlobalHWVar.gpy * 8.5) - 1), (GlobalHWVar.gpx * 27, (GlobalHWVar.gpy * 8.5) - 1), 2)
@@ -690,7 +695,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         i = 0
         while i <= 50:
             GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xRettangoloRingra, yRettangoloRingra, xDimensioneRettangoloRingra, yDimensioneRettangoloRingra))
-            FunzioniGraficheGeneriche.messaggio("Thank you", GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
+            FunzioniGraficheGeneriche.messaggio(LI.GRAZIE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
             imgOscuramentoSchermo2.fill((0, 0, 0, 255 - (i * 5)))
             GlobalHWVar.disegnaImmagineSuSchermo(imgOscuramentoSchermo2, (xRettangoloRingra, yRettangoloRingra))
             GlobalHWVar.aggiornaSchermo()
@@ -698,7 +703,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
             i += 1
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xRettangoloRingra, yRettangoloRingra, xDimensioneRettangoloRingra, yDimensioneRettangoloRingra))
-        FunzioniGraficheGeneriche.messaggio("Thank you", GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
+        FunzioniGraficheGeneriche.messaggio(LI.GRAZIE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
         GlobalHWVar.aggiornaSchermo()
         i = 0
         while i < 170:

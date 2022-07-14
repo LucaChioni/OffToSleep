@@ -7,6 +7,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetAvanzamentiStanzePorteCofanetti as SetAvanzamentiStanzePorteCofanetti
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 # vettore statistiche per livello
 def inizializzaStatistichePerLivello():
@@ -406,7 +407,7 @@ def disegnaSchermataDiCaricamento():
     GlobalHWVar.disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(sfumaturaCaricamentoMenuPrincipale, (0, 0))
     carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 70 // 60)
-    testo = carattere.render("Caricamento...", True, GlobalHWVar.grigiochi)
+    testo = carattere.render(LI.CARICAMENTO___[GlobalHWVar.linguaImpostata], True, GlobalHWVar.grigiochi)
     GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 15.5))
     carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 200 // 60)
     testo1 = carattere.render("Off", True, GlobalHWVar.grigiochi)
@@ -464,23 +465,28 @@ GlobalSndVar.loadSounds(numSndCaricato)
 # partitaAppenaAvviataPostFinale serve per le animazioni dopo il finale (in cui ti alzi dal letto o dal calcolatore)
 partitaAppenaAvviataPostFinale = True
 
-listaCreditiSuoni = ""
-listaCreditiSuoni += "\"Knock Monitor Screen.wav\" by Angel_Perez_Grandi -- https://freesound.org/s/71175/ -- License: Attribution 4.0" + " <br> "
-listaCreditiSuoni += "\"Wild Boar / Grunting Growling\" by TheVeoMammoth11 -- https://freesound.org/s/492655/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Lava loop.wav\" by Audionautics -- https://freesound.org/s/133901/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Woodman's grocery store ambiance 2\" by ChrisReierson -- https://freesound.org/s/384379/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"MITSUBISHI IMIEV electric car HATCHBACK lever int.wav\" by jakobthiesen -- https://freesound.org/s/174826/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Hissing.m4a\" by TheScarlettWitch89 -- https://freesound.org/s/415287/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"cooling down hot saucepan with water.wav\" by laspaziale -- https://freesound.org/s/92738/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Splash, Jumping, E.wav\" by InspectorJ -- https://freesound.org/s/352105/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Water, Pouring, A.wav\" by InspectorJ -- https://freesound.org/s/421184/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Knife_Sharpen_Large.wav\" by digifishmusic -- https://freesound.org/s/41508/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"The ticking of a mechanical watch HQ.wav\" by tosha73 -- https://freesound.org/s/547534/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"spinning metal\" by baryy -- https://freesound.org/s/163420/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"forest stick sticks wood crackle snap step squash squashing break breaking.wav\" by bulbastre -- https://freesound.org/s/126909/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Pencil, Writing, Close, A.wav\" by InspectorJ -- https://freesound.org/s/398271/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"ChainLodingBayDoor01.WAV\" by mmaruska -- https://freesound.org/s/241108/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Digging with shovel.wav\" by CGEffex -- https://freesound.org/s/96211/ -- License: Attribution 3.0" + " <br> "
-listaCreditiSuoni += "\"Wind_blowing_gusting_through_french_castle_tower.wav\" by Astounded -- https://freesound.org/s/483479/ -- License: Attribution 3.0"
-listaCreditiRingraziamenti = "My family <br> Pygame community <br> Freesound community"
-listaCrediti = [["Written & Developed by:", "Luca Chioni"], ["English Translation by:", "Someone"], ["Music by:", "Luca Chioni"], ["Developed with:", "Python 2 & Pygame"], ["Sound Effects by Freesound:", listaCreditiSuoni], ["Special Thanks to:", listaCreditiRingraziamenti]]
+creditiMioNome = "Luca Chioni"
+creditiTraduttoreInglese = "Someone"
+creditiSuoni = "\"Knock Monitor Screen.wav\" by Angel_Perez_Grandi -- https://freesound.org/s/71175/ -- License: Attribution 4.0" + " <br> "
+creditiSuoni += "\"Wild Boar / Grunting Growling\" by TheVeoMammoth11 -- https://freesound.org/s/492655/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Lava loop.wav\" by Audionautics -- https://freesound.org/s/133901/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Woodman's grocery store ambiance 2\" by ChrisReierson -- https://freesound.org/s/384379/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"MITSUBISHI IMIEV electric car HATCHBACK lever int.wav\" by jakobthiesen -- https://freesound.org/s/174826/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Hissing.m4a\" by TheScarlettWitch89 -- https://freesound.org/s/415287/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"cooling down hot saucepan with water.wav\" by laspaziale -- https://freesound.org/s/92738/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Splash, Jumping, E.wav\" by InspectorJ -- https://freesound.org/s/352105/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Water, Pouring, A.wav\" by InspectorJ -- https://freesound.org/s/421184/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Knife_Sharpen_Large.wav\" by digifishmusic -- https://freesound.org/s/41508/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"The ticking of a mechanical watch HQ.wav\" by tosha73 -- https://freesound.org/s/547534/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"spinning metal\" by baryy -- https://freesound.org/s/163420/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"forest stick sticks wood crackle snap step squash squashing break breaking.wav\" by bulbastre -- https://freesound.org/s/126909/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Pencil, Writing, Close, A.wav\" by InspectorJ -- https://freesound.org/s/398271/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"ChainLodingBayDoor01.WAV\" by mmaruska -- https://freesound.org/s/241108/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Digging with shovel.wav\" by CGEffex -- https://freesound.org/s/96211/ -- License: Attribution 3.0" + " <br> "
+creditiSuoni += "\"Wind_blowing_gusting_through_french_castle_tower.wav\" by Astounded -- https://freesound.org/s/483479/ -- License: Attribution 3.0"
+listaCrediti = [[LI.SCR_E_SVI_DA_[GlobalHWVar.linguaImpostata], creditiMioNome],
+                [LI.TRA_IN_ING_[GlobalHWVar.linguaImpostata], creditiTraduttoreInglese],
+                [LI.MUSICA_[GlobalHWVar.linguaImpostata], creditiMioNome],
+                [LI.SVILUPPATO_CON_[GlobalHWVar.linguaImpostata], LI.PYT_2_PYG__PYC_COM_EDI_IDE__LMMS_MUS__GIM_2_IMM_ANI__AUD_EDI_AUD[GlobalHWVar.linguaImpostata]],
+                [LI.EFF_AUD_DA_FRE_[GlobalHWVar.linguaImpostata], creditiSuoni],
+                [LI.RINGRAZIAMENTI_SPECIALI_[GlobalHWVar.linguaImpostata], LI.MIA_FAM_COM_PYG_COM_FRE[GlobalHWVar.linguaImpostata]]]

@@ -5,6 +5,7 @@ import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato, listaAvanzamentoDialoghi):
@@ -293,47 +294,47 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
 def scriviNomeZona(stanza, stanzaVecchia, attesa):
     nomeDaScrivere = False
     if (stanzaVecchia == GlobalGameVar.dictStanze["sognoSara4"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"] and stanza == GlobalGameVar.dictStanze["casaHansSara4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["casaHansSara1"]):
-        nomeDaScrivere = "Casa"
+        nomeDaScrivere = LI.CASA[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara4"] and stanza == GlobalGameVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà1"] and stanza == GlobalGameVar.dictStanze["forestaCadetta9"]):
-        nomeDaScrivere = "Foresta Cadetta"
+        nomeDaScrivere = LI.FORESTA_CADETTA[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta9"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["città1"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]):
-        nomeDaScrivere = u"Strada per Città"
+        nomeDaScrivere = LI.STR_PER_CIT[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà3"] and stanza == GlobalGameVar.dictStanze["città1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] and stanza == GlobalGameVar.dictStanze["città4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"] and stanza == GlobalGameVar.dictStanze["città7"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida1"] and stanza == GlobalGameVar.dictStanze["città9"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano1"] and stanza == GlobalGameVar.dictStanze["città10"]):
-        nomeDaScrivere = u"Città"
+        nomeDaScrivere = LI.CITT[GlobalHWVar.linguaImpostata]
     elif stanzaVecchia == GlobalGameVar.dictStanze["città4"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
-        nomeDaScrivere = u"Casa di David"
+        nomeDaScrivere = LI.CAS_DI_DAV[GlobalHWVar.linguaImpostata]
     elif stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanza == GlobalGameVar.dictStanze["biblioteca1"]:
-        nomeDaScrivere = u"Biblioteca"
+        nomeDaScrivere = LI.BIBLIOTECA[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]):
-        nomeDaScrivere = u"Strada per Selva Arida"
+        nomeDaScrivere = LI.STR_PER_SEL_ARI[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"] and stanza == GlobalGameVar.dictStanze["selvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["selvaArida16"]):
-        nomeDaScrivere = u"Selva Arida"
+        nomeDaScrivere = LI.SELVA_ARIDA[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida16"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["labirinto3"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod3"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]):
-        nomeDaScrivere = u"Avamposto di Rod"
+        nomeDaScrivere = LI.AVA_DI_ROD[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["labirinto3"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["labirinto20"]):
-        nomeDaScrivere = u"Labirinto"
+        nomeDaScrivere = LI.LABIRINTO[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["labirinto20"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["esternoCastello5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"] and stanza == GlobalGameVar.dictStanze["esternoCastello1"]):
-        nomeDaScrivere = u"Castello di Neil - Esterno"
+        nomeDaScrivere = LI.CAS_DI_NEI___EST[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello5"] and stanza == GlobalGameVar.dictStanze["internoCastello1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo1"] and stanza == GlobalGameVar.dictStanze["internoCastello8"]):
-        nomeDaScrivere = u"Castello di Neil - Interno"
+        nomeDaScrivere = LI.CAS_DI_NEI___INT[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello1"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"]):
-        nomeDaScrivere = u"Scorciatoia sulle montagne"
+        nomeDaScrivere = LI.SCO_SUL_MON[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["città10"] and stanza == GlobalGameVar.dictStanze["stradaPerPassoMontano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano1"] and stanza == GlobalGameVar.dictStanze["stradaPerPassoMontano2"]):
-        nomeDaScrivere = u"Strada per Passo Montano"
+        nomeDaScrivere = LI.STR_PER_PAS_MON[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano2"] and stanza == GlobalGameVar.dictStanze["passoMontano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["passoMontano10"]):
-        nomeDaScrivere = u"Passo Montano"
+        nomeDaScrivere = LI.PASSO_MONTANO[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["passoMontano10"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["tunnelDiRod1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna1"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["esternoCastello3"] and stanza == GlobalGameVar.dictStanze["palazzoDiRod2"]):
-        nomeDaScrivere = u"Palazzo di Rod"
+        nomeDaScrivere = LI.PAL_DI_ROD[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod2"] and stanza == GlobalGameVar.dictStanze["tunnelDiRod3"]):
-        nomeDaScrivere = u"Tunnel di Rod"
+        nomeDaScrivere = LI.TUN_DI_ROD[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanza == GlobalGameVar.dictStanze["caverna1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["vulcano1"] and stanza == GlobalGameVar.dictStanze["caverna18"]):
-        nomeDaScrivere = u"Caverna Impo"
+        nomeDaScrivere = LI.CAVERNA_IMPO[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["caverna18"] and stanza == GlobalGameVar.dictStanze["vulcano3"]):
-        nomeDaScrivere = u"Vulcano"
+        nomeDaScrivere = LI.VULCANO[GlobalHWVar.linguaImpostata]
     elif (stanzaVecchia == GlobalGameVar.dictStanze["internoCastello8"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] and stanza == GlobalGameVar.dictStanze["tunnelSubacqueo2"]):
-        nomeDaScrivere = u"Tunnel Subacqueo"
+        nomeDaScrivere = LI.TUNNEL_SUBACQUEO[GlobalHWVar.linguaImpostata]
     elif stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-        nomeDaScrivere = u"Laboratorio di Neil"
+        nomeDaScrivere = LI.LAB_DI_NEI[GlobalHWVar.linguaImpostata]
 
     if nomeDaScrivere:
         if attesa:
@@ -354,14 +355,14 @@ def mostraTempoPassato(avanzamentoStoria, stanza, stanzaVecchia):
     tempoPassato1 = False
     tempoPassato2 = ""
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        tempoPassato1 = "Giorno 2"
+        tempoPassato1 = LI.GIORNO_2[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
-        tempoPassato1 = "Giorno 3"
+        tempoPassato1 = LI.GIORNO_3[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
-        tempoPassato1 = "Giorno 23"
+        tempoPassato1 = LI.GIORNO_23[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-        tempoPassato1 = "Giorno 23"
-        tempoPassato2 = " - Anno 12"
+        tempoPassato1 = LI.GIORNO_23[GlobalHWVar.linguaImpostata]
+        tempoPassato2 = LI._ANNO_12[GlobalHWVar.linguaImpostata]
 
     if tempoPassato1:
         xScritta = GlobalHWVar.gpx * 3
