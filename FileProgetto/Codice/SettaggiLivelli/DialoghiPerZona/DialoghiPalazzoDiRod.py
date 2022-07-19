@@ -439,7 +439,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Quelli non sono semplici pappagalli. Sono PappaLibriSonori, si usano per registrare.")
+                dialogo.append(u"Quelli non sono semplici pappagalli. Sono Pappa-Libri Sonori, si usano per registrare.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -763,7 +763,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Oh, i miei vecchi appunti sull'estrazione dell'olio di ImpoFrutto...)")
+                dialogo.append(u"(Oh, i miei vecchi appunti sull'estrazione dell'olio di impofrutto...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False

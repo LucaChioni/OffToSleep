@@ -2011,7 +2011,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Posso interrompervi un attimo...")
+                dialogo.append(u"Posso interrompervi un attimo...?")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

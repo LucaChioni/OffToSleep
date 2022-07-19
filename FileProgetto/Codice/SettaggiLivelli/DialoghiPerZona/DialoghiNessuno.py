@@ -2,15 +2,16 @@
 
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizDialoghi as LD
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
     tipo = tipoId.split("-")[0]
 
     if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-        frasePortaChiusa = u"(Potrei entrare, ma... non mi pare il caso di richiedere al calcolatore di fare del lavoro superfluo ai fini della storia principale...)"
+        frasePortaChiusa = LD.POT_ENT_MA_NON_MI_PAR_IL_CAS_DI_RIC_AL_CAL_DI_FAR_DEL_LAV_SUP_AI_FIN_DEL_STO_PRI[GlobalHWVar.linguaImpostata]
     else:
-        frasePortaChiusa = u"(È chiuso a chiave...)"
+        frasePortaChiusa = LD._CHI_A_CHI[GlobalHWVar.linguaImpostata]
 
     partiDialogo = []
     nome = "Nessuno"

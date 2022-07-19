@@ -689,7 +689,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Non devi trasportarlo, ti seguirà quando attivi questa pietra...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"]:
-            oggettoDato = "ImpoFrutto piccolo"
+            oggettoDato = "Impofrutto piccolo"
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -723,11 +723,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Puoi dirgli che azione compiere a seconda della situazione e lui la eseguirà ogni volta senza batter ciglio. Ma, per comunicargli queste informazioni, devi inserirgli degli ImpoFogli nell'apertura che ha dietro la testa. Queste aperture vengono chiamate \"celle di memoria\" e lui ne ha solo una al momento, quindi puoi fargli fare solo un'azione alla volta.")
+            dialogo.append(u"Puoi dirgli che azione compiere a seconda della situazione e lui la eseguirà ogni volta senza batter ciglio. Ma, per comunicargli queste informazioni, devi inserirgli degli impofogli nell'apertura che ha dietro la testa. Queste aperture vengono chiamate \"celle di memoria\" e lui ne ha solo una al momento, quindi puoi fargli fare solo un'azione alla volta.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah... e cos'è un \"impofoglio\"?")
+            dialogo.append(u"Ah... e cos'è un \"Impofoglio\"?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -767,11 +767,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non c'è di che, Sara. Ah, dimenticavo! Prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutrono gli impo. Daglielo quando vedi che sta esaurendo le energie.")
+            dialogo.append(u"Non c'è di che, Sara. Ah, dimenticavo! Prendi questo... è un impofrutto, un frutto che nasce nelle montagne occidentali di cui si nutrono gli impo. Daglielo quando vedi che sta esaurendo le energie.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Un \"ImpoFrutto\"? Non sembra affatto un frutto...")
+            dialogo.append(u"Un \"Impofrutto\"? Non sembra affatto un frutto...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

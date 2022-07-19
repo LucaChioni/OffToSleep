@@ -205,11 +205,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Beh, dopo che sono morti, Neil li ha raccolti tutti per... studiarli.")
+                dialogo.append(u"Beh... dopo che sono morti, Neil li ha raccolti tutti per... studiarli.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma lui non è morto.")
+                dialogo.append(u"Oh... ma lui non è morto.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
