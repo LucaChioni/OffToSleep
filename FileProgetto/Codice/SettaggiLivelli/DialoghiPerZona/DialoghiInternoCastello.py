@@ -718,7 +718,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoSpecchioCastello-0":
             partiDialogo = []
-            nome = "OggettoSpecchioCastello"
+            nome = "Specchio"
             if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -733,7 +733,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(... Non si stacca... aspetta, continua dentro il muro... continua lungo tutta la parete... perché mettere uno specchio dentro il muro?)")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -741,7 +741,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ehi, uno specchio! Cavolo mi sono lavata ieri e guarda qua... mi servirebbe un altro bagno...)")
+                dialogo.append(u"(Ehi, uno specchio!)")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Cavolo, mi sono lavata ieri e guarda qua... mi servirebbe un altro bagno...)")
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -749,6 +757,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 menuMercante = False
                 scelta = False
                 avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"...")
@@ -4075,7 +4087,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 avanzaColDialogo = False
                 dialogo = []
-                dialogo.append("tu")
+                dialogo.append("personaggio")
                 dialogo.append(u"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
@@ -4088,6 +4100,10 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 menuMercante = False
                 scelta = False
                 avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"...")

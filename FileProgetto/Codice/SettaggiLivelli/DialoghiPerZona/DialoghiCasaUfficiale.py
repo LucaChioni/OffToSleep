@@ -1113,7 +1113,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "OggettoLavandinoCasaDavid":
         partiDialogo = []
-        nome = "OggettoLavandinoCasaDavid"
+        nome = "Specchio"
         if avanzamentoDialogo == 0 and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"]:
             oggettoDato = False
             avanzaStoria = False
@@ -1145,7 +1145,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             avanzaColDialogo = True
             dialogo = []
-            dialogo.append("tu")
+            dialogo.append("personaggio")
             dialogo.append(u"<*>#italic#Ehi, ma che carina questa ragazza.<*>")
             partiDialogo.append(dialogo)
             dialogo = []
@@ -1153,15 +1153,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Oh, ma salve! Il mio nome è Sara, piacere di conoscerti.")
             partiDialogo.append(dialogo)
             dialogo = []
-            dialogo.append("tu")
+            dialogo.append("personaggio")
             dialogo.append(u"<*>#italic#Piacere Sara. Hai prorpio un bel viso, sai? Sarebbe perfetto se non fosse per quelle occhiaie...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Cosa?! Queste non sono occhiaie! Sono solo le luci che fanno dei riflessi...")
+            dialogo.append(u"Cosa?! Queste non sono occhiaie! Sono solo le luci... che fanno dei riflessi...")
             partiDialogo.append(dialogo)
             dialogo = []
-            dialogo.append("tu")
+            dialogo.append("personaggio")
             dialogo.append(u"<*>#italic#Ed emani anche uno sgradevole odore. Sarebbe proprio il caso che ti dessi una \"ripulita\"!<*>")
             partiDialogo.append(dialogo)
             dialogo = []
@@ -1203,7 +1203,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Ehi specchio! Chi è che ha le occhiaie adesso?!")
             partiDialogo.append(dialogo)
             dialogo = []
-            dialogo.append("tu")
+            dialogo.append("personaggio")
             dialogo.append(u"<*>#italic#Tu.<*>")
             partiDialogo.append(dialogo)
             dialogo = []

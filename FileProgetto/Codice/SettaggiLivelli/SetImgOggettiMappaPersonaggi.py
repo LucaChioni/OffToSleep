@@ -289,6 +289,21 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoLavandinoCasaDavid":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 3
+        nomeImgDialogo = ["Vuota", "SpecchioDialogoSara", "SpecchioDialogoSaraVestitiDavid"]
+    if tipo == "OggettoSpecchioCastello":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 6
+        nomeImgDialogo = ["SpecchioDialogoSara", "SpecchioDialogoSaraVestitiCastello", "SpecchioDialogoSaraSconvolta", "SpecchioDialogoSaraSconvoltaVestitiCastello", "SpecchioDialogoRod", "SpecchioDialogoSaraResuscitata"]
+    if tipo == "OggettoSpecchio":
+        disegnaImg = False
+        numImg = 1
+        numImgDialogo = 1
+        nomeImgDialogo = ["SpecchioDialogoSara"]
 
     return disegnaImg, numImg, numImgDialogo, nomeImgDialogo
 
@@ -458,6 +473,26 @@ def impostaImgOggettoDialogoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo)
             numImgAttualeDialogo = 1
         else:
             numImgAttualeDialogo = 0
+    if tipo == "OggettoLavandinoCasaDavid":
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"] or avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            numImgAttualeDialogo = 0
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+            numImgAttualeDialogo = 1
+        else:
+            numImgAttualeDialogo = 2
+    if tipo == "OggettoSpecchioCastello":
+        if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+            numImgAttualeDialogo = 4
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and not GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttualeDialogo = 2
+        elif GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineFugaDalCastello"] and GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttualeDialogo = 3
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and not GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttualeDialogo = 0
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and GlobalGameVar.cambiataAlCastello[0]:
+            numImgAttualeDialogo = 1
+        else:
+            numImgAttualeDialogo = 5
 
     return numImgAttualeDialogo
 

@@ -3,6 +3,7 @@
 # import psutil
 import os
 import pygame
+import datetime
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
@@ -361,9 +362,10 @@ def gameloop():
                 datiAttualiTotali = [dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco]
                 CaricaSalvaPartita.salvataggio(GlobalGameVar.numSalvataggioCaricato, datiAttualiTotali, datiAttualiTotali[:])
 
-            # se è nuova partita => mostro schemata con citazione
+            # se è nuova partita => mostro schemata con citazione e imposto il tempo d'inizio di gioco
             if GlobalGameVar.numSalvataggioCaricato == 0 and not gameover:
                 FunzioniGraficheGeneriche.mostraSchermataCitazione()
+                GlobalHWVar.tempoInizioPartita = datetime.datetime.now()
 
             gameover = False
             # controlla se devi cambiare personaggio giocabile
