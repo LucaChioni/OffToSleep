@@ -31,11 +31,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("No, io stavo... stavo cercando... non lo so, non importa.")
+            dialogo.append("No, io stavo... stavo cercando... non lo so, non importa...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Perché sei sveglio?")
+            dialogo.append(u"...Perché sei sveglio?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
