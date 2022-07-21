@@ -106,7 +106,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni. Facendolo in un luogo sicuro invece ti permetterà di riposare e recuperare tutti i <*>#italic#Pv.<*>")
+        dialogo.append(u"In modalità interazione, cliccando su te stesso, assumerai una posizione difensiva che ti permetterà di subire meno danni. Facendolo in un luogo sicuro invece ti permetterà di riposare e recuperare tutti i <*>#italic#Pv.<*>")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
         oggettoDato = False

@@ -436,7 +436,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ehm... posso...")
+            dialogo.append(u"Uhm... posso...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

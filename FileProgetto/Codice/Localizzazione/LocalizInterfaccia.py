@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 LIV__ATT_AUM = {"ita": u"Liv +: Attacco aumentato", "eng": u""}
 LIV__DIF_AUM = {"ita": u"Liv +: Difesa aumentata", "eng": u""}
 LIV__PUN_VIT_AUM = {"ita": u"Liv +: Punti vita aumentati", "eng": u""}
