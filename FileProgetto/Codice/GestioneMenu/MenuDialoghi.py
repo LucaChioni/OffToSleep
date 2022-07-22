@@ -28,7 +28,12 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
     imgPersDialogo = GlobalGameVar.imgDaAggiornareAvanzandoStoria["imgPersonaggioDialoghi"]
 
     nomeInterlocutore = personaggio.nome[GlobalHWVar.linguaImpostata]
-    partiDialogo = personaggio.partiDialogoTradotte[GlobalHWVar.linguaImpostata]
+    partiDialogo = []
+    for dialogo in personaggio.partiDialogoTradotte:
+        dialogoTemp = []
+        for pezzoDialogo in dialogo:
+            dialogoTemp.append(pezzoDialogo[GlobalHWVar.linguaImpostata])
+        partiDialogo.append(dialogoTemp)
     oggettoDato = personaggio.oggettoDato[GlobalHWVar.linguaImpostata]
 
     xProtagonista = 0

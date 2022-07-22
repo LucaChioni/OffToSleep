@@ -122,7 +122,7 @@ def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
 
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
     tipo = tipoId.split("-")[0]
-    partiDialogoTradotte = {"ita": [], "eng": []}
+    partiDialogoTradotte = []
     nome = "---"
     oggettoDato = False
     avanzaStoria = False
@@ -193,11 +193,17 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiLaboratorioNeil.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
-    # !!! - temporaneo finché non sistemi tutti i dialoghi per includere le traduzioni - !!!
-    sistematoDialoghi = False
-    if not sistematoDialoghi:
-        partiDialogoTradotte = {"ita": partiDialogoTradotte, "eng": partiDialogoTradotte}
-
+    # se le parti che compongono le battute dei dialoghi non sono dictionary (come "Tu", "personaggio", "???DOMANDA???" e "!!!RISPOSTA!!!"), le traformo in dictionary qui
+    partiDialogoTradotteTemp = []
+    for dialogo in partiDialogoTradotte:
+        dialogoTemp = []
+        for pezzoDialogo in dialogo:
+            if not type(pezzoDialogo) is dict:
+                dialogoTemp.append({"ita": pezzoDialogo, "eng": pezzoDialogo})
+            else:
+                dialogoTemp.append(pezzoDialogo)
+        partiDialogoTradotteTemp.append(dialogoTemp)
+    partiDialogoTradotte = partiDialogoTradotteTemp
     # se il nome dell'interlocutore non è un dictionary (non c'è bisogno di tradurlo), lo traformo in dictionary qui
     if not type(nome) is dict:
         nome = {"ita": nome, "eng": nome}
@@ -210,8 +216,9 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         idDialogoCorrente = False
     else:
         idDialogoCorrente = tipo
-        for dialogo in partiDialogoTradotte["ita"]:
-            idDialogoCorrente += dialogo[0] + dialogo[1]
+        for dialogo in partiDialogoTradotte:
+            for pezzoDialogo in dialogo:
+                idDialogoCorrente += pezzoDialogo["ita"]
         md5 = hashlib.md5()
         md5.update(idDialogoCorrente.encode("utf-8"))
         idDialogoCorrente = md5.hexdigest()
