@@ -849,7 +849,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 avanzaColDialogo = False
                 dialogo = []
-                dialogo.append("personaggio")
+                dialogo.append("tu")
                 dialogo.append(u"René, a proposito di Rod, sai dove posso trovarlo adesso?")
                 partiDialogo.append(dialogo)
                 dialogo = []
