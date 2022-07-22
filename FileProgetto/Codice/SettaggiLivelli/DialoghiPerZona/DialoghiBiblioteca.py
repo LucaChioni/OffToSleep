@@ -3,6 +3,7 @@
 import random
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -19,7 +20,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo = []
         nome = u"René"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -89,7 +90,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"<*>#italic#Porc-...<*> e va bene seguimi, ti faccio controllare i registri...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -103,7 +104,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioArrivoNelloStudio"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -117,7 +118,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Io...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["messoRegistroBibliotecaSullaScrivania"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -131,7 +132,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Io ho...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioPreVomito1"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -149,7 +150,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Che hai?")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -179,7 +180,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"O-ok...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -189,7 +190,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Perché non viene via?")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ripulitoVomito"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -199,7 +200,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Va beh, non importa...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["bibliotecarioVenutoVersoDiTe"]:
-            nome = "Bibliotecario"
+            nome = LI.BIBLIOTECARIO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -628,7 +629,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Ah! Trovato.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            oggettoDato = "Impopietra"
+            oggettoDato = LI.IMPOPIETRA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -689,7 +690,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Non devi trasportarlo, ti seguirà quando attivi questa pietra...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"]:
-            oggettoDato = "Impofrutto piccolo"
+            oggettoDato = LI.IMPOFRUTTO_PICCOLO
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -941,11 +942,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] and (tipo.startswith("Ragazz") or tipo == "OggettoAssistBiblioteca"):
         partiDialogo = []
         if tipo.startswith("Ragazzo"):
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
         elif tipo.startswith("Ragazza"):
-            nome = "Sconosciuta"
+            nome = LI.SCONOSCIUTA
         elif tipo == "OggettoAssistBiblioteca":
-            nome = "Assistente bibliotecario"
+            nome = LI.ASSISTENTE_BIBLIOTECARIO
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
@@ -970,7 +971,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca1"]:
         if tipo == "AssistBiblioteca":
             partiDialogo = []
-            nome = "Assistente bibliotecario"
+            nome = LI.ASSISTENTE_BIBLIOTECARIO
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosseMonetePerEntrareInConfraternita"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -1073,7 +1074,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAssistBiblioteca":
             partiDialogo = []
-            nome = "Assistente bibliotecario"
+            nome = LI.ASSISTENTE_BIBLIOTECARIO
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1144,7 +1145,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazzo3":
             partiDialogo = []
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1205,7 +1206,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazzo1":
             partiDialogo = []
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1284,7 +1285,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazza3":
             partiDialogo = []
-            nome = "Sconosciuta"
+            nome = LI.SCONOSCIUTA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1342,7 +1343,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca2"]:
         if tipo == "Ragazzo1":
             partiDialogo = []
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1399,7 +1400,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazzo2":
             partiDialogo = []
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1478,7 +1479,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "Ragazza1":
             partiDialogo = []
-            nome = "Sconosciuta"
+            nome = LI.SCONOSCIUTA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1535,9 +1536,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoLibriImpo":
             partiDialogo = []
-            nome = "Libro"
+            nome = LI.LIBRO
             if x == GlobalHWVar.gpx * 12:
-                nome = "Libro (Scopo degli impo)"
+                nome = LI.LIBRO_SCOPO_DEGLI_IMPO
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1559,7 +1560,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Il secondo caso si presenta quando nessun impofoglio può essere eseguito ma è stato soddisfatto un Condizio-Impofoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, l'impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-Impofoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18:
-                nome = "Libro (Sacche Energetiche)"
+                nome = LI.LIBRO_SACCHE_ENERGETICHE
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1581,7 +1582,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... In uno degli ultimi studi, si è scoperto che le Sacche Energetiche sono responsabili anche dell'efficienza del sistema difensivo: alcune sacche permettono di resistere alle aggressioni spendendo meno energia...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 22:
-                nome = "Libro (Gestione dell'impo-forza)"
+                nome = LI.LIBRO_GESTIONE_DELL_IMPOFORZA
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1603,7 +1604,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Anche se relativamente poco influente, questo loro comportamento non può essere alterato da agenti esterni...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 25:
-                nome = "Libro (Impo-malus)"
+                nome = LI.LIBRO_IMPOMALUS
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -1627,7 +1628,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"]:
         if tipo == "OggettoLibreriaStudioBibliotecario":
             partiDialogo = []
-            nome = "Libro"
+            nome = LI.LIBRO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1638,7 +1639,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(Ci sono un sacco di libri...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
-                nome = "Libro (Moto rettilineo uniformemente accelerato)"
+                nome = LI.LIBRO_MOT_RET_UNI_ACC
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

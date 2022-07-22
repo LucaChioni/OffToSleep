@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -15,7 +16,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     avanzaColDialogo = False
 
     if tipo.startswith("OggettoDictCofanetto"):
-        nome = "Cofanetto"
+        nome = LI.COFANETTO
         if tipo == "OggettoDictCofanettoAperto":
             oggettoDato = False
             avanzaStoria = False
@@ -334,7 +335,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append(u"(Non ho abbastanza monete, e questo caprone non abbasserà il prezzo per me...)")
                     partiDialogo.append(dialogo)
                 else:
-                    oggettoDato = "Strumenti di Rod"
+                    oggettoDato = LI.STR_DI_ROD
                     avanzaStoria = True
                     menuMercante = False
                     scelta = False
@@ -610,7 +611,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoPappaLibroSonoroMercante":
             partiDialogo = []
-            nome = "Pappagallo"
+            nome = LI.PAPPAGALLO
             if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -846,9 +847,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiApprendimentoPappagalli":
             partiDialogo = []
-            nome = "Appunti di Rod"
+            nome = LI.APP_DI_ROD
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoStanzaPappagalliPalazzoDiRod"]:
-                oggettoDato = "Chiave seminterrato"
+                oggettoDato = LI.CHIAVE_SEMINTERRATO
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
@@ -976,7 +977,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiArmaturaDiRod":
             partiDialogo = []
-            nome = "Appunti di Rod"
+            nome = LI.APP_DI_ROD
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -1030,7 +1031,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoLetteraStopTrattamentiEstetici":
             partiDialogo = []
-            nome = "Lettera di Neil"
+            nome = LI.LET_DI_NEI
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -1162,7 +1163,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoMucchioImpo":
             partiDialogo = []
-            nome = "Mucchio di Impo"
+            nome = LI.MUC_DI_IMP
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -1259,7 +1260,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiPazzoNellaCaverna":
             partiDialogo = []
-            nome = "Appunti di Rod"
+            nome = LI.APP_DI_ROD
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -1309,7 +1310,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiRaccoltaImpo":
             partiDialogo = []
-            nome = "Appunti di Rod"
+            nome = LI.APP_DI_ROD
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False
@@ -1363,7 +1364,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiMacchinarioIdraulico":
             partiDialogo = []
-            nome = "Appunti di Rod"
+            nome = LI.APP_DI_ROD
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo == 0:
                     oggettoDato = False

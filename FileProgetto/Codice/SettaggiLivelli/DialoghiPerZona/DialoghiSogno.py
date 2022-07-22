@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import Codice.Variabili.GlobalImgVar as GlobalImgVar
-import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -17,9 +16,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereOrco"):
-            nome = "Orco"
+            nome = LI.ORCO
         elif tipo.startswith("OggettoDictCadaverePipistrello"):
-            nome = "Pipistrello"
+            nome = LI.PIPISTRELLO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False

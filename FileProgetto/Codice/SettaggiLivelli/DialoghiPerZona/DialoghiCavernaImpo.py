@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -17,15 +18,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo in GlobalImgVar.vettoreNomiNemici:
         partiDialogo = []
         if tipo == "RoboLeggero":
-            nome = "Impo leggero"
+            nome = LI.IMPO_LEGGERO
         elif tipo == "RoboVolante":
-            nome = "Impo volante"
+            nome = LI.IMPO_VOLANTE
         elif tipo == "RoboPesante":
-            nome = "Impo pesante"
+            nome = LI.IMPO_PESANTE
         elif tipo == "RoboPesanteVolante":
-            nome = "Impo volante pesante"
+            nome = LI.IMP_VOL_PES
         elif tipo == "RoboTorre":
-            nome = "Impo torre"
+            nome = LI.IMPO_TORRE
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
             oggettoDato = False
             avanzaStoria = False
@@ -49,15 +50,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereRoboLeggero"):
-            nome = "Impo leggero"
+            nome = LI.IMPO_LEGGERO
         elif tipo.startswith("OggettoDictCadavereRoboVolante"):
-            nome = "Impo volante"
+            nome = LI.IMPO_VOLANTE
         elif tipo.startswith("OggettoDictCadavereRoboPesante"):
-            nome = "Impo pesante"
+            nome = LI.IMPO_PESANTE
         elif tipo.startswith("OggettoDictCadavereRoboPesanteVolante"):
-            nome = "Impo volante pesante"
+            nome = LI.IMP_VOL_PES
         elif tipo.startswith("OggettoDictCadavereRoboTorre"):
-            nome = "Impo torre"
+            nome = LI.IMPO_TORRE
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -69,7 +70,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCumuloImpo":
         partiDialogo = []
-        nome = "Cumulo Impo"
+        nome = LI.CUMULO_IMPO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -16,7 +17,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
         if tipo == "GuardiaCitta":
             partiDialogo = []
-            nome = "Soldato"
+            nome = LI.SOLDATO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                     oggettoDato = False
@@ -77,7 +78,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         elif tipo == "AssistBiblioteca":
             if avanzamentoDialogo == 0:
                 partiDialogo = []
-                nome = "Sconosciuto"
+                nome = LI.SCONOSCIUTO
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -145,7 +146,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 1:
                 partiDialogo = []
-                nome = "Sconosciuto"
+                nome = LI.SCONOSCIUTO
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -193,7 +194,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 2:
                 partiDialogo = []
-                nome = "Sconosciuto"
+                nome = LI.SCONOSCIUTO
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

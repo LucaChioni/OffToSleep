@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -17,17 +18,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo in GlobalImgVar.vettoreNomiNemici:
         partiDialogo = []
         if tipo == "GufoMarrone":
-            nome = "Gufo marrone"
+            nome = LI.GUFO_MARRONE
         elif tipo == "GufoBianco":
-            nome = "Gufo bianco"
+            nome = LI.GUFO_BIANCO
         elif tipo == "Struzzo":
-            nome = "Struzzo"
+            nome = LI.STRUZZO
         elif tipo == "Casuario":
-            nome = "Casuario"
+            nome = LI.CASUARIO
         elif tipo == "Falco":
-            nome = "Falco"
+            nome = LI.FALCO
         elif tipo == "Aquila":
-            nome = "Aquila"
+            nome = LI.AQUILA
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -40,17 +41,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereGufoMarrone"):
-            nome = "Gufo marrone"
+            nome = LI.GUFO_MARRONE
         elif tipo.startswith("OggettoDictCadavereGufoBianco"):
-            nome = "Gufo bianco"
+            nome = LI.GUFO_BIANCO
         elif tipo.startswith("OggettoDictCadavereStruzzo"):
-            nome = "Struzzo"
+            nome = LI.STRUZZO
         elif tipo.startswith("OggettoDictCadavereCasuario"):
-            nome = "Casuario"
+            nome = LI.CASUARIO
         elif tipo.startswith("OggettoDictCadavereFalco"):
-            nome = "Falco"
+            nome = LI.FALCO
         elif tipo.startswith("OggettoDictCadavereAquila"):
-            nome = "Aquila"
+            nome = LI.AQUILA
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False

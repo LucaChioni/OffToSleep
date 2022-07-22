@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -16,7 +17,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerPassoMontano1"]:
         if tipo == "GuardiaCitta":
             partiDialogo = []
-            nome = "Soldato"
+            nome = LI.SOLDATO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = False

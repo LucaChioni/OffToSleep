@@ -31,6 +31,7 @@ import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiCavernaImpo as DialoghiCav
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiVulcano as DialoghiVulcano
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelSubacqueo as DialoghiTunnelSubacqueo
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiLaboratorioNeil as DialoghiLaboratorioNeil
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setGender(tipo):
@@ -122,8 +123,8 @@ def gestisciEventiPostDialoghi(avanzamentoStoria, personaggio, canzone):
 def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
     tipo = tipoId.split("-")[0]
     partiDialogoTradotte = {"ita": [], "eng": []}
-    nome = {"ita": "---", "eng": "---"}
-    oggettoDato = {"ita": False, "eng": False}
+    nome = "---"
+    oggettoDato = False
     avanzaStoria = False
     menuMercante = False
     scelta = False
@@ -137,7 +138,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     elif tipo == "Tutorial":
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiTutorial.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
     elif tipo == "OggettoDictCofanettoChiuso" and GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-        nome = "Cofanetto"
+        nome = LI.COFANETTO
         partiDialogoTradotte = []
         oggettoDato = False
         avanzaStoria = False
@@ -196,7 +197,12 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     sistematoDialoghi = False
     if not sistematoDialoghi:
         partiDialogoTradotte = {"ita": partiDialogoTradotte, "eng": partiDialogoTradotte}
+
+    # se il nome dell'interlocutore non è un dictionary (non c'è bisogno di tradurlo), lo traformo in dictionary qui
+    if not type(nome) is dict:
         nome = {"ita": nome, "eng": nome}
+    # se l'oggetto dato non è un dictionary (è == False), lo traformo in dictionary qui
+    if not type(oggettoDato) is dict:
         oggettoDato = {"ita": oggettoDato, "eng": oggettoDato}
 
     # creo un digest dell'intero dialogo per avere un id da usare per il controllo dei dialoghi già letti (non lo faccio per i dialoghi con nessuno, tutorial e cadaveri (eccetto i soldati nel castello))

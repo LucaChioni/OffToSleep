@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
     tipo = tipoId.split("-")[0]
 
     partiDialogo = []
-    nome = "Tutorial"
+    nome = LI.TUTORIAL
     oggettoDato = False
     avanzaStoria = False
     menuMercante = False

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -146,7 +147,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoLetteraInvitoReneLaboratorio":
             partiDialogo = []
-            nome = "Lettera di Neil"
+            nome = LI.LET_DI_NEI
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["interazioneConCellaDiNeil2"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -239,7 +240,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiIstruzioniCalcolatoreLaboratorio":
             partiDialogo = []
-            nome = "Istruzioni per il Calcolatore Di Eventi"
+            nome = LI.IST_PER_IL_CAL_DI_EVE
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["creatoPersonaggioOggettoIstruzioniCalcolatoreLaboratorio"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -304,7 +305,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiGenerici0Laboratorio":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -351,7 +352,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoCalcolatoreEventi":
             partiDialogo = []
-            nome = "Macchinario"
+            nome = LI.MACCHINARIO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["lettoAppuntiIstruzioniCalcolatoreLaboratorio"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -414,7 +415,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiGenerici1Laboratorio":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -441,7 +442,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiGenerici2Laboratorio":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -472,7 +473,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoAppuntiGenerici3Laboratorio":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False

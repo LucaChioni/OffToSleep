@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -35,7 +36,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Avverto che abbiamo ospiti per cena. Seguimi, la sala da pranzo è al piano di sopra.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["giratoDavidVersoIlBasso"]:
-            oggettoDato = "Chiave stanza"
+            oggettoDato = LI.CHIAVE_STANZA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -72,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "ServoDavid":
         partiDialogo = []
-        nome = "Servo"
+        nome = LI.SERVO
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"] and avanzamentoDialogo == 0:
             oggettoDato = False
             avanzaStoria = False
@@ -244,7 +245,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Rimani un attimo qui, torno subito con il certificato.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoArrivaConCertificazione"]:
-            oggettoDato = "Certificato di residenza"
+            oggettoDato = LI.CER_DI_RES
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -766,7 +767,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "Ragazza2":
         partiDialogo = []
-        nome = "Sconosciuta"
+        nome = LI.SCONOSCIUTA
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -791,7 +792,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
-        nome = "Soldato"
+        nome = LI.SOLDATO
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"]:
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoAndatoPrendereCertificazione"]:
                 oggettoDato = False
@@ -1113,7 +1114,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "OggettoLavandinoCasaDavid":
         partiDialogo = []
-        nome = "Specchio"
+        nome = LI.SPECCHIO
         if avanzamentoDialogo == 0 and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"]:
             oggettoDato = False
             avanzaStoria = False

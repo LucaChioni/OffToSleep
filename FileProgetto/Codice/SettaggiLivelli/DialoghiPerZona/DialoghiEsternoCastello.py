@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -55,7 +56,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 if tipoId == "ServoLancia-0":
                     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
@@ -221,7 +222,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 if tipoId == "ServoLancia-2":
                     if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["apertoCancelloPrincipaleCastello"]:
@@ -440,7 +441,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False

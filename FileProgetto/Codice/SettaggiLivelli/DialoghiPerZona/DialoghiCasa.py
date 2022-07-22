@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -150,7 +151,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("(Devo prendere un bicchiere prima...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
-            oggettoDato = "Bicchiere con acqua"
+            oggettoDato = LI.BIC_CON_ACQ
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -189,7 +190,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo = []
         nome = "OggettoScaffaleBicchieri"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
-            oggettoDato = "Bicchiere"
+            oggettoDato = LI.BICCHIERE
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -250,7 +251,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("(Ho messo qua il bicchiere con l'acqua...)")
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-            oggettoDato = "Mappa e Diario"
+            oggettoDato = LI.MAP_E_DIA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -530,7 +531,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"(Ci sono dei bellissimi fiori che sarebbero già morti se non ci fossi io a innaffiarli...)")
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
-            oggettoDato = "Chiave del ripostiglio"
+            oggettoDato = LI.CHI_DEL_RIP
             avanzaStoria = True
             menuMercante = False
             scelta = False

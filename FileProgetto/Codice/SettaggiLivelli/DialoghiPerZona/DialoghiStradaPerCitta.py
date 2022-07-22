@@ -2,6 +2,7 @@
 
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -77,7 +78,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
-        nome = "Soldato"
+        nome = LI.SOLDATO
         if GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
             oggettoDato = False
             avanzaStoria = False
@@ -347,7 +348,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipo == "PadreUfficialeServizio":
         partiDialogo = []
-        nome = "Soldato"
+        nome = LI.SOLDATO
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["bussatoAllaPortaCittà"]:
             oggettoDato = False
             avanzaStoria = True

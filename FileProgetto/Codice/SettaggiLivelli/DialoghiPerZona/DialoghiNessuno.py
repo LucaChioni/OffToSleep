@@ -2,6 +2,7 @@
 
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
 
 
@@ -9,12 +10,12 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     tipo = tipoId.split("-")[0]
 
     if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-        frasePortaChiusa = LDS.POT_ENT_MA_NON_MI_PAR_IL_CAS_DI_RIC_AL_CAL_DI_FAR_DEL_LAV_SUP_AI_FIN_DEL_STO_PRI[GlobalHWVar.linguaImpostata]
+        frasePortaChiusa = LDS._1322_01_Tu_POT_ENT_MA_NON_MI_PAR_IL_CAS_DI_RIC_AL_CAL_DI_FAR_DEL_LAV_SUP_AI_FIN_DEL_STO_PRI[GlobalHWVar.linguaImpostata]
     else:
-        frasePortaChiusa = LDS._CHI_A_CHI[GlobalHWVar.linguaImpostata]
+        frasePortaChiusa = LDS._1323_01_Tu__CHI_A_CHI[GlobalHWVar.linguaImpostata]
 
     partiDialogo = []
-    nome = "Nessuno"
+    nome = LI.NESSUNO
     oggettoDato = False
     avanzaStoria = False
     menuMercante = False
@@ -349,7 +350,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"(C'è un uomo a terra e... ok, prima di tutto mi devo occupare di quel bestione...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sotterratoSam"] and stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta7"]:
-            oggettoDato = "Equipaggiamento soldato"
+            oggettoDato = LI.EQUIPAGGIAMENTO_SOLDATO
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -3197,7 +3198,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Uhm...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apparizioneStanzaNelCalcolatore"]:
-                nome = "Voce sconosciuta"
+                nome = LI.VOCE_SCONOSCIUTA
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -3290,7 +3291,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... L'ha costruito mentre era bloccato nel tempo...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCellaNeilPostTrasformazioneLaboratorio2"]:
-                nome = "Voce sconosciuta"
+                nome = LI.VOCE_SCONOSCIUTA
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -3338,7 +3339,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"... Ok, uhm... regredisci... dieci secondi...")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tornatoIndietroNelTempo10SecInLaboratorio"]:
-                nome = "Voce sconosciuta"
+                nome = LI.VOCE_SCONOSCIUTA
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False

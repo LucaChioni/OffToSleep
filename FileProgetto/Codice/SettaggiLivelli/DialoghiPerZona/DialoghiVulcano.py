@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -100,7 +101,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoCumuloImpo":
             partiDialogo = []
-            nome = "Cumulo Impo"
+            nome = LI.CUMULO_IMPO
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -112,7 +113,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "RoboLeggero":
             partiDialogo = []
-            nome = "Impo Leggero"
+            nome = LI.IMPO_LEGGERO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -136,7 +137,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano2"]:
         if tipo == "OggettoComputerCostruttore":
             partiDialogo = []
-            nome = "Computer"
+            nome = LI.COMPUTER
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoVistoComputerVulcano"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -199,7 +200,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoCellaCostruttore":
             partiDialogo = []
-            nome = "Sconosciuto"
+            nome = LI.SCONOSCIUTO
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologo2PostRisveglioNelVulcano"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -233,7 +234,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(C'è un cadavere... ha dei tubi che gli escono dal corpo...)")
                 partiDialogo.append(dialogo)
             else:
-                nome = "Costruttore"
+                nome = LI.COSTRUTTORE
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False

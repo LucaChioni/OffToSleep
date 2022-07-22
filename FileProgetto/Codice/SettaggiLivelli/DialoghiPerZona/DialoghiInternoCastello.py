@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -16,7 +17,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     avanzaColDialogo = False
 
     if tipo.startswith("OggettoDictCofanetto"):
-        nome = "Cofanetto"
+        nome = LI.COFANETTO
         if tipo == "OggettoDictCofanettoAperto":
             oggettoDato = False
             avanzaStoria = False
@@ -39,11 +40,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         if tipo in GlobalImgVar.vettoreNomiNemici:
             partiDialogo = []
             if tipo == "ServoLancia":
-                nome = "Soldato con lancia"
+                nome = LI.SOL_CON_LAN
             elif tipo == "ServoArco":
-                nome = "Soldato con arco"
+                nome = LI.SOL_CON_ARC
             elif tipo == "ServoSpada":
-                nome = "Soldato con spada"
+                nome = LI.SOL_CON_SPA
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -55,7 +56,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "ServoSpada":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -71,7 +72,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "ServoArco":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -87,7 +88,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -103,7 +104,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipo.startswith("OggettoQuadro"):
             partiDialogo = []
-            nome = "Quadro"
+            nome = LI.QUADRO
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -115,7 +116,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipoId.startswith("OggettoQuadro") and GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         if tipoId == "OggettoQuadro-7":
             oggettoDato = False
             avanzaStoria = False
@@ -138,7 +139,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-1":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -150,7 +151,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-2":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -162,7 +163,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-3":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -174,7 +175,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-4":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -186,7 +187,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-5":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -198,7 +199,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-6":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -210,7 +211,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-7":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -222,7 +223,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-8":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -234,7 +235,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-9":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -246,7 +247,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-10":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -258,7 +259,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-11":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -270,7 +271,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-12":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -282,7 +283,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-13":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -294,7 +295,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-14":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -306,7 +307,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-15":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -318,7 +319,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-16":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -330,7 +331,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-17":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -342,7 +343,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId == "OggettoQuadro-18":
         partiDialogo = []
-        nome = "Quadro"
+        nome = LI.QUADRO
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -354,9 +355,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipoId.startswith("OggettoDictCadavereSoldatoCastello"):
         partiDialogo = []
-        nome = "Cadavere soldato"
+        nome = LI.CADAVERE_SOLDATO
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["comparsoCadavereSoldatoInternoCastello20"]:
-            oggettoDato = "Chiave ufficio di Neil"
+            oggettoDato = LI.CHI_UFF_DI_NEI
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -433,7 +434,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-3":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["servoLanciaEntratoNelCastello"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -472,7 +473,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-4":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -503,7 +504,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-0":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -535,7 +536,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
         if tipoId == "ServoSpada-0":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -604,7 +605,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello3"]:
         if tipoId == "ServoArco-1":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -687,7 +688,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello4"]:
         if tipoId == "ServoLancia-5":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -718,7 +719,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoSpecchioCastello-0":
             partiDialogo = []
-            nome = "Specchio"
+            nome = LI.SPECCHIO
             if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -867,7 +868,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello5"]:
         if tipoId == "ServoArco-2":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -899,7 +900,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello6"]:
         if tipoId == "ServoSpada-1":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -939,7 +940,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello7"]:
         if tipoId == "ServoLancia-6":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1006,7 +1007,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-3":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1061,8 +1062,8 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-13":
             partiDialogo = []
-            nome = "Soldato con lancia"
-            oggettoDato = "Chiave stanza"
+            nome = LI.SOL_CON_LAN
+            oggettoDato = LI.CHIAVE_STANZA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -1143,7 +1144,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello8"]:
         if tipoId == "ServoArco-4":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1208,7 +1209,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello9"]:
         if tipoId == "ServoLancia-7":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1240,7 +1241,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello10"]:
         if tipoId == "ServoLancia-8":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1271,7 +1272,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-5":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1576,7 +1577,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello11"]:
         if tipoId == "ServoSpada-2":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1603,7 +1604,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-3":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1660,7 +1661,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-6":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1700,7 +1701,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello13"]:
         if tipoId == "ServoArco-7":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1810,7 +1811,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-4":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1855,7 +1856,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-9":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1895,7 +1896,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello16"]:
         if tipoId == "ServoSpada-5":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1926,7 +1927,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-6":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -1957,7 +1958,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-10":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2001,7 +2002,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello17"]:
         if tipoId == "ServoSpada-7":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2088,7 +2089,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-12":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoInternoCastello18"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -2175,7 +2176,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoArco-8":
             partiDialogo = []
-            nome = "Soldato con arco"
+            nome = LI.SOL_CON_ARC
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2208,7 +2209,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 if tipoId == "OggettoLibreriaCastello-1":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.1 - Etica)"
+                    nome = LI.LIB_SUL_COS_VOL1_ETI
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2252,7 +2253,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-2":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.2 - Libero arbitrio)"
+                    nome = LI.LIB_SUL_COS_VOL2_LIB_ARB
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2288,7 +2289,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-3":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
+                    nome = LI.LIB_SUL_COS_VOL3_TEM
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2329,7 +2330,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-4":
                     partiDialogo = []
-                    nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
+                    nome = LI.LIB_SUL_COS_VOL4_REA
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2386,7 +2387,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-5":
                     partiDialogo = []
-                    nome = "Libro (Sull'evoluzione)"
+                    nome = LI.LIB_SUL_EVO
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2435,7 +2436,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-6":
                     partiDialogo = []
-                    nome = "Libro (Sul conflitto)"
+                    nome = LI.LIB_SUL_CON
                     if avanzamentoDialogo == 0:
                         oggettoDato = False
                         avanzaStoria = True
@@ -2494,7 +2495,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riletturaLibroNeilSulTempo"]:
                 if tipoId == "OggettoLibreriaCastello-1":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.1 - Etica)"
+                    nome = LI.LIB_SUL_COS_VOL1_ETI
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False
@@ -2506,7 +2507,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-2":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.2 - Libero arbitrio)"
+                    nome = LI.LIB_SUL_COS_VOL2_LIB_ARB
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False
@@ -2518,7 +2519,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-3":
                     partiDialogo = []
-                    nome = "Libro (Sulla coscienza Vol.3 - Tempo)"
+                    nome = LI.LIB_SUL_COS_VOL3_TEM
                     oggettoDato = False
                     avanzaStoria = True
                     menuMercante = False
@@ -2554,7 +2555,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-4":
                     partiDialogo = []
-                    nome = u"Libro (Sulla coscienza Vol.4 - Realtà)"
+                    nome = LI.LIB_SUL_COS_VOL4_REA
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False
@@ -2566,7 +2567,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-5":
                     partiDialogo = []
-                    nome = "Libro (Sull'evoluzione)"
+                    nome = LI.LIB_SUL_EVO
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False
@@ -2578,7 +2579,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                 elif tipoId == "OggettoLibreriaCastello-6":
                     partiDialogo = []
-                    nome = "Libro (Sul conflitto)"
+                    nome = LI.LIB_SUL_CON
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False
@@ -2645,7 +2646,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-11":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2672,7 +2673,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-8":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["letto6LibriCastello"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -2752,7 +2753,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo = []
             nome = "Neil"
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["bussatoPortaStudioDiNeil"]:
-                nome = "Sconosciuto"
+                nome = LI.SCONOSCIUTO
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False
@@ -2775,7 +2776,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Sì, entra.")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"]:
-                oggettoDato = "Lista strumenti"
+                oggettoDato = LI.LISTA_STRUMENTI
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
@@ -3357,7 +3358,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Impo!")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostTempoBloccato"]:
-                oggettoDato = "Impopietra"
+                oggettoDato = LI.IMPOPIETRA
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
@@ -3541,7 +3542,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoSpada-9":
             partiDialogo = []
-            nome = "Soldato con spada"
+            nome = LI.SOL_CON_SPA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioFugaDalCastello"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -3742,7 +3743,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiNeilCastello-0":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -3808,7 +3809,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoImpoScarico-0":
             partiDialogo = []
-            nome = "Impo Scarico"
+            nome = "Impo"
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -4038,7 +4039,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "ServoLancia-14":
             partiDialogo = []
-            nome = "Soldato con lancia"
+            nome = LI.SOL_CON_LAN
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoSpecchioPostRianimazione4"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -4079,7 +4080,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoSpecchio-0":
             partiDialogo = []
-            nome = "Specchio"
+            nome = LI.SPECCHIO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -4110,7 +4111,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoValvolaMacchinario-0":
             partiDialogo = []
-            nome = "Valvola"
+            nome = LI.VALVOLA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -4133,7 +4134,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoCapsulaMacchinario-0":
             partiDialogo = []
-            nome = "Capsula"
+            nome = LI.CAPSULA
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -4156,7 +4157,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoArmadioRatti-0":
             partiDialogo = []
-            nome = "Ratto"
+            nome = LI.RATTO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["lettoAppuntiNeilSuRatti"]:
                 oggettoDato = False
                 avanzaStoria = False
@@ -4197,7 +4198,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiRatti-0":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["creatoOggettoAppuntiRattiNeilInternoCastello21"]:
                 oggettoDato = False
                 avanzaStoria = True
@@ -4286,7 +4287,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipoId == "OggettoAppuntiRianimazioneSara-0":
             partiDialogo = []
-            nome = "Appunti di Neil"
+            nome = LI.APP_DI_NEI
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoNotatoQtaSoldatiCastelloPostTempoBloccato"]:
                 oggettoDato = False
                 avanzaStoria = True

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -15,7 +16,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     avanzaColDialogo = False
 
     if tipo.startswith("OggettoDictCofanetto"):
-        nome = "Cofanetto"
+        nome = LI.COFANETTO
         if tipo == "OggettoDictCofanettoAperto":
             oggettoDato = False
             avanzaStoria = False

@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -17,15 +18,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo in GlobalImgVar.vettoreNomiNemici:
         partiDialogo = []
         if tipo == "SerpeVerde":
-            nome = "Serpente verde"
+            nome = LI.SERPENTE_VERDE
         elif tipo == "SerpeArancio":
-            nome = "Serpente arancione"
+            nome = LI.SERPENTE_ARANCIONE
         elif tipo == "RagnoNero":
-            nome = "Ragno nero"
+            nome = LI.RAGNO_NERO
         elif tipo == "RagnoRosso":
-            nome = "Ragno rosso"
+            nome = LI.RAGNO_ROSSO
         elif tipo == "Scorpione":
-            nome = "Scorpione"
+            nome = LI.SCORPIONE
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoArrivoAvampostoPostEsplosioneVulcano"]:
             oggettoDato = False
             avanzaStoria = True
@@ -57,15 +58,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereSerpeVerde"):
-            nome = "Serpente verde"
+            nome = LI.SERPENTE_VERDE
         elif tipo.startswith("OggettoDictCadavereSerpeArancio"):
-            nome = "Serpente arancione"
+            nome = LI.SERPENTE_ARANCIONE
         elif tipo.startswith("OggettoDictCadavereRagnoNero"):
-            nome = "Ragno nero"
+            nome = LI.RAGNO_NERO
         elif tipo.startswith("OggettoDictCadavereRagnoRosso"):
-            nome = "Ragno rosso"
+            nome = LI.RAGNO_ROSSO
         elif tipo.startswith("OggettoDictCadavereScorpione"):
-            nome = "Scorpione"
+            nome = LI.SCORPIONE
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False

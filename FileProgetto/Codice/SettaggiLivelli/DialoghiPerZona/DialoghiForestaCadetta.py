@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -17,17 +18,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo in GlobalImgVar.vettoreNomiNemici:
         partiDialogo = []
         if tipo == "TartarugaVerde":
-            nome = "Tartaruga verde"
+            nome = LI.TARTARUGA_VERDE
         elif tipo == "TartarugaMarrone":
-            nome = "Tartaruga marrone"
+            nome = LI.TARTARUGA_MARRONE
         elif tipo == "LupoGrigio":
-            nome = "Lupo grigio"
+            nome = LI.LUPO_GRIGIO
         elif tipo == "LupoBianco":
-            nome = "Lupo bianco"
+            nome = LI.LUPO_BIANCO
         elif tipo == "LupoNero":
-            nome = "Lupo nero"
+            nome = LI.LUPO_NERO
         elif tipo == "Cinghiale":
-            nome = "Cinghiale"
+            nome = LI.CINGHIALE
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -40,17 +41,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
         if tipo.startswith("OggettoDictCadavereTartarugaVerde"):
-            nome = "Tartaruga verde"
+            nome = LI.TARTARUGA_VERDE
         elif tipo.startswith("OggettoDictCadavereTartarugaMarrone"):
-            nome = "Tartaruga marrone"
+            nome = LI.TARTARUGA_MARRONE
         elif tipo.startswith("OggettoDictCadavereLupoGrigio"):
-            nome = "Lupo grigio"
+            nome = LI.LUPO_GRIGIO
         elif tipo.startswith("OggettoDictCadavereLupoBianco"):
-            nome = "Lupo bianco"
+            nome = LI.LUPO_BIANCO
         elif tipo.startswith("OggettoDictCadavereLupoNero"):
-            nome = "Lupo nero"
+            nome = LI.LUPO_NERO
         elif tipo.startswith("OggettoDictCadavereCinghiale"):
-            nome = "Cinghiale"
+            nome = LI.CINGHIALE
         oggettoDato = False
         avanzaStoria = False
         menuMercante = False
@@ -373,7 +374,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     elif tipo == "FiglioUfficiale":
         partiDialogo = []
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"]:
-            nome = "Soldato"
+            nome = LI.SOLDATO
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -666,7 +667,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo = []
         nome = "OggettoLegna"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna1"] and avanzamentoDialogo == 0:
-            oggettoDato = "Legna"
+            oggettoDato = LI.LEGNA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -676,7 +677,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"(Credo che sia questa la legna tagliata da Sam... di sicuro non basterà per la notte. Qui intorno ce ne dovrebbe essere dell'altra...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna2"] and avanzamentoDialogo == 0:
-            oggettoDato = "Legna"
+            oggettoDato = LI.LEGNA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -686,7 +687,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("(Ecco dell'altra legna! Ancora un po' e posso tornare indietro...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"] and avanzamentoDialogo == 0:
-            oggettoDato = "Legna"
+            oggettoDato = LI.LEGNA
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -727,7 +728,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCinghiale":
         partiDialogo = []
-        nome = "Cinghiale"
+        nome = LI.CINGHIALE
         oggettoDato = False
         avanzaStoria = True
         menuMercante = False
@@ -738,7 +739,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
     elif tipo == "OggettoPersonaCadavereSam":
         partiDialogo = []
-        nome = "Soldato"
+        nome = LI.SOLDATO
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"]:
             oggettoDato = False
             avanzaStoria = False
@@ -805,7 +806,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
     elif tipo == "Ragazzo1":
         partiDialogo = []
-        nome = "Sconosciuto"
+        nome = LI.SCONOSCIUTO
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apparsiAggressoriForestaSognoCastello"]:
             oggettoDato = False
             avanzaStoria = True

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -15,7 +16,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     avanzaColDialogo = False
 
     if tipo.startswith("OggettoDictCofanetto"):
-        nome = "Cofanetto"
+        nome = LI.COFANETTO
         if tipo == "OggettoDictCofanettoAperto":
             oggettoDato = False
             avanzaStoria = False
@@ -711,7 +712,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoPappaLibroSonoroMercante":
             partiDialogo = []
-            nome = "Pappagallo"
+            nome = LI.PAPPAGALLO
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] and avanzamentoDialogo == 0:
                 oggettoDato = False
                 avanzaStoria = False
@@ -861,7 +862,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"(... Mi domando se sia riuscito a capire cos'è successo...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["lettoAppuntiInquinamentoAvampostoRod"]:
-                oggettoDato = "Chiave avamposto di Rod"
+                oggettoDato = LI.CHI_AVA_DI_ROD
                 avanzaStoria = True
                 menuMercante = False
                 scelta = False
