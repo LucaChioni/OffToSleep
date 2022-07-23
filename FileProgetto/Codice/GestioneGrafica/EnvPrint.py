@@ -351,8 +351,8 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, nemicoInquadrato.imgS)
     else:
         # mostro l'icona per poter andare in mod. interazione
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazioneNonAttivo, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgModInterazione, (0, 0))
 
     # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
@@ -435,8 +435,8 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
     else:
         # mostro l'icona per poter andare in mod. interazione
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazioneNonAttivo, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgModInterazione, (0, 0))
 
     # vita-status rallo
     FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, dati[0])
@@ -1037,8 +1037,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
     else:
         # mostro l'icona per poter andare in mod. interazione
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazioneAttivo, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgModInterazione, (0, 0))
 
     GlobalHWVar.aggiornaSchermo()
 
@@ -2302,8 +2302,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         elif not puntandoSuUnNemicoOColcoOEsca:
             # mostro l'icona per poter andare in mod. interazione
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazioneAttivo, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgModInterazione, (0, 0))
 
         # vita-status rallo
         FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria)

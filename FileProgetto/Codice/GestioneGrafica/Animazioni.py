@@ -1304,8 +1304,8 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
 
     if not nemicoInquadrato and not GlobalGameVar.impoPresente:
         # mostro l'icona per poter andare in mod. interazione
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazione, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatAnalisi, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoLogoInterazioneNonAttivo, (0, 0))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgModInterazione, (0, 0))
 
     # backbround saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
