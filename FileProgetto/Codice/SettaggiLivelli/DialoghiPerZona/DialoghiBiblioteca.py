@@ -526,7 +526,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Comunque... a proposito di lavoro, dovrei tornare al mio adesso. Dicevi di essere venuta per sapere di tuo fratello...")
+            dialogo.append(u"Comunque, a proposito di lavoro, dovrei tornare al mio adesso. Dicevi di essere venuta per sapere di tuo fratello...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
