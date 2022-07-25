@@ -398,7 +398,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Ok, l'ho copiata nella mia mappa. Adesso devo solo segnarmi il percorso...)")
+                dialogo.append(u"(... Ok, l'ho copiata nella mia mappa. Adesso devo solo segnarmi il percorso...)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"]:
                 oggettoDato = False
