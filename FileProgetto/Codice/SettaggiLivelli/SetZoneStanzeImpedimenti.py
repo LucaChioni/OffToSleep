@@ -355,14 +355,14 @@ def mostraTempoPassato(avanzamentoStoria, stanza, stanzaVecchia):
     tempoPassato1 = False
     tempoPassato2 = ""
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara1"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
-        tempoPassato1 = LI.GIORNO_2[GlobalHWVar.linguaImpostata]
+        tempoPassato1 = LI.GIORNO_1[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dormitoNelCastello"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["internoCastello10"]:
-        tempoPassato1 = LI.GIORNO_3[GlobalHWVar.linguaImpostata]
+        tempoPassato1 = LI.GIORNO_2[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"] and stanzaVecchia == GlobalGameVar.dictStanze["internoCastello21"] and stanza == GlobalGameVar.dictStanze["internoCastello21"]:
-        tempoPassato1 = LI.GIORNO_23[GlobalHWVar.linguaImpostata]
+        tempoPassato1 = LI.GIORNO_22[GlobalHWVar.linguaImpostata]
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
-        tempoPassato1 = LI.GIORNO_23[GlobalHWVar.linguaImpostata]
-        tempoPassato2 = LI._ANNO_12[GlobalHWVar.linguaImpostata]
+        tempoPassato1 = LI.GIORNO_22[GlobalHWVar.linguaImpostata]
+        tempoPassato2 = LI._ANNO_13[GlobalHWVar.linguaImpostata]
 
     if tempoPassato1:
         xScritta = GlobalHWVar.gpx * 3
