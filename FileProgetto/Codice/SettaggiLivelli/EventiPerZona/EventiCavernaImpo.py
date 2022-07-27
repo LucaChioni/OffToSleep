@@ -165,7 +165,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             x -= GlobalHWVar.gpx
         elif x == GlobalHWVar.gpx * 18 and y == GlobalHWVar.gpy * 9:
             y -= GlobalHWVar.gpy
-        if x == GlobalHWVar.gpx * 18 and len(listaNemiciTotali) == 0:
+        if x == GlobalHWVar.gpx * 18 and len(listaNemici) == 0:
             percorsoNemico = []
             nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6, "s", "RoboTorre", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)

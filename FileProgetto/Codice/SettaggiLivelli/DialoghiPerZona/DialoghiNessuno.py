@@ -1220,7 +1220,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     scelta = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Cavolo, non posso azionare il piano ascensore adesso...)")
+                    dialogo.append(u"Cavolo, non posso azionare il piano ascensore adesso...")
                     partiDialogo.append(dialogo)
                 elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"]:
                     oggettoDato = False

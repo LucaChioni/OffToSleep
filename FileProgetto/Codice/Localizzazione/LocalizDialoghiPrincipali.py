@@ -928,7 +928,7 @@ _0171_02_IstruzioniPerIlCalcolatoreDiEventi_COM_CER_DEL_CAL_DI_EVE_POS_IL_CAS_OC
 _0171_03_IstruzioniPerIlCalcolatoreDiEventi_COM_PRO_TEM_PRO_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_REG_TEM_REG_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_MOV_MOV_SPA_IN_INS_LUO_BR_IL_SIS_PRO_GLI_EVE_NEL_MEN_DEL_ = {"ita": u"Comando progresso temporale: <*>#italic#Progredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando movimento: <*>#italic#Movimento spaziale in *inserisci luogo*<*> <br> Il sistema proietterà gli eventi nella mente dell'utente.", "eng": u""}
 _0171_04_IstruzioniPerIlCalcolatoreDiEventi_ECC_A_TE_TUT_LA_MIA_CON_ = {"ita": u"Ecco a te tutta la mia conoscenza.", "eng": u""}
 _0171_05_Tu_ASPETTA_POSSO_ = {"ita": u"(Aspetta... posso...)", "eng": u""}
-_0171_06_Tu_CA_DI_EVE_NON_DIR_CHE_ = {"ita": u"(\"Calcolatore di eventi\"... non dirmi che...)", "eng": u""}
+_0171_06_Tu_CA_DI_EVE_NON_DIR_CHE_ = {"ita": u"(\"Calcolatore di eventi\"... vuol dire che...)", "eng": u""}
 _0172_01_Tu_QUI_MI_SIE_QUI_ = {"ita": u"(Quindi... mi siedo qui...)", "eng": u""}
 _0173_01_Ren__CHE_DIA_ = {"ita": u"... Che diavolo...?!", "eng": u""}
 _0174_01_Ren__ = {"ita": u"...", "eng": u""}
@@ -989,7 +989,7 @@ _0215_01_Tu_QUE__SAN_CHE__SUC_QUI_ = {"ita": u"(Questo è... sangue? Che è succ
 _0216_01_Tu_OH_IL_PIA_ASC__APE_ = {"ita": u"(Oh, il piano ascensore è aperto...)", "eng": u""}
 _0217_01_Tu_AH_ASPETTA_ = {"ita": u"Ah, aspetta...", "eng": u""}
 _0217_02_Tu_EHM_EHM_MOV_SPA_IN_IN_STA_IN_CUI_NEI_IN_CUI_NEI_FA_ = {"ita": u"<*>#italic#Ehm ehm...<*> Movimento spaziale in... in stanza in cui Neil... in cui Neil fa...", "eng": u""}
-_0218_01_Tu_CAV_NON_POS_AZI_IL_PIA_ASC_ADE_ = {"ita": u"(Cavolo, non posso azionare il piano ascensore adesso...)", "eng": u""}
+_0218_01_Tu_CAV_NON_POS_AZI_IL_PIA_ASC_ADE_ = {"ita": u"Cavolo, non posso azionare il piano ascensore adesso...", "eng": u""}
 _0219_01_Tu__QUI_CHE_CIO__PER_ME_QUE_POS_A_TAV_ = {"ita": u"(È qui che... cioè, è per me quel posto a tavola?)", "eng": u""}
 _0220_01_Tu__OK_MAN_QUA_E_VAD_A_LET_ = {"ita": u"(... Ok... mangio qualcosa e vado a letto...)", "eng": u""}
 _0220_02_Tu__ANC_SE_NON_HO_VIS_LET_IN_GIR_POT_DOR_SU_UNO_DI_QUE_DIV_ = {"ita": u"(... Anche se non ho visto letti in giro... potrei dormire su uno di quei divanetti...)", "eng": u""}
