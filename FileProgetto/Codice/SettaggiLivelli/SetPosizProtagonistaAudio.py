@@ -325,6 +325,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     if x == GlobalHWVar.gsx // 32 * 16:
                         x = GlobalHWVar.gsx // 32 * 16
                         y = GlobalHWVar.gsy // 18 * 15
+                if stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"]:
+                    npers = "w"
+                    x = GlobalHWVar.gsx // 32 * 16
+                    y = GlobalHWVar.gsy // 18 * 15
     elif GlobalGameVar.dictStanze["forestaCadetta1"] <= stanza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
         if stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
             nomeCanzoneLuogo = "04-Foresta"
@@ -5408,6 +5412,8 @@ def riproduciSuoniCambioStanza(stanzaVecchia, stanzaDestinazione, avanzamentoSto
         elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod2"]) or (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod1"]):
             riproduciSuono = True
         elif (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod2"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod5"]) or (stanzaVecchia == GlobalGameVar.dictStanze["palazzoDiRod5"] and stanzaDestinazione == GlobalGameVar.dictStanze["palazzoDiRod2"]):
+            riproduciSuono = True
+        elif stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansSara4"]:
             riproduciSuono = True
 
     if riproduciSuono:

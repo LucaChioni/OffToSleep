@@ -247,6 +247,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"] and stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta4"]:
         nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoUscitaLaboratorioPostPassatiMoltiAnni"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fine"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansSara4"] and stanzaDestinazione == GlobalGameVar.dictStanze["forestaCadetta1"]:
+        nonProcedere = True
 
     return nonProcedere
 
@@ -335,6 +337,14 @@ def scriviNomeZona(stanza, stanzaVecchia, attesa):
         nomeDaScrivere = LI.TUNNEL_SUBACQUEO[GlobalHWVar.linguaImpostata]
     elif stanzaVecchia == GlobalGameVar.dictStanze["tunnelSubacqueo2"] and stanza == GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
         nomeDaScrivere = LI.LAB_DI_NEI[GlobalHWVar.linguaImpostata]
+    elif stanzaVecchia == GlobalGameVar.dictStanze["internoCastello1"] and stanza == GlobalGameVar.dictStanze["casaHansSara4"]:
+        nomeDaScrivere = LI.CASA[GlobalHWVar.linguaImpostata]
+        if not attesa:
+            i = 0
+            while i < 50:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
 
     if nomeDaScrivere:
         if attesa:

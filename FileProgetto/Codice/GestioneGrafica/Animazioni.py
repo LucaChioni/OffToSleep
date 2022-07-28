@@ -63,7 +63,7 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
             if cambiosta:
                 fineanimaz = animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
                 if fineanimaz == 0:
-                    SetPosizProtagonistaAudio.riproduciSuoniCambioStanza(numStanza, stanzaVecchia, avanzamentoStoria)
+                    SetPosizProtagonistaAudio.riproduciSuoniCambioStanza(stanzaVecchia, numStanza, avanzamentoStoria)
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
             else:
