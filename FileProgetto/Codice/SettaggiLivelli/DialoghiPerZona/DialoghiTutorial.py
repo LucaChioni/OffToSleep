@@ -55,7 +55,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, verrà aperto un menu rapido che permetterà di compiere meno operazioni ripetto al menu normale.")
+        dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*> della tastiera, <*>#bold#Menu<*> del controller o il tasto <*>#bold#Centrale<*> del mouse, verrà aperto un menu rapido che permetterà di compiere meno operazioni rispetto al menu normale.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialBattaglia"]:
         oggettoDato = False

@@ -392,7 +392,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Facciamo finta che sia possibile tornare indietro nel tempo. Torni a una sitazione in cui hai preso una scelta. Una scelta qualsiasi. Però facendolo, perdi anche i ricordi che hai accumulato nel tempo che stai riavvolgendo, d'accordo?")
+            dialogo.append(u"Facciamo finta che sia possibile tornare indietro nel tempo. Torni a una situazione in cui hai preso una scelta. Una scelta qualsiasi. Però facendolo, perdi anche i ricordi che hai accumulato nel tempo che stai riavvolgendo, d'accordo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -732,7 +732,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"L'impofoglio è una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli impofogli sono diversi tra loro e si dividono in due categorie: \"Condizio-Impofogli\", che indicano delle condizioni, e \"Azio-ImpoFogli\", che indicano delle azioni da compiere...")
+            dialogo.append(u"L'impofoglio è una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli impofogli sono diversi tra loro e si dividono in due categorie: \"Condizio-Impofogli\", che indicano delle condizioni, e \"Azio-Impofogli\", che indicano delle azioni da compiere...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -789,7 +789,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sì, li puoi trovare negli scaffali al piano di sopra. Sono tutti colorari di nero, non puoi sbagliarti.")
+            dialogo.append(u"Sì, li puoi trovare negli scaffali al piano di sopra. Sono tutti colorati di nero, non puoi sbagliarti.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"]:
             if avanzamentoDialogo == 0:
@@ -1027,7 +1027,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Mi spiace, devi per forza avere un documeto.")
+                dialogo.append(u"Mi spiace, devi per forza avere un documento.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1597,7 +1597,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Gli impo hanno infatti un'istinto di sopravvivenza che permette loro di difendersi dagli attacchi nemici sfruttando la propria energia. Più è violenta l'aggressione, più energia verrà consumata...")
+                dialogo.append(u"... Gli impo hanno infatti un istinto di sopravvivenza che permette loro di difendersi dagli attacchi nemici sfruttando la propria energia. Più è violenta l'aggressione, più energia verrà consumata...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

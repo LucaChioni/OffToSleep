@@ -218,7 +218,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Cioè, non che abbia qualcosa contro il silezio, sia chiaro... è solo un po' inquietante, tutto qui...")
+                dialogo.append(u"... Cioè, non che abbia qualcosa contro il silenzio, sia chiaro... è solo un po' inquietante, tutto qui...")
                 partiDialogo.append(dialogo)
         elif tipo == "ServoLancia":
             partiDialogo = []
@@ -352,7 +352,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         avanzaColDialogo = False
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Il padrone ha ordinato di lascirti libero accesso.")
+                        dialogo.append(u"Il padrone ha ordinato di lasciarti libero accesso.")
                         partiDialogo.append(dialogo)
             else:
                 oggettoDato = False

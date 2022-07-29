@@ -10,9 +10,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     tipo = tipoId.split("-")[0]
 
     if GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
-        frasePortaChiusa = LDS._1322_01_Tu_POT_ENT_MA_NON_MI_PAR_IL_CAS_DI_RIC_AL_CAL_DI_FAR_DEL_LAV_SUP_AI_FIN_DEL_STO_PRI[GlobalHWVar.linguaImpostata]
+        frasePortaChiusa = LDS._1322_01_Tu_POT_ENT_MA_NON_MI_PAR_IL_CAS_DI_RIC_AL_CAL_DI_FAR_DEL_LAV_SUP_AI_FIN_DEL_STO_PRI
     else:
-        frasePortaChiusa = LDS._1323_01_Tu__CHI_A_CHI[GlobalHWVar.linguaImpostata]
+        frasePortaChiusa = LDS._1323_01_Tu__CHI_A_CHI
 
     partiDialogo = []
     nome = LI.NESSUNO
@@ -1196,7 +1196,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     scelta = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Questo soldato si è messo prorio davanti alla porta e non mi fa passare...)")
+                    dialogo.append(u"(Questo soldato si è messo proprio davanti alla porta e non mi fa passare...)")
                     partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["internoCastello2"]:
             if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRodNotatoSangueNelCastello"]:
@@ -1395,7 +1395,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Chidere ai soldati, non credo serva a qualcosa... stanno fermi immobili tutto il tempo, senza emettere un fiato...)")
+                dialogo.append(u"(... Chiedere ai soldati, non credo serva a qualcosa... stanno fermi immobili tutto il tempo, senza emettere un fiato...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2180,7 +2180,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Oh, è quello il piano ascansore?)")
+                dialogo.append(u"(Oh, è quello il piano ascensore?)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoDaInternoCastello21ConRod"]:
                 oggettoDato = False
@@ -2673,7 +2673,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... La nuova recluta è riuscita ad avere un impo ancora vivo, ma ha deciso bene di collaborare con Neil. E Neil giungerà presto alle mie stesse scoperte. Tutti i miei progetti e i miei studi diventerano immediatamente obsoleti...)")
+                dialogo.append(u"(... La nuova recluta è riuscita ad avere un impo ancora vivo, ma ha deciso bene di collaborare con Neil. E Neil giungerà presto alle mie stesse scoperte. Tutti i miei progetti e i miei studi diventeranno immediatamente obsoleti...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

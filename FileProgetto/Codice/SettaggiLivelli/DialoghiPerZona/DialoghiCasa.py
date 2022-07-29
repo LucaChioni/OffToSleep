@@ -667,7 +667,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("(Stanno dormento profondamente, non devo fare rumore...)")
+            dialogo.append("(Stanno dormendo profondamente, non devo fare rumore...)")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False

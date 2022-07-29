@@ -160,11 +160,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"René, ti mando i miei ringraziamenti per le risorse speditemi. Le ricerche sull'impo si sono avviate non appena è stato possibile e sono felice di comunicarti che stanno già dando ottimi risultati. Tanto che mi hanno permesso di sbloccare un fronte di ricerca che avevo ormai abbandonato da anni, ossia l'incremento di frequenza di campinamento percettivo e cognitivo...")
+                dialogo.append(u"René, ti mando i miei ringraziamenti per le risorse speditemi. Le ricerche sull'impo si sono avviate non appena è stato possibile e sono felice di comunicarti che stanno già dando ottimi risultati. Tanto che mi hanno permesso di sbloccare un fronte di ricerca che avevo ormai abbandonato da anni, ossia l'incremento di frequenza di campionamento percettivo e cognitivo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Da quel che ho potuto osservare fin'ora, gli impo possiedono tecnologie che permettono loro di elaborare informazioni a una frequenza talmente elevata da superare addirittura la frequenza con cui gli eventi reali si susseguono. Ciò vuol dire che, se la tecnologia venisse riadattata per noi esseri umani, sarebbe possibile rimanere coscienti, o addirittuara muoverci, in quei frangenti di tempo in cui il tempo stesso non scorre.")
+                dialogo.append(u"... Da quel che ho potuto osservare fin'ora, gli impo possiedono tecnologie che permettono loro di elaborare informazioni a una frequenza talmente elevata da superare addirittura la frequenza con cui gli eventi reali si susseguono. Ciò vuol dire che, se la tecnologia venisse riadattata per noi esseri umani, sarebbe possibile rimanere coscienti, o addirittura muoverci, in quei frangenti di tempo in cui il tempo stesso non scorre.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -206,11 +206,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"René, ti mando i miei ringraziamenti per le risorse speditemi. Le ricerche sull'impo si sono avviate non appena è stato possibile e sono felice di comunicarti che stanno già dando ottimi risultati. Tanto che mi hanno permesso di sbloccare un fronte di ricerca che avevo ormai abbandonato da anni, ossia l'incremento di frequenza di campinamento percettivo e cognitivo...")
+                dialogo.append(u"René, ti mando i miei ringraziamenti per le risorse speditemi. Le ricerche sull'impo si sono avviate non appena è stato possibile e sono felice di comunicarti che stanno già dando ottimi risultati. Tanto che mi hanno permesso di sbloccare un fronte di ricerca che avevo ormai abbandonato da anni, ossia l'incremento di frequenza di campionamento percettivo e cognitivo...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Da quel che ho potuto osservare fin'ora, gli impo possiedono tecnologie che permettono loro di elaborare informazioni a una frequenza talmente elevata da superare addirittura la frequenza con cui gli eventi reali si susseguono. Ciò vuol dire che, se la tecnologia venisse riadattata per noi esseri umani, sarebbe possibile rimanere coscienti, o addirittuara muoverci, in quei frangenti di tempo in cui il tempo stesso non scorre.")
+                dialogo.append(u"... Da quel che ho potuto osservare fin'ora, gli impo possiedono tecnologie che permettono loro di elaborare informazioni a una frequenza talmente elevata da superare addirittura la frequenza con cui gli eventi reali si susseguono. Ciò vuol dire che, se la tecnologia venisse riadattata per noi esseri umani, sarebbe possibile rimanere coscienti, o addirittura muoverci, in quei frangenti di tempo in cui il tempo stesso non scorre.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -424,7 +424,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Appunti di Neil... qua spiega nel dettaglio il funzionamento del sistema usato dal Costruttore per creare la realtà: quella \"roccia\" in mezzo alla lava del vulcano è un calcolatore, mentre gli impo sono operai. In patica, da quel che ho capito, il calcolatore elabora gli eventi in maniera simile al calcolatore di Neil, e gli impo producono...)")
+                dialogo.append(u"(Appunti di Neil... qua spiega nel dettaglio il funzionamento del sistema usato dal Costruttore per creare la realtà: quella \"roccia\" in mezzo alla lava del vulcano è un calcolatore, mentre gli impo sono operai. In pratica, da quel che ho capito, il calcolatore elabora gli eventi in maniera simile al calcolatore di Neil, e gli impo producono...)")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

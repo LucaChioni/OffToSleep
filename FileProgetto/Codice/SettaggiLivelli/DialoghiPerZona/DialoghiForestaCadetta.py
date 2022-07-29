@@ -165,7 +165,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Qui è dove Sam ha intezione di accendere il fuoco per la notte...)")
+            dialogo.append(u"(Qui è dove Sam ha intenzione di accendere il fuoco per la notte...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             oggettoDato = False

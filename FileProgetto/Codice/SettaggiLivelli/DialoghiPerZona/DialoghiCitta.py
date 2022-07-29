@@ -310,7 +310,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Mi dispiace, non posso rivelare informazioni a chi non è nella cofraternita... è una delle regole...")
+            dialogo.append(u"Mi dispiace, non posso rivelare informazioni a chi non è nella confraternita... è una delle regole...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -800,7 +800,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, volevo chiereti un'inform-")
+                dialogo.append(u"Sì, volevo chiederti un'inform-")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -875,7 +875,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Continua a lamentersi di questi pomodori... perché non va in un'altra bancarella...?)")
+                dialogo.append(u"(Continua a lamentarsi di questi pomodori... perché non va in un'altra bancarella...?)")
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
@@ -1607,7 +1607,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Eddai! Ti offro la birra!")
+                dialogo.append(u"E dai! Ti offro la birra!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1633,7 +1633,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Eddai! Ti offro la birra!")
+                dialogo.append(u"E dai! Ti offro la birra!")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -3147,7 +3147,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Cosa?! Chi credi che gestisca la città? Tutti i servizi, il controllo dei territori, le guardie che garantiscono la sicurazza in città...")
+                    dialogo.append(u"Cosa?! Chi credi che gestisca la città? Tutti i servizi, il controllo dei territori, le guardie che garantiscono la sicurezza in città...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -3267,7 +3267,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Eh sì. È proprio una bella torre. Sarebbe un peccato perdersi la sua magnificienza anche solo per un attimo.")
+                dialogo.append(u"... Eh sì. È proprio una bella torre. Sarebbe un peccato perdersi la sua magnificenza anche solo per un attimo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

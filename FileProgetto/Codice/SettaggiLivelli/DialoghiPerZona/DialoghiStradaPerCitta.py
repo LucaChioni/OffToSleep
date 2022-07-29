@@ -297,7 +297,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"No. Dev'esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per stanci sopra!")
+                        dialogo.append(u"No. Dev'esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per starci sopra!")
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")

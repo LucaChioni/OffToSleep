@@ -403,7 +403,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("(Non posso rimetteremi a dormire adesso...)")
+            dialogo.append("(Non posso rimettermi a dormire adesso...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
@@ -503,7 +503,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Ok, credo che questa vasca funzioni più o meno come quella cha abbiamo a casa... vediamo...)")
+            dialogo.append(u"(Ok, credo che questa vasca funzioni più o meno come quella che abbiamo a casa... vediamo...)")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
@@ -809,7 +809,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Stiamo indagando. Sembrerebbe trattarsi di suicidio, ma macano ancora dei presupposti validi... potrebbe essere stato semplicemente un incidente...")
+                dialogo.append(u"Stiamo indagando. Sembrerebbe trattarsi di suicidio, ma mancano ancora dei presupposti validi... potrebbe essere stato semplicemente un incidente...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1155,7 +1155,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"<*>#italic#Piacere Sara. Hai prorpio un bel viso, sai? Sarebbe perfetto se non fosse per quelle occhiaie...<*>")
+            dialogo.append(u"<*>#italic#Piacere Sara. Hai proprio un bel viso, sai? Sarebbe perfetto se non fosse per quelle occhiaie...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

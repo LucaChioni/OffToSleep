@@ -288,7 +288,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     scelta = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Senti, non ho quelle monete. Puoi farmi semplicemete vedere la mappa? Puoi tenerla tu mentre la guardo, non la toccherò nemmeno...")
+                    dialogo.append(u"Senti, non ho quelle monete. Puoi farmi semplicemente vedere la mappa? Puoi tenerla tu mentre la guardo, non la toccherò nemmeno...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")

@@ -406,7 +406,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Senti <*>#italic#Olfo,<*> non rompere... non so perchè... mi sono innervosita per... è sicuramente colpa tua!")
+                    dialogo.append(u"Senti <*>#italic#Olfo,<*> non rompere... non so perché... mi sono innervosita per... è sicuramente colpa tua!")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -542,7 +542,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non credo sia prorpio la stessa cosa... e poi neanche gli impo hanno un cervello...")
+                dialogo.append(u"Non credo sia proprio la stessa cosa... e poi neanche gli impo hanno un cervello...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -999,7 +999,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... La raccolta di impofrutti verrà notevolmente incrementata, il vecchio trombone la smettarà di lamentarsi della scarsità...")
+                    dialogo.append(u"... La raccolta di impofrutti verrà notevolmente incrementata, il vecchio trombone la smetterà di lamentarsi della scarsità...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -1045,7 +1045,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Rod, ti informo che i trattamenti estetici su Sara da te suggeriti sono stati sospesi in consegueza a delle anomalie comportamentali del soggetto in fase di ricostruzione...")
+                    dialogo.append(u"Rod, ti informo che i trattamenti estetici su Sara da te suggeriti sono stati sospesi in conseguenza a delle anomalie comportamentali del soggetto in fase di ricostruzione...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -1274,7 +1274,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Dev'essere lui, quel Pazzo Montano, che continua ad aggirarsi intorno all'ingersso della caverna...")
+                    dialogo.append(u"... Dev'essere lui, quel Pazzo Montano, che continua ad aggirarsi intorno all'ingresso della caverna...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -1296,7 +1296,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Appunti di Rod in cui parla di un \"Pazzo Montano\" che si aggirava intorno all'ingersso della caverna...)")
+                    dialogo.append(u"(Appunti di Rod in cui parla di un \"Pazzo Montano\" che si aggirava intorno all'ingresso della caverna...)")
                     partiDialogo.append(dialogo)
             else:
                 oggettoDato = False

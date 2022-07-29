@@ -32,6 +32,7 @@ import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiVulcano as DialoghiVulcano
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiTunnelSubacqueo as DialoghiTunnelSubacqueo
 import Codice.SettaggiLivelli.DialoghiPerZona.DialoghiLaboratorioNeil as DialoghiLaboratorioNeil
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
 
 
 def setGender(tipo):
@@ -146,7 +147,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(Non posso aprirlo adesso...)")
+        dialogo.append(LDS._0393_01_Tu_NON_POS_APR_ADE_)
         partiDialogoTradotte.append(dialogo)
     elif GlobalGameVar.dictStanze["sognoSara1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["sognoSara4"]:
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiSogno.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
