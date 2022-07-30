@@ -233,7 +233,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Esattamente. Fanno " + str(GlobalGameVar.monetePerGliStumentiPerNeil) + u" monete.")
+                dialogo.append(u"Esattamente. Fanno %i monete." % GlobalGameVar.monetePerGliStumentiPerNeil)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

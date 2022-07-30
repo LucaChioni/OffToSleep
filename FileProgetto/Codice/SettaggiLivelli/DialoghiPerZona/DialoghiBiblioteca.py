@@ -337,7 +337,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("???DOMANDA???")
-            dialogo.append(u"Dimmi, quanto spazio percorre la palla prima di fermarsi se la faccio partire con una velocità di " + str(velPalla) + u" m/s?")
+            dialogo.append(u"Dimmi, quanto spazio percorre la palla prima di fermarsi se la faccio partire con una velocità di %s m/s?" % str(velPalla))
             i = 1
             while i <= 4:
                 if i == scelta:
@@ -352,9 +352,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             i = 1
             while i <= 4:
                 if i == scelta:
-                    dialogo.append("Seguendo i calcoli, esattamente " + str(soluzione) + " m. E questo risultato corrisponde a un evento non ancora avvenuto...")
+                    dialogo.append("Seguendo i calcoli, esattamente %s m. E questo risultato corrisponde a un evento non ancora avvenuto..." % str(soluzione))
                 else:
-                    dialogo.append(u"<*>#italic#Mmh...<*> no, devi aver sbagliato dei calcoli. Riprova con una velocità di " + str(velProssimaPalla) + " m/s. La risposta giusta era " + str(soluzione) + " m, ti faccio vedere.")
+                    dialogo.append(u"<*>#italic#Mmh...<*> no, devi aver sbagliato dei calcoli. Riprova con una velocità di %s m/s. La risposta giusta era %s m, ti faccio vedere." % (str(velProssimaPalla), str(soluzione)))
                 i += 1
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eseguitaVerificaRisultatoEnigma"]:

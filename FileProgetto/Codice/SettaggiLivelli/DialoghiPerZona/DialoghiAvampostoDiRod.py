@@ -246,7 +246,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Ma non preoccuparti, ho qui una mappa che può aiutarti. Te la posso prestare per sole " + str(GlobalGameVar.monetePerLaMappaDelLabirinto) + u" monete.")
+                dialogo.append(u"Ma non preoccuparti, ho qui una mappa che può aiutarti. Te la posso prestare per sole %i monete." % GlobalGameVar.monetePerLaMappaDelLabirinto)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -292,7 +292,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Sono impegnato al momento. Con " + str(GlobalGameVar.monetePerLaMappaDelLabirinto) + u" monete potrai studiartela per bene.")
+                    dialogo.append(u"Sono impegnato al momento. Con %i monete potrai studiartela per bene." % GlobalGameVar.monetePerLaMappaDelLabirinto)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -305,7 +305,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     scelta = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ecco le " + str(GlobalGameVar.monetePerLaMappaDelLabirinto) + u" monete, <*>#italic#Rod.<*>")
+                    dialogo.append(u"Ecco le %i monete, <*>#italic#Rod.<*>" % GlobalGameVar.monetePerLaMappaDelLabirinto)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
