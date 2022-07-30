@@ -370,11 +370,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Oh santo cielo...")
+                    dialogo.append(u"... \"Olfo\" non è male.")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"...")
+                    dialogo.append(u"\"Olfo\" non è male? E che ne dici di \"Dolfo\"?")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"... \"Dolfo\"... forse con l'apostrofo... \"D'Olfo\"...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"No! Senza l'apostrofo!")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -382,15 +390,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"...")
-                    partiDialogo.append(dialogo)
-                    dialogo = []
-                    dialogo.append("personaggio")
-                    dialogo.append(u"... Già finito?")
-                    partiDialogo.append(dialogo)
-                    dialogo = []
-                    dialogo.append("tu")
-                    dialogo.append(u"... <*>#italic#Ufff...<*> che stupida...")
+                    dialogo.append(u"... <*>#italic#Ufff...<*>")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -398,19 +398,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"...")
+                    dialogo.append(u"... Che stupida...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"... Almeno su quello siamo d'accordo...")
+                    dialogo.append(u"... Con l'apostrofo era chiaramente meglio...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Senti <*>#italic#Olfo,<*> non rompere... non so perché... mi sono innervosita per... è sicuramente colpa tua!")
+                    dialogo.append(u"... Certo... l'apostrofo...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Certo, ovviamente... Prendi gli strumenti, <*>#italic#collaboratrice,<*> e torna dal tuo <*>#italic#collaboratore,<*> che sicuramente non vedrà l'ora di riprendere la vostra <*>#italic#collaborazione.<*>")
+                    dialogo.append(u"Adesso prendi i tuoi strumenti, <*>#italic#collaboratrice,<*> e torna dal tuo <*>#italic#collaboratore,<*> che sicuramente non vedrà l'ora di riprendere la vostra <*>#italic#collaborazione.<*>")
                     partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dateMonetePerStrumentiPerStudiareImpo"]:
                 oggettoDato = False
