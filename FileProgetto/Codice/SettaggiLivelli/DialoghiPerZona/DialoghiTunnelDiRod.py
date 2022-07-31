@@ -2,6 +2,8 @@
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -24,7 +26,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Ma... si è presa la mia roba?!)")
+            dialogo.append(LDS._1302_01_Tu_MA_SI__PRE_LA_MIA_ROB_)
             partiDialogo.append(dialogo)
         elif tipo == "OggettoDictCofanettoChiuso":
             oggettoDato = False
@@ -33,7 +35,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Adesso non mi serve questa roba...)")
+            dialogo.append(LDS._1303_01_Tu_ADE_NON_MI_SER_QUE_ROB_)
             partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod1"]:
         if tipo == "OggettoImpo":
@@ -47,7 +49,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"È buio qua dentro...")
+                dialogo.append(LDP._0373_01_Tu__BUI_QUA_DEN_)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["tunnelDiRod3"]:
         if tipo == "OggettoLevaTunnelDiRod":
@@ -61,7 +63,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Forse se tiro questa leva...)")
+                dialogo.append(LDP._0374_01_Tu_FOR_SE_TIR_QUE_LEV_)
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"]:
                 oggettoDato = False
@@ -71,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Non voglio chiudere di nuovo le sbarre...)")
+                dialogo.append(LDS._1304_01_Tu_NON_VOG_CHI_DI_NUO_LE_SBA_)
                 partiDialogo.append(dialogo)
             elif GlobalGameVar.dictAvanzamentoStoria["inizioParteDiRod"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
                 oggettoDato = False
@@ -81,7 +83,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Lo lascerò aperto finché non torno...)")
+                dialogo.append(LDS._1305_01_Tu_LO_LAS_APE_FIN_NON_TOR_)
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                 oggettoDato = False
@@ -91,7 +93,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È la leva che ho usato per aprire il tunnel...)")
+                dialogo.append(LDS._1306_01_Tu__LA_LEV_CHE_HO_USA_PER_APR_IL_TUN_)
                 partiDialogo.append(dialogo)
             elif GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
                 oggettoDato = False
@@ -101,7 +103,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Non posso tirarla adesso...)")
+                dialogo.append(LDS._1307_01_Tu_NON_POS_TIR_ADE_)
                 partiDialogo.append(dialogo)
             else:
                 if avanzamentoDialogo == 0:
@@ -112,7 +114,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Tiro la leva...)")
+                    dialogo.append(LDS._1308_01_Tu_TIR_LA_LEV_)
                     partiDialogo.append(dialogo)
                 else:
                     oggettoDato = False
@@ -122,7 +124,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(È la leva che ho usato per aprire il tunnel...)")
+                    dialogo.append(LDS._1309_01_Tu__LA_LEV_CHE_HO_USA_PER_APR_IL_TUN_)
                     partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

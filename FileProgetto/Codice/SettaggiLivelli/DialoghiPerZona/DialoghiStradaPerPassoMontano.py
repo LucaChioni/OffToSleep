@@ -2,6 +2,7 @@
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -26,7 +27,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Non voglio parlare coi soldati... potrebbero insospettirsi per Impo...)")
+                dialogo.append(LDS._1293_01_Tu_NON_VOG_PAR_COI_SOL_POT_INS_PER_IMP_)
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -36,7 +37,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1294_01_Soldato__)
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

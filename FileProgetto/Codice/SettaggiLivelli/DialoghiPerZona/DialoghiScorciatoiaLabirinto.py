@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -24,15 +25,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"<*>#italic#Brrr...<*> questo vento... tu stai bene?")
+                dialogo.append(LDP._0363_01_Tu_BRR_QUE_VEN_TU_STA_BEN_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDP._0363_02_Impo__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Dovrebbe essere il tuo habitat questo... più o meno...")
+                dialogo.append(LDP._0363_03_Tu__DOV_ESS_IL_TUO_HAB_QUE_PI_O_MEN_)
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -26,7 +27,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = True
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"...")
+        dialogo.append(LDS._1272_01_Pipistrello__)
         partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

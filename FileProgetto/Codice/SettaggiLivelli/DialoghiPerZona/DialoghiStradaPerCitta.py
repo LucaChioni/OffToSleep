@@ -3,6 +3,8 @@
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -24,7 +26,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(C'è scritto: \" - <*>#bold#FORESTA CADETTA<*> - Attenzione alla fauna notturna\"...)")
+        dialogo.append(LDS._1273_01_Tu_C_SCR___FOR_CAD__ATT_ALL_FAU_NOT_)
         partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloStaccionata":
         partiDialogo = []
@@ -36,11 +38,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"...)")
+            dialogo.append(LDS._1274_01_Tu_SU_QUE_STA_C_UN_CAR_CHE_DIC__VIE_LAC__)
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Da quello che so, tutti i passaggi verso oriente sono bloccati da anni...)")
+            dialogo.append(LDS._1274_02_Tu_DA_QUE_CHE_SO_TUT_I_PAS_VER_ORI_SON_BLO_DA_ANN_)
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False
@@ -49,7 +51,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(C'è scritto: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"...)")
+            dialogo.append(LDS._1275_01_Tu_C_SCR__VIE_LAC__)
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCartelloBloccoStrada":
         partiDialogo = []
@@ -61,11 +63,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Oltrepassando questo cartello, verrai dichiarato nemico del reggente cittadino\"...)")
+            dialogo.append(LDS._1276_01_Tu_C_UN_CAR_CON_LA_SCR__VIE_LAC___OLT_QUE_CAR_VER_DIC_NEM_DEL_REG_CIT_)
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Non credo che Hans sia andato di qua...)")
+            dialogo.append(LDS._1276_02_Tu_NON_CRE_CHE_HAN_SIA_AND_DI_QUA_)
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False
@@ -74,7 +76,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(C'è scritto: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Oltrepassando questo cartello, verrai dichiarato nemico del reggente cittadino\"...)")
+            dialogo.append(LDS._1277_01_Tu_C_SCR__VIE_LAC___OLT_QUE_CAR_VER_DIC_NEM_DEL_REG_CIT_)
             partiDialogo.append(dialogo)
     elif tipo == "GuardiaCitta":
         partiDialogo = []
@@ -87,7 +89,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Meglio risparmiarsi le conversazioni coi soldati, non ho voglia di... potrebbero chiedermi qualcosa sull'omicidio...)")
+            dialogo.append(LDS._1278_01_Tu_MEG_RIS_LE_CON_COI_SOL_NON_HO_VOG_DI_POT_CHI_QUA_SUL_)
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
@@ -97,7 +99,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(Non voglio parlare coi soldati... potrebbero insospettirsi per Impo...)")
+            dialogo.append(LDS._1279_01_Tu_NON_VOG_PAR_COI_SOL_POT_INS_PER_IMP_)
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
@@ -109,31 +111,31 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Chiedo scusa soldato...")
+                    dialogo.append(LDS._1280_01_Tu_CHI_SCU_SOL_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Stai lontano! L'accesso verso oriente è vietato a tutti i civili per ordine del Re.")
+                    dialogo.append(LDS._1280_02_Soldato_STA_LON_LAC_VER_ORI__VIE_A_TUT_I_CIV_PER_ORD_DEL_RE_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ma io volevo... perché è vietato?")
+                    dialogo.append(LDS._1280_03_Tu_MA_IO_VOL_PER__VIE_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Non mi è concesso divulgare informazioni a riguardo.")
+                    dialogo.append(LDS._1280_04_Soldato_NON_MI__CON_DIV_INF_A_RIG_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Esiste qualcuno a cui è concesso?")
+                    dialogo.append(LDS._1280_05_Tu__ESI_QUA_A_CUI__CON_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"È mio compito arrestare chi commette quest'illecito.")
+                    dialogo.append(LDS._1280_06_Soldato__MIO_COM_ARR_CHI_COM_QUE_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"<*>#italic#Mmh...<*>")
+                    dialogo.append(LDS._1280_07_Tu_MMH_)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 1:
                     oggettoDato = False
@@ -143,31 +145,31 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Ma se è così importante che nessuno passi di qua, perché sei da solo a fare la guardia?")
+                    dialogo.append(LDS._1281_01_Tu__MA_SE__COS_IMP_CHE_NES_PAS_DI_QUA_PER_SEI_DA_SOL_A_FAR_LA_GUA_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"La strada è già bloccata da questi cartelli e l'unico punto libero è quello in cui sono io adesso. È praticamente impossibile passare.")
+                    dialogo.append(LDS._1281_02_Soldato_LA_STR__GI_BLO_DA_QUE_CAR_E_LUN_PUN_LIB__QUE_IN_CUI_SON_IO_ADE__PRA_IMP_PAS_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Cosa...?")
+                    dialogo.append(LDS._1281_03_Tu__COSA_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Senti, ho studiato personalmente questo sistema di blocco. Se trovi un modo per passare provaci pure, ma sappi che ne subirai le conseguenze!")
+                    dialogo.append(LDS._1281_04_Soldato_SEN_HO_STU_PER_QUE_SIS_DI_BLO_SE_TRO_UN_MOD_PER_PAS_PRO_PUR_MA_SAP_CHE_NE_SUB_LE_CON_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ok... ma uno potrebbe farsi strada nel bosco senza troppi problemi, no?")
+                    dialogo.append(LDS._1281_05_Tu_OK_MA_UNO_POT_FAR_STR_NEL_BOS_SEN_TRO_PRO_NO_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Di questo non devi preoccuparti, tutti gli accessi verso oriente sono bloccati e ben protetti.")
+                    dialogo.append(LDS._1281_06_Soldato_DI_QUE_NON_DEV_PRE_TUT_GLI_ACC_VER_ORI_SON_BLO_E_BEN_PRO_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ok...")
+                    dialogo.append(LDS._1281_07_Tu_OK_)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 2:
                     oggettoDato = False
@@ -177,15 +179,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"<*>#italic#Ehm ehm,<*> dovrei passare...")
+                    dialogo.append(LDS._1282_01_Tu_EHM_EHM_DOV_PAS_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Prova a fare un altro passo e ti taglio le gambe!")
+                    dialogo.append(LDS._1282_02_Soldato_PRO_A_FAR_UN_ALT_PAS_E_TI_TAG_LE_GAM_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Ok ok... me ne vado...")
+                    dialogo.append(LDS._1282_03_Tu_OK_OK_ME_NE_VAD_)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 3:
                     oggettoDato = False
@@ -195,11 +197,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Devo dire che hai organizzato proprio un bel sistema per bloccare la strada.")
+                    dialogo.append(LDS._1283_01_Tu_DEV_DIR_CHE_HAI_ORG_PRO_UN_BEL_SIS_PER_BLO_LA_STR_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del giudizio altrui. Adesso vattene, ho del lavoro da fare qui!")
+                    dialogo.append(LDS._1283_02_Soldato_SON_GI_ABB_FID_NEI_MIE_MEZ_NON_HO_BIS_DEL_GIU_ALT_ADE_VAT_HO_DEL_LAV_DA_FAR_QUI_)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 4 and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                     oggettoDato = False
@@ -209,7 +211,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Meglio lasciarlo al suo lavoro...)")
+                    dialogo.append(LDS._1284_01_Tu_MEG_LAS_AL_SUO_LAV_)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 4:
                     oggettoDato = False
@@ -219,7 +221,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Non lo disturberò ancora...)")
+                    dialogo.append(LDS._1285_01_Tu_NON_LO_DIS_ANC_)
                     partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 if avanzamentoDialogo > 1:
@@ -230,11 +232,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1286_01_Soldato__)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Se solo non avesse escogitato un sistema così impenetrabile...)")
+                    dialogo.append(LDS._1286_02_Tu_SE_SOL_NON_AVE_ESC_UN_SIS_COS_IMP_)
                     partiDialogo.append(dialogo)
                 else:
                     oggettoDato = False
@@ -244,7 +246,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1287_01_Soldato__)
                     partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -254,7 +256,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1288_01_Soldato__)
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
@@ -266,7 +268,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"Benvenuta in città. Se sei in cerca di un posto sicuro per riposare, rivolgiti agli alloggi profughi.")
+                    dialogo.append(LDS._1289_01_Soldato_BEN_IN_CIT_SE_SEI_IN_CER_DI_UN_POS_SIC_PER_RIP_RIV_AGL_ALL_PRO_)
                     partiDialogo.append(dialogo)
                 elif y == GlobalHWVar.gpy * 12:
                     if avanzamentoDialogo == 0:
@@ -277,43 +279,43 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         avanzaColDialogo = True
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Salve, soldato.")
+                        dialogo.append(LDS._1290_01_Tu_SALVE_SOLDATO_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Salve. Si prega di non ingombrare il ponte troppo a lungo! È necessario che sia sempre il più fruibile possibile.")
+                        dialogo.append(LDS._1290_02_Soldato_SAL_SI_PRE_DI_NON_ING_IL_PON_TRO_A_LUN__NEC_CHE_SIA_SEM_IL_PI_FRU_POS_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Oh, mi stavo giusto chiedendo perché non ci fosse nessuno qui...")
+                        dialogo.append(LDS._1290_03_Tu_OH_MI_STA_GIU_CHI_PER_NON_CI_FOS_NES_QUI_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Perché è un ponte... serve per attraversare il fiume, non per ostruire il passaggio!")
+                        dialogo.append(LDS._1290_04_Soldato_PER__UN_PON_SER_PER_ATT_IL_FIU_NON_PER_OST_IL_PAS_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Ok, ma tu invece? Non lo stai ostruendo?")
+                        dialogo.append(LDS._1290_05_Tu_OK_MA_TU_INV_NON_LO_STA_OST_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"No. Dev'esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per starci sopra!")
+                        dialogo.append(LDS._1290_06_Soldato_NO_DEV_QUA_CHE_LO_MAN_LIB_ALT_SAR_PIE_DI_PER_CHE_COM_TE_BLO_UN_TRA_DI_PER_CHE_LO_VUO_ATT_SOL_PER_STA_SOP_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"A me sembra che l'unico traffico qui sia composto da due guardie che stanno sul ponte senza neanche attraversarlo...")
+                        dialogo.append(LDS._1290_07_Tu_A_ME_SEM_CHE_LUN_TRA_QUI_SIA_COM_DA_DUE_GUA_CHE_STA_SUL_PON_SEN_NEA_ATT_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Due guardie che mantengono il ponte libero dal traffico!")
+                        dialogo.append(LDS._1290_08_Soldato_DUE_GUA_CHE_MAN_IL_PON_LIB_DAL_TRA_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("tu")
-                        dialogo.append(u"Certo. Dico solo che, senza tutte quelle guardie, il ponte sarebbe sicuramente più libero e fruibile, tutto qui...")
+                        dialogo.append(LDS._1290_09_Tu_CER_DIC_SOL_CHE_SEN_TUT_QUE_GUA_IL_PON_SAR_SIC_PI_LIB_E_FRU_TUT_QUI_)
                         partiDialogo.append(dialogo)
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Senti ragazzina, non ho altro tempo da perdere! Vai dove devi andare senza ostruire il passaggio!")
+                        dialogo.append(LDS._1290_10_Soldato_SEN_RAG_NON_HO_ALT_TEM_DA_PER_VAI_DOV_DEV_AND_SEN_OST_IL_PAS_)
                         partiDialogo.append(dialogo)
                     elif avanzamentoDialogo == 1:
                         oggettoDato = False
@@ -323,7 +325,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                         avanzaColDialogo = False
                         dialogo = []
                         dialogo.append("personaggio")
-                        dialogo.append(u"Vai dove devi andare senza ostruire il passaggio!")
+                        dialogo.append(LDS._1291_01_Soldato_VAI_DOV_DEV_AND_SEN_OST_IL_PAS_)
                         partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -333,7 +335,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1292_01_Soldato__)
                 partiDialogo.append(dialogo)
     elif tipo == "OggettoBucoPorta":
         partiDialogo = []
@@ -344,7 +346,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("tu")
-        dialogo.append(u"(È chiuso...)")
+        dialogo.append(LDP._0370_01_Tu__CHIUSO_)
         partiDialogo.append(dialogo)
     elif tipo == "PadreUfficialeServizio":
         partiDialogo = []
@@ -357,15 +359,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Chi va là!")
+            dialogo.append(LDP._0371_01_Soldato_CHI_VA_L_)
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Scusate sono di passaggio... sto cercando un ragazzo che dovrebbe essere passato di qua poco fa...")
+            dialogo.append(LDP._0371_02_Tu_SCU_SON_DI_PAS_STO_CER_UN_RAG_CHE_DOV_ESS_PAS_DI_QUA_POC_FA_)
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Una ragazza! Aprite!")
+            dialogo.append(LDP._0371_03_Soldato_UNA_RAG_APR_)
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

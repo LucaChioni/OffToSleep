@@ -3,6 +3,8 @@
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -36,7 +38,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"...")
+        dialogo.append(LDS._1265_01_Aquila__)
         partiDialogo.append(dialogo)
     elif tipo.startswith("OggettoDict"):
         partiDialogo = []
@@ -59,7 +61,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         avanzaColDialogo = True
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"...")
+        dialogo.append(LDS._1266_01_Aquila__)
         partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano1"]:
         if tipo == "OggettoImpo":
@@ -73,7 +75,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Porca miseria, che freddo!")
+                dialogo.append(LDP._0359_01_Tu__POR_MIS_CHE_FRE_)
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoSilenzioCittàPostTempoBloccato"]:
                 oggettoDato = False
@@ -83,7 +85,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma... sono bloccati a mezz'aria...")
+                dialogo.append(LDP._0360_01_Tu_MA_SON_BLO_A_MEZ_)
                 partiDialogo.append(dialogo)
         elif tipo.startswith("Pazzo"):
             partiDialogo = []
@@ -96,80 +98,80 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Rallo?")
+                dialogo.append(LDS._1267_01_Tu_RALLO_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Relei?")
+                dialogo.append(LDS._1267_02_Rallo__RELEI_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Come sei arrivato qui?")
+                dialogo.append(LDS._1267_03_Tu_COM_SEI_ARR_QUI_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Vaga un Pazzo Montano da queste parti. Meglio fare attenzione...")
+                dialogo.append(LDS._1267_04_Rallo_VAG_UN_PAZ_MON_DA_QUE_PAR_MEG_FAR_ATT_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Un pazzo montano?")
+                dialogo.append(LDS._1267_05_Tu__UN_PAZ_MON_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"<*>#italic#Mmh...<*> uno... due... tre...")
+                dialogo.append(LDS._1267_06_Rallo_MMH_UNO_DUE_TRE_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Che stai-")
+                dialogo.append(LDS._1267_07_Tu__CHE_STA_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"QUARTA DOMANDA!")
+                dialogo.append(LDS._1267_08_Rallo_QUARTA_DOMANDA_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1267_09_Tu__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("???DOMANDA???")
-                dialogo.append(u"QUARTA DOMANDA: dove sei?")
-                dialogo.append(u"Sono davanti a te.")
-                dialogo.append(u"Sono nel Passo Montano.")
-                dialogo.append(u"Sono sulla terra.")
-                dialogo.append(u"Non lo so.")
+                dialogo.append(LDS._1267_10_Rallo_DOMANDA_)
+                dialogo.append(LDS._1267_11_Rallo_QUA_DOM_DOV_SEI_)
+                dialogo.append(LDS._1267_12_Rallo_SON_DAV_A_TE_)
+                dialogo.append(LDS._1267_13_Rallo_SON_NEL_PAS_MON_)
+                dialogo.append(LDS._1267_14_Rallo_SON_SUL_TER_)
+                dialogo.append(LDS._1267_15_Rallo_NON_LO_SO_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("!!!RISPOSTA!!!")
-                dialogo.append(u"Davanti...")
-                dialogo.append(u"Nel... Pazzo Montano...")
-                dialogo.append(u"Su della terra...")
-                dialogo.append(u"<*>#italic#Mmh...<*>")
+                dialogo.append(LDS._1267_16_Rallo_RISPOSTA_)
+                dialogo.append(LDS._1267_17_Rallo_DAVANTI_)
+                dialogo.append(LDS._1267_18_Rallo_NEL_PAZ_MON_)
+                dialogo.append(LDS._1267_19_Rallo_SU_DEL_TER_)
+                dialogo.append(LDS._1267_20_Rallo_MMH_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1267_21_Tu__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Mi stai mentendo?")
+                dialogo.append(LDS._1267_22_Rallo_MI_STA_MEN_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... No... perché dovrei?")
+                dialogo.append(LDS._1267_23_Tu__NO_PER_DOV_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Non lo sai...")
+                dialogo.append(LDS._1267_24_Rallo_NON_LO_SAI_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Cosa?")
+                dialogo.append(LDS._1267_25_Tu__COSA_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"<*>#italic#Mmh...<*>")
+                dialogo.append(LDS._1267_26_Rallo_MMH_)
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 5:
                 oggettoDato = False
@@ -179,40 +181,40 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Rallo?")
+                dialogo.append(LDS._1268_01_Tu_RALLO_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Tu ti fidi?")
+                dialogo.append(LDS._1268_02_Rallo__TU_TI_FID_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Di cosa?")
+                dialogo.append(LDS._1268_03_Tu__DI_COS_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("???DOMANDA???")
-                dialogo.append(u"QUINTA DOMANDA: ti fidi di quello che vedi e racconti?")
-                dialogo.append(u"Certo, tu no?")
-                dialogo.append(u"Di cosa dovrei fidarmi se non di quello?")
-                dialogo.append(u"Non dovrei fidarmi di quello che vedo?")
-                dialogo.append(u"Non lo so.")
+                dialogo.append(LDS._1268_04_Rallo_DOMANDA_)
+                dialogo.append(LDS._1268_05_Rallo_QUI_DOM_TI_FID_DI_QUE_CHE_VED_E_RAC_)
+                dialogo.append(LDS._1268_06_Rallo_CER_TU_NO_)
+                dialogo.append(LDS._1268_07_Rallo_DI_COS_DOV_FID_SE_NON_DI_QUE_)
+                dialogo.append(LDS._1268_08_Rallo_NON_DOV_FID_DI_QUE_CHE_VED_)
+                dialogo.append(LDS._1268_09_Rallo_NON_LO_SO_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("!!!RISPOSTA!!!")
-                dialogo.append(u"Io sono il capo di questa percezione. Quello che vedo ha fede in me.")
-                dialogo.append(u"Di Frrelloww, <*>#italic#capo<*> di questa percezione.")
-                dialogo.append(u"Io non lo farei...")
-                dialogo.append(u"<*>#italic#Mmh...<*> pazzo... Pazzo Montano...")
+                dialogo.append(LDS._1268_10_Rallo_RISPOSTA_)
+                dialogo.append(LDS._1268_11_Rallo_IO_SON_IL_CAP_DI_QUE_PER_QUE_CHE_VED_HA_FED_IN_ME_)
+                dialogo.append(LDS._1268_12_Rallo_DI_FRR_CAP_DI_QUE_PER_)
+                dialogo.append(LDS._1268_13_Rallo_IO_NON_LO_FAR_)
+                dialogo.append(LDS._1268_14_Rallo_MMH_PAZ_PAZ_MON_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ok...")
+                dialogo.append(LDS._1268_15_Tu_OK_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"<*>#italic#Mmh...<*>")
+                dialogo.append(LDS._1268_16_Rallo_MMH_)
                 partiDialogo.append(dialogo)
             elif avanzamentoDialogo == 6:
                 oggettoDato = False
@@ -222,7 +224,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"<*>#italic#Mmh...<*>")
+                dialogo.append(LDS._1269_01_Rallo_MMH_)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano7"]:
         if tipo == "OggettoImpo":
@@ -236,11 +238,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Sto congelando...")
+                dialogo.append(LDP._0361_01_Tu__STO_CON_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ma quello è ghiaccio? Dio santo, che cavolo ci faccio qui?!")
+                dialogo.append(LDP._0361_02_Tu_MA_QUE__GHI_DIO_SAN_CHE_CAV_CI_FAC_QUI_)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["passoMontano8"]:
         if tipo == "OggettoImpo":
@@ -254,11 +256,13 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non è freddo come mi ricordavo...")
+                dialogo.append(LDP._0362_01_Tu_NON__FRE_COM_MI_RIC_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"L'aria è fredda, ma non si sente quasi per niente... si riscalda subito...")
+                dialogo.append(LDP._0362_02_Tu_LAR__FRE_MA_NON_SI_SEN_QUA_PER_NIE_SI_RIS_SUB_)
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

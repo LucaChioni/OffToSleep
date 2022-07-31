@@ -2,6 +2,8 @@
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.Localizzazione.LocalizInterfaccia as LI
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -28,52 +30,52 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Rallo?")
+                    dialogo.append(LDS._1312_01_Tu__RALLO_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1312_02_Rallo__)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Immobile... ma com'è arrivato fin qui...?")
+                    dialogo.append(LDS._1312_03_Tu__IMM_MA_COM_ARR_FIN_QUI_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Oh, ha un foglietto...")
+                    dialogo.append(LDS._1312_04_Tu__OH_HA_UN_FOG_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... C'è scritto: \"SESTA DOMANDA: che fai?\"...")
+                    dialogo.append(LDS._1312_05_Tu__C_SCR_SE_DOM_CHE_FAI_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"... Ma come...?! Poi che senso ha se non puoi neanche sentire la risposta?")
+                    dialogo.append(LDS._1312_06_Tu__MA_COM_POI_CHE_SEN_HA_SE_NON_PUO_NEA_SEN_LA_RIS_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1312_07_Rallo__)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append("???DOMANDA???")
-                    dialogo.append(u"... Va beh... sesta domanda... che faccio?")
-                    dialogo.append(u"Non lo so.")
-                    dialogo.append(u"Vado avanti e guardo che succede.")
-                    dialogo.append(u"Sto leggendo un foglietto.")
-                    dialogo.append(u"Prendo coscienza di quello che percepisco.")
+                    dialogo.append(LDS._1312_08_Tu_DOMANDA_)
+                    dialogo.append(LDS._1312_09_Tu__VA_BEH_SES_DOM_CHE_FAC_)
+                    dialogo.append(LDS._1312_10_Tu_NON_LO_SO_)
+                    dialogo.append(LDS._1312_11_Tu_VAD_AVA_E_GUA_CHE_SUC_)
+                    dialogo.append(LDS._1312_12_Tu_STO_LEG_UN_FOG_)
+                    dialogo.append(LDS._1312_13_Tu_PRE_COS_DI_QUE_CHE_PER_)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append("!!!RISPOSTA!!!")
-                    dialogo.append(u"...")
-                    dialogo.append(u"...")
-                    dialogo.append(u"...")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1312_14_Rallo_RISPOSTA_)
+                    dialogo.append(LDS._1312_15_Rallo__)
+                    dialogo.append(LDS._1312_16_Rallo__)
+                    dialogo.append(LDS._1312_17_Rallo__)
+                    dialogo.append(LDS._1312_18_Rallo__)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1312_19_Tu__)
                     partiDialogo.append(dialogo)
                 elif avanzamentoDialogo == 7:
                     oggettoDato = False
@@ -83,11 +85,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(u"...")
+                    dialogo.append(LDS._1313_01_Rallo__)
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"(Non ha altri foglietti...)")
+                    dialogo.append(LDS._1313_02_Tu_NON_HA_ALT_FOG_)
                     partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -97,7 +99,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1314_01_Rallo__)
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoCumuloImpo":
             partiDialogo = []
@@ -109,7 +111,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"(È un cumulo di impofrutti...)")
+            dialogo.append(LDS._1315_01_Tu__UN_CUM_DI_IMP_)
             partiDialogo.append(dialogo)
         elif tipo == "RoboLeggero":
             partiDialogo = []
@@ -122,7 +124,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Mi sta ignorando...)")
+                dialogo.append(LDS._1316_01_Tu_MI_STA_IGN_)
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -132,7 +134,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1317_01_ImpoLeggero__)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano2"]:
         if tipo == "OggettoComputerCostruttore":
@@ -146,23 +148,23 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Ci sono dei simboli luminosi, delle scritte strane e...)")
+                dialogo.append(LDP._0390_01_Tu__CI_SON_DEI_SIM_LUM_DEL_SCR_STR_E_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Oh, quelli sono impo!")
+                dialogo.append(LDP._0390_02_Tu_OH_QUE_SON_IMP_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Disegni di diverse specie di impo...")
+                dialogo.append(LDP._0390_03_Tu__DIS_DI_DIV_SPE_DI_IMP_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"...")
+                dialogo.append(LDP._0390_04_Tu__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(... Che significa...?)")
+                dialogo.append(LDP._0390_05_Tu__CHE_SIG_)
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 oggettoDato = False
@@ -172,7 +174,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Non ho idea di cosa sia questo affare. Ci sono degli impo disegnati sopra...)")
+                dialogo.append(LDS._1318_01_Tu_NON_HO_IDE_DI_COS_SIA_QUE_AFF_CI_SON_DEG_IMP_DIS_SOP_)
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -182,7 +184,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È il calcolatore di eventi del Costruttore... sta elaborando il prossimo frame...)")
+                dialogo.append(LDS._1319_01_Tu__IL_CAL_DI_EVE_DEL_COS_STA_ELA_IL_PRO_FRA_)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano3"]:
         if tipo == "OggettoImpo":
@@ -196,7 +198,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Impo...")
+                dialogo.append(LDP._0391_01_Tu_IMPO_)
                 partiDialogo.append(dialogo)
         elif tipo == "OggettoCellaCostruttore":
             partiDialogo = []
@@ -209,15 +211,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Ehi?")
+                dialogo.append(LDP._0392_01_Tu__EHI_)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDP._0392_02_Sconosciuto__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"...")
+                dialogo.append(LDP._0392_03_Tu__)
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"]:
                 oggettoDato = False
@@ -227,11 +229,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1320_01_Sconosciuto__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(C'è un cadavere... ha dei tubi che gli escono dal corpo...)")
+                dialogo.append(LDS._1320_02_Tu_C_UN_CAD_HA_DEI_TUB_CHE_GLI_ESC_DAL_COR_)
                 partiDialogo.append(dialogo)
             else:
                 nome = LI.COSTRUTTORE
@@ -242,11 +244,13 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"...")
+                dialogo.append(LDS._1321_01_Costruttore__)
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È il cadavere del Costruttore... alla fine Neil è riuscito a prendere il suo posto...)")
+                dialogo.append(LDS._1321_02_Tu__IL_CAD_DEL_COS_ALL_FIN_NEI__RIU_A_PRE_IL_SUO_POS_)
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+

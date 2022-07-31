@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Localizzazione.LocalizDialoghiSecondari as LDS
+import Codice.Localizzazione.LocalizDialoghiPrincipali as LDP
 
 
 def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
@@ -26,7 +28,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(Qualcuno ha sfondato la porta per entrare...)")
+                dialogo.append(LDS._1310_01_Tu_QUA_HA_SFO_LA_POR_PER_ENT_)
                 partiDialogo.append(dialogo)
             else:
                 oggettoDato = False
@@ -36,7 +38,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"(È la porta del laboratorio... credo che l'unico che possa averla sfondata sia il Costruttore...)")
+                dialogo.append(LDS._1311_01_Tu__LA_POR_DEL_LAB_CRE_CHE_LUN_CHE_POS_AVE_SFO_SIA_IL_COS_)
                 partiDialogo.append(dialogo)
         elif tipo == "Bibliotecario":
             partiDialogo = []
@@ -49,7 +51,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Neil!")
+                dialogo.append(LDP._0375_01_Ren__NEIL_)
                 partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo
+
+
