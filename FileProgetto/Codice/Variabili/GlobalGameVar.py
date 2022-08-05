@@ -466,7 +466,7 @@ GlobalSndVar.loadSounds(numSndCaricato)
 partitaAppenaAvviataPostFinale = True
 
 creditiMioNome = "Luca Chioni"
-creditiTraduttoreInglese = "Someone"
+creditiTraduttoreInglese = "Sara Doneddu"
 creditiSuoni = "\"Knock Monitor Screen.wav\" by Angel_Perez_Grandi -- https://freesound.org/s/71175/ -- License: Attribution 4.0" + " <br> "
 creditiSuoni += "\"Wild Boar / Grunting Growling\" by TheVeoMammoth11 -- https://freesound.org/s/492655/ -- License: Attribution 3.0" + " <br> "
 creditiSuoni += "\"Lava loop.wav\" by Audionautics -- https://freesound.org/s/133901/ -- License: Attribution 3.0" + " <br> "
