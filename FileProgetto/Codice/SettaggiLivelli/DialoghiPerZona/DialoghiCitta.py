@@ -288,11 +288,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(LDP._0071_10_Sconosciuto_NON_PAR_SEN_COM_SON___STR__U_MON_ % GlobalGameVar.monetePerEntrareNellaConfraternita)
+            dialogo.append({lingua: testo % GlobalGameVar.monetePerEntrareNellaConfraternita for lingua, testo in LDP._0071_10_Sconosciuto_NON_PAR_SEN_COM_SON___STR__U_MON_.items()})
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(LDP._0071_11_Tu_COS___STR__U_MON_PER_RIS_A_UNA_DOM_ % GlobalGameVar.monetePerEntrareNellaConfraternita)
+            dialogo.append({lingua: testo % GlobalGameVar.monetePerEntrareNellaConfraternita for lingua, testo in LDP._0071_11_Tu_COS___STR__U_MON_PER_RIS_A_UNA_DOM_.items()})
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -316,7 +316,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(LDP._0071_17_Tu_CER_DI_SIC_NON_TE_LO_SEI_APP_INV___STR__U_MON_PER_AVE_UNA_RIS_E_LOP_DI_SPE_ALT_MON_PER_DEL_RI_NON_MI_SEN_PER_NIE_TRU_ANZ_SEM_PRO_UNO_DA_PRE_AL_VOL_ % GlobalGameVar.monetePerEntrareNellaConfraternita)
+            dialogo.append({lingua: testo % GlobalGameVar.monetePerEntrareNellaConfraternita for lingua, testo in LDP._0071_17_Tu_CER_DI_SIC_NON_TE_LO_SEI_APP_INV___STR__U_MON_PER_AVE_UNA_RIS_E_LOP_DI_SPE_ALT_MON_PER_DEL_RI_NON_MI_SEN_PER_NIE_TRU_ANZ_SEM_PRO_UNO_DA_PRE_AL_VOL_.items()})
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -339,7 +339,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(LDS._0633_02_Sconosciuto_CER_SON___STR__U_MON_ % GlobalGameVar.monetePerEntrareNellaConfraternita)
+                dialogo.append({lingua: testo % GlobalGameVar.monetePerEntrareNellaConfraternita for lingua, testo in LDS._0633_02_Sconosciuto_CER_SON___STR__U_MON_.items()})
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -352,7 +352,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(LDP._0072_01_Tu_TIE_LE___STR__U_MON_UHM_NON_SO_ANC_IL_TUO_NOM_ % GlobalGameVar.monetePerEntrareNellaConfraternita)
+                dialogo.append({lingua: testo % GlobalGameVar.monetePerEntrareNellaConfraternita for lingua, testo in LDP._0072_01_Tu_TIE_LE___STR__U_MON_UHM_NON_SO_ANC_IL_TUO_NOM_.items()})
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -464,7 +464,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(LDS._0635_06_Sconosciuto_COM_VUO_SON___STR__U_MON_PER_LAS_LA_CON_ % GlobalGameVar.monetePerLasciareLaConfraternita)
+                dialogo.append({lingua: testo % GlobalGameVar.monetePerLasciareLaConfraternita for lingua, testo in LDS._0635_06_Sconosciuto_COM_VUO_SON___STR__U_MON_PER_LAS_LA_CON_.items()})
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

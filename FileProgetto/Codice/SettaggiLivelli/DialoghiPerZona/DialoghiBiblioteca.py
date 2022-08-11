@@ -339,7 +339,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(LDP._0026_01_Bibliotecario_DOMANDA_)
-            dialogo.append(LDP._0026_02_Bibliotecario_DIM_QUA_SPA_PER_LA_PAL_PRI_DI_FER_SE_LA_FAC_PAR_CON_UNA_VEL_DI___STR__U_MS_ % str(velPalla))
+            dialogo.append({lingua: testo % str(velPalla) for lingua, testo in LDP._0026_02_Bibliotecario_DIM_QUA_SPA_PER_LA_PAL_PRI_DI_FER_SE_LA_FAC_PAR_CON_UNA_VEL_DI___STR__U_MS_.items()})
             i = 1
             while i <= 4:
                 if i == scelta:
@@ -354,9 +354,9 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             i = 1
             while i <= 4:
                 if i == scelta:
-                    dialogo.append(LDP._0026_04_Bibliotecario_SEG_I_CAL_ESA___STR___M_E_QUE_RIS_COR_A_UN_EVE_NON_ANC_AVV_ % str(soluzione))
+                    dialogo.append({lingua: testo % str(soluzione) for lingua, testo in LDP._0026_04_Bibliotecario_SEG_I_CAL_ESA___STR___M_E_QUE_RIS_COR_A_UN_EVE_NON_ANC_AVV_.items()})
                 else:
-                    dialogo.append(LDP._0026_05_Bibliotecario_MMH_NO_DEV_AVE_SBA_DEI_CAL_RIP_CON_UNA_VEL_DI___STR___MS_LA_RIS_GIU_ERA___STR___M_TI_FAC_VED_ % (str(velProssimaPalla), str(soluzione)))
+                    dialogo.append({lingua: testo % (str(velProssimaPalla), str(soluzione)) for lingua, testo in LDP._0026_05_Bibliotecario_MMH_NO_DEV_AVE_SBA_DEI_CAL_RIP_CON_UNA_VEL_DI___STR___MS_LA_RIS_GIU_ERA___STR___M_TI_FAC_VED_.items()})
                 i += 1
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eseguitaVerificaRisultatoEnigma"]:

@@ -248,7 +248,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(LDP._0005_32_Rod_MA_NON_PRE_HO_QUI_UNA_MAP_CHE_PU_AIU_TE_LA_POS_PRE_PER_SOL___STR__U_MON_ % GlobalGameVar.monetePerLaMappaDelLabirinto)
+                dialogo.append({lingua: testo % GlobalGameVar.monetePerLaMappaDelLabirinto for lingua, testo in LDP._0005_32_Rod_MA_NON_PRE_HO_QUI_UNA_MAP_CHE_PU_AIU_TE_LA_POS_PRE_PER_SOL___STR__U_MON_.items()})
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -294,7 +294,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
-                    dialogo.append(LDS._0396_02_Rod_SON_IMP_AL_MOM_CON___STR__U_MON_POT_STU_PER_BEN_ % GlobalGameVar.monetePerLaMappaDelLabirinto)
+                    dialogo.append({lingua: testo % GlobalGameVar.monetePerLaMappaDelLabirinto for lingua, testo in LDS._0396_02_Rod_SON_IMP_AL_MOM_CON___STR__U_MON_POT_STU_PER_BEN_.items()})
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("tu")
@@ -307,7 +307,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     scelta = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(LDP._0006_01_Tu_ECC_LE___STR__U_MON_ROD_ % GlobalGameVar.monetePerLaMappaDelLabirinto)
+                    dialogo.append({lingua: testo % GlobalGameVar.monetePerLaMappaDelLabirinto for lingua, testo in LDP._0006_01_Tu_ECC_LE___STR__U_MON_ROD_.items()})
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
