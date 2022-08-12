@@ -768,7 +768,7 @@ def animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, att
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDanneggiamentoCausaRallo, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
                     elif fineanimaz <= 5:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDanneggiamentoCausaRallo, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
-                if "attaccoColco" in azioniDaEseguire:
+                if "attaccoColco" in azioniDaEseguire and 0 < fineanimaz <= 5:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgDanneggiamentoCausaColco, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
                 j = 0
                 while j < len(morteEscheAnimata):
