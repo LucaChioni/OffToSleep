@@ -372,7 +372,6 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     # nuova partita
                     if voceMarcata == 1:
-                        GlobalGameVar.inizializzaVariabiliGlobali()
                         menuConferma = "inizia"
 
                     # carica partita
@@ -381,13 +380,13 @@ def menu(caricaSalvataggio, gameover):
 
                         # lettura salvataggio
                         if n != -1:
-                            GlobalGameVar.inizializzaVariabiliGlobali()
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
                             GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone, GlobalHWVar.canaliSoundSottofondoAmbientale], [0, 0], False, posizioneCanaleMusica=0)
                             GlobalHWVar.canaleSoundCanzone.stop()
                             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+                            GlobalGameVar.inizializzaVariabiliGlobali()
                             datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
                             dati = datiTotaliAttuali[0]
                             tuttePorte = datiTotaliAttuali[1]
@@ -536,6 +535,7 @@ def menu(caricaSalvataggio, gameover):
                             GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+                            GlobalGameVar.inizializzaVariabiliGlobali()
                             dati = datiIniziali
                             xInizialie = GlobalHWVar.gsx // 32 * 15
                             yInizialie = GlobalHWVar.gsy // 18 * 7

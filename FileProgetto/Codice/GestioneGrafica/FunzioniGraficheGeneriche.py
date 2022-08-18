@@ -976,6 +976,11 @@ def aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, 
 
 
 def mostraSchermataCitazione():
+    i = 0
+    while i < 10:
+        pygame.time.wait(100)
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        i += 1
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     messaggio(LI.A_NOI_UOM_NAS__TOC_UN_TRI_PRI_QUE_DI_SEN_VIV_CON_LA_BEL_ILL_DI_PRE_COM_UNA_REA_FUO_DI_NOI_QUE_NOS_INT_SEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 8, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
     # messaggio(LI._LUI_PIR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
@@ -996,6 +1001,11 @@ def mostraSchermataCitazione():
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
     oscuraIlluminaSchermo(illumina=False)
+    i = 0
+    while i < 10:
+        pygame.time.wait(100)
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        i += 1
 
 
 def animaTremolioSchermo(nelVulcano=False):
