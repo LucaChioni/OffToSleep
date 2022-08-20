@@ -801,8 +801,6 @@ def settaRisoluzioneOttimale(testaPrestazioni):
                     os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
                 opzioni_schermo = pygame.DOUBLEBUF
                 schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-                pygame.display.set_caption(titolo)
-                pygame.display.set_icon(icona)
             else:
                 if gsx == maxGsx and gsy == maxGsy:
                     os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
@@ -858,8 +856,6 @@ if len(datiFileImpostazioniString) == 7:
                 os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
             opzioni_schermo = pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-            pygame.display.set_caption(titolo)
-            pygame.display.set_icon(icona)
         else:
             if gsx == maxGsx and gsy == maxGsy:
                 os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
