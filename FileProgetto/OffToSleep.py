@@ -29,6 +29,7 @@ import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaA
 import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
+import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 
 
 def gameloop():
