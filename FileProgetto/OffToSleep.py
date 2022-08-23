@@ -4,6 +4,7 @@
 import os
 import pygame
 import datetime
+import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
@@ -29,7 +30,6 @@ import Codice.SettaggiLivelli.SetPosizProtagonistaAudio as SetPosizProtagonistaA
 import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimenti
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
-import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 
 
 def gameloop():

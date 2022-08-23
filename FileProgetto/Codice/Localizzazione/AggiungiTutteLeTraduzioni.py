@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import Codice.Localizzazione.TraduzioniInterfaccia.TestiInglese
+import Codice.Localizzazione.TraduzInglese.Interfaccia
