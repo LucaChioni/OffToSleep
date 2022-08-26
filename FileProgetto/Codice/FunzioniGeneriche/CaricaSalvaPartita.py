@@ -231,6 +231,13 @@ def salvataggio(n, datiAttuali, datiGameover):
     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
     scrivi.write(encoded_text)
     scrivi.close()
+    leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+    contenutoFile = leggi.read()
+    leggi.close()
+    encoded_text = contenutoFile.encode('base64')
+    scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+    scrivi.write(encoded_text)
+    scrivi.close()
 
 
 def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, checkErrori):
@@ -543,7 +550,6 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
             contenutoFile = leggi.read()
             leggi.close()
-            contenutoFile = contenutoFile.encode('base64')
             if not backupNecessario:
                 scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
             else:
