@@ -313,7 +313,7 @@ def menuMercante(dati):
         mouseInquadraFrecciaGiu = False
         suTornaIndietro = False
         if GlobalHWVar.mouseVisibile:
-            if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+            if GlobalHWVar.gsx // 32 * 22.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
@@ -1006,11 +1006,11 @@ def menuMercante(dati):
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
 
             GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 4.5))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialogoMercante, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 4))
@@ -1054,11 +1054,11 @@ def menuMercante(dati):
                 if oggetton == 11:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccato, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     if dati[133] == 1:
-                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton + 1] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton + 1] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 50, centrale=True)
                     elif dati[133] >= 2:
-                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton + 2] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton + 2] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 50, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 50, centrale=True)
                 else:
                     if voceMarcata != 0 and oggetton != 11 and (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["W"] or (bottoneDown == "mouseSinistro" and mouseInquadraFrecciaSu) or bottoneDown == "padSu"):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoSu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
@@ -1066,11 +1066,11 @@ def menuMercante(dati):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
-                    FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.MON_NEC_I[GlobalHWVar.linguaImpostata] % (costoOggettiTemp[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 5.3, 50, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1), int(GlobalHWVar.gpy * 6.7) - 1), (int(GlobalHWVar.gpx * 9.5), int(GlobalHWVar.gpy * 6.7) - 1), 2)
-                FunzioniGraficheGeneriche.messaggio(LI.CONFERMA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
+                FunzioniGraficheGeneriche.messaggio(LI.CONFERMA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.3, GlobalHWVar.gsy // 18 * 7, 50, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.9)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.7)), 2)
-                FunzioniGraficheGeneriche.messaggio(LI.ANNULLA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 7, 50)
+                FunzioniGraficheGeneriche.messaggio(LI.ANNULLA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 7.3, GlobalHWVar.gsy // 18 * 7, 50, centrale=True)
             else:
                 if interlocutore == "Rod":
                     FunzioniGraficheGeneriche.messaggio(LI.PRE_QUE_CHE_TI_SER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.25, GlobalHWVar.gsy // 18 * 4.5, 50, centrale=True)

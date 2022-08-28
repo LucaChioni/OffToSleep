@@ -44,7 +44,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
             if GlobalHWVar.mouseVisibile:
-                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.gsx // 32 * 22.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                 else:
@@ -68,11 +68,11 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robograf2, (GlobalHWVar.gpx * 7, int(-GlobalHWVar.gpy * 4.45)))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_VUO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14, 100)
                 GlobalHWVar.aggiornaSchermo()
 
@@ -87,7 +87,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
             if GlobalHWVar.mouseVisibile:
-                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.gsx // 32 * 22.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                 else:
@@ -111,11 +111,11 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robograf4, (GlobalHWVar.gpx * 7, -GlobalHWVar.gpy * 4.45))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_DAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 14, 100)
                 GlobalHWVar.aggiornaSchermo()
 
@@ -166,7 +166,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
         suCambiaOperazione = False
         if GlobalHWVar.mouseVisibile:
             if not conferma:
-                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2 and not fineDelGioco:
+                if GlobalHWVar.gsx // 32 * 22.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2 and not fineDelGioco:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     suTornaIndietro = True
@@ -200,7 +200,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
             else:
-                if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.gsx // 32 * 22.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     suTornaIndietro = True
@@ -508,39 +508,39 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (0, GlobalHWVar.gsy // 18 * 16, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2))
                 if cosa == 1:
                     if GlobalHWVar.mouseVisibile:
-                        FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     elif GlobalHWVar.usandoIlController:
-                        FunzioniGraficheGeneriche.messaggio(LI.Y_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.Y_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio(LI.SHI_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.SHI_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                 if cosa == 2:
                     if possibileSalvare:
                         if GlobalHWVar.mouseVisibile:
-                            FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         elif GlobalHWVar.usandoIlController:
-                            FunzioniGraficheGeneriche.messaggio(LI.Y_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.Y_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         else:
-                            FunzioniGraficheGeneriche.messaggio(LI.SHI_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.SHI_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
                         if GlobalHWVar.mouseVisibile:
-                            FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         elif GlobalHWVar.usandoIlController:
-                            FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         else:
-                            FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
+                            FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                 if cosa == 3:
                     if GlobalHWVar.mouseVisibile:
-                        FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     elif GlobalHWVar.usandoIlController:
-                        FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.3, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16.8, 50)
+                        FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                 if GlobalHWVar.mouseVisibile:
-                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 elif GlobalHWVar.usandoIlController:
-                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
-                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
+                    FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
 
             if conferma:
                 if primaconf:
@@ -561,11 +561,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeScuroPiuScuro, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), ((GlobalHWVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 12.5) - 1), 2)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, ((GlobalHWVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
-                FunzioniGraficheGeneriche.messaggio(LI.CONFERMI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.5) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.9, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.CONFERMI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 12.9, 70, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 2.5) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 14.1) - 1), ((GlobalHWVar.gsx // 32 * 10.75) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), (GlobalHWVar.gsy // 18 * 14.1) - 1), 2)
-                FunzioniGraficheGeneriche.messaggio(LI.SI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.SI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 5.1) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70, centrale=True)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 14.4), ((GlobalHWVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3) - 1, GlobalHWVar.gsy // 18 * 15.7), 2)
-                FunzioniGraficheGeneriche.messaggio(LI.NO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 7.6) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70)
+                FunzioniGraficheGeneriche.messaggio(LI.NO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 8.1) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 14.6, 70, centrale=True)
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (vxp, vyp))
             elif confermaSalvataggioCancellazione:
                 if confermaSalvataggioCancellazione == 1:
