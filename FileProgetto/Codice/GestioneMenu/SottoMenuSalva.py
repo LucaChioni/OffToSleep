@@ -73,7 +73,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_VUO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14, 100)
+                FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_VUO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 14, 100, centrale=True)
                 GlobalHWVar.aggiornaSchermo()
 
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
@@ -116,7 +116,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_DAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 14, 100)
+                FunzioniGraficheGeneriche.messaggio(LI.SLO_DI_MEM_DAN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 14, 100, centrale=True)
                 GlobalHWVar.aggiornaSchermo()
 
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
