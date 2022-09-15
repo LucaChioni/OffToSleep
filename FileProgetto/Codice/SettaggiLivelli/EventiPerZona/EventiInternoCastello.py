@@ -1080,7 +1080,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             cambiosta = True
             carim = True
             caricaTutto = True
-            # apro le porte nell'ufficio di Neil e nella stanza8 per accedere al tunnel (evitare di dover prendere chiavi)
+            # apro le porte nell'ufficio di Neil per evitare di dover prendere chiavi
             i = 0
             while i < len(tutteporte):
                 if tutteporte[i] == GlobalGameVar.dictStanze["internoCastello20"]:

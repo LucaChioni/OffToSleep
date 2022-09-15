@@ -2074,7 +2074,7 @@ def equiprobo(dati):
 
                 FunzioniGraficheGeneriche.messaggio(LI.SETTA_IMPO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 FunzioniGraficheGeneriche.messaggio(LI.SACCHE_ENERGETICHE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
-                FunzioniGraficheGeneriche.messaggio(LI.PRIORIT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.8, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                FunzioniGraficheGeneriche.messaggio(LI.PRIORIT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.9, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(LI.CONDIZIOIMPOFOGLIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(LI.AZIOIMPOFOGLIO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.8, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
                 # equip batteria
@@ -2131,7 +2131,7 @@ def equiprobo(dati):
                 # programmazione Colco
                 i = 1
                 while i <= 10:
-                    FunzioniGraficheGeneriche.messaggio(str(i), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.8, GlobalHWVar.gsy // 18 * (i + 5.2), 50, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(str(i), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.9, GlobalHWVar.gsy // 18 * (i + 5.2), 50, centrale=True)
                     i += 1
                 posXCondizioni = 11.8
                 c = 6.3
