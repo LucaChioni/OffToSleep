@@ -398,11 +398,11 @@ def menuMercante(dati):
                     if not GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(True)
             else:
-                if GlobalHWVar.gsy // 18 * 4.3 <= yMouse <= GlobalHWVar.gsy // 18 * 4.8 and GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 9.5:
+                if GlobalHWVar.gsy // 18 * 4.3 <= yMouse <= GlobalHWVar.gsy // 18 * 4.8 and GlobalHWVar.gsx // 32 * 7.45 <= xMouse <= GlobalHWVar.gsx // 32 * 8.45:
                     mouseInquadraFrecciaSu = True
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
-                elif GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 5.3 and GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 9.5:
+                elif GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 5.3 and GlobalHWVar.gsx // 32 * 7.45 <= xMouse <= GlobalHWVar.gsx // 32 * 8.45:
                     mouseInquadraFrecciaGiu = True
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
