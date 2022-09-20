@@ -762,11 +762,11 @@ _0130_12_Sconosciuto_NON_DOV_FAR_NIE_DI_SPE_SE_QUA_TI_SVE_VED_TUT_BLO_VOR_DIR_CH
 _0130_13_Tu__NO_IO_IO_VOG_TOR_COM_PRI_ = {"ita": u"... No, io... io voglio tornare come prima..."}
 _0130_14_Sconosciuto_BEN_POS_PRO_ = {"ita": u"Bene, possiamo procedere."}
 _0130_15_Tu_ASPETTA_REN_ = {"ita": u"Aspetta! René-"}
-_0131_01_Tu__SAR_STA_MEG_PRO_SU_UN_SOL_ = {"ita": u"... Sarebbe stato meglio provarlo su un soldato."}
+_0131_01_Tu__SAR_STA_MEG_PRO_SU_UN_SOL_ = {"ita": u"... sarebbe stato meglio provarlo su un soldato."}
 _0131_02_Sconosciuto_NO__NEC_UN_AMB_PUL_ = {"ita": u"No, è necessario un ambiente pulito."}
 _0131_03_Tu_MMH_SPE_DI_AVE_PRE_TUT_CON_QUE_SIS_DI_EME_ = {"ita": u"<*>#italic#Mmh...<*> speriamo di aver previsto tutto con quei sistemi di emergenza..."}
 _0131_04_Sconosciuto_NON_FAR_DAN_ = {"ita": u"Non farà danni..."}
-_0132_01_Tu__E_PER_QUA_RIM_BLO_ = {"ita": u"... E per quanto rimarrà bloccata?"}
+_0132_01_Tu__E_PER_QUA_RIM_BLO_ = {"ita": u"... e per quanto rimarrà bloccata?"}
 _0132_02_Sconosciuto__PER_QUA_SEC_ = {"ita": u"... Per qualche secolo."}
 _0132_03_Tu_POTREBBE_IMPAZZIRE_ = {"ita": u"Potrebbe impazzire..."}
 _0132_04_Sconosciuto__POS_PAS_ALL_FAS_ = {"ita": u"... Possiamo passare all'ultima fase."}
@@ -925,7 +925,7 @@ _0170_09_LetteraDiNeil_SE_DEC_DI_ACC_PRE_IL_PRI_POS_AL_MIO_CAS_CON_QUE_LET_ALL_G
 _0170_10_Tu__ERA_QUI_PER_QUE_REN_ = {"ita": u"(... Era qui per questo René...)"}
 _0171_01_Tu__UNA_LIS_DI_COM_ = {"ita": u"(È una lista di comandi...)"}
 _0171_02_IstruzioniPerIlCalcolatoreDiEventi_COM_CER_DEL_CAL_DI_EVE_POS_IL_CAS_OCC_CHI_E_PAR_ALL_BR_COM_DI_ACC_NAV_BR_COM_DAV_SEQ_DI_EVE_AVV_SEQ_BR_COM_DAR_SEQ_DI_EVE_STO_ = {"ita": u"Comandi cerebrali del Calcolatore di eventi (posiziona il casco: occhi chiusi e paralleli all'orizzonte): <br> Comando di accensione: <*>#italic#Navigazione<*> <br> Comando d'avvio sequenza di eventi: <*>#italic#Avvia sequenza<*> <br> Comando d'arresto sequenza di eventi: <*>#italic#Stop<*>"}
-_0171_03_IstruzioniPerIlCalcolatoreDiEventi_COM_PRO_TEM_PRO_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_REG_TEM_REG_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_MOV_MOV_SPA_IN_INS_LUO_BR_IL_SIS_PRO_GLI_EVE_NEL_MEN_DEL_ = {"ita": u"Comando progresso temporale: <*>#italic#Progredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando regresso temporale: <*>#italic#Regredisci *x* anni, *x* mesi, *x* giorni, *x* ore, *x* minuti, *x* secondi<*> <br> Comando movimento: <*>#italic#Movimento spaziale in *inserisci luogo*<*> <br> Il sistema proietterà gli eventi nella mente dell'utente."}
+_0171_03_IstruzioniPerIlCalcolatoreDiEventi_COM_PRO_TEM_PRO_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_REG_TEM_REG_X_ANN_X_MES_X_GIO_X_ORE_X_MIN_X_SEC_BR_COM_MOV_MOV_SPA_IN_INS_LUO_BR_IL_SIS_PRO_GLI_EVE_NEL_MEN_DEL_ = {"ita": u"Comando progresso temporale: <*>#italic#Progredisci *x anni, *x mesi, *x giorni, *x ore, *x minuti, *x secondi<*> <br> Comando regresso temporale: <*>#italic#Regredisci *x anni, *x mesi, *x giorni, *x ore, *x minuti, *x secondi<*> <br> Comando movimento: <*>#italic#Movimento spaziale in *inserisci_luogo<*> <br> Il sistema proietterà gli eventi nella mente dell'utente."}
 _0171_04_IstruzioniPerIlCalcolatoreDiEventi_ECC_A_TE_TUT_LA_MIA_CON_ = {"ita": u"Ecco a te tutta la mia conoscenza."}
 _0171_05_Tu_ASPETTA_POSSO_ = {"ita": u"(Aspetta... posso...)"}
 _0171_06_Tu_CA_DI_EVE_NON_DIR_CHE_ = {"ita": u"(\"Calcolatore di eventi\"... vuol dire che...)"}
