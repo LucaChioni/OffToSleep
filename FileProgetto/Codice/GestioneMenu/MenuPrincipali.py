@@ -1561,7 +1561,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, 
                 voceMarcataOggetto = voceMarcata
 
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoStartBattaglia, (0, GlobalHWVar.gsy // 18 * 8))
-            FunzioniGraficheGeneriche.messaggio(LI.IMPOSTAZIONI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 0.7), int(GlobalHWVar.gpy * 16.05), 45)
+            FunzioniGraficheGeneriche.messaggio(LI.IMPOSTAZIONI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 2.2), int(GlobalHWVar.gpy * 16.05), 45, centrale=True)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 15.8)), (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 16.8)), 2)
             FunzioniGraficheGeneriche.messaggio(LI.ESCI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 4.9), int(GlobalHWVar.gpy * 16.05), 45)
 

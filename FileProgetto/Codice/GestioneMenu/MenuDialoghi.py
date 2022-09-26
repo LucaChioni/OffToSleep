@@ -494,42 +494,62 @@ def menuMercante(dati):
                             yp = GlobalHWVar.gsy // 18 * 6.1
                         # pozione
                         if confermaOggettoDaAcquistare == 1:
+                            if dati[31] == -1:
+                                dati[31] = 0
                             dati[31] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 7
                         # carica batt
                         if confermaOggettoDaAcquistare == 2:
+                            if dati[32] == -1:
+                                dati[32] = 0
                             dati[32] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 7.9
                         # antidoto
                         if confermaOggettoDaAcquistare == 3:
+                            if dati[33] == -1:
+                                dati[33] = 0
                             dati[33] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 8.8
                         # super pozione
                         if confermaOggettoDaAcquistare == 4:
+                            if dati[34] == -1:
+                                dati[34] = 0
                             dati[34] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 9.7
                         # carica migliorato
                         if confermaOggettoDaAcquistare == 5:
+                            if dati[35] == -1:
+                                dati[35] = 0
                             dati[35] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 10.6
                         # bomba
                         if confermaOggettoDaAcquistare == 6:
+                            if dati[36] == -1:
+                                dati[36] = 0
                             dati[36] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 11.5
                         # bomba veleno
                         if confermaOggettoDaAcquistare == 7:
+                            if dati[37] == -1:
+                                dati[37] = 0
                             dati[37] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 12.4
                         # esca
                         if confermaOggettoDaAcquistare == 8:
+                            if dati[38] == -1:
+                                dati[38] = 0
                             dati[38] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 13.3
                         # bomba appiccicosa
                         if confermaOggettoDaAcquistare == 9:
+                            if dati[39] == -1:
+                                dati[39] = 0
                             dati[39] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 14.2
                         # bomba potenziata
                         if confermaOggettoDaAcquistare == 10:
+                            if dati[40] == -1:
+                                dati[40] = 0
                             dati[40] += numeroOggettiAcquistati
                             yp = GlobalHWVar.gsy // 18 * 15.1
                         confermaOggettoDaAcquistare = 0

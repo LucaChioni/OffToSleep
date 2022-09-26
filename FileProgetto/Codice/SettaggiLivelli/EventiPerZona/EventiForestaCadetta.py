@@ -216,8 +216,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             dati[40] += oggettiRimastiAHans[9]
         if oggettiRimastiAHans[10] > 0:
             dati[132] += oggettiRimastiAHans[10]
-        if dati[132] > 1:
-            dati[132] = 1
+        if dati[132] > GlobalGameVar.frecceMaxPerFaretra[dati[133]]:
+            dati[132] = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
         if dati[62] <= 0 and oggettiRimastiAHans[11] > 0:
             dati[62] = oggettiRimastiAHans[11]
         if oggettiRimastiAHans[12] > 0:
