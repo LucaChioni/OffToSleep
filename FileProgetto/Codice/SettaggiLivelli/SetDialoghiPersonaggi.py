@@ -194,23 +194,37 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
     elif GlobalGameVar.dictStanze["laboratorioSegretoNeil1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["laboratorioSegretoNeil1"]:
         partiDialogoTradotte, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo = DialoghiLaboratorioNeil.setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute)
 
-    # se le parti che compongono le battute dei dialoghi non sono dictionary (come "Tu", "personaggio", "???DOMANDA???" e "!!!RISPOSTA!!!"), le traformo in dictionary qui
+    # se le parti che compongono le battute dei dialoghi non sono dictionary (come "tu" e "personaggio"), le traformo in dictionary qui
     partiDialogoTradotteTemp = []
     for dialogo in partiDialogoTradotte:
         dialogoTemp = []
         for pezzoDialogo in dialogo:
             if not type(pezzoDialogo) is dict:
-                dialogoTemp.append({"ita": pezzoDialogo, "eng": pezzoDialogo})
+                dictTempLocalizzazioniDialoghi = {}
+                for lingua in GlobalHWVar.lingueDelGioco:
+                    dictTempLocalizzazioniDialoghi[lingua] = pezzoDialogo
+                dialogoTemp.append(dictTempLocalizzazioniDialoghi)
+            elif type(pezzoDialogo) is dict:
+                for lingua in GlobalHWVar.lingueDelGioco:
+                    if not lingua in pezzoDialogo.keys():
+                        pezzoDialogo[lingua] = pezzoDialogo["ita"]
+                dialogoTemp.append(pezzoDialogo)
             else:
                 dialogoTemp.append(pezzoDialogo)
         partiDialogoTradotteTemp.append(dialogoTemp)
     partiDialogoTradotte = partiDialogoTradotteTemp
     # se il nome dell'interlocutore non è un dictionary (non c'è bisogno di tradurlo), lo traformo in dictionary qui
     if not type(nome) is dict:
-        nome = {"ita": nome, "eng": nome}
+        dictTempLocalizzazioniNomi = {}
+        for lingua in GlobalHWVar.lingueDelGioco:
+            dictTempLocalizzazioniNomi[lingua] = nome
+        nome = dictTempLocalizzazioniNomi
     # se l'oggetto dato non è un dictionary (è == False), lo traformo in dictionary qui
     if not type(oggettoDato) is dict:
-        oggettoDato = {"ita": oggettoDato, "eng": oggettoDato}
+        dictTempLocalizzazioniOggetti = {}
+        for lingua in GlobalHWVar.lingueDelGioco:
+            dictTempLocalizzazioniOggetti[lingua] = oggettoDato
+        oggettoDato = dictTempLocalizzazioniOggetti
 
     # creo un digest dell'intero dialogo per avere un id da usare per il controllo dei dialoghi già letti (non lo faccio per i dialoghi con nessuno, tutorial e cadaveri (eccetto i soldati nel castello))
     if tipo == "Nessuno" or tipo == "Tutorial" or (tipo.startswith("OggettoDictCadavere") and not tipo.startswith("OggettoDictCadavereSoldatoCastello")):

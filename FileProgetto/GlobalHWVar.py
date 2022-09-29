@@ -815,6 +815,7 @@ def settaRisoluzioneOttimale(testaPrestazioni):
     # if ramNecessaria > ramDisponibile:
         # print ("RAM disponibile non sufficiente. Necessaria: " + str(ramNecessaria) + " MB")
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, modalitaSchermo, gsx, gsy)
+lingueDelGioco = ["eng", "ita"]
 linguaImpostata = "eng"
 controlloRisoluzione = True
 leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
@@ -882,3 +883,14 @@ if erroreFileImpostazioni:
 
 # definisco la variabile che mi serve per sapere quanto tempo hai giocato (per metterlo nel salvataggio)
 tempoInizioPartita = False
+
+# # inizializzazione di stamworks
+# nomeAchievement = "JUST_WAIT"
+# from steamworks import STEAMWORKS
+# steamworks = STEAMWORKS()
+# steamworks.initialize()
+# utenteSteamConnesso = steamworks.UserStats.RequestCurrentStats()
+# if utenteSteamConnesso:
+#     achievementSbloccato = steamworks.UserStats.GetAchievement(nomeAchievement)
+# else:
+#     achievementSbloccato = False

@@ -40,6 +40,9 @@ def gameloop():
     gameover = False
     # inizializzo tutte le variabili
     if True:
+        # # la frequenza con cui viene richiesto di sbloccare l'achievement a Steam
+        # frequenzaDiRichiestaSteam = 0
+
         casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
 
         listaNemiciSotterrati = []
@@ -2926,6 +2929,13 @@ def gameloop():
             # controlla se devi cambiare personaggio giocabile
             personaggioDaUsare = SetImgOggettiMappaPersonaggi.cambiaProtagonista(dati[0])
             personaggioUsato = personaggioDaUsare
+
+        # # sblocco dell'achievement di Steam se non è ancora stato sbloccato (si sblocca quando si finisce il gioco)
+        # if GlobalHWVar.utenteSteamConnesso and not GlobalHWVar.achievementSbloccato and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["fine"] and frequenzaDiRichiestaSteam == 0:
+        #     frequenzaDiRichiestaSteam = 60*60
+        #     if GlobalHWVar.steamworks.UserStats.SetAchievement(GlobalHWVar.nomeAchievement):
+        #         GlobalHWVar.achievementSbloccato = True
+        #         GlobalHWVar.steamworks.UserStats.StoreStats()
 
         if dati[0] == GlobalGameVar.dictAvanzamentoStoria["fine"]:
             dati[0] += 1
