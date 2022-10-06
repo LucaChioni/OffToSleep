@@ -1454,6 +1454,9 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         GlobalHWVar.gsy = gsyTemp
                         GlobalHWVar.gpx = GlobalHWVar.gsx // 32
                         GlobalHWVar.gpy = GlobalHWVar.gsy // 18
+                        if GlobalHWVar.sistemaOperativo == "Mac":
+                            pygame.display.quit()
+                            pygame.display.init()
                         if GlobalHWVar.modalitaSchermo == 0:
                             opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
                             GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), opzioni_schermo)

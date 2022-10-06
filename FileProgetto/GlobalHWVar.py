@@ -26,7 +26,7 @@ if eseguibile:
         import win32gui, win32con
         programToHide = win32gui.GetForegroundWindow()
         win32gui.ShowWindow(programToHide, win32con.SW_HIDE)
-    if sistemaOperativo == "Linux":
+    if sistemaOperativo == "Linux" or sistemaOperativo == "Mac":
         vetGamePath = gamePath.split("/")
         vetGamePath.pop(len(vetGamePath) - 1)
         vetGamePath.pop(len(vetGamePath) - 1)
@@ -56,6 +56,14 @@ elif sistemaOperativo == "Linux":
     resolution = output.split()[0].split(b'x')
     gsx = int(resolution[0])
     gsy = int(resolution[1])
+elif sistemaOperativo == "Mac":
+    import encodings
+    import re
+    import subprocess
+    results = str(subprocess.Popen(['system_profiler SPDisplaysDataType'], stdout=subprocess.PIPE, shell=True).communicate()[0])
+    res = re.search('Resolution: \d* x \d*', results).group(0).split(' ')
+    gsx = int(res[1])
+    gsy = int(res[3])
 
 # print ("Origine", gsx, gsy)
 if gsx % 32 != 0 or gsy % 18 != 0:
