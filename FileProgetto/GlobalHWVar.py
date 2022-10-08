@@ -283,15 +283,22 @@ configPadInUso = []
 listaPadConnessiConfigurati = []
 listaPadConnessiSconosciuti = []
 configPadConnessi = []
-def inizializzaPad(pad):
+croceDirezionalePad_corretta = True
+def impostaConfigPad(pad):
     # faccio il vettore con la configurazione dei tasti del pad da usare
     global configPadInUso
     global configPadConnessi
     global padUtilizzato
+    global croceDirezionalePad_corretta
     padUtilizzato = pad
     configPadInUso = []
     for configPad in configPadConnessi:
         if configPad[1] == padUtilizzato.get_name():
+            if len(configPad) == 14:
+                croceDirezionalePad_corretta = False
+            else:
+                croceDirezionalePad_corretta = True
+
             configTastiPad = []
             configTastiPad.append(configPad[2])
             configTastiPad.append(configPad[3])
@@ -301,11 +308,17 @@ def inizializzaPad(pad):
             configTastiPad.append(configPad[7])
             configTastiPad.append(configPad[8])
             configTastiPad.append(configPad[9])
+            if not croceDirezionalePad_corretta:
+                configTastiPad.append(configPad[10])
+                configTastiPad.append(configPad[11])
+                configTastiPad.append(configPad[12])
+                configTastiPad.append(configPad[13])
 
             configPadInUso.append(configPad[0])
             configPadInUso.append(configPad[1])
             configPadInUso.append(configTastiPad)
-            configPadInUso.append(configPad[10])
+            if croceDirezionalePad_corretta:
+                configPadInUso.append(configPad[10])
             break
 def caricaImpostazioniController():
     impoControllerErrato = False
@@ -322,7 +335,12 @@ def caricaImpostazioniController():
         while contaGlobale < len(datiImpostazioniController):
             setteggioController = datiImpostazioniController[contaGlobale].split("_")
             setteggioController.pop(len(setteggioController) - 1)
-            if len(setteggioController) != 10:
+            croceDirezionalePad_corretta_temp = True
+            if len(setteggioController) == 10:
+                croceDirezionalePad_corretta_temp = True
+            elif len(setteggioController) == 13:
+                croceDirezionalePad_corretta_temp = False
+            if (croceDirezionalePad_corretta_temp and len(setteggioController) != 10) or (not croceDirezionalePad_corretta_temp and len(setteggioController) != 13):
                 impoControllerErrato = True
                 # print ("File di configurazione dei controller corrotto 1")
                 break
@@ -366,6 +384,11 @@ def assegnaConfigurazioneController():
                 setteggioController = datiImpostazioniController[contaGlobale].split("_")
                 setteggioController.pop(len(setteggioController) - 1)
                 if nomeController == setteggioController[0]:
+                    joystick.init()
+                    if joystick.get_numhats() >= 1:
+                        croceDirezionalePad_corretta_temp = True
+                    else:
+                        croceDirezionalePad_corretta_temp = False
                     padGiaConfigurato = True
                     listaPadConnessiConfigurati.append(joystick)
                     configPad.append(idController)
@@ -378,11 +401,21 @@ def assegnaConfigurazioneController():
                     configPad.append(int(setteggioController[6]))
                     configPad.append(int(setteggioController[7]))
                     configPad.append(int(setteggioController[8]))
-                    configPad.append(int(setteggioController[9]))
-                    joystick.init()
+                    if not croceDirezionalePad_corretta_temp:
+                        configPad.append(int(setteggioController[9]))
+                        configPad.append(int(setteggioController[10]))
+                        configPad.append(int(setteggioController[11]))
+                        configPad.append(int(setteggioController[12]))
+                    else:
+                        configPad.append(int(setteggioController[9]))
                     break
                 contaGlobale += 1
         if not padGiaConfigurato:
+            joystick.init()
+            if joystick.get_numhats() >= 1:
+                croceDirezionalePad_corretta_temp = True
+            else:
+                croceDirezionalePad_corretta_temp = False
             listaPadConnessiSconosciuti.append(joystick)
             configPad.append(idController)
             configPad.append(nomeController)
@@ -395,6 +428,11 @@ def assegnaConfigurazioneController():
             configPad.append(False)
             configPad.append(False)
             configPad.append(False)
+            if not croceDirezionalePad_corretta_temp:
+                configPad.append(False)
+                configPad.append(False)
+                configPad.append(False)
+            joystick.quit()
         configPadConnessi.append(configPad)
 def inizializzaModuloJoistick():
     if pygame.joystick.get_init():

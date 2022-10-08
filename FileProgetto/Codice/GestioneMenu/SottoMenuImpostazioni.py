@@ -32,7 +32,9 @@ def settaController(arrivatoDaMenuPrincipale):
     listaIdPadConfigModificata = []
     tastiPremutiPadConfig = []
     tastoDaConfigurare = 0
-    ordineConfigTasti = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "select", "croceDir"]
+    ordineConfigTasti_croceDirezionalePad_corretta = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "select", "croceDir"]
+    ordineConfigTasti_croceDirezionalePad_nonCorretta = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "select", "croceDirSu", "croceDirGiu", "croceDirDestra", "croceDirSinistra"]
+    ordineConfigTasti = []
     configurazioneTastiFatta = []
 
     precedentementeInizializzato = True
@@ -58,6 +60,22 @@ def settaController(arrivatoDaMenuPrincipale):
         idController = -1
         nomeController = "Nessun controller rilevato"
         padInizialmeteConfigurato = False
+
+    # inizializzo variabile "croceDirezionalePad_corretta_temp" per il controllo degli input della croce direzionale
+    if controllerDaConfigurare and not controllerDaConfigurare.get_init():
+        controllerDaConfigurare.init()
+        numCrociDirezionali = controllerDaConfigurare.get_numhats()
+        controllerDaConfigurare.quit()
+    elif controllerDaConfigurare and controllerDaConfigurare.get_init():
+        numCrociDirezionali = controllerDaConfigurare.get_numhats()
+    else:
+        numCrociDirezionali = 0
+    if numCrociDirezionali >= 1:
+        croceDirezionalePad_corretta_temp = True
+        ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_corretta
+    else:
+        croceDirezionalePad_corretta_temp = False
+        ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_nonCorretta
 
     configTemp = []
     impoControllerErrato, datiImpostazioniController = GlobalHWVar.caricaImpostazioniController()
@@ -159,7 +177,7 @@ def settaController(arrivatoDaMenuPrincipale):
                 if direzioneX != 0 or direzioneY != 0:
                     tastiPremutiPadConfig.append("croceDir:" + str(idCroceDirezionale))
             if configurando and len(tastiPremutiPadConfig) == 1:
-                if not ((ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and not (type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))) or (not ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))):
+                if not croceDirezionalePad_corretta_temp:
                     tastoGiaUsato = False
                     for tasto in configurazioneTastiFatta:
                         if tasto == tastiPremutiPadConfig[0]:
@@ -169,7 +187,18 @@ def settaController(arrivatoDaMenuPrincipale):
                         configurazioneTastiFatta.append(tastiPremutiPadConfig[0])
                         tastoDaConfigurare += 1
                         aggiornaSchermo = True
-        if configurando and len(configurazioneTastiFatta) == 10:
+                else:
+                    if not ((ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and not (type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))) or (not ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))):
+                        tastoGiaUsato = False
+                        for tasto in configurazioneTastiFatta:
+                            if tasto == tastiPremutiPadConfig[0]:
+                                tastoGiaUsato = True
+                        if not tastoGiaUsato:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                            configurazioneTastiFatta.append(tastiPremutiPadConfig[0])
+                            tastoDaConfigurare += 1
+                            aggiornaSchermo = True
+        if configurando and len(configurazioneTastiFatta) == len(ordineConfigTasti) + 1:
             configurazioneSalvata = False
             i = 0
             while i < len(configTemp):
@@ -182,12 +211,19 @@ def settaController(arrivatoDaMenuPrincipale):
                     configTemp[i][6] = configurazioneTastiFatta[6]
                     configTemp[i][7] = configurazioneTastiFatta[7]
                     configTemp[i][8] = configurazioneTastiFatta[8]
-                    configTemp[i][9] = int(configurazioneTastiFatta[9].split(":")[1])
+                    if not croceDirezionalePad_corretta_temp:
+                        configTemp[i][9] = configurazioneTastiFatta[9]
+                        configTemp[i][10] = configurazioneTastiFatta[10]
+                        configTemp[i][11] = configurazioneTastiFatta[11]
+                        configTemp[i][12] = configurazioneTastiFatta[12]
+                    else:
+                        configTemp[i][9] = int(configurazioneTastiFatta[9].split(":")[1])
                     configurazioneSalvata = True
                     break
                 i += 1
             if not configurazioneSalvata:
-                configurazioneTastiFatta[9] = int(configurazioneTastiFatta[9].split(":")[1])
+                if croceDirezionalePad_corretta_temp:
+                    configurazioneTastiFatta[9] = int(configurazioneTastiFatta[9].split(":")[1])
                 configTemp.append(configurazioneTastiFatta)
             if not precedentementeInizializzato:
                 controllerDaConfigurare.quit()
@@ -269,6 +305,12 @@ def settaController(arrivatoDaMenuPrincipale):
                         precedentementeInizializzato = True
                     if controllerDaConfigurare and controllerDaConfigurare.get_init():
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                        if controllerDaConfigurare.get_numhats() >= 1:
+                            croceDirezionalePad_corretta_temp = True
+                            ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_corretta
+                        else:
+                            croceDirezionalePad_corretta_temp = False
+                            ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_nonCorretta
                         configurazioneTastiFatta = []
                         configurazioneTastiFatta.append(nomeController)
                         tastoDaConfigurare = 0
@@ -305,6 +347,12 @@ def settaController(arrivatoDaMenuPrincipale):
                         precedentementeInizializzato = True
                     if controllerDaConfigurare and controllerDaConfigurare.get_init():
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                        if controllerDaConfigurare.get_numhats() >= 1:
+                            croceDirezionalePad_corretta_temp = True
+                            ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_corretta
+                        else:
+                            croceDirezionalePad_corretta_temp = False
+                            ordineConfigTasti = ordineConfigTasti_croceDirezionalePad_nonCorretta
                         testando = True
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -642,6 +690,14 @@ def settaController(arrivatoDaMenuPrincipale):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 if ordineConfigTasti[tastoDaConfigurare] == "croceDir":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "croceDirSu":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_su, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "croceDirGiu":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_giu, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "croceDirDestra":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_destra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "croceDirSinistra":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_sinistra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
             elif testando:
                 configurazioneDaTestare = []
                 for padConf in configTemp:
@@ -654,7 +710,13 @@ def settaController(arrivatoDaMenuPrincipale):
                         configurazioneDaTestare.append(int(padConf[6]))
                         configurazioneDaTestare.append(int(padConf[7]))
                         configurazioneDaTestare.append(int(padConf[8]))
-                        configurazioneDaTestare.append("croceDir:" + str(padConf[9]))
+                        if not croceDirezionalePad_corretta_temp:
+                            configurazioneDaTestare.append(int(padConf[9]))
+                            configurazioneDaTestare.append(int(padConf[10]))
+                            configurazioneDaTestare.append(int(padConf[11]))
+                            configurazioneDaTestare.append(int(padConf[12]))
+                        else:
+                            configurazioneDaTestare.append("croceDir:" + str(padConf[9]))
                         break
                 if len(configurazioneDaTestare) > 0:
                     if configurazioneDaTestare[0] in tastiPremutiPadConfig:
@@ -673,8 +735,18 @@ def settaController(arrivatoDaMenuPrincipale):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerStart, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                     if configurazioneDaTestare[7] in tastiPremutiPadConfig:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
-                    if configurazioneDaTestare[8] in tastiPremutiPadConfig:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                    if not croceDirezionalePad_corretta_temp:
+                        if configurazioneDaTestare[8] in tastiPremutiPadConfig:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_su, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                        if configurazioneDaTestare[9] in tastiPremutiPadConfig:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_giu, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                        if configurazioneDaTestare[10] in tastiPremutiPadConfig:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_destra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                        if configurazioneDaTestare[11] in tastiPremutiPadConfig:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale_sinistra, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                    else:
+                        if configurazioneDaTestare[8] in tastiPremutiPadConfig:
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 FunzioniGraficheGeneriche.messaggio(LI.CON_CHE_I_TAS_PRE_COR_A_QUE_ILL[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
             else:
                 if controllerDaConfigurare:

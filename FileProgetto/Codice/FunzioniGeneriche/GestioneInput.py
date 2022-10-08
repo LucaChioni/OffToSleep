@@ -63,7 +63,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                     for idTasto in range(buttons):
                         if pad.get_button(idTasto):
                             if pad != GlobalHWVar.padUtilizzato:
-                                GlobalHWVar.inizializzaPad(pad)
+                                GlobalHWVar.impostaConfigPad(pad)
                             padTrovato = True
                             break
                     if padTrovato:
@@ -76,7 +76,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                         direzioneX, direzioneY = hat
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalHWVar.padUtilizzato:
-                                GlobalHWVar.inizializzaPad(pad)
+                                GlobalHWVar.impostaConfigPad(pad)
                             padTrovato = True
                             break
                     if padTrovato:
@@ -257,7 +257,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                         if pad.get_button(idTasto):
                             if pad != GlobalHWVar.padUtilizzato:
                                 GlobalHWVar.listaTastiPremuti = []
-                                GlobalHWVar.inizializzaPad(pad)
+                                GlobalHWVar.impostaConfigPad(pad)
                                 padCambiato = True
                             padTrovato = True
                             break
@@ -326,6 +326,35 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                                     bottoneDown = "padSelect"
                                 GlobalHWVar.listaTastiPremuti.append("padSelect")
                                 tastoTrovato = True
+                            if not GlobalHWVar.croceDirezionalePad_corretta:
+                                if idTasto == GlobalHWVar.configPadInUso[2][8] and not "padSu" in GlobalHWVar.listaTastiPremuti:
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padSuDown")
+                                    elif not tastoTrovato:
+                                        bottoneDown = "padSu"
+                                    GlobalHWVar.listaTastiPremuti.append("padSu")
+                                    tastoTrovato = True
+                                if idTasto == GlobalHWVar.configPadInUso[2][9] and not "padGiu" in GlobalHWVar.listaTastiPremuti:
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padGiuDown")
+                                    elif not tastoTrovato:
+                                        bottoneDown = "padGiu"
+                                    GlobalHWVar.listaTastiPremuti.append("padGiu")
+                                    tastoTrovato = True
+                                if idTasto == GlobalHWVar.configPadInUso[2][10] and not "padDestra" in GlobalHWVar.listaTastiPremuti:
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padDestraDown")
+                                    elif not tastoTrovato:
+                                        bottoneDown = "padDestra"
+                                    GlobalHWVar.listaTastiPremuti.append("padDestra")
+                                    tastoTrovato = True
+                                if idTasto == GlobalHWVar.configPadInUso[2][11] and not "padSinistra" in GlobalHWVar.listaTastiPremuti:
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padSinistraDown")
+                                    elif not tastoTrovato:
+                                        bottoneDown = "padSinistra"
+                                    GlobalHWVar.listaTastiPremuti.append("padSinistra")
+                                    tastoTrovato = True
                         else:
                             if idTasto == GlobalHWVar.configPadInUso[2][0] and "padCroce" in GlobalHWVar.listaTastiPremuti:
                                 GlobalHWVar.listaTastiPremuti.remove("padCroce")
@@ -359,10 +388,27 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                                 GlobalHWVar.listaTastiPremuti.remove("padSelect")
                                 if gestioneDuranteLePause:
                                     GlobalHWVar.listaInputInSospeso.append("padSelectUp")
+                            if not GlobalHWVar.croceDirezionalePad_corretta:
+                                if idTasto == GlobalHWVar.configPadInUso[2][8] and "padSu" in GlobalHWVar.listaTastiPremuti:
+                                    GlobalHWVar.listaTastiPremuti.remove("padSu")
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padSuUp")
+                                if idTasto == GlobalHWVar.configPadInUso[2][9] and "padGiu" in GlobalHWVar.listaTastiPremuti:
+                                    GlobalHWVar.listaTastiPremuti.remove("padGiu")
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padGiuUp")
+                                if idTasto == GlobalHWVar.configPadInUso[2][10] and "padDestra" in GlobalHWVar.listaTastiPremuti:
+                                    GlobalHWVar.listaTastiPremuti.remove("padDestra")
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padDestraUp")
+                                if idTasto == GlobalHWVar.configPadInUso[2][11] and "padSinistra" in GlobalHWVar.listaTastiPremuti:
+                                    GlobalHWVar.listaTastiPremuti.remove("padSinistra")
+                                    if gestioneDuranteLePause:
+                                        GlobalHWVar.listaInputInSospeso.append("padSinistraUp")
 
             if len(GlobalHWVar.listaTastiPremuti) == 0:
                 bottoneDown = False
-        if (event.type == pygame.JOYHATMOTION) and not cambioInput and GlobalHWVar.usandoIlController:
+        if (event.type == pygame.JOYHATMOTION) and not cambioInput and GlobalHWVar.usandoIlController and GlobalHWVar.croceDirezionalePad_corretta:
             padCambiato = False
             padTrovato = False
             for pad in GlobalHWVar.listaPadConnessiConfigurati:
@@ -374,7 +420,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalHWVar.padUtilizzato:
                                 GlobalHWVar.listaTastiPremuti = []
-                                GlobalHWVar.inizializzaPad(pad)
+                                GlobalHWVar.impostaConfigPad(pad)
                                 padCambiato = True
                             padTrovato = True
                             break

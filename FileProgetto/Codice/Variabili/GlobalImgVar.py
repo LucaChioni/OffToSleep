@@ -191,6 +191,10 @@ global impostaControllerR1
 global impostaControllerStart
 global impostaControllerSelect
 global impostaControllerCroceDirezionale
+global impostaControllerCroceDirezionale_su
+global impostaControllerCroceDirezionale_giu
+global impostaControllerCroceDirezionale_destra
+global impostaControllerCroceDirezionale_sinistra
 global impostazioniTastiera
 global robograf1
 global robograf2
@@ -475,6 +479,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global impostaControllerStart
     global impostaControllerSelect
     global impostaControllerCroceDirezionale
+    global impostaControllerCroceDirezionale_su
+    global impostaControllerCroceDirezionale_giu
+    global impostaControllerCroceDirezionale_destra
+    global impostaControllerCroceDirezionale_sinistra
     global impostazioniTastiera
     global robograf1
     global robograf2
@@ -1049,6 +1057,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     impostaControllerStart = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerSelect = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerSelect.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_su = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_su.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_giu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_giu.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_destra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_destra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_sinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_sinistra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostazioniTastiera = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoTastiera.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 16, False)
 
     # img grafiche / dialoghi

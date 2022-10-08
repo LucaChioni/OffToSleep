@@ -7,6 +7,10 @@ sudo cp -r FileProgetto/DatiSalvati/ build/exe.macosx-10.7-x86_64-2.7/DatiSalvat
 sudo chmod 777 build/exe.macosx-10.7-x86_64-2.7/DatiSalvati/Impostazioni/*
 sudo chmod 777 build/exe.macosx-10.7-x86_64-2.7/DatiSalvati/Salvataggi/*
 
+# metto libreria SDL aggiornata per evitare il bug dello schermo vuoto
+sudo cp /usr/local/opt/sdl2/lib/libSDL2-2.0.0.dylib /Users/lucachioni/Desktop/OffToSleep/build/exe.macosx-10.7-x86_64-2.7/lib/pygame/.dylibs/
+sudo rm /Users/lucachioni/Desktop/OffToSleep/build/exe.macosx-10.7-x86_64-2.7/lib/pygame/.dylibs/libSDL-1.2.0.dylib
+
 #touch build/exe.macosx-10.7-x86_64-2.7/run_OffToSleep.sh
 #echo '#!/bin/bash' >> build/exe.macosx-10.7-x86_64-2.7/run_OffToSleep.sh
 #echo 'SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )' >> build/exe.macosx-10.7-x86_64-2.7/run_OffToSleep.sh
