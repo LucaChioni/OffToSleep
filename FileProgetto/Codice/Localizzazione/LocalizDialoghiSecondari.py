@@ -206,10 +206,10 @@ _0475_10_LibroMotoRettilineoUniformementeAccelerato_UN_CAR_DI_CAV_VIA_A_6_MS_SE_
 _0475_11_LibroMotoRettilineoUniformementeAccelerato_LA_VEL_INI_DEL_CAR__VI__6_MS_BR_LA_VEL_FIN_DAT_CHE_SI_DEV_FER__VF__0_MS_BR_LAC_DAT_CHE__CON_ALL_DIR_DEL_CAR__NEG_A__2_MS_ = {"ita": u"La velocità iniziale del carro è: <*>#italic#Vi = 6 m/s.<*> <br> La velocità finale, dato che si deve fermare, è: <*>#italic#Vf = 0 m/s.<*> <br> L'accelerazione, dato che è contraria alla direzione del carro, è negativa: <*>#italic#A = -2 m/s².<*>"}
 _0475_12_LibroMotoRettilineoUniformementeAccelerato_PRI_DI_TUT__NEC_RIC_IL_TEM_CHE_IMP_IL_CAR_PER_FER_BR_DAL_REL_VF__VI__A_SI_OTT_T__VF__VI__A_BR_SOS_CON_I_DAT_CHE_ABB_T__0__6__2__3_BR_PER_FER_IL_CAR_IMP_3_SEC_ = {"ita": u"Prima di tutto, è necessario ricavare il tempo che impiega il carro per fermarsi. <br> Dalla relazione <*>#italic#Vf = Vi + A×T,<*> si ottiene: <*>#italic#T = (Vf - Vi) / A.<*> <br> Sostituendo con i dati che abbiamo: <*>#italic#T = (0 - 6) / (-2) = 3.<*> <br> Per fermarsi il carro impiega 3 secondi."}
 _0475_13_LibroMotoRettilineoUniformementeAccelerato_ORA_CHE_SAP_QUA_TEM_SER_PER_AZZ_LA_VEL_POS_CAL_QUA_DIS_PER_IL_CAR_PRI_DI_FER_TRA_LA_REL_S__VI__12_BR_OSS_S__6__12__9_BR_IL_CAR_SI_FER_DOP_9_MET_ = {"ita": u"Ora che sappiamo quanto tempo serve per azzerare la velocità, possiamo calcolare quanta distanza percorre il carro prima di fermarsi tramite la relazione: <*>#italic#S = Vi×T + (1/2)×A×T².<*> <br> Ossia: <*>#italic#S = 6×3 + (1/2)×(-2)×3² = 9.<*> <br> Il carro si ferma dopo 9 metri."}
-_0475_14_Tu_MMH_NON_SO_SE_HO_CAP_TUT_MA_SOS_I_DAT_NEL_FOR_DOV_AND_CRE_ = {"ita": u"(<*>#italic#Mmh...<*> non so se ho capito tutto, ma... sostituendo i dati nelle formule, dovrebbe andare... credo...)"}
+_0475_14_Tu_MMH_NON_SO_SE_HO_CAP_TUT_MA_SOS_I_DAT_NEL_FOR_DOV_AND_CRE_ = {"ita": u"(... Non so se ho capito tutto, ma... sostituendo i dati nelle formule, dovrebbe andare... credo...)"}
 _0476_01_Tu_NON_MI_VA_DI_LEG_ALT_SPI_DI_FOR_CHE_NON_CAP_ = {"ita": u"(Non mi va di leggere altre spiegazioni di formule che non capisco...)"}
 _0477_01_Tu_LIB_DI_REN_ = {"ita": u"(Libri di René...)"}
-_0478_01_Tu_MMM_NON_CAP_NIE_DI_COM__ORG_ = {"ita": u"(<*>#italic#Mmmh...<*> non capisco niente di come è organizzato...)"}
+_0478_01_Tu_MMM_NON_CAP_NIE_DI_COM__ORG_ = {"ita": u"(... Non capisco niente di come è organizzato...)"}
 _0479_01_Tu_HAN_NON__STA_SEG_SU_QUE_REG_ = {"ita": u"(Hans non è stato segnato su questo registro...)"}
 _0480_01_Tu_UN_REG_DEL_BIB_ = {"ita": u"(Un registro della biblioteca...)"}
 _0481_01_Tu_SON_I_REG_DEL_BIB_QUE_DI_OGG__SUL_SCR_ = {"ita": u"(Sono i registri della biblioteca. Quello di oggi è sulla scrivania...)"}
@@ -1307,7 +1307,7 @@ _0998_01_Tu_QUE_NON__NEI_MA_ALM__QUA_ = {"ita": u"(Questo non è Neil, ma almeno
 _0999_01_SoldatoConSpada_NEI_NON_PU_ANC_RIC_ = {"ita": u"Neil non può ancora riceverti."}
 _0999_02_Tu_QUA_DEV_ASP_ANC_ = {"ita": u"Quanto devo aspettare ancora?"}
 _0999_03_SoldatoConSpada__ = {"ita": u"..."}
-_0999_04_Tu_UFF_POT_LEG_QUA_NEL_FRA_ = {"ita": u"(<*>#italic#Ufff...<*> potrei leggere qualcosa nel frattempo...)"}
+_0999_04_Tu_UFF_POT_LEG_QUA_NEL_FRA_ = {"ita": u"(Ufff... potrei leggere qualcosa nel frattempo...)"}
 _1000_01_SoldatoConSpada_ENT_NEI_PU_RIC_ADE_ = {"ita": u"Entra, Neil può riceverti adesso."}
 _1001_01_SoldatoConSpada__ = {"ita": u"..."}
 _1002_01_Tu__MATTINA_ = {"ita": u"(È mattina...)"}
