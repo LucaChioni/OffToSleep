@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
@@ -527,6 +528,17 @@ class NemicoObj(object):
         self.imgMorte = nemicoDaCopiare.imgMorte
 
         self.imgCampoAttaccabile = nemicoDaCopiare.imgCampoAttaccabile
+
+    def creaCopia(self):
+        exec ("import copy")
+        copia = NemicoObj(self.x, self.y, self.direzione, self.tipo, self.stanzaDiAppartenenza, self.percorso)
+        for variabileOriginaleKey, variabileOriginaleVal in vars(self).items():
+            if type(variabileOriginaleVal) != pygame.SurfaceType:
+                for variabileCopiaKey, variabileCopiaVal in vars(copia).items():
+                    if variabileOriginaleKey == variabileCopiaKey:
+                        exec ("copia.%s = copy.deepcopy(self.%s)" % (variabileOriginaleKey, variabileOriginaleKey))
+                        break
+        return copia
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS

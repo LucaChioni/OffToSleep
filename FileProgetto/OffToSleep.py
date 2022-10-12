@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# import psutil
 import os
+# import psutil
 import pygame
 import datetime
-import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 import GlobalHWVar
+# "AggiungiTutteLeTraduzioni" lo mette come inutile ma serve per aggiornare i dictionary dei testi con le traduzioni
+import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import base64
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
@@ -227,14 +228,14 @@ def salvataggio(n, datiAttuali, datiGameover):
     leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
     leggi.close()
-    encoded_text = contenutoFile.encode('base64')
+    encoded_text = base64.b64encode(contenutoFile.encode("UTF-8")).decode("UTF-8")
     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
     scrivi.write(encoded_text)
     scrivi.close()
     leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
     contenutoFile = leggi.read()
     leggi.close()
-    encoded_text = contenutoFile.encode('base64')
+    encoded_text = base64.b64encode(contenutoFile.encode("UTF-8")).decode("UTF-8")
     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
     scrivi.write(encoded_text)
     scrivi.close()
@@ -266,7 +267,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         # decritta il salvataggio
         datiTotali = [""]
         try:
-            contenutoFile = contenutoFile.decode('base64')
+            contenutoFile = base64.b64decode(contenutoFile.encode("UTF-8")).decode("UTF-8")
             datiTotali = contenutoFile.split("\n")
         except:
             errore = True

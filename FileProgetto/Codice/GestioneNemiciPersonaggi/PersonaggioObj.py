@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
@@ -180,6 +181,17 @@ class PersonaggioObj(object):
     def copiaImgsOggetto(self, oggettoDaCopiare):
         self.imgOggetto = oggettoDaCopiare.imgOggetto
         self.imgOggettoDialogo = oggettoDaCopiare.imgOggettoDialogo
+
+    def creaCopia(self, avanzamentoStoria):
+        exec ("import copy")
+        copia = PersonaggioObj(self.x, self.y, self.direzione, self.tipoId, self.stanzaDiAppartenenza, avanzamentoStoria, self.percorso)
+        for variabileOriginaleKey, variabileOriginaleVal in vars(self).items():
+            if type(variabileOriginaleVal) != pygame.SurfaceType:
+                for variabileCopiaKey, variabileCopiaVal in vars(copia).items():
+                    if variabileOriginaleKey == variabileCopiaKey:
+                        exec ("copia.%s = copy.deepcopy(self.%s)" % (variabileOriginaleKey, variabileOriginaleKey))
+                        break
+        return copia
 
     def girati(self, direzione, perDialogo=False):
         if not perDialogo or (perDialogo and not (self.tipo == "ServoLancia" or self.tipo == "ServoSpada" or self.tipo == "ServoArco")):

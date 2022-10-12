@@ -4,11 +4,9 @@ import random
 import copy
 import pygame
 import GlobalHWVar
-import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAudioAmbiente
-import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 
 
@@ -1957,7 +1955,11 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, a
 
 
 def copiaNemico(oggettoNemico, checkErrori=False):
-    copia = copy.deepcopy(oggettoNemico)
+    # ho messo una funzione che crea un nuovo oggetto e copia tutti gli attributi al posto del deepcopy
+    if oggettoNemico:
+        copia = oggettoNemico.creaCopia()
+    else:
+        copia = copy.deepcopy(oggettoNemico)
     if oggettoNemico and not checkErrori:
         copia.copiaImgs(oggettoNemico)
         copia.girati(copia.direzione)
@@ -1966,7 +1968,11 @@ def copiaNemico(oggettoNemico, checkErrori=False):
 
 
 def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria, checkErrori=False):
-    copia = copy.deepcopy(oggettoPersonaggio)
+    # ho messo una funzione che crea un nuovo oggetto e copia tutti gli attributi al posto del deepcopy
+    if oggettoPersonaggio:
+        copia = oggettoPersonaggio.creaCopia(avanzamentoStoria)
+    else:
+        copia = copy.deepcopy(oggettoPersonaggio)
     if copia.tipo != "Tutorial" and copia.tipo != "Nessuno" and not checkErrori:
         if copia.tipo.startswith("Oggetto"):
             copia.copiaImgsOggetto(oggettoPersonaggio)
