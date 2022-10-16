@@ -250,7 +250,7 @@ def disegnaSchermataSelezioneLingua():
     sndSelimp = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriPuntatore/SelImp.wav")
     puntatore = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatore.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True, True)
 
-    stringaTitolo = "Choose language"
+    stringaTitolo = "Select language"
     carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 200 // 60)
     testo = carattere.render(stringaTitolo, True, GlobalHWVar.grigiochi)
     GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gpx * 1.6, GlobalHWVar.gpy * 2))
@@ -353,7 +353,7 @@ def disegnaSchermataSelezioneLingua():
             GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 6, GlobalHWVar.gpx * 1.5, GlobalHWVar.gpy * 8.2))
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
             if voceMarcata == 1:
-                stringaTitolo = "Choose language"
+                stringaTitolo = "Select language"
             else:
                 stringaTitolo = "Seleziona lingua"
             carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 200 // 60)

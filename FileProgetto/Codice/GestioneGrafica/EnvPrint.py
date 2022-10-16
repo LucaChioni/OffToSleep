@@ -481,7 +481,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     dark.fill((0, 0, 0, 160))
     GlobalHWVar.disegnaImmagineSuSchermo(dark, (xPartenzaPannello, 0))
 
-    FunzioniGraficheGeneriche.messaggio(LI.PRE_PRO_AZI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
+    FunzioniGraficheGeneriche.messaggio(LI.PRE_PRO_AZI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 6.5), GlobalHWVar.gsy // 18 * 1, 65, centrale=True)
     azionePrevistaTrovata = False
     FunzioniGraficheGeneriche.messaggio(LI.MOV_VER_IMP[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
