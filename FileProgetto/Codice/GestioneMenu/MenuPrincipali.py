@@ -26,8 +26,8 @@ def chiediconferma(conferma):
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
     dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 180))
-    background.blit(dark, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
+    GlobalHWVar.disegnaImmagineSuSchermo(dark, (0, 0))
 
     schermo_temp = GlobalHWVar.schermo.copy()
     backgroundUpdate1 = schermo_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9, GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 3)).convert()
@@ -139,6 +139,7 @@ def chiediconferma(conferma):
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
                 GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(dark, (0, 0))
                 if conferma == 1:
                     FunzioniGraficheGeneriche.messaggio(LI.TOR_AL_MEN_PRI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.5, 120, centrale=True)
                 elif conferma == 2:
