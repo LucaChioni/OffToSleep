@@ -533,7 +533,13 @@ class NemicoObj(object):
         exec ("import copy")
         copia = NemicoObj(self.x, self.y, self.direzione, self.tipo, self.stanzaDiAppartenenza, self.percorso)
         for variabileOriginaleKey, variabileOriginaleVal in vars(self).items():
-            if type(variabileOriginaleVal) != pygame.SurfaceType:
+            superficiInLista = False
+            if type(variabileOriginaleVal) == list:
+                for elem in variabileOriginaleVal:
+                    if type(elem) == pygame.SurfaceType:
+                        superficiInLista = True
+                        break
+            if type(variabileOriginaleVal) != pygame.SurfaceType and not superficiInLista:
                 for variabileCopiaKey, variabileCopiaVal in vars(copia).items():
                     if variabileOriginaleKey == variabileCopiaKey:
                         exec ("copia.%s = copy.deepcopy(self.%s)" % (variabileOriginaleKey, variabileOriginaleKey))
