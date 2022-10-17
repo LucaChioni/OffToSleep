@@ -12,3 +12,4 @@ echo 'SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && 
 echo 'cd "$SCRIPT_DIR"' >> build/exe.linux-x86_64-2.7/run_OffToSleep.sh
 echo 'export LD_LIBRARY_PATH=./lib' >> build/exe.linux-x86_64-2.7/run_OffToSleep.sh
 echo './OffToSleep' >> build/exe.linux-x86_64-2.7/run_OffToSleep.sh
+sudo chmod 755 build/exe.linux-x86_64-2.7/run_OffToSleep.sh
