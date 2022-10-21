@@ -1558,10 +1558,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                     daInquadrare = True
                                 break
                             i += 4
-                if inquadratoQualcosa == "Colco" and not (type(nemicoInquadrato) is str and nemicoInquadrato == "Colco"):
-                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selObbiettivo)
-                    nemicoInquadrato = "Colco"
-                    daInquadrare = True
+                # if inquadratoQualcosa == "Colco" and not (type(nemicoInquadrato) is str and nemicoInquadrato == "Colco"):
+                #     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selObbiettivo)
+                #     nemicoInquadrato = "Colco"
+                #     daInquadrare = True
             if not daInquadrare:
                 infliggidanno = False
                 statom = 0
