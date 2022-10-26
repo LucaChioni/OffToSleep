@@ -2,6 +2,7 @@
 
 import os
 import pygame
+import copy
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
@@ -183,7 +184,6 @@ class PersonaggioObj(object):
         self.imgOggettoDialogo = oggettoDaCopiare.imgOggettoDialogo
 
     def creaCopia(self, avanzamentoStoria):
-        exec ("import copy")
         copia = PersonaggioObj(self.x, self.y, self.direzione, self.tipoId, self.stanzaDiAppartenenza, avanzamentoStoria, self.percorso)
         for variabileOriginaleKey, variabileOriginaleVal in vars(self).items():
             superficiInLista = False

@@ -773,8 +773,9 @@ while i > 0:
 listaRisoluzioniDisponibili.append([maxGsx, maxGsy])
 # print (listaRisoluzioniDisponibili)
 
-ramDisponibile = (psutil.virtual_memory().total / 1000000000) * 1000
-# print ("RAM disponibile: " + str(ramDisponibile) + " MB")
+ramDisponibile = psutil.virtual_memory().total / 1024.0 / 1024.0
+ramDisponibileGB = round(ramDisponibile / 1024.0, 1)
+# print ("RAM disponibile: " + str(ramDisponibile) + " MB / " + str(ramDisponibileGB) + " GB")
 def getRAMNecessariaPerRisoluzione(dimX):
     ramNecessaria = RAMnHD
     if dimX > 3840:

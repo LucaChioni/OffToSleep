@@ -2,6 +2,7 @@
 
 import random
 import pygame
+import copy
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
@@ -530,7 +531,6 @@ class NemicoObj(object):
         self.imgCampoAttaccabile = nemicoDaCopiare.imgCampoAttaccabile
 
     def creaCopia(self):
-        exec ("import copy")
         copia = NemicoObj(self.x, self.y, self.direzione, self.tipo, self.stanzaDiAppartenenza, self.percorso)
         for variabileOriginaleKey, variabileOriginaleVal in vars(self).items():
             superficiInLista = False
