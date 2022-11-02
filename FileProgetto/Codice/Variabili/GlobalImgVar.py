@@ -269,8 +269,9 @@ global imgEvidenziaUsciteStanzaGiuBloccate
 global imgEvidenziaUsciteStanzaDestraBloccate
 global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
+global imgBacchePv
 
-numImgTotali = 1960
+numImgTotali = 1961
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
@@ -557,6 +558,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgEvidenziaUsciteStanzaDestraBloccate
     global imgEvidenziaUsciteStanzaSinistraBloccate
     global imgChiaveSeminterratoPalazzoRod
+    global imgBacchePv
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -901,6 +903,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgEvidenziaUsciteStanzaGiuBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaUsciteStanzaDestraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     imgEvidenziaUsciteStanzaSinistraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSinistraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgBacchePv = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/BacchePv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # cofanetti
     cofaniaper = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

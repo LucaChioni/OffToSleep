@@ -14,12 +14,15 @@ import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 import Codice.Localizzazione.LocalizInterfaccia as LI
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcoS, faretraS, armaturaS, collanaS, armaS, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno, casellePercorribiliPorteEscluse, difesa, arcoS, faretraS, armaturaS, collanaS, armaS, guantiDifesa, scudoDifesa, listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv):
     if caricaTutto:
         GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # disegno i cadaveri sotterrati
         for nemicoSotterrato in listaNemiciSotterrati:
             GlobalHWVar.disegnaImmagineSuSchermo(imgNemicoSotterrato, (nemicoSotterrato[0], nemicoSotterrato[1]))
+        # disegno le bacche
+        for baccaPv in listaBacchePv:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgBacchePv, (GlobalHWVar.gpx * baccaPv[0], GlobalHWVar.gpy * baccaPv[1]))
         # salvo la lista di cofanetti vicini a caselle viste per non mettergli la casella oscurata
         vetCofanettiVisti = []
         i = 0
@@ -122,16 +125,16 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         i = 0
         while i < len(vettoreImgCaselle):
             if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
-                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
-                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
-                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
-                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             else:
                 casellaTrovata = False
@@ -139,13 +142,13 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     for nemico in listaNemici:
                         if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
-                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                         if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
-                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
@@ -153,14 +156,14 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     for personaggio in listaPersonaggi:
                         if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
-                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                 if not personaggio.mantieniSempreASchermo:
                                     FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                         if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
-                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                 FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
@@ -172,7 +175,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                             while k < len(caseviste):
                                 if caseviste[k] == vettoreEsche[j + 2] and caseviste[k + 1] == vettoreEsche[j + 3]:
                                     if caseviste[k + 2] and (primaDiAnima or vettoreEsche[j + 1] > 0):
-                                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                         FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                                     break
                                 k += 3
@@ -187,7 +190,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                             while k < len(caseviste):
                                 if caseviste[k] == vettoreDenaro[j + 1] and caseviste[k + 1] == vettoreDenaro[j + 2]:
                                     if caseviste[k + 2]:
-                                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                                         FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                                     break
                                 k += 3
@@ -286,7 +289,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 i = 0
                 while i < len(vettoreImgCaselle):
                     if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
-                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato)
+                        FunzioniGraficheGeneriche.disegnaCasellaSulloSchermo(vettoreImgCaselle[i + 2], vettoreImgCaselle[i], vettoreImgCaselle[i + 1], listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv)
                         break
                     i += 3
             if personaggio.imgAttuale:
@@ -633,7 +636,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse, listaNemiciSotterrati, imgNemicoSotterrato):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac, caselleNonVisibili, casellePercorribiliPorteEscluse, listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -778,6 +781,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     # disegno i cadaveri sotterrati
     for nemicoSotterrato in listaNemiciSotterrati:
         GlobalHWVar.disegnaImmagineSuSchermo(imgNemicoSotterrato, (nemicoSotterrato[0], nemicoSotterrato[1]))
+    # disegno le bacche
+    for baccaPv in listaBacchePv:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgBacchePv, (GlobalHWVar.gpx * baccaPv[0], GlobalHWVar.gpy * baccaPv[1]))
     # disegno l'ombreggiatura delle caselle
     i = 0
     while i < len(casellePercorribili):

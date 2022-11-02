@@ -1093,11 +1093,14 @@ def animaTremolioSchermo(nelVulcano=False):
         GlobalHWVar.aggiornaSchermo(ignoraBloccoAggiornamento=True)
 
 
-def disegnaCasellaSulloSchermo(imgCasella, xCasella, yCasella, listaNemiciSotterrati, imgNemicoSotterrato):
+def disegnaCasellaSulloSchermo(imgCasella, xCasella, yCasella, listaNemiciSotterrati, imgNemicoSotterrato, listaBacchePv):
     GlobalHWVar.disegnaImmagineSuSchermo(imgCasella, (xCasella, yCasella))
     for nemicoSotterrato in listaNemiciSotterrati:
         if nemicoSotterrato[0] == xCasella and nemicoSotterrato[1] == yCasella:
             GlobalHWVar.disegnaImmagineSuSchermo(imgNemicoSotterrato, (nemicoSotterrato[0], nemicoSotterrato[1]))
+    for baccaPv in listaBacchePv:
+        if GlobalHWVar.gpx * baccaPv[0] == xCasella and GlobalHWVar.gpy * baccaPv[1] == yCasella:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgBacchePv, (GlobalHWVar.gpx * baccaPv[0], GlobalHWVar.gpy * baccaPv[1]))
 
 
 def animaDormiveglia(illumina, screen):

@@ -359,3 +359,35 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, rx, ry, nrob, c
         bottoneDown = False
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, porte, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, chiamarob, ultimoObbiettivoColco, evitaAvanzamentoTurno, avanzaManualmentePercorsoDaEseguire, listaNemiciSotterrati
+
+
+def mettiBacchePv(stanza):
+    listaBacchePv = []
+    if stanza == GlobalGameVar.dictStanze["sognoSara2"]:
+        listaBacchePv.append([6, 9])
+        listaBacchePv.append([22, 5])
+        listaBacchePv.append([29, 2])
+    elif stanza == GlobalGameVar.dictStanze["sognoSara3"]:
+        listaBacchePv.append([4, 11])
+        listaBacchePv.append([15, 10])
+        listaBacchePv.append([11, 5])
+    elif stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
+        listaBacchePv.append([21, 3])
+        listaBacchePv.append([24, 15])
+        listaBacchePv.append([5, 8])
+    elif stanza == GlobalGameVar.dictStanze["forestaCadetta2"]:
+        listaBacchePv.append([22, 11])
+        listaBacchePv.append([19, 5])
+        listaBacchePv.append([11, 14])
+        listaBacchePv.append([8, 5])
+        listaBacchePv.append([6, 11])
+    elif stanza == GlobalGameVar.dictStanze["forestaCadetta3"]:
+        listaBacchePv.append([6, 7])
+        listaBacchePv.append([15, 2])
+        listaBacchePv.append([11, 13])
+        listaBacchePv.append([20, 14])
+    elif stanza == GlobalGameVar.dictStanze["forestaCadetta4"]:
+        listaBacchePv.append([12, 8])
+        listaBacchePv.append([22, 11])
+
+    return listaBacchePv

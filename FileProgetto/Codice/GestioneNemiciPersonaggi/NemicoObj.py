@@ -131,7 +131,7 @@ class NemicoObj(object):
             esp = 3
         if self.tipo == "LupoGrigio":
             vitaTotale = 30
-            attacco = 20
+            attacco = 17
             difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
@@ -143,8 +143,8 @@ class NemicoObj(object):
             esp = 8
         if self.tipo == "LupoBianco":
             vitaTotale = 50
-            attacco = 27
-            difesa = 3
+            attacco = 24
+            difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
@@ -155,8 +155,8 @@ class NemicoObj(object):
             esp = 12
         if self.tipo == "LupoNero":
             vitaTotale = 80
-            attacco = 35
-            difesa = 5
+            attacco = 30
+            difesa = 2
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
