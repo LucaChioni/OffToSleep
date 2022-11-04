@@ -996,6 +996,15 @@ def gameloop():
                         i += 1
                 if not inquadratoQualcosa:
                     i = 0
+                    for nemico in listaNemici:
+                        if nemico.x <= xMouse <= nemico.x + GlobalHWVar.gpx and nemico.y <= yMouse <= nemico.y + GlobalHWVar.gpy:
+                            if GlobalHWVar.mouseBloccato:
+                                GlobalHWVar.configuraCursore(False)
+                            inquadratoQualcosa = "nemico:" + str(i)
+                            break
+                        i += 1
+                if not inquadratoQualcosa:
+                    i = 0
                     while i < len(porte):
                         if porte[i + 1] <= xMouse <= porte[i + 1] + GlobalHWVar.gpx and porte[i + 2] <= yMouse <= porte[i + 2] + GlobalHWVar.gpy and not porte[i + 3]:
                             if ((porte[i + 1] == x + GlobalHWVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalHWVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalHWVar.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalHWVar.gpy)) and not porte[i + 3]:
@@ -1344,6 +1353,21 @@ def gameloop():
                         sposta = False
                         interazioneEseguita = True
                         caricaTutto = True
+                # entro in mod interazione quando interagisco con un nemico
+                for nemico in listaNemici:
+                    if (nemico.x == x + GlobalHWVar.gpx and nemico.y == y and npers == 1) or (nemico.x == x - GlobalHWVar.gpx and nemico.y == y and npers == 2) or (nemico.x == x and nemico.y == y + GlobalHWVar.gpy and npers == 4) or (nemico.x == x and nemico.y == y - GlobalHWVar.gpy and npers == 3):
+                        GlobalHWVar.canaleSoundPassiRallo.stop()
+                        if nemicoInquadrato != nemico:
+                            nemicoInquadrato = nemico
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selObbiettivo)
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
+                        nx = 0
+                        ny = 0
+                        attacco = 1
+                        sposta = False
+                        interazioneEseguita = True
+                        break
                 if not sposta and not interazioneEseguita:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 bottoneDown = False
@@ -1700,6 +1724,20 @@ def gameloop():
                         dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi, canzone)
                     sposta = False
                     caricaTutto = True
+                    bottoneDown = False
+                elif inquadratoQualcosa and inquadratoQualcosa.startswith("nemico"):
+                    GlobalHWVar.canaleSoundPassiRallo.stop()
+                    inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                    posizNemicoInVettore = int(inquadratoQualcosaList[1])
+                    nemico = listaNemici[posizNemicoInVettore]
+                    if nemicoInquadrato != nemico:
+                        nemicoInquadrato = nemico
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selObbiettivo)
+                    else:
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
+                    nx = 0
+                    ny = 0
+                    attacco = 1
                     bottoneDown = False
                 elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
                     movimentoPerMouse = True
