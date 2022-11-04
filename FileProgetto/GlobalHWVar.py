@@ -14,7 +14,7 @@ eseguibile = False
 testOstacoliAttivi = False
 
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
-# modifico il path se sto creando l'eseguibile (su windows nascondo anche la console)
+# modifico il path se sto creando l'eseguibile
 if eseguibile:
     if sistemaOperativo == "Windows":
         vetGamePath = gamePath.split("/")
@@ -23,9 +23,6 @@ if eseguibile:
         gamePath = ""
         for dir in vetGamePath:
             gamePath += dir + "/"
-        import win32gui, win32con
-        programToHide = win32gui.GetForegroundWindow()
-        win32gui.ShowWindow(programToHide, win32con.SW_HIDE)
     if sistemaOperativo == "Linux" or sistemaOperativo == "Mac":
         vetGamePath = gamePath.split("/")
         vetGamePath.pop(len(vetGamePath) - 1)
