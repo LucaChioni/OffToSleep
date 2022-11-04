@@ -11,6 +11,7 @@ import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAud
 
 sistemaOperativo = "Windows"
 eseguibile = False
+usando_python3 = False
 testOstacoliAttivi = False
 
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
@@ -836,7 +837,12 @@ def settaRisoluzioneOttimale(testaPrestazioni):
             gpx = gsx // 32
             gpy = gsy // 18
             if modalitaSchermo == 0:
-                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+                if usando_python3:
+                    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+                    schermo = pygame.display.set_mode((gsx, gsy), pygame.HIDDEN)
+                    pygame.time.wait(500)
+                else:
+                    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
                 schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
             elif modalitaSchermo == 1:
                 if not (gsx == maxGsx and gsy == maxGsy):
@@ -894,7 +900,10 @@ if len(datiFileImpostazioniString) == 7:
         if datiFileImpostazioni[6] == 0 or datiFileImpostazioni[6] == 1:
             controlloRisoluzione = bool(datiFileImpostazioni[6])
         if modalitaSchermo == 0:
-            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+            if usando_python3:
+                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+            else:
+                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         elif modalitaSchermo == 1:
             if not (gsx == maxGsx and gsy == maxGsy):
@@ -920,7 +929,10 @@ else:
     erroreFileImpostazioni = True
 if erroreFileImpostazioni:
     # print ("Errore nella lettura del file di configurazione delle impostazioni")
-    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+    if usando_python3:
+        opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+    else:
+        opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
     settaRisoluzioneOttimale(testaPrestazioni=True)
     initVolumeSounds()

@@ -1530,7 +1530,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                             pygame.display.quit()
                             pygame.display.init()
                         if GlobalHWVar.modalitaSchermo == 0:
-                            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+                            if GlobalHWVar.usando_python3:
+                                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+                                GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), pygame.HIDDEN)
+                                pygame.time.wait(500)
+                            else:
+                                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
                             GlobalHWVar.schermo = pygame.display.set_mode((GlobalHWVar.gsx, GlobalHWVar.gsy), opzioni_schermo)
                         elif GlobalHWVar.modalitaSchermo == 1:
                             opzioni_schermo = pygame.DOUBLEBUF
