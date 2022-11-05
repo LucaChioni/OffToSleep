@@ -1289,6 +1289,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["oltreFinalePartenzaRod"] = i
     i += 1
     dictAvanzamentoStoria["oltreFinalePartenzaCittà"] = i
+    i += 1
+    dictAvanzamentoStoria["oltreFinalePartenzaVulcano"] = i
 
     return dictAvanzamentoStoria
 

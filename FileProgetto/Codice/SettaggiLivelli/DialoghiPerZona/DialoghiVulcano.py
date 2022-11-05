@@ -180,11 +180,28 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
-                scelta = False
+                scelta = 4
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(LDS._1319_01_Tu__IL_CAL_DI_EVE_DEL_COS_STA_ELA_IL_PRO_FRA_)
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(LDS._1319_02_Tu_DOMANDA_)
+                dialogo.append(LDS._1319_03_Tu__POS_FER_DOV_)
+                dialogo.append(LDS._1319_04_Tu_NO_POT_CAN_LA_REA_)
+                dialogo.append(LDS._1319_05_Tu_NO_POT_UCC_TUT_)
+                dialogo.append(LDS._1319_06_Tu_NO_POT_CAN_LA_REA_)
+                dialogo.append(LDS._1319_07_Tu_SI_)
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(LDS._1319_08_Tu_RISPOSTA_)
+                dialogo.append(LDS._1319_09_Tu__)
+                dialogo.append(LDS._1319_10_Tu__)
+                dialogo.append(LDS._1319_11_Tu__)
+                dialogo.append(LDS._1319_12_Tu_OK_)
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["vulcano3"]:
         if tipo == "OggettoImpo":

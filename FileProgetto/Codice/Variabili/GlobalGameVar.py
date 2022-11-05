@@ -83,6 +83,9 @@ vetDatiSalvataggi = []
 vetDatiSalvataggioGameOver = []
 numSalvataggioCaricato = 0
 
+# variabile che serve per uscire dal gioco quando sepngi il calcolatore di eventi alla fine del gioco
+spengiCalcolatore = False
+
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
 costoTecniche = [3, 5, 3, 3, 6, 10, 5, 10, 10, 10, 15, 10, 10, 15, 20, 20, 20, 30, 30, 60]
 dannoTecniche = [dannoAttacchiColco["scossa"], 50, 0, dannoAttacchiColco["freccia"], dannoAttacchiColco["tempesta"], 0, 300, 150, dannoAttacchiColco["scossa+"], dannoAttacchiColco["freccia+"], 1, 50, 50, 1, dannoAttacchiColco["tempesta+"], 500, 1000, dannoAttacchiColco["scossa++"], dannoAttacchiColco["freccia++"], dannoAttacchiColco["tempesta++"]]

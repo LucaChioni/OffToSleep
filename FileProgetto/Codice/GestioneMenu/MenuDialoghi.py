@@ -187,6 +187,8 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi, canzone):
                     sceltaEffettuata = voceMarcata
                     if sceltaEffettuata != personaggio.scelta and personaggio.scelta != -1:
                         SetDialoghiPersonaggi.gestisciRisposteSbagliate(avanzamentoStoria)
+                    elif sceltaEffettuata == personaggio.scelta and personaggio.scelta != -1:
+                        SetDialoghiPersonaggi.gestisciRisposteCorrette(avanzamentoStoria, personaggio.tipo)
                 prosegui = True
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:

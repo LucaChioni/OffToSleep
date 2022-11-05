@@ -327,6 +327,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             datiAttualiTotali = [datiAttuali, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, listaAvanzamentoDialoghi, oggettiRimastiAHansAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco]
                             datiGameoverTotali = [GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[6], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[8], GlobalGameVar.vetDatiSalvataggioGameOver[9], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11]]
                             CaricaSalvaPartita.salvataggio(n, datiAttualiTotali, datiGameoverTotali)
+                            GlobalGameVar.numSalvataggioCaricato = n
                             # ricarico il salvataggio
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
                             confermaSalvataggioCancellazione = 1

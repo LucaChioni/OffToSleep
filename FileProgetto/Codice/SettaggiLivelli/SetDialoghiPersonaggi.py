@@ -72,6 +72,11 @@ def gestisciRisposteSbagliate(avanzamentoStoria):
         GlobalGameVar.datiEnigmaBibliotecario["reset"] = True
 
 
+def gestisciRisposteCorrette(avanzamentoStoria, tipoPersonaggio):
+    if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["passatiMoltiAnniGuardandoGliEventi"] and tipoPersonaggio == "OggettoComputerCostruttore":
+        GlobalGameVar.spengiCalcolatore = True
+
+
 def gestisciEventiPreDialoghi(avanzamentoStoria, personaggio, canzone):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialRecuperoPvDifesa"] and personaggio.tipo == "FiglioUfficiale":
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundCanzone], [0], False, posizioneCanaleMusica=0)

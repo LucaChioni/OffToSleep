@@ -328,7 +328,7 @@ def gameloop():
             # decido dove ripartire per il prossimo salvataggio
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["oltreFinale"]:
                 GlobalGameVar.partitaAppenaAvviataPostFinale = True
-                if dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinale"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCittà"]:
+                if dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinale"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaVulcano"]:
                     dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCasa"]
                     dati[1] = GlobalGameVar.dictStanze["casaHansSara1"]
                     dati[2] = GlobalHWVar.gpx * 6
@@ -365,6 +365,13 @@ def gameloop():
                     dati[3] = GlobalHWVar.gpx * 13
                     # npers: 1=d, 2=a, 3=w, 4=s
                     dati[140] = 4
+                elif dati[0] == GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaCittà"]:
+                    dati[0] = GlobalGameVar.dictAvanzamentoStoria["oltreFinalePartenzaVulcano"]
+                    dati[1] = GlobalGameVar.dictStanze["vulcano3"]
+                    dati[2] = GlobalHWVar.gpx * 16
+                    dati[3] = GlobalHWVar.gpx * 7
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    dati[140] = 3
                 datiAttualiTotali = [dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco]
                 CaricaSalvaPartita.salvataggio(GlobalGameVar.numSalvataggioCaricato, datiAttualiTotali, datiAttualiTotali[:])
 
@@ -3042,6 +3049,25 @@ def gameloop():
                 i += 1
             inizio = True
         GlobalGameVar.partitaAppenaAvviataPostFinale = False
+        if GlobalGameVar.spengiCalcolatore:
+            i = 0
+            while i < 5:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSbloccoPorta)
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
+            if GlobalGameVar.numSalvataggioCaricato != -1:
+                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % GlobalGameVar.numSalvataggioCaricato, "w")
+                scrivi.close()
+                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % GlobalGameVar.numSalvataggioCaricato, "w")
+                scrivi.close()
+            pygame.quit()
+            GlobalHWVar.quit()
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)
