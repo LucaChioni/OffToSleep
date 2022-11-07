@@ -487,7 +487,7 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     while not risposta:
         # gestione degli input
         bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-        if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
+        if bottoneDown == pygame.K_SPACE or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseSinistro" or bottoneDown == "mouseDestro" or bottoneDown == "padCroce" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
             risposta = True
             bottoneDown = False

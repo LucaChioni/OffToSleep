@@ -589,7 +589,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 while not rispostaSottoMenu:
                     # gestione degli input
                     bottoneDownSottoMenu, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDownSottoMenu, False)
-                    if bottoneDownSottoMenu == pygame.K_SPACE or bottoneDownSottoMenu == "mouseSinistro" or bottoneDownSottoMenu == "padCroce":
+                    if bottoneDownSottoMenu == pygame.K_SPACE or bottoneDownSottoMenu == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDownSottoMenu == "mouseSinistro" or bottoneDownSottoMenu == "mouseDestro" or bottoneDownSottoMenu == "padCroce" or bottoneDownSottoMenu == "padCerchio":
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         rispostaSottoMenu = True
                         bottoneDownSottoMenu = False

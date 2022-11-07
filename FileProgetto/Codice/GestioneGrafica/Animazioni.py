@@ -187,7 +187,7 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
             while not risposta:
                 # gestione degli input
                 bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
-                if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
+                if bottoneDown == pygame.K_SPACE or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseSinistro" or bottoneDown == "mouseDestro" or bottoneDown == "padCroce" or bottoneDown == "padCerchio":
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     risposta = True
                     aumentoliv -= 1
@@ -1855,7 +1855,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         while not risposta:
             # gestione degli input
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
-            if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
+            if bottoneDown == pygame.K_SPACE or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseSinistro" or bottoneDown == "mouseDestro" or bottoneDown == "padCroce" or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 risposta = True
                 bottoneDown = False
@@ -1895,7 +1895,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         while not risposta:
             # gestione degli input
             bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
-            if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
+            if bottoneDown == pygame.K_SPACE or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["Q"] or bottoneDown == "mouseSinistro" or bottoneDown == "mouseDestro" or bottoneDown == "padCroce" or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 risposta = True
                 bottoneDown = False
