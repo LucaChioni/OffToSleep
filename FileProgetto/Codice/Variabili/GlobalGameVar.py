@@ -116,7 +116,7 @@ maxMonete = 999999
 vitaTotEsche = 200
 
 # pv recuperati dalle bacche
-qtaCuraBacchePv = 10
+qtaCuraBacchePv = 20
 
 # danno mortale (viene usato per la storia)
 dannoMortale = 100000
