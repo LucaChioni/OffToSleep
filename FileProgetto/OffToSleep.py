@@ -1102,6 +1102,9 @@ def gameloop():
             if bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect" or movimentoDaCompiere == "saltaTurno":
                 if not movimentoDaCompiere == "saltaTurno":
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
+                GlobalHWVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 sposta = True
                 saltaTurno = True
 
