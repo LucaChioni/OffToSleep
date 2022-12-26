@@ -13,9 +13,9 @@ To create the executable you need:
 	1- set the operating system in "FileProgetto/setup.py", line 4 (choose between "Windows", "Linux" or "Mac");
 	2- set to True the variable "eseguibile" in "FileProgetto/GlobalHWVar.py", line 13;
 	3- run the file corresponding to your operating system:
-		- On Windows => "convertire_in_eseguibile_windows.bat";
-		- On Linux => "convertire_in_eseguibile_linux.sh";
-		- On Mac => "convertire_in_eseguibile_mac.sh";
+		- On Windows => "Convertire_in_eseguibile_windows.bat";
+		- On Linux => "Convertire_in_eseguibile_linux.sh";
+		- On Mac => "Convertire_in_eseguibile_mac.sh";
 	4- the executable will be located inside the folder "build".
 
 ==========================================================================================================================================================================
@@ -34,7 +34,7 @@ Per creare l'eseguibile è necessario:
 	1- impostare il sistema operativo nel file "FileProgetto/setup.py" alla riga 4 (scegli tra "Windows", "Linux" o "Mac");
 	2- impostare a True la variabile "eseguibile" nel file "FileProgetto/GlobalHWVar.py" alla riga 13;
 	3- eseguire il file corrispondente al sistema operativo in uso:
-		- Su Windows => "convertire_in_eseguibile_windows.bat";
-		- Su Linux => "convertire_in_eseguibile_linux.sh";
-		- Su Mac => "convertire_in_eseguibile_mac.sh";
+		- Su Windows => "Convertire_in_eseguibile_windows.bat";
+		- Su Linux => "Convertire_in_eseguibile_linux.sh";
+		- Su Mac => "Convertire_in_eseguibile_mac.sh";
 	4- l'eseguibile si troverà dentro la cartella "build".
