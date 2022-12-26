@@ -1,4 +1,5 @@
-FileProgetto/DatiSalvati/
-FileProgetto/Risorse/
 /.idea/
+/FileProgetto/DatiSalvati/
+/FileProgetto/Risorse/
+/__pycache__/
 *.pyc
