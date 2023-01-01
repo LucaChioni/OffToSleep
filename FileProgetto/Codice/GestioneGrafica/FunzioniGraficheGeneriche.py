@@ -525,7 +525,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
         rect = pygame.display.get_surface().get_rect()
         image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
         if tipoOscuramento == 1:
-            image.fill((0, 0, 0, 150))
+            image.fill((0, 0, 0, 130))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 5:
@@ -535,7 +535,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 2
+                i += 3
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 2:
@@ -562,11 +562,11 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 2
+                i += 4
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 4:
-            image.fill((0, 0, 0, 60))
+            image.fill((0, 0, 0, 90))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 6:
@@ -576,7 +576,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 3
+                i += 4
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 5:
             image.fill((0, 0, 0, 50))
