@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-sistema_operativo = "Windows"
+sistema_operativo = "Linux"
 
 # Tells the build script to hide the console
 base = None

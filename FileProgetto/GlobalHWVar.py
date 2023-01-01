@@ -9,9 +9,9 @@ import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAudioAmbiente
 
 
-sistemaOperativo = "Windows"
+sistemaOperativo = "Linux"
 eseguibile = False
-usando_python3 = False
+usando_python3 = True
 testOstacoliAttivi = False
 
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
@@ -112,8 +112,8 @@ fpsInterazioni = 30
 fpsMenu = 30
 fpsAnimazioni = 15
 fpsVideo = 12
-fpsFadeToBlack = 15
-fpsScritturaDialogo = 15
+fpsFadeToBlack = 10
+fpsScritturaDialogo = 8
 fpsDisegno = 30
 
 # colori

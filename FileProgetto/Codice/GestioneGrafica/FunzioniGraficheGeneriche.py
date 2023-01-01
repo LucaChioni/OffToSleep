@@ -168,11 +168,15 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             y += dimY
                     contaLettere = 0
                     while contaLettere < len(parola):
-                        if contaLettere + 1 >= len(parola):
-                            lettera = parola[contaLettere]
-                        else:
+                        if contaLettere + 3 < len(parola):
+                            lettera = parola[contaLettere:contaLettere + 4]
+                        elif contaLettere + 2 < len(parola):
+                            lettera = parola[contaLettere:contaLettere + 3]
+                        elif contaLettere + 1 < len(parola):
                             lettera = parola[contaLettere:contaLettere + 2]
-                        contaLettere += 2
+                        else:
+                            lettera = parola[contaLettere]
+                        contaLettere += 4
                         if fineDialogo:
                             break
                         bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
@@ -194,7 +198,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                         x += dimX
 
                         if not scriviTutto:
-                            if intervalloSuonoDialogo % 2 == 0:
+                            if intervalloSuonoDialogo % 1 == 0:
                                 GlobalHWVar.canaleSoundPuntatoreSposta.play(suonoDialogo)
                             intervalloSuonoDialogo += 1
                             GlobalHWVar.aggiornaSchermo()
@@ -546,7 +550,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                     GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 2
+                i += 3
         elif tipoOscuramento == 3:
             image.fill((0, 0, 0, 180))
             image = image.convert_alpha(GlobalHWVar.schermo)
@@ -562,7 +566,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 4:
-            image.fill((0, 0, 0, 50))
+            image.fill((0, 0, 0, 60))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 6:
@@ -572,10 +576,10 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 2
+                i += 3
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 5:
-            image.fill((0, 0, 0, 60))
+            image.fill((0, 0, 0, 50))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 50:
