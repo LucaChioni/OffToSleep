@@ -886,10 +886,10 @@ if len(datiFileImpostazioniString) == 7:
             linguaImpostata = "ita"
         elif datiFileImpostazioni[0] == 1:
             linguaImpostata = "eng"
-        if 0 <= int(datiFileImpostazioni[1]) <= 10:
-            volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
-        if 0 <= int(datiFileImpostazioni[2]) <= 10:
-            volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
+        if 0 <= int(datiFileImpostazioni[1]) <= 100:
+            volumeEffetti = int(datiFileImpostazioni[1]) / 100.0
+        if 0 <= int(datiFileImpostazioni[2]) <= 100:
+            volumeCanzoni = int(datiFileImpostazioni[2]) / 100.0
         if datiFileImpostazioni[3] == 0 or datiFileImpostazioni[3] == 1 or datiFileImpostazioni[3] == 2:
             modalitaSchermo = int(datiFileImpostazioni[3])
         if (maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5]) and (datiFileImpostazioni[4] % 32 == 0 and datiFileImpostazioni[5] % 18 == 0):

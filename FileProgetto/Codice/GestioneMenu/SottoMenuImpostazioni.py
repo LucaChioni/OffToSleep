@@ -1350,7 +1350,12 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
     aggiornaSchermo = False
 
     linguaTemp = GlobalHWVar.linguaImpostata
-    volumeEffettiTemp = GlobalHWVar.volumeEffetti * 10
+    if GlobalHWVar.volumeEffetti >= 0.1:
+        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.1) * 10
+    elif GlobalHWVar.volumeEffetti == 0.05:
+        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.05) * 10
+    else:
+        volumeEffettiTemp = GlobalHWVar.volumeEffetti * 10
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     modalitaSchermoTemp = GlobalHWVar.modalitaSchermo
@@ -1510,8 +1515,15 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     GlobalHWVar.linguaImpostata = linguaTemp
-                    GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
-                    GlobalHWVar.volumeCanzoni = volumeEffettiTemp / 10.0
+                    if volumeEffettiTemp >= 2:
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 1) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 1) / 10.0
+                    elif volumeEffettiTemp == 1:
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 0.5) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 0.5) / 10.0
+                    else:
+                        GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
+                        GlobalHWVar.volumeCanzoni = volumeEffettiTemp / 10.0
                     GlobalHWVar.controlloRisoluzione = controlloRisoluzioneTemp
                     GlobalHWVar.initVolumeSounds()
                     if dimezzaVolumeCanzone:
@@ -1578,8 +1590,8 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         scrivi.write("0_")
                     elif GlobalHWVar.linguaImpostata == "eng":
                         scrivi.write("1_")
-                    scrivi.write(str(int(GlobalHWVar.volumeEffetti * 10)) + "_")
-                    scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 10)) + "_")
+                    scrivi.write(str(int(GlobalHWVar.volumeEffetti * 100)) + "_")
+                    scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 100)) + "_")
                     scrivi.write(str(GlobalHWVar.modalitaSchermo) + "_")
                     scrivi.write(str(GlobalHWVar.gsx) + "_")
                     scrivi.write(str(GlobalHWVar.gsy) + "_")
