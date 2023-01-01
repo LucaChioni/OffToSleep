@@ -1351,9 +1351,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
 
     linguaTemp = GlobalHWVar.linguaImpostata
     if GlobalHWVar.volumeEffetti >= 0.1:
-        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.1) * 10
+        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.2) * 10
     elif GlobalHWVar.volumeEffetti == 0.05:
-        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.05) * 10
+        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.15) * 10
+    elif GlobalHWVar.volumeEffetti == 0.01:
+        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.09) * 10
     else:
         volumeEffettiTemp = GlobalHWVar.volumeEffetti * 10
     gsxTemp = GlobalHWVar.gsx
@@ -1515,12 +1517,15 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     GlobalHWVar.linguaImpostata = linguaTemp
-                    if volumeEffettiTemp >= 2:
-                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 1) / 10.0
-                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 1) / 10.0
+                    if volumeEffettiTemp >= 3:
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 2) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 2) / 10.0
+                    elif volumeEffettiTemp == 2:
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 1.5) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 1.5) / 10.0
                     elif volumeEffettiTemp == 1:
-                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 0.5) / 10.0
-                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 0.5) / 10.0
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 0.9) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 0.9) / 10.0
                     else:
                         GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
                         GlobalHWVar.volumeCanzoni = volumeEffettiTemp / 10.0
@@ -1590,8 +1595,8 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         scrivi.write("0_")
                     elif GlobalHWVar.linguaImpostata == "eng":
                         scrivi.write("1_")
-                    scrivi.write(str(int(GlobalHWVar.volumeEffetti * 100)) + "_")
-                    scrivi.write(str(int(GlobalHWVar.volumeCanzoni * 100)) + "_")
+                    scrivi.write(str(int(round(GlobalHWVar.volumeEffetti * 100, 0))) + "_")
+                    scrivi.write(str(int(round(GlobalHWVar.volumeCanzoni * 100, 0))) + "_")
                     scrivi.write(str(GlobalHWVar.modalitaSchermo) + "_")
                     scrivi.write(str(GlobalHWVar.gsx) + "_")
                     scrivi.write(str(GlobalHWVar.gsy) + "_")
