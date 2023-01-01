@@ -615,7 +615,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     GlobalHWVar.aggiornaSchermo()
                     inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                     GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                    i += 1
+                    i += 2
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
                 GlobalHWVar.aggiornaSchermo()
 

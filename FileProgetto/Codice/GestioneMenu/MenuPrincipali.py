@@ -762,7 +762,7 @@ def menu(caricaSalvataggio, gameover):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalGameVar.schemataDiCaricamento, (0, 0))
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)

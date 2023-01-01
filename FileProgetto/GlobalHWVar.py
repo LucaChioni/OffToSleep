@@ -110,11 +110,11 @@ clockDisegno = pygame.time.Clock()
 fpsMainLoop = 60
 fpsInterazioni = 30
 fpsMenu = 30
-fpsAnimazioni = 30
+fpsAnimazioni = 15
 fpsVideo = 12
-fpsFadeToBlack = 30
-fpsScritturaDialogo = 30
-fpsDisegno = 60
+fpsFadeToBlack = 15
+fpsScritturaDialogo = 15
+fpsDisegno = 30
 
 # colori
 nero = (0, 0, 0)

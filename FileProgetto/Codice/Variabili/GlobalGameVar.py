@@ -226,7 +226,7 @@ def mostraLogo():
         GlobalHWVar.aggiornaSchermo()
         pygame.event.pump()
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-        i += 1
+        i += 2
     GlobalHWVar.disegnaImmagineSuSchermo(logo, (GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 3))
     GlobalHWVar.aggiornaSchermo()
 
@@ -238,7 +238,7 @@ def mostraLogo():
 
     rect = pygame.display.get_surface().get_rect()
     image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-    image.fill((0, 0, 0, 100))
+    image.fill((0, 0, 0, 150))
     image = image.convert_alpha(GlobalHWVar.schermo)
     i = 0
     while i <= 5:
@@ -246,7 +246,7 @@ def mostraLogo():
         GlobalHWVar.aggiornaSchermo()
         pygame.event.pump()
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-        i += 1
+        i += 2
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.aggiornaSchermo()
 def disegnaSchermataSelezioneLingua():
@@ -295,7 +295,7 @@ def disegnaSchermataSelezioneLingua():
         GlobalHWVar.aggiornaSchermo()
         pygame.event.pump()
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-        i += 1
+        i += 2
     GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
     GlobalHWVar.aggiornaSchermo()
 
@@ -373,7 +373,7 @@ def disegnaSchermataSelezioneLingua():
 
     rect = pygame.display.get_surface().get_rect()
     imgOscuramento = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-    imgOscuramento.fill((0, 0, 0, 100))
+    imgOscuramento.fill((0, 0, 0, 150))
     imgOscuramento = imgOscuramento.convert_alpha(GlobalHWVar.schermo)
     i = 0
     while i <= 5:
@@ -381,7 +381,7 @@ def disegnaSchermataSelezioneLingua():
         GlobalHWVar.aggiornaSchermo()
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-        i += 1
+        i += 2
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.aggiornaSchermo()
 
@@ -453,7 +453,7 @@ def disegnaSchermataDiCaricamento():
         GlobalHWVar.aggiornaSchermo()
         pygame.event.pump()
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-        i += 1
+        i += 2
     GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
     GlobalHWVar.aggiornaSchermo()
 

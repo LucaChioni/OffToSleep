@@ -402,7 +402,7 @@ def mostraTempoPassato(avanzamentoStoria, stanza, stanzaVecchia):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 10
+                i += 20
             i = 0
             while i < 30:
                 pygame.time.wait(100)

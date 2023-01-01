@@ -112,7 +112,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsAnimazioni)
-            yLineaOrizzonte += 1
+            yLineaOrizzonte += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (0, GlobalHWVar.gpy * 9), (GlobalHWVar.gsx, GlobalHWVar.gpy * 9), GlobalHWVar.gpy // 5)
         GlobalHWVar.aggiornaSchermo()
@@ -1529,7 +1529,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsAnimazioni)
-            yLineaOrizzonte -= 1
+            yLineaOrizzonte -= 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         caricaTutto = True
@@ -1594,7 +1594,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsAnimazioni)
-                yLineaOrizzonte += 1
+                yLineaOrizzonte += 2
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (0, GlobalHWVar.gpy * 9), (GlobalHWVar.gsx, GlobalHWVar.gpy * 9), GlobalHWVar.gpy // 5)
             GlobalHWVar.aggiornaSchermo()

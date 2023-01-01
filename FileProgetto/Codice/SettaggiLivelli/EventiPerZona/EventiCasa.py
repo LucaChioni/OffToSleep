@@ -340,7 +340,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (0, GlobalHWVar.gpy * 9), (GlobalHWVar.gsx, GlobalHWVar.gpy * 9), GlobalHWVar.gpy // 5)
         GlobalHWVar.aggiornaSchermo()
@@ -596,7 +596,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         i = 0
@@ -635,7 +635,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             GlobalHWVar.aggiornaSchermo()
             i = 0
@@ -651,7 +651,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
             i = 0
@@ -677,7 +677,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
         i = 0
@@ -701,7 +701,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (xRettangoloRingra, yRettangoloRingra, xDimensioneRettangoloRingra, yDimensioneRettangoloRingra))
         FunzioniGraficheGeneriche.messaggio(LI.GRAZIE[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, xRingraziamento, yRingraziamento, 60, centrale=True)
         GlobalHWVar.aggiornaSchermo()
@@ -719,7 +719,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         i = 0

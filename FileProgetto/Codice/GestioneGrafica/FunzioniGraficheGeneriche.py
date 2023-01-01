@@ -166,7 +166,13 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             y += spazioTraLeRighe
                         else:
                             y += dimY
-                    for lettera in parola:
+                    contaLettere = 0
+                    while contaLettere < len(parola):
+                        if contaLettere + 1 >= len(parola):
+                            lettera = parola[contaLettere]
+                        else:
+                            lettera = parola[contaLettere:contaLettere + 2]
+                        contaLettere += 2
                         if fineDialogo:
                             break
                         bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
@@ -188,7 +194,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                         x += dimX
 
                         if not scriviTutto:
-                            if intervalloSuonoDialogo % 3 == 0:
+                            if intervalloSuonoDialogo % 2 == 0:
                                 GlobalHWVar.canaleSoundPuntatoreSposta.play(suonoDialogo)
                             intervalloSuonoDialogo += 1
                             GlobalHWVar.aggiornaSchermo()
@@ -515,7 +521,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
         rect = pygame.display.get_surface().get_rect()
         image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
         if tipoOscuramento == 1:
-            image.fill((0, 0, 0, 100))
+            image.fill((0, 0, 0, 150))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 5:
@@ -525,11 +531,11 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 2:
-            image.fill((0, 0, 0, 8))
+            image.fill((0, 0, 0, 20))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 30:
@@ -540,9 +546,9 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                     GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
         elif tipoOscuramento == 3:
-            image.fill((0, 0, 0, 100))
+            image.fill((0, 0, 0, 180))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 3:
@@ -552,11 +558,11 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 4:
-            image.fill((0, 0, 0, 25))
+            image.fill((0, 0, 0, 50))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 6:
@@ -566,10 +572,10 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 5:
-            image.fill((0, 0, 0, 30))
+            image.fill((0, 0, 0, 60))
             image = image.convert_alpha(GlobalHWVar.schermo)
             i = 0
             while i <= 50:
@@ -580,7 +586,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                     GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     else:
         screen = GlobalHWVar.schermo.copy().convert()
@@ -606,7 +612,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
         elif illumina == 2:
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((0, 0, 0, 250))
@@ -633,7 +639,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-                i += 1
+                i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
 
@@ -661,7 +667,10 @@ def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio
         if os.path.exists(GlobalHWVar.gamePath + pathImgs + "img" + str(i) + ".png"):
             ultimaImgAnimazione = CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", dimX, dimY, aumenteRisoluzione)
         vetImgAnimazione.append(ultimaImgAnimazione)
-        i += 1
+        if tuttoSchermo:
+            i += 1
+        else:
+            i += 2
     # metto i suoni marcati con "-1" nell'ultimo frame dell'animazione
     i = 0
     while i < len(listaAudio):
@@ -679,7 +688,7 @@ def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio
                 GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaleSoundBattitoCardiaco], [0], False, posizioneCanaleMusica=0)
                 GlobalHWVar.canaleSoundBattitoCardiaco.stop()
                 GlobalHWVar.canaleSoundBattitoCardiaco.set_volume(GlobalHWVar.volumeEffetti)
-        if len(listaAudio) > 0 and listaAudio[0] == numFrameAttuale:
+        if len(listaAudio) > 0 and (listaAudio[0] == numFrameAttuale or (listaAudio[0] == numFrameAttuale - 1 and not tuttoSchermo)):
             GlobalHWVar.canaleSoundInterazioni.play(listaAudio[1])
             del listaAudio[1]
             del listaAudio[0]
@@ -691,9 +700,10 @@ def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         if tuttoSchermo:
             GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsVideo)
+            numFrameAttuale += 1
         else:
             GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
-        numFrameAttuale += 1
+            numFrameAttuale += 2
 
 
 def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp, avanzamentoStoria):
@@ -1122,10 +1132,10 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         # fase 2: rioscuramento
         image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-        image.fill((0, 0, 0, 30))
+        image.fill((0, 0, 0, 60))
         image = image.convert_alpha(GlobalHWVar.schermo)
         i = 0
         while i <= 20:
@@ -1133,7 +1143,7 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         # fase 3: illuminazione totale
@@ -1153,11 +1163,11 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
     else:
         # fase 1: oscuramento
         image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-        image.fill((0, 0, 0, 30))
+        image.fill((0, 0, 0, 60))
         image = image.convert_alpha(GlobalHWVar.schermo)
         i = 0
         while i <= 20:
@@ -1165,7 +1175,7 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         # fase 2: reilluminazione parziale
@@ -1184,10 +1194,10 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         # fase 3: oscuramento totale
         image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-        image.fill((0, 0, 0, 30))
+        image.fill((0, 0, 0, 60))
         image = image.convert_alpha(GlobalHWVar.schermo)
         i = 0
         while i <= 20:
@@ -1195,7 +1205,7 @@ def animaDormiveglia(illumina, screen):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
 
@@ -1209,7 +1219,7 @@ def animaCambioScenaCalcolatore(x, y, direzione, stato, nonMostrarePersonaggio, 
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         image = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
-        image.fill((255, 255, 255, 50))
+        image.fill((255, 255, 255, 100))
         image = image.convert_alpha(GlobalHWVar.schermo)
         i = 0
         while i <= 20:
@@ -1217,7 +1227,7 @@ def animaCambioScenaCalcolatore(x, y, direzione, stato, nonMostrarePersonaggio, 
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
         GlobalHWVar.aggiornaSchermo()
         GlobalHWVar.nonAggiornareSchermo = True
@@ -1254,7 +1264,7 @@ def animaCambioScenaCalcolatore(x, y, direzione, stato, nonMostrarePersonaggio, 
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 10
+            i += 20
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.bianco)
         GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersb, (x, y))
@@ -1305,7 +1315,7 @@ def animaCambioScenaCalcolatore(x, y, direzione, stato, nonMostrarePersonaggio, 
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 10
+            i += 20
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         if not personaggioGiaNelloScreen:
             GlobalHWVar.disegnaImmagineSuSchermo(imgPers, (x, y))
@@ -1333,7 +1343,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 100))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1350,7 +1360,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 25))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1367,7 +1377,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 50))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1384,7 +1394,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
@@ -1399,7 +1409,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 200))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1416,7 +1426,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 100))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1433,7 +1443,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 150))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1450,7 +1460,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti], True)
@@ -1465,7 +1475,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 220))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1482,7 +1492,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 150))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1499,7 +1509,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 200))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1516,7 +1526,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 120))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1533,7 +1543,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         GlobalHWVar.aggiornaSchermo()
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.1], True)
@@ -1548,7 +1558,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 150))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1565,7 +1575,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         image.fill((0, 0, 0, 200))
         image = image.convert_alpha(GlobalHWVar.schermo)
@@ -1582,7 +1592,7 @@ def animaMancamento(intensita):
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i -= 1
+            i -= 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
         GenericFunc.cambiaVolumeCanaliAudio([GlobalHWVar.canaliSoundSottofondoAmbientale], [GlobalHWVar.volumeEffetti * 0.6], True)

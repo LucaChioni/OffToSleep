@@ -192,7 +192,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
-            i += 1
+            i += 2
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
         avanzamentoStoria += 1
