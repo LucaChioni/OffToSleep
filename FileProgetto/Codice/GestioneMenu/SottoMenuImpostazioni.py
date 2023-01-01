@@ -1350,14 +1350,14 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
     aggiornaSchermo = False
 
     linguaTemp = GlobalHWVar.linguaImpostata
-    if GlobalHWVar.volumeEffetti >= 0.1:
-        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.2) * 10
-    elif GlobalHWVar.volumeEffetti == 0.05:
-        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.15) * 10
-    elif GlobalHWVar.volumeEffetti == 0.01:
-        volumeEffettiTemp = (GlobalHWVar.volumeEffetti + 0.09) * 10
+    if round(GlobalHWVar.volumeEffetti, 2) >= 0.1:
+        volumeEffettiTemp = int(round((round(GlobalHWVar.volumeEffetti + 0.2, 1)) * 10, 0))
+    elif round(GlobalHWVar.volumeEffetti, 2) == 0.05:
+        volumeEffettiTemp = int(round((round(GlobalHWVar.volumeEffetti + 0.15, 1)) * 10, 0))
+    elif round(GlobalHWVar.volumeEffetti, 2) == 0.02:
+        volumeEffettiTemp = int(round((round(GlobalHWVar.volumeEffetti + 0.08, 1)) * 10, 0))
     else:
-        volumeEffettiTemp = GlobalHWVar.volumeEffetti * 10
+        volumeEffettiTemp = int(round(round(GlobalHWVar.volumeEffetti, 1) * 10, 0))
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     modalitaSchermoTemp = GlobalHWVar.modalitaSchermo
@@ -1524,8 +1524,8 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamento
                         GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 1.5) / 10.0
                         GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 1.5) / 10.0
                     elif volumeEffettiTemp == 1:
-                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 0.9) / 10.0
-                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 0.9) / 10.0
+                        GlobalHWVar.volumeEffetti = (volumeEffettiTemp - 0.8) / 10.0
+                        GlobalHWVar.volumeCanzoni = (volumeEffettiTemp - 0.8) / 10.0
                     else:
                         GlobalHWVar.volumeEffetti = volumeEffettiTemp / 10.0
                         GlobalHWVar.volumeCanzoni = volumeEffettiTemp / 10.0
