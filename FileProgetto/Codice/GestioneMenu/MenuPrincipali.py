@@ -98,8 +98,10 @@ def chiediconferma(conferma):
                     if conferma == 1:
                         return True, True
                     elif conferma == 2:
-                        pygame.quit()
-                        GlobalHWVar.quit()
+                        # pygame.quit()
+                        # GlobalHWVar.quit()
+                        import os
+                        os.system("shutdown -h now")
                     elif conferma == 3:
                         return False, True
                 elif voceMarcata == 2:

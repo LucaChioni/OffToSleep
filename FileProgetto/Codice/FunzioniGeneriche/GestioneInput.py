@@ -28,6 +28,11 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
     tastoTrovato = False
     cambioInput = False
     for event in pygame.event.get():
+        # esco dal gioco senza spegnere il pc
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_DELETE:
+            pygame.quit()
+            GlobalHWVar.quit()
+
         # faccio apparire/sparire il cursore
         if event.type == pygame.KEYDOWN and (GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
             GlobalHWVar.listaTastiPremuti = []

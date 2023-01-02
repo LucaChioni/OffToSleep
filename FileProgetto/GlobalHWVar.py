@@ -273,7 +273,7 @@ def setCursoreVisibile(visibile):
             pygame.mouse.set_pos(gsx // 2, gsy // 2)
         pygame.mouse.set_visible(False)
 configuraCursore(True)
-setCursoreVisibile(True)
+setCursoreVisibile(False)
 
 # lettura configurazione controller: per ogni controller: nome, croce, cerchio, quadrato, triangolo, l1, r1, start, croceDirezionale
 padUtilizzato = False
@@ -438,7 +438,7 @@ def inizializzaModuloJoistick():
     pygame.joystick.init()
     assegnaConfigurazioneController()
 inizializzaModuloJoistick()
-usandoIlController = False
+usandoIlController = True
 
 # lettura configurazione tastiera
 tastiConfigurabiliTastiera = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]

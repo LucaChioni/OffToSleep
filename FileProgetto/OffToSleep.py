@@ -3069,8 +3069,9 @@ def gameloop():
                 scrivi.close()
                 scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % GlobalGameVar.numSalvataggioCaricato, "w")
                 scrivi.close()
-            pygame.quit()
-            GlobalHWVar.quit()
+            # pygame.quit()
+            # GlobalHWVar.quit()
+            os.system("shutdown -h now")
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)
