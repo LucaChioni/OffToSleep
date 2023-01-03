@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+os.system("xdotool mousemove 400 480")
 # import psutil
 import pygame
 import datetime
 import GlobalHWVar
+os.system("xdotool mousemove 400 240")
 # "AggiungiTutteLeTraduzioni" lo mette come inutile ma serve per aggiornare i dictionary dei testi con le traduzioni
 import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
