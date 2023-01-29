@@ -155,7 +155,7 @@ def chiediconferma(conferma):
                 GlobalHWVar.disegnaImmagineSuSchermo(backgroundUpdate2, (GlobalHWVar.gsx // 32 * 21, 0))
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
@@ -520,7 +520,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (0, GlobalHWVar.gsy // 18 * 16.5, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2))
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_COM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
-                    elif GlobalHWVar.usandoIlController:
+                    elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                         FunzioniGraficheGeneriche.messaggio(LI.MENU_COMANDI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio(LI.ESC_COMANDI[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
@@ -616,7 +616,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 13.2), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 13.2), 2)
                     FunzioniGraficheGeneriche.messaggio(LI.CAM_OPE_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.5, 35)
                     FunzioniGraficheGeneriche.messaggio(LI.ESC_SE_CON[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 15, 35)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.COMANDI_CONTROLLER[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6))
@@ -720,7 +720,7 @@ def menu(caricaSalvataggio, gameover):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 6.2), (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 17), 2)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES__CEN_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.MEN__B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.ESC__Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
@@ -1166,7 +1166,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 19, 0, GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 2))
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio(LI.TAS_DES__CEN_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                    elif GlobalHWVar.usandoIlController:
+                    elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                         FunzioniGraficheGeneriche.messaggio(LI.MEN__B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio(LI.ESC__Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)

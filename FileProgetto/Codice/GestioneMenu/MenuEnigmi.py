@@ -239,7 +239,7 @@ def enigmaBiblioteca():
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAN_TUT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 2.5, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.LB[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio(LI.RB[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
@@ -599,7 +599,7 @@ def enigmaLabirinto(avanzamentoStoria):
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAN_TUT[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 2.5, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.LB[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio(LI.RB[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.5, 60)
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)

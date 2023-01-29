@@ -69,7 +69,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
@@ -112,7 +112,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
@@ -510,7 +510,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 if cosa == 1:
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
-                    elif GlobalHWVar.usandoIlController:
+                    elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                         FunzioniGraficheGeneriche.messaggio(LI.Y_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio(LI.SHI_CAN_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
@@ -518,27 +518,27 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                     if possibileSalvare:
                         if GlobalHWVar.mouseVisibile:
                             FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
-                        elif GlobalHWVar.usandoIlController:
+                        elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                             FunzioniGraficheGeneriche.messaggio(LI.Y_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         else:
                             FunzioniGraficheGeneriche.messaggio(LI.SHI_SAL_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
                         if GlobalHWVar.mouseVisibile:
                             FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
-                        elif GlobalHWVar.usandoIlController:
+                        elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                             FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                         else:
                             FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                 if cosa == 3:
                     if GlobalHWVar.mouseVisibile:
                         FunzioniGraficheGeneriche.messaggio(LI.TAS_CEN_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
-                    elif GlobalHWVar.usandoIlController:
+                    elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                         FunzioniGraficheGeneriche.messaggio(LI.Y_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                     else:
                         FunzioniGraficheGeneriche.messaggio(LI.SHI_CAR_PAR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 16.8, 50, centrale=True)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio(LI.TAS_DES_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
-                elif GlobalHWVar.usandoIlController:
+                elif GlobalHWVar.usandoIlController or GlobalHWVar.usandoGpioRaspberry:
                     FunzioniGraficheGeneriche.messaggio(LI.B_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio(LI.Q_TOR_IND[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 1, 50, centrale=True)

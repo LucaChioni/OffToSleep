@@ -14,6 +14,8 @@ eseguibile = False
 usando_python3 = True
 testOstacoliAttivi = False
 
+usandoGpioRaspberry = True
+
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 # modifico il path se sto creando l'eseguibile
 if eseguibile:
@@ -438,7 +440,7 @@ def inizializzaModuloJoistick():
     pygame.joystick.init()
     assegnaConfigurazioneController()
 inizializzaModuloJoistick()
-usandoIlController = True
+usandoIlController = False
 
 # lettura configurazione tastiera
 tastiConfigurabiliTastiera = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]
