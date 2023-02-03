@@ -2106,13 +2106,13 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 22 and cy == GlobalHWVar.gpy * 11:
                 tesoro = 32
         if stanza == GlobalGameVar.dictStanze["selvaArida15"]:
-            # ottieni caricabatterie
+            # ottieni condizione (pe<80)
             if cx == GlobalHWVar.gpx * 20 and cy == GlobalHWVar.gpy * 5:
-                tesoro = 32
+                tesoro = 86
         if stanza == GlobalGameVar.dictStanze["selvaArida16"]:
-            # ottieni medicina
+            # ottieni tecnica (auto-ricarica)
             if cx == GlobalHWVar.gpx * 20 and cy == GlobalHWVar.gpy * 7:
-                tesoro = 33
+                tesoro = 17
     elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
         if stanza == GlobalGameVar.dictStanze["avampostoDiRod3"]:
             # ottieni collana assorbilampo
@@ -2120,17 +2120,17 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 tesoro = 70
     elif GlobalGameVar.dictStanze["labirinto1"] <= stanza <= GlobalGameVar.dictStanze["labirinto23"]:
         if stanza == GlobalGameVar.dictStanze["labirinto2"]:
-            # ottieni condizione (pe<80)
+            # ottieni caricabatterie
             if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 6:
-                tesoro = 86
+                tesoro = 32
         if stanza == GlobalGameVar.dictStanze["labirinto4"]:
             # ottieni condizione (nemici>3)
             if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 11:
                 tesoro = 100
         if stanza == GlobalGameVar.dictStanze["labirinto5"]:
-            # ottieni tecnica (auto-ricarica)
+            # ottieni caricabatterie
             if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 10:
-                tesoro = 17
+                tesoro = 32
         if stanza == GlobalGameVar.dictStanze["labirinto9"]:
             # ottieni tecnica (attP)
             if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 8:
@@ -2249,7 +2249,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 25 and cy == GlobalHWVar.gpy * 8:
                 tesoro = 74
         if stanza == GlobalGameVar.dictStanze["internoCastello21"]:
-            # ottieni tecnica (ricarica+)
+            # ottieni tecnica (auto-ricarica+)
             if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 12:
                 tesoro = 27
             # ottieni condizione (pvNemicoMinori)
@@ -2386,7 +2386,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if cx == GlobalHWVar.gpx * 17 and cy == GlobalHWVar.gpy * 11:
                 tesoro = 29
         if stanza == GlobalGameVar.dictStanze["caverna10"]:
-            # ottieni tecnica (tempesta++)
+            # ottieni tecnica (tempesta elettrica++)
             if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 3:
                 tesoro = 30
             # ottieni condizione (nemici>1)

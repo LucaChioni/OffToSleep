@@ -236,9 +236,8 @@ def guardaVideo(listaImg, audio, loop):
     # oscuraIlluminaSchermo(illumina=False)
 
 
-def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente, avanzamentoStoria):
+def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio, gameover, caricaSalvataggio, riavviaAudioMusica, riavviaAudioAmbiente, avanzamentoStoria):
     if vitaRallo <= 0:
-        gameover = True
         if GlobalHWVar.mouseBloccato:
             GlobalHWVar.configuraCursore(False)
 
@@ -268,24 +267,114 @@ def controllaMorteRallo(vitaRallo, pvtot, numFrecce, avvele, attp, difp, inizio,
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
-        messaggio(LI.SEI_MORTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 13, 150)
+        messaggio(LI.SEI_MORTO[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 6.3, 150, centrale=True)
+        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 4.5, GlobalHWVar.gsy // 18 * 8.8), (GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 8.8), 1)
+        messaggio(LI.CONTINUA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.9, GlobalHWVar.gsy // 18 * 9.8, 90)
+        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 16), int(GlobalHWVar.gpy * 9.3)), (int(GlobalHWVar.gpx * 16), int(GlobalHWVar.gpy * 11.6)), 1)
+        messaggio(LI.CARICA_PARTITA[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.1, GlobalHWVar.gsy // 18 * 9.8, 90)
         GlobalHWVar.aggiornaSchermo()
 
+        schermo_temp = GlobalHWVar.schermo.copy()
+        backgroundUpdate = schermo_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9, GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 3)).convert()
+
+        puntatore = GlobalImgVar.puntatore
+        xp = GlobalHWVar.gsx // 32 * 9.2
+        yp = GlobalHWVar.gsy // 18 * 10.2
+
+        primoFrame = True
+        tastotempfps = 8
+        voceMarcata = 1
+
         bottoneDown = False
-        continua = False
-        while not continua:
+        while True:
+            # rallenta per i 30 fps
+            if tastotempfps != 0 and bottoneDown:
+                tastotempfps -= 1
+            elif tastotempfps == 0 and bottoneDown:
+                tastotempfps = 2
+
+            voceMarcataVecchia = voceMarcata
+            xMouse, yMouse = pygame.mouse.get_pos()
+            if GlobalHWVar.mouseVisibile:
+                if GlobalHWVar.gsy // 18 * 8.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
+                    if GlobalHWVar.gsx // 32 * 7 <= xMouse <= GlobalHWVar.gsx // 32 * 16:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        voceMarcata = 1
+                        xp = GlobalHWVar.gsx // 32 * 9.2
+                        yp = GlobalHWVar.gsy // 18 * 10.2
+                    elif GlobalHWVar.gsx // 32 * 16 <= xMouse <= GlobalHWVar.gsx // 32 * 25:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
+                        voceMarcata = 2
+                        xp = GlobalHWVar.gsx // 32 * 16.4
+                        yp = GlobalHWVar.gsy // 18 * 10.2
+                    else:
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
+                else:
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
+                if voceMarcataVecchia != voceMarcata and not primoFrame:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+
             # gestione degli input
-            bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-            if bottoneDown:
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
-                continua = True
+            primoMovimento = False
+            bottoneDownVecchio = bottoneDown
+            bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
+            if bottoneDownVecchio != bottoneDown:
+                primoMovimento = True
+                tastotempfps = 8
+            if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
+                if voceMarcata == 1:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                    gameover = True
+                    break
+                elif voceMarcata == 2:
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                    oscuraIlluminaSchermo(illumina=False)
+                    caricaSalvataggio = GlobalGameVar.numSalvataggioCaricato
+                    break
+                bottoneDown = False
+            elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                bottoneDown = False
+            tastoMovimentoPremuto = False
+            if bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+                tastoMovimentoPremuto = True
+            elif bottoneDown:
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
                 bottoneDown = False
 
+            if primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
+                primoFrame = False
+                if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["A"] or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
+                    if voceMarcata == 2:
+                        voceMarcata -= 1
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        xp = GlobalHWVar.gsx // 32 * 9.2
+                    else:
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        bottoneDown = False
+                if (bottoneDown == GlobalHWVar.tastiConfiguratiTastiera["D"] or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
+                    if voceMarcata == 1:
+                        voceMarcata += 1
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        xp = GlobalHWVar.gsx // 32 * 16.4
+                    else:
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                        bottoneDown = False
+                if not primoMovimento and tastoMovimentoPremuto:
+                    tastotempfps = 2
+
+                GlobalHWVar.disegnaImmagineSuSchermo(backgroundUpdate, (GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 9))
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                GlobalHWVar.aggiornaSchermo()
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
         inizio = True
 
-    return inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente
+    return inizio, gameover, caricaSalvataggio, riavviaAudioMusica, riavviaAudioAmbiente
 
 
 def disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False, difesa=False):

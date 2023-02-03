@@ -10,8 +10,8 @@ import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAud
 
 
 sistemaOperativo = "Windows"
-eseguibile = False
 usando_python3 = False
+eseguibile = False
 testOstacoliAttivi = False
 
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
@@ -940,7 +940,7 @@ if erroreFileImpostazioni:
 # definisco la variabile che mi serve per sapere quanto tempo hai giocato (per metterlo nel salvataggio)
 tempoInizioPartita = False
 
-# # inizializzazione di stamworks
+# # inizializzazione di steamworks
 # nomeAchievement = "JUST_WAIT"
 # from steamworks import STEAMWORKS
 # steamworks = STEAMWORKS()

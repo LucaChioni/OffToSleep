@@ -50,13 +50,16 @@ def animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura,
         FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, numStanza, stanzaVecchia):
+def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, numStanza, stanzaVecchia, camminataVeloce):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
             animazioneRallo = True
             if not GlobalHWVar.canaleSoundPassiRallo.get_busy():
-                GlobalHWVar.canaleSoundPassiRallo.play(GlobalSndVar.rumorecamminata)
+                if camminataVeloce:
+                    GlobalHWVar.canaleSoundPassiRallo.play(GlobalSndVar.rumorecamminataVeloce)
+                else:
+                    GlobalHWVar.canaleSoundPassiRallo.play(GlobalSndVar.rumorecamminata)
             if primopasso and not cambiosta:
                 primopasso = False
             # camminata quando si entra in una stanza
@@ -85,7 +88,7 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
             if attaccoADistanza:
                 if fineanimaz == 10:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreLancioFreccia)
-                elif fineanimaz == 5:
+                elif fineanimaz == 6:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreAttaccoArco)
                 FunzioniGraficheGeneriche.disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
             else:
@@ -151,7 +154,7 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.saliliv2, (x, y))
         if 1 < fineanimaz <= 5:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.saliliv1, (x, y))
-        if fineanimaz == 1:
+        if fineanimaz <= 1:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.saliliv, (x, y))
 
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfocontcof, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 0))
@@ -173,7 +176,7 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
                 FunzioniGraficheGeneriche.messaggio(LI.LIV__PUN_VIT_AUM[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
                 break
             i += 3
-        if fineanimaz == 1:
+        if fineanimaz == 0:
             if GlobalHWVar.mouseBloccato:
                 GlobalHWVar.configuraCursore(False)
             GlobalHWVar.aggiornaSchermo()
@@ -562,7 +565,7 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, nemicoInquadrato, fin
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreLancioOggettoNemico)
                 else:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreAttaccoNemico)
-            if fineanimaz == 5 and nemicoAttaccante.attaccaDaLontano:
+            if fineanimaz == 6 and nemicoAttaccante.attaccaDaLontano:
                 GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.rumoreAttaccoNemico)
             if nemicoAttaccante.direzione == "w":
                 GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.imgAttaccoW, (nemicoAttaccante.x, nemicoAttaccante.y - GlobalHWVar.gpy))
@@ -596,7 +599,7 @@ def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, anima
                         nemicoUccisoDallAttualeAttacante = nemico.animaDanneggiamento[i + 1]
                     i += 2
                 if nemico.animaMorte and nemicoUccisoDallAttualeAttacante:
-                    if not GlobalHWVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
+                    if not GlobalHWVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 6:
                         GlobalHWVar.canaleSoundMorteNemici.play(GlobalSndVar.rumoreMorteNemico)
                     nemico.animazioneFatta = True
                     if fineanimaz > 5 or (0 < fineanimaz <= 5 and fineanimaz % 4 == 0):
@@ -752,7 +755,7 @@ def animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, att
         i = 0
         while i < len(vettoreEsche):
             if vettoreEsche[i] in escheMorte:
-                if not GlobalHWVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
+                if not GlobalHWVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 6:
                     GlobalHWVar.canaleSoundMorteNemici.play(GlobalSndVar.rumoreMorteNemico)
                 c = 0
                 while c < len(vettoreImgCaselle):
@@ -851,7 +854,7 @@ def animaMangiareBacche(x, y, listaBacchePv, fineanimaz):
     return baccheMangiate
 
 
-def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz):
+def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vettoreEsche, camminataVeloce, fineanimaz):
     # disegno il terreno sotto le frecce lanciate da Rallo
     if "attaccoRallo" in azioniDaEseguire and (attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata") and not cambiosta:
         xInizioRetta = x
@@ -876,14 +879,20 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
                 yFineRetta = attaccoADistanza.vy
         global quadrettoSottoLaFreccia
         global quadrettoSottoEsplosione
-        if fineanimaz > 5:
+        if fineanimaz > 4:
             if fineanimaz == 10 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
                 quadrettoSottoEsplosione = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xFineRetta - (GlobalHWVar.gpx * 2), yFineRetta - (GlobalHWVar.gpy * 2), GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5)).convert()
             if fineanimaz != 10:
-                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalHWVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+                if camminataVeloce:
+                    GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
             quadrettoSottoLaFreccia = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpy, GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3)).convert()
-        elif fineanimaz == 5:
-            GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+        elif fineanimaz == 4:
+            if camminataVeloce:
+                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+            else:
+                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
         elif fineanimaz == 0 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
             GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoEsplosione, ((xFineRetta - (GlobalHWVar.gpx * 2), yFineRetta - (GlobalHWVar.gpy * 2))))
 
@@ -898,12 +907,18 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
             xFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vx
             yFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vy
         global quadrettoSottoLaFrecciaElettrica
-        if fineanimaz > 5:
+        if fineanimaz > 4:
             if fineanimaz != 10:
-                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalHWVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+                if camminataVeloce:
+                    GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
             quadrettoSottoLaFrecciaElettrica = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpy, GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3)).convert()
-        elif fineanimaz == 5:
-            GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+        elif fineanimaz == 4:
+            if camminataVeloce:
+                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+            else:
+                GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
 
     # disegno il terreno sotto gli oggetti lanciati dai nemici
     if "attaccoNemici" in azioniDaEseguire and nemicoAttaccante:
@@ -912,12 +927,18 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
             xFineRetta = nemicoAttaccante.obbiettivo[1]
             yInizioRetta = nemicoAttaccante.y
             yFineRetta = nemicoAttaccante.obbiettivo[2]
-            if fineanimaz > 5:
+            if fineanimaz > 4:
                 if fineanimaz != 10:
-                    GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalHWVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+                    if camminataVeloce:
+                        GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+                    else:
+                        GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
                 nemicoAttaccante.quadrettoSottoOggettoLanciato = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalHWVar.gpy, GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3)).convert()
-            elif fineanimaz == 5:
-                GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
+            elif fineanimaz == 4:
+                if camminataVeloce:
+                    GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (8 - fineanimaz)) - GlobalHWVar.gpy))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalHWVar.gpy))
 
 
 def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz):
@@ -1046,28 +1067,28 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
             angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
             angoloInGradi = math.degrees(angoloInRadianti)
             imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaLanciata, angoloInGradi)
-        if fineanimaz > 5:
+        if fineanimaz > 4:
             GlobalHWVar.disegnaImmagineSuSchermo(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
         elif animaOggetto[0] and fineanimaz > 0:
             if animaOggetto[0] == "bomba":
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaBomba, (animaOggetto[1] - GlobalHWVar.gpx, animaOggetto[2] - GlobalHWVar.gpy))
-                if fineanimaz == 5:
+                if fineanimaz == 4:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoBomba)
             elif animaOggetto[0] == "bombaVeleno":
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaBombaVeleno, (animaOggetto[1], animaOggetto[2]))
-                if fineanimaz == 5:
+                if fineanimaz == 4:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoBombaVeleno)
             elif animaOggetto[0] == "esca":
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
-                if fineanimaz == 5:
+                if fineanimaz == 4:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoEsca)
             elif animaOggetto[0] == "bombaAppiccicosa":
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaBombaAppiccicosa, (animaOggetto[1], animaOggetto[2]))
-                if fineanimaz == 5:
+                if fineanimaz == 4:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoBombaAppiccicosa)
             elif animaOggetto[0] == "bombaPotenziata":
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgAnimaBombaPotenziata, (animaOggetto[1] - (GlobalHWVar.gpx * 2), animaOggetto[2] - (GlobalHWVar.gpy * 2)))
-                if fineanimaz == 5:
+                if fineanimaz == 4:
                     GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoBombaPotenziata)
 
     # disegno le frecce elettriche lanciate da Colco
@@ -1116,7 +1137,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
     # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
-    if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Rallo" in attaccoDiRallo and fineanimaz == 5:
+    if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Rallo" in attaccoDiRallo and fineanimaz == 6:
         i = 0
         while i < len(attaccoDiRallo):
             if attaccoDiRallo[i] == "Rallo":
@@ -1131,7 +1152,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                 if attaccoDiRallo[i + 2] == "avvelena":
                     statoRalloInizioTurno[1] = True
             i += 3
-    if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Rallo" and fineanimaz == 5:
+    if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Rallo" and fineanimaz == 6:
         if nemicoAttaccante.bersaglioColpito[1] != 0:
             GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][1] = nemicoAttaccante.bersaglioColpito[1]
             GlobalGameVar.datiAnimazioniDanniInflitti["dannoRallo"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
@@ -1142,7 +1163,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
         statoRalloInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
         if nemicoAttaccante.bersaglioColpito[2] == "avvelena":
             statoRalloInizioTurno[1] = True
-    if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Rallo" in attaccoDiColco and fineanimaz == 5:
+    if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Rallo" in attaccoDiColco and fineanimaz == 6:
         i = 0
         while i < len(attaccoDiColco):
             if attaccoDiColco[i] == "Rallo":
@@ -1170,7 +1191,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
 
     # disegno la vita del Colco / esca / mostro selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and GlobalGameVar.impoPresente):
-        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Colco" in attaccoDiRallo and fineanimaz == 5:
+        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Colco" in attaccoDiRallo and fineanimaz == 6:
             i = 0
             while i < len(attaccoDiRallo):
                 if attaccoDiRallo[i] == "Colco":
@@ -1183,7 +1204,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                             GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][0] = "danno"
                     statoColcoInizioTurno[0] += attaccoDiRallo[i + 1]
                 i += 3
-        if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco" and fineanimaz == 5:
+        if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco" and fineanimaz == 6:
             if nemicoAttaccante.bersaglioColpito[1] != 0 and statoColcoInizioTurno[0] > 0:
                 GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][1] = nemicoAttaccante.bersaglioColpito[1]
                 GlobalGameVar.datiAnimazioniDanniInflitti["dannoImpo"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
@@ -1194,7 +1215,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
             statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
             if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
                 statoColcoInizioTurno[1] = 10
-        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Colco" in attaccoDiColco and fineanimaz == 5:
+        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Colco" in attaccoDiColco and fineanimaz == 6:
             i = 0
             while i < len(attaccoDiColco):
                 if attaccoDiColco[i] == "Colco":
@@ -1229,7 +1250,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                         idEscaInizioturno = j
                         break
                     j += 2
-                if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca") and nemicoAttaccante.bersaglioColpito[0] == nemicoInquadrato and fineanimaz == 5:
+                if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca") and nemicoAttaccante.bersaglioColpito[0] == nemicoInquadrato and fineanimaz == 6:
                     if nemicoAttaccante.bersaglioColpito[1] != 0:
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][1] = nemicoAttaccante.bersaglioColpito[1]
                         GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][2] = GlobalGameVar.datiAnimazioniDanniInflitti["tempoAnimazione"]
@@ -1238,7 +1259,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                         elif GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][1] < 0:
                             GlobalGameVar.datiAnimazioniDanniInflitti["dannoEsche"][0] = "danno"
                     statoEscheInizioTurno[idEscaInizioturno + 1] += nemicoAttaccante.bersaglioColpito[1]
-                if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and fineanimaz == 5:
+                if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and fineanimaz == 6:
                     k = 0
                     while k < len(attaccoDiColco):
                         if type(attaccoDiColco[k]) is str and attaccoDiColco[k].startswith("Esca") and int(attaccoDiColco[k].split(":")[1]) == vettoreEsche[i]:
@@ -1252,7 +1273,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                             statoEscheInizioTurno[idEscaInizioturno + 1] += attaccoDiColco[k + 1]
                             break
                         k += 3
-                if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and fineanimaz == 5:
+                if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and fineanimaz == 6:
                     k = 0
                     while k < len(attaccoDiRallo):
                         if type(attaccoDiRallo[k]) is str and attaccoDiRallo[k].startswith("Esca") and int(attaccoDiRallo[k].split(":")[1]) == vettoreEsche[i]:
@@ -1272,7 +1293,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
             i += 4
 
     for nemico in listaNemici:
-        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and nemico in attaccoDiRallo and fineanimaz == 5:
+        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and nemico in attaccoDiRallo and fineanimaz == 6:
             i = 0
             while i < len(attaccoDiRallo):
                 if attaccoDiRallo[i] == nemico:
@@ -1290,7 +1311,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                         nemico.statoInizioTurno[2] = True
                     break
                 i += 3
-        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and nemico in attaccoDiColco and fineanimaz == 5:
+        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and nemico in attaccoDiColco and fineanimaz == 6:
             i = 0
             while i < len(attaccoDiColco):
                 if attaccoDiColco[i] == nemico:
@@ -1504,6 +1525,16 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     animaValoreCuraCollana(animaCuraCollana, dati, difesa)
     animaValoreCuraBacchePv(animaCuraBacchePv, dati, difesa)
 
+    # decidi se velocizzare l'animazione (quando hai preso le scarpe veloci e non ci sono nemici)
+    nemiciPresenti = False
+    for nemico in listaNemici:
+        if nemico.inCasellaVista:
+            nemiciPresenti += True
+            break
+    camminataVeloce = False
+    if not nemiciPresenti and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["indossatoScarpeVeloci"]:
+        camminataVeloce = True
+
     denaroRaccolto = False
     baccheMangiate = False
     animazioneRalloFatta = False
@@ -1575,7 +1606,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy()
-            eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
+            eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vettoreEsche, camminataVeloce, fineanimaz)
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
             if cambiosta:
@@ -1605,7 +1636,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(dati[0], sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, dati[1], stanzaVecchia)
+                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(dati[0], sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio, dati[1], stanzaVecchia, camminataVeloce)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
@@ -1670,7 +1701,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if fineanimaz > 0:
                     GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
                     # print (GlobalHWVar.clockAnimazioni.get_fps())
-            fineanimaz -= 1
+
+            if camminataVeloce:
+                fineanimaz -= 2
+            else:
+                fineanimaz -= 1
 
         azioniDaEseguire = []
         if not cambiosta:

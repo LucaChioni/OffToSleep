@@ -96,6 +96,7 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["armaturaNonno4"] = i
     i += 1
     dictAvanzamentoStoria["armaturaNonnoCompletata"] = i
+    dictAvanzamentoStoria["indossatoScarpeVeloci"] = i
     i += 1
     dictAvanzamentoStoria["tutorialSeppellireCadaveri"] = i
     i += 1

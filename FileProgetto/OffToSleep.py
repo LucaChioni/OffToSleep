@@ -325,6 +325,30 @@ def gameloop():
             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
             # print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
 
+            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - INIZIO !!!
+            # controllo se i cofanetti modificati dopo il lancio del gioco sono già stati aperti (nel caso aggiungo gli oggetti "unici" al salvataggio)
+            # tutticofanetti[stanza, x, y, True / False, ...]
+            i = 0
+            while i < len(tutticofanetti):
+                # contenuto cofanetto modificato da oggetto consumabile a "condizione -> pe<80"
+                if tutticofanetti[i] == GlobalGameVar.dictStanze["selvaArida15"] and tutticofanetti[i + 1] == GlobalHWVar.gpx * 20 and tutticofanetti[i + 2] == GlobalHWVar.gpy * 5:
+                    if tutticofanetti[i + 3] and dati[86] <= 0:
+                        dati[86] = 1
+                # contenuto cofanetto modificato da oggetto consumabile a "tecnica -> auto-ricarica"
+                if tutticofanetti[i] == GlobalGameVar.dictStanze["selvaArida16"] and tutticofanetti[i + 1] == GlobalHWVar.gpx * 20 and tutticofanetti[i + 2] == GlobalHWVar.gpy * 7:
+                    if tutticofanetti[i + 3] and dati[17] <= 0:
+                        dati[17] = 1
+                i += 4
+            # apro le porte che ho deciso di togliere dopo il lancio del gioco (non posso cancellarle sennò darebbe "salvataggio corrotto")
+            # tutteporte[stanza, x, y, True / False, ...]
+            i = 0
+            while i < len(tutteporte):
+                # porte in selvaArida16 => tolte per non nascondere un cofanetto
+                if tutteporte[i] == GlobalGameVar.dictStanze["selvaArida16"]:
+                    tutteporte[i + 3] = True
+                i += 4
+            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - FINE !!!
+
             # decido dove ripartire per il prossimo salvataggio
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["oltreFinale"]:
                 GlobalGameVar.partitaAppenaAvviataPostFinale = True
@@ -2096,7 +2120,7 @@ def gameloop():
             attaccoDiRallo.append("")
 
         # morte tua e di robo
-        inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente, dati[0])
+        inizio, gameover, caricaSalvataggio, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124], inizio, gameover, caricaSalvataggio, riavviaAudioMusica, riavviaAudioAmbiente, dati[0])
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
         # decido se cambiare le stanze pacifiche a seconda dell'avanzamento nella storia
@@ -2289,7 +2313,15 @@ def gameloop():
                 else:
                     animaCuraCollana = 1
                 statoRalloInizioTurno[0] += animaCuraCollana
-                dati[5] += 1
+                nemiciPresenti = False
+                for nemico in listaNemici:
+                    if nemico.inCasellaVista:
+                        nemiciPresenti = True
+                        break
+                if nemiciPresenti or dati[121]:
+                    dati[5] += 1
+                else:
+                    dati[5] += 10
                 if dati[5] > pvtot:
                     dati[5] = pvtot
             # apertura/chiusura porte

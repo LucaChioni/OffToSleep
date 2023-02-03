@@ -17,6 +17,7 @@ global rumoreLancioFreccia
 global rumoreAttaccoArco
 global rumoreParata
 global rumorecamminata
+global rumorecamminataVeloce
 global rumorelevelup
 global rumoreMorte
 global suonoaperturacofanetti
@@ -110,7 +111,7 @@ global rumoreRiempimentoBicchiere
 global rumoreMangiareBacche
 
 
-numSndTotali = 103
+numSndTotali = 104
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -137,6 +138,7 @@ def loadSounds(numSndCaricato):
     global rumoreAttaccoArco
     global rumoreParata
     global rumorecamminata
+    global rumorecamminataVeloce
     global rumorelevelup
     global rumoreMorte
     global suonoaperturacofanetti
@@ -245,8 +247,10 @@ def loadSounds(numSndCaricato):
     rumoreParata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/ParataConScudo.wav")
     if GlobalHWVar.usando_python3:
         rumorecamminata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Camminata-Python3.wav")
+        rumorecamminataVeloce = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/CamminataVeloce-Python3.wav")
     else:
         rumorecamminata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Camminata.wav")
+        rumorecamminataVeloce = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/CamminataVeloce.wav")
     rumorelevelup = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Levelup.wav")
     rumoreMorte = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Morte.wav")
 
