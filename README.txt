@@ -2,7 +2,7 @@
 
 IF YOU ARE DOWNLOADING FROM GITHUB: the game will not work because all audio and video resources are missing.
 
-On Windows and Linux the game must be run with Python 2 and the following versions of the libraries: pygame==1.9.6, cx-freeze==5.1.1, psutil==5.8.0.
+On Windows and Linux the game must be run with Python 2 and the following versions of the libraries: pygame==1.9.6, cx-freeze==5.0.1, psutil==5.8.0.
 On MacOS the game must be run with Python 3 and the following versions of the libraries: pygame==2.1.2, cx-freeze==6.13.1, psutil==5.8.0.
 
 To run the code correctly you need:
@@ -23,7 +23,7 @@ To create the executable you need:
 
 SE STAI SCARICANDO DA GITHUB: il gioco non funzionerà perché mancano tutte le risorse audio e video.
 
-Su Windows e Linux il gioco deve essere eseguito con Python 2 e le seguenti versioni delle librerie: pygame==1.9.6, cx-freeze==5.1.1, psutil==5.8.0.
+Su Windows e Linux il gioco deve essere eseguito con Python 2 e le seguenti versioni delle librerie: pygame==1.9.6, cx-freeze==5.0.1, psutil==5.8.0.
 Su MacOS il gioco deve essere eseguito con Python 3 e le seguenti versioni delle librerie: pygame==2.1.2, cx-freeze==6.13.1, psutil==5.8.0.
 
 Per eseguire correttamente il codice è necessario:
