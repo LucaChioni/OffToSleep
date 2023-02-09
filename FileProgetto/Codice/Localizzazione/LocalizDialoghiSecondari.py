@@ -60,7 +60,7 @@ _0429_01_Tu_SON_DEG_ABB_FAT_DUR_LES_DEL_LAB_CRE_ = {"ita": u"(Sono degli abbozza
 _0430_01_Tu_I_MIE_VEC_APP_SUL_LAB_CI_SON_STA_TRE_GIO_L_DEN_ = {"ita": u"(I miei vecchi appunti sul labirinto. Ci sono stato tre giorni là dentro...)"}
 _0431_01_Tu_APP_DI_ROD_ = {"ita": u"(Appunti di Rod...)"}
 _0432_01_Tu_SON_DEI_LIB_DI_ROD_SUL_FLO_LOC_CRE_CHE_SAP_QUA_DI_CI_CHE__SUC_ALL_SEL_ = {"ita": u"(Sono dei libri di Rod sulla flora locale... credo che sappia qualcosa di ciò che è successo alla selva...)"}
-_0433_01_Tu_DEV_AVE_FRU_QUA_IN_MEZ_DOV_LA_MIA_CHI_PER_NON_LA_RIM_A_POS_ = {"ita": u"(Deve aver frugato qua in mezzo... Dov'è la mia chiave?! Perché non la rimessa a posto?!)"}
+_0433_01_Tu_DEV_AVE_FRU_QUA_IN_MEZ_DOV_LA_MIA_CHI_PER_NON_LA_RIM_A_POS_ = {"ita": u"(Deve aver frugato qua in mezzo... Dov'è la mia chiave?! Perché non l'ha rimessa a posto?!)"}
 _0434_01_Tu_APP_DI_ROD_ = {"ita": u"(Appunti di Rod...)"}
 
 # Luogo: Biblioteca

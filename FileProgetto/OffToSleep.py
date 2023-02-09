@@ -2468,17 +2468,18 @@ def gameloop():
                 ultimoObbiettivoColco.append("spostamento")
             # mangiare bacche da terra
             animaCuraBacchePv = -1
-            i = 0
-            while i < len(listaBacchePv):
-                if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
-                    pvTempPreCura = dati[5]
-                    dati[5] += GlobalGameVar.qtaCuraBacchePv
-                    if dati[5] > pvtot:
-                        dati[5] = pvtot
-                    statoRalloInizioTurno[0] += dati[5] - pvTempPreCura
-                    animaCuraBacchePv = dati[5] - pvTempPreCura
-                    break
-                i += 1
+            if not GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+                i = 0
+                while i < len(listaBacchePv):
+                    if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
+                        pvTempPreCura = dati[5]
+                        dati[5] += GlobalGameVar.qtaCuraBacchePv
+                        if dati[5] > pvtot:
+                            dati[5] = pvtot
+                        statoRalloInizioTurno[0] += dati[5] - pvTempPreCura
+                        animaCuraBacchePv = dati[5] - pvTempPreCura
+                        break
+                    i += 1
 
             # impedisce di andare avanti quando si vuole andare in una zona non ancora sbloccata (usato anche per gli eventi)
             if dati[6] != 0 or dati[128] != 0 or dati[8] != 0 or dati[7] != 0:
@@ -2987,12 +2988,13 @@ def gameloop():
                 if not denaroPreso:
                     i += 4
             # elimino le bacche mangiate
-            i = 0
-            while i < len(listaBacchePv):
-                if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
-                    del listaBacchePv[i]
-                    break
-                i += 1
+            if not GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+                i = 0
+                while i < len(listaBacchePv):
+                    if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
+                        del listaBacchePv[i]
+                        break
+                    i += 1
 
             # tolgo animazione valore danni dopo il tempo limite
             FunzioniGraficheGeneriche.aggiornaBarreStatusPerValoriDanniCureScaduti(dati, pvtot, nemicoInquadrato, entot, vettoreEsche, sposta)

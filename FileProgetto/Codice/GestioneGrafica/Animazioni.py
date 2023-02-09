@@ -843,14 +843,15 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz):
     return denaroRaccolto
 
 
-def animaMangiareBacche(x, y, listaBacchePv, fineanimaz):
+def animaMangiareBacche(x, y, listaBacchePv, avanzamentoStoria, fineanimaz):
     baccheMangiate = False
-    i = 0
-    while i < len(listaBacchePv):
-        if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
-            baccheMangiate = True
-            break
-        i += 1
+    if not GlobalGameVar.dictAvanzamentoStoria["inizioUsoCalcolatore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fineUsoCalcolatore"]:
+        i = 0
+        while i < len(listaBacchePv):
+            if GlobalHWVar.gpx * listaBacchePv[i][0] == x and GlobalHWVar.gpy * listaBacchePv[i][1] == y:
+                baccheMangiate = True
+                break
+            i += 1
     return baccheMangiate
 
 
@@ -1534,6 +1535,43 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     camminataVeloce = False
     if not nemiciPresenti and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["indossatoScarpeVeloci"]:
         camminataVeloce = True
+    # tolgo la camminata veloce negli eventi in cui la scena è troppo veloce
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid4"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCasaDavid"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["andatoACercareImpo"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["arrivatoRodAllAltroTavolo"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["inizioCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCastello"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["ricevutoListaStrumentiDaNeil"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoRipresoImpoDaNeil"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoNeilSuImpoPietraNonConsegnata"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoRodNeil3"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineParteDiRod"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoConSoldatoPostRianimazione1"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["iniezioneSiringaOperazioneBloccoTempo"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili1"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili2"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologo2RenéPostAvvioSequenzaDiEventiCalcolatore"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["tornatoIndietroNelTempoAPrimaCheNeilLasciasseIlSuoUfficio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["NeilUscitoDaUfficioPostAvvioSequenzaNelCalcolatore"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["monologoArrivoLaboratorioDiNeilDelPassato1"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["sdraiatoNeilSulLettoDelLaboratorio"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["alzatoRenéDalCalcolatoreDopoSetteAnni"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoVistoRenéOperatoDopoCheèScesoDalCalcolatore"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["uscitoRodDalPalazzoPreLancioMissile"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa1NellaSeraDellInizioDelGioco"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoHansSamCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fine"]:
+        camminataVeloce = False
 
     denaroRaccolto = False
     baccheMangiate = False
@@ -1688,7 +1726,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz)
             # anima mangiare bacche
-            baccheMangiate = animaMangiareBacche(x, y, listaBacchePv, fineanimaz)
+            baccheMangiate = animaMangiareBacche(x, y, listaBacchePv, dati[0], fineanimaz)
 
             if animazioneRallo:
                 animazioneRalloFatta = True

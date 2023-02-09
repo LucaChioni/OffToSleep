@@ -248,11 +248,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 i += 2
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         avanzamentoStoria += 1
-        # chiudo tutte le porte di casaHansSara tranne la cameretta
+        # chiudo tutte le porte di casaHansSara tranne la cameretta + apro la cameretta
         i = 0
         while i < len(tutteporte):
             if tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and not (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
                 tutteporte[i + 3] = False
+            elif tutteporte[i] == GlobalGameVar.dictStanze["casaHansSara1"] and (tutteporte[i + 1] == GlobalHWVar.gpx * 6 and tutteporte[i + 2] == GlobalHWVar.gpx * 9):
+                tutteporte[i + 3] = True
             i += 4
         # tolgo l'equipaggiamento (spada, scudo, armatura, arco, guanti e collana)
         dati[6] = 0

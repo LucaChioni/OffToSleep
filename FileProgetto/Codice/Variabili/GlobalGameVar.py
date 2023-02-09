@@ -94,7 +94,7 @@ vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
 costoOggetti = [5, 20, 30, 30, 80, 100, 50, 80, 120, 150, 200, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [200, 100, 0, 100, 500]
+dannoOggetti = [300, 100, 0, 100, 800]
 # cura oggetti => curaOggetti[pozione, caricabatterie piccolo, medicina, super pozione, caricabatterie grande]
 curaOggetti = [100, 250, 0, 300, 800]
 # frecce trasportabili per faretra
