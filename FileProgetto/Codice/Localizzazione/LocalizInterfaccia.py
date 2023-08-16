@@ -490,7 +490,7 @@ CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_NON__MOL_PER_IN_QUA_SI_MUO_MOL_LEN_E_I_SUO_MOR_NO
 CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_UN_PO_PI_FOR_DEL_TAR_VER_MA_NIE_DI_TRO_PRE_SI_MUO_LEN = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. Un po' più forte della Tartaruga verde, ma niente di troppo preoccupante. Si muove lentamente."}
 CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_LIN_UN_TUO_SIM_UN_LUP_ABB_AGG_MA_POC_RES__ABB_VEL_NON_FAC_DA_SEM = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. Linooo... un tuo simile. Un lupo abbastanza aggressivo ma poco resistente. È abbastanza veloce, non facile da seminare."}
 CRE_OST_CHE_SI_TRO_NEL_FOR_CAD__UN_PO_PI_FOR_E_RES_DEL_LUP_GRI_QUE_POC_SEC_IN_CUI_TI_FIS_PRI_DI_ATT_SON_GEL = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. È un po' più forte e resistente del Lupo grigio. Quei pochi secondi in cui ti fissa prima di attaccarti sono gelanti."}
-CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_LA_RAZ_DI_LUP_PI_FOR_NEL_BUI_DEL_FOR_SAR_DIF_NOT_SE_NON_VIA_IN_BRA = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. La razza di lupo più forte. Nel buio della foresta, sarebbe difficile notarli se non viaggiassero in branco."}
+CRE_OST_CHE_SI_TRO_NEL_FOR_CAD_LA_RAZ_DI_LUP_PI_FOR_NEL_BUI_DEL_FOR_SAR_DIF_NOT_SE_NON_VIA_IN_BRA = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. La razza di lupo più forte. Nel buio della foresta sarebbe difficile notarli se non viaggiassero in branco."}
 CRE_OST_CHE_SI_TRO_NEL_FOR_CAD__UN_BES_GRA_IL_DOP_DI_ME_NE_HO_DOV_AFF_UNO_E_PER_POC_NON_CI_RIM_SEC_COM_QUE_SOL = {"ita": u"Creatura ostile che si trova nella Foresta Cadetta. È un bestione grande il doppio di me. Ne ho dovuto affrontare uno e per poco non ci rimanevo secca come quel soldato..."}
 NON_VOL_UCC_AVE_UN_TON_VIO_MI_AVR_STU_FOR_SAR_STA_MEG_NON_OPP = {"ita": u"Non volevo ucciderlo. Aveva un tono violento, mi avrebbe stuprata... forse sarebbe stato meglio non opporsi...?"}
 LHO_UCC_PRI_CHE_POT_TOC_NON_SON_UNA_PAZ_ASS_VOL_CHI_FAR_DEL_MAL_CHE_CAZ_HO_FAT = {"ita": u"L'ho ucciso prima che potesse toccarmi. Non sono una pazza assassina, voleva chiaramente farmi del male... che cazzo ho fatto..."}
@@ -686,7 +686,7 @@ GIORNO_1 = {"ita": u"Giorno 1"}
 GIORNO_2 = {"ita": u"Giorno 2"}
 GIORNO_22 = {"ita": u"Giorno 22"}
 _ANNO_13 = {"ita": u" - Anno 13"}
-GRAZIE = {"ita": u"Grazie"}
+GRAZIE = {"ita": u"Grazie per aver giocato"}
 SCR_E_SVI_DA_ = {"ita": u"Scritto e Sviluppato da:"}
 TRA_IN_ING_ = {"ita": u"Traduzione Inglese:"}
 MUSICA_ = {"ita": u"Musica:"}

@@ -325,7 +325,7 @@ def gameloop():
             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaroTotale, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
             # print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
 
-            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - INIZIO !!!
+            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - INIZIO -------- !!!
             # controllo se i cofanetti modificati dopo il lancio del gioco sono già stati aperti (nel caso aggiungo gli oggetti "unici" al salvataggio)
             # tutticofanetti[stanza, x, y, True / False, ...]
             i = 0
@@ -347,7 +347,7 @@ def gameloop():
                 if tutteporte[i] == GlobalGameVar.dictStanze["selvaArida16"]:
                     tutteporte[i + 3] = True
                 i += 4
-            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - FINE !!!
+            # -------------------- !!! MODIFICHE AL SALVATAGGIO DOPO IL LANCIO DEL GIOCO - FINE ---------- !!!
 
             # decido dove ripartire per il prossimo salvataggio
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["oltreFinale"]:

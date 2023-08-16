@@ -9,7 +9,7 @@ import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
     if stanza == GlobalGameVar.dictStanze["caverna1"]:
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["resoOstileImpoInCaverna1"]:
-            percorsoNemico = ["s", "a", "sGira", "", "", "", "d", "w", "d", "w", "dGira", "", "", "", "s", "a"]
+            percorsoNemico = ["s", "a", "sGira", "", "", "", "d", "w", "d", "d", "wGira", "", "", "", "a", "a"]
             nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, "a", "RoboLeggero", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
@@ -332,7 +332,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
 def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoStoria, listaAvanzamentoDialoghi):
     if stanza == GlobalGameVar.dictStanze["caverna1"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["resoOstileImpoInCaverna1"]:
-            percorsoPersonaggio = ["s", "a", "sGira", "", "", "", "d", "w", "d", "w", "dGira", "", "", "", "s", "a"]
+            percorsoPersonaggio = ["s", "a", "sGira", "", "", "", "d", "w", "d", "d", "wGira", "", "", "", "a", "a"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4, "a", "RoboLeggero-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
