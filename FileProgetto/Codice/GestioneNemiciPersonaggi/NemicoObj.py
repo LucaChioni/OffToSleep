@@ -2,6 +2,7 @@
 
 import random
 import pygame
+# copy viene utilizzato in una exec
 import copy
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
@@ -85,7 +86,7 @@ class NemicoObj(object):
             attacco = 5
             difesa = 1
             velocita = -1
-            raggioVisivo = GlobalHWVar.gpx * 3
+            raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -97,7 +98,7 @@ class NemicoObj(object):
             attacco = 3
             difesa = 0
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 3
+            raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = True
             velenoso = True
             surriscaldante = False
@@ -122,7 +123,7 @@ class NemicoObj(object):
             attacco = 10
             difesa = 3
             velocita = -1
-            raggioVisivo = GlobalHWVar.gpx * 3
+            raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -134,7 +135,7 @@ class NemicoObj(object):
             attacco = 17
             difesa = 2
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -146,7 +147,7 @@ class NemicoObj(object):
             attacco = 24
             difesa = 2
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -158,7 +159,7 @@ class NemicoObj(object):
             attacco = 30
             difesa = 2
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
@@ -210,49 +211,49 @@ class NemicoObj(object):
             attacco = 45
             difesa = 5
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 4
+            raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(8, 12)
-            esp = 19
+            esp = 24
         if self.tipo == "SerpeArancio":
             vitaTotale = 300
             attacco = 55
             difesa = 7
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 4
+            raggioVisivo = GlobalHWVar.gpx * 3
             attaccaDaLontano = False
             velenoso = True
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(13, 15)
-            esp = 36
+            esp = 41
         if self.tipo == "RagnoNero":
             vitaTotale = 400
             attacco = 70
             difesa = 10
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(8, 12)
-            esp = 22
+            esp = 28
         if self.tipo == "RagnoRosso":
             vitaTotale = 400
             attacco = 60
             difesa = 10
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 5
+            raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = True
             velenoso = True
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(13, 15)
-            esp = 34
+            esp = 37
         if self.tipo == "Scorpione":
             vitaTotale = 1000
             attacco = 80
@@ -264,32 +265,32 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = random.randint(25, 30)
-            esp = 120
+            esp = 200
 
         if self.tipo == "GufoMarrone":
             vitaTotale = 500
             attacco = 100
             difesa = 15
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 6
+            raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(35, 40)
-            esp = 82
+            esp = 124
         if self.tipo == "GufoBianco":
             vitaTotale = 800
             attacco = 140
             difesa = 20
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 6
+            raggioVisivo = GlobalHWVar.gpx * 5
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(55, 60)
-            esp = 168
+            esp = 187
         if self.tipo == "Struzzo":
             vitaTotale = 1000
             attacco = 200
@@ -301,7 +302,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(40, 45)
-            esp = 124
+            esp = 142
         if self.tipo == "Casuario":
             vitaTotale = 1500
             attacco = 180
@@ -319,13 +320,13 @@ class NemicoObj(object):
             attacco = 180
             difesa = 25
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 7
+            raggioVisivo = GlobalHWVar.gpx * 6
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
             denaro = random.randint(70, 75)
-            esp = 277
+            esp = 311
         if self.tipo == "Aquila":
             vitaTotale = 2000
             attacco = 250
@@ -350,7 +351,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = 0
-            esp = 158
+            esp = 222
             ignoraEsche = True
         if self.tipo == "ServoArco":
             vitaTotale = 1000
@@ -363,7 +364,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = 0
-            esp = 181
+            esp = 194
             ignoraEsche = True
         if self.tipo == "ServoLancia":
             vitaTotale = 1500
@@ -376,7 +377,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = 0
-            esp = 203
+            esp = 249
             ignoraEsche = True
 
         if self.tipo == "RoboLeggero":
@@ -390,7 +391,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = 0
-            esp = 300
+            esp = 379
         if self.tipo == "RoboVolante":
             vitaTotale = 1000
             attacco = 300
@@ -402,7 +403,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = 0
-            esp = 350
+            esp = 404
         if self.tipo == "RoboPesante":
             vitaTotale = 2000
             attacco = 600
@@ -414,7 +415,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = 0
-            esp = 500
+            esp = 514
         if self.tipo == "RoboPesanteVolante":
             vitaTotale = 1500
             attacco = 500
@@ -426,7 +427,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = 0
-            esp = 550
+            esp = 604
         if self.tipo == "RoboTorre":
             vitaTotale = 2500
             attacco = 1000
