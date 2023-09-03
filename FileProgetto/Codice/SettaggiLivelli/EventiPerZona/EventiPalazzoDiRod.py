@@ -496,7 +496,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         pathImgs = "Risorse/Immagini/Scenari/Stanza" + str(stanza) + "/Animazioni/EsplosioneMissile/"
         coordinateImgAnimata = (0, 0)
         dimensioniImgAnimata = (GlobalHWVar.gsx, GlobalHWVar.gsy)
-        listaAudio = [24, GlobalSndVar.rumoreEsplosioneMissile]
+        # listaAudio = [24, GlobalSndVar.rumoreEsplosioneMissile]
+        listaAudio = []
         FunzioniGraficheGeneriche.animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio, tuttoSchermo=True, battito=145)
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, (54, 35, 21))
         GlobalHWVar.aggiornaSchermo()

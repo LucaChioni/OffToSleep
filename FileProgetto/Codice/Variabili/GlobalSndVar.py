@@ -105,19 +105,20 @@ global suonoPortaLaboratorioSegretoDiNeil
 global rumoreTaglioSbarreTunnelDiRod
 global rumoreGettareSbarreATerra
 global rumoreLancioMissile
-global rumoreEsplosioneMissile
+# global rumoreEsplosioneMissile
 global rumoreAttaccoCinghialeAdHans
 global rumoreRiempimentoBicchiere
 global rumoreMangiareBacche
 
 
-numSndTotali = 104
+numSndTotali = 103
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     numSndCaricatoTemp += 1
-    caricamentoCompiuto = (GlobalHWVar.gpx * 30) + ((GlobalHWVar.gpx * 1.0 / numSndTotali) * numSndCaricatoTemp)
+    # print(numSndCaricatoTemp)
+    caricamentoCompiuto = (GlobalHWVar.gpx * 20) + ((GlobalHWVar.gpx * 11.0 / numSndTotali) * numSndCaricatoTemp)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(caricamentoCompiuto), GlobalHWVar.gpy * 0.5))
     GlobalHWVar.aggiornaSchermo()
     return suono
@@ -226,7 +227,7 @@ def loadSounds(numSndCaricato):
     global rumoreTaglioSbarreTunnelDiRod
     global rumoreGettareSbarreATerra
     global rumoreLancioMissile
-    global rumoreEsplosioneMissile
+    # global rumoreEsplosioneMissile
     global rumoreAttaccoCinghialeAdHans
     global rumoreRiempimentoBicchiere
     global rumoreMangiareBacche
@@ -343,7 +344,7 @@ def loadSounds(numSndCaricato):
     rumoreTaglioSbarreTunnelDiRod = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/TaglioSbarreTunnelDiRod.wav")
     rumoreGettareSbarreATerra = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/GettareSbarreATerra.wav")
     rumoreLancioMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LancioMissile.wav")
-    rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
+    # rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
     rumoreAttaccoCinghialeAdHans = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttaccoCinghialeAdHans.wav")
     rumoreRiempimentoBicchiere = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/RiempimentoBicchiereLavandino.wav")
 

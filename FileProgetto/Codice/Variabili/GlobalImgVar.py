@@ -3,6 +3,7 @@
 import pygame
 import GlobalHWVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.Variabili.ImageClass as ImageClass
 
 
 # dichiaro le variabili globali della funzione loadImgs
@@ -271,13 +272,14 @@ global imgEvidenziaUsciteStanzaSinistraBloccate
 global imgChiaveSeminterratoPalazzoRod
 global imgBacchePv
 
-numImgTotali = 1961
+numImgTotali = 267
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True, imgImpenetrabile=False):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha, imgImpenetrabile)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     numImgCaricataTemp += 1
-    caricamentoCompiuto = (GlobalHWVar.gpx * 30.0 / numImgTotali) * numImgCaricataTemp
+    # print(numImgCaricataTemp)
+    caricamentoCompiuto = (GlobalHWVar.gpx * 20.0 / numImgTotali) * numImgCaricataTemp
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(caricamentoCompiuto), GlobalHWVar.gpy * 0.5))
     GlobalHWVar.aggiornaSchermo()
     return immagine
@@ -566,87 +568,87 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         funzionePerCaricareImmagini = caricaImmagineMostrandoAvanzamento
 
     # puntatore
-    puntatore = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatore.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True)
-    puntatorevecchio = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatorevecchio.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True)
-    puntatIn = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraCVin.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatOut = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraCVout.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatSfo = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/sfondoOggettoLanciato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatDif = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Difesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatDifPv = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/DifesaPv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatAtt = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Attacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatArc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/AttaccoDistanza.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatPor = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ApriChiudiPorta.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatCof = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ApriCofanetto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatAnalisi = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/AnalizzaColco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatBom = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto6Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatBoV = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto7Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatEsc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatBoA = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto9Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatBoP = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto10Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    scorriSu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriOggettiSu.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    scorriGiu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriOggettiGiu.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/IcoDialogo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatoreInquadraNemici = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraNemicoSelezionato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatoreImpostazioniDestra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestra.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatoreImpostazioniSinistra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistra.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatoreImpostazioniDestraBloccato = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    puntatoreImpostazioniSinistraBloccato = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgCasellaObbiettivoAnalizzaColco = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ObiettivoAnalizzaColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    puntatore = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatore.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True, forceLoad=funzionePerCaricareImmagini)
+    puntatorevecchio = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/Puntatorevecchio.png", GlobalHWVar.gpx // 2, GlobalHWVar.gpy // 2, True, forceLoad=funzionePerCaricareImmagini)
+    puntatIn = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraCVin.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatOut = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraCVout.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatSfo = ImageClass.ImageClass('Risorse/Immagini/Oggetti/sfondoOggettoLanciato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatDif = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Difesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatDifPv = ImageClass.ImageClass('Risorse/Immagini/Oggetti/DifesaPv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatAtt = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Attacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatArc = ImageClass.ImageClass('Risorse/Immagini/Oggetti/AttaccoDistanza.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatPor = ImageClass.ImageClass('Risorse/Immagini/Oggetti/ApriChiudiPorta.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatCof = ImageClass.ImageClass('Risorse/Immagini/Oggetti/ApriCofanetto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatAnalisi = ImageClass.ImageClass('Risorse/Immagini/Oggetti/AnalizzaColco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatBom = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto6Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatBoV = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto7Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatEsc = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatBoA = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto9Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatBoP = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto10Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    scorriSu = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriOggettiSu.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    scorriGiu = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriOggettiGiu.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatDialoghi = ImageClass.ImageClass('Risorse/Immagini/Oggetti/IcoDialogo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatoreInquadraNemici = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/InquadraNemicoSelezionato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatoreImpostazioniDestra = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestra.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatoreImpostazioniSinistra = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistra.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatoreImpostazioniDestraBloccato = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    puntatoreImpostazioniSinistraBloccato = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgCasellaObbiettivoAnalizzaColco = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Puntatori/ObiettivoAnalizzaColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # immagini personaggio
-    persw = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persab = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perso = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persob = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    perss = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persd = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdb = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persam = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persamb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persamb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswm = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmb1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmb2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perswmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persambAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    perssmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persdmbAttacco = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persmbDifesa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persAvvele = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    persoSara1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara3 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara4 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoSara6 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Sara6Menu.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persobSara = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persobSara5 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persobFraMaggiore = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persoRod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    persobRod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    persw = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perswb = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persa = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persab = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perso = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persob = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    perss = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perssb = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persd = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persdb = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perssm = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perssmb1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perssmb2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persdm = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persdmb1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persdmb2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persam = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persamb1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persamb2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perswm = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perswmb1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perswmb2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perswmbAttacco = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persambAttacco = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    perssmbAttacco = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persdmbAttacco = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persmbDifesa = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persAvvele = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara2/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara3 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara3/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara4 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara4/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara5 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara5/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoSara6 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Sara6Menu.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persobSara = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara1/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persobSara5 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Sara5/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoFraMaggiore = ImageClass.ImageClass('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persobFraMaggiore = ImageClass.ImageClass('Risorse/Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persoRod = ImageClass.ImageClass('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    persobRod = ImageClass.ImageClass('Risorse/Immagini/Personaggi/RodGiocabile/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
 
     # immagini robot
-    robow = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    roboa = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    roboo1 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    roboo2 = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
-    robos = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    robod = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    robomo = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot0.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    robodp = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot2p.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    roboap = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/Robot3p.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    armrobmo = funzionePerCaricareImmagini('Risorse/Immagini/EquipRobo/Batteria00.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    roboSurrisc = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Colco/RobotSurriscaldato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    robow = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    roboa = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    roboo1 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    roboo2 = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True, forceLoad=funzionePerCaricareImmagini)
+    robos = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    robod = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    robomo = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot0.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    robodp = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot2p.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    roboap = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/Robot3p.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    armrobmo = ImageClass.ImageClass('Risorse/Immagini/EquipRobo/Batteria00.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    roboSurrisc = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Colco/RobotSurriscaldato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     casellaVuotaPreset = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     # immagini equipaggiamenti
@@ -678,22 +680,22 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgSpadeInGame.append(vetAnimaTemp)
         # arco
         vetAnimaTemp = []
@@ -707,21 +709,21 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgArchiInGame.append(vetAnimaTemp)
         # armatura
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmatureInGame.append(vetAnimaTemp)
         # scudo
         vetAnimaTemp = []
@@ -732,11 +734,11 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgScudiInGame.append(vetAnimaTemp)
         # guanti
         vetAnimaTemp = []
@@ -759,23 +761,23 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgGuantiInGame.append(vetAnimaTemp)
         # collana
         vetAnimaTemp = []
@@ -785,10 +787,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgCollaneInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgFaretreInGame = []
@@ -802,10 +804,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
             vetAnimaTemp.append(casellaVuotaPreset)
             vetAnimaTemp.append(casellaVuotaPreset)
         else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgFaretreInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgArmRobInGame = []
@@ -813,43 +815,43 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while contatoreGlobale < 5:
         # armatura robot
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmRobInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
 
     # img danneggiamento personaggio e Colco
-    imgDanneggiamentoCausaRallo = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoRallo.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgDanneggiamentoCausaColco = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgDanneggiamentoCausaRallo = ImageClass.ImageClass("Risorse/Immagini/Nemici/DannoRallo.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgDanneggiamentoCausaColco = ImageClass.ImageClass("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # img menu mercante
-    mercanteMenu = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Mercante/MercanteDialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
-    pappagalloMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/PappagalloGrafMenuMercante.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
-    saraMenuMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara4Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
-    scorriSuGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    scorriSuGiuBloccato = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    scorriSuGiuBloccatoGiu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    scorriSuGiuBloccatoSu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sfondoDialogoMercante = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/SfondoDialogoMercante.png', GlobalHWVar.gpx * 9.5, GlobalHWVar.gpy * 4.5, False, imgImpenetrabile=True)
-    faretra1Menu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Faretra1Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
-    faretra2Menu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Faretra2Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
-    faretra3Menu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Faretra3Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
-    frecciaMenu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/FrecciaMenu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
+    mercanteMenu = ImageClass.ImageClass('Risorse/Immagini/Personaggi/Mercante/MercanteDialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    pappagalloMenuMercante = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Dialoghi/PappagalloGrafMenuMercante.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    saraMenuMercante = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Dialoghi/Sara4Dialogo.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    scorriSuGiu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    scorriSuGiuBloccato = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    scorriSuGiuBloccatoGiu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    scorriSuGiuBloccatoSu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    sfondoDialogoMercante = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/SfondoDialogoMercante.png', GlobalHWVar.gpx * 9.5, GlobalHWVar.gpy * 4.5, False, imgImpenetrabile=True)
+    faretra1Menu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Faretra1Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
+    faretra2Menu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Faretra2Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
+    faretra3Menu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Faretra3Menu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
+    frecciaMenu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/FrecciaMenu.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
 
     # sfondi
-    sfondoRallo = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoRallo.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoColco = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoColco.png', GlobalHWVar.gpx * 6, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoMostro = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoNemici.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoEsche = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoEsche.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoLogoInterazioneNonAttivo = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoLogoInterazioneNonAttivo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoLogoInterazioneAttivo = funzionePerCaricareImmagini('Risorse/Immagini/Status/SfondoLogoInterazioneAttivo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, imgImpenetrabile=True)
-    sfondoStartBattaglia = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SfondoStartBattaglia.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 10, False, imgImpenetrabile=True)
-    sfondoTriangolinoAltoDestra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloAltoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sfondoTriangolinoAltoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sfondoTriangolinoBassoDestra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sfondoTriangolinoBassoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    sfondoRallo = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoRallo.png', GlobalHWVar.gpx * 8, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoColco = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoColco.png', GlobalHWVar.gpx * 6, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoMostro = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoNemici.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoEsche = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoEsche.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoLogoInterazioneNonAttivo = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoLogoInterazioneNonAttivo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoLogoInterazioneAttivo = ImageClass.ImageClass('Risorse/Immagini/Status/SfondoLogoInterazioneAttivo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, imgImpenetrabile=True)
+    sfondoStartBattaglia = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SfondoStartBattaglia.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 10, False, imgImpenetrabile=True)
+    sfondoTriangolinoAltoDestra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/TriangoloAltoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    sfondoTriangolinoAltoSinistra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    sfondoTriangolinoBassoDestra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/TriangoloBassoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    sfondoTriangolinoBassoSinistra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     casellaChiara = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     casellaChiara.fill((0, 0, 0, 0))
     casellaScura = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
@@ -858,65 +860,65 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     casellaOscurata.fill((0, 0, 0, 100))
 
     # status
-    appiccicoso = funzionePerCaricareImmagini('Risorse/Immagini/Status/Appiccicoso.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    avvelenatoMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Avvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    avvelenato = funzionePerCaricareImmagini('Risorse/Immagini/Status/Avvelenato.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    surriscaldatoMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Surriscaldato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    surriscaldato = funzionePerCaricareImmagini('Risorse/Immagini/Status/Surriscaldato.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    attaccopiuMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Attaccopiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    attaccopiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Attaccopiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    difesapiuMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Difesapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    difesapiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Difesapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    velocitapiuMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Velocitapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    velocitapiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Velocitapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    efficienzapiuMenu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Efficienzapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    efficienzapiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/Efficienzapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
-    imgNumFrecce = funzionePerCaricareImmagini('Risorse/Immagini/Status/NumFrecce.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
+    appiccicoso = ImageClass.ImageClass('Risorse/Immagini/Status/Appiccicoso.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    avvelenatoMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Avvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    avvelenato = ImageClass.ImageClass('Risorse/Immagini/Status/Avvelenato.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    surriscaldatoMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Surriscaldato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    surriscaldato = ImageClass.ImageClass('Risorse/Immagini/Status/Surriscaldato.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    attaccopiuMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Attaccopiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    attaccopiu = ImageClass.ImageClass('Risorse/Immagini/Status/Attaccopiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    difesapiuMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Difesapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    difesapiu = ImageClass.ImageClass('Risorse/Immagini/Status/Difesapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    velocitapiuMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Velocitapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    velocitapiu = ImageClass.ImageClass('Risorse/Immagini/Status/Velocitapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    efficienzapiuMenu = ImageClass.ImageClass('Risorse/Immagini/Status/Efficienzapiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    efficienzapiu = ImageClass.ImageClass('Risorse/Immagini/Status/Efficienzapiu.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
+    imgNumFrecce = ImageClass.ImageClass('Risorse/Immagini/Status/NumFrecce.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True, forceLoad=funzionePerCaricareImmagini)
 
     # menu alto destra
-    sfochiaveocchio = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SfondoOcchioChiave.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 1, False, imgImpenetrabile=True)
-    occhioape = funzionePerCaricareImmagini('Risorse/Immagini/Status/OcchioAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    occhiochiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/OcchioChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    chiaveroboacc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoAcc.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    chiaverobospe = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoSpe.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgSaltaTurno = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SaltaTurno.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgSaltaTurnoCliccato = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SaltaTurnoCliccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgModInterazione = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/LogoInterazione.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    sfochiaveocchio = ImageClass.ImageClass("Risorse/Immagini/Oggetti/SfondoOcchioChiave.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 1, False, imgImpenetrabile=True)
+    occhioape = ImageClass.ImageClass('Risorse/Immagini/Status/OcchioAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    occhiochiu = ImageClass.ImageClass('Risorse/Immagini/Status/OcchioChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    chiaveroboacc = ImageClass.ImageClass('Risorse/Immagini/Oggetti/ChiaveColcoAcc.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    chiaverobospe = ImageClass.ImageClass('Risorse/Immagini/Oggetti/ChiaveColcoSpe.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgSaltaTurno = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SaltaTurno.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgSaltaTurnoCliccato = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SaltaTurnoCliccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgModInterazione = ImageClass.ImageClass('Risorse/Immagini/Oggetti/LogoInterazione.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # oggetti sulla schermata
-    esche = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sacchettoDenaroStart = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroSinistra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    sacchettoDenaroMercante = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroDestra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart0 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra0Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart1 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra1Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart2 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra2Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    faretraFrecceStart3 = funzionePerCaricareImmagini('Risorse/Immagini/EquipSara/Faretre/Faretra3Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    sacchettoDenaro = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgFrecciaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaInterzaione = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneDisponibile.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaInterzaioneCompiuta = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/InterazioneEffettuata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaSu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaGiu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaDestra = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaSinistra = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaSuBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaGiuBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaGiuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaDestraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaDestraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgEvidenziaUsciteStanzaSinistraBloccate = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/UscitaStanzaSinistraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgBacchePv = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/BacchePv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    esche = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    sacchettoDenaroStart = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SacchettoDenaroSinistra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    sacchettoDenaroMercante = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SacchettoDenaroDestra.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart0 = ImageClass.ImageClass('Risorse/Immagini/EquipSara/Faretre/Faretra0Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart1 = ImageClass.ImageClass('Risorse/Immagini/EquipSara/Faretre/Faretra1Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart2 = ImageClass.ImageClass('Risorse/Immagini/EquipSara/Faretre/Faretra2Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    faretraFrecceStart3 = ImageClass.ImageClass('Risorse/Immagini/EquipSara/Faretre/Faretra3Menu.png', GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
+    sacchettoDenaro = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SacchettoDenaroIco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgFrecciaLanciata = ImageClass.ImageClass('Risorse/Immagini/Oggetti/Freccia.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaInterzaione = ImageClass.ImageClass('Risorse/Immagini/Oggetti/InterazioneDisponibile.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaInterzaioneCompiuta = ImageClass.ImageClass('Risorse/Immagini/Oggetti/InterazioneEffettuata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaSu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaSu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaGiu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaGiu.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaDestra = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaSinistra = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaSuBloccate = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaSuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaGiuBloccate = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaGiuBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaDestraBloccate = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaDestraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgEvidenziaUsciteStanzaSinistraBloccate = ImageClass.ImageClass('Risorse/Immagini/Oggetti/UscitaStanzaSinistraBloccata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgBacchePv = ImageClass.ImageClass('Risorse/Immagini/Oggetti/BacchePv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # cofanetti
-    cofaniaper = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    cofanichiu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    sfocontcof = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SfondoContenutoCofanetto.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 3, False)
+    cofaniaper = ImageClass.ImageClass('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    cofanichiu = ImageClass.ImageClass('Risorse/Immagini/Oggetti/CofanettoChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    sfocontcof = ImageClass.ImageClass('Risorse/Immagini/Oggetti/SfondoContenutoCofanetto.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 3, False)
 
     # caselle attaccabili
-    campoattaccabileRallo1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
-    campoattaccabileRallo2 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
-    campoattaccabileRallo3 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
-    campoattaccabileRallo4 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
-    campoattaccabileRallo5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    campoattaccabileRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRobo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
+    campoattaccabileRallo1 = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False, forceLoad=funzionePerCaricareImmagini)
+    campoattaccabileRallo2 = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False, forceLoad=funzionePerCaricareImmagini)
+    campoattaccabileRallo3 = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False, forceLoad=funzionePerCaricareImmagini)
+    campoattaccabileRallo4 = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False, forceLoad=funzionePerCaricareImmagini)
+    campoattaccabileRallo5 = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRallo.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False, forceLoad=funzionePerCaricareImmagini)
+    campoattaccabileRobo = ImageClass.ImageClass('Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileRobo.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False, forceLoad=funzionePerCaricareImmagini)
     caselleattaccabiliRobo = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     caselleattaccabiliRobo.fill((0, 0, 130, 100))
     caselleattaccabilimostro = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
@@ -925,9 +927,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     caselleattaccabili.fill((0, 0, 0, 100))
 
     # aumento livello
-    saliliv = funzionePerCaricareImmagini('Risorse/Immagini/Status/Levelup/Saliliv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    saliliv1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Levelup/Saliliv1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    saliliv2 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Levelup/Saliliv2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    saliliv = ImageClass.ImageClass('Risorse/Immagini/Status/Levelup/Saliliv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    saliliv1 = ImageClass.ImageClass('Risorse/Immagini/Status/Levelup/Saliliv1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    saliliv2 = ImageClass.ImageClass('Risorse/Immagini/Status/Levelup/Saliliv2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     vetImgSpadeMenu = []
@@ -938,30 +940,30 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     vetImgCollaneMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadeMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgArchiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgArmatureMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgScudiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgGuantiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
-        vetImgCollaneMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgSpadeMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgArchiMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgArmatureMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgScudiMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgGuantiMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgCollaneMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
         contatoreGlobale += 1
-    imgGambitSconosciuta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/GrafGambit/Sconosciuto.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
+    imgGambitSconosciuta = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/GrafGambit/Sconosciuto.png', GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False)
     vetImgCondizioniMenu = []
     contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgCondizioniMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/GrafGambit/GrafCondizioni/Condizione%i.png" % contatoreGlobale, GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False))
+        vetImgCondizioniMenu.append(ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/GrafGambit/GrafCondizioni/Condizione%i.png" % contatoreGlobale, GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False))
         contatoreGlobale += 1
     vetImgTecnicheMenu = []
     contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgTecnicheMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/GrafGambit/GrafTecniche/Tecnica%i.png" % contatoreGlobale, GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False))
+        vetImgTecnicheMenu.append(ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/GrafGambit/GrafTecniche/Tecnica%i.png" % contatoreGlobale, GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 9, False))
         contatoreGlobale += 1
     vetImgBatterieMenu = []
     vetIcoBatterieMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgBatterieMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetIcoBatterieMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
+        vetImgBatterieMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetIcoBatterieMenu.append(ImageClass.ImageClass("Risorse/Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False))
         contatoreGlobale += 1
     vetImgOggettiMenu = []
     vetImgOggettiMercante = []
@@ -969,10 +971,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     vetIcoOggettiMenu = []
     contatoreGlobale = 1
     while contatoreGlobale <= 10:
-        vetImgOggettiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False))
-        vetImgOggettiMercante.append(funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False))
-        vetImgOggettiStart.append(funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False))
-        vetIcoOggettiMenu.append(funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetImgOggettiMenu.append(ImageClass.ImageClass("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False))
+        vetImgOggettiMercante.append(ImageClass.ImageClass("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False))
+        vetImgOggettiStart.append(ImageClass.ImageClass("Risorse/Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False))
+        vetIcoOggettiMenu.append(ImageClass.ImageClass("Risorse/Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         contatoreGlobale += 1
 
     # img equipaggiamento pixellato
@@ -984,27 +986,27 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     vetImgCollanePixellate = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgArchiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgArmaturePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgScudiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgGuantiPixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
-        vetImgCollanePixellate.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgSpadePixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgArchiPixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgArmaturePixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgScudiPixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgGuantiPixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
+        vetImgCollanePixellate.append(ImageClass.ImageClass("Risorse/Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True))
         contatoreGlobale += 1
 
     # img animazioni oggetti
-    imgAnimaBomba = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Bomba.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
-    imgAnimaBombaVeleno = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/BombaVeleno.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaBombaAppiccicosa = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/BombaAppiccicosa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaBombaPotenziata = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/BombaPotenziata.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    imgAnimaPozione1 = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Pozione1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaPozione2 = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Pozione2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaMedicina1 = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Medicina1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaMedicina2 = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Medicina2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgAnimaCaricabatterie = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniOggetti/Caricabatterie.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgAnimaBomba = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Bomba.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaBombaVeleno = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/BombaVeleno.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaBombaAppiccicosa = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/BombaAppiccicosa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaBombaPotenziata = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/BombaPotenziata.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaPozione1 = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Pozione1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaPozione2 = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Pozione2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaMedicina1 = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Medicina1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaMedicina2 = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Medicina2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgAnimaCaricabatterie = ImageClass.ImageClass('Risorse/Immagini/AnimazioniOggetti/Caricabatterie.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # img animazioni tecniche
-    imgDanneggiamentoColco = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/Danneggiamento.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgDanneggiamentoColco = ImageClass.ImageClass('Risorse/Immagini/AnimazioniTecniche/Danneggiamento.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
     vetAnimazioniTecniche = []
     nomiTecniche = ["scossa", "scossa+", "scossa++", "freccia", "freccia+", "freccia++", "tempesta", "tempesta+", "tempesta++", "cura", "cura+", "cura++", "antidoto", "attP", "difP", "ricarica", "ricarica+", "raffred", "velocizza", "efficienza"]
     for contatoreGlobale in nomiTecniche:
@@ -1013,128 +1015,128 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         if contatoreGlobale.startswith("scossa") or contatoreGlobale.startswith("freccia") or contatoreGlobale.startswith("cura") or contatoreGlobale == "antidoto" or contatoreGlobale == "attP" or contatoreGlobale == "difP":
             if contatoreGlobale.startswith("freccia"):
                 contatoreGlobale = "freccia"
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-            img2 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True, forceLoad=funzionePerCaricareImmagini)
+            img2 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-            img2 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+            img2 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-            img2 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True, forceLoad=funzionePerCaricareImmagini)
+            img2 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-            img2 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+            img2 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            imgSelf = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            imgSelf = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(imgSelf)
         elif contatoreGlobale.startswith("ricarica") or contatoreGlobale == "raffred" or contatoreGlobale == "velocizza" or contatoreGlobale == "efficienza":
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
         elif contatoreGlobale.startswith("tempesta"):
-            img1 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, True)
-            img2 = funzionePerCaricareImmagini("Risorse/Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, True)
+            img1 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, True, forceLoad=funzionePerCaricareImmagini)
+            img2 = ImageClass.ImageClass("Risorse/Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, True, forceLoad=funzionePerCaricareImmagini)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
         vetAnimazioniTecniche.append(vetAnimaImgTecniche)
-    imgFrecciaEletttricaLanciata = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgFrecciaEletttricaLanciataP = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata+.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    imgFrecciaEletttricaLanciataPP = funzionePerCaricareImmagini('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata++.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgFrecciaEletttricaLanciata = ImageClass.ImageClass('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgFrecciaEletttricaLanciataP = ImageClass.ImageClass('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata+.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
+    imgFrecciaEletttricaLanciataPP = ImageClass.ImageClass('Risorse/Immagini/AnimazioniTecniche/FrecciaLanciata++.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
 
     # img tutorial
-    tutorialTastieraInGioco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInGioco.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
-    tutorialTastieraInMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInMenu.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
-    tutorialMouse = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/Mouse.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
-    tutorialControllerInGioco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ControllerInGioco.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
-    tutorialControllerInMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ControllerInMenu.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
-    impostazioniController = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoController.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroce = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroce.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCerchio = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCerchio.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerQuadrato = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerQuadrato.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerTriangolo = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerTriangolo.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerL1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerL1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerR1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerR1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerStart = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerSelect = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerSelect.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroceDirezionale_su = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_su.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroceDirezionale_giu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_giu.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroceDirezionale_destra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_destra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostaControllerCroceDirezionale_sinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_sinistra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
-    impostazioniTastiera = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoTastiera.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 16, False)
+    tutorialTastieraInGioco = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInGioco.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
+    tutorialTastieraInMenu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/TastieraInMenu.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
+    tutorialMouse = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/Mouse.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
+    tutorialControllerInGioco = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ControllerInGioco.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
+    tutorialControllerInMenu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ControllerInMenu.png', GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11, False)
+    impostazioniController = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoController.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroce = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroce.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCerchio = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCerchio.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerQuadrato = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerQuadrato.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerTriangolo = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerTriangolo.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerL1 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerL1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerR1 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerR1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerStart = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerSelect = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerSelect.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_su = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_su.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_giu = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_giu.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_destra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_destra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerCroceDirezionale_sinistra = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale_sinistra.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostazioniTastiera = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoTastiera.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 16, False)
 
     # img grafiche / dialoghi
-    sfondoDialoghi = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False, imgImpenetrabile=True)
-    robograf1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    robograf2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
-    robograf2b = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    robograf4 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
-    imgDialogoColco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    sfondoDialoghi = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', GlobalHWVar.gsx, GlobalHWVar.gsy // 3, False, imgImpenetrabile=True)
+    robograf1 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    robograf2 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
+    robograf2b = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    robograf4 = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
+    imgDialogoColco = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     dictImgDialoghiPersonaggiOggettoSpecifici = {}
     dictImgPersonaggiOggettoSpecifici = {}
     dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoAperto"] = cofaniaper
     dictImgPersonaggiOggettoSpecifici["OggettoDictCofanettoChiuso"] = cofanichiu
     vettoreNomiCadaveriNemici = ["CadavereSoldatoCastello", "CadavereOrco", "CadaverePipistrello", "CadavereTartarugaVerde", "CadavereTartarugaMarrone", "CadavereLupoGrigio", "CadavereLupoBianco", "CadavereLupoNero", "CadavereCinghiale", "CadavereCittadino1", "CadavereCittadino3", "CadavereSerpeVerde", "CadavereSerpeArancio", "CadavereScorpione", "CadavereRagnoNero", "CadavereRagnoRosso", "CadavereGufoMarrone", "CadavereGufoBianco", "CadavereFalco", "CadavereAquila", "CadavereStruzzo", "CadavereCasuario", "CadavereRoboLeggero", "CadavereRoboVolante", "CadavereRoboPesante", "CadavereRoboPesanteVolante", "CadavereRoboTorre"]
     for nomeCadavereNemico in vettoreNomiCadaveriNemici:
-        dictImgDialoghiPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "Dialogo"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
-        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "1"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "2"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "3"] = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "3.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictImgDialoghiPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "Dialogo"] = ImageClass.ImageClass("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "1"] = ImageClass.ImageClass("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "2"] = ImageClass.ImageClass("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        dictImgPersonaggiOggettoSpecifici["OggettoDict" + nomeCadavereNemico + "3"] = ImageClass.ImageClass("Risorse/Immagini/Personaggi/Oggetti/" + nomeCadavereNemico + "/" + nomeCadavereNemico + "3.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
-    sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipSara/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
-    sconosciutoEquipMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoEquip.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)
-    sconosciutoOggettoMenu1 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False)
-    sconosciutoOggettoMenu2 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False)
-    sconosciutoOggettoMenu3 = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False)
+    sfondoOggettoMenu = ImageClass.ImageClass("Risorse/Immagini/EquipSara/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False, forceLoad=funzionePerCaricareImmagini)
+    sconosciutoEquipMenu = ImageClass.ImageClass("Risorse/Immagini/Oggetti/SconosciutoEquip.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False, forceLoad=funzionePerCaricareImmagini)
+    sconosciutoOggettoMenu1 = ImageClass.ImageClass("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 4, False, forceLoad=funzionePerCaricareImmagini)
+    sconosciutoOggettoMenu2 = ImageClass.ImageClass("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 8, False, forceLoad=funzionePerCaricareImmagini)
+    sconosciutoOggettoMenu3 = ImageClass.ImageClass("Risorse/Immagini/Oggetti/Sconosciuto.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False, forceLoad=funzionePerCaricareImmagini)
+    sconosciutoOggettoIcoMenu = ImageClass.ImageClass("Risorse/Immagini/Oggetti/SconosciutoIco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, False, forceLoad=funzionePerCaricareImmagini)
 
     # img personaggi
     vettoreNomiPersonaggi = ["AssistBiblioteca", "Bambino1", "Bambino2", "Bibliotecario", "BibliotecarioOperato", "CaneCasa", "Costruttore", "FiglioUfficiale", "GuardiaCitta", "Madre", "MadreUfficiale", "Mercante", "MercanteFuturo", "Neil", "Padre", "PadreUfficialeCasa", "PadreUfficialeServizio", "Pazzo1", "Pazzo2", "Ragazza1", "Ragazza2", "Ragazza3", "Ragazzo1", "Ragazzo2", "Ragazzo3", "ServoArco", "ServoDavid", "ServoLancia", "ServoSpada", "FratelloMaggiore", "SaraArmaturaPelle"]
     dictionaryImgPersonaggi = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
         dictionaryImgPosizioni = {}
-        imgW = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgW = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgW"] = imgW
-        imgA = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgA = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgA"] = imgA
-        imgS = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgS = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgS"] = imgS
-        imgD = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgD = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgD"] = imgD
-        imgWMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgWMov1 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgWMov1"] = imgWMov1
-        imgWMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgWMov2 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgWMov2"] = imgWMov2
-        imgAMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAMov1 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAMov1"] = imgAMov1
-        imgAMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAMov2 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAMov2"] = imgAMov2
-        imgSMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgSMov1 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgSMov1"] = imgSMov1
-        imgSMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgSMov2 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgSMov2"] = imgSMov2
-        imgDMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDMov1 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDMov1"] = imgDMov1
-        imgDMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDMov2 = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDMov2"] = imgDMov2
-        imgDialogo = funzionePerCaricareImmagini("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
+        imgDialogo = ImageClass.ImageClass("Risorse/Immagini/Personaggi/" + nomePersonaggi + "/" + nomePersonaggi + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
         dictionaryImgPosizioni["imgDialogo"] = imgDialogo
 
         dictionaryImgPersonaggi[nomePersonaggi] = dictionaryImgPosizioni
     dictImgPersonaggiDiario = {}
     for nomePersonaggi in vettoreNomiPersonaggi:
         if nomePersonaggi != "AssistBiblioteca" and nomePersonaggi != "GuardiaCitta" and nomePersonaggi != "Ragazza1" and nomePersonaggi != "Ragazza2" and nomePersonaggi != "Ragazza3" and nomePersonaggi != "Ragazzo1" and nomePersonaggi != "Ragazzo2" and nomePersonaggi != "Ragazzo3" and nomePersonaggi != "ServoArco" and nomePersonaggi != "ServoDavid" and nomePersonaggi != "ServoLancia" and nomePersonaggi != "ServoSpada" and nomePersonaggi != "FratelloMaggiore" and nomePersonaggi != "BibliotecarioOperato" and nomePersonaggi != "MercanteFuturo" and nomePersonaggi != "Bambino1" and nomePersonaggi != "Bambino2" and nomePersonaggi != "SaraArmaturaPelle":
-            imgPersonaggi = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/" + nomePersonaggi + "GrafMenu.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+            imgPersonaggi = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/" + nomePersonaggi + "GrafMenu.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
             dictImgPersonaggiDiario[nomePersonaggi] = imgPersonaggi
-    fraMaggioreDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    roboDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    imgProtagonistaDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    neilSconosciutoDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
-    pappagalloDiario = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/PappagalloGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    fraMaggioreDiario = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    roboDiario = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    imgProtagonistaDiario = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenuDiario.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    neilSconosciutoDiario = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilSconosciutoGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+    pappagalloDiario = ImageClass.ImageClass('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/PappagalloGrafMenu.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
 
     # img nemici
     vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "LupoGrigio", "LupoBianco", "LupoNero", "Cinghiale", "Cittadino1", "Cittadino3", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]
@@ -1142,81 +1144,81 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     for nomeNemico in vettoreNomiNemici:
         dictionaryImgPosizioni = {}
 
-        imgW = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgW = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgW"] = imgW
-        imgA = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgA = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgA"] = imgA
-        imgS = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgS = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgS"] = imgS
-        imgD = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgD = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgD"] = imgD
-        imgWMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgWMov1 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgWMov1"] = imgWMov1
-        imgWMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgWMov2 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgWMov2"] = imgWMov2
-        imgAMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAMov1 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAMov1"] = imgAMov1
-        imgAMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAMov2 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAMov2"] = imgAMov2
-        imgSMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgSMov1 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgSMov1"] = imgSMov1
-        imgSMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgSMov2 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgSMov2"] = imgSMov2
-        imgDMov1 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDMov1 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDMov1"] = imgDMov1
-        imgDMov2 = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDMov2 = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDMov2"] = imgDMov2
-        imgAvvelenamento = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/NemicoAvvelenato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAvvelenamento = ImageClass.ImageClass("Risorse/Immagini/Nemici/NemicoAvvelenato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAvvelenamento"] = imgAvvelenamento
-        imgAppiccicato = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/NemicoAppiccicato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgAppiccicato = ImageClass.ImageClass("Risorse/Immagini/Nemici/NemicoAppiccicato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAppiccicato"] = imgAppiccicato
-        imgAttaccoW = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+        imgAttaccoW = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoW"] = imgAttaccoW
-        imgAttaccoA = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+        imgAttaccoA = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAttaccoA"] = imgAttaccoA
-        imgAttaccoS = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+        imgAttaccoS = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoS"] = imgAttaccoS
-        imgAttaccoD = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+        imgAttaccoD = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgAttaccoD"] = imgAttaccoD
-        imgOggettoLanciato = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgOggettoLanciato = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgOggettoLanciato"] = imgOggettoLanciato
-        imgDanneggiamentoOggettoLanciato = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDanneggiamentoOggettoLanciato = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoOggettoLanciato"] = imgDanneggiamentoOggettoLanciato
-        imgDanneggiamentoRalloNemico = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoRallo.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDanneggiamentoRalloNemico = ImageClass.ImageClass("Risorse/Immagini/Nemici/DannoRallo.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
-        imgDanneggiamentoColcoNemico = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+        imgDanneggiamentoColcoNemico = ImageClass.ImageClass("Risorse/Immagini/Nemici/DannoColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
         if nomeNemico == "Orco" or nomeNemico == "Pipistrello" or nomeNemico == "Cinghiale" or nomeNemico == "Cittadino1" or nomeNemico == "Cittadino3" or nomeNemico == "Scorpione" or nomeNemico == "ServoSpada" or nomeNemico == "ServoArco" or nomeNemico == "ServoLancia" or nomeNemico == "Aquila":
             imgDialogo = casellaVuotaPreset
         else:
-            imgDialogo = funzionePerCaricareImmagini("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+            imgDialogo = ImageClass.ImageClass("Risorse/Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
         dictionaryImgPosizioni["imgDialogo"] = imgDialogo
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
     dictImgCampiVisiviNemici = {}
     raggio = 2
     while raggio <= 8:
-        dictImgCampiVisiviNemici[str(raggio)] = funzionePerCaricareImmagini("Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileMostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True)
+        dictImgCampiVisiviNemici[str(raggio)] = ImageClass.ImageClass("Risorse/Immagini/Status/Campiattaccabili/CampoattaccabileMostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True, forceLoad=funzionePerCaricareImmagini)
         raggio += 1
     dictImgNemiciDiario = {}
     for nomeNemico in vettoreNomiNemici:
-        imgNemico = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/DisegniNemici/" + nomeNemico + "Graf.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
+        imgNemico = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/DisegniNemici/" + nomeNemico + "Graf.png", GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
         dictImgNemiciDiario[nomeNemico] = imgNemico
 
     # img menu
-    imgOmbreggiaturaContorniMappaMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgDiarioChiusoMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/DiarioChiusoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgDiarioApertoMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/DiarioApertoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
+    imgOmbreggiaturaContorniMappaMenu = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgDiarioChiusoMenu = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/DiarioChiusoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
+    imgDiarioApertoMenu = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/DiarioApertoMenu.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
 
     # img oggetti speciali
-    imgBicchiereConAcqua = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/BicchiereConAcqua.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveRipostiglio = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveRipostiglio.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveStanzaCasaDavid = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCasaDavid.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgCertificazioneResidenza = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/CertificazioneResidenza.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgImpoPietra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ImpoPietra.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveStanzaCastello = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCastello.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgListaStrumentiStudioImpo = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ListaStrumentiStudioImpo.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveAvamposto = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveAvampostoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgStrumentiDiRod = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/StrumentiDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveUfficioNeil = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveUfficioNeil.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
-    imgChiaveSeminterratoPalazzoRod = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveSeminterratoPalazzoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgBicchiereConAcqua = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/BicchiereConAcqua.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveRipostiglio = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveRipostiglio.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveStanzaCasaDavid = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCasaDavid.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgCertificazioneResidenza = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/CertificazioneResidenza.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgImpoPietra = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ImpoPietra.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveStanzaCastello = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveStanzaCastello.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgListaStrumentiStudioImpo = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ListaStrumentiStudioImpo.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveAvamposto = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveAvampostoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgStrumentiDiRod = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/StrumentiDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveUfficioNeil = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveUfficioNeil.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    imgChiaveSeminterratoPalazzoRod = ImageClass.ImageClass("Risorse/Immagini/DecorazioniMenu/Diario/OggettiSpeciali/ChiaveSeminterratoPalazzoDiRod.png", GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)

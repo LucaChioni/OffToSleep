@@ -7,6 +7,7 @@ import psutil
 import pygame
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAudioAmbiente
+import Codice.Variabili.ImageClass as ImageClass
 
 
 sistemaOperativo = "Windows"
@@ -272,8 +273,6 @@ def setCursoreVisibile(visibile):
         if sistemaOperativo == "Windows":
             pygame.mouse.set_pos(gsx // 2, gsy // 2)
         pygame.mouse.set_visible(False)
-configuraCursore(True)
-setCursoreVisibile(True)
 
 # lettura configurazione controller: per ogni controller: nome, croce, cerchio, quadrato, triangolo, l1, r1, start, croceDirezionale
 padUtilizzato = False
@@ -699,6 +698,8 @@ def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
     x = int(x)
     y = int(y)
     if img:
+        if type(img) is ImageClass.ImageClass:
+            img = img.get()
         if superficie:
             superficie.blit(img, (x, y))
         else:
@@ -874,68 +875,123 @@ leggi.close()
 datiFileImpostazioniString = leggifile.split("_")
 datiFileImpostazioniString.pop(len(datiFileImpostazioniString) - 1)
 erroreFileImpostazioni = False
-if len(datiFileImpostazioniString) == 7:
-    datiFileImpostazioni = []
-    for i in range(0, len(datiFileImpostazioniString)):
-        try:
-            datiFileImpostazioni.append(int(datiFileImpostazioniString[i]))
-        except ValueError:
-            erroreFileImpostazioni = True
-    if not erroreFileImpostazioni:
-        if datiFileImpostazioni[0] == 0:
-            linguaImpostata = "ita"
-        elif datiFileImpostazioni[0] == 1:
-            linguaImpostata = "eng"
-        if 0 <= int(datiFileImpostazioni[1]) <= 10:
-            volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
-        if 0 <= int(datiFileImpostazioni[2]) <= 10:
-            volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
-        if datiFileImpostazioni[3] == 0 or datiFileImpostazioni[3] == 1 or datiFileImpostazioni[3] == 2:
-            modalitaSchermo = int(datiFileImpostazioni[3])
-        if (maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5]) and (datiFileImpostazioni[4] % 32 == 0 and datiFileImpostazioni[5] % 18 == 0):
-            gsx = int(datiFileImpostazioni[4])
-            gsy = int(datiFileImpostazioni[5])
-            gpx = gsx // 32
-            gpy = gsy // 18
-        if datiFileImpostazioni[6] == 0 or datiFileImpostazioni[6] == 1:
-            controlloRisoluzione = bool(datiFileImpostazioni[6])
-        if modalitaSchermo == 0:
-            if usando_python3:
-                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+datiFileImpostazioni = []
+global opzioni_schermo
+global schermo
+def avviaSchermoGioco():
+    global datiFileImpostazioni
+    global erroreFileImpostazioni
+    global linguaImpostata
+    global volumeEffetti
+    global volumeCanzoni
+    global modalitaSchermo
+    global gsx
+    global gsy
+    global gpx
+    global gpy
+    global controlloRisoluzione
+    global opzioni_schermo
+    global schermo
+
+    if len(datiFileImpostazioniString) == 7:
+        datiFileImpostazioni = []
+        for i in range(0, len(datiFileImpostazioniString)):
+            try:
+                datiFileImpostazioni.append(int(datiFileImpostazioniString[i]))
+            except ValueError:
+                erroreFileImpostazioni = True
+        if not erroreFileImpostazioni:
+            if datiFileImpostazioni[0] == 0:
+                linguaImpostata = "ita"
+            elif datiFileImpostazioni[0] == 1:
+                linguaImpostata = "eng"
+            if 0 <= int(datiFileImpostazioni[1]) <= 10:
+                volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
+            if 0 <= int(datiFileImpostazioni[2]) <= 10:
+                volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
+            if datiFileImpostazioni[3] == 0 or datiFileImpostazioni[3] == 1 or datiFileImpostazioni[3] == 2:
+                modalitaSchermo = int(datiFileImpostazioni[3])
+            if (maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5]) and (datiFileImpostazioni[4] % 32 == 0 and datiFileImpostazioni[5] % 18 == 0):
+                gsx = int(datiFileImpostazioni[4])
+                gsy = int(datiFileImpostazioni[5])
+                gpx = gsx // 32
+                gpy = gsy // 18
+            if datiFileImpostazioni[6] == 0 or datiFileImpostazioni[6] == 1:
+                controlloRisoluzione = bool(datiFileImpostazioni[6])
+            if modalitaSchermo == 0:
+                if usando_python3:
+                    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+                else:
+                    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+            elif modalitaSchermo == 1:
+                if not (gsx == maxGsx and gsy == maxGsy):
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+                else:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
+                opzioni_schermo = pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+                pygame.display.set_caption(titolo)
+                pygame.display.set_icon(icona)
             else:
-                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        elif modalitaSchermo == 1:
-            if not (gsx == maxGsx and gsy == maxGsy):
-                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
-            else:
-                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2) + (gpy // 3))
-            opzioni_schermo = pygame.DOUBLEBUF
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-            pygame.display.set_caption(titolo)
-            pygame.display.set_icon(icona)
-        else:
-            if gsx == maxGsx and gsy == maxGsy:
-                os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
-            else:
-                os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
-            opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        # setto la risoluzione ottimale nel caso non ci fosse abbastanza RAM (solo se l'opzione "controlloRisoluzione" è True)
-        if controlloRisoluzione:
-            settaRisoluzioneOttimale(testaPrestazioni=False)
-        initVolumeSounds()
-else:
-    erroreFileImpostazioni = True
-if erroreFileImpostazioni:
-    # print ("Errore nella lettura del file di configurazione delle impostazioni")
-    if usando_python3:
-        opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+                if gsx == maxGsx and gsy == maxGsy:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
+                else:
+                    os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (gsx // 2)) + "," + str((maxGsy // 2) - (gsy // 2))
+                opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
+                schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+            # setto la risoluzione ottimale nel caso non ci fosse abbastanza RAM (solo se l'opzione "controlloRisoluzione" è True)
+            if controlloRisoluzione:
+                settaRisoluzioneOttimale(testaPrestazioni=False)
+            initVolumeSounds()
     else:
-        opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
-    schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-    settaRisoluzioneOttimale(testaPrestazioni=True)
-    initVolumeSounds()
+        erroreFileImpostazioni = True
+    if erroreFileImpostazioni:
+        # print ("Errore nella lettura del file di configurazione delle impostazioni")
+        if usando_python3:
+            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED
+        else:
+            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+        schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        settaRisoluzioneOttimale(testaPrestazioni=True)
+        initVolumeSounds()
+
+    configuraCursore(True)
+    setCursoreVisibile(True)
+def avviaSchermataAttesa():
+    global opzioni_schermo
+    global schermo
+    global maxGsx
+    global maxGsy
+
+    local_gsx = maxGsx // 2
+    local_gsy = maxGsy // 2
+    if local_gsx % 32 != 0 or local_gsy % 18 != 0:
+        while local_gsx % 32 != 0:
+            local_gsx = local_gsx - 1
+        while local_gsy % 18 != 0:
+            local_gsy = local_gsy - 1
+    if local_gsx // 16 < local_gsy // 9:
+        # print ("Altezza piu grande")
+        local_gsy = local_gsx * 9 // 16
+    elif local_gsx // 16 > local_gsy // 9:
+        # print ("Larghezza piu grande")
+        local_gsx = local_gsy * 16 // 9
+
+    if local_gsx == maxGsx and local_gsy == maxGsy:
+        os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
+    else:
+        os.environ['SDL_VIDEO_WINDOW_POS'] = str((maxGsx // 2) - (local_gsx // 2)) + "," + str((maxGsy // 2) - (local_gsy // 2))
+    opzioni_schermo = pygame.NOFRAME | pygame.DOUBLEBUF
+    schermo = pygame.display.set_mode((local_gsx, local_gsy), opzioni_schermo)
+
+    schermata_attesa = CaricaFileProgetto.loadImage("Risorse/Immagini/AttesaAvvio.png", local_gsx, local_gsy, True)
+    disegnaImmagineSuSchermo(schermata_attesa, (0, 0))
+    aggiornaSchermo()
+    pygame.time.wait(1000)
+def chiudiSchermataAttesa():
+    pygame.display.quit()
+    pygame.display.init()
 
 # definisco la variabile che mi serve per sapere quanto tempo hai giocato (per metterlo nel salvataggio)
 tempoInizioPartita = False

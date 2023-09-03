@@ -271,7 +271,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             pathImgs = "Risorse/Immagini/Scenari/Stanza" + str(stanza) + "/Animazioni/EsplosioneMissilePt1/"
             coordinateImgAnimata = (0, 0)
             dimensioniImgAnimata = (GlobalHWVar.gsx, GlobalHWVar.gsy)
-            listaAudio = [24, GlobalSndVar.rumoreEsplosioneMissile]
+            # listaAudio = [24, GlobalSndVar.rumoreEsplosioneMissile]
+            listaAudio = []
             FunzioniGraficheGeneriche.animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio, tuttoSchermo=True)
             i = 0
             while i < 50:

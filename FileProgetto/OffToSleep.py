@@ -5,6 +5,9 @@ import os
 import pygame
 import datetime
 import GlobalHWVar
+
+GlobalHWVar.avviaSchermataAttesa()
+
 # "AggiungiTutteLeTraduzioni" lo mette come inutile ma serve per aggiornare i dictionary dei testi con le traduzioni
 import Codice.Localizzazione.AggiungiTutteLeTraduzioni
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
@@ -32,6 +35,9 @@ import Codice.SettaggiLivelli.SetZoneStanzeImpedimenti as SetZoneStanzeImpedimen
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
+GlobalHWVar.chiudiSchermataAttesa()
+GlobalHWVar.avviaSchermoGioco()
+GlobalGameVar.avviaCaricamento()
 
 def gameloop():
     # p = psutil.Process()

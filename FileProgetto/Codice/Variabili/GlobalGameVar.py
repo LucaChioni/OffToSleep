@@ -191,7 +191,6 @@ def inizializzaVariabiliGlobali():
     datiAnimazioniDanniInflitti = {"dannoRallo":[False, 0, -1], "dannoImpo":[False, 0, -1], "dannoEsche":[False, 0, -1], "dannoNemico":[False, 0, -1], "tempoAnimazione":60}
     idDialoghiLetti = []
     idDialoghiLettiGameOver = []
-inizializzaVariabiliGlobali()
 
 def mostraLogo():
     effettoAvvio = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriAmbiente/EffettoAvvio.wav")
@@ -459,14 +458,16 @@ def disegnaSchermataDiCaricamento():
 
     GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
 
-mostraLogo()
-if GlobalHWVar.erroreFileImpostazioni:
-    disegnaSchermataSelezioneLingua()
-disegnaSchermataDiCaricamento()
-numImgCaricata = 0
-GlobalImgVar.loadImgs(numImgCaricata, cambioRisoluzione=False)
-numSndCaricato = 0
-GlobalSndVar.loadSounds(numSndCaricato)
+def avviaCaricamento():
+    inizializzaVariabiliGlobali()
+    mostraLogo()
+    if GlobalHWVar.erroreFileImpostazioni:
+        disegnaSchermataSelezioneLingua()
+    disegnaSchermataDiCaricamento()
+    numImgCaricata = 0
+    GlobalImgVar.loadImgs(numImgCaricata, cambioRisoluzione=False)
+    numSndCaricato = 0
+    GlobalSndVar.loadSounds(numSndCaricato)
 
 # partitaAppenaAvviataPostFinale serve per le animazioni dopo il finale (in cui ti alzi dal letto o dal calcolatore)
 partitaAppenaAvviataPostFinale = True
