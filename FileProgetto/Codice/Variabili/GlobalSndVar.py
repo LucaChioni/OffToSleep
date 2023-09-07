@@ -105,13 +105,13 @@ global suonoPortaLaboratorioSegretoDiNeil
 global rumoreTaglioSbarreTunnelDiRod
 global rumoreGettareSbarreATerra
 global rumoreLancioMissile
-# global rumoreEsplosioneMissile
+global rumoreEsplosioneMissile
 global rumoreAttaccoCinghialeAdHans
 global rumoreRiempimentoBicchiere
 global rumoreMangiareBacche
 
 
-numSndTotali = 103
+numSndTotali = 104
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
@@ -227,7 +227,7 @@ def loadSounds(numSndCaricato):
     global rumoreTaglioSbarreTunnelDiRod
     global rumoreGettareSbarreATerra
     global rumoreLancioMissile
-    # global rumoreEsplosioneMissile
+    global rumoreEsplosioneMissile
     global rumoreAttaccoCinghialeAdHans
     global rumoreRiempimentoBicchiere
     global rumoreMangiareBacche
@@ -344,7 +344,7 @@ def loadSounds(numSndCaricato):
     rumoreTaglioSbarreTunnelDiRod = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/TaglioSbarreTunnelDiRod.wav")
     rumoreGettareSbarreATerra = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/GettareSbarreATerra.wav")
     rumoreLancioMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/LancioMissile.wav")
-    # rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
+    rumoreEsplosioneMissile = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/EsplosioneMissile.wav")
     rumoreAttaccoCinghialeAdHans = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/AttaccoCinghialeAdHans.wav")
     rumoreRiempimentoBicchiere = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Eventi/RiempimentoBicchiereLavandino.wav")
 

@@ -1570,7 +1570,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["uscitoRodDalPalazzoPreLancioMissile"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["HansUscitoDaCasa1NellaSeraDellInizioDelGioco"]:
         camminataVeloce = False
-    if GlobalGameVar.dictAvanzamentoStoria["dialogoHansSamCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fine"]:
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoHansSamCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["colpitoHansDalCinghialeCalcolatore"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["secondoCinghialeUscitoDaForesta5PostUccisioneHansCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fine"]:
         camminataVeloce = False
 
     denaroRaccolto = False
