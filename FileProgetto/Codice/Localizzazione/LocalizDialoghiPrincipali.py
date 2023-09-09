@@ -941,8 +941,8 @@ _0179_01_Ren__ = {"ita": u"..."}
 _0179_02_Tu__SI__ = {"ita": u"... Si è..."}
 
 # Luogo: Nessuno
-_0180_01_Tu_OH_CAV_DOV_SON_ADE_ = {"ita": u"(Oh cavolo! Dove sono adesso?!)"}
-_0180_02_Tu_MI_SON_PER_LO_SAP_ = {"ita": u"(Mi sono persa, lo sapevo...)"}
+_0180_01_Tu_OH_CAV_DOV_SON_ADE_ = {"ita": u"..."}
+_0180_02_Tu_MI_SON_PER_LO_SAP_ = {"ita": u"(Mi sono persa... di nuovo...)"}
 _0181_01_Tu_OK_HAN_DOV_ESS_PAS_DI_QUA_ = {"ita": u"(Ok, Hans dovrebbe essere passato di qua...)"}
 _0182_01_Tu_PER_SON_VEN_QUI_ = {"ita": u"(Perché sono venuta qui...?)"}
 _0183_01_Tu__MI_HA_POR_LAC_MA_NON__TOR_A_LET_ = {"ita": u"(... Mi ha portato l'acqua ma non è tornato a letto...)"}

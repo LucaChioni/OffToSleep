@@ -1072,19 +1072,56 @@ def mostraSchermataCitazione():
         i += 1
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     messaggio(LI.A_NOI_UOM_NAS__TOC_UN_TRI_PRI_QUE_DI_SEN_VIV_CON_LA_BEL_ILL_DI_PRE_COM_UNA_REA_FUO_DI_NOI_QUE_NOS_INT_SEN[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 8, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
-    # messaggio(LI._LUI_PIR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
     oscuraIlluminaSchermo(illumina=2)
 
     if GlobalHWVar.mouseBloccato:
         GlobalHWVar.configuraCursore(False)
     risposta = False
     bottoneDown = False
+    mostratoAutore = False
     while not risposta:
         # gestione degli input
         bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
         if bottoneDown:
-            risposta = True
             bottoneDown = False
+            if not mostratoAutore:
+                blackImage = pygame.Surface((GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 2))
+                blackImage.fill((0, 0, 0))
+                rect = pygame.display.get_surface().get_rect()
+                vetImg = []
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 250))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 200))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 150))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 100))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 60))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+                image.fill((0, 0, 0, 20))
+                vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
+                i = 0
+                while i <= 5:
+                    GlobalHWVar.disegnaImmagineSuSchermo(blackImage, (GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 11.5))
+                    messaggio(LI._LUI_PIR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 11.5))
+                    GlobalHWVar.aggiornaSchermo()
+                    inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                    i += 1
+                GlobalHWVar.disegnaImmagineSuSchermo(blackImage, (GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 11.5))
+                messaggio(LI._LUI_PIR[GlobalHWVar.linguaImpostata], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
+                GlobalHWVar.aggiornaSchermo()
+                mostratoAutore = True
+            else:
+                risposta = True
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
