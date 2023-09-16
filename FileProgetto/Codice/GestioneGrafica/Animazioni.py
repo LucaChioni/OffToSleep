@@ -1067,7 +1067,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
             deltaYRetta = yFineRetta - yInizioRetta
             angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
             angoloInGradi = math.degrees(angoloInRadianti)
-            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaLanciata, angoloInGradi)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaLanciata.get(), angoloInGradi)
         if fineanimaz > 4:
             GlobalHWVar.disegnaImmagineSuSchermo(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
         elif animaOggetto[0] and fineanimaz > 0:
@@ -1108,11 +1108,11 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
         angoloInGradi = math.degrees(angoloInRadianti)
         imgFrecciaLanciata_temp = 0
         if tecnicaUsata == "freccia":
-            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciata, angoloInGradi)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciata.get(), angoloInGradi)
         elif tecnicaUsata == "freccia+":
-            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciataP, angoloInGradi)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciataP.get(), angoloInGradi)
         elif tecnicaUsata == "freccia++":
-            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciataPP, angoloInGradi)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(GlobalImgVar.imgFrecciaEletttricaLanciataPP.get(), angoloInGradi)
         if fineanimaz > 5:
             GlobalHWVar.disegnaImmagineSuSchermo(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
 
@@ -1127,7 +1127,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
             deltaYRetta = yFineRetta - yInizioRetta
             angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
             angoloInGradi = math.degrees(angoloInRadianti)
-            imgFrecciaLanciata_temp = pygame.transform.rotate(nemicoAttaccante.imgOggettoLanciato, angoloInGradi)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(nemicoAttaccante.imgOggettoLanciato.get(), angoloInGradi)
             if fineanimaz > 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
             elif fineanimaz != 0:
