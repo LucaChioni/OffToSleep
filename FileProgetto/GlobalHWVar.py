@@ -988,7 +988,7 @@ def avviaSchermataAttesa():
     schermata_attesa = CaricaFileProgetto.loadImage("Risorse/Immagini/AttesaAvvio.png", local_gsx, local_gsy, True)
     disegnaImmagineSuSchermo(schermata_attesa, (0, 0))
     aggiornaSchermo()
-    pygame.time.wait(1000)
+    pygame.time.wait(500)
 def chiudiSchermataAttesa():
     pygame.display.quit()
     pygame.display.init()
