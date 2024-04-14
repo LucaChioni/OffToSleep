@@ -200,7 +200,7 @@ class PersonaggioObj(object):
         return copia
 
     def girati(self, direzione, perDialogo=False):
-        if not perDialogo or (perDialogo and not (self.tipo == "ServoLancia" or self.tipo == "ServoSpada" or self.tipo == "ServoArco")):
+        if not perDialogo or (perDialogo and not (self.tipo == "ServoLancia" or self.tipo == "ServoSpada" or self.tipo == "ServoArco" or self.tipo == "MadreUfficiale" or self.tipo == "Neil")):
             if direzione == "w":
                 self.imgAttuale = self.imgW
             elif direzione == "a":

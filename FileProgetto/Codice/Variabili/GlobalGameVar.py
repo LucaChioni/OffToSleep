@@ -491,9 +491,15 @@ creditiSuoni += "\"Pencil, Writing, Close, A.wav\" by InspectorJ -- https://free
 creditiSuoni += "\"ChainLodingBayDoor01.WAV\" by mmaruska -- https://freesound.org/s/241108/ -- License: Attribution 3.0" + " <br> "
 creditiSuoni += "\"Digging with shovel.wav\" by CGEffex -- https://freesound.org/s/96211/ -- License: Attribution 3.0" + " <br> "
 creditiSuoni += "\"Wind_blowing_gusting_through_french_castle_tower.wav\" by Astounded -- https://freesound.org/s/483479/ -- License: Attribution 3.0"
-listaCrediti = [[LI.SCR_E_SVI_DA_[GlobalHWVar.linguaImpostata], creditiMioNome],
-                [LI.TRA_IN_ING_[GlobalHWVar.linguaImpostata], creditiTraduttoreInglese],
-                [LI.MUSICA_[GlobalHWVar.linguaImpostata], creditiMioNome],
-                [LI.SVILUPPATO_CON_[GlobalHWVar.linguaImpostata], LI.PYT_2_PYG__PYC_COM_EDI_IDE__LMMS_MUS__GIM_2_IMM_ANI__AUD_EDI_AUD[GlobalHWVar.linguaImpostata]],
-                [LI.EFF_AUD_DA_FRE_[GlobalHWVar.linguaImpostata], creditiSuoni],
-                [LI.RINGRAZIAMENTI_SPECIALI_[GlobalHWVar.linguaImpostata], LI.MIA_FAM_COM_PYG_COM_FRE[GlobalHWVar.linguaImpostata]]]
+def init_lista_crediti():
+    global listaCrediti
+    listaCrediti = [
+        [LI.SCR_E_SVI_DA_[GlobalHWVar.linguaImpostata], creditiMioNome],
+        [LI.TRA_IN_ING_[GlobalHWVar.linguaImpostata], creditiTraduttoreInglese],
+        [LI.MUSICA_[GlobalHWVar.linguaImpostata], creditiMioNome],
+        [LI.SVILUPPATO_CON_[GlobalHWVar.linguaImpostata], LI.PYT_2_PYG__PYC_COM_EDI_IDE__LMMS_MUS__GIM_2_IMM_ANI__AUD_EDI_AUD[GlobalHWVar.linguaImpostata]],
+        [LI.EFF_AUD_DA_FRE_[GlobalHWVar.linguaImpostata], creditiSuoni],
+        [LI.RINGRAZIAMENTI_SPECIALI_[GlobalHWVar.linguaImpostata], LI.MIA_FAM_COM_PYG_COM_FRE[GlobalHWVar.linguaImpostata]]
+    ]
+listaCrediti = []
+init_lista_crediti()

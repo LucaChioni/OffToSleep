@@ -1536,9 +1536,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     if not nemiciPresenti and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["indossatoScarpeVeloci"]:
         camminataVeloce = True
     # tolgo la camminata veloce negli eventi in cui la scena è troppo veloce
-    if GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid4"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid1"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
         camminataVeloce = False
-    if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCasaDavid"]:
+    if GlobalGameVar.dictAvanzamentoStoria["inizioSognoCasaDavid"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["fineSognoCasaDavid"]:
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
         camminataVeloce = False
@@ -1546,9 +1546,15 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["arrivatoRodAllAltroTavolo"]:
         camminataVeloce = False
+    if dati[0] == GlobalGameVar.dictAvanzamentoStoria["servoLanciaAndatoInEsternoCastello5"] and dati[1] == GlobalGameVar.dictStanze["internoCastello1"]:
+        camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["inizioCenaAlCastello"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["hansAllontanatoCamerettaSognoCastello"]:
         camminataVeloce = False
-    if GlobalGameVar.dictAvanzamentoStoria["ricevutoListaStrumentiDaNeil"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoRipresoImpoDaNeil"]:
+    if GlobalGameVar.dictAvanzamentoStoria["monologoPrimaVistaDiNeil"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoRipresoImpoDaNeil"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["dialogoRodDopoEssereEntratoNelPalazzo"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["rodArrivatoAlTavoloDegliStrumenti"]:
+        camminataVeloce = False
+    if GlobalGameVar.dictAvanzamentoStoria["avviatoBattitoCardiacoPreConsegnaStrumenti"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["dialogoNeilSuImpoPietraNonConsegnata"]:
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["dialogoNeilSuImpoPietraNonConsegnata"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["cliccatoImpoPietraPerFuggireDaNeilConImpo"]:
         camminataVeloce = False
@@ -1558,7 +1564,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["risvegliatoNelVulcano"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["interazioneCellaCostruttore"]:
         camminataVeloce = False
-    if GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili1"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili2"]:
+    if GlobalGameVar.dictAvanzamentoStoria["interagitoConComputerVulcano"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologoVistoImpoNonOstili2"] and dati[1] == GlobalGameVar.dictStanze["vulcano1"]:
         camminataVeloce = False
     if GlobalGameVar.dictAvanzamentoStoria["avviatoSequenzaDiEventiCalcolatore"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["monologo2RenéPostAvvioSequenzaDiEventiCalcolatore"]:
         camminataVeloce = False

@@ -604,6 +604,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             pygame.time.wait(100)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
+
+        GlobalGameVar.init_lista_crediti()
         c = 0
         while c < len(GlobalGameVar.listaCrediti):
             infoCrediti = GlobalGameVar.listaCrediti[c]
