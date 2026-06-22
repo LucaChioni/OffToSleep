@@ -1,40 +1,111 @@
---- ENGLISH ---
+# Running and Building the Game
 
-IF YOU ARE DOWNLOADING FROM GITHUB: the game will not work because all audio and video resources are missing.
+> **Important**
+>
+> If you download the project from GitHub, the game will not work as-is because all audio and video resources are missing.
 
-On Windows and Linux the game must be run with Python 2 and the following versions of the libraries: pygame==1.9.6, cx-freeze==5.0.1, psutil==5.8.0.
-On MacOS the game must be run with Python 3 and the following versions of the libraries: pygame==2.1.2, cx-freeze==6.13.1, psutil==5.8.0.
+## Requirements
 
-To run the code correctly you need:
-	1- set the operating system in "FileProgetto/GlobalHWVar.py", line 12 (choose between "Windows", "Linux" or "Mac");
-	2- set the variable "usando_python3" to False if you are using Windows or Linux, OR to True if you are using MacOS (in "FileProgetto/GlobalHWVar.py", line 14).
+### Windows and Linux
 
-To create the executable you need:
-	1- set the operating system in "FileProgetto/setup.py", line 4 (choose between "Windows", "Linux" or "Mac");
-	2- set to True the variable "eseguibile" in "FileProgetto/GlobalHWVar.py", line 13;
-	3- run the file corresponding to your operating system:
-		- On Windows => "Convertire_in_eseguibile_windows.bat";
-		- On Linux => "Convertire_in_eseguibile_linux.sh";
-		- On Mac => "Convertire_in_eseguibile_mac.sh";
-	4- the executable will be located inside the folder "build".
+The game must be run with **Python 2** and the following library versions:
 
-==========================================================================================================================================================================
---- ITALIANO ---
+```txt
+pygame==1.9.6
+cx-freeze==5.0.1
+psutil==5.8.0
+```
 
-SE STAI SCARICANDO DA GITHUB: il gioco non funzionerà perché mancano tutte le risorse audio e video.
+### macOS
 
-Su Windows e Linux il gioco deve essere eseguito con Python 2 e le seguenti versioni delle librerie: pygame==1.9.6, cx-freeze==5.0.1, psutil==5.8.0.
-Su MacOS il gioco deve essere eseguito con Python 3 e le seguenti versioni delle librerie: pygame==2.1.2, cx-freeze==6.13.1, psutil==5.8.0.
+The game must be run with **Python 3** and the following library versions:
 
-Per eseguire correttamente il codice è necessario:
-	1- impostare il sistema operativo nel file "FileProgetto/GlobalHWVar.py" alla riga 12 (scegli tra "Windows", "Linux" o "Mac");
-	2- impostare la variabile "usando_python3" a False se si sta usando Windows o Linux, OPPURE a True se si sta usando MacOS (in "FileProgetto/GlobalHWVar.py", riga 14).
+```txt
+pygame==2.1.2
+cx-freeze==6.13.1
+psutil==5.8.0
+```
 
-Per creare l'eseguibile è necessario:
-	1- impostare il sistema operativo nel file "FileProgetto/setup.py" alla riga 4 (scegli tra "Windows", "Linux" o "Mac");
-	2- impostare a True la variabile "eseguibile" nel file "FileProgetto/GlobalHWVar.py" alla riga 13;
-	3- eseguire il file corrispondente al sistema operativo in uso:
-		- Su Windows => "Convertire_in_eseguibile_windows.bat";
-		- Su Linux => "Convertire_in_eseguibile_linux.sh";
-		- Su Mac => "Convertire_in_eseguibile_mac.sh";
-	4- l'eseguibile si troverà dentro la cartella "build".
+## Running the Game
+
+Before running the code, update the following settings:
+
+1. Open:
+
+```txt
+FileProgetto/GlobalHWVar.py
+```
+
+2. On line 12, set the operating system. Choose one of the following values:
+
+```python
+"Windows"
+"Linux"
+"Mac"
+```
+
+3. On line 14, set the `usando_python3` variable:
+
+```python
+usando_python3 = False
+```
+
+Use `False` if you are running the game on **Windows** or **Linux**.
+
+```python
+usando_python3 = True
+```
+
+Use `True` if you are running the game on **macOS**.
+
+## Creating the Executable
+
+Before creating the executable, update the following settings:
+
+1. Open:
+
+```txt
+FileProgetto/setup.py
+```
+
+2. On line 4, set the operating system. Choose one of the following values:
+
+```python
+"Windows"
+"Linux"
+"Mac"
+```
+
+3. Open:
+
+```txt
+FileProgetto/GlobalHWVar.py
+```
+
+4. On line 13, set the `eseguibile` variable to `True`:
+
+```python
+eseguibile = True
+```
+
+5. Run the script for your operating system:
+
+### Windows
+
+```txt
+Convertire_in_eseguibile_windows.bat
+```
+
+### Linux
+
+```bash
+./Convertire_in_eseguibile_linux.sh
+```
+
+### macOS
+
+```bash
+./Convertire_in_eseguibile_mac.sh
+```
+
+6. The executable will be created inside the `build` folder.
